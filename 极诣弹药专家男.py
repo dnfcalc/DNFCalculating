@@ -409,6 +409,16 @@ class 极诣弹药专家男技能22(极诣弹药专家男主动技能):
 
     def 加成倍率(self, 武器类型):
         return 0.0
+    
+    def 等效百分比(self, 武器类型):
+        if self.等级 == 0:
+            return 0
+        else:
+            return round((self.攻击次数 * (self.基础 + self.成长 * self.等级) + self.攻击次数2 * (self.基础2 + self.成长2 * self.等级) + self.攻击次数3 * (
+                        self.基础3 + self.成长3 * self.等级)+ self.攻击次数4 * (
+                        self.基础4 + self.成长4 * self.等级)+ self.攻击次数5 * (
+                        self.基础5 + self.成长5 * self.等级)) * (1 + self.TP成长 * self.TP等级) * self.倍率,2)
+
 
 极诣弹药专家男技能列表 = []
 i = 0
