@@ -1852,10 +1852,10 @@ class 角色窗口(QWidget):
                             tempstr+=','
                     tempstr+='</b><br>'
                 被动数据.setToolTip(tempstr)
-                被动数据.move(380+num*40, 500)
+                被动数据.move(300+num*40, 500)
                 被动等级=QLabel(输出窗口)
                 被动等级.setText('Lv.'+str(实际技能等级[i]))
-                被动等级.move(380+num*40, 480)
+                被动等级.move(300+num*40, 480)
                 被动等级.resize(30,28)
                 if 实际技能等级[i] != 0:
                     被动等级.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
