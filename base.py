@@ -1646,7 +1646,7 @@ class 角色窗口(QWidget):
             self.输出界面(0)
         else:
             self.排行界面()
-    
+            
     def 排行界面(self):
         self.排行窗口列表.clear()
         滚动排行 = QMainWindow()
