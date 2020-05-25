@@ -476,10 +476,7 @@ class 角色属性():
                 if self.次数输入[self.技能序号[i.名称]] =='/CD':
                     技能释放次数.append(int(self.时间输入/i.等效CD(self.武器类型) + 1 +i.基础释放次数))
                 else:
-                    if self.次数输入[self.技能序号[i.名称]] != '0':
-                        技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]])+i.基础释放次数)
-                    else:
-                        技能释放次数.append(0)
+                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]])+i.基础释放次数)
             else:
                 技能释放次数.append(0)
     
@@ -910,6 +907,13 @@ class 角色窗口(QWidget):
         self.计算模式选择.move(750, 613)
         self.计算模式选择.resize(235, 24)
         self.计算模式选择.setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px} QComboBox:hover{background-color:rgba(65,105,225,0.8)}")
+
+
+        self.神话排名选项 = QCheckBox('神话排名模式', self.main_frame1)
+        self.神话排名选项.move(880, 580)
+        self.神话排名选项.resize(100, 24)
+        self.神话排名选项.setToolTip('仅显示有神话的组合，且每件神话装备只会出现一次')
+        self.神话排名选项.setStyleSheet(复选框样式)
 
         self.显示选项 = QCheckBox('亿为单位显示', self.main_frame1)
         self.显示选项.move(990, 580)
@@ -1595,7 +1599,7 @@ class 角色窗口(QWidget):
             QMessageBox.information(self,"错误",  "计算量过大，请更换模式或重新选择装备")
             return
         if len(self.有效穿戴组合) == 0:
-            QMessageBox.information(self,"错误",  "无有效组合，请重新选择装备")
+            QMessageBox.information(self,"错误",  "无有效组合，请更换模式或重新选择装备")
             return
         
         self.角色属性A = copy.deepcopy(self.初始属性)
@@ -1623,13 +1627,26 @@ class 角色窗口(QWidget):
         self.排行数据.clear()
         self.伤害列表 = heapq.nlargest(heapSize, self.伤害列表)
 
-        for i in range(heapSize):
-            self.排行数据.append(self.伤害列表[i][1:])
+        if self.神话排名选项.isChecked():
+            神话列表 = []
+            for i in range(heapSize):
+                tempstr = self.伤害列表[i][1:]
+                for j in [0,5,8]:
+                    if 装备列表[装备序号[tempstr[j]]].品质=='神话' and tempstr[j] not in 神话列表:
+                        神话列表.append(tempstr[j])
+                        self.排行数据.append(tempstr)
+        else:
+            for i in range(heapSize):
+                self.排行数据.append(self.伤害列表[i][1:])
+
+        if len(self.排行数据) == 0:
+            QMessageBox.information(self,"错误",  "请确认有勾选含神话装备的组合")
+            return
         if len(self.排行数据) == 1:
             self.输出界面(0)
         else:
             self.排行界面()
-    
+            
     def 排行界面(self):
         self.排行窗口列表.clear()
         滚动排行 = QMainWindow()
@@ -1870,8 +1887,8 @@ class 角色窗口(QWidget):
                 被动数据.move(300+num*40, 500)
                 被动等级=QLabel(输出窗口)
                 被动等级.setText('Lv.'+str(实际技能等级[i]))
-                被动等级.move(300+num*40, 480)
-                被动等级.resize(30,28)
+                被动等级.move(300-6+num*40, 480)
+                被动等级.resize(40,28)
                 if 实际技能等级[i] != 0:
                     被动等级.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
                 else:
