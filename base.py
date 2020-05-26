@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 import copy
+import heapq
 
 class 技能:
     名称 = ''
@@ -86,6 +87,9 @@ class 被动技能(技能):
 复选框样式 = "QCheckBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px} QCheckBox:hover{background-color:rgba(65,105,225,0.8)}"
 按钮样式 = 'QPushButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:10px} QPushButton:hover{background-color:rgba(65,105,225,0.8)}'
 标签样式 = "QLabel{font-size:12px;color:white}"
+
+堆大小上限 = 100
+最大组合数计算上限 = 301440
 
 class 角色属性():
 
@@ -195,8 +199,8 @@ class 角色属性():
     护石第二栏 = '无'
 
     def 穿戴装备(self, 装备, 套装):
-        self.装备栏 = copy.deepcopy(装备)
-        self.套装栏 = copy.deepcopy(套装)
+        self.装备栏 = 装备
+        self.套装栏 = 套装
         self.武器类型 = 装备列表[装备序号[self.装备栏[11]]].类型
 
     def 装备基础(self):
@@ -1595,35 +1599,43 @@ class 角色窗口(QWidget):
         if len(self.有效穿戴组合) == 0:
             QMessageBox.information(self,"错误",  "无有效组合，请更换模式或重新选择装备")
             return
+        
         self.角色属性A = copy.deepcopy(self.初始属性)
         self.角色属性A.技能栏 = copy.deepcopy(self.初始属性.技能栏)
         self.输入属性(self.角色属性A)
-        self.计算数据 = []
         self.伤害列表 = []
+        heapq.heapify(self.伤害列表)
+        heapSize = 0
+        minDamage = -1
+
         for i in range(0, len(self.有效穿戴组合)):
             self.角色属性B = copy.deepcopy(self.角色属性A)
             self.角色属性B.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
             self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
-            self.伤害列表.append(self.角色属性B.伤害计算() + (i % 97) / 10007)
-            self.计算数据.append(self.角色属性B.装备栏 + [self.伤害列表[-1]] + self.角色属性B.套装栏 + [self.百变怪列表[i]])
-        self.伤害列表.sort(reverse = True)
+            damage = self.角色属性B.伤害计算() + (i % 97) / 10007
+            if (heapSize > 0):
+                minDamage = self.伤害列表[0][0]
+            if damage >= minDamage:
+                if (heapSize == 堆大小上限):
+                    heapq.heappushpop(self.伤害列表, [damage] + self.角色属性B.装备栏 + [damage] + self.角色属性B.套装栏 + [self.百变怪列表[i]])
+                else:
+                    heapq.heappush(self.伤害列表, [damage] + self.角色属性B.装备栏 + [damage] + self.角色属性B.套装栏 + [self.百变怪列表[i]])
+                    heapSize = heapSize + 1
+
         self.排行数据.clear()
-        self.数据索引 = dict()
-        for i in range(0,len(self.计算数据)):
-            index = self.伤害列表.index(self.计算数据[i][12])
-            self.数据索引[index] = i
+        self.伤害列表 = heapq.nlargest(heapSize, self.伤害列表)
+
         if self.神话排名选项.isChecked():
             神话列表 = []
-            for i in range(len(self.计算数据)):
-                tempstr = self.计算数据[self.数据索引[i]]
+            for i in range(heapSize):
+                tempstr = self.伤害列表[i][1:]
                 for j in [0,5,8]:
                     if 装备列表[装备序号[tempstr[j]]].品质=='神话' and tempstr[j] not in 神话列表:
                         神话列表.append(tempstr[j])
-                        self.排行数据.append(self.计算数据[self.数据索引[i]])
+                        self.排行数据.append(tempstr)
         else:
-            for i in range(0,min(100,len(self.计算数据))):
-                self.排行数据.append(self.计算数据[self.数据索引[i]])
-
+            for i in range(heapSize):
+                self.排行数据.append(self.伤害列表[i][1:])
         if len(self.排行数据) == 0:
             QMessageBox.information(self,"错误",  "请确认有勾选含神话装备的组合")
             return
@@ -1631,7 +1643,7 @@ class 角色窗口(QWidget):
             self.输出界面(0)
         else:
             self.排行界面()
-    
+            
     def 排行界面(self):
         self.排行窗口列表.clear()
         滚动排行 = QMainWindow()
@@ -2506,7 +2518,7 @@ class 角色窗口(QWidget):
                             self.有效穿戴套装.append(套装适用[count])
                             self.百变怪列表.append(sign2)
                             count2 += 1
-                            if count2 > 301440:
+                            if count2 > 最大组合数计算上限:
                                 return 0
                                                                 
         else:
@@ -2546,6 +2558,6 @@ class 角色窗口(QWidget):
                                                                 self.有效穿戴套装.append(temp2)
                                                                 self.百变怪列表.append('空')
                                                                 count += 1
-                                                                if count > 301440:
+                                                                if count > 最大组合数计算上限:
                                                                     return 0
         return 1
