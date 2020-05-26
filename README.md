@@ -1,5 +1,5 @@
 # DNFCalculating
-  主要框架由纸飞机实现，西瓜协助修改，python编写，pyqt5图形GUI库<br>
+  主要框架由纸飞机实现，西瓜协助修改，SCUDRT优化排序，python编写，pyqt5图形GUI库<br>
   <b>如果有兴趣添加职业整合,可加群：1019815121</b><br>
 
 ## 各职业实现
