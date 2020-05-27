@@ -1,5 +1,5 @@
 from math import *
-from base import *
+from PublicReference.base import *
 
 class 极诣弹药专家男主动技能(主动技能):
     技能施放时间 = 0.0
