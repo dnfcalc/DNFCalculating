@@ -1618,12 +1618,11 @@ class 角色窗口(QWidget):
             damage = self.角色属性B.伤害计算() + (i % 97) / 10007
             if (heapSize > 0):
                 minDamage = self.伤害列表[0][0]
-            if damage >= minDamage:
-                if (heapSize == 堆大小上限):
-                    heapq.heappushpop(self.伤害列表, [damage] + self.角色属性B.装备栏 + [damage] + self.角色属性B.套装栏 + [self.百变怪列表[i]])
-                else:
-                    heapq.heappush(self.伤害列表, [damage] + self.角色属性B.装备栏 + [damage] + self.角色属性B.套装栏 + [self.百变怪列表[i]])
-                    heapSize = heapSize + 1
+            if (heapSize == 堆大小上限 and damage >= minDamage):
+                heapq.heappushpop(self.伤害列表, [damage] + self.角色属性B.装备栏 + [damage] + self.角色属性B.套装栏 + [self.百变怪列表[i]])
+            else:
+                heapq.heappush(self.伤害列表, [damage] + self.角色属性B.装备栏 + [damage] + self.角色属性B.套装栏 + [self.百变怪列表[i]])
+                heapSize = heapSize + 1
 
         self.排行数据.clear()
         self.伤害列表 = heapq.nlargest(heapSize, self.伤害列表)
