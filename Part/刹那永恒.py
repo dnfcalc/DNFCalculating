@@ -1,4 +1,5 @@
 ﻿from math import *
+
 from PublicReference.base import *
 
 class 刹那永恒主动技能(主动技能):
@@ -8,6 +9,11 @@ class 刹那永恒主动技能(主动技能):
         else:
             return round((self.攻击次数 * (self.基础 + self.成长 * self.等级) + self.攻击次数2 * (self.基础2 + self.成长2 * self.等级) + self.攻击次数3 * (
                         self.基础3 + self.成长3 * self.等级)) * (1 + self.TP成长 * self.TP等级) * self.倍率,2)
+    def 等效CD(self, 武器类型):
+        if 武器类型 == '魔杖':
+            return round(self.CD / self.恢复 * 1.0, 1)
+        if 武器类型 == '法杖':
+            return round(self.CD / self.恢复 * 1.1, 1)
 
 class 刹那永恒技能0(主动技能):
     名称 = '冰魄剑'
@@ -130,7 +136,7 @@ class 刹那永恒技能8(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return (1.25 + (self.等级-1) * 0.00625)
+            return (1.25 + (self.等级-1) * 0.0125)
 
 
 class 刹那永恒技能9(主动技能):
