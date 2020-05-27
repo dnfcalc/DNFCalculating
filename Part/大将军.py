@@ -295,7 +295,7 @@ class 大将军技能15(大将军主动技能):
     def 装备护石(self):
         self.基础2 = self.基础*0.22
         self.成长2 = self.成长*0.22
-        self.技能施放时间2 = 2
+        self.技能施放时间 = 2
         self.攻击次数2 = 17
         self.CD *=0.95
         self.脱手2 = 1
