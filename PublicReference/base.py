@@ -1610,24 +1610,20 @@ class 角色窗口(QWidget):
         heapq.heapify(self.伤害列表)
         heapSize = 0
         minDamage = -1
-
-        for i in range(0, len(self.有效穿戴组合)):
-            self.角色属性B = copy.deepcopy(self.角色属性A)
-            self.角色属性B.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
-            self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
-            damage = self.角色属性B.伤害计算() + (i % 97) / 10007
-            if (heapSize > 0):
-                minDamage = self.伤害列表[0][0]
-            if (heapSize == 堆大小上限 and damage >= minDamage):
-                heapq.heappushpop(self.伤害列表, [damage] + self.角色属性B.装备栏 + [damage] + self.角色属性B.套装栏 + [self.百变怪列表[i]])
-            else:
+        
+        if self.神话排名选项.isChecked():
+            for i in range(0, len(self.有效穿戴组合)):
+                self.角色属性B = copy.deepcopy(self.角色属性A)
+                self.角色属性B.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
+                self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
+                damage = self.角色属性B.伤害计算()
+                if (heapSize > 0):
+                    minDamage = self.伤害列表[0][0]
                 heapq.heappush(self.伤害列表, [damage] + self.角色属性B.装备栏 + [damage] + self.角色属性B.套装栏 + [self.百变怪列表[i]])
                 heapSize = heapSize + 1
-
-        self.排行数据.clear()
-        self.伤害列表 = heapq.nlargest(heapSize, self.伤害列表)
-
-        if self.神话排名选项.isChecked():
+    
+            self.排行数据.clear()
+            self.伤害列表 = heapq.nlargest(heapSize, self.伤害列表)
             神话列表 = []
             for i in range(heapSize):
                 tempstr = self.伤害列表[i][1:]
@@ -1635,9 +1631,30 @@ class 角色窗口(QWidget):
                     if 装备列表[装备序号[tempstr[j]]].品质=='神话' and tempstr[j] not in 神话列表:
                         神话列表.append(tempstr[j])
                         self.排行数据.append(tempstr)
+                if len(神话列表) >= 35:
+                    break
         else:
-            for i in range(heapSize):
+            for i in range(0, len(self.有效穿戴组合)):
+                self.角色属性B = copy.deepcopy(self.角色属性A)
+                self.角色属性B.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
+                self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
+                damage = self.角色属性B.伤害计算()
+                if (heapSize > 0):
+                    minDamage = self.伤害列表[0][0]
+                if heapSize >= 堆大小上限:
+                    if damage >= minDamage:
+                        heapq.heappushpop(self.伤害列表, [damage] + self.角色属性B.装备栏 + [damage] + self.角色属性B.套装栏 + [self.百变怪列表[i]])
+                else:
+                    heapq.heappush(self.伤害列表, [damage] + self.角色属性B.装备栏 + [damage] + self.角色属性B.套装栏 + [self.百变怪列表[i]])
+                    heapSize = heapSize + 1
+    
+            self.排行数据.clear()
+            self.伤害列表 = heapq.nlargest(heapSize, self.伤害列表)
+
+            for i in range(min(heapSize,堆大小上限)):
                 self.排行数据.append(self.伤害列表[i][1:])
+
+                
         if len(self.排行数据) == 0:
             QMessageBox.information(self,"错误",  "请确认有勾选含神话装备的组合")
             return
@@ -1701,7 +1718,6 @@ class 角色窗口(QWidget):
                     图标.move(int(初始x+x间隔*水平间距[j]),int(初始y+i*y间隔))
                     图标.setToolTip(self.排行数据[i][j])
                 
-    
             伤害量 = str(int(round(self.排行数据[i][12]/100000000,0)))
             if 最高伤害!=0:
                 百分比=str(round(self.排行数据[i][12]/最高伤害*100,1))+'%'

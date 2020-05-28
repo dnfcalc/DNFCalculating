@@ -3,7 +3,7 @@ from Part.sum import *
 app = QApplication([])
 
 选择窗口 = QWidget()
-选择窗口.setFixedSize(220, len(所有职业)*45)
+选择窗口.setFixedSize(30 + 160 * len(角色列表), 8 * 45)
 选择窗口.setWindowTitle('职业选择')
 
 按钮样式 = 'QPushButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px} QPushButton:hover{background-color:rgba(65,105,225,0.8)}'
@@ -20,14 +20,17 @@ app = QApplication([])
 主背景.setGraphicsEffect(主背景透明度)
 
 窗口列表 = []
-count = 0
-for i in 所有职业:
-    x = QPushButton(i,选择窗口)
-    x.clicked.connect(lambda state, index = i: 打开窗口(index))
-    x.move(30 , 30 + 40 * count)
-    x.resize(160, 28)
-    x.setStyleSheet(按钮样式)
-    count += 1
+count2 = 0
+for j in 角色列表:
+    count1 = 0
+    for i in j:
+        x = QPushButton(i,选择窗口)
+        x.clicked.connect(lambda state, index = i: 打开窗口(index))
+        x.move(30 + 160 * count2 , 30 + 40 * count1)
+        x.resize(140, 28)
+        x.setStyleSheet(按钮样式)
+        count1 += 1
+    count2 += 1
 
 def 打开窗口(index):
     if len(窗口列表) != 0:
