@@ -60,7 +60,6 @@ class 主动技能(技能):
         else:
             return int((self.攻击次数 * (self.基础 + self.成长 * self.等级) + self.攻击次数2 * (self.基础2 + self.成长2 * self.等级) + self.攻击次数3 * (
                         self.基础3 + self.成长3 * self.等级)) * (1 + self.TP成长 * self.TP等级) * self.倍率)
-            # return int((self.基础 + self.成长 * self.等级)* (1 + self.TP成长 * self.TP等级) * self.倍率)
     def 等效CD(self, 武器类型):
         # Will修改
         return round(self.CD * self.CD倍率 / self.恢复, 1)
@@ -1087,7 +1086,7 @@ class 角色窗口(QWidget):
         self.BUFF.setPixmap(QPixmap('./ResourceFiles/'+self.角色属性A.职业名称 + "/技能/BUFF.png"))
         self.BUFF.resize(28,28)
         self.BUFF.move(x-2,y-40)
-        self.BUFF.setToolTip( '最高值参考：' + str((self.角色属性A.主BUFF - 1) * 100))
+        self.BUFF.setToolTip( '最高值参考：' + str('%.1f' % ((self.角色属性A.主BUFF - 1) * 100)))
         
         self.BUFF输入.setText(str((self.角色属性A.主BUFF - 1) * 100))
         self.BUFF输入.resize(50, 25)
@@ -1258,7 +1257,7 @@ class 角色窗口(QWidget):
                 Linelist[j].move(95 + i*(宽度 + 5), 35 + j*30)
             self.属性设置输入.append(Linelist)
     
-        列名称2 = ["力量", "智力", "物攻", "魔攻", "独立", "属强", "徽章力", "徽章智", "所有攻", "技能"]
+        列名称2 = ["力量", "智力", "物攻", "魔攻", "独立", "属强", "徽章力", "徽章智", "终伤", "技能"]
         行名称2 = ["上衣", "下装", "头肩", "腰带", "鞋", "手镯", "项链", "戒指", "左槽", "右槽", "耳环", "武器", "称号", "光环", "武器装扮", "皮肤", "时装"]
 
         self.列名称 = 列名称1 + 列名称2
@@ -1782,10 +1781,6 @@ class 角色窗口(QWidget):
         self.角色属性B = copy.deepcopy(self.角色属性A)
         self.角色属性B.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
         self.角色属性B.穿戴装备(装备名称,套装名称)
-        #for i in self.角色属性B.装备栏:
-        #    装备列表[装备序号[i]].其它属性(self.角色属性B)
-        #for i in self.角色属性B.套装栏:
-        #    套装列表[套装序号[i]].其它属性(self.角色属性B)
         统计详情 = self.角色属性B.伤害计算(1)
 
         #最大输出界面限制
@@ -1880,24 +1875,24 @@ class 角色窗口(QWidget):
                     tempstr+=j
                     if j != self.角色属性B.技能栏[i].关联技能[-1]:
                         tempstr+=','
-                tempstr+='</b><br>'
+                tempstr+='</b>'
                 # Will添加
                 if self.角色属性B.技能栏[i].关联技能2 != ['无']:
-                    tempstr+='加成倍率：<b>'+str(round(self.角色属性B.技能栏[i].加成倍率2(self.角色属性B.武器类型)*100-100,2))+'%</b><br>'
+                    tempstr+='<br>加成倍率：<b>'+str(round(self.角色属性B.技能栏[i].加成倍率2(self.角色属性B.武器类型)*100-100,2))+'%</b><br>'
                     tempstr+='关联技能：<b>'
                     for k in self.角色属性B.技能栏[i].关联技能2:
                         tempstr+=k
                         if k != self.角色属性B.技能栏[i].关联技能2[-1]:
                             tempstr+=','
-                    tempstr+='</b><br>'
+                    tempstr+='</b>'
                 if self.角色属性B.技能栏[i].关联技能3 != ['无']:
-                    tempstr+='加成倍率：<b>'+str(round(self.角色属性B.技能栏[i].加成倍率3(self.角色属性B.武器类型)*100-100,2))+'%</b><br>'
+                    tempstr+='<br>加成倍率：<b>'+str(round(self.角色属性B.技能栏[i].加成倍率3(self.角色属性B.武器类型)*100-100,2))+'%</b><br>'
                     tempstr+='关联技能：<b>'
                     for l in self.角色属性B.技能栏[i].关联技能3:
                         tempstr+=l
                         if l != self.角色属性B.技能栏[i].关联技能3[-1]:
                             tempstr+=','
-                    tempstr+='</b><br>'
+                    tempstr+='</b>'
                 被动数据.setToolTip(tempstr)
                 被动数据.move(300+num*40, 500)
                 被动等级=QLabel(输出窗口)
