@@ -1731,7 +1731,7 @@ class 角色窗口(QWidget):
 
     def 格式化输出(self, 数字文本):
         if self.显示选项.isChecked():
-            返回值 = str(round(int(数字文本)/100000000,2)) + '亿'
+            返回值 = str('%.2f' % round(int(数字文本)/100000000,2)) + '亿'
         else:
             返回值=''
             for i in range(0,len(数字文本)):
