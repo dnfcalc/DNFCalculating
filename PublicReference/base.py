@@ -7,6 +7,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 import copy
 import heapq
+import ctypes
 
 class 技能:
     名称 = ''
