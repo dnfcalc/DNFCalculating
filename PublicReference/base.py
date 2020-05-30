@@ -1,5 +1,6 @@
 from PublicReference.装备 import *
 from PublicReference.装备函数 import *
+from PublicReference.辟邪玉 import *
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
@@ -444,16 +445,7 @@ class 角色属性():
         self.伤害指数=面板*属性倍率*增伤倍率*基准倍率/100
 
     def 伤害计算(self, x = 0):
-        self.装备基础()
-
-        for i in self.装备栏:
-            装备列表[装备序号[i]].城镇属性(self)
-            装备列表[装备序号[i]].进图属性(self)
-
-        for i in self.套装栏:
-            套装列表[套装序号[i]].城镇属性(self)
-            套装列表[套装序号[i]].进图属性(self)
-
+        
         self.所有属性强化(self.进图属强)
         # Will添加
         self.CD倍率计算()
@@ -545,6 +537,17 @@ class 角色属性():
             except : 
                 pass
         return round(站街独立攻击, 3)
+    
+    def 装备属性计算(self):
+        self.装备基础()
+
+        for i in self.装备栏:
+            装备列表[装备序号[i]].城镇属性(self)
+            装备列表[装备序号[i]].进图属性(self)
+
+        for i in self.套装栏:
+            套装列表[套装序号[i]].城镇属性(self)
+            套装列表[套装序号[i]].进图属性(self)
 
 class 角色窗口(QWidget):
     
@@ -773,7 +776,7 @@ class 角色窗口(QWidget):
         self.装备条件选择.append(QComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['绿色生命的面容：无', '绿色生命的面容：阴暗面'])
         self.装备条件选择.append(QComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems(['希洛克融合：无','希洛克：奈克斯(伤害增幅)', '希洛克：暗杀者(冷却缩减)', '希洛克：卢克西(觉醒增幅)', '希洛克：罗德斯(霸体抗性)', '希洛克：守门将(45-最低)', '希洛克：守门将(90-平均)', '希洛克：守门将(135-最高)'])
+        self.装备条件选择[-1].addItems(['希洛克融合：无','希洛克：奈克斯(伤害增幅)', '希洛克：暗杀者(冷却缩减)', '希洛克：卢克西(觉醒增幅)', '希洛克：罗德斯(霸体抗性)', '希洛克：守门将(45属强)', '希洛克：守门将(90属强)', '希洛克：守门将(135属强)'])
         for i in range(0, len(self.装备条件选择)):
             self.装备条件选择[i].resize(170, 20)
             self.装备条件选择[i].setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px} QComboBox:hover{background-color:rgba(65,105,225,0.8)}")
@@ -1176,6 +1179,24 @@ class 角色窗口(QWidget):
             self.符文效果[i].setStyleSheet(下拉框样式)
             纵坐标+=25
 
+        self.辟邪玉选择 = []
+        self.辟邪玉数值 = []
+        for i in range(4):
+            x = QComboBox(self.main_frame2) 
+            for j in 辟邪玉列表:
+                x.addItem('[' + str(j.编号) + ']' + j.名称)
+            x.resize(200,20)
+            x.setStyleSheet(下拉框样式)
+            x.move(480,300 + i * 25)
+            x.currentIndexChanged.connect(lambda state, index = i:self.辟邪玉数值选项更新(index))
+            self.辟邪玉选择.append(x)
+            y = QComboBox(self.main_frame2) 
+            y.resize(80,20)
+            y.setStyleSheet(下拉框样式)
+            y.move(700,300 + i * 25)
+            self.辟邪玉数值.append(y)
+
+
         self.复选框列表 = []
         self.复选框列表.append(QCheckBox('顶级力量灵药     ', self.main_frame2))
         self.复选框列表.append(QCheckBox('顶级智力灵药     ', self.main_frame2))
@@ -1341,6 +1362,23 @@ class 角色窗口(QWidget):
         self.stacked_layout.addWidget(self.main_frame1)
         self.stacked_layout.addWidget(self.main_frame2)
         self.stacked_layout.addWidget(self.main_frame3)
+
+    def 辟邪玉数值选项更新(self, index):
+        self.辟邪玉数值[index].clear()
+        x = self.辟邪玉选择[index].currentIndex()
+        temp = 辟邪玉列表[x].最小值
+        while temp <= 辟邪玉列表[x].最大值:
+            self.辟邪玉数值[index].addItem(str('%.1f' % temp))
+            temp += 辟邪玉列表[x].间隔
+
+    def 辟邪玉属性计算(self, 属性):
+        for i in range(4):
+            x = self.辟邪玉选择[i].currentIndex()
+            if self.辟邪玉数值[i].currentIndex() >= 0:
+                辟邪玉列表[x].当前值 = float(self.辟邪玉数值[i].currentText())
+            if 辟邪玉列表[x].间隔 == 1:
+                辟邪玉列表[x].当前值 = int(辟邪玉列表[x].当前值)
+            辟邪玉列表[x].进图属性(属性)
 
     def 装备图标点击事件(self, index, sign):
         #改变状态
@@ -1524,6 +1562,15 @@ class 角色窗口(QWidget):
         except:
             pass
 
+        try:
+            setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/set/skill3.ini', 'r', encoding='utf-8').readlines()
+            num = 0
+            for i in range(4):
+                self.辟邪玉选择[i].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+                self.辟邪玉数值[i].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+        except:
+            pass
+
     def 保存配置(self):
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/set/attr.ini', 'w', encoding='utf-8')
@@ -1593,6 +1640,14 @@ class 角色窗口(QWidget):
         except:
             pass
 
+        try:
+            setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/set/skill3.ini', 'w', encoding='utf-8')
+            for i in range(4):
+                setfile.write(str(self.辟邪玉选择[i].currentIndex())+'\n')
+                setfile.write(str(self.辟邪玉数值[i].currentIndex())+'\n')
+        except:
+            pass
+
     def click_window(self, index):
         if self.stacked_layout.currentIndex() != index:
             self.stacked_layout.setCurrentIndex(index)
@@ -1619,6 +1674,8 @@ class 角色窗口(QWidget):
                 self.角色属性B = copy.deepcopy(self.角色属性A)
                 self.角色属性B.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
                 self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
+                self.角色属性B.装备属性计算()
+                self.辟邪玉属性计算(self.角色属性B)
                 damage = self.角色属性B.伤害计算()
                 if (heapSize > 0):
                     minDamage = self.伤害列表[0][0]
@@ -1641,6 +1698,8 @@ class 角色窗口(QWidget):
                 self.角色属性B = copy.deepcopy(self.角色属性A)
                 self.角色属性B.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
                 self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
+                self.角色属性B.装备属性计算()
+                self.辟邪玉属性计算(self.角色属性B)
                 damage = self.角色属性B.伤害计算()
                 if (heapSize > 0):
                     minDamage = self.伤害列表[0][0]
@@ -1790,6 +1849,8 @@ class 角色窗口(QWidget):
         self.角色属性B = copy.deepcopy(self.角色属性A)
         self.角色属性B.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
         self.角色属性B.穿戴装备(装备名称,套装名称)
+        self.角色属性B.装备属性计算()
+        self.辟邪玉属性计算(self.角色属性B)
         统计详情 = self.角色属性B.伤害计算(1)
 
         #最大输出界面限制
@@ -2350,7 +2411,7 @@ class 角色窗口(QWidget):
             if i.是否有伤害 == 1:
                 属性.次数输入.append(self.次数输入[序号].currentText())
                 if self.次数输入[序号].currentIndex() != 0:
-                    self.宠物次数[序号].setCurrentIndex(min(self.宠物次数[序号].currentIndex(), self.次数输入[序号].currentIndex() - 1))
+                    self.宠物次数[序号].setCurrentIndex(min(self.宠物次数[序号].currentIndex(), self.次数输入[序号].currentIndex() - 1 + i.基础释放次数))
                 属性.宠物次数.append(self.宠物次数[序号].currentIndex())
             else:
                 属性.次数输入.append('')
