@@ -1,5 +1,6 @@
 from PublicReference.base import *
 
+
 class 战斗神思者技能0(主动技能):
     名称 = '空斩打'
     所在等级 = 15
@@ -78,6 +79,12 @@ class 战斗神思者技能6(主动技能):
     CD = 7.0
     TP成长 = 0.10
     TP上限 = 7
+    关联技能 = ['所有']
+    def 加成倍率(self, 武器类型):
+        if (self.等级 < 1):
+            return 1.0
+        else:
+            return 1.2
 
 
 class 战斗神思者技能7(主动技能):
