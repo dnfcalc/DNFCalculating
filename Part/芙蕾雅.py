@@ -435,16 +435,6 @@ class 芙蕾雅角色属性(角色属性):
         self.技能序号= copy.deepcopy(芙蕾雅技能序号)
 
     def 伤害计算(self, x=0):
-        self.装备基础()
-
-        for i in self.装备栏:
-            装备列表[装备序号[i]].城镇属性(self)
-            装备列表[装备序号[i]].进图属性(self)
-
-        for i in self.套装栏:
-            套装列表[套装序号[i]].城镇属性(self)
-            套装列表[套装序号[i]].进图属性(self)
-
         self.所有属性强化(self.进图属强)
         # Will添加
         self.CD倍率计算()
