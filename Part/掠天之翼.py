@@ -7,6 +7,7 @@ class 掠天之翼技能0(主动技能):
     基础等级 = 46
     基础 = 950.6
     成长 = 107.4
+    攻击次数 = 1
     CD = 6.9
     TP成长 = 0.1
     TP上限 = 7
@@ -19,18 +20,18 @@ class 掠天之翼技能1(被动技能):
     def 加成倍率(self, 武器类型):
         if self.等级 == 0:
             return 1.0
-        if self.等级 <= 10:
-            return round(1.1 + 0.01 * self.等级, 5)
         else:
-            return round(1.0 + 0.02 * self.等级, 5)
+            return round(1.1 + 0.01 * self.等级, 5)
 
     def 物理攻击力倍率(self, 武器类型):
         if self.等级 == 0:
             return 1.0
-        if self.等级 <= 10:
-            return round(1.1 + 0.01 * self.等级, 5)
         else:
-            return round(1.0 + 0.02 * self.等级, 5)
+            if self.等级 <= 10:
+                return round(1.1 + 0.01 * self.等级, 5)
+            else:
+                return round(1.2 + 0.02 * (self.等级 - 10), 5)
+
 
 class 掠天之翼技能2(被动技能):
     名称 = '花式枪术'
@@ -40,10 +41,12 @@ class 掠天之翼技能2(被动技能):
     def 加成倍率(self, 武器类型):
         if self.等级 == 0:
             return 1.0
-        if self.等级 <= 10:
-            return round(1.0 + 0.01 * self.等级, 5)
         else:
-            return round(0.9 + 0.02 * self.等级, 5)
+            if self.等级 <= 10:
+                return round(1 + 0.01 * self.等级, 5)
+            else:
+                return round(1.1 + 0.02 * (self.等级 - 10), 5)
+
 
 class 掠天之翼技能3(主动技能):
     名称 = '三连发'
@@ -54,7 +57,7 @@ class 掠天之翼技能3(主动技能):
     成长 = 51.73
     基础2 = 916.54
     成长2 = 103.46
-    攻击次数2 = 1
+    攻击次数2 = 2
     基础3 = 2291.35
     成长3 = 258.65
     攻击次数3 = 1
@@ -122,19 +125,19 @@ class 掠天之翼技能8(主动技能):
     所在等级 = 45
     等级上限 = 60
     基础等级 = 31
-    基础 = 460.86
-    成长 = 52.14
-    基础2 = 477.10
-    成长2 = 53.90
-    基础3 = 501.36
-    成长3 = 56.64
-    基础攻击次数 = 16
-    基础攻击次数2 = 18
-    基础攻击次数3 = 22
-    攻击间隔 = 1.0
-    攻击次数 = 基础攻击次数 / 攻击间隔 
-    攻击次数2 = 基础攻击次数2 / 攻击间隔 
-    攻击次数3 = 基础攻击次数3 / 攻击间隔 
+    基础 = 498.633
+    成长 = 56.367
+    基础2 = 515.7
+    成长2 = 58.3
+    基础3 = 541.733
+    成长3 = 61.267
+    攻击速度 = 22
+    时间 = 0.545
+    时间2 = 0.666
+    时间3 = 1
+    攻击次数 = 时间 * 攻击速度
+    攻击次数2 = 时间2 * 攻击速度
+    攻击次数3 = 时间3 * 攻击速度
     CD = 43.2
     TP成长 = 0.05
     TP基础 = 5
@@ -142,21 +145,22 @@ class 掠天之翼技能8(主动技能):
     是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
-        x = 1 - 0.05 * self.TP等级
-        self.攻击次数 = int(self.基础攻击次数/self.攻击间隔/x)
-        self.攻击次数2 = int(self.基础攻击次数2/self.攻击间隔/x)
-        self.攻击次数3 = int(self.基础攻击次数3/self.攻击间隔/x)
+        self.攻击次数 = int((1 + 0.1 * self.TP等级) * self.时间 * self.攻击速度)
+        self.攻击次数2 = int((1 + 0.1 * self.TP等级) * self.时间2 * self.攻击速度)
+        self.攻击次数3 = int((1 + 0.1 * self.TP等级) * self.时间3 * self.攻击速度)
+
         if self.等级 == 0:
             return 0
         else:
-            return int((self.攻击次数 * (self.基础 + self.成长 * self.等级) + self.攻击次数2 * (self.基础2 + self.成长2 * self.等级) + self.攻击次数3 * (
-                        self.基础3 + self.成长3 * self.等级)) * (1 + self.TP成长 * self.TP等级) * self.倍率)
+            return int((self.攻击次数 * (self.基础 + self.成长 * self.等级) + self.攻击次数2 * (
+                    self.基础2 + self.成长2 * self.等级) + self.攻击次数3 * (
+                    self.基础3 + self.成长3 * self.等级)) * (1 + self.TP成长 * self.TP等级) * self.倍率)
 
     def 装备护石(self):
-         self.基础2 *= 1.08
-         self.成长2 *= 1.08
-         self.基础攻击次数 = 0
-         self.攻击间隔 *= 0.7
+        self.基础2 *= 1.08
+        self.成长2 *= 1.08
+        self.时间 = 0
+        self.攻击速度 = 22 / 0.7
 
 class 掠天之翼技能9(被动技能):
     名称 = '死亡印记'
@@ -240,7 +244,7 @@ class 掠天之翼技能13(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(1.305 + 0.045 * self.等级, 5)
+            return round((1.305 + 0.045 * self.等级)/(1.22 + 0.02 * self.等级), 5)
 
 class 掠天之翼技能14(主动技能):
     名称 = '疾风骤雨'

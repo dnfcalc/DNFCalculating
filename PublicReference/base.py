@@ -1663,7 +1663,6 @@ class 角色窗口(QWidget):
             return
         
         self.角色属性A = copy.deepcopy(self.初始属性)
-        self.角色属性A.技能栏 = copy.deepcopy(self.初始属性.技能栏)
         self.输入属性(self.角色属性A)
         self.伤害列表 = []
         heapq.heapify(self.伤害列表)
@@ -1673,7 +1672,6 @@ class 角色窗口(QWidget):
         if self.神话排名选项.isChecked():
             for i in range(0, len(self.有效穿戴组合)):
                 self.角色属性B = copy.deepcopy(self.角色属性A)
-                self.角色属性B.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
                 self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
                 self.角色属性B.装备属性计算()
                 self.辟邪玉属性计算(self.角色属性B)
@@ -1697,7 +1695,6 @@ class 角色窗口(QWidget):
         else:
             for i in range(0, len(self.有效穿戴组合)):
                 self.角色属性B = copy.deepcopy(self.角色属性A)
-                self.角色属性B.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
                 self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
                 self.角色属性B.装备属性计算()
                 self.辟邪玉属性计算(self.角色属性B)
@@ -1826,7 +1823,6 @@ class 角色窗口(QWidget):
 
     def 站街计算(self,装备名称,套装名称):
         C = copy.deepcopy(self.角色属性A)
-        C.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
         C.穿戴装备(装备名称,套装名称)
         for i in C.装备栏:
             装备列表[装备序号[i]].城镇属性(C)
@@ -1848,7 +1844,6 @@ class 角色窗口(QWidget):
         C = self.站街计算(装备名称,套装名称)
 
         self.角色属性B = copy.deepcopy(self.角色属性A)
-        self.角色属性B.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
         self.角色属性B.穿戴装备(装备名称,套装名称)
         self.角色属性B.装备属性计算()
         self.辟邪玉属性计算(self.角色属性B)
