@@ -202,6 +202,54 @@ class 角色属性():
     护石第一栏 = '无'
     护石第二栏 = '无'
 
+    def 手动拷贝(self, role):
+        
+        #基础属性(含唤醒)
+        self.基础力量 = role.基础力量
+        self.基础智力 = role.基础智力
+        
+        #适用系统奶加成
+        self.力量 = role.力量
+        self.智力 = role.智力
+        
+        #不适用系统奶加成
+        self.进图力量 = role.进图力量
+        self.进图智力 = role.进图智力
+        self.进图物理攻击力 = role.进图物理攻击力
+        self.进图魔法攻击力 = role.进图魔法攻击力
+        self.进图独立攻击力 = role.进图独立攻击力
+        self.进图属强 = role.进图属强
+
+        #人物基础 + 唤醒 + 防具精通
+        self.物理攻击力 = role.物理攻击力
+        self.魔法攻击力 = role.物理攻击力
+        self.独立攻击力 = role.独立攻击力
+        self.火属性强化 = role.火属性强化
+        self.冰属性强化 = role.冰属性强化
+        self.光属性强化 = role.光属性强化
+        self.暗属性强化 = role.暗属性强化
+        self.百分比力智 = role.百分比力智
+        self.百分比三攻 = role.百分比三攻
+        self.伤害增加 = role.伤害增加
+        self.附加伤害 = role.附加伤害
+        self.属性附加 = role.属性附加
+        self.暴击伤害 = role.暴击伤害
+        self.最终伤害 = role.最终伤害
+        self.技能攻击力 = role.技能攻击力
+        self.持续伤害 = role.持续伤害
+        self.加算冷却缩减 = role.加算冷却缩减
+
+        self.攻击速度 = role.攻击速度
+        self.移动速度 = role.移动速度
+        self.释放速度 = role.释放速度
+        self.命中率 = role.命中率
+        self.回避率 = role.回避率
+        self.物理暴击率 = role.物理暴击率
+        self.魔法暴击率 = role.魔法暴击率
+
+        self.技能栏 = copy.deepcopy(role.技能栏)
+        self.技能序号 = role.技能序号
+
     def 穿戴装备(self, 装备, 套装):
         self.装备栏 = 装备
         self.套装栏 = 套装
@@ -1665,13 +1713,15 @@ class 角色窗口(QWidget):
         self.角色属性A = copy.deepcopy(self.初始属性)
         self.输入属性(self.角色属性A)
         self.伤害列表 = []
+        self.角色属性B = copy.deepcopy(self.角色属性A) # 预先构造对象(?)
+
         heapq.heapify(self.伤害列表)
         heapSize = 0
         minDamage = -1
-        
         if self.神话排名选项.isChecked():
             for i in range(0, len(self.有效穿戴组合)):
-                self.角色属性B = copy.deepcopy(self.角色属性A)
+                # self.角色属性B = copy.deepcopy(self.角色属性A)
+                self.角色属性B.手动拷贝(self.角色属性A)
                 self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
                 self.角色属性B.装备属性计算()
                 self.辟邪玉属性计算(self.角色属性B)
@@ -1694,7 +1744,8 @@ class 角色窗口(QWidget):
                     break
         else:
             for i in range(0, len(self.有效穿戴组合)):
-                self.角色属性B = copy.deepcopy(self.角色属性A)
+                # self.角色属性B = copy.deepcopy(self.角色属性A)
+                self.角色属性B.手动拷贝(self.角色属性A)
                 self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
                 self.角色属性B.装备属性计算()
                 self.辟邪玉属性计算(self.角色属性B)
@@ -1713,8 +1764,6 @@ class 角色窗口(QWidget):
 
             for i in range(min(heapSize,堆大小上限)):
                 self.排行数据.append(self.伤害列表[i][1:])
-
-                
         if len(self.排行数据) == 0:
             QMessageBox.information(self,"错误",  "请确认有勾选含神话装备的组合")
             return
