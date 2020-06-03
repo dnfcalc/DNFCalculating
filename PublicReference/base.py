@@ -1,6 +1,8 @@
 from PublicReference.装备 import *
 from PublicReference.装备函数 import *
 from PublicReference.辟邪玉 import *
+from PublicReference.称号 import *
+from PublicReference.宠物 import *
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
@@ -460,7 +462,7 @@ class 角色属性():
     
         #技能单次伤害计算
         for i in self.技能栏:
-            if i.是否主动==1:
+            if i.是否有伤害==1:
                 技能单次伤害.append(i.等效百分比(self.武器类型)*self.伤害指数*i.被动倍率)
             else:
                 技能单次伤害.append(0)
@@ -478,7 +480,7 @@ class 角色属性():
         #单技能伤害合计
     
         for i in self.技能栏:
-            if i.是否主动==1 and 技能释放次数[self.技能序号[i.名称]] != 0:
+            if i.是否有伤害==1 and 技能释放次数[self.技能序号[i.名称]] != 0:
                 技能总伤害.append(技能单次伤害[self.技能序号[i.名称]]*技能释放次数[self.技能序号[i.名称]]*(1+self.白兔子技能*0.20+self.年宠技能*0.10*self.宠物次数[self.技能序号[i.名称]]/技能释放次数[self.技能序号[i.名称]]+self.斗神之吼秘药*0.12))
             else:
                 技能总伤害.append(0)
@@ -548,6 +550,54 @@ class 角色属性():
         for i in self.套装栏:
             套装列表[套装序号[i]].城镇属性(self)
             套装列表[套装序号[i]].进图属性(self)
+
+    def 手动拷贝(self, role):
+
+        #基础属性(含唤醒)
+        self.基础力量 = role.基础力量
+        self.基础智力 = role.基础智力
+
+        #适用系统奶加成
+        self.力量 = role.力量
+        self.智力 = role.智力
+
+        #不适用系统奶加成
+        self.进图力量 = role.进图力量
+        self.进图智力 = role.进图智力
+        self.进图物理攻击力 = role.进图物理攻击力
+        self.进图魔法攻击力 = role.进图魔法攻击力
+        self.进图独立攻击力 = role.进图独立攻击力
+        self.进图属强 = role.进图属强
+
+        #人物基础 + 唤醒 + 防具精通
+        self.物理攻击力 = role.物理攻击力
+        self.魔法攻击力 = role.魔法攻击力
+        self.独立攻击力 = role.独立攻击力
+        self.火属性强化 = role.火属性强化
+        self.冰属性强化 = role.冰属性强化
+        self.光属性强化 = role.光属性强化
+        self.暗属性强化 = role.暗属性强化
+        self.百分比力智 = role.百分比力智
+        self.百分比三攻 = role.百分比三攻
+        self.伤害增加 = role.伤害增加
+        self.附加伤害 = role.附加伤害
+        self.属性附加 = role.属性附加
+        self.暴击伤害 = role.暴击伤害
+        self.最终伤害 = role.最终伤害
+        self.技能攻击力 = role.技能攻击力
+        self.持续伤害 = role.持续伤害
+        self.加算冷却缩减 = role.加算冷却缩减
+
+        self.攻击速度 = role.攻击速度
+        self.移动速度 = role.移动速度
+        self.释放速度 = role.释放速度
+        self.命中率 = role.命中率
+        self.回避率 = role.回避率
+        self.物理暴击率 = role.物理暴击率
+        self.魔法暴击率 = role.魔法暴击率
+
+        self.技能栏 = copy.deepcopy(role.技能栏)
+        self.技能序号 = role.技能序号
 
 class 角色窗口(QWidget):
     
@@ -867,10 +917,12 @@ class 角色窗口(QWidget):
         self.装备打造选项.append(x)
 
         self.称号 = QComboBox(self.main_frame1)
-        self.称号.addItems(['(2020)伟大的意志', '(2019)神选之英杰', '(2020)使徒降临', '(2019)超越极限者', '(2018)神之试炼', '(2015)哥特绮梦'])
+        for i in 称号列表:
+            self.称号.addItem(i.名称)
         
         self.宠物 = QComboBox(self.main_frame1)
-        self.宠物.addItems(['(2020)至尊', '(2019)至尊·进化', '(2020)普通', '(2019)普通'])
+        for i in 宠物列表:
+            self.宠物.addItem(i.名称)
 
         x = QLabel('称号&宠物选择：', self.main_frame1)
         x.resize(130,20)
@@ -880,27 +932,27 @@ class 角色窗口(QWidget):
         
         counter = 0
         for x in [self.称号, self.宠物]:
-            x.resize(130,20)
-            x.move(360 , 430 + counter * 30)
+            x.resize(160,20)
+            x.move(350 , 430 + counter * 30)
             x.setStyleSheet(下拉框样式)  
             counter += 1    
 
         x = QPushButton('一键全选', self.main_frame1)
         x.clicked.connect(lambda state, index = 1: self.批量选择(index))
-        x.move(505 , 400)
-        x.resize(115, 24)
+        x.move(520 , 400)
+        x.resize(105, 24)
         x.setStyleSheet(按钮样式)
 
         x = QPushButton('一键清空',self.main_frame1)
         x.clicked.connect(lambda state, index = 0: self.批量选择(index))
-        x.move(505 , 430)
-        x.resize(115, 24)
+        x.move(520 , 430)
+        x.resize(105, 24)
         x.setStyleSheet(按钮样式)
 
         x = QPushButton('一键10/12/8/5',self.main_frame1)
         x.clicked.connect(lambda state: self.批量打造())
-        x.move(505 , 460)
-        x.resize(115, 24)
+        x.move(520 , 460)
+        x.resize(105, 24)
         x.setStyleSheet(按钮样式)
 
         self.百变怪选项 = QCheckBox('百变怪   ', self.main_frame1)
@@ -1038,11 +1090,10 @@ class 角色窗口(QWidget):
         
         for i in self.角色属性A.技能栏:
             if i.是否有伤害 == 1:
-                if i.是否主动==1:
-                    if i.TP上限!=0:
-                        self.TP输入[self.角色属性A.技能序号[i.名称]].resize(词条框宽度, 行高)
-                        self.TP输入[self.角色属性A.技能序号[i.名称]].move(横坐标,纵坐标)
-                        self.TP输入[self.角色属性A.技能序号[i.名称]].setStyleSheet(下拉框样式)
+                if i.TP上限!=0:
+                    self.TP输入[self.角色属性A.技能序号[i.名称]].resize(词条框宽度, 行高)
+                    self.TP输入[self.角色属性A.技能序号[i.名称]].move(横坐标,纵坐标)
+                    self.TP输入[self.角色属性A.技能序号[i.名称]].setStyleSheet(下拉框样式)
                 纵坐标+=纵坐标偏移量
         
         横坐标=横坐标+50
@@ -1050,13 +1101,12 @@ class 角色窗口(QWidget):
         
         for i in self.角色属性A.技能栏:
             if i.是否有伤害 == 1:
-                if i.是否主动==1:
-                    self.次数输入[self.角色属性A.技能序号[i.名称]].resize(词条框宽度, 行高)
-                    self.次数输入[self.角色属性A.技能序号[i.名称]].move(横坐标,纵坐标)
-                    self.次数输入[self.角色属性A.技能序号[i.名称]].setStyleSheet(下拉框样式)
-                    self.宠物次数[self.角色属性A.技能序号[i.名称]].resize(词条框宽度, 行高)
-                    self.宠物次数[self.角色属性A.技能序号[i.名称]].move(横坐标+50,纵坐标)
-                    self.宠物次数[self.角色属性A.技能序号[i.名称]].setStyleSheet(下拉框样式)
+                self.次数输入[self.角色属性A.技能序号[i.名称]].resize(词条框宽度, 行高)
+                self.次数输入[self.角色属性A.技能序号[i.名称]].move(横坐标,纵坐标)
+                self.次数输入[self.角色属性A.技能序号[i.名称]].setStyleSheet(下拉框样式)
+                self.宠物次数[self.角色属性A.技能序号[i.名称]].resize(词条框宽度, 行高)
+                self.宠物次数[self.角色属性A.技能序号[i.名称]].move(横坐标+50,纵坐标)
+                self.宠物次数[self.角色属性A.技能序号[i.名称]].setStyleSheet(下拉框样式)
                 纵坐标+=纵坐标偏移量
 
         横坐标=横坐标+120
@@ -1243,8 +1293,6 @@ class 角色窗口(QWidget):
         # 第三个布局界面
         self.main_frame3 = QMainWindow()
 
-        名称列表 = ["上衣", "下装", "头肩", "腰带", "鞋", "手镯", "项链", "戒指", "耳环", "辅助装备", "魔法石", "武器", "称号", "宠物", "宠物装备","光环", "武器装扮", "皮肤", "时装", "勋章", "快捷栏装备"]
-        
         self.属性设置输入 = []
         self.技能设置输入 = []
 
@@ -1664,13 +1712,14 @@ class 角色窗口(QWidget):
         self.角色属性A = copy.deepcopy(self.初始属性)
         self.输入属性(self.角色属性A)
         self.伤害列表 = []
+        self.角色属性B = copy.deepcopy(self.角色属性A) # 预先构造对象
         heapq.heapify(self.伤害列表)
         heapSize = 0
         minDamage = -1
         
         if self.神话排名选项.isChecked():
             for i in range(0, len(self.有效穿戴组合)):
-                self.角色属性B = copy.deepcopy(self.角色属性A)
+                self.角色属性B.手动拷贝(self.角色属性A)
                 self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
                 self.角色属性B.装备属性计算()
                 self.辟邪玉属性计算(self.角色属性B)
@@ -1693,7 +1742,7 @@ class 角色窗口(QWidget):
                     break
         else:
             for i in range(0, len(self.有效穿戴组合)):
-                self.角色属性B = copy.deepcopy(self.角色属性A)
+                self.角色属性B.手动拷贝(self.角色属性A)
                 self.角色属性B.穿戴装备(self.有效穿戴组合[i], self.有效穿戴套装[i])
                 self.角色属性B.装备属性计算()
                 self.辟邪玉属性计算(self.角色属性B)
@@ -1969,7 +2018,7 @@ class 角色窗口(QWidget):
         技能等效CD=[]
         for i in self.角色属性B.技能栏:
             实际技能等级.append(i.等级)
-            if i.是否主动==1:
+            if i.是否有伤害==1:
                 技能等效CD.append(i.等效CD(self.角色属性B.武器类型))
             else:
                 技能等效CD.append(0)
@@ -1990,7 +2039,7 @@ class 角色窗口(QWidget):
                 tempstr+='被动倍率：<b>'+str(round(self.角色属性B.技能栏[i].被动倍率*100,1))+'%</b><br>'
                 if self.角色属性B.技能栏[i].倍率!=0:
                     tempstr+='其它倍率：<b>'+str(round(self.角色属性B.技能栏[i].倍率*100,1))+'%</b><br>'
-                tempstr+='CD显示：<b>'+str(round(self.角色属性B.技能栏[i].CD,2))+'s</b><br>'
+                tempstr+='CD显示：<b>'+str(round(self.角色属性B.技能栏[i].等效CD(self.角色属性B.武器类型) / self.角色属性B.技能栏[i].恢复,2))+'s</b><br>'
                 tempstr+='CD恢复：<b>'+str(round(self.角色属性B.技能栏[i].恢复*100,1))+'%</b>'
                 每行详情[0].setToolTip(tempstr)
     
@@ -2171,7 +2220,7 @@ class 角色窗口(QWidget):
     def 输入属性(self, 属性):
         for i in 属性.技能栏:
             i.等级 = i.基础等级+int(self.等级调整[self.角色属性A.技能序号[i.名称]].currentText())
-            if i.是否主动==1:
+            if i.是否有伤害==1:
                 if i.TP上限!=0:
                     i.TP等级=int(self.TP输入[self.角色属性A.技能序号[i.名称]].currentText())
         if self.复选框列表[0].isChecked():
@@ -2202,101 +2251,13 @@ class 角色窗口(QWidget):
             属性.百分比力智+=0.20
         if self.复选框列表[12].isChecked():
             属性.系统奶 = True
-        if self.称号.currentText() == '(2020)伟大的意志':
-            属性.力量 += 90
-            属性.智力 += 90
-            属性.物理攻击力 += 65
-            属性.魔法攻击力 += 65
-            属性.独立攻击力 += 65
-            属性.所有属性强化(20)
-            属性.暴击伤害 += 0.18
-            属性.百分比力智 += 0.04
-            if self.复选框列表[6].isChecked():
-                属性.进图力量+=35
-                属性.进图智力+=35
-        if self.称号.currentText() == '(2019)神选之英杰':
-            属性.力量 += 75
-            属性.智力 += 75
-            属性.物理攻击力 += 45
-            属性.魔法攻击力 += 45
-            属性.独立攻击力 += 65
-            属性.所有属性强化(20)
-            属性.暴击伤害 += 0.18
-            属性.物理暴击率+=0.15
-            属性.攻击速度+=0.04
-            属性.移动速度+=0.04
-            if self.复选框列表[6].isChecked():
-                属性.进图力量+=35
-                属性.进图智力+=35
-        if self.称号.currentText() == '(2020)使徒降临':
-            属性.力量 += 80
-            属性.智力 += 80
-            属性.物理攻击力 += 60
-            属性.魔法攻击力 += 60
-            属性.独立攻击力 += 60
-            属性.所有属性强化(15)
-            属性.附加伤害 += 0.12
-            属性.百分比力智 += 0.03
-            if self.复选框列表[6].isChecked():
-                属性.进图力量+=35
-                属性.进图智力+=35
-        if self.称号.currentText() == '(2018)神之试炼':
-            属性.力量 += 55
-            属性.智力 += 55
-            属性.所有属性强化(15)
-            属性.暴击伤害 += 0.15
-            if self.复选框列表[6].isChecked():
-                属性.进图属强 += 10
-        if self.称号.currentText() == '(2019)超越极限者':
-            属性.力量 += 60
-            属性.智力 += 60
-            属性.所有属性强化(15)
-            属性.暴击伤害 += 0.15
-            if self.复选框列表[6].isChecked():
-                属性.进图属强 += 10
-        if self.称号.currentText() == '(2015)哥特绮梦':
-            属性.力量 += 30
-            属性.智力 += 30
-            属性.物理攻击力 += 70
-            属性.魔法攻击力 += 70
-            属性.独立攻击力 += 90
-            属性.加算冷却缩减 += 0.10
-        if self.宠物.currentText() == '(2020)至尊':
-            属性.力量 += 150
-            属性.智力 += 150
-            属性.所有属性强化(24)
-            属性.附加伤害 += 0.15
-            属性.技能等级加成('所有',1,50,1)
-            属性.加算冷却缩减 += 0.05
-            属性.最终伤害 += 0.05
-            属性.百分比力智 += 0.12
-        if self.宠物.currentText() == '(2019)至尊·进化':
-            属性.力量 += 120
-            属性.智力 += 120
-            属性.所有属性强化(24)
-            属性.附加伤害 += 0.15
-            属性.技能等级加成('所有',1,50,1)
-            属性.加算冷却缩减 += 0.05
-            属性.最终伤害 += 0.05
-            属性.百分比力智 += 0.08
-        if self.宠物.currentText() == '(2020)普通':
-            属性.力量 += 140
-            属性.智力 += 140
-            属性.所有属性强化(24)
-            属性.附加伤害 += 0.12
-            属性.技能等级加成('所有',1,50,1)
-            属性.加算冷却缩减 += 0.05
-            属性.百分比力智 += 0.10
+ 
+        称号列表[self.称号.currentIndex()].城镇属性(属性)
+        if self.复选框列表[6].isChecked():
+            称号列表[self.称号.currentIndex()].触发属性(属性)
 
-        if self.宠物.currentText() == '(2019)普通':
-            属性.力量 += 120
-            属性.智力 += 120
-            属性.所有属性强化(24)
-            属性.附加伤害 += 0.12
-            属性.技能等级加成('所有',1,50,1)
-            属性.加算冷却缩减 += 0.05
-
-    
+        宠物列表[self.宠物.currentIndex()].城镇属性(属性)
+        
         if self.护石第一栏.currentText()!= '无':
             属性.技能栏[self.角色属性A.技能序号[self.护石第一栏.currentText()]].装备护石()
             属性.护石第一栏 = self.护石第一栏.currentText()
@@ -2359,6 +2320,7 @@ class 角色窗口(QWidget):
         属性.军神的隐秘遗产 = self.装备条件选择[10].currentIndex()
         属性.太极天帝剑 = self.装备条件选择[11].currentIndex()
         属性.绿色生命的面容 = self.装备条件选择[12].currentIndex()
+
         if self.装备条件选择[13].currentIndex() != 0:
             属性.最终伤害+=0.05
             属性.百分比三攻+=0.05
