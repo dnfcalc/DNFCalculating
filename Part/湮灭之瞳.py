@@ -43,8 +43,10 @@ class 湮灭之瞳主动技能(技能):
             return int((self.攻击次数 * (self.基础 + self.成长 * self.等级) + self.攻击次数2 * (self.基础2 + self.成长2 * self.等级) + self.攻击次数3 * (
                         self.基础3 + self.成长3 * self.等级)) * (1 + self.TP成长 * self.TP等级) * self.倍率)
     def 等效CD(self, 武器类型):
-        # Will修改
-        return round(self.CD * self.CD倍率 / self.恢复, 1)
+        if 武器类型 == '魔杖':
+            return round(self.CD / self.恢复 * 1.0, 1)
+        if 武器类型 == '法杖':
+            return round(self.CD / self.恢复 * 1.1, 1)
 class 湮灭之瞳被动技能(技能):
     是否主动 = 0
     是否有伤害 = 0
@@ -299,9 +301,16 @@ class 湮灭之瞳技能18(湮灭之瞳主动技能):
     TP上限 = 1
     def 等效CD(self, 武器类型):
         if self.TP等级 == 0:
-             return round (self.CD * 0.8,2)
+            if 武器类型 == '魔杖':
+                return round (self.CD * 0.8,2)
+            if 武器类型 == '法杖':
+                return round (self.CD * 0.8  * 1.1 ,2)
         else:
-             return round (self.CD *0.75 *0.8 ,2)
+            if 武器类型 == '魔杖':
+                return round (self.CD *0.75 *0.8 ,2)
+            if 武器类型 == '法杖':
+                return round (self.CD *0.75 *0.8 * 1.1 ,2)
+
 
 class 湮灭之瞳技能19(湮灭之瞳主动技能):
     名称 = '旋炎破'
@@ -456,8 +465,8 @@ class 湮灭之瞳角色属性(角色属性):
     主BUFF = 2.07
 
     # 基础属性(含唤醒)
-    基础力量 = 784.0
-    基础智力 = 946.0
+    基础力量 = 774
+    基础智力 = 976
 
     # 适用系统奶加成
     力量 = 基础力量

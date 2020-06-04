@@ -421,6 +421,7 @@ class 念皇角色属性(角色属性):
     防具精通属性 = ['智力']
 
     主BUFF = 1.43
+    BUFF属强 = 86
 
     # 基础属性(含唤醒)
     基础力量 = 940.0
@@ -454,16 +455,10 @@ class 念皇角色属性(角色属性):
         self.技能栏[self.技能序号['念气环绕：御']].被动倍率  = 6* self.技能栏[self.技能序号['念气环绕']].被动倍率*self.技能栏[self.技能序号['念气环绕：御']].被动倍率
         self.技能栏[self.技能序号['念气环绕：袭']].被动倍率 = self.技能栏[self.技能序号['念气环绕']].被动倍率 * self.技能栏[self.技能序号['念气环绕：袭']].被动倍率
         
-        #分身
-
-        #self.技能栏[self.技能序号['念气波：蓄念炮']].被动倍率 = self.技能栏[self.技能序号['念气波']].被动倍率 * self.技能栏[self.技能序号['念气波：蓄念炮']].被动倍率
-        #self.技能栏[self.技能序号['分身']].等效百分比 = self.技能栏[self.技能序号['分身']].等效百分比 * self.技能栏[self.技能序号['幻影爆碎']].加成倍率
-        #self.技能栏[self.技能序号['分身']].被动倍率 = self.技能栏[self.技能序号['幻影爆碎']].被动倍率 * self.技能栏[self.技能序号['分身']].被动倍率
-        #self.技能栏[self.技能序号['念气波：蓄念炮']].被动倍率 = self.技能栏[self.技能序号['念气波：蓄念炮']].被动倍率 + self.技能栏[self.技能序号['念气波：蓄念炮']].被动倍率 * self.技能栏[self.技能序号['蓄念炮']].被动倍率
-
-        #self.技能栏[self.技能序号['分身']].被动倍率 = self.技能栏[self.技能序号['幻影爆碎']].被动倍率*self.技能栏[self.技能序号['分身']].被动倍率
-
-        #self.技能栏[self.技能序号['念气环绕：袭']].被动倍率 = self.技能栏[self.技能序号['念气环绕']].被动倍率*self.技能栏[self.技能序号['念气环绕：袭']].被动倍率
+  
+    def 伤害指数计算(self):
+        self.光属性强化 += self.BUFF属强
+        super().伤害指数计算()
 
 
 
@@ -486,7 +481,7 @@ class 念皇(角色窗口):
         self.BUFF输入.resize(40, 25)
 
         self.BUFF输入2 = QLineEdit(self.main_frame2)
-        self.BUFF输入2.setText('86')
+        self.BUFF输入2.setText(str(self.初始属性.BUFF属强))
         self.BUFF输入2.resize(40, 25)
         self.BUFF输入2.move(self.BUFF输入.x() + 45, self.BUFF输入.y())
         self.BUFF输入2.setStyleSheet("QLineEdit{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px} QLineEdit:hover{background-color:rgba(65,105,225,0.8)}")
@@ -495,6 +490,7 @@ class 念皇(角色窗口):
     def 输入属性(self, 属性):
         super().输入属性(属性)
         try:
-            属性.进图属强 += float(self.BUFF输入2.text())
+            self.BUFF光强 = int(self.BUFF输入2.text())
         except:
-            QMessageBox.information(主窗口, "错误", "BUFF属强输入错误")
+            self.BUFF光强 = self.初始属性.BUFF属强
+            QMessageBox.information(self, "错误", "BUFF属强输入错误,重置为最高值")

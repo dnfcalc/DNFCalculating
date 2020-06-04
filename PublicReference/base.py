@@ -2299,8 +2299,8 @@ class 角色窗口(QWidget):
         try:
             属性.主BUFF = float(self.BUFF输入.text()) / 100 + 1
         except: 
-            QMessageBox.information(主窗口,"错误",  "BUFF数值输入错误,已设置为默认数值") 
-            self.BUFF输入.setText(str((self.角色属性A.主BUFF - 1) * 100))
+            QMessageBox.information(self,"错误",  "BUFF数值输入错误,已设置为默认数值") 
+            self.BUFF输入.setText(str('%.1f' % ((self.角色属性A.主BUFF - 1) * 100)))
     
         if self.觉醒选择状态 == 1:
             属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.一觉序号].名称]
