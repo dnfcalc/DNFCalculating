@@ -258,7 +258,8 @@ class 念帝技能15(念帝主动技能):
     基础 = 9336.7
     成长 = 1051.3
     # 实际CD为20秒
-    CD = 20.2
+    CD = 20
+    演出时间 = 1
     TP成长 = 0.10
     TP上限 = 7
     是否有护石 = 1
@@ -495,6 +496,8 @@ class 念帝(角色窗口):
         except:
             self.BUFF光强 = self.初始属性.BUFF属强
             QMessageBox.information(self, "错误", "BUFF属强输入错误,重置为最高值")
+
+        属性.BUFF属强 = self.BUFF光强
 
         if self.雷龙开关.isChecked():
             属性.雷龙开关 = 1

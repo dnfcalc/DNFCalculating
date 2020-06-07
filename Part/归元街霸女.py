@@ -142,8 +142,9 @@ class 归元街霸女技能10(主动技能):
     所在等级 = 40
     等级上限 = 60
     基础等级 = 33
-    基础 = 8649.44 *1.09
-    成长 = 665.56 *1.09
+    基础 = 1729.89 *1.09
+    成长 = 133.11 *1.09
+    攻击次数 = 5
     CD = 24.0
     TP成长 = 0.10
     TP上限 = 7
@@ -488,10 +489,26 @@ class 归元街霸女(角色窗口):
         super().界面()
         self.死亡毒雾力智开关=QCheckBox('死亡毒雾力智',self.main_frame2)
         self.死亡毒雾力智开关.resize(100,20)
-        self.死亡毒雾力智开关.move(325,450)
+        self.死亡毒雾力智开关.move(325,420)
         self.死亡毒雾力智开关.setStyleSheet(复选框样式)
+
+        self.毒雷个数数选择=QComboBox(self.main_frame2)
+        self.毒雷个数数选择.addItem('毒雷引爆：0颗')
+        self.毒雷个数数选择.addItem('毒雷引爆：1颗')
+        self.毒雷个数数选择.addItem('毒雷引爆：2颗')
+        self.毒雷个数数选择.addItem('毒雷引爆：3颗')
+        self.毒雷个数数选择.addItem('毒雷引爆：4颗')
+        self.毒雷个数数选择.addItem('毒雷引爆：5颗')
+        self.毒雷个数数选择.addItem('毒雷引爆：6颗')
+        self.毒雷个数数选择.addItem('毒雷引爆：7颗')
+        self.毒雷个数数选择.addItem('毒雷引爆：8颗')
+        self.毒雷个数数选择.setCurrentIndex(5)
+        self.毒雷个数数选择.resize(120,20)
+        self.毒雷个数数选择.move(315,460)
+        self.毒雷个数数选择.setStyleSheet(下拉框样式)
 
     def 输入属性(self, 属性):
         super().输入属性(属性)
         if self.死亡毒雾力智开关.isChecked():
             属性.死亡毒雾力智开关 = 1
+        属性.技能栏[属性.技能序号['毒雷引爆']].攻击次数 = self.毒雷个数数选择.currentIndex()

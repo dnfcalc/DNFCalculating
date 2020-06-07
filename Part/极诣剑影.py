@@ -427,8 +427,3 @@ class 极诣剑影(角色窗口):
         self.护石选项 = copy.deepcopy(极诣剑影护石选项)
         self.符文选项 = copy.deepcopy(极诣剑影符文选项)
 
-    def 输出界面(self, index):
-        self.行高 = 25
-        super().输出界面(index)
-
-

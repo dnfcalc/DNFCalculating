@@ -375,6 +375,3 @@ class 风神(角色窗口):
         self.护石选项 = copy.deepcopy(风神护石选项)
         self.符文选项 = copy.deepcopy(风神符文选项)
 
-    def 输出界面(self, index):
-        self.行高 = 27
-        super().输出界面(index)

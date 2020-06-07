@@ -231,6 +231,7 @@ class 极诣流浪武士技能17(极诣流浪武士主动技能):
     基础等级 = 16
     基础 = 48823.07
     成长 = 5512.93
+    攻击次数 = 1
     CD = 40.0
 
 class 极诣流浪武士技能18(极诣流浪武士主动技能):
@@ -355,3 +356,15 @@ class 极诣流浪武士(角色窗口):
         self.三觉序号 = 极诣流浪武士三觉序号
         self.护石选项 = copy.deepcopy(极诣流浪武士护石选项)
         self.符文选项 = copy.deepcopy(极诣流浪武士符文选项)
+
+    def 界面(self):
+        super().界面()
+        self.莲花剑舞开关=QCheckBox('莲花剑舞空中释放',self.main_frame2)
+        self.莲花剑舞开关.resize(120,20)
+        self.莲花剑舞开关.move(315,420)
+        self.莲花剑舞开关.setStyleSheet(复选框样式)
+
+    def 输入属性(self, 属性):
+        super().输入属性(属性)
+        if self.莲花剑舞开关.isChecked():
+            属性.技能栏[属性.技能序号['莲花剑舞']].攻击次数 = 1.1

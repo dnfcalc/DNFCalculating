@@ -3,6 +3,7 @@ from PublicReference.装备函数 import *
 from PublicReference.辟邪玉 import *
 from PublicReference.称号 import *
 from PublicReference.宠物 import *
+from PublicReference.选项设置 import *
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
@@ -13,6 +14,7 @@ import heapq
 
 class 技能:
     名称 = ''
+    备注 = ''
     所在等级 = 0
     等级上限 = 0
     等级 = 0
@@ -47,6 +49,7 @@ class 主动技能(技能):
     倍率 = 1.0
     被动倍率 = 1.0
     基础释放次数 = 0
+    演出时间 = 0
     是否有护石 = 0
     关联技能 = ['无']
     关联技能2 = ['无']
@@ -63,6 +66,7 @@ class 主动技能(技能):
         else:
             return int((self.攻击次数 * (self.基础 + self.成长 * self.等级) + self.攻击次数2 * (self.基础2 + self.成长2 * self.等级) + self.攻击次数3 * (
                         self.基础3 + self.成长3 * self.等级)) * (1 + self.TP成长 * self.TP等级) * self.倍率)
+                        
     def 等效CD(self, 武器类型):
         # Will修改
         return round(self.CD * self.CD倍率 / self.恢复, 1)
@@ -79,7 +83,7 @@ class 被动技能(技能):
     冷却关联技能2 = ['无']
     冷却关联技能3 = ['无']
 
-符文效果选项 = ['无', '攻击+5%,CD+3%', 'CD-4%', '攻击+3%', '攻击-3%,CD-6%', '攻击+3%,CD+2%', 'CD-3%', '攻击+2%', '攻击-2%,CD-4%']
+符文效果选项 = ['无', '攻击+5%,CD+3%', 'CD-4%', '攻击+3%', '攻击-3%,CD-6%', '攻击+3%,CD+2%', 'CD-3%', '攻击+2%', '攻击-2%,CD-4%','攻击+2%,CD+1%', 'CD-2%', '攻击+1%', '攻击-1%,CD-3%']
 
 部位列表 = ["上衣", "头肩", "下装", "腰带", "鞋", "手镯", "项链", "戒指", "耳环", "辅助装备", "魔法石", "武器"]
 
@@ -88,7 +92,7 @@ class 被动技能(技能):
 神话上衣额外力量 = {'布甲':0, '皮甲':1,'轻甲':2,'重甲':1,'板甲':1}
 神话上衣额外智力 = {'布甲':2, '皮甲':1,'轻甲':1,'重甲':1,'板甲':1}
 
-下拉框样式 = "QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px} QComboBox:hover{background-color:rgba(65,105,225,0.8)}"
+下拉框样式 = "QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)}"
 复选框样式 = "QCheckBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px} QCheckBox:hover{background-color:rgba(65,105,225,0.8)}"
 按钮样式 = 'QPushButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:10px} QPushButton:hover{background-color:rgba(65,105,225,0.8)}'
 标签样式 = "QLabel{font-size:12px;color:white}"
@@ -113,6 +117,7 @@ class 角色属性():
     年宠技能 = False
     白兔子技能 = False
     斗神之吼秘药 = False
+    称号触发 = False
 
     #基础属性(含唤醒)
     基础力量 = 0.0
@@ -225,7 +230,6 @@ class 角色属性():
             if '智力' in self.防具精通属性:
                 self.智力 += x
   
-
         for i in [9,10]:
             if 装备列表[装备序号[self.装备栏[i]]].所属套装 != '智慧产物':
                 x = 左右计算(100,'史诗',self.强化等级[i])
@@ -287,8 +291,6 @@ class 角色属性():
                 else:
                     if i.是否主动 == 1:
                         i.等级加成(lv)
-        if (min <= 20 and max >= 20) and 加成类型 == '所有':
-            self.物理暴击率 += lv * 0.01
 
     def 单技能等级加成(self, 名称, lv):
         for i in self.技能栏:
@@ -471,7 +473,7 @@ class 角色属性():
         for i in self.技能栏:
             if i.是否有伤害==1:
                 if self.次数输入[self.技能序号[i.名称]] =='/CD':
-                    技能释放次数.append(int(self.时间输入/i.等效CD(self.武器类型) + 1 +i.基础释放次数))
+                    技能释放次数.append(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型) + 1 +i.基础释放次数))
                 else:
                     技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]])+i.基础释放次数)
             else:
@@ -677,7 +679,7 @@ class 角色窗口(QWidget):
         self.frame_tool = QFrame(self)
         self.frame_tool.setGeometry(0, 0, self.width(), 24)
 
-        self.页面名称 = ["装备选择", "其它设置", "基础属性"]
+        self.页面名称 = ["装备/选择/打造", "技能/符文/其它", "基础/细节/修正"]
         self.页面数量 = len(self.页面名称)
         self.btn_group = QButtonGroup(self.frame_tool)
         for i in range(0, self.页面数量):
@@ -685,7 +687,7 @@ class 角色窗口(QWidget):
             self.window_btn.setText(self.页面名称[i])
             self.window_btn.resize(int(self.width() / self.页面数量), 24)
             self.window_btn.move(self.window_btn.width() * i, 0)
-            self.window_btn.setStyleSheet('QToolButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);} QToolButton:hover{background-color:rgba(65,105,225,0.8)}')
+            self.window_btn.setStyleSheet('QToolButton{font-size:13px;color:white;background-color:rgba(70,134,197,0.8);} QToolButton:hover{background-color:rgba(65,105,225,0.8)}')
             self.window_btn.clicked.connect(lambda state, index = i: self.click_window(index))
             self.btn_group.addButton(self.window_btn, i)
 
@@ -829,7 +831,7 @@ class 角色窗口(QWidget):
         self.装备条件选择[-1].addItems(['希洛克融合：无','希洛克：奈克斯(伤害增幅)', '希洛克：暗杀者(冷却缩减)', '希洛克：卢克西(觉醒增幅)', '希洛克：罗德斯(霸体抗性)', '希洛克：守门将(45属强)', '希洛克：守门将(90属强)', '希洛克：守门将(135属强)'])
         for i in range(0, len(self.装备条件选择)):
             self.装备条件选择[i].resize(170, 20)
-            self.装备条件选择[i].setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px} QComboBox:hover{background-color:rgba(65,105,225,0.8)}")
+            self.装备条件选择[i].setStyleSheet(下拉框样式)
             self.装备条件选择[i].move(940, 30 + 28 * i)
 
 
@@ -1063,7 +1065,7 @@ class 角色窗口(QWidget):
                 x=QLabel(self.main_frame2)
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
                 x.resize(28,28)
-                tempstr='<font color="#FF0000"><b>'+i.名称+'</b></font><br>'
+                tempstr='<font color="#FF0000"><b>'+i.名称 +i.备注 +'</b></font><br>'
                 tempstr+='所在等级：<b>'+str(i.所在等级)+'</b><br>'
                 tempstr+='等级上限：<b>'+str(i.等级上限)+'</b>'
                 if i.是否主动==1:
@@ -1116,7 +1118,7 @@ class 角色窗口(QWidget):
                 x=QLabel(self.main_frame2)
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
                 x.resize(28,28)
-                tempstr='<font color="#FF0000"><b>'+i.名称+'</b></font><br>'
+                tempstr='<font color="#FF0000"><b>'+i.名称 +i.备注 +'</b></font><br>'
                 tempstr+='所在等级：<b>'+str(i.所在等级)+'</b><br>'
                 tempstr+='等级上限：<b>'+str(i.等级上限)+'</b>'
                 x.setToolTip(tempstr)
@@ -1234,7 +1236,8 @@ class 角色窗口(QWidget):
         for i in range(4):
             x = QComboBox(self.main_frame2) 
             for j in 辟邪玉列表:
-                x.addItem('[' + str(j.编号) + ']' + j.名称)
+                #'[' + str(j.编号) + ']' + 
+                x.addItem(j.名称)
             x.resize(200,20)
             x.setStyleSheet(下拉框样式)
             x.move(480,300 + i * 25)
@@ -1246,34 +1249,18 @@ class 角色窗口(QWidget):
             y.move(700,300 + i * 25)
             self.辟邪玉数值.append(y)
 
-
         self.复选框列表 = []
-        self.复选框列表.append(QCheckBox('顶级力量灵药     ', self.main_frame2))
-        self.复选框列表.append(QCheckBox('顶级智力灵药     ', self.main_frame2))
-        self.复选框列表.append(QCheckBox('斗神之吼秘药     ', self.main_frame2))
-        self.复选框列表.append(QCheckBox('赛丽亚的特调酷饮 ', self.main_frame2))
-        self.复选框列表.append(QCheckBox('魔界战力释放秘药 ', self.main_frame2))
-        self.复选框列表.append(QCheckBox('宠物次数适用(10%)', self.main_frame2))
-        self.复选框列表.append(QCheckBox('称号效果触发     ', self.main_frame2))
-        self.复选框列表.append(QCheckBox('精神刺激灵药     ', self.main_frame2))
-        self.复选框列表.append(QCheckBox('虚祖皇家能量秘药 ', self.main_frame2))
-        self.复选框列表.append(QCheckBox('黄金羊毛         ', self.main_frame2))
-        self.复选框列表.append(QCheckBox('白兔子(20%全程)  ', self.main_frame2))
-        self.复选框列表.append(QCheckBox('雷米迪亚蛋糕     ', self.main_frame2))
-        self.复选框列表.append(QCheckBox('系统奶BUFF      ', self.main_frame2))
+        for i in 选项设置列表:
+            self.复选框列表.append(QCheckBox(i.名称, self.main_frame2))
 
         counter=0
         for i in self.复选框列表:
             i.setStyleSheet(复选框样式)
             i.resize(125,20)
             i.move(970,10 + counter * 28)
-            if counter < 7 and counter > 1:
+            if counter < 7:
                 i.setChecked(True)
             counter+=1
-        if '物理' in self.角色属性A.伤害类型:
-            self.复选框列表[0].setChecked(True)
-        if '魔法' in self.角色属性A.伤害类型:
-            self.复选框列表[1].setChecked(True)
 
         x=QLabel("时间输入：", self.main_frame2)
         x.move(850, 618)
@@ -1416,16 +1403,17 @@ class 角色窗口(QWidget):
         x = self.辟邪玉选择[index].currentIndex()
         temp = 辟邪玉列表[x].最小值
         while temp <= 辟邪玉列表[x].最大值:
-            self.辟邪玉数值[index].addItem(str('%.1f' % temp))
+            if 辟邪玉列表[x].间隔 == 1:
+                self.辟邪玉数值[index].addItem(str(int(temp)))
+            else:
+                self.辟邪玉数值[index].addItem(str('%.1f' % temp) + '%')
             temp += 辟邪玉列表[x].间隔
 
     def 辟邪玉属性计算(self, 属性):
         for i in range(4):
             x = self.辟邪玉选择[i].currentIndex()
             if self.辟邪玉数值[i].currentIndex() >= 0:
-                辟邪玉列表[x].当前值 = float(self.辟邪玉数值[i].currentText())
-            if 辟邪玉列表[x].间隔 == 1:
-                辟邪玉列表[x].当前值 = int(辟邪玉列表[x].当前值)
+                辟邪玉列表[x].当前值 = float(self.辟邪玉数值[i].currentText().replace('%',''))
             辟邪玉列表[x].进图属性(属性)
 
     def 装备图标点击事件(self, index, sign):
@@ -1877,6 +1865,7 @@ class 角色窗口(QWidget):
         for i in C.套装栏:
             套装列表[套装序号[i]].城镇属性(C)
         C.装备基础()
+        C.被动倍率计算()
 
         return C
 
@@ -2024,6 +2013,13 @@ class 角色窗口(QWidget):
                 技能等效CD.append(0)
     
         总伤害数值=0
+
+        count = 0
+        for i in range(0,len(self.角色属性B.技能栏)):
+            if 统计详情[i*4] != 0:
+                count += 1
+
+        self.行高 = min(int(440 / count),30)        
     
         for i in range(0,len(self.角色属性B.技能栏)):
             j=len(self.角色属性B.技能栏)-1-excel.index(统计详情[i*4+1])
@@ -2034,14 +2030,17 @@ class 角色窗口(QWidget):
                 #图片
                 每行详情[0].setPixmap(self.技能图片[i])
                 每行详情[0].resize(28,min(28,self.行高 - 2)) 
-                tempstr='<font color="#FF0000"><b>'+self.角色属性B.技能栏[i].名称+'</b></font><br>'
-                tempstr+='百分比：<b>'+str(int(self.角色属性B.技能栏[i].等效百分比(self.角色属性B.武器类型) / self.角色属性B.技能栏[i].倍率))+'%</b><br>'
-                tempstr+='被动倍率：<b>'+str(round(self.角色属性B.技能栏[i].被动倍率*100,1))+'%</b><br>'
-                if self.角色属性B.技能栏[i].倍率!=0:
-                    tempstr+='其它倍率：<b>'+str(round(self.角色属性B.技能栏[i].倍率*100,1))+'%</b><br>'
-                tempstr+='CD显示：<b>'+str(round(self.角色属性B.技能栏[i].等效CD(self.角色属性B.武器类型) / self.角色属性B.技能栏[i].恢复,2))+'s</b><br>'
-                tempstr+='CD恢复：<b>'+str(round(self.角色属性B.技能栏[i].恢复*100,1))+'%</b>'
-                每行详情[0].setToolTip(tempstr)
+                try:
+                    tempstr='<font color="#FF0000"><b>'+self.角色属性B.技能栏[i].名称+self.角色属性B.技能栏[i].备注+ '</b></font><br>'
+                    tempstr+='百分比：<b>'+str(int(self.角色属性B.技能栏[i].等效百分比(self.角色属性B.武器类型) / self.角色属性B.技能栏[i].倍率))+'%</b><br>'
+                    tempstr+='被动倍率：<b>'+str(round(self.角色属性B.技能栏[i].被动倍率*100,1))+'%</b><br>'
+                    if self.角色属性B.技能栏[i].倍率!=0:
+                        tempstr+='其它倍率：<b>'+str(round(self.角色属性B.技能栏[i].倍率*100,1))+'%</b><br>'
+                    tempstr+='CD显示：<b>'+str(round(self.角色属性B.技能栏[i].等效CD(self.角色属性B.武器类型) / self.角色属性B.技能栏[i].恢复,2))+'s</b><br>'
+                    tempstr+='CD恢复：<b>'+str(round(self.角色属性B.技能栏[i].恢复*100,1))+'%</b>'
+                    每行详情[0].setToolTip(tempstr)
+                except:
+                    pass
     
                 每行详情[0].move(302, 50 + j * self.行高)
                 #等级
@@ -2223,37 +2222,13 @@ class 角色窗口(QWidget):
             if i.是否有伤害==1:
                 if i.TP上限!=0:
                     i.TP等级=int(self.TP输入[self.角色属性A.技能序号[i.名称]].currentText())
-        if self.复选框列表[0].isChecked():
-            属性.进图力量+=175
-        if self.复选框列表[1].isChecked():
-            属性.进图智力+=175
-        if self.复选框列表[2].isChecked():
-            属性.斗神之吼秘药 = True
-        if self.复选框列表[3].isChecked():
-            属性.进图属强 += 5
-        if self.复选框列表[4].isChecked():
-            属性.进图力量+=150
-            属性.进图智力+=150
-        if self.复选框列表[5].isChecked():
-            属性.年宠技能 = True
-        if self.复选框列表[7].isChecked():
-            属性.技能冷却缩减(1,100,0.20)
-        if self.复选框列表[8].isChecked():
-            属性.进图力量+=100
-            属性.进图智力+=100
-            属性.进图属强 += 5
-        if self.复选框列表[9].isChecked():
-            属性.进图力量+=60
-            属性.进图智力+=60
-        if self.复选框列表[10].isChecked():
-            属性.白兔子技能 = True
-        if self.复选框列表[11].isChecked():
-            属性.百分比力智+=0.20
-        if self.复选框列表[12].isChecked():
-            属性.系统奶 = True
- 
+
+        for i in range(len(self.复选框列表)):
+            if self.复选框列表[i].isChecked():
+                选项设置列表[i].适用效果(属性)
+
         称号列表[self.称号.currentIndex()].城镇属性(属性)
-        if self.复选框列表[6].isChecked():
+        if 属性.称号触发:
             称号列表[self.称号.currentIndex()].触发属性(属性)
 
         宠物列表[self.宠物.currentIndex()].城镇属性(属性)
@@ -2267,27 +2242,12 @@ class 角色窗口(QWidget):
             属性.护石第二栏 = self.护石第二栏.currentText()
     
         for i in range(0,6):
-            if self.符文[i].currentText()!='无':
-                if self.符文效果[i].currentText()=='攻击+5%,CD+3%':
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率*=1.05
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD*=1.03
-                if self.符文效果[i].currentText()=='CD-4%':
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD*=0.96
-                if self.符文效果[i].currentText()=='攻击+3%':
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率*=1.03
-                if self.符文效果[i].currentText()=='攻击-3%,CD-6%':
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率*=0.97
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD*=0.94
-                if self.符文效果[i].currentText()=='攻击+3%,CD+2%':
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率*=1.03
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD*=1.02
-                if self.符文效果[i].currentText()=='CD-3%':
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD*=0.97
-                if self.符文效果[i].currentText()=='攻击+2%':
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率*=1.02
-                if self.符文效果[i].currentText()=='攻击-2%,CD-4%':
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率*=0.98
-                    属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD*=0.96
+            if self.符文[i].currentText()!='无' and self.符文效果[i].currentText() != '无':
+                for j in self.符文效果[i].currentText().split(','):
+                    if '攻击' in j:
+                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率 *= 1 + int(j.replace('攻击','').replace('%',''))/100
+                    if 'CD' in j:
+                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD *= 1 + int(j.replace('CD','').replace('%',''))/100
 
         for i in range(0,12):
             属性.是否增幅[i] = self.装备打造选项[i].currentIndex()

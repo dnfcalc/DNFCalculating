@@ -4,10 +4,10 @@ from PyQt5.QtCore import QUrl
 app = QApplication([])
 
 选择窗口 = QWidget()
-选择窗口.setFixedSize(20 + 115 * len(角色列表), 10 * 45)
-选择窗口.setWindowTitle('DNF-100SS搭配计算器-2020.6.4')
+选择窗口.setFixedSize(20 + 115 * len(角色列表), 10 * 45 + 10)
+选择窗口.setWindowTitle('DNF-100SS搭配计算器-2020.6.7')
 
-按钮样式2 = 'QPushButton{font-size:13px;color:white;background-color:rgba(255,255,255,0.1);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(65,105,225,0.5)}'
+按钮样式2 = 'QPushButton{font-size:13px;color:white;background-color:rgba(255,255,255,0.1);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(65,105,225,0.5)} '
 
 选择窗口.setWindowIcon(QIcon('ResourceFiles/img/icon.png'))
 背景颜色 = QLabel(选择窗口)
@@ -42,6 +42,7 @@ def 打开窗口(index):
 
 def 打开查看更新():
     QDesktopServices.openUrl(QUrl("https://lanzous.com/b01bfj76f"))
+    QDesktopServices.openUrl(QUrl("https://wws.lanzous.com/b01bfj76f"))
 
 查看更新=QtWidgets.QPushButton('查看更新', 选择窗口)
 查看更新.clicked.connect(打开查看更新)
@@ -58,10 +59,10 @@ def 打开制作人员():
     各职业实现：<br>\
     女大枪(纸飞机)、男大枪(幕城&纸飞机)、剑魔(爱敏&777&纸飞机)<br>\
     狂战士(爱敏&纸飞机)、剑豪(爱敏&纸飞机)、光枪(爱敏&纸飞机)<br>\
-    毒王(雅男&纸飞机)、女机械(贝壳)、女弹药(西瓜)、男机械(韩械)<br>\
-    男弹药(小一)、冰洁(平静)、元素(碳末&平静)、剑影(亚索)<br>\
-    男漫游(Garson)、审判(Paxis)、特工(碳末)、剑宗(亚索)<br>\
-    念皇(球)、魔皇(碳末)、念帝(疯)、风法(龙卷风)<br>")
+    毒王(雅男&纸飞机)、女机械(荔枝贝壳)、女弹药(西瓜)、男机械(韩械)<br>\
+    男弹药(小一)、冰洁(平静)、元素(碳末&平静)、剑影(亚索)、女漫(纸飞机)<br>\
+    男漫游(Garson)、审判(Paxis)、特工(碳末)、剑宗(亚索&纸飞机)<br>\
+    念皇(球)、魔皇(碳末)、念帝(疯)、风法(龙卷风)、剑魂(纸飞机)<br>")
 
 制作人员=QtWidgets.QPushButton('制作人员', 选择窗口)
 制作人员.clicked.connect(打开制作人员)
