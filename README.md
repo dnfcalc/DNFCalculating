@@ -2,7 +2,7 @@
 
 python（3.8）编写，使用pyqt5（5.14.2） 图形GUI 库<br>
 <b>如果有兴趣添加职业整合,可加群：1019815121,记得备注下职业</b><br>
-执行程序下载:https://ww.lanzous.com/b01bfj76f
+执行程序下载:https://wws.lanzous.com/b01bfj76f  或 https://pan.lanzou.com/b01bfj76f
 
 ## 制作人员
 
