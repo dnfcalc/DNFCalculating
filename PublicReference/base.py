@@ -12,6 +12,9 @@ from PyQt5.QtCore import Qt
 import copy
 import heapq
 
+#不计算装备属性，武器类型为角色武器选项第一个
+调试开关 = 0
+
 class 技能:
     名称 = ''
     备注 = ''
@@ -92,7 +95,12 @@ class 被动技能(技能):
 神话上衣额外力量 = {'布甲':0, '皮甲':1,'轻甲':2,'重甲':1,'板甲':1}
 神话上衣额外智力 = {'布甲':2, '皮甲':1,'轻甲':1,'重甲':1,'板甲':1}
 
-下拉框样式 = "QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)}"
+class MyQComboBox(QComboBox):
+    def __init__(self,窗口):
+        super().__init__(窗口)
+        self.setView(QListView())
+        self.setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+
 复选框样式 = "QCheckBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px} QCheckBox:hover{background-color:rgba(65,105,225,0.8)}"
 按钮样式 = 'QPushButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:10px} QPushButton:hover{background-color:rgba(65,105,225,0.8)}'
 标签样式 = "QLabel{font-size:12px;color:white}"
@@ -145,6 +153,7 @@ class 角色属性():
     暗属性强化 = 0
     百分比力智 = 0.0
     百分比三攻 = 0.0
+    百分比属强 = 0.0 #辟邪玉属性
     伤害增加 = 0.0
     附加伤害 = 0.0
     属性附加 = 0.0
@@ -428,16 +437,21 @@ class 角色属性():
                         self.技能栏[self.技能序号[k]].被动倍率 *= i.加成倍率3(self.武器类型)
 
     def 伤害指数计算(self):
-        基准倍率 = 1.5 * self.主BUFF * (1 - 443215 / (443215 + 20000))
+        基准倍率 = 1.5 * self.主BUFF * (1 - 443243 / (443243 + 20000))
 
         if self.伤害类型 == '物理百分比':
-            面板 = (self.面板力量()/250+1) * (self.物理攻击力 + self.进图物理攻击力) * (1 + self.百分比三攻)
+            面板 = (self.面板力量()/250+1) * round((self.物理攻击力 + self.进图物理攻击力) * (1 + self.百分比三攻), 3)
         if self.伤害类型 == '魔法百分比':
-            面板 = (self.面板智力()/250+1) * (self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻)
+            面板 = (self.面板智力()/250+1) * round((self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻), 3)
         if self.伤害类型 == '物理固伤':
-            面板 = (self.面板力量()/250+1) * (self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻)
+            面板 = (self.面板力量()/250+1) * round((self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻), 3)
         if self.伤害类型 == '魔法固伤':
-            面板 = (self.面板智力()/250+1) * (self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻)
+            面板 = (self.面板智力()/250+1) * round((self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻), 3)
+        
+        self.火属性强化 = int(self.火属性强化 * (1+self.百分比属强))
+        self.冰属性强化 = int(self.冰属性强化 * (1+self.百分比属强))
+        self.光属性强化 = int(self.光属性强化 * (1+self.百分比属强))
+        self.暗属性强化 = int(self.暗属性强化 * (1+self.百分比属强))
 
         属性倍率=1.05+0.0045*max(self.火属性强化,self.冰属性强化,self.光属性强化,self.暗属性强化)
         增伤倍率=1+self.伤害增加
@@ -581,6 +595,7 @@ class 角色属性():
         self.暗属性强化 = role.暗属性强化
         self.百分比力智 = role.百分比力智
         self.百分比三攻 = role.百分比三攻
+        self.百分比属强 = role.百分比属强
         self.伤害增加 = role.伤害增加
         self.附加伤害 = role.附加伤害
         self.属性附加 = role.属性附加
@@ -608,6 +623,7 @@ class 角色窗口(QWidget):
         self.窗口属性输入()
         self.界面()
         self.载入配置()
+        self.click_window(0)
 
     def 关闭窗口(self):
         self.close()
@@ -621,11 +637,16 @@ class 角色窗口(QWidget):
         pass
     
     def 界面(self):
-        self.setWindowTitle(self.角色属性A.职业名称 + "搭配计算器")
+        self.setWindowTitle(self.角色属性A.职业名称 + "搭配计算器 （点击标签栏按钮切换界面）")
         self.icon = QIcon('./ResourceFiles/'+self.角色属性A.职业名称 + '/技能/BUFF.png')
         self.setWindowIcon(self.icon)
         #窗口大小
-        self.setFixedSize(1120, 680)
+        count = 0
+        for i in self.角色属性A.技能栏:
+            if i.是否有伤害 == 1:
+                count += 1
+        self.窗口高度 = max(55 + 30 * count, 680)
+        self.setFixedSize(1120, self.窗口高度)
 
         背景颜色 = QLabel(self)
         背景颜色.resize(self.width(),self.height())
@@ -644,7 +665,6 @@ class 角色窗口(QWidget):
             self.技能图片.append(QPixmap(path))
         
         self.输出窗口列表 = []
-        self.行高 = 30 #输出窗口技能伤害标签高度
         self.排行窗口列表 = []
         
         self.装备图片 = []
@@ -682,14 +702,14 @@ class 角色窗口(QWidget):
         self.页面名称 = ["装备/选择/打造", "技能/符文/其它", "基础/细节/修正"]
         self.页面数量 = len(self.页面名称)
         self.btn_group = QButtonGroup(self.frame_tool)
+        self.window_btn = []
         for i in range(0, self.页面数量):
-            self.window_btn = QToolButton(self.frame_tool)
-            self.window_btn.setText(self.页面名称[i])
-            self.window_btn.resize(int(self.width() / self.页面数量), 24)
-            self.window_btn.move(self.window_btn.width() * i, 0)
-            self.window_btn.setStyleSheet('QToolButton{font-size:13px;color:white;background-color:rgba(70,134,197,0.8);} QToolButton:hover{background-color:rgba(65,105,225,0.8)}')
-            self.window_btn.clicked.connect(lambda state, index = i: self.click_window(index))
-            self.btn_group.addButton(self.window_btn, i)
+            self.window_btn.append(QToolButton(self.frame_tool))
+            self.window_btn[-1].setText(self.页面名称[i])
+            self.window_btn[-1].resize(int(self.width() / self.页面数量), 24)
+            self.window_btn[-1].move(self.window_btn[-1].width() * i, 0)
+            self.window_btn[-1].clicked.connect(lambda state, index = i: self.click_window(index))
+            self.btn_group.addButton(self.window_btn[-1], i)
 
         # 2. 工作区域
         self.main_frame = QFrame(self)
@@ -801,37 +821,36 @@ class 角色窗口(QWidget):
         标签.setAlignment(Qt.AlignCenter)
         标签.setStyleSheet(标签样式)
         self.装备条件选择.clear()
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['角色熟练度：英雄', '角色熟练度：传说'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['技能栏空位：0', '技能栏空位：1', '技能栏空位：2', '技能栏空位：3', '技能栏空位：4', '技能栏空位：5', '技能栏空位：6'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['命运的抉择：数学期望', '命运的抉择：黄字+35%', '命运的抉择：爆伤+35%', '命运的抉择：白字+35%', '命运的抉择：终伤+35%', '命运的抉择：三攻+35%'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['骰子：数学期望', '骰子：1点', '骰子：2点', '骰子：3点', '骰子：4点', '骰子：5点', '骰子：6点'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['悲剧的残骸：数学期望', '悲剧的残骸：HP高于70%', '悲剧的残骸：HP70-30%', '悲剧的残骸：HP低于30%'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['先知者预言：数学期望', '先知者预言：属白+5%', '先知者预言：技攻+10%', '先知者预言：技攻+15%'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['贫瘠沙漠的遗产：无', '贫瘠沙漠的遗产：霸体', '贫瘠沙漠的遗产：无伤'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['幸运三角：数学期望', '幸运三角：7效果', '幸运三角：77效果', '幸运三角：777效果'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['擎天战甲：过充电状态', '擎天战甲：过负荷状态'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['持续伤害适用：100%', '持续伤害适用：90%', '持续伤害适用：80%', '持续伤害适用：70%', '持续伤害适用：60%', '持续伤害适用：50%', '持续伤害适用：40%', '持续伤害适用：30%', '持续伤害适用：20%', '持续伤害适用：10%', '持续伤害适用：0%'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['军神的隐秘遗产：120%以上', '军神的隐秘遗产：120-100%', '军神的隐秘遗产：100-80%', '军神的隐秘遗产：80-60%', '军神的隐秘遗产：60-40%', '军神的隐秘遗产：40%以下'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['太极天帝剑：阳', '太极天帝剑：阴'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['绿色生命的面容：无', '绿色生命的面容：阴暗面'])
-        self.装备条件选择.append(QComboBox(self.main_frame1))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['希洛克融合：无','希洛克：奈克斯(伤害增幅)', '希洛克：暗杀者(冷却缩减)', '希洛克：卢克西(觉醒增幅)', '希洛克：罗德斯(霸体抗性)', '希洛克：守门将(45属强)', '希洛克：守门将(90属强)', '希洛克：守门将(135属强)'])
         for i in range(0, len(self.装备条件选择)):
             self.装备条件选择[i].resize(170, 20)
-            self.装备条件选择[i].setStyleSheet(下拉框样式)
             self.装备条件选择[i].move(940, 30 + 28 * i)
 
 
@@ -854,10 +873,9 @@ class 角色窗口(QWidget):
 
         counter = 0
         for i in 部位列表:
-            x = QComboBox(self.main_frame1)
+            x = MyQComboBox(self.main_frame1)
             x.addItems(['强化','增幅'])
             x.resize(55,20)
-            x.setStyleSheet(下拉框样式)
             self.装备打造选项.append(x)
             if counter < 5:
                 x.move(60 , 504 + counter * 30)
@@ -870,11 +888,10 @@ class 角色窗口(QWidget):
             
         counter = 0
         for i in 部位列表:
-            x = QComboBox(self.main_frame1)
+            x = MyQComboBox(self.main_frame1)
             for j in range(0,21):
                 x.addItem(str(j))
             x.resize(50,20)
-            x.setStyleSheet(下拉框样式)
             self.装备打造选项.append(x)
             if counter < 5:
                 x.move(120 , 504 + counter * 30)
@@ -887,11 +904,10 @@ class 角色窗口(QWidget):
 
         counter = 0
         for i in 部位列表:
-            x = QComboBox(self.main_frame1)
+            x = MyQComboBox(self.main_frame1)
             for j in range(0,21):
                 x.addItem('改造+' + str(j))
             x.resize(75,20)
-            x.setStyleSheet(下拉框样式)
             self.装备打造选项.append(x)
             if counter < 5:
                 x.move(180 , 504 + counter * 30)
@@ -903,26 +919,24 @@ class 角色窗口(QWidget):
                     x.move(540 , 500 + (counter - 9) * 30)
             counter += 1
 
-        x = QComboBox(self.main_frame1)
+        x = MyQComboBox(self.main_frame1)
         for j in range(0,9):
             x.addItem('锻造+' + str(j))
         x.resize(110,20)
         x.move(540 , 504 + (counter - 9) * 30)
-        x.setStyleSheet(下拉框样式)
         self.装备打造选项.append(x)
 
-        x = QComboBox(self.main_frame1)
+        x = MyQComboBox(self.main_frame1)
         x.addItems(self.角色属性A.伤害类型选择)
         x.resize(110,20)
         x.move(540 , 504 + (counter - 8) * 30)
-        x.setStyleSheet(下拉框样式)
         self.装备打造选项.append(x)
 
-        self.称号 = QComboBox(self.main_frame1)
+        self.称号 = MyQComboBox(self.main_frame1)
         for i in 称号列表:
             self.称号.addItem(i.名称)
         
-        self.宠物 = QComboBox(self.main_frame1)
+        self.宠物 = MyQComboBox(self.main_frame1)
         for i in 宠物列表:
             self.宠物.addItem(i.名称)
 
@@ -936,7 +950,6 @@ class 角色窗口(QWidget):
         for x in [self.称号, self.宠物]:
             x.resize(160,20)
             x.move(350 , 430 + counter * 30)
-            x.setStyleSheet(下拉框样式)  
             counter += 1    
 
         x = QPushButton('一键全选', self.main_frame1)
@@ -963,7 +976,7 @@ class 角色窗口(QWidget):
         self.百变怪选项.setToolTip('仅在极速模式和套装模式下生效')
         self.百变怪选项.setStyleSheet(复选框样式)
 
-        self.计算模式选择 = QComboBox(self.main_frame1)
+        self.计算模式选择 = MyQComboBox(self.main_frame1)
         self.计算模式选择.addItems(['计算模式：极速模式', '计算模式：套装模式', '计算模式：单件模式'])
         self.计算模式选择.move(750, 613)
         self.计算模式选择.resize(235, 24)
@@ -992,9 +1005,9 @@ class 角色窗口(QWidget):
 
         #技能等级、TP、次数输入、宠物次数
         self.BUFF输入 = QLineEdit(self.main_frame2)
-        self.时间输入 = QComboBox(self.main_frame2)
-        self.护石第一栏 = QComboBox(self.main_frame2)
-        self.护石第二栏 = QComboBox(self.main_frame2)
+        self.时间输入 = MyQComboBox(self.main_frame2)
+        self.护石第一栏 = MyQComboBox(self.main_frame2)
+        self.护石第二栏 = MyQComboBox(self.main_frame2)
         self.符文 = []
         self.符文效果 = []
 
@@ -1007,14 +1020,14 @@ class 角色窗口(QWidget):
         
         for i in self.角色属性A.技能栏:
             i.等级 = i.基础等级
-            self.等级调整.append(QComboBox(self.main_frame2))
+            self.等级调整.append(MyQComboBox(self.main_frame2))
             if i.是否有伤害 == 1 and i.TP上限 != 0:
-                self.TP输入.append(QComboBox(self.main_frame2))
+                self.TP输入.append(MyQComboBox(self.main_frame2))
             else:
                 self.TP输入.append('')
             if i.是否有伤害 == 1:
-                self.次数输入.append(QComboBox(self.main_frame2))
-                self.宠物次数.append(QComboBox(self.main_frame2))
+                self.次数输入.append(MyQComboBox(self.main_frame2))
+                self.宠物次数.append(MyQComboBox(self.main_frame2))
             else:
                 self.次数输入.append('')
                 self.宠物次数.append('')
@@ -1083,7 +1096,6 @@ class 角色窗口(QWidget):
                 横坐标+=40
                 self.等级调整[self.角色属性A.技能序号[i.名称]].resize(词条框宽度,行高)
                 self.等级调整[self.角色属性A.技能序号[i.名称]].move(横坐标,纵坐标+10)
-                self.等级调整[self.角色属性A.技能序号[i.名称]].setStyleSheet(下拉框样式)
                 横坐标-=80
                 纵坐标+=纵坐标偏移量
         
@@ -1095,7 +1107,6 @@ class 角色窗口(QWidget):
                 if i.TP上限!=0:
                     self.TP输入[self.角色属性A.技能序号[i.名称]].resize(词条框宽度, 行高)
                     self.TP输入[self.角色属性A.技能序号[i.名称]].move(横坐标,纵坐标)
-                    self.TP输入[self.角色属性A.技能序号[i.名称]].setStyleSheet(下拉框样式)
                 纵坐标+=纵坐标偏移量
         
         横坐标=横坐标+50
@@ -1105,10 +1116,8 @@ class 角色窗口(QWidget):
             if i.是否有伤害 == 1:
                 self.次数输入[self.角色属性A.技能序号[i.名称]].resize(词条框宽度, 行高)
                 self.次数输入[self.角色属性A.技能序号[i.名称]].move(横坐标,纵坐标)
-                self.次数输入[self.角色属性A.技能序号[i.名称]].setStyleSheet(下拉框样式)
                 self.宠物次数[self.角色属性A.技能序号[i.名称]].resize(词条框宽度, 行高)
                 self.宠物次数[self.角色属性A.技能序号[i.名称]].move(横坐标+50,纵坐标)
-                self.宠物次数[self.角色属性A.技能序号[i.名称]].setStyleSheet(下拉框样式)
                 纵坐标+=纵坐标偏移量
 
         横坐标=横坐标+120
@@ -1131,7 +1140,6 @@ class 角色窗口(QWidget):
                 横坐标+=40
                 self.等级调整[self.角色属性A.技能序号[i.名称]].resize(词条框宽度,行高)
                 self.等级调整[self.角色属性A.技能序号[i.名称]].move(横坐标,纵坐标+10)
-                self.等级调整[self.角色属性A.技能序号[i.名称]].setStyleSheet(下拉框样式)
                 横坐标-=80
                 纵坐标+=纵坐标偏移量
         
@@ -1178,9 +1186,9 @@ class 角色窗口(QWidget):
         self.护石第二栏.addItems(self.护石选项)
 
         for i in range(0,6):
-            self.符文.append(QComboBox(self.main_frame2))
+            self.符文.append(MyQComboBox(self.main_frame2))
             self.符文[i].addItems(self.符文选项)
-            self.符文效果.append(QComboBox(self.main_frame2))
+            self.符文效果.append(MyQComboBox(self.main_frame2))
             self.符文效果[i].addItems(符文效果选项)
         
         横坐标=480;纵坐标=20;行高=18
@@ -1190,7 +1198,6 @@ class 角色窗口(QWidget):
         纵坐标+=21
         self.护石第一栏.move(横坐标,纵坐标)
         self.护石第一栏.resize(130, 行高)
-        self.护石第一栏.setStyleSheet(下拉框样式)
         纵坐标+=25
         for i in range(0,3):
             tempstr='符文'+str(i+1)+'选择: '
@@ -1200,11 +1207,9 @@ class 角色窗口(QWidget):
             纵坐标+=21
             self.符文[i].move(横坐标,纵坐标)
             self.符文[i].resize(130, 行高)
-            self.符文[i].setStyleSheet(下拉框样式)
             纵坐标+=21
             self.符文效果[i].move(横坐标,纵坐标)
             self.符文效果[i].resize(130,行高)
-            self.符文效果[i].setStyleSheet(下拉框样式)
             纵坐标+=25
         
         横坐标=650;纵坐标=20
@@ -1214,7 +1219,6 @@ class 角色窗口(QWidget):
         纵坐标+=21
         self.护石第二栏.move(横坐标,纵坐标)
         self.护石第二栏.resize(130, 行高)
-        self.护石第二栏.setStyleSheet(下拉框样式)
         纵坐标+=25
         for i in range(3,6):
             tempstr='符文'+str(i+1)+'选择: '
@@ -1224,28 +1228,24 @@ class 角色窗口(QWidget):
             纵坐标+=21
             self.符文[i].move(横坐标,纵坐标)
             self.符文[i].resize(130, 行高)
-            self.符文[i].setStyleSheet(下拉框样式)
             纵坐标+=21
             self.符文效果[i].move(横坐标,纵坐标)
             self.符文效果[i].resize(130,行高)
-            self.符文效果[i].setStyleSheet(下拉框样式)
             纵坐标+=25
 
         self.辟邪玉选择 = []
         self.辟邪玉数值 = []
         for i in range(4):
-            x = QComboBox(self.main_frame2) 
+            x = MyQComboBox(self.main_frame2) 
             for j in 辟邪玉列表:
                 #'[' + str(j.编号) + ']' + 
                 x.addItem(j.名称)
             x.resize(200,20)
-            x.setStyleSheet(下拉框样式)
             x.move(480,300 + i * 25)
             x.currentIndexChanged.connect(lambda state, index = i:self.辟邪玉数值选项更新(index))
             self.辟邪玉选择.append(x)
-            y = QComboBox(self.main_frame2) 
+            y = MyQComboBox(self.main_frame2) 
             y.resize(80,20)
-            y.setStyleSheet(下拉框样式)
             y.move(700,300 + i * 25)
             self.辟邪玉数值.append(y)
 
@@ -1254,11 +1254,12 @@ class 角色窗口(QWidget):
             self.复选框列表.append(QCheckBox(i.名称, self.main_frame2))
 
         counter=0
+
         for i in self.复选框列表:
             i.setStyleSheet(复选框样式)
             i.resize(125,20)
             i.move(970,10 + counter * 28)
-            if counter < 7:
+            if counter < 7 and 调试开关 == 0:
                 i.setChecked(True)
             counter+=1
 
@@ -1269,7 +1270,6 @@ class 角色窗口(QWidget):
         self.时间输入.addItems(['1', '10', '15', '20', '25', '30', '60'])
         self.时间输入.move(920, 617)
         self.时间输入.resize(50, 20)
-        self.时间输入.setStyleSheet(下拉框样式)
 
         self.计算按钮2 = QPushButton('开始计算', self.main_frame2)
         self.计算按钮2.clicked.connect(lambda state: self.计算())
@@ -1356,7 +1356,7 @@ class 角色窗口(QWidget):
             self.属性设置输入.append(Linelist)
     
         for j in range(0, 17):
-            self.技能设置输入.append(QComboBox(self.main_frame3))
+            self.技能设置输入.append(MyQComboBox(self.main_frame3))
             self.技能设置输入[j].addItem('无')
             self.技能设置输入[j].setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px}")
             self.技能设置输入[j].resize(150, 22)
@@ -1401,13 +1401,13 @@ class 角色窗口(QWidget):
     def 辟邪玉数值选项更新(self, index):
         self.辟邪玉数值[index].clear()
         x = self.辟邪玉选择[index].currentIndex()
-        temp = 辟邪玉列表[x].最小值
-        while temp <= 辟邪玉列表[x].最大值:
+        temp = 辟邪玉列表[x].最大值 * 10
+        while temp >= 辟邪玉列表[x].最小值 * 10:
             if 辟邪玉列表[x].间隔 == 1:
-                self.辟邪玉数值[index].addItem(str(int(temp)))
+                self.辟邪玉数值[index].addItem(str(int(temp/10)))
             else:
-                self.辟邪玉数值[index].addItem(str('%.1f' % temp) + '%')
-            temp += 辟邪玉列表[x].间隔
+                self.辟邪玉数值[index].addItem(str('%.1f' % (temp/10)) + '%')
+            temp -= 辟邪玉列表[x].间隔 * 10
 
     def 辟邪玉属性计算(self, 属性):
         for i in range(4):
@@ -1687,9 +1687,21 @@ class 角色窗口(QWidget):
     def click_window(self, index):
         if self.stacked_layout.currentIndex() != index:
             self.stacked_layout.setCurrentIndex(index)
+        for i in self.window_btn:
+            i.setStyleSheet('QToolButton{font-size:13px;color:white;background-color:rgba(70,130,200,0.8)} QToolButton:hover{background-color:rgba(40,100,235,0.8)}')
+        self.window_btn[index].setStyleSheet('QToolButton{font-size:13px;color:white;background-color:rgba(200,30,30,0.8)} QToolButton:hover{background-color:rgba(235,0,0,0.8)}')
 
     def 计算(self):
+
         self.保存配置()
+
+        self.角色属性A = copy.deepcopy(self.初始属性)
+        self.输入属性(self.角色属性A)
+
+        if 调试开关 == 1:
+            self.输出界面(-1)
+            return 
+
         if self.组合生成(self.计算模式选择.currentIndex()) == 0:
             QMessageBox.information(self,"错误",  "计算量过大，请更换模式或重新选择装备")
             return
@@ -1697,8 +1709,6 @@ class 角色窗口(QWidget):
             QMessageBox.information(self,"错误",  "无有效组合，请更换模式或重新选择装备")
             return
         
-        self.角色属性A = copy.deepcopy(self.初始属性)
-        self.输入属性(self.角色属性A)
         self.伤害列表 = []
         self.角色属性B = copy.deepcopy(self.角色属性A) # 预先构造对象
         heapq.heapify(self.伤害列表)
@@ -1766,7 +1776,7 @@ class 角色窗口(QWidget):
         滚动排行.resize(620,530)
         滚动排行.setMinimumSize(620,530)
         滚动排行.setMaximumSize(620,1030)
-        滚动排行.setWindowTitle('配装排行 （点击伤害数字可查看详情）')  
+        滚动排行.setWindowTitle('配置排行（点击伤害数字查看详情）')  
         滚动排行.setWindowIcon(self.icon)  
     
         背景颜色=QLabel(滚动排行)
@@ -1870,6 +1880,18 @@ class 角色窗口(QWidget):
         return C
 
     def 输出界面(self, index):
+        #调试模式下 index为-1
+        flag = 1
+        if index < 0:
+            flag = 0
+            index = 0
+            武器名称 = ''
+            for i in 装备列表:
+                if i.类型 == self.角色属性A.武器选项[0]:
+                    武器名称 = i.名称
+                    break
+            self.排行数据.append(['撒旦：沸腾之怒', '贝利亚尔：毁灭之种', '亚蒙：谎言之力', '亚巴顿：绝望地狱', '巴尔：堕落之魂', '白象之庇护', '四叶草之初心', '红兔之祝福', '军神的心之所念', '军神的遗书', '军神的庇护宝石', 武器名称, 0, '噩梦：地狱之路[2]', '噩梦：地狱之路[3]', '噩梦：地狱之路[5]', '幸运三角[2]', '幸运三角[3]', '军神的隐秘遗产[2]', '军神的隐秘遗产[3]', '无'])
+
         装备名称 = []
         套装名称 = []
         百变怪 = self.排行数据[index][-1]
@@ -1877,13 +1899,16 @@ class 角色窗口(QWidget):
             装备名称.append(self.排行数据[index][i])
         for i in range(13,len(self.排行数据[index])-1):
             套装名称.append(self.排行数据[index][i])
-
-        C = self.站街计算(装备名称,套装名称)
-
         self.角色属性B = copy.deepcopy(self.角色属性A)
         self.角色属性B.穿戴装备(装备名称,套装名称)
-        self.角色属性B.装备属性计算()
-        self.辟邪玉属性计算(self.角色属性B)
+
+        if flag == 1:
+            C = self.站街计算(装备名称,套装名称)
+            self.角色属性B.装备属性计算()
+            self.辟邪玉属性计算(self.角色属性B)
+        else:
+            C = copy.deepcopy(self.角色属性A)
+
         统计详情 = self.角色属性B.伤害计算(1)
 
         #最大输出界面限制

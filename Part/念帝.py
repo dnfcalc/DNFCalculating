@@ -470,7 +470,7 @@ class 念帝(角色窗口):
 
     def 界面(self):
         super().界面()
-
+        
         self.BUFF.move(self.BUFF.x() - 18, self.BUFF.y())
         self.BUFF输入.move(self.BUFF输入.x() - 20, self.BUFF输入.y())
         self.BUFF输入.resize(40, 25)

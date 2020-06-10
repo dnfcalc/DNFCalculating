@@ -454,17 +454,21 @@ class 归元街霸女角色属性(角色属性):
             self.力量+= self.技能栏[self.技能序号['死亡毒雾']].等级 * 6.5 + 91
             self.智力+= self.技能栏[self.技能序号['死亡毒雾']].等级 * 6.5 + 91
 
-        基准倍率 = 1.5 * (0.9 + self.主BUFF/10) * (1 - 443215 / (443215 + 20000))
+        基准倍率 = 1.5 * (0.9 + self.主BUFF/10) * (1 - 443243 / (443243 + 20000))
 
         if self.伤害类型 == '物理百分比':
-            面板 = (self.面板力量()/250+1) * (self.物理攻击力 + self.进图物理攻击力) * (1 + self.百分比三攻)
+            面板 = (self.面板力量()/250+1) * round((self.物理攻击力 + self.进图物理攻击力) * (1 + self.百分比三攻), 3)
         if self.伤害类型 == '魔法百分比':
-            面板 = (self.面板智力()/250+1) * (self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻)
+            面板 = (self.面板智力()/250+1) * round((self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻), 3)
         if self.伤害类型 == '物理固伤':
-            面板 = (self.面板力量()/250+1) * (self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻)
+            面板 = (self.面板力量()/250+1) * round((self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻), 3)
         if self.伤害类型 == '魔法固伤':
-            面板 = (self.面板智力()/250+1) * (self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻)
+            面板 = (self.面板智力()/250+1) * round((self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻), 3)
 
+        self.火属性强化 = int(self.火属性强化 * (1+self.百分比属强))
+        self.冰属性强化 = int(self.冰属性强化 * (1+self.百分比属强))
+        self.光属性强化 = int(self.光属性强化 * (1+self.百分比属强))
+        self.暗属性强化 = int(self.暗属性强化 * (1+self.百分比属强))
         属性倍率=1.05+0.0045*max(self.火属性强化,self.冰属性强化,self.光属性强化,self.暗属性强化)
         增伤倍率=1+self.伤害增加
         增伤倍率*=1+self.暴击伤害
@@ -492,7 +496,7 @@ class 归元街霸女(角色窗口):
         self.死亡毒雾力智开关.move(325,420)
         self.死亡毒雾力智开关.setStyleSheet(复选框样式)
 
-        self.毒雷个数数选择=QComboBox(self.main_frame2)
+        self.毒雷个数数选择=MyQComboBox(self.main_frame2)
         self.毒雷个数数选择.addItem('毒雷引爆：0颗')
         self.毒雷个数数选择.addItem('毒雷引爆：1颗')
         self.毒雷个数数选择.addItem('毒雷引爆：2颗')
@@ -505,7 +509,6 @@ class 归元街霸女(角色窗口):
         self.毒雷个数数选择.setCurrentIndex(5)
         self.毒雷个数数选择.resize(120,20)
         self.毒雷个数数选择.move(315,460)
-        self.毒雷个数数选择.setStyleSheet(下拉框样式)
 
     def 输入属性(self, 属性):
         super().输入属性(属性)

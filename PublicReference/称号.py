@@ -219,6 +219,13 @@ class 称号16():
         属性.加算冷却缩减 += 0.30
         pass
 
+class 称号17():
+    名称 = '无'
+    def 城镇属性(self, 属性):
+        pass
+    def 触发属性(self, 属性):
+        pass
+
 称号列表 = []
 i = 0
 while i >= 0:

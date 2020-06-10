@@ -21,7 +21,7 @@ class 极诣驭剑士技能0(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(0.472 + 0.0889 * self.等级, 5)
+            return round(1.472 + 0.0889 * self.等级, 5)
 
 
 class 极诣驭剑士技能1(极诣驭剑士主动技能):
@@ -45,7 +45,7 @@ class 极诣驭剑士技能2(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(1 + int(16 + 0.6 * self.等级)/100, 5)
+            return round(1 + (15.6 + 0.6 * self.等级)/100, 5)
             
     def 加成倍率2(self, 武器类型):
         return self.物理攻击力倍率(武器类型)
@@ -208,10 +208,11 @@ class 极诣驭剑士技能13(极诣驭剑士主动技能):
     所在等级 = 45
     等级上限 = 60
     基础等级 = 31
-    基础 = 11967.86
-    成长 = 1352.14
-    基础2 = 6562.942857
-    成长2 = 741.0571429
+    基础 = 797.90
+    成长 = 90.10
+    攻击次数 = 13
+    基础2 = 6562.93
+    成长2 = 741.07
     攻击次数2 = 1
     CD = 40.0
     TP成长 = 0.10
@@ -220,9 +221,10 @@ class 极诣驭剑士技能13(极诣驭剑士主动技能):
     def 装备护石(self):
         self.基础 *= 1.19
         self.成长 *= 1.19
+        self.攻击次数 = 14
         self.基础2 *= 1.17
         self.成长2 *= 1.17
-        self.攻击次数2 = 1
+        self.CD *= 0.95
 
 class 极诣驭剑士技能14(极诣驭剑士主动技能):
     名称 = '极·驭剑术（时空斩）'
@@ -263,14 +265,14 @@ class 极诣驭剑士技能16(极诣驭剑士主动技能):
         self.成长 *= 0
         self.基础2 *= 2.12
         self.成长2 *= 2.12
-        self.CD *= 0.89
+        self.CD *= 0.95
 
 class 极诣驭剑士技能17(极诣驭剑士主动技能):
     名称 = '幻剑阵'
     所在等级 = 70
     等级上限 = 40
     基础等级 = 18
-    基础 = 12466.35
+    基础 = 12447.69
     成长 = 1405.65
     基础2 = 12448.41
     成长2 = 1405.59
@@ -450,6 +452,7 @@ class 极诣驭剑士角色属性(角色属性):
     钻头蓄力开关 = 0
     魔剑降临 = 0
     魔剑堆叠层数 = 0
+    冰刀三绝斩倍率 = 1
 
     def __init__(self):
         self.技能栏= copy.deepcopy(极诣驭剑士技能列表)
@@ -458,9 +461,10 @@ class 极诣驭剑士角色属性(角色属性):
 
     def 被动倍率计算(self):
         super().被动倍率计算()
-        self.技能栏[self.技能序号['破军旋舞斩']].被动倍率 *= (1.106 + self.技能栏[self.技能序号['毁灭之巨剑精通']].等级 * 0.004) * 1.2
-        self.技能栏[self.技能序号['恶即斩']].基础2 *= 1.37 + self.技能栏[self.技能序号['毁灭之巨剑精通']].等级 * 0.005
-        self.技能栏[self.技能序号['恶即斩']].成长2 *= 1.37 + self.技能栏[self.技能序号['毁灭之巨剑精通']].等级 * 0.005
+        self.技能栏[self.技能序号['破军旋舞斩']].被动倍率 *= round(1.096 + self.技能栏[self.技能序号['毁灭之巨剑精通']].等级 * 0.004,2) * 1.2
+        
+        self.技能栏[self.技能序号['恶即斩']].基础2 *= round(1.375 + self.技能栏[self.技能序号['毁灭之巨剑精通']].等级 * 0.005,2)
+        self.技能栏[self.技能序号['恶即斩']].成长2 *= round(1.375 + self.技能栏[self.技能序号['毁灭之巨剑精通']].等级 * 0.005,2)
 
         if self.魔剑降临 == 0 or self.魔剑降临 == 1:
             self.技能栏[self.技能序号['魔剑降临']].攻击次数 = 1
@@ -496,21 +500,14 @@ class 极诣驭剑士角色属性(角色属性):
 
         self.技能栏[self.技能序号['飓风魔剑']].基础 *= 1 + 0.03 * self.魔剑堆层数
         self.技能栏[self.技能序号['飓风魔剑']].成长 *= 1 + 0.03 * self.魔剑堆层数
-        self.技能栏[self.技能序号['飓风魔剑']].基础2 *= 1 + 0.03 * self.魔剑堆层数
-        self.技能栏[self.技能序号['飓风魔剑']].成长2 *= 1 + 0.03 * self.魔剑堆层数
         self.技能栏[self.技能序号['飓风魔剑']].基础3 = self.魔剑堆层数 * self.技能栏[self.技能序号['魔剑奥义']].等效百分比(self.武器类型)
-        
-        if self.魔剑降临 == 0:
-            self.技能栏[self.技能序号['瞬影三绝斩']].被动倍率 *= 1.10
-        if self.魔剑降临 == 1:
-            self.技能栏[self.技能序号['瞬影三绝斩']].被动倍率 *= 1.15
-        if self.魔剑降临 == 2:
-            self.技能栏[self.技能序号['瞬影三绝斩']].被动倍率 *= 1.10
         if self.魔剑降临 == 3:
-            self.技能栏[self.技能序号['瞬影三绝斩']].被动倍率 *= 1.13
             self.技能栏[self.技能序号['飓风魔剑']].基础3 += self.技能栏[self.技能序号['魔剑奥义']].等效百分比(self.武器类型) * 10 * (0.09 + self.技能栏[self.技能序号['飓风魔剑']].等级/100)
 
+        if self.魔剑降临 == 1:
+            self.技能栏[self.技能序号['瞬影三绝斩']].被动倍率 *= self.冰刀三绝斩倍率
 
+            
 class 极诣驭剑士(角色窗口):
     def 窗口属性输入(self):
         self.初始属性 = 极诣驭剑士角色属性()
@@ -525,7 +522,7 @@ class 极诣驭剑士(角色窗口):
     def 界面(self):
         super().界面()
 
-        self.魔剑降临选择=QComboBox(self.main_frame2)
+        self.魔剑降临选择=MyQComboBox(self.main_frame2)
         self.魔剑降临选择.addItem('魔剑降临：火')
         self.魔剑降临选择.addItem('魔剑降临：冰')
         self.魔剑降临选择.addItem('魔剑降临：光')
@@ -533,19 +530,17 @@ class 极诣驭剑士(角色窗口):
         self.魔剑降临选择.setCurrentIndex(1)
         self.魔剑降临选择.resize(120,20)
         self.魔剑降临选择.move(315,380)
-        self.魔剑降临选择.setStyleSheet(下拉框样式)
 
-        self.魔剑堆层数选择=QComboBox(self.main_frame2)
+        self.魔剑堆层数选择=MyQComboBox(self.main_frame2)
         self.魔剑堆层数选择.addItem('魔剑堆：0层')
         self.魔剑堆层数选择.addItem('魔剑堆：1层')
         self.魔剑堆层数选择.addItem('魔剑堆：2层')
         self.魔剑堆层数选择.addItem('魔剑堆：3层')
         self.魔剑堆层数选择.addItem('魔剑堆：4层')
         self.魔剑堆层数选择.addItem('魔剑堆：5层')
-        self.魔剑堆层数选择.setCurrentIndex(5)
+        self.魔剑堆层数选择.setCurrentIndex(1)
         self.魔剑堆层数选择.resize(120,20)
         self.魔剑堆层数选择.move(315,410)
-        self.魔剑堆层数选择.setStyleSheet(下拉框样式)
 
         self.破剑阵开关=QCheckBox('破剑阵瞬爆',self.main_frame2)
         self.破剑阵开关.resize(100,20)
@@ -559,7 +554,13 @@ class 极诣驭剑士(角色窗口):
         self.钻头蓄力开关.setStyleSheet(复选框样式)
         self.钻头蓄力开关.setChecked(True)
 
-
+        self.冰刀三绝斩倍率=MyQComboBox(self.main_frame2)
+        for i in range(0,30):
+            self.冰刀三绝斩倍率.addItem('冰三绝斩：'+str(i)+'%')
+        self.冰刀三绝斩倍率.setCurrentIndex(13)
+        self.冰刀三绝斩倍率.resize(120,20)
+        self.冰刀三绝斩倍率.move(315,510)
+        self.冰刀三绝斩倍率.setToolTip('请根据自己实测选择')
 
     def 输入属性(self, 属性):
         super().输入属性(属性)
@@ -571,3 +572,4 @@ class 极诣驭剑士(角色窗口):
 
         属性.魔剑堆层数 = self.魔剑堆层数选择.currentIndex()
         属性.魔剑降临 = self.魔剑降临选择.currentIndex()
+        属性.冰刀三绝斩倍率 = self.冰刀三绝斩倍率.currentIndex() / 100 + 1
