@@ -13,6 +13,8 @@ from typing import List
 
 class CalcData():
     def __init__(self):
+        self.是输出职业 = True
+
         self.minheap_queue = None  # type: Queue
         self.角色属性A = None  # type: 角色属性
         self.应用的辟邪玉列表 = []  # type: List[BiXieYu]
@@ -42,8 +44,12 @@ class CalcData():
         self.results = []
 
     def pre_calc_needed_data(self):
-        from .装备 import 总套装列表
-        from .base import 部位列表, 装备列表
+        if self.是输出职业:
+            from .装备 import 总套装列表
+            from .base import 部位列表, 装备列表
+        else:
+            from .装备_buff import 总套装列表
+            from .base_buff import 部位列表, 装备列表
 
         self.有效武器列表.clear()
         for j in range(0, 6):
@@ -81,7 +87,6 @@ def calc_core(data: CalcData):
     # 根据装备选择情况，预计算一些数据
     data.pre_calc_needed_data()
 
-    # re:跑一下两个线程时的简单用例, debug一下，分别把三种模式下的简单用例跑通
     # 寻找本任务对应的各个组合并调用计算函数
     if data.mode_index in [0, 1]:
         calc_speed_and_set_mode(data)
@@ -94,8 +99,12 @@ def calc_core(data: CalcData):
 
 
 def calc_speed_and_set_mode(data):
-    from .装备 import 套装映射
-    from .base import 部位列表, 装备列表
+    if data.是输出职业:
+        from .装备 import 套装映射
+        from .base import 部位列表, 装备列表
+    else:
+        from .装备_buff import 套装映射
+        from .base_buff import 部位列表, 装备列表
 
     套装组合 = []
     套装适用 = []
@@ -187,8 +196,12 @@ def calc_speed_and_set_mode(data):
 
 
 def calc_single_mode(data):
-    from .装备 import 装备序号
-    from .base import 装备列表, 所有套装列表
+    if data.是输出职业:
+        from .装备 import 装备序号
+        from .base import 装备列表, 所有套装列表
+    else:
+        from .装备_buff import 装备序号
+        from .base_buff import 装备列表, 所有套装列表
 
     # 散件模式
     count = 0
@@ -252,7 +265,11 @@ def calc_damage(有效穿戴组合, 有效穿戴套装, 百变怪, data: CalcDat
     角色属性A.装备属性计算()
     for yu in data.应用的辟邪玉列表:
         yu.进图属性(角色属性A)
-    damage = 角色属性A.伤害计算()
+    if data.是输出职业:
+        damage = 角色属性A.伤害计算()
+    else:
+        damage = 角色属性A.BUFF计算()
+
     data.results.append((damage,) + tuple(角色属性A.装备栏) + (damage,) + tuple(角色属性A.套装栏) + (百变怪,))
 
     if len(data.results) >= 批量传回的结果数:

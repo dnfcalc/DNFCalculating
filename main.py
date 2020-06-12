@@ -13,7 +13,7 @@ def 打开窗口(index):
     名称 = 角色列表[index].类名
     if len(窗口列表) != 0:
         窗口列表[-1].关闭窗口()
-    exec('窗口列表.append(' + 名称 + '())')
+    exec('窗口列表.append('+ 名称 +'())')
     窗口列表[-1].show()
 
 
@@ -42,11 +42,11 @@ class 选择窗口(QWidget):
 
     def 界面(self):
         self.setFixedSize(700, 500)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.6.8')
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.6.12')
         self.setWindowIcon(QIcon('ResourceFiles/img/icon.png'))
         按钮样式2 = 'QPushButton{font-size:13px;color:white;background-color:rgba(255,255,255,0.1);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(65,105,225,0.5)} '
         背景颜色 = QLabel(self)
-        背景颜色.resize(self.width(), self.height())
+        背景颜色.resize(self.width(),self.height())
         背景颜色.setStyleSheet("QLabel{background-color:rgba(50,50,50,1)}")
         主背景透明度 = QGraphicsOpacityEffect()
         主背景透明度.setOpacity(0.25)
@@ -55,16 +55,16 @@ class 选择窗口(QWidget):
         主背景.setPixmap(主背景图片)
         主背景.setGraphicsEffect(主背景透明度)
 
-        查看更新 = QtWidgets.QPushButton('查看更新', self)
+        查看更新=QtWidgets.QPushButton('查看更新', self)
         查看更新.clicked.connect(lambda state: self.打开查看更新())
-        查看源码 = QtWidgets.QPushButton('查看源码', self)
+        查看源码=QtWidgets.QPushButton('查看源码', self)
         查看源码.clicked.connect(lambda state: self.打开查看源码())
-        查看更新.move(int(self.width() / 2 * 0.3), self.height() - 40)
-        查看源码.move(int(self.width() / 2 * 1.3), self.height() - 40)
+        查看更新.move(int(self.width() / 2 * 0.3),self.height() - 40)
+        查看源码.move(int(self.width() / 2 * 1.3),self.height() - 40)
         查看更新.setStyleSheet(按钮样式2)
         查看源码.setStyleSheet(按钮样式2)
-        查看更新.resize(150, 30)
-        查看源码.resize(150, 30)
+        查看更新.resize(150,30)
+        查看源码.resize(150,30)
 
         self.按钮列表 = []
         for i in range(len(角色列表)):
@@ -72,7 +72,7 @@ class 选择窗口(QWidget):
             self.按钮列表[i].move(-1000, -1000)
             self.按钮列表[i].resize(100, 28)
             self.按钮列表[i].setStyleSheet(按钮样式)
-            self.按钮列表[i].clicked.connect(lambda state, index=i: 打开窗口(index))
+            self.按钮列表[i].clicked.connect(lambda state, index = i: 打开窗口(index))
 
         self.日期列表 = []
         self.作者列表 = []
@@ -100,11 +100,11 @@ class 选择窗口(QWidget):
         self.选择框.move(20, 10)
         self.选择框.resize(660, 24)
         self.选择框.currentIndexChanged.connect(lambda state: self.界面修改())
-        self.选择框.addItem('所有：合计' + str(len(角色列表)) + '个')
+        self.选择框.addItem('所有：合计' +str(len(角色列表)) + '个')
         for i in range(len(角色类型)):
             temp = ''
             for j in 类型角色[i]:
-                temp += j + ' '
+                temp += j +' '
             self.选择框.addItem(角色类型[i] + '：' + temp)
 
     def 打开查看更新(self):
@@ -130,7 +130,7 @@ class 选择窗口(QWidget):
                 self.备注列表[i].move(-1000, -1000)
         else:
             序号 = self.选择框.currentIndex() - 1
-            间隔 = min(int(400 / len(类型角色[序号])), 45)
+            间隔 = min(int(400 / len(类型角色[序号])) , 45)
             count1 = 0
             for i in range(len(角色列表)):
                 if 角色列表[i].角色 != 角色类型[序号]:
