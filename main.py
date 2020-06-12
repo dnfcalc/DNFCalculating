@@ -6,6 +6,9 @@ from Part.sum import *
 from PublicReference.calc_core import calc_core
 from PublicReference.producer_consumer import producer_data, consumer, 工作线程数
 
+if __name__ == '__main__':
+    multiprocessing.freeze_support()
+
 窗口列表 = []
 
 

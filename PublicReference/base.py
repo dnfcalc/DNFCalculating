@@ -1953,9 +1953,9 @@ class 角色窗口(QWidget):
         totoalCostTime = time.time() - startTime
         logger.info((
             "计算完毕\n"
-            "总计耗时={}"
+            "工作线程数={} 总计耗时={}"
         ).format(
-            format_time(totoalCostTime),
+            工作线程数, format_time(totoalCostTime),
         ))
 
         if len(self.排行数据) == 0:

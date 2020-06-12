@@ -25,7 +25,7 @@ log_directory = "logs"
 try:
     pathlib.Path(log_directory).mkdir(parents=True, exist_ok=True)
 except PermissionError as err:
-    notify_error(None, "创建日志目录logs失败，请确认是否限制了基础的运行权限")
+    print("创建日志目录logs失败，请确认是否限制了基础的运行权限")
     sys.exit(-1)
 
 fileHandler = logging.FileHandler("{0}/{1}.log".format(log_directory, datetime.now().strftime('{}_%Y_%m_%d_%H_%M_%S'.format(logger.name))), encoding="utf-8")
