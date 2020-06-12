@@ -27,6 +27,7 @@ class CalcData():
         # 原始数据
         self.装备选择状态: list[int] = []  # 各个装备的选择状况，第i个位置为0表示装备i未选择，否则表示已选择
         self.拥有百变怪 = False  # 是否勾选了百变怪
+        self.神话属性选项: list[int] = [] # 每个神话四个选项，第4*k~4*k+3下标表示第k个神话的词条选择（k从0开始计数）
 
         # 根据原始数据在计算线程计算出的一些数据
         self.有效武器列表 = []
@@ -68,6 +69,16 @@ class CalcData():
                         self.有效总套装列表[j].append(装备列表[i].所属套装)
 
                 self.有效部位列表[部位列表.index(装备列表[i].部位)].append(装备列表[i].名称)
+
+
+        count = 0
+        for i in 装备列表:
+            if i.品质 == '神话':
+                i.属性1选择 = self.神话属性选项[count * 4 + 0]
+                i.属性2选择 = self.神话属性选项[count * 4 + 1]
+                i.属性3选择 = self.神话属性选项[count * 4 + 2]
+                i.属性4选择 = self.神话属性选项[count * 4 + 3]
+                count += 1
         pass
 
 

@@ -1438,6 +1438,7 @@ class 角色窗口(QWidget):
 
             calc_data.装备选择状态 = copy.deepcopy(self.装备选择状态)
             calc_data.拥有百变怪 = self.百变怪选项.isChecked()
+            calc_data.神话属性选项 = [cb.currentIndex() for cb in self.神话属性选项]
 
             producer(calc_data)
 
