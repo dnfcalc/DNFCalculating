@@ -1,8 +1,17 @@
-﻿from Part.sum import *
+﻿import multiprocessing
+
 from PyQt5.QtCore import QUrl
 
+from Part.sum import *
+from PublicReference.calc_core import calc_core
+from PublicReference.producer_consumer import producer_data, consumer, 工作线程数
+
+if __name__ == '__main__':
+    multiprocessing.freeze_support()
 
 窗口列表 = []
+
+
 def 打开窗口(index):
     名称 = 角色列表[index].类名
     if len(窗口列表) != 0:
@@ -10,14 +19,33 @@ def 打开窗口(index):
     exec('窗口列表.append('+ 名称 +'())')
     窗口列表[-1].show()
 
+
 class 选择窗口(QWidget):
     def __init__(self):
         super().__init__()
+        self.初始化工作进程()
         self.界面()
+
+    def 初始化工作进程(self):
+        # 工作队列
+        work_queue = multiprocessing.JoinableQueue()
+        work_queue.cancel_join_thread()  # or else thread that puts data will not term
+        producer_data.work_queue = work_queue
+        # 工作进程
+        workers = []
+        for i in range(工作线程数):
+            p = multiprocessing.Process(target=consumer, args=(work_queue, calc_core), daemon=True, name="worker#{}".format(i + 1))
+            p.start()
+            workers.append(p)
+
+        logger.info("已启动{}个工作进程".format(工作线程数))
+
+        self.worker = workers
+        pass
 
     def 界面(self):
         self.setFixedSize(700, 500)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.6.8')
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.6.14')
         self.setWindowIcon(QIcon('ResourceFiles/img/icon.png'))
         按钮样式2 = 'QPushButton{font-size:13px;color:white;background-color:rgba(255,255,255,0.1);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(65,105,225,0.5)} '
         背景颜色 = QLabel(self)
@@ -85,7 +113,7 @@ class 选择窗口(QWidget):
     def 打开查看更新(self):
         QDesktopServices.openUrl(QUrl("https://pan.lanzou.com/b01bfj76f"))
         QDesktopServices.openUrl(QUrl("https://wws.lanzous.com/b01bfj76f"))
-    
+
     def 打开查看源码(self):
         QDesktopServices.openUrl(QUrl("https://github.com/wxh0402/DNFCalculating"))
 
@@ -120,7 +148,9 @@ class 选择窗口(QWidget):
                     self.备注列表[i].move(400, 45 + 间隔 * count1)
                     count1 += 1
 
-app = QApplication([])
-a = 选择窗口()
-a.show()
-app.exec_()  
+
+if __name__ == '__main__':
+    app = QApplication([])
+    a = 选择窗口()
+    a.show()
+    app.exec_()
