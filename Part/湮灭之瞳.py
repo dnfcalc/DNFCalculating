@@ -309,14 +309,14 @@ class 湮灭之瞳技能18(湮灭之瞳主动技能):
     def 等效CD(self, 武器类型):
         if self.TP等级 == 0:
             if 武器类型 == '魔杖':
-                return round (0.8 * self.CD * self.CD倍率 / self.恢复, 1)
+                return round (0.8 * self.CD  / self.恢复, 1)
             if 武器类型 == '法杖':
-                return round (0.8 * 1.1 * self.CD * self.CD倍率 / self.恢复, 1)
+                return round (0.8 * 1.1 * self.CD  / self.恢复, 1)
         else:
             if 武器类型 == '魔杖':
-                return round (0.8 * (self.CD - 3.0) * self.CD倍率 / self.恢复, 1)
+                return round (0.8 * (self.CD - 3.0)  / self.恢复, 1)
             if 武器类型 == '法杖':
-                return round (0.8 * 1.1 * (self.CD - 3.0) * self.CD倍率 / self.恢复, 1)
+                return round (0.8 * 1.1 * (self.CD - 3.0)  / self.恢复, 1)
 
 
 
@@ -499,8 +499,8 @@ class 湮灭之瞳角色属性(角色属性):
     暗属性强化 = 13
 
     def __init__(self):
-        self.技能栏 = copy.deepcopy(湮灭之瞳技能列表)
-        self.技能序号 = copy.deepcopy(湮灭之瞳技能序号)
+        self.技能栏 = deepcopy(湮灭之瞳技能列表)
+        self.技能序号 = deepcopy(湮灭之瞳技能序号)
 
     def 属性强化加成(self):
         属性强化值 = 0
@@ -523,7 +523,7 @@ class 湮灭之瞳角色属性(角色属性):
 
         基准倍率 = 1.5 * self.主BUFF * (1 - 443243 / (443243 + 20000))
 
-        面板 = (self.面板智力()/250+1) * round((self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻), 3)
+        面板 = (self.面板智力()/250+1) * (self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻)
 
         self.火属性强化 = int(self.火属性强化 * (1+self.百分比属强))
         self.冰属性强化 = int(self.冰属性强化 * (1+self.百分比属强))
@@ -595,8 +595,10 @@ class 湮灭之瞳角色属性(角色属性):
             if i.是否有伤害 == 1:
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
                     技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型) + 1 + i.基础释放次数))
+                elif self.次数输入[self.技能序号[i.名称]] != '0':
+                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]])+i.基础释放次数)
                 else:
-                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]) + i.基础释放次数)
+                    技能释放次数.append(0)
             else:
                 技能释放次数.append(0)
 
@@ -658,7 +660,7 @@ class 湮灭之瞳(角色窗口):
         self.一觉序号 = 湮灭之瞳一觉序号
         self.二觉序号 = 湮灭之瞳二觉序号
         self.三觉序号 = 湮灭之瞳三觉序号
-        self.护石选项 = copy.deepcopy(湮灭之瞳护石选项)
-        self.符文选项 = copy.deepcopy(湮灭之瞳符文选项)
+        self.护石选项 = deepcopy(湮灭之瞳护石选项)
+        self.符文选项 = deepcopy(湮灭之瞳符文选项)
 
 

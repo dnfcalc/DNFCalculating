@@ -419,8 +419,8 @@ class 龙神角色属性(角色属性):
     暗属性强化 = 13
   
     def __init__(self):
-        self.技能栏= copy.deepcopy(龙神技能列表)
-        self.技能序号= copy.deepcopy(龙神技能序号)
+        self.技能栏= deepcopy(龙神技能列表)
+        self.技能序号= deepcopy(龙神技能序号)
 
 class 龙神(角色窗口):
     def 窗口属性输入(self):
@@ -430,5 +430,5 @@ class 龙神(角色窗口):
         self.一觉序号 = 龙神一觉序号
         self.二觉序号 = 龙神二觉序号
         self.三觉序号 = 龙神三觉序号
-        self.护石选项 = copy.deepcopy(龙神护石选项)
-        self.符文选项 = copy.deepcopy(龙神符文选项)
+        self.护石选项 = deepcopy(龙神护石选项)
+        self.符文选项 = deepcopy(龙神符文选项)

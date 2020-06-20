@@ -350,8 +350,8 @@ class 毁灭者角色属性(角色属性):
     暗属性强化 = 13
   
     def __init__(self):
-        self.技能栏= copy.deepcopy(毁灭者技能列表)
-        self.技能序号= copy.deepcopy(毁灭者技能序号)
+        self.技能栏= deepcopy(毁灭者技能列表)
+        self.技能序号= deepcopy(毁灭者技能序号)
 
 class 毁灭者(角色窗口):
     def 窗口属性输入(self):
@@ -361,5 +361,5 @@ class 毁灭者(角色窗口):
         self.一觉序号 = 毁灭者一觉序号
         self.二觉序号 = 毁灭者二觉序号
         self.三觉序号 = 毁灭者三觉序号
-        self.护石选项 = copy.deepcopy(毁灭者护石选项)
-        self.符文选项 = copy.deepcopy(毁灭者符文选项)
+        self.护石选项 = deepcopy(毁灭者护石选项)
+        self.符文选项 = deepcopy(毁灭者符文选项)

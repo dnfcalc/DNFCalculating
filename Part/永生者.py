@@ -374,8 +374,8 @@ class 永生者角色属性(角色属性):
     暗属性强化 = 13
 
     def __init__(self):
-        self.技能栏= copy.deepcopy(永生者技能列表)
-        self.技能序号= copy.deepcopy(永生者技能序号)
+        self.技能栏= deepcopy(永生者技能列表)
+        self.技能序号= deepcopy(永生者技能序号)
 
 
     def 被动倍率计算(self):
@@ -391,8 +391,8 @@ class 永生者(角色窗口):
         self.一觉序号 = 永生者一觉序号
         self.二觉序号 = 永生者二觉序号
         self.三觉序号 = 永生者三觉序号
-        self.护石选项 = copy.deepcopy(永生者护石选项)
-        self.符文选项 = copy.deepcopy(永生者符文选项)
+        self.护石选项 = deepcopy(永生者护石选项)
+        self.符文选项 = deepcopy(永生者符文选项)
 
 
 

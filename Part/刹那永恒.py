@@ -414,8 +414,8 @@ class 刹那永恒角色属性(角色属性):
     暗属性强化 = 13
   
     def __init__(self):
-        self.技能栏= copy.deepcopy(刹那永恒技能列表)
-        self.技能序号= copy.deepcopy(刹那永恒技能序号)
+        self.技能栏= deepcopy(刹那永恒技能列表)
+        self.技能序号= deepcopy(刹那永恒技能序号)
 
 
     def 伤害指数计算(self):
@@ -423,7 +423,7 @@ class 刹那永恒角色属性(角色属性):
 
         基准倍率 = 1.5 * self.主BUFF * (1 - 443243 / (443243 + 20000))
 
-        面板 = (self.面板智力()/250+1) * round((self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻), 3)
+        面板 = (self.面板智力()/250+1) * (self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻)
 
         self.火属性强化 = int(self.火属性强化 * (1+self.百分比属强))
         self.冰属性强化 = int(self.冰属性强化 * (1+self.百分比属强))
@@ -504,12 +504,12 @@ class 刹那永恒(角色窗口):
         self.一觉序号 = 刹那永恒一觉序号
         self.二觉序号 = 刹那永恒二觉序号
         self.三觉序号 = 刹那永恒三觉序号
-        self.护石选项 = copy.deepcopy(刹那永恒护石选项)
-        self.符文选项 = copy.deepcopy(刹那永恒符文选项)
+        self.护石选项 = deepcopy(刹那永恒护石选项)
+        self.符文选项 = deepcopy(刹那永恒符文选项)
 
     def 站街计算(self,装备名称,套装名称):
-        C = copy.deepcopy(self.角色属性A)
-        C.技能栏 = copy.deepcopy(self.角色属性A.技能栏)
+        C = deepcopy(self.角色属性A)
+        C.技能栏 = deepcopy(self.角色属性A.技能栏)
         C.穿戴装备(装备名称,套装名称)
         for i in C.装备栏:
             装备列表[装备序号[i]].城镇属性(C)

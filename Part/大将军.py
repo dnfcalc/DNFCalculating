@@ -447,8 +447,8 @@ class 大将军角色属性(角色属性):
     暗属性强化 = 13
   
     def __init__(self):
-        self.技能栏= copy.deepcopy(大将军技能列表)
-        self.技能序号= copy.deepcopy(大将军技能序号)
+        self.技能栏= deepcopy(大将军技能列表)
+        self.技能序号= deepcopy(大将军技能序号)
 
     def 伤害计算(self, x=0):
         self.所有属性强化(self.进图属强)
@@ -514,9 +514,10 @@ class 大将军角色属性(角色属性):
                             技能消耗时间 += int((self.时间输入) / (i.等效CD(self.武器类型) + i.技能施放时间) + 1 + i.基础释放次数) * 0.2
                         else:
                             技能消耗时间 += int((self.时间输入) / (i.等效CD(self.武器类型) + i.技能施放时间) + 1 + i.基础释放次数) *  i.技能施放时间
+                    elif self.次数输入[self.技能序号[i.名称]] != '0':
+                        技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]])+i.基础释放次数)
                     else:
-                        if self.次数输入[self.技能序号[i.名称]] != '0':
-                            技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]) + i.基础释放次数)
+                        技能释放次数.append(0)
             else:
                 技能释放次数.append(0)
 
@@ -570,6 +571,6 @@ class 大将军(角色窗口):
         self.一觉序号 = 大将军一觉序号
         self.二觉序号 = 大将军二觉序号
         self.三觉序号 = 大将军三觉序号
-        self.护石选项 = copy.deepcopy(大将军护石选项)
-        self.符文选项 = copy.deepcopy(大将军符文选项)
+        self.护石选项 = deepcopy(大将军护石选项)
+        self.符文选项 = deepcopy(大将军符文选项)
 

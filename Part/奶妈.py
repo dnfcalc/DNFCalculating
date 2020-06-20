@@ -162,12 +162,14 @@ class 奶妈角色属性(角色属性):
     智力 = 952
     武器选项 = ['十字架']
 
+    一觉序号 = 4
+
     防具类型 = '板甲'
     防具精通属性 = ['智力']
 
     def __init__(self):
-        self.技能栏 = copy.deepcopy(奶妈技能列表)
-        self.技能序号 = copy.deepcopy(奶妈技能序号)
+        self.技能栏 = deepcopy(奶妈技能列表)
+        self.技能序号 = deepcopy(奶妈技能序号)
 
     def 专属词条计算(self):
         
@@ -196,22 +198,14 @@ class 奶妈角色属性(角色属性):
         self.技能栏[self.技能序号['虔诚信念']].额外力智 = self.一觉被动力智
 
     def BUFF计算(self, x = 0):
-        self.适用数值计算()
-        总数据 = []
-        for i in range(len(self.技能栏)):
-            if  self.次数输入[i] == '1':
-                总数据.append(self.技能栏[i].结算统计())
-            else:
-                总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
-        
-        for j in range(8):
-            总数据[self.技能序号['勇气圣歌']][j] = int(总数据[self.技能序号['勇气祝福']][j] * self.技能栏[self.技能序号['勇气圣歌']].增幅倍率)
+        总数据 = self.数据计算()
 
-        if x==0:
-            return self.提升率计算(总数据)
-    
-        if x==1:
-            return 总数据
+        if self.次数输入[self.技能序号['勇气圣歌']] == '1':
+            for j in range(8):
+                总数据[self.技能序号['勇气圣歌']][j] = int(总数据[self.技能序号['勇气祝福']][j] * self.技能栏[self.技能序号['勇气圣歌']].增幅倍率)
+
+        return self.结果返回(x, 总数据)
+        
     
 class 奶妈(角色窗口):
     def 窗口属性输入(self):

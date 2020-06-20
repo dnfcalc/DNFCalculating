@@ -204,12 +204,14 @@ class BUFF神思者角色属性(角色属性):
     精神 = 954
     武器选项 = ['十字架']
 
+    一觉序号 = 5
+
     防具类型 = '板甲'
     防具精通属性 = ['体力','精神']
 
     def __init__(self):
-        self.技能栏 = copy.deepcopy(BUFF神思者技能列表)
-        self.技能序号 = copy.deepcopy(BUFF神思者技能序号)
+        self.技能栏 = deepcopy(BUFF神思者技能列表)
+        self.技能序号 = deepcopy(BUFF神思者技能序号)
 
     def 专属词条计算(self):
         self.技能栏[self.技能序号['守护恩赐']].额外体精 = self.守护恩赐体精

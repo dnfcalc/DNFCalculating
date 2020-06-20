@@ -4,15 +4,15 @@ class 极诣剑魂主动技能(主动技能):
     hit数 = 0
     def 等效CD(self, 武器类型):
         if 武器类型 == '巨剑':
-            return round(self.CD / self.恢复 * self.CD倍率 * 1.1, 1)
+            return round(self.CD / self.恢复  * 1.1, 1)
         if 武器类型 == '太刀':
-            return round(self.CD / self.恢复 * self.CD倍率 * 0.95, 1)
+            return round(self.CD / self.恢复  * 0.95, 1)
         if 武器类型 == '钝器':
-            return round(self.CD / self.恢复 * self.CD倍率 * 1.05, 1)
+            return round(self.CD / self.恢复  * 1.05, 1)
         if 武器类型 == '短剑':
-            return round(self.CD / self.恢复 * self.CD倍率 * 1.0, 1)
+            return round(self.CD / self.恢复  * 1.0, 1)
         if 武器类型 == '光剑':
-            return round(self.CD / self.恢复 * self.CD倍率 * 0.90, 1)
+            return round(self.CD / self.恢复  * 0.90, 1)
     def 额外刺伤层数(self, 武器类型):
         return 0
     def 穿云刺数量(self, 武器类型):
@@ -796,8 +796,8 @@ class 极诣剑魂角色属性(角色属性):
     流心跃状态 = 0
   
     def __init__(self):
-        self.技能栏= copy.deepcopy(极诣剑魂技能列表)
-        self.技能序号= copy.deepcopy(极诣剑魂技能序号)
+        self.技能栏= deepcopy(极诣剑魂技能列表)
+        self.技能序号= deepcopy(极诣剑魂技能序号)
 
     def 被动倍率计算(self):
 
@@ -887,8 +887,10 @@ class 极诣剑魂角色属性(角色属性):
             if i.是否有伤害==1:
                 if self.次数输入[self.技能序号[i.名称]] =='/CD':
                     技能释放次数.append(int(self.时间输入/i.等效CD(self.武器类型) + 1 +i.基础释放次数))
-                else:
+                elif self.次数输入[self.技能序号[i.名称]] != '0':
                     技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]])+i.基础释放次数)
+                else:
+                    技能释放次数.append(0)
             else:
                 技能释放次数.append(0)
 
@@ -1049,8 +1051,8 @@ class 极诣剑魂(角色窗口):
         self.一觉序号 = 极诣剑魂一觉序号
         self.二觉序号 = 极诣剑魂二觉序号
         self.三觉序号 = 极诣剑魂三觉序号
-        self.护石选项 = copy.deepcopy(极诣剑魂护石选项)
-        self.符文选项 = copy.deepcopy(极诣剑魂符文选项)
+        self.护石选项 = deepcopy(极诣剑魂护石选项)
+        self.符文选项 = deepcopy(极诣剑魂符文选项)
 
 
     def 界面(self):

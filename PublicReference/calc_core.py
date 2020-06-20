@@ -6,7 +6,7 @@
 # Author    : Chen Ji
 # Email     : fzls.zju@gmail.com
 # -------------------------------
-import copy
+from PublicReference.copy import *
 from multiprocessing import Queue
 from typing import List
 
@@ -270,15 +270,17 @@ def calc_single_mode(data):
 def calc_damage(有效穿戴组合, 有效穿戴套装, 百变怪, data: CalcData):
     from .producer_consumer import 批量传回的结果数
 
-    角色属性A = copy.deepcopy(data.角色属性A)
+    角色属性A = deepcopy(data.角色属性A)
 
     角色属性A.穿戴装备(有效穿戴组合, 有效穿戴套装)
-    角色属性A.装备属性计算()
-    for yu in data.应用的辟邪玉列表:
-        yu.进图属性(角色属性A)
     if data.是输出职业:
+        角色属性A.装备属性计算()
+        for yu in data.应用的辟邪玉列表:
+            yu.进图属性(角色属性A)
         damage = 角色属性A.伤害计算()
     else:
+        for yu in data.应用的辟邪玉列表:
+            yu.进图属性(角色属性A)
         damage = 角色属性A.BUFF计算()
 
     data.results.append((damage,) + tuple(角色属性A.装备栏) + (damage,) + tuple(角色属性A.套装栏) + (百变怪,))

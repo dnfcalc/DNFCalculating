@@ -45,7 +45,7 @@ class 选择窗口(QWidget):
 
     def 界面(self):
         self.setFixedSize(700, 500)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.6.14')
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.6.20')
         self.setWindowIcon(QIcon('ResourceFiles/img/icon.png'))
         按钮样式2 = 'QPushButton{font-size:13px;color:white;background-color:rgba(255,255,255,0.1);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(65,105,225,0.5)} '
         背景颜色 = QLabel(self)

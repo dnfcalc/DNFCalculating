@@ -445,8 +445,8 @@ class 大地女神角色属性(角色属性):
     暗属性强化 = 13
 
     def __init__(self):
-        self.技能栏 = copy.deepcopy(大地女神技能列表)
-        self.技能序号 = copy.deepcopy(大地女神技能序号)
+        self.技能栏 = deepcopy(大地女神技能列表)
+        self.技能序号 = deepcopy(大地女神技能序号)
 
     def 被动倍率计算(self):
         super().被动倍率计算()
@@ -468,6 +468,6 @@ class 大地女神(角色窗口):
         self.一觉序号 = 大地女神一觉序号
         self.二觉序号 = 大地女神二觉序号
         self.三觉序号 = 大地女神三觉序号
-        self.护石选项 = copy.deepcopy(大地女神护石选项)
-        self.符文选项 = copy.deepcopy(大地女神符文选项)
+        self.护石选项 = deepcopy(大地女神护石选项)
+        self.符文选项 = deepcopy(大地女神符文选项)
 

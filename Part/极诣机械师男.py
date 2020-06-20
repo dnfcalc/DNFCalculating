@@ -412,8 +412,8 @@ class 极诣机械师男角色属性(角色属性):
     暗属性强化 = 13
   
     def __init__(self):
-        self.技能栏= copy.deepcopy(极诣机械师男技能列表)
-        self.技能序号= copy.deepcopy(极诣机械师男技能序号)
+        self.技能栏= deepcopy(极诣机械师男技能列表)
+        self.技能序号= deepcopy(极诣机械师男技能序号)
 
     def 被动倍率计算(self):
         super().被动倍率计算()
@@ -429,5 +429,5 @@ class 极诣机械师男(角色窗口):
         self.一觉序号 = 极诣机械师男一觉序号
         self.二觉序号 = 极诣机械师男二觉序号
         self.三觉序号 = 极诣机械师男三觉序号
-        self.护石选项 = copy.deepcopy(极诣机械师男护石选项)
-        self.符文选项 = copy.deepcopy(极诣机械师男符文选项)
+        self.护石选项 = deepcopy(极诣机械师男护石选项)
+        self.符文选项 = deepcopy(极诣机械师男符文选项)

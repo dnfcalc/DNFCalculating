@@ -389,8 +389,8 @@ class 极诣暗殿骑士角色属性(角色属性):
     暗属性强化 = 13
 
     def __init__(self):
-        self.技能栏 = copy.deepcopy(极诣暗殿骑士技能列表)
-        self.技能序号 = copy.deepcopy(极诣暗殿骑士技能序号)
+        self.技能栏 = deepcopy(极诣暗殿骑士技能列表)
+        self.技能序号 = deepcopy(极诣暗殿骑士技能序号)
 
 class 极诣暗殿骑士(角色窗口):
 
@@ -401,5 +401,5 @@ class 极诣暗殿骑士(角色窗口):
         self.一觉序号 = 极诣暗殿骑士一觉序号
         self.二觉序号 = 极诣暗殿骑士二觉序号
         self.三觉序号 = 极诣暗殿骑士三觉序号
-        self.护石选项 = copy.deepcopy(极诣暗殿骑士护石选项)
-        self.符文选项 = copy.deepcopy(极诣暗殿骑士符文选项)
+        self.护石选项 = deepcopy(极诣暗殿骑士护石选项)
+        self.符文选项 = deepcopy(极诣暗殿骑士符文选项)

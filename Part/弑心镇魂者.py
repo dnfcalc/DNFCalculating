@@ -47,7 +47,7 @@ class 主动技能(技能):
                         
     def 等效CD(self, 武器类型):
         # Will修改
-        return round(self.CD * self.CD倍率 / self.恢复, 1)
+        return round(self.CD  / self.恢复, 1)
 class 弑心镇魂者技能0(主动技能):
     名称 = '连续射击'
     所在等级 = 15
@@ -401,8 +401,8 @@ class 弑心镇魂者角色属性(角色属性):
     暗属性强化 = 13
   
     def __init__(self):
-        self.技能栏= copy.deepcopy(弑心镇魂者技能列表)
-        self.技能序号= copy.deepcopy(弑心镇魂者技能序号)
+        self.技能栏= deepcopy(弑心镇魂者技能列表)
+        self.技能序号= deepcopy(弑心镇魂者技能序号)
 
     def 伤害计算(self, x = 0):
         
@@ -492,5 +492,5 @@ class 弑心镇魂者(角色窗口):
         self.一觉序号 = 弑心镇魂者一觉序号
         self.二觉序号 = 弑心镇魂者二觉序号
         self.三觉序号 = 弑心镇魂者三觉序号
-        self.护石选项 = copy.deepcopy(弑心镇魂者护石选项)
-        self.符文选项 = copy.deepcopy(弑心镇魂者符文选项)
+        self.护石选项 = deepcopy(弑心镇魂者护石选项)
+        self.符文选项 = deepcopy(弑心镇魂者符文选项)

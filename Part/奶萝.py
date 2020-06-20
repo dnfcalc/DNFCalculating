@@ -174,12 +174,14 @@ class 奶萝角色属性(角色属性):
     智力 = 952
     武器选项 = ['扫把']
 
+    一觉序号 = 5
+
     防具类型 = '板甲'
     防具精通属性 = ['智力']
 
     def __init__(self):
-        self.技能栏 = copy.deepcopy(奶萝技能列表)
-        self.技能序号 = copy.deepcopy(奶萝技能序号)
+        self.技能栏 = deepcopy(奶萝技能列表)
+        self.技能序号 = deepcopy(奶萝技能序号)
 
     def 专属词条计算(self):
         
@@ -208,23 +210,19 @@ class 奶萝角色属性(角色属性):
         self.技能栏[self.技能序号['少女的爱']].额外力智 = self.一觉被动力智
 
     def BUFF计算(self, x = 0):
-        self.适用数值计算()
-        总数据 = []
-        for i in range(len(self.技能栏)):
-            if  self.次数输入[i] == '1':
-                总数据.append(self.技能栏[i].结算统计())
-            else:
-                self.技能栏[i].增幅倍率 = 0
-                总数据.append([0, 0, 0, 0, 0, 0, 0, 0, 0])
-        
+
+        总数据 = self.数据计算()
+
+        if self.次数输入[self.技能序号['死命召唤']] == '0':
+            self.技能栏[self.技能序号['死命召唤']].增幅倍率 = 0
+        if self.次数输入[self.技能序号['小魔女的偏爱']] == '0':
+            self.技能栏[self.技能序号['小魔女的偏爱']].增幅倍率 = 0
+
         for j in range(8):
             总数据[self.技能序号['禁忌诅咒']][j] = int(总数据[self.技能序号['禁忌诅咒']][j] * (1 + self.技能栏[self.技能序号['死命召唤']].增幅倍率) * (1 + self.技能栏[self.技能序号['小魔女的偏爱']].增幅倍率))
 
-        if x==0:
-            return self.提升率计算(总数据)
-    
-        if x==1:
-            return 总数据
+        return self.结果返回(x, 总数据)
+
     
 class 奶萝(角色窗口):
     def 窗口属性输入(self):

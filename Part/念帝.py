@@ -441,8 +441,8 @@ class 念帝角色属性(角色属性):
     雷龙开关 = 0
 
     def __init__(self):
-        self.技能栏 = copy.deepcopy(念帝技能列表)
-        self.技能序号 = copy.deepcopy(念帝技能序号)
+        self.技能栏 = deepcopy(念帝技能列表)
+        self.技能序号 = deepcopy(念帝技能序号)
 
     def 被动倍率计算(self):
         self.技能栏[self.技能序号['分身']].基础个数 = self.技能栏[self.技能序号['幻影爆碎']].TP等级
@@ -465,8 +465,8 @@ class 念帝(角色窗口):
         self.一觉序号 = 念帝一觉序号
         self.二觉序号 = 念帝二觉序号
         self.三觉序号 = 念帝三觉序号
-        self.护石选项 = copy.deepcopy(念帝护石选项)
-        self.符文选项 = copy.deepcopy(念帝符文选项)
+        self.护石选项 = deepcopy(念帝护石选项)
+        self.符文选项 = deepcopy(念帝符文选项)
 
     def 界面(self):
         super().界面()

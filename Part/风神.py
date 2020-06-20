@@ -361,8 +361,8 @@ class 风神角色属性(角色属性):
     暗属性强化 = 13
   
     def __init__(self):
-        self.技能栏= copy.deepcopy(风神技能列表)
-        self.技能序号= copy.deepcopy(风神技能序号)
+        self.技能栏= deepcopy(风神技能列表)
+        self.技能序号= deepcopy(风神技能序号)
 
 class 风神(角色窗口):
     def 窗口属性输入(self):
@@ -372,6 +372,6 @@ class 风神(角色窗口):
         self.一觉序号 = 风神一觉序号
         self.二觉序号 = 风神二觉序号
         self.三觉序号 = 风神三觉序号
-        self.护石选项 = copy.deepcopy(风神护石选项)
-        self.符文选项 = copy.deepcopy(风神符文选项)
+        self.护石选项 = deepcopy(风神护石选项)
+        self.符文选项 = deepcopy(风神符文选项)
 
