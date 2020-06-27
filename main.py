@@ -1,6 +1,7 @@
 ﻿import multiprocessing
 
 from PyQt5.QtCore import QUrl
+import PyQt5.QtCore as qtc
 
 from Part.sum import *
 from PublicReference.calc_core import calc_core
@@ -11,14 +12,13 @@ if __name__ == '__main__':
 
 窗口列表 = []
 
-
 def 打开窗口(index):
     名称 = 角色列表[index].类名
     if len(窗口列表) != 0:
         窗口列表[-1].关闭窗口()
+        窗口列表.clear()
     exec('窗口列表.append('+ 名称 +'())')
     窗口列表[-1].show()
-
 
 class 选择窗口(QWidget):
     def __init__(self):
@@ -44,8 +44,8 @@ class 选择窗口(QWidget):
         pass
 
     def 界面(self):
-        self.setFixedSize(700, 500)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.6.20')
+        self.setFixedSize(720, 500)
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.6.27 (技能模板仅供参考，请根据自身情况修改)')
         self.setWindowIcon(QIcon('ResourceFiles/img/icon.png'))
         按钮样式2 = 'QPushButton{font-size:13px;color:white;background-color:rgba(255,255,255,0.1);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(65,105,225,0.5)} '
         背景颜色 = QLabel(self)
@@ -74,7 +74,7 @@ class 选择窗口(QWidget):
             self.按钮列表.append(QPushButton(角色列表[i].名称, self))
             self.按钮列表[i].move(-1000, -1000)
             self.按钮列表[i].resize(100, 28)
-            self.按钮列表[i].setStyleSheet(按钮样式)
+            self.按钮列表[i].setStyleSheet(按钮样式 + 'QPushButton{font-size:13px;}')
             self.按钮列表[i].clicked.connect(lambda state, index = i: 打开窗口(index))
 
         self.日期列表 = []
@@ -101,9 +101,9 @@ class 选择窗口(QWidget):
 
         self.选择框 = MyQComboBox(self)
         self.选择框.move(20, 10)
-        self.选择框.resize(660, 24)
+        self.选择框.resize(680, 24)
         self.选择框.currentIndexChanged.connect(lambda state: self.界面修改())
-        self.选择框.addItem('所有：合计' +str(len(角色列表)) + '个')
+        self.选择框.addItem('所有：合计' +str(len(角色列表)) + '个  (点击下拉框进行角色类型筛选)  仅限个人使用，请勿带节奏')
         for i in range(len(角色类型)):
             temp = ''
             for j in 类型角色[i]:
@@ -121,12 +121,14 @@ class 选择窗口(QWidget):
         if self.选择框.currentIndex() == 0:
             count1 = 0
             count2 = 0
-            for i in range(len(角色列表)):
-                self.按钮列表[i].move(20 + 115 * count2, 45 + 40 * count1)
-                count1 += 1
-                if count1 % 10 == 0:
-                    count1 = 0
-                    count2 += 1
+            for j in 角色类型:
+                for i in range(len(角色列表)):
+                    if 角色列表[i].角色 == j:
+                        self.按钮列表[i].move(20 + 115 * count2, 45 + 40 * count1)
+                        count1 += 1
+                        if count1 % 10 == 0:
+                            count1 = 0
+                            count2 += 1
             for i in range(len(角色列表)):
                 self.日期列表[i].move(-1000, -1000)
                 self.作者列表[i].move(-1000, -1000)
@@ -148,8 +150,11 @@ class 选择窗口(QWidget):
                     self.备注列表[i].move(400, 45 + 间隔 * count1)
                     count1 += 1
 
-
 if __name__ == '__main__':
+    if hasattr(qtc.Qt, 'AA_EnableHighDpiScaling'):
+        QtWidgets.QApplication.setAttribute(qtc.Qt.AA_EnableHighDpiScaling, True)
+    if hasattr(qtc.Qt, 'AA_UseHighDpiPixmaps'):
+        QtWidgets.QApplication.setAttribute(qtc.Qt.AA_UseHighDpiPixmaps, True)
     app = QApplication([])
     a = 选择窗口()
     a.show()

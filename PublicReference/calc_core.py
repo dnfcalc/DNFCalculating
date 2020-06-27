@@ -162,7 +162,7 @@ def calc_speed_and_set_mode(data):
 
     # 极速模式与套装模式
     count = -1
-    count2 = 0
+    current_index = -1
     for temp in 套装组合:
         count += 1
         for k in [-1, 0, 5, 8]:
@@ -186,25 +186,55 @@ def calc_speed_and_set_mode(data):
                 temp1.append(装备列表[index].名称)
             if sign == 11:
                 for i in data.有效武器列表:
-                    current_index = count2
-                    count2 += 1
+                    current_index += 1
                     if current_index < data.start_index:
                         # 尚未到本工作线程需要计算的范围
                         continue
                     if current_index > data.end_index:
                         # 本工作线程需要计算的范围已全部完成，直接退出
                         return
-
-                    有效穿戴组合 = temp1 + [i]
-                    有效穿戴套装 = 套装适用[count]
-                    百变怪 = sign2
-
-                    calc_damage(有效穿戴组合, 有效穿戴套装, 百变怪, data)
+                    calc_damage(temp1 + [i], 套装适用[count], sign2, data)
                     # logger.warning("consumer {} {} {} - {}".format(
                     #     data.mode_index, data.start_index, data.end_index, current_index
                     # ))
     pass
 
+
+def 筛选(名称, x, 装备, 套装, 神话, 种类数, data):
+    if data.是输出职业:
+        from .装备 import 装备序号
+        from .base import 装备列表, 所有套装列表
+    else:
+        from .装备_buff import 装备序号
+        from .base_buff import 装备列表, 所有套装列表
+
+    i = 装备序号[名称]
+    装备[x] = 名称
+    for k in range(x + 1, 11):
+        套装[k] = '无'
+    套装[x] = 装备列表[i].所属套装
+    count = []
+    for j in 套装:
+        if (j != '智慧产物') and (j != '无') and (j not in count):
+            count.append(j)
+    if len(count) > 种类数[0]:
+        return 1
+    elif x == 10:
+        种类数[0] = max(min(种类数[0], len(count)), 4)
+    
+    if x in [0, 5, 8]:
+        if x < 5:
+            神话[5] = 0
+            神话[8] = 0
+        if x < 8:
+            神话[8] = 0   
+        if 装备列表[i].品质 == '神话':
+            神话[x] = 1
+            if sum(神话) > 1:
+                return 1
+        else:
+            神话[x] = 0
+    return 0
 
 def calc_single_mode(data):
     if data.是输出职业:
@@ -216,7 +246,13 @@ def calc_single_mode(data):
 
     # 散件模式
     count = 0
+    装备 = ['无'] * 12
+    套装 = ['无'] * 11
+    神话 = [0] * 11
+    种类数 = [11]
+
     for a1 in data.有效部位列表[0]:
+        if 筛选(a1, 0, 装备, 套装, 神话, 种类数, data): continue
         for a2 in data.有效部位列表[1]:
             # 暂时先写死前两层跑通流程，后面用迭代函数写一个正式的
             current_index = count
@@ -227,43 +263,40 @@ def calc_single_mode(data):
             if current_index > data.end_index:
                 # 本工作线程需要计算的范围已全部完成，直接退出
                 return
-
+            if 筛选(a2, 1, 装备, 套装, 神话, 种类数, data): continue
             for a3 in data.有效部位列表[2]:
+                if 筛选(a3, 2, 装备, 套装, 神话, 种类数, data): continue
                 for a4 in data.有效部位列表[3]:
+                    if 筛选(a4, 3, 装备, 套装, 神话, 种类数, data): continue
                     for a5 in data.有效部位列表[4]:
+                        if 筛选(a5, 4, 装备, 套装, 神话, 种类数, data): continue
                         for a6 in data.有效部位列表[5]:
+                            if 筛选(a6, 5, 装备, 套装, 神话, 种类数, data): continue
                             for a7 in data.有效部位列表[6]:
+                                if 筛选(a7, 6, 装备, 套装, 神话, 种类数, data): continue
                                 for a8 in data.有效部位列表[7]:
+                                    if 筛选(a8, 7, 装备, 套装, 神话, 种类数, data): continue
                                     for a9 in data.有效部位列表[8]:
+                                        if 筛选(a9, 8, 装备, 套装, 神话, 种类数, data): continue
                                         for a10 in data.有效部位列表[9]:
+                                            if 筛选(a10, 9, 装备, 套装, 神话, 种类数, data): continue
                                             for a11 in data.有效部位列表[10]:
+                                                if 筛选(a11, 10, 装备, 套装, 神话, 种类数, data): continue
+                                                套装字典 = {}
+                                                for i in 套装:
+                                                    if i != '智慧产物' and i != '无':
+                                                        套装字典[i] = 套装字典.get(i, 0) + 1
+                                                套装名称 = []
+                                                for i in 套装字典.keys():
+                                                    if 套装字典[i] >= 2:
+                                                        套装名称.append(i + '[2]')
+                                                    if 套装字典[i] >= 3:
+                                                        套装名称.append(i + '[3]')
+                                                    if 套装字典[i] >= 5:
+                                                        套装名称.append(i + '[5]')
                                                 for a12 in data.有效部位列表[11]:
-                                                    temp = [a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12]
-                                                    神话数量 = 0
-                                                    for i in temp:
-                                                        if 装备列表[装备序号[i]].品质 == '神话':
-                                                            神话数量 += 1
-                                                    if 神话数量 <= 1:
-                                                        件数统计 = [0] * len(所有套装列表)
-                                                        for i in temp:
-                                                            所属套装名称 = 装备列表[装备序号[i]].所属套装
-                                                            if 所属套装名称 != '无' and 所属套装名称 != '智慧产物':
-                                                                件数统计[所有套装列表.index(所属套装名称)] += 1
-                                                        temp2 = []
-                                                        for i in range(0, len(件数统计)):
-                                                            if 件数统计[i] >= 2:
-                                                                temp2.append(所有套装列表[i] + '[2]')
-                                                            if 件数统计[i] >= 3:
-                                                                temp2.append(所有套装列表[i] + '[3]')
-                                                            if 件数统计[i] >= 5:
-                                                                temp2.append(所有套装列表[i] + '[5]')
-
-                                                        有效穿戴组合 = temp
-                                                        有效穿戴套装 = temp2
-                                                        百变怪 = '空'
-
-                                                        calc_damage(有效穿戴组合, 有效穿戴套装, 百变怪, data)
-
+                                                    装备[11] = a12                                               
+                                                    calc_damage(装备, 套装名称, '空', data)
     pass
 
 

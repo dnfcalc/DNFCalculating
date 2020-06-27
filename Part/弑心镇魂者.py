@@ -438,19 +438,19 @@ class 弑心镇魂者角色属性(角色属性):
                 if self.次数输入[self.技能序号[i.名称]] =='/CD':
                     技能释放次数.append(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型) + 1 +i.基础释放次数))
                 else:
-                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]])+i.基础释放次数)
+                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
             elif i.名称 == '月影秘步':
                 if self.次数输入[self.技能序号[i.名称]] =='/CD':
                     技能释放次数.append(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型) + 1 +i.基础释放次数)*3)
                 else:
-                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]])+i.基础释放次数)
+                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
             elif i.名称 == '锁定射击':
                 if self.次数输入[self.技能序号[i.名称]] =='/CD' and self.技能栏[self.技能序号['锁定射击']].锁定护石==1:
                     技能释放次数.append(int(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型) + 1 +i.基础释放次数)*12)+(int(self.技能栏[self.技能序号['毁灭狂欢']].歼灭次数 *6)))
                 elif self.次数输入[self.技能序号[i.名称]] =='/CD' and self.技能栏[self.技能序号['锁定射击']].锁定护石==0:
                     技能释放次数.append(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型) + 1 +i.基础释放次数)*12)
                 else:
-                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]])+i.基础释放次数)
+                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
             else:
                 技能释放次数.append(0)
     

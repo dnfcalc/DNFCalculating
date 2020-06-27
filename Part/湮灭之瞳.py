@@ -525,10 +525,10 @@ class 湮灭之瞳角色属性(角色属性):
 
         面板 = (self.面板智力()/250+1) * (self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻)
 
-        self.火属性强化 = int(self.火属性强化 * (1+self.百分比属强))
-        self.冰属性强化 = int(self.冰属性强化 * (1+self.百分比属强))
-        self.光属性强化 = int(self.光属性强化 * (1+self.百分比属强))
-        self.暗属性强化 = int(self.暗属性强化 * (1+self.百分比属强))
+        self.火属性强化 += int((self.火属性强化 - 22) * self.百分比属强)
+        self.冰属性强化 += int((self.冰属性强化 - 22) * self.百分比属强)
+        self.光属性强化 += int((self.光属性强化 - 22) * self.百分比属强)
+        self.暗属性强化 += int((self.暗属性强化 - 22) * self.百分比属强)
         if self.攻击属性 == 0:
             属性倍率=1.05+0.0045*max(self.火属性强化,self.冰属性强化,self.光属性强化,self.暗属性强化)
         elif self.攻击属性 == 1:
@@ -596,7 +596,7 @@ class 湮灭之瞳角色属性(角色属性):
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
                     技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型) + 1 + i.基础释放次数))
                 elif self.次数输入[self.技能序号[i.名称]] != '0':
-                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]])+i.基础释放次数)
+                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
                 else:
                     技能释放次数.append(0)
             else:

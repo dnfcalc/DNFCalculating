@@ -18,7 +18,7 @@ from .common import *
 ###########################################################
 logFormatter = logging.Formatter("%(asctime)s %(levelname)-5.5s [%(name)s] %(funcName)s:%(lineno)d: %(message)s")
 logger = logging.getLogger()
-logger.setLevel(logging.ERROR)
+logger.setLevel(logging.DEBUG)
 logger.name = "DNFCalculating"
 
 log_directory = "logs"

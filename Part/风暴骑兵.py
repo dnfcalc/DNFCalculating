@@ -467,4 +467,3 @@ class 风暴骑兵(角色窗口):
         self.三觉序号 = 风暴骑兵三觉序号
         self.护石选项 = deepcopy(风暴骑兵护石选项)
         self.符文选项 = deepcopy(风暴骑兵符文选项)
-

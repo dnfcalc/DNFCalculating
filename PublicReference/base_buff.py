@@ -68,7 +68,6 @@ class MyQComboBox(QComboBox):
 标签样式 = "QLabel{font-size:12px;color:white}"
 
 堆大小上限 = 100
-最大组合数计算上限 = 150720 * 10 * 2 # 一把武器150720，多线程版本暂定上限为计算20把武器的全点亮套装模式
 
 class 角色属性():
 
@@ -237,6 +236,7 @@ class 角色属性():
         return False
 
     def 技能等级加成(self, 加成类型, min, max, lv):
+        lv = int(lv)
         for i in self.技能栏:
             if i.所在等级 >= min and i.所在等级 <= max:
                 if 加成类型 == '所有':
@@ -488,7 +488,6 @@ class 角色窗口(QWidget):
 
     def 关闭窗口(self):
         self.close()
-        self.排行窗口列表.clear()
 
     def closeEvent(self, event):
         self.保存配置()
@@ -509,7 +508,7 @@ class 角色窗口(QWidget):
         背景颜色.setStyleSheet("QLabel{background-color:rgba(50,50,50,1)}")
 
         主背景透明度 = QGraphicsOpacityEffect()
-        主背景透明度.setOpacity(0.25)
+        主背景透明度.setOpacity(0.15)
         self.主背景图片 = QPixmap('./ResourceFiles/'+self.角色属性A.职业名称 + "/bg.jpg")
         主背景 = QLabel(self)
         主背景.setPixmap(self.主背景图片)
@@ -825,12 +824,6 @@ class 角色窗口(QWidget):
         for i in range(工作线程数, 0, -1):
             self.线程数选择.addItem('进程:' + str(i))
 
-        self.重置 = QPushButton('全局重置(默认)', self.main_frame1)
-        self.重置.clicked.connect(lambda state: self.载入配置('reset'))
-        self.重置.move(990, 550)
-        self.重置.resize(100, 25)
-        self.重置.setStyleSheet(按钮样式)
-
         self.计算按钮1 = QPushButton('开始计算', self.main_frame1)
         self.计算按钮1.clicked.connect(lambda state: self.计算())
         self.计算按钮1.move(990, 610)
@@ -1029,7 +1022,7 @@ class 角色窗口(QWidget):
                 Linelist[j].move(95 + i * (宽度 + 5), 35 + j * 30)
             self.属性设置输入.append(Linelist)
 
-        列名称2 = ["智力", "体力", "精神","徽章智","徽章体","徽章精"]
+        列名称2 = ["智力", "体力", "精神","徽章智","徽章体","徽章精","技能等级"]
         行名称2 = ["上衣", "下装", "头肩", "腰带", "鞋", "手镯", "项链", "戒指", "左槽", "右槽", "耳环", "武器", "登记补正","穿戴称号", "光环", "武器装扮", "时装"]
 
         self.列名称 = 列名称1 + 列名称2
@@ -1040,17 +1033,17 @@ class 角色窗口(QWidget):
         名称.setStyleSheet(
             "QLabel{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px}")
         名称.resize(80, 25)
-        名称.move(140 + 7 * 宽度, 5)
-        for i in range(0, 6):
+        名称.move(7 * 宽度, 5)
+        for i in range(0, 7):
             名称 = QLabel(列名称2[i], self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             名称.setStyleSheet(
                 "QLabel{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px}")
-            if i == 9:
+            if i == 6:
                 名称.resize(150, 25)
             else:
                 名称.resize(宽度, 25)
-            名称.move(225 + 7 * 宽度 + i * (宽度 + 5), 5)
+            名称.move(90 + 7 * 宽度 + i * (宽度 + 5), 5)
 
         for j in range(0, 17):
             名称 = QLabel(行名称2[j], self.main_frame3)
@@ -1058,7 +1051,7 @@ class 角色窗口(QWidget):
             名称.setStyleSheet(
                 "QLabel{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px}")
             名称.resize(80, 25)
-            名称.move(140 + 7 * 宽度, 35 + j * 30)
+            名称.move(7 * 宽度, 35 + j * 30)
 
         for i in range(0, 6):
             Linelist = []
@@ -1068,7 +1061,7 @@ class 角色窗口(QWidget):
                 Linelist[j].setStyleSheet(
                     "QLineEdit{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px}")
                 Linelist[j].resize(宽度, 22)
-                Linelist[j].move(225 + 7 * 宽度 + i * (宽度 + 5), 35 + j * 30)
+                Linelist[j].move(90 + 7 * 宽度 + i * (宽度 + 5), 35 + j * 30)
             self.属性设置输入.append(Linelist)
 
         for j in range(0, 17):
@@ -1077,11 +1070,10 @@ class 角色窗口(QWidget):
             self.技能设置输入[j].setStyleSheet(
                 "MyQComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px}")
             self.技能设置输入[j].resize(150, 22)
-            self.技能设置输入[j].move(225 + 7 * 宽度 + 9 * (宽度 + 5), 35 + j * 30)
+            self.技能设置输入[j].move(90 + 7 * 宽度 + 6 * (宽度 + 5), 35 + j * 30)
 
         for j in [2, 3, 4]:
             self.技能设置输入[j].addItems(['Lv1-30(主动)Lv+1', 'Lv1-50(主动)Lv+1'])
-
 
         for j in [8, 9, 16]:
             for i in self.角色属性A.技能栏:
@@ -1102,20 +1094,43 @@ class 角色窗口(QWidget):
             名称.setStyleSheet(
                 "QLabel{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px}")
             名称.resize(90, 25)
-            名称.move(100 + i * 100, 570)
+            名称.move(170 + 7 * 宽度 + 9 * (宽度 + 5), 35 + i * 30)
             Linelist.append(QLineEdit(self.main_frame3))
             Linelist[i].setAlignment(Qt.AlignCenter)
             Linelist[i].setStyleSheet(
                 "QLineEdit{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px}")
-            Linelist[i].resize(90, 25)
-            Linelist[i].move(100 + i * 100, 610)
+            Linelist[i].resize(60, 25)
+            Linelist[i].move(270 + 7 * 宽度 + 9 * (宽度 + 5), 35 + i * 30)
         self.属性设置输入.append(Linelist)
+
+        count = 0
+        self.时装选项 = []
+        for i in ['头部', '帽子', '脸部', '胸部', '上衣', '腰带', '下装', '鞋']:
+            名称 = QLabel(i, self.main_frame3)
+            名称.setAlignment(Qt.AlignCenter)
+            名称.setStyleSheet(
+                "QLabel{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px}")
+            名称.resize(90, 25)
+            名称.move(170 + 7 * 宽度 + 9 * (宽度 + 5), 255 + count * 30)
+            self.时装选项.append(MyQComboBox(self.main_frame3))
+            self.时装选项[count].addItems(['高级', '节日', '稀有', '神器'])
+            self.时装选项[count].resize(60, 22)
+            self.时装选项[count].move(270 + 7 * 宽度 + 9 * (宽度 + 5), 255 + count * 30)
+            self.时装选项[count].currentIndexChanged.connect(lambda state, index=count: self.时装选项更新(index))
+            count += 1
+
+        self.时装选项.append(MyQComboBox(self.main_frame3))
+        self.时装选项[8].addItems(['高级套装[8]', '节日套装[8]', '稀有套装[8]', '神器套装[8]'])
+        self.时装选项[8].resize(160, 22)
+        self.时装选项[8].move(170 + 7 * 宽度 + 9 * (宽度 + 5), 260 + count * 30)
+        self.时装选项[8].currentIndexChanged.connect(lambda state, index=8: self.时装选项更新(index))
 
         self.计算按钮3 = QPushButton('开始计算', self.main_frame3)
         self.计算按钮3.clicked.connect(lambda state: self.计算())
         self.计算按钮3.move(990, 610)
         self.计算按钮3.resize(100, 30)
         self.计算按钮3.setStyleSheet(按钮样式)
+
 
         #第四个布局
         self.main_frame4 = QMainWindow()
@@ -1155,12 +1170,60 @@ class 角色窗口(QWidget):
                         self.神话属性选项[count * 4 + j].addItem('无')
                 count += 1
 
-
         # 把布局界面放进去
         self.stacked_layout.addWidget(self.main_frame1)
         self.stacked_layout.addWidget(self.main_frame2)
         self.stacked_layout.addWidget(self.main_frame3)
         self.stacked_layout.addWidget(self.main_frame4)
+
+    def 时装选项更新(self, index):
+        if index == 8:
+            count = 0
+            for i in self.时装选项:
+                if count != 8:
+                    i.setCurrentIndex(self.时装选项[8].currentIndex())
+                count += 1
+            return
+        else:
+            智力, 体力, 精神 = 0, 0, 0
+            套装字典 = {'高级':0, '节日':0, '稀有':0, '神器':0}
+            for i in range(8):
+                套装字典[self.时装选项[i].currentText()] = 套装字典.get(self.时装选项[i].currentText(), 0) + 1
+            #套装属性
+            神器 = 套装字典['神器']
+            稀有 = 套装字典['稀有'] + 神器
+            if 套装字典['高级'] >= 3:
+                智力 += 10; 体力 += 10; 精神 += 10
+            if 稀有 >= 3 and 神器 < 3:
+                智力 += 40; 体力 += 40; 精神 += 40
+            if 套装字典['神器'] >= 3:
+                智力 += 50; 体力 += 50; 精神 += 50
+            if 套装字典['高级'] >= 8:
+                智力 += 10; 体力 += 10; 精神 += 10
+            if 套装字典['节日'] >= 8:
+                智力 += 25; 体力 += 25; 精神 += 25
+            if 稀有 >= 8 and 神器 < 8:
+                智力 += 40; 体力 += 40; 精神 += 40
+            if 套装字典['神器'] >= 8:
+                智力 += 50; 体力 += 50; 精神 += 50
+            数据 = [45, 45, 55, 65]
+            智力 += 数据[self.时装选项[0].currentIndex()] #头部
+            精神 += 数据[self.时装选项[0].currentIndex()] #头部
+            智力 += 数据[self.时装选项[1].currentIndex()] #帽子
+            精神 += 数据[self.时装选项[1].currentIndex()] #帽子
+            数据 = [0, 0, 55, 65]
+            体力 += 数据[self.时装选项[5].currentIndex()]  # 腰带
+            数据 = [45 ,45, 55, 65]
+            体力 += 数据[self.时装选项[7].currentIndex()]  # 鞋子
+
+            数据 = [0, 20, 0, 0]
+            智力 += 数据[self.时装选项[6].currentIndex()]  # 下装
+            体力 += 数据[self.时装选项[6].currentIndex()]  # 下装
+            精神 += 数据[self.时装选项[6].currentIndex()]  # 下装
+
+            self.属性设置输入[3][16].setText(str(智力))
+            self.属性设置输入[4][16].setText(str(体力))
+            self.属性设置输入[5][16].setText(str(精神))
 
     def 辟邪玉数值选项更新(self, index):
         self.辟邪玉数值[index].clear()
@@ -1285,6 +1348,23 @@ class 角色窗口(QWidget):
 
     def 载入配置(self, path = 'set'):
         try:
+            setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/' + path + '/equ3.ini', 'r', encoding='utf-8').readlines()
+            self.称号.setCurrentIndex(int(setfile[0].replace('\n', '')))
+            self.宠物.setCurrentIndex(int(setfile[1].replace('\n', '')))
+            self.计算模式选择.setCurrentIndex(int(setfile[2].replace('\n', '')))
+            # 百变怪 && 神话排名 && 一觉切装备 && 时装选项
+            if int(setfile[3].replace('\n', '')):
+                self.百变怪选项.setChecked(True)
+            if int(setfile[4].replace('\n', '')):
+                self.神话排名选项.setChecked(True)
+            if int(setfile[5].replace('\n', '')):
+                self.切装模式选项.setChecked(True)
+            for i in range(0,len(self.时装选项)):
+                self.时装选项[i].setCurrentIndex(int(setfile[i + 6].replace('\n', '')))
+        except:
+            pass
+
+        try:
             setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/' + path + '/attr.ini', 'r', encoding='utf-8').readlines()
             for i in range(0, 10):
                 for j in range(0, len(self.属性设置输入[i])):
@@ -1314,14 +1394,6 @@ class 角色窗口(QWidget):
             setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/' + path + '/equ2.ini', 'r', encoding='utf-8').readlines()
             for i in range(0,len(self.装备条件选择)):
                 self.装备条件选择[i].setCurrentIndex(int(setfile[i].replace('\n', '')))
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/' + path + '/equ3.ini', 'r', encoding='utf-8').readlines()
-            self.称号.setCurrentIndex(int(setfile[0].replace('\n', '')))
-            self.宠物.setCurrentIndex(int(setfile[1].replace('\n', '')))
-            self.计算模式选择.setCurrentIndex(int(setfile[2].replace('\n', '')))
         except:
             pass
 
@@ -1362,6 +1434,20 @@ class 角色窗口(QWidget):
 
     def 保存配置(self):
         try:
+            setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/set/equ3.ini', 'w', encoding='utf-8')
+            setfile.write(str(self.称号.currentIndex())+'\n')
+            setfile.write(str(self.宠物.currentIndex())+'\n')
+            setfile.write(str(self.计算模式选择.currentIndex())+'\n')
+            # 百变怪 && 神话排名 && 一觉切装备 && 时装选择
+            setfile.write(str(int(self.百变怪选项.isChecked())) + '\n')
+            setfile.write(str(int(self.神话排名选项.isChecked())) + '\n')
+            setfile.write(str(int(self.切装模式选项.isChecked())) + '\n')
+            for i in range(0, len(self.时装选项)):
+                setfile.write(str(self.时装选项[i].currentIndex()) + '\n')
+        except:
+            pass
+
+        try:
             setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/set/attr.ini', 'w', encoding='utf-8')
             for i in range(0, 10):
                 for j in range(0, len(self.属性设置输入[i])):
@@ -1391,14 +1477,6 @@ class 角色窗口(QWidget):
             setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/set/equ2.ini', 'w', encoding='utf-8')
             for i in range(0,len(self.装备条件选择)):
                 setfile.write(str(self.装备条件选择[i].currentIndex())+'\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/set/equ3.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.称号.currentIndex())+'\n')
-            setfile.write(str(self.宠物.currentIndex())+'\n')
-            setfile.write(str(self.计算模式选择.currentIndex())+'\n')
         except:
             pass
 
@@ -1469,21 +1547,17 @@ class 角色窗口(QWidget):
     def 计算(self):
         logger.info("开始计算")
         self.保存配置()
-
-        logger.info("生成组合")
-        if self.组合生成(self.计算模式选择.currentIndex()) == 0:
-            QMessageBox.information(self,"错误",  "计算量过大，请更换模式或重新选择装备")
-            return
-        if len(self.有效穿戴组合) == 0:
-            QMessageBox.information(self,"错误",  "无有效组合，请更换模式或重新选择装备")
-            return
-        
         self.角色属性A = deepcopy(self.初始属性)
         self.输入属性(self.角色属性A)
 
+        self.最大使用线程数 = 工作线程数 - self.线程数选择.currentIndex()
+
+        if self.组合计算(self.计算模式选择.currentIndex()) == 0:
+            QMessageBox.information(self,"错误",  "无有效组合，请更换模式或重新选择装备") 
+            return
+
         # -------------------------------------多线程计算流程开始-------------------------------------
 
-        logger.info("开始实际计算，总共计算组合数为{}".format(len(self.有效穿戴组合)))
         startTime = time.time()
         finished = False
         producer_data.calc_index += 1
@@ -1526,7 +1600,7 @@ class 角色窗口(QWidget):
 
         # 异步计算搭配
         mode_index = self.计算模式选择.currentIndex()
-        total_task_count = len(self.有效穿戴组合) # 极速模式和套装模式时
+        total_task_count = self.组合计算(self.计算模式选择.currentIndex()) # 极速模式和套装模式时
         if mode_index == 2:
             # 散件模式时
             total_task_count = 1
@@ -1608,7 +1682,7 @@ class 角色窗口(QWidget):
         ))
 
         if len(self.排行数据) == 0:
-            QMessageBox.information(self,"错误",  "请确认有勾选含神话装备的组合")
+            QMessageBox.information(self,"计算错误",  "无有效组合")
             return
         if len(self.排行数据) == 1:
             self.输出界面(0)
@@ -1630,7 +1704,7 @@ class 角色窗口(QWidget):
         背景颜色.setStyleSheet("QLabel{background-color:rgba(50,50,50,1.0)}")
     
         排行背景透明度=QGraphicsOpacityEffect()
-        排行背景透明度.setOpacity(0.5)
+        排行背景透明度.setOpacity(0.15)
         排行背景=QLabel(滚动排行)
         排行背景.move(-600,0)
         排行背景.resize(1600,1080)
@@ -2110,7 +2184,7 @@ class 角色窗口(QWidget):
                         float(self.属性设置输入[i][j].text())
                     except:
                         QMessageBox.information(self, "错误",
-                                                self.行名称[j + 17 if i > 6 else j] + "：" + self.列名称[i] + "  输入格式错误，已重置为空")
+                                                self.行名称[j + 17 if i > 2 else j] + "：" + self.列名称[i] + "  输入格式错误，已重置为空")
                         self.属性设置输入[i][j].setText('')
         for i in range(3, 9):
             for j in range(0, 17):
@@ -2119,7 +2193,7 @@ class 角色窗口(QWidget):
                         float(self.属性设置输入[i][j].text())
                     except:
                         QMessageBox.information(self, "错误",
-                                                self.行名称[j + 17 if i > 6 else j] + "：" + self.列名称[i] + "  输入格式错误，已重置为空")
+                                                self.行名称[j + 17 if i > 2 else j] + "：" + self.列名称[i] + "  输入格式错误，已重置为空")
                         self.属性设置输入[i][j].setText('')
 
         temp = []
@@ -2207,7 +2281,7 @@ class 角色窗口(QWidget):
         属性.护石计算(属性.护石第一栏)
         属性.护石计算(属性.护石第二栏)
 
-    def 组合生成(self, index):
+    def 组合计算(self, index):
         self.有效穿戴组合.clear()
         self.有效穿戴套装.clear()
         self.百变怪列表.clear()
@@ -2217,12 +2291,14 @@ class 角色窗口(QWidget):
             for a in self.有效防具套装:
                 for b in self.有效首饰套装:
                     for c in self.有效特殊套装:
+                        # 533
                         套装组合.append([a, a, a, a, a, b, b, b, c, c, c]); 套装适用.append([a + '[2]', a + '[3]', a + '[5]', b + '[2]', b + '[3]', c + '[2]', c + '[3]'])
     
             for a in self.有效防具套装:
                 for d in self.有效上链左套装:
                     for e in self.有效镯下右套装:
                         for f in self.有效环鞋指套装:
+                            # 3332
                             套装组合.append([d, a, e, a, f, e, d, f, f, d, e]); 套装适用.append([a + '[2]', d + '[2]', d + '[3]', e + '[2]', e + '[3]', f + '[2]', f + '[3]'])
                             套装组合.append([a, a, e, a, f, e, d, f, f, d, e]); 套装适用.append([a + '[2]', d + '[2]', a + '[3]', e + '[2]', e + '[3]', f + '[2]', f + '[3]'])
                             套装组合.append([d, a, a, a, f, e, d, f, f, d, e]); 套装适用.append([a + '[2]', d + '[2]', d + '[3]', e + '[2]', a + '[3]', f + '[2]', f + '[3]'])
@@ -2234,6 +2310,7 @@ class 角色窗口(QWidget):
                     for c in self.有效特殊套装:
                         for d in self.有效防具套装:
                             if d != a:
+                                # 2333
                                 套装组合.append([a, a, a, d, d, b, b, b, c, c, c])
                                 套装组合.append([a, a, d, a, d, b, b, b, c, c, c])
                                 套装组合.append([a, d, a, a, d, b, b, b, c, c, c])
@@ -2246,12 +2323,11 @@ class 角色窗口(QWidget):
                                 套装组合.append([d, d, a, a, a, b, b, b, c, c, c])
                                 for x in range(0,10):
                                     套装适用.append([a + '[2]', a + '[3]', d + '[2]', b + '[2]', b + '[3]', c + '[2]', c + '[3]'])
-    
+        
+        count = 0
         if index != 2:
-            count = -1
-            count2 = 0
+            # 极速模式与套装模式
             for temp in 套装组合:
-                count += 1
                 for k in [-1, 0, 5, 8]:
                     temp1 = []
                     sign = 0
@@ -2272,51 +2348,9 @@ class 角色窗口(QWidget):
                                 sign2 = 装备列表[index].名称
                         temp1.append(装备列表[index].名称)
                     if sign == 11:
-                        for i in self.有效武器列表:
-                            self.有效穿戴组合.append(temp1 + [i])
-                            self.有效穿戴套装.append(套装适用[count])
-                            self.百变怪列表.append(sign2)
-                            count2 += 1
-                            if count2 > 最大组合数计算上限:
-                                return 0
-                                                                
-        else:
-            count = 0
-            for a1 in self.有效部位列表[0]:
-                for a2 in self.有效部位列表[1]:
-                    for a3 in self.有效部位列表[2]:
-                        for a4 in self.有效部位列表[3]:
-                            for a5 in self.有效部位列表[4]:
-                                for a6 in self.有效部位列表[5]:
-                                    for a7 in self.有效部位列表[6]:
-                                        for a8 in self.有效部位列表[7]:
-                                            for a9 in self.有效部位列表[8]:
-                                                for a10 in self.有效部位列表[9]:
-                                                    for a11 in self.有效部位列表[10]:
-                                                        for a12 in self.有效部位列表[11]:
-                                                            temp = [a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12]
-                                                            神话数量 = 0
-                                                            for i in temp:
-                                                                if 装备列表[装备序号[i]].品质 == '神话':
-                                                                    神话数量 += 1
-                                                            if 神话数量 <= 1:
-                                                                件数统计 = [0] * len(所有套装列表)
-                                                                for i in temp:
-                                                                    所属套装名称 = 装备列表[装备序号[i]].所属套装
-                                                                    if 所属套装名称 != '无' and 所属套装名称 != '智慧产物':
-                                                                        件数统计[所有套装列表.index(所属套装名称)] += 1
-                                                                temp2 = []
-                                                                for i in range(0,len(件数统计)):
-                                                                    if 件数统计[i] >= 2:
-                                                                        temp2.append(所有套装列表[i] + '[2]')
-                                                                    if 件数统计[i] >= 3:
-                                                                        temp2.append(所有套装列表[i] + '[3]')
-                                                                    if 件数统计[i] >= 5:
-                                                                        temp2.append(所有套装列表[i] + '[5]')    
-                                                                self.有效穿戴组合.append(temp)
-                                                                self.有效穿戴套装.append(temp2)
-                                                                self.百变怪列表.append('空')
-                                                                count += 1
-                                                                if count > 最大组合数计算上限:
-                                                                    return 0
-        return 1
+                        count += len(self.有效武器列表)                         
+        if index == 2:
+            count = 1     
+            for i in self.有效部位列表:
+                count *= len(i)                       
+        return count
