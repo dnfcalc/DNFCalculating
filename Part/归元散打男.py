@@ -437,7 +437,7 @@ class 归元散打男(角色窗口):
         self.二挡关联选择.resize(150,20)
         self.二挡关联选择.move(310,270)
 
-    def 输入属性(self, 属性):
+    def 输入属性(self, 属性, x = 0):
         super().输入属性(属性)
         if self.觉醒选择状态 == 2:
             属性.二挡关联  = self.二挡关联选择.currentText()

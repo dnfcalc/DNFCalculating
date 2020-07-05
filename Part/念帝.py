@@ -218,7 +218,7 @@ class 念帝技能12(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(0.472 + 0.0889 * self.等级, 5)
+            return round(0.463 + 0.089 * self.等级, 5)
 
 # 气玉弹
 class 念帝技能13(念帝主动技能):
@@ -435,8 +435,8 @@ class 念帝角色属性(角色属性):
     冰属性强化 = 13
     光属性强化 = 13
     暗属性强化 = 13
+    远古记忆 = 0
 
-    
     #1 秒C
     雷龙开关 = 0
 
@@ -489,13 +489,12 @@ class 念帝(角色窗口):
         self.雷龙开关.setStyleSheet(复选框样式)
         self.雷龙开关.setChecked(True)
 
-    def 输入属性(self, 属性):
+    def 输入属性(self, 属性, x = 0):
         super().输入属性(属性)
         try:
             self.BUFF光强 = int(self.BUFF输入2.text())
         except:
             self.BUFF光强 = self.初始属性.BUFF属强
-            QMessageBox.information(self, "错误", "BUFF属强输入错误,重置为最高值")
 
         属性.BUFF属强 = self.BUFF光强
 

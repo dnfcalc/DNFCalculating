@@ -453,7 +453,7 @@ class 影舞者(角色窗口):
         self.一觉Buff开关.setStyleSheet(复选框样式)
         self.一觉Buff开关.setChecked(True)
 
-    def 输入属性(self, 属性):
+    def 输入属性(self, 属性, x = 0):
         super().输入属性(属性)
         if self.一觉Buff开关.isChecked():
             属性.一觉Buff开关= 1

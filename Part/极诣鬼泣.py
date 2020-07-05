@@ -17,7 +17,7 @@ class 极诣鬼泣技能0(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(0.472 + 0.0889 * self.等级, 5)
+            return round(0.463 + 0.089 * self.等级, 5)
 
 class 极诣鬼泣技能1(极诣鬼泣主动技能):
     名称 = '鬼斩'
@@ -196,6 +196,7 @@ class 极诣鬼泣技能13(极诣鬼泣主动技能):
     TP成长 = 0.10
     TP上限 = 7
     是否有护石 = 1
+    演出时间 = 1
 
     def 装备护石(self):
         self.倍率 *= (0.5*1.1)+(0.5*1.1*1.08)
@@ -212,9 +213,11 @@ class 极诣鬼泣技能14(极诣鬼泣主动技能):
     TP成长 = 0.10
     TP上限 = 7
     是否有护石 = 1
+    演出时间 = 0.5
 
     def 装备护石(self):
         self.倍率 *= 1.26
+        self.演出时间 = 1.2
 
 class 极诣鬼泣技能15(极诣鬼泣主动技能):
     名称 = '鬼影闪'
@@ -456,6 +459,7 @@ class 极诣鬼泣角色属性(角色属性):
     冰属性强化 = 13
     光属性强化 = 13
     暗属性强化 = 13
+    远古记忆 = 0
 
     def 伤害指数计算(self):
         self.暗属性强化 += self.技能栏[self.技能序号['暗月降临']].属强加成()
@@ -503,12 +507,13 @@ class 极诣鬼泣(角色窗口):
 
     def 界面(self):
         super().界面()
-        self.布雷德开关=QCheckBox('布雷德：直接解放',self.main_frame2)
+        self.布雷德开关=QCheckBox('刀阵：直接解放',self.main_frame2)
+        self.布雷德开关.setCheckState(True)
         self.布雷德开关.resize(120,20)
         self.布雷德开关.move(315,450)
         self.布雷德开关.setStyleSheet(复选框样式)
 
-    def 输入属性(self, 属性):
+    def 输入属性(self, 属性, x = 0):
         super().输入属性(属性)
         if self.布雷德开关.isChecked():
             属性.技能栏[属性.技能序号['幽魂之布雷德']].攻击次数 = 0

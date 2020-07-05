@@ -58,10 +58,7 @@ def consumer(work_queue, work_func):
             logger.warning("work thread={} BrokenPipeError quit job".format(current_process))
             continue_wrok = False
         except Exception as error:
-            args_list = []
-            if 'args' in locals():
-                args_list = [arg.__dict__ for arg in args]
-            logger.error("work thread {} error={} processed count={}, args_list={}".format(current_process, error, processed_count, args_list))
+            logger.error("work thread {} error={} processed count={}".format(current_process, error, processed_count))
         finally:
             work_queue.task_done()
 

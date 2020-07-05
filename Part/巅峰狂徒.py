@@ -295,20 +295,20 @@ class 巅峰狂徒技能17(巅峰狂徒主动技能):
     成长2 = 941.5
     攻击次数2 = 1
 
+    护石状态 = 0
+
 
     def 装备护石(self):
         self.攻击次数2 = 0
         self.倍率 = 1.24
-        self.CD = 8.3 * 0.88
-        
+        self.护石状态 = 1
 
- #   def 等效CD(self, 武器类型, 护石第一栏, 护石第二栏):
- #     if 护石第一栏 == '完美击球' or 护石第二栏 == '完美击球' :
- #           return 8.3 * 0.88#可能是bug
- #       else:
- #           return round(self.CD  / self.恢复, 1)
-            
-            
+    def 等效CD(self, 武器类型):
+        if self.护石状态 == 0:
+            return round(self.CD  / self.恢复, 1)
+        else:
+            return round(8.3 * 0.88, 1)
+        
 # 夺命焰火
 
 class 巅峰狂徒技能18(巅峰狂徒主动技能):

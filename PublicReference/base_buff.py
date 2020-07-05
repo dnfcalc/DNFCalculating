@@ -5,7 +5,7 @@ import time
 import os
 
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
@@ -65,6 +65,7 @@ class MyQComboBox(QComboBox):
 
 复选框样式 = "QCheckBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px} QCheckBox:hover{background-color:rgba(65,105,225,0.8)}"
 按钮样式 = 'QPushButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:10px} QPushButton:hover{background-color:rgba(65,105,225,0.8)}'
+不可点击按钮样式 = 'QPushButton{font-size:12px;color:white;background-color:grey;border:1px;border-radius:10px} QPushButton:hover{background-color:rgba(65,105,225,0.8)}'
 标签样式 = "QLabel{font-size:12px;color:white}"
 
 堆大小上限 = 100
@@ -328,21 +329,25 @@ class 角色属性():
 
         匹配1 = [防具套装, 上链左套装, 上链左套装, 镯下右套装, 镯下右套装, 环鞋指套装, 环鞋指套装]
         匹配0 = [防具套装, 上链左套装, 防具套装, 镯下右套装, 防具套装, 环鞋指套装, 防具套装]
+        匹配 = [防具套装, 防具套装, 防具套装, 首饰套装, 首饰套装, 特殊套装, 特殊套装]
 
         count = []
+        count2 = 0
 
         for i in range(7):
+            #3332散搭
             if 套装栏[i] in 匹配1[i]:
                 count.append(1)
             elif 套装栏[i] in 匹配0[i]:
                 count.append(0)
             else:
                 count.append(-9)
+            #3233双防具
+            if 套装栏[i] in 匹配[i]:
+                count2 += 1
 
         sumcount = sum(count)
-        if sumcount < 6:
-            return [deepcopy(属性)]
-        elif sumcount == 7:
+        if sumcount == 7:
             x1 = deepcopy(属性)
             x2 = deepcopy(属性)
             x3 = deepcopy(属性)
@@ -364,6 +369,39 @@ class 角色属性():
             x2.套装栏[index] = x2.套装栏[index].replace(装备列表[装备序号[x2.装备栏[1]]].所属套装, 装备列表[装备序号[x2.装备栏[部位[index]]]].所属套装)
             x2.切换详情 = 装备列表[装备序号[x2.装备栏[index - 2]]].部位 + '：' + x1.装备栏[index - 2] + ' → ' + x2.装备栏[index - 2]
             return [x1, x2]
+        elif count2 == 7 and 套装栏[1] != 套装栏[2]:
+            x1 = deepcopy(属性)
+            x2 = deepcopy(属性)
+            x3 = deepcopy(属性)
+            x4 = deepcopy(属性)
+            x5 = deepcopy(属性)
+            两件套名称 = 属性.套装栏[2].split('[')[0]
+            三件套名称 = 属性.套装栏[1].split('[')[0]
+            x2.套装栏[1] = x2.套装栏[1].replace(三件套名称, 两件套名称)
+            x3.套装栏[1] = x3.套装栏[1].replace(三件套名称, 两件套名称)
+            x4.套装栏[1] = x4.套装栏[1].replace(三件套名称, 两件套名称)
+            x5.套装栏[2] = x5.套装栏[2].replace(两件套名称 + '[2]', 三件套名称 + '[5]')
+            可更换部位 = []
+            不可更换部位 = []
+            for i in range(5):
+                if 装备列表[装备序号[属性.装备栏[i]]].所属套装 == 三件套名称:
+                    可更换部位.append(i)
+                else:
+                    不可更换部位.append(i)
+            x2.装备栏[可更换部位[0]] = 装备列表[套装映射[两件套名称 + '-' + '史诗' + '-' + 部位列表[可更换部位[0]]]].名称
+            x3.装备栏[可更换部位[1]] = 装备列表[套装映射[两件套名称 + '-' + '史诗' + '-' + 部位列表[可更换部位[1]]]].名称
+            x4.装备栏[可更换部位[2]] = 装备列表[套装映射[两件套名称 + '-' + '史诗' + '-' + 部位列表[可更换部位[2]]]].名称
+
+            x5.装备栏[不可更换部位[0]] = 装备列表[套装映射[三件套名称 + '-' + '史诗' + '-' + 部位列表[不可更换部位[0]]]].名称
+            x5.装备栏[不可更换部位[1]] = 装备列表[套装映射[三件套名称 + '-' + '史诗' + '-' + 部位列表[不可更换部位[1]]]].名称
+            
+            x2.切换详情 = 部位列表[可更换部位[0]] + '：' + 属性.装备栏[可更换部位[0]] + ' → ' + x2.装备栏[可更换部位[0]]
+            x3.切换详情 = 部位列表[可更换部位[1]] + '：' + 属性.装备栏[可更换部位[1]] + ' → ' + x3.装备栏[可更换部位[1]]
+            x4.切换详情 = 部位列表[可更换部位[2]] + '：' + 属性.装备栏[可更换部位[2]] + ' → ' + x4.装备栏[可更换部位[2]]
+            x5.切换详情 = 属性.套装栏[2] + ' → ' + x5.套装栏[2]
+            return [x1, x2, x3, x4, x5]
+        else:
+            return [deepcopy(属性)]
 
     def 数据计算(self):        
         总数据 = []
@@ -383,7 +421,8 @@ class 角色属性():
             #拷贝数据，并修改装备，返回可能的组合
             数据列表 = []
             切换列表 = []
-            for 一觉计算属性 in self.装备替换(temp):
+            可能组合 = self.装备替换(temp)
+            for 一觉计算属性 in 可能组合:
                 一觉计算属性.装备属性计算()
                 一觉计算属性.适用数值计算()
                 数据列表.append(一觉计算属性.技能栏[self.一觉序号].结算统计()[3]) #3是力量属性  一觉力智都是相等的
@@ -391,9 +430,16 @@ class 角色属性():
             
             #取一觉最大值，并修改数据
             a = max(数据列表)
+            序号 = 数据列表.index(a)
             总数据[self.一觉序号] = [0, 0, 0, a, a, 0, 0, 0]
-            self.切换详情 = 切换列表[数据列表.index(a)]
-            
+            self.切换详情 = 切换列表[序号]
+            self.技能栏[self.一觉序号].等级 = 可能组合[序号].技能栏[self.一觉序号].等级
+            self.技能栏[self.一觉序号].一觉力智 = 可能组合[序号].技能栏[self.一觉序号].一觉力智
+            self.技能栏[self.一觉序号].一觉力智per = 可能组合[序号].技能栏[self.一觉序号].一觉力智per
+
+            self.一觉力智 = 可能组合[序号].一觉力智
+            self.一觉力智per = 可能组合[序号].一觉力智per
+
         else:
             self.装备属性计算()
             self.适用数值计算()
@@ -466,9 +512,15 @@ class 角色属性():
                 pass
 
 class 角色窗口(QWidget):
+    calc_done_signal = pyqtSignal()
+    update_remaining_signal = pyqtSignal(str)
 
     def __init__(self):
         super().__init__()
+
+        self.calc_done_signal.connect(self.calc_done)
+        self.update_remaining_signal.connect(self.update_remaining)
+
         self.护石选项 = ['无','buff力智增加量+2%', 'buff力智增加量+4%', 'buff力智增加量+6%']
         self.窗口属性输入()
         self.界面()
@@ -808,7 +860,7 @@ class 角色窗口(QWidget):
         self.切装模式选项 = QCheckBox('一觉切1件装备', self.main_frame1)
         self.切装模式选项.move(870, 580)
         self.切装模式选项.resize(110, 24)
-        self.切装模式选项.setToolTip('仅对极速模式中的3332散搭组合生效\n\n默认相同打造')
+        self.切装模式选项.setToolTip('仅对极速/套装模式中的3332散搭组合生效\n\n默认相同打造')
         self.切装模式选项.setStyleSheet(复选框样式)
 
         self.神话排名选项 = QCheckBox('神话排名模式', self.main_frame1)
@@ -823,6 +875,12 @@ class 角色窗口(QWidget):
         self.线程数选择.resize(80, 24)
         for i in range(工作线程数, 0, -1):
             self.线程数选择.addItem('进程:' + str(i))
+
+        重置按钮 = QPushButton('全局重置', self.main_frame1)
+        重置按钮.clicked.connect(lambda state: self.全局重置())
+        重置按钮.move(990, 540)
+        重置按钮.resize(100, 30)
+        重置按钮.setStyleSheet(按钮样式)
 
         self.计算按钮1 = QPushButton('开始计算', self.main_frame1)
         self.计算按钮1.clicked.connect(lambda state: self.计算())
@@ -1074,13 +1132,14 @@ class 角色窗口(QWidget):
 
         for j in [2, 3, 4]:
             self.技能设置输入[j].addItems(['Lv1-30(主动)Lv+1', 'Lv1-50(主动)Lv+1'])
+        self.技能设置输入[2].addItem('Lv1-35(主动)Lv+1')
 
         for j in [8, 9, 16]:
             for i in self.角色属性A.技能栏:
                 self.技能设置输入[j].addItem(i.名称 + 'Lv+1')
         self.技能设置输入[12].addItems(['BUFFLv+1', 'BUFFLv+2','BUFFLv+3','BUFFLv+4'])
         self.技能设置输入[13].addItems(['Lv1-50(主动)Lv+1', '一觉Lv+1', '一觉Lv+2'])
-        self.技能设置输入[14].addItems(['Lv1-30(所有)Lv+1', 'Lv1-50(所有)Lv+1'])
+        self.技能设置输入[14].addItems(['Lv1-30(所有)Lv+1', 'Lv1-50(所有)Lv+1', 'Lv1-20(所有)Lv+1', 'Lv20-30(所有)Lv+1'])
 
         if '智力' in self.角色属性A.系数类型选择:
             self.修正列表名称 = ['转职被动智力', 'BUFF力智%', 'BUFF三攻%', '转职被动等级', '一觉被动力智', '一觉力智%', '一觉力智']
@@ -1175,6 +1234,15 @@ class 角色窗口(QWidget):
         self.stacked_layout.addWidget(self.main_frame2)
         self.stacked_layout.addWidget(self.main_frame3)
         self.stacked_layout.addWidget(self.main_frame4)
+
+    def 全局重置(self):
+        box = QMessageBox(QMessageBox.Warning, "提示", "是否恢复默认设置？")
+        box.setWindowIcon(self.icon)
+        yes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
+        no = box.addButton(self.tr("取消"), QMessageBox.NoRole)
+        box.exec_()
+        if box.clickedButton() == yes:
+            self.载入配置('reset')
 
     def 时装选项更新(self, index):
         if index == 8:
@@ -1376,6 +1444,7 @@ class 角色窗口(QWidget):
             pass
 
         try:
+            self.批量选择(0)#先清空
             setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/' + path + '/equ.ini', 'r', encoding='utf-8').readlines()
             for i in range(0, len(装备列表)):
                 if setfile[i].replace('\n', '') == '1':
@@ -1544,18 +1613,37 @@ class 角色窗口(QWidget):
                             self.神话属性选项[num * 4 + i].move(-1000,-1000)
                     num += 1
 
-    def 计算(self):
-        logger.info("开始计算")
-        self.保存配置()
-        self.角色属性A = deepcopy(self.初始属性)
-        self.输入属性(self.角色属性A)
+    def 神话数量判断(self):
+        for j in range(len(装备列表)):
+            if 装备列表[j].品质 == '神话':
+                if self.装备选择状态[j] == 1:
+                    return False
+        return True
 
-        self.最大使用线程数 = 工作线程数 - self.线程数选择.currentIndex()
+    def 计算(self):
+        self.保存配置()
+
+        if self.神话数量判断() and self.神话排名选项.isChecked():
+            QMessageBox.information(self,"错误",  "请勾选神话装备或取消勾选神话排名模式选项") 
+            return
 
         if self.组合计算(self.计算模式选择.currentIndex()) == 0:
             QMessageBox.information(self,"错误",  "无有效组合，请更换模式或重新选择装备") 
             return
+        self.计算按钮1.setEnabled(False)
+        self.计算按钮1.setStyleSheet(不可点击按钮样式)
+        self.计算按钮2.setEnabled(False)
+        self.计算按钮2.setStyleSheet(不可点击按钮样式)
+        self.计算按钮3.setEnabled(False)
+        self.计算按钮3.setStyleSheet(不可点击按钮样式)
+        threading.Thread(target=self.计算线程, daemon=True).start()
 
+    def 计算线程(self):
+        logger.info("开始计算")
+        self.角色属性A = deepcopy(self.初始属性)
+        self.输入属性(self.角色属性A)
+
+        self.最大使用线程数 = 工作线程数 - self.线程数选择.currentIndex()
         # -------------------------------------多线程计算流程开始-------------------------------------
 
         startTime = time.time()
@@ -1564,11 +1652,13 @@ class 角色窗口(QWidget):
         producer_data.produced_count = 0
 
         def log_result_queue_info(log_func, msg, mq: MinHeapWithQueue):
+            estimated_remaining_time = format_time(mq.remaining_time()*批量传回的结果数)
             log_func("calc#{}: {}: {} remaining_qize={}, processed_result={}, speed={:.2f}/s estimated_remaining_time={}, totalWork={}".format(
                 producer_data.calc_index,
-                mq.name, msg, mq.minheap_queue.qsize()*批量传回的结果数, mq.processed_result_count, mq.process_results_per_second(), format_time(mq.remaining_time()*批量传回的结果数),
+                mq.name, msg, mq.minheap_queue.qsize()*批量传回的结果数, mq.processed_result_count, mq.process_results_per_second(), estimated_remaining_time,
                 producer_data.produced_count,
             ))
+            self.update_remaining_signal.emit(str(mq.processed_result_count))
 
         def try_fetch_result(mq: MinHeapWithQueue):
             while True:
@@ -1681,6 +1771,32 @@ class 角色窗口(QWidget):
             工作线程数, format_time(totoalCostTime),
         ))
 
+        self.calc_done_signal.emit()
+
+    def 数量显示(self, counter):
+        if counter <= 9999 :
+            return str(counter)
+        else:
+            counter /= 10000
+            return ('%.2f' % counter) + '万'
+
+    def update_remaining(self, count):
+        temp = self.数量显示(int(count))
+        self.计算按钮1.setText("完成:" + temp)
+        self.计算按钮2.setText("完成:" + temp)
+        self.计算按钮3.setText("完成:" + temp)
+
+
+    def calc_done(self):
+        self.计算按钮1.setText("开始计算")
+        self.计算按钮1.setEnabled(True)
+        self.计算按钮1.setStyleSheet(按钮样式)
+        self.计算按钮2.setText("开始计算")
+        self.计算按钮2.setEnabled(True)
+        self.计算按钮2.setStyleSheet(按钮样式)
+        self.计算按钮3.setText("开始计算")
+        self.计算按钮3.setEnabled(True)
+        self.计算按钮3.setStyleSheet(按钮样式)
         if len(self.排行数据) == 0:
             QMessageBox.information(self,"计算错误",  "无有效组合")
             return
@@ -2091,7 +2207,7 @@ class 角色窗口(QWidget):
 
         输出窗口.show()  
 
-    def 输入属性(self, 属性):
+    def 输入属性(self, 属性, x = 0):
         for i in 属性.技能栏:
             i.等级 = i.基础等级+int(self.等级调整[self.角色属性A.技能序号[i.名称]].currentText())
 
@@ -2099,7 +2215,7 @@ class 角色窗口(QWidget):
         属性.C三攻 = int(self.排行选项[1].currentText().split(':')[1])
         属性.排行类型 = self.排行选项[2].currentText()
 
-        if self.切装模式选项.isChecked() and self.计算模式选择.currentIndex() == 0:
+        if self.切装模式选项.isChecked() and self.计算模式选择.currentIndex() != 2:
             属性.双装备模式 = 1
 
         count = 0
@@ -2147,11 +2263,20 @@ class 角色窗口(QWidget):
         if name == 'Lv1-50(主动)Lv+1':
             属性.技能等级加成('主动',1,50,1)
             return
+        if name == 'Lv1-35(主动)Lv+1':
+            属性.技能等级加成('主动',1,35,1)
+            return
         if name == 'Lv1-30(所有)Lv+1':
             属性.技能等级加成('所有',1,30,1)
             return
         if name == 'Lv1-50(所有)Lv+1':
             属性.技能等级加成('所有',1,50,1)
+            return
+        if name == 'Lv1-20(所有)Lv+1':
+            属性.技能等级加成('所有',1,20,1)
+            return
+        if name == 'Lv20-30(所有)Lv+1':
+            属性.技能等级加成('所有',20,30,1)
             return
         if name == '一觉Lv+1':
             属性.一觉Lv += 1

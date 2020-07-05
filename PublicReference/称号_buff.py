@@ -56,7 +56,7 @@ class 称号5():
         pass
     def 触发属性(self, 属性):
         pass
-    
+
 #class 称号2():
 #    名称 = '(19)至尊·神选之英杰'
 #    def 城镇属性(self, 属性):

@@ -505,6 +505,7 @@ class 真龙星君角色属性(角色属性):
     冰属性强化 = 13
     光属性强化 = 13
     暗属性强化 = 13
+    远古记忆 = 0
     反身空斩打 = 0
     力法及精通 = 0
 
@@ -550,7 +551,6 @@ class 真龙星君(角色窗口):
         self.力法及精通选择.addItem('板甲力驱')
         self.力法及精通选择.addItem('重甲力驱')
         self.力法及精通选择.addItem('布甲法驱')
-        self.力法及精通选择.setCurrentIndex(2)
         self.力法及精通选择.resize(120,20)
         self.力法及精通选择.move(315,480)
 
@@ -560,7 +560,7 @@ class 真龙星君(角色窗口):
         self.反身空斩打.setStyleSheet(复选框样式)
         self.反身空斩打.setToolTip('触发潜龙冲击波')
 
-    def 输入属性(self, 属性):
+    def 输入属性(self, 属性, x = 0):
         super().输入属性(属性)
         if self.反身空斩打.isChecked():
             属性.反身空斩打 = 1

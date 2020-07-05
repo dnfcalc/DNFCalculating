@@ -305,7 +305,7 @@ class 神龙天女技能24(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(0.472 + 0.0889 * self.等级, 5)
+            return round(0.463 + 0.089 * self.等级, 5)
 
 神龙天女技能列表 = []
 i = 0
@@ -373,6 +373,7 @@ class 神龙天女角色属性(角色属性):
     冰属性强化 = 13
     光属性强化 = 13
     暗属性强化 = 13
+    远古记忆 = 0
 
     def __init__(self):
         self.技能栏= deepcopy(神龙天女技能列表)

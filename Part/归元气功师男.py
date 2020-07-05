@@ -643,10 +643,12 @@ class 归元气功师男角色属性(角色属性):
     物理攻击力 = 65.0
     魔法攻击力 = 65.0
     独立攻击力 = 1045.0
-    火属性强化 = 0
-    冰属性强化 = 0
+    火属性强化 = 13
+    冰属性强化 = 13
     光属性强化 = 13
-    暗属性强化 = 0
+    暗属性强化 = 13
+    远古记忆 = 0
+
 
     def __init__(self):
         self.技能栏 = deepcopy(归元气功师男技能列表)
@@ -701,10 +703,9 @@ class 归元气功师男(角色窗口):
 
 
 
-    def 输入属性(self, 属性):
+    def 输入属性(self, 属性, x = 0):
         super().输入属性(属性)
         try:
             self.BUFF光强 = int(self.BUFF输入2.text())
         except:
             self.BUFF光强 = self.初始属性.BUFF属强
-            QMessageBox.information(self, "错误", "BUFF属强输入错误,重置为最高值")
