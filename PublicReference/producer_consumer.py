@@ -13,8 +13,6 @@ from PublicReference import logger
 
 工作线程数 = multiprocessing.cpu_count()
 每个工作线程应处理的任务数 = 4
-串行搜索的层数 = 2 # 散件模式下，前两层串行搜索
-批量传回的结果数 = 100 # 出于性能考虑，将结果按该数目批量通过队列传回主线程
 
 class ProducerData:
     def __init__(self):

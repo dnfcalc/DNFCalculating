@@ -9,7 +9,8 @@
 from PublicReference.copy import *
 from multiprocessing import Queue
 from typing import List
-
+from .minheap import MinHeap, expected_qsize
+import copy
 
 class CalcData():
     def __init__(self):
@@ -42,7 +43,7 @@ class CalcData():
         self.有效部位列表 = []
 
         # 最终结果
-        self.results = []
+        self.minheap = None  # type: MinHeap
 
     def pre_calc_needed_data(self):
         if self.是输出职业:
@@ -93,7 +94,6 @@ def calc_core(data: CalcData):
     :type 应用的辟邪玉列表: List[BiXieYu]
     """
     # 计算伤害具体算法
-    data.results = []
 
     # 根据装备选择情况，预计算一些数据
     data.pre_calc_needed_data()
@@ -105,8 +105,7 @@ def calc_core(data: CalcData):
         calc_single_mode(data)
 
     # 全部计算完后，将剩余结果传入结果队列
-    if len(data.results) > 0:
-        data.minheap_queue.put(data.results)
+    data.minheap_queue.put(copy.deepcopy(data.minheap))
 
 
 def calc_speed_and_set_mode(data):
@@ -146,7 +145,7 @@ def calc_speed_and_set_mode(data):
                 for c in data.有效特殊套装:
                     for d in data.有效防具套装:
                         if d != a:
-                            # 2333
+                            # 2333 占套装模式90%计算量
                             套装组合.append([a, a, a, d, d, b, b, b, c, c, c])
                             套装组合.append([a, a, d, a, d, b, b, b, c, c, c])
                             套装组合.append([a, d, a, a, d, b, b, b, c, c, c])
@@ -210,9 +209,34 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类数, data):
 
     i = 装备序号[名称]
     装备[x] = 名称
-    for k in range(x + 1, 11):
+    if x == 0:
+        范围 = [5, 8, 1, 3, 2, 4, 6, 9, 7, 10]
+    elif x == 5:
+        范围 = [8, 1, 3, 2, 4, 6, 9, 7, 10]
+    elif x == 8:
+        范围 = [1, 3, 2, 4, 6, 9, 7, 10]
+    elif x == 1:
+        范围 = [3, 2, 4, 6, 9, 7, 10]
+    elif x == 3:
+        范围 = [2, 4, 6, 9, 7, 10]
+    elif x == 2:
+        范围 = [4, 6, 9, 7, 10]
+    elif x == 4:
+        范围 = [6, 9, 7, 10]
+    elif x == 6:
+        范围 = [9, 7, 10]
+    elif x == 9:
+        范围 = [7, 10]
+    elif x == 7:
+        范围 = [10]
+    else:
+        范围 = []
+
+    for k in 范围:
         套装[k] = '无'
+
     套装[x] = 装备列表[i].所属套装
+
     count = []
     for j in 套装:
         if (j != '智慧产物') and (j != '无') and (j not in count):
@@ -221,13 +245,13 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类数, data):
         return 1
     elif x == 10:
         种类数[0] = max(min(种类数[0], len(count)), 4)
-    
+
     if x in [0, 5, 8]:
         if x < 5:
             神话[5] = 0
             神话[8] = 0
-        if x < 8:
-            神话[8] = 0   
+        elif x < 8:
+            神话[8] = 0
         if 装备列表[i].品质 == '神话':
             神话[x] = 1
             if sum(神话) > 1:
@@ -245,7 +269,7 @@ def calc_single_mode(data):
         from .base_buff import 装备列表, 所有套装列表
 
     # 散件模式
-    count = 0
+    current_index = -1
     装备 = ['无'] * 12
     套装 = ['无'] * 11
     神话 = [0] * 11
@@ -253,33 +277,31 @@ def calc_single_mode(data):
 
     for a1 in data.有效部位列表[0]:
         if 筛选(a1, 0, 装备, 套装, 神话, 种类数, data): continue
-        for a2 in data.有效部位列表[1]:
-            # 暂时先写死前两层跑通流程，后面用迭代函数写一个正式的
-            current_index = count
-            count += 1
-            if current_index < data.start_index:
-                # 尚未到本工作线程需要计算的范围
-                continue
-            if current_index > data.end_index:
-                # 本工作线程需要计算的范围已全部完成，直接退出
-                return
-            if 筛选(a2, 1, 装备, 套装, 神话, 种类数, data): continue
-            for a3 in data.有效部位列表[2]:
-                if 筛选(a3, 2, 装备, 套装, 神话, 种类数, data): continue
-                for a4 in data.有效部位列表[3]:
-                    if 筛选(a4, 3, 装备, 套装, 神话, 种类数, data): continue
-                    for a5 in data.有效部位列表[4]:
-                        if 筛选(a5, 4, 装备, 套装, 神话, 种类数, data): continue
-                        for a6 in data.有效部位列表[5]:
-                            if 筛选(a6, 5, 装备, 套装, 神话, 种类数, data): continue
-                            for a7 in data.有效部位列表[6]:
-                                if 筛选(a7, 6, 装备, 套装, 神话, 种类数, data): continue
-                                for a8 in data.有效部位列表[7]:
-                                    if 筛选(a8, 7, 装备, 套装, 神话, 种类数, data): continue
-                                    for a9 in data.有效部位列表[8]:
-                                        if 筛选(a9, 8, 装备, 套装, 神话, 种类数, data): continue
-                                        for a10 in data.有效部位列表[9]:
-                                            if 筛选(a10, 9, 装备, 套装, 神话, 种类数, data): continue
+        for a2 in data.有效部位列表[5]:
+            if 筛选(a2, 5, 装备, 套装, 神话, 种类数, data): continue
+            for a3 in data.有效部位列表[8]:
+                if 筛选(a3, 8, 装备, 套装, 神话, 种类数, data): continue
+                for a4 in data.有效部位列表[1]:
+                    if 筛选(a4, 1, 装备, 套装, 神话, 种类数, data): continue
+                    current_index += 1
+                    if current_index < data.start_index:
+                        # 尚未到本工作线程需要计算的范围
+                        continue
+                    if current_index > data.end_index:
+                        # 本工作线程需要计算的范围已全部完成，直接退出
+                        return
+                    for a5 in data.有效部位列表[3]:
+                        if 筛选(a5, 3, 装备, 套装, 神话, 种类数, data): continue
+                        for a6 in data.有效部位列表[2]:
+                            if 筛选(a6, 2, 装备, 套装, 神话, 种类数, data): continue
+                            for a7 in data.有效部位列表[4]:
+                                if 筛选(a7, 4, 装备, 套装, 神话, 种类数, data): continue
+                                for a8 in data.有效部位列表[6]:
+                                    if 筛选(a8, 6, 装备, 套装, 神话, 种类数, data): continue
+                                    for a9 in data.有效部位列表[9]:
+                                        if 筛选(a9, 9, 装备, 套装, 神话, 种类数, data): continue
+                                        for a10 in data.有效部位列表[7]:
+                                            if 筛选(a10, 7, 装备, 套装, 神话, 种类数, data): continue
                                             for a11 in data.有效部位列表[10]:
                                                 if 筛选(a11, 10, 装备, 套装, 神话, 种类数, data): continue
                                                 套装字典 = {}
@@ -295,14 +317,12 @@ def calc_single_mode(data):
                                                     if 套装字典[i] >= 5:
                                                         套装名称.append(i + '[5]')
                                                 for a12 in data.有效部位列表[11]:
-                                                    装备[11] = a12                                               
+                                                    装备[11] = a12
                                                     calc_damage(装备, 套装名称, '空', data)
     pass
 
 
 def calc_damage(有效穿戴组合, 有效穿戴套装, 百变怪, data: CalcData):
-    from .producer_consumer import 批量传回的结果数
-
     角色属性A = deepcopy(data.角色属性A)
 
     角色属性A.穿戴装备(有效穿戴组合, 有效穿戴套装)
@@ -316,8 +336,14 @@ def calc_damage(有效穿戴组合, 有效穿戴套装, 百变怪, data: CalcDat
             yu.进图属性(角色属性A)
         damage = 角色属性A.BUFF计算()
 
-    data.results.append((damage,) + tuple(角色属性A.装备栏) + (damage,) + tuple(角色属性A.套装栏) + (百变怪,))
+    data.minheap.add((damage,) + tuple(角色属性A.装备栏) + (damage,) + tuple(角色属性A.套装栏) + (百变怪,))
+    data.minheap.processed_result_count += 1
 
-    if len(data.results) >= 批量传回的结果数:
-        data.minheap_queue.put(data.results)
-        data.results.clear()
+    if data.minheap.processed_result_count >= data.minheap.batch_size:
+        # 动态调整批量大小
+        if data.minheap_queue.qsize() > expected_qsize:
+            data.minheap.update_batch_size()
+        # 同步
+        data.minheap_queue.put(copy.deepcopy(data.minheap))
+        # 重置
+        data.minheap.reset()

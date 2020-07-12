@@ -5,7 +5,6 @@ import multiprocessing
 
 from PyQt5.QtCore import QUrl
 import PyQt5.QtCore as qtc
-
 from Part.sum import *
 from PublicReference.calc_core import calc_core
 from PublicReference.producer_consumer import producer_data, consumer, 工作线程数
@@ -14,7 +13,6 @@ if __name__ == '__main__':
     multiprocessing.freeze_support()
 
 窗口列表 = []
-
 
 def 打开窗口(index):
     if len(窗口列表) != 0:
@@ -47,14 +45,14 @@ class 选择窗口(QMainWindow):
         pass
 
     def 界面(self):
-        self.setMinimumSize(800,600)
-        self.setMaximumSize(800,1520)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.7.5 (技能模板仅供参考，请根据自身情况修改)')
+        self.setMinimumSize(805,600)
+        self.setMaximumSize(805,1520)
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.7.12 (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/icon.png')
         self.setWindowIcon(self.icon)
 
         背景颜色 = QLabel(self)
-        背景颜色.resize(800,1520)
+        背景颜色.resize(805,1520)
         背景颜色.setStyleSheet("QLabel{background-color:rgba(0,0,0,1)}")
 
         self.头像图片 = []
@@ -205,11 +203,11 @@ class 选择窗口(QMainWindow):
             QDesktopServices.openUrl(QUrl(i))
 
 if __name__ == '__main__':
-    if hasattr(qtc.Qt, 'AA_EnableHighDpiScaling'):
-        QtWidgets.QApplication.setAttribute(qtc.Qt.AA_EnableHighDpiScaling, True)
-    if hasattr(qtc.Qt, 'AA_UseHighDpiPixmaps'):
-        QtWidgets.QApplication.setAttribute(qtc.Qt.AA_UseHighDpiPixmaps, True)
-    print('当前角色数：' + str(len(角色列表) - 14))
+    if conf.getint('窗口显示', 'value') == 1:
+        if hasattr(qtc.Qt, 'AA_EnableHighDpiScaling'):
+            QtWidgets.QApplication.setAttribute(qtc.Qt.AA_EnableHighDpiScaling, True)
+        if hasattr(qtc.Qt, 'AA_UseHighDpiPixmaps'):
+            QtWidgets.QApplication.setAttribute(qtc.Qt.AA_UseHighDpiPixmaps, True)
     app = QApplication([])
     a = 选择窗口()
     a.show()

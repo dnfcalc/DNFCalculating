@@ -11,12 +11,25 @@ import time
 from heapq import heapify, heappush, heappushpop
 from multiprocessing import Queue
 
+# 工作进程与主进程的数据传输配置
+# 批量向主进程传输计算结果（已本地预处理过）的大小
+batch_size = 100
+# 倍增阶段的临界批量大小
+batch_stage_double_upper_bound = 6400
+# 累加阶段每次增加的批量大小
+batch_linear_increase_size = 100
+# 预期数据传输队列的最大大小
+expected_qsize = 100
+
 
 class MinHeap:
-    def __init__(self, top_n):
+    def __init__(self, top_n, batch_size):
         self.h = []
         self.length = top_n
         heapify(self.h)
+
+        self.processed_result_count = 0
+        self.batch_size = batch_size
 
     def add(self, element):
         if len(self.h) < self.length:
@@ -27,6 +40,28 @@ class MinHeap:
     def getTop(self):
         return sorted(self.h, reverse=True)
 
+    def merge(self, other):
+        """
+        合并另一个堆
+        @type other MinHeap
+        """
+        for elem in other.h:
+            self.add(elem)
+        self.processed_result_count += other.processed_result_count
+        self.batch_size = other.batch_size
+
+    def reset(self):
+        self.h = []
+        heapify(self.h)
+
+        self.processed_result_count = 0
+
+    def update_batch_size(self):
+        if self.batch_size < batch_stage_double_upper_bound:
+            self.batch_size *= 2
+        else:
+            self.batch_size += batch_linear_increase_size
+
 
 class MinHeapWithQueue:
     def __init__(self, name: str, minheap: MinHeap, minheap_queue: Queue):
@@ -35,18 +70,6 @@ class MinHeapWithQueue:
         self.minheap_queue = minheap_queue
 
         self.start_time = time.time()
-        self.processed_result_count = 0
 
     def process_results_per_second(self) -> float:
-        return float(self.processed_result_count) / (time.time() - self.start_time + 0.0001)
-
-    def remaining_time(self) -> float:
-        rt = 0.0
-        if self.processed_result_count == 0:
-            # 啥都没处理的时候，预估剩余一天时间
-            rt = 86400.0
-        else:
-            # 否则预估剩余时间=当前已处理速度*当前结果队列大小
-            rt = (time.time() - self.start_time) / float(self.processed_result_count) * self.minheap_queue.qsize()
-
-        return rt
+        return float(self.minheap.processed_result_count) / (time.time() - self.start_time + 1e-6)
