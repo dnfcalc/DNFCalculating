@@ -509,7 +509,7 @@ class 极诣鬼泣(角色窗口):
     def 界面(self):
         super().界面()
         self.布雷德开关=QCheckBox('刀阵：直接解放',self.main_frame2)
-        self.布雷德开关.setCheckState(True)
+        self.布雷德开关.setChecked(True)
         self.布雷德开关.resize(120,20)
         self.布雷德开关.move(315,450)
         self.布雷德开关.setStyleSheet(复选框样式)
