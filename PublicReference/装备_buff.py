@@ -19,6 +19,9 @@ class 装备0():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备1():
     名称 = '太极天帝剑'
@@ -37,6 +40,9 @@ class 装备1():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备2():
     名称 = '哈蒂-赎月者'
@@ -55,6 +61,9 @@ class 装备2():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备3():
     名称 = '卡西姆的大剑'
@@ -73,6 +82,9 @@ class 装备3():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备4():
     名称 = '星之海：巴德纳尔'
@@ -91,6 +103,9 @@ class 装备4():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备5():
     名称 = '白虎啸魂手套'
@@ -109,6 +124,9 @@ class 装备5():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备6():
     名称 = '太阴神：灵龟'
@@ -127,6 +145,9 @@ class 装备6():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备7():
     名称 = '疯狂飓风'
@@ -145,6 +166,9 @@ class 装备7():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备8():
     名称 = '猎焰追魂拳套'
@@ -163,6 +187,9 @@ class 装备8():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备9():
     名称 = '青沙棍'
@@ -181,6 +208,9 @@ class 装备9():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备10():
     名称 = '午夜生死轮盘'
@@ -199,6 +229,9 @@ class 装备10():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备11():
     名称 = '雷霆怒啸手枪'
@@ -217,6 +250,9 @@ class 装备11():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备12():
     名称 = '强力打击-X'
@@ -235,6 +271,9 @@ class 装备12():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备13():
     名称 = '绝杀：无人生还'
@@ -256,6 +295,9 @@ class 装备13():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备14():
     名称 = '激光流星弓'
@@ -274,6 +316,9 @@ class 装备14():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备15():
     名称 = '歼灵灭魂矛'
@@ -292,6 +337,9 @@ class 装备15():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备16():
     名称 = '混沌之种'
@@ -310,6 +358,9 @@ class 装备16():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备17():
     名称 = '火焰地狱'
@@ -328,6 +379,9 @@ class 装备17():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备18():
     名称 = '世界树的根须'
@@ -346,6 +400,9 @@ class 装备18():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备19():
     名称 = '纯白的祈祷'
@@ -373,6 +430,16 @@ class 装备19():
         属性.一觉Lv += 2
         属性.一觉力智 += 68
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += '智力 +81<br>'
+        temp += '[禁忌诅咒]技能等级 +5<br>'
+        temp += '[禁忌诅咒]力量、智力 +12%<br>'
+        temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +20%<br>'
+        temp += '[开幕！人偶剧场]技能等级 +2<br>'
+        temp += '[开幕！人偶剧场]力量、智力 +68<br>'
+        temp += '[人偶操纵者]智力 +127<br>'
+        return temp
 
 class 装备20():
     名称 = '圣者的慈悲'
@@ -401,6 +468,26 @@ class 装备20():
         属性.一觉Lv += 3
         属性.一觉力智 += 26
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +81<br>'
+            temp += '[勇气祝福]技能等级 +5<br>'
+            temp += '[勇气祝福]力量、智力 +12%<br>'
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +20%<br>'
+            temp += '[圣光天启]技能等级 +3<br>'
+            temp += '[圣光天启]力量、智力 +68<br>'
+            temp += '[启示：圣歌]智力 +152<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +97<br>'
+            temp += '精神 +97<br>'
+            temp += '[荣誉祝福]技能等级 +5<br>'
+            temp += '[荣誉祝福]力量、智力 +12%<br>'
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +20%<br>'
+            temp += '[天启之珠]技能等级 +3<br>'
+            temp += '[天启之珠]力量、智力 +68<br>'
+            temp += '[守护恩赐]体力、精神 +152<br>'
+        return temp
 
 class 装备21():
     名称 = '轮回之环：桓龙'
@@ -420,6 +507,9 @@ class 装备21():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备22():
     名称 = '暗战终结者'
@@ -438,6 +528,9 @@ class 装备22():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备23():
     名称 = '泯灭之灵'
@@ -456,6 +549,9 @@ class 装备23():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备24():
     名称 = '弗卡奴斯的第二个痕迹'
@@ -474,6 +570,9 @@ class 装备24():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备25():
     名称 = '匿影'
@@ -492,6 +591,9 @@ class 装备25():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备26():
     名称 = '一叶障目'
@@ -510,6 +612,9 @@ class 装备26():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备27():
     名称 = '绿色生命的面容'
@@ -528,6 +633,9 @@ class 装备27():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备28():
     名称 = '血腥红宝石之眼'
@@ -546,6 +654,9 @@ class 装备28():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备29():
     名称 = '幻影狂欢长枪'
@@ -564,6 +675,9 @@ class 装备29():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备30():
     名称 = '万夫之勇'
@@ -583,6 +697,9 @@ class 装备30():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备31():
     名称 = '千芒闪爆枪'
@@ -601,6 +718,9 @@ class 装备31():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备32():
     名称 = '寂灭剧毒矛'
@@ -619,6 +739,9 @@ class 装备32():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备33():
     名称 = '金刚密藏刀'
@@ -639,6 +762,9 @@ class 装备33():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备34():
     名称 = '冰洁的红焰'
@@ -657,6 +783,9 @@ class 装备34():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备35():
     名称 = '聚能擎天剑'
@@ -675,6 +804,9 @@ class 装备35():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备36():
     名称 = '远古御神战剑'
@@ -693,6 +825,9 @@ class 装备36():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备37():
     名称 = '战场的热血：安格巴迪'
@@ -711,6 +846,9 @@ class 装备37():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备38():
     名称 = '前瞻守卫者'
@@ -729,6 +867,9 @@ class 装备38():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备39():
     名称 = '骚动的冥焰'
@@ -747,6 +888,9 @@ class 装备39():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备40():
     名称 = '神之意象'
@@ -767,6 +911,9 @@ class 装备40():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备41():
     名称 = '赤光剑路易纳斯'
@@ -785,6 +932,9 @@ class 装备41():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备42():
     名称 = '无暇之意志手套'
@@ -805,6 +955,9 @@ class 装备42():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备43():
     名称 = '毁灭之碾压'
@@ -823,6 +976,9 @@ class 装备43():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备44():
     名称 = '痛苦之源'
@@ -841,6 +997,9 @@ class 装备44():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备45():
     名称 = '幻光绽放拳套'
@@ -859,6 +1018,9 @@ class 装备45():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备46():
     名称 = '鸣鸿破影棍'
@@ -877,6 +1039,9 @@ class 装备46():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备47():
     名称 = '血枪之脉'
@@ -895,6 +1060,9 @@ class 装备47():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备48():
     名称 = '寻觅海石竹'
@@ -913,6 +1081,9 @@ class 装备48():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备49():
     名称 = '湍流'
@@ -931,6 +1102,9 @@ class 装备49():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备50():
     名称 = '乾坤极电炮'
@@ -949,6 +1123,9 @@ class 装备50():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备51():
     名称 = '吟游诗人的轻吟'
@@ -967,6 +1144,9 @@ class 装备51():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备52():
     名称 = '吟唱：不灭之魂'
@@ -985,6 +1165,9 @@ class 装备52():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备53():
     名称 = '精灵浮风棍'
@@ -1003,6 +1186,9 @@ class 装备53():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备54():
     名称 = '魔力之泉：加斯达利亚'
@@ -1021,6 +1207,9 @@ class 装备54():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备55():
     名称 = '银月的祝福'
@@ -1042,6 +1231,9 @@ class 装备55():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备56():
     名称 = '世界树之精灵'
@@ -1072,6 +1264,19 @@ class 装备56():
         属性.一觉Lv += 1
         属性.一觉力智 += 26
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += '智力 +81<br>'
+        temp += 'Lv50 技能等级 +1<br>'
+        temp += 'Lv85 技能等级 +1<br>'
+        temp += 'Lv100 技能等级 +1<br>'
+        temp += '[禁忌诅咒]技能等级 +5<br>'
+        temp += '[禁忌诅咒]力量、智力 +12%<br>'
+        temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +20%<br>'
+        temp += '[开幕！人偶剧场]技能等级 +1<br>'
+        temp += '[开幕！人偶剧场]力量、智力 +26<br>'
+        temp += '[人偶操纵者]智力 +152<br>'
+        return temp
 
 class 装备57():
     名称 = '闪耀的神威'
@@ -1099,7 +1304,26 @@ class 装备57():
         属性.BUFF独立per *= 1.2
         属性.一觉Lv += 2
         属性.一觉力智 += 68
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +81<br>'
+            temp += '[勇气祝福]技能等级 +5<br>'
+            temp += '[勇气祝福]力量、智力 +12%<br>'
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +20%<br>'
+            temp += '[圣光天启]技能等级 +2<br>'
+            temp += '[圣光天启]力量、智力 +68<br>'
+            temp += '[启示：圣歌]智力 +127<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +97<br>'
+            temp += '精神 +97<br>'
+            temp += '[荣誉祝福]技能等级 +5<br>'
+            temp += '[荣誉祝福]力量、智力 +12%<br>'
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +20%<br>'
+            temp += '[天启之珠]技能等级 +2<br>'
+            temp += '[天启之珠]力量、智力 +68<br>'
+            temp += '[守护恩赐]体力、精神 +127<br>'
+        return temp
 
 class 装备58():
     名称 = '古代神兽的记忆'
@@ -1118,6 +1342,9 @@ class 装备58():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备59():
     名称 = '拓荒者之路'
@@ -1136,6 +1363,9 @@ class 装备59():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备60():
     名称 = '异教主的审判'
@@ -1154,6 +1384,9 @@ class 装备60():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备61():
     名称 = '信念之重量'
@@ -1172,6 +1405,9 @@ class 装备61():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备62():
     名称 = '暗杀团长的玉妆刀'
@@ -1190,6 +1426,9 @@ class 装备62():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备63():
     名称 = '血色舞会'
@@ -1208,6 +1447,9 @@ class 装备63():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备64():
     名称 = '圣洁的精灵遗物'
@@ -1226,6 +1468,9 @@ class 装备64():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备65():
     名称 = '天幕道火扇'
@@ -1245,6 +1490,9 @@ class 装备65():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备66():
     名称 = '彪悍冲锋者'
@@ -1263,6 +1511,9 @@ class 装备66():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备67():
     名称 = '沙岩幻戟'
@@ -1283,6 +1534,9 @@ class 装备67():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备68():
     名称 = '天将军：传承之光'
@@ -1301,6 +1555,9 @@ class 装备68():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备69():
     名称 = '魅影飞龙'
@@ -1319,6 +1576,9 @@ class 装备69():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备70():
     名称 = '夜天刀'
@@ -1338,6 +1598,9 @@ class 装备70():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备71():
     名称 = '冥焰黑暗之触'
@@ -1356,6 +1619,9 @@ class 装备71():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备72():
     名称 = '爆裂红焰'
@@ -1374,6 +1640,9 @@ class 装备72():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备73():
     名称 = '谍影：超级核心'
@@ -1392,9 +1661,12 @@ class 装备73():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备74():
-    名称 = '魔法师[---]的长袍'
+    名称 = '魔法师[???]的长袍'
     所属套装 = '遗忘魔法师的馈赠'
     模式 = 0
     等级 = 100
@@ -1411,6 +1683,21 @@ class 装备74():
         属性.转职被动智力 += 50
         属性.BUFF物攻per *= 1.25
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +50<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +150<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +50<br>'
+        return temp
 
 class 装备75():
     名称 = '死亡阴影夹克'
@@ -1430,6 +1717,24 @@ class 装备75():
         属性.BUFFLv += 1
         属性.BUFF物攻per *= 1.25
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +50<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +150<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +50<br>'
+        return temp
 
 class 装备76():
     名称 = '燃烧烈焰之勇气'
@@ -1448,6 +1753,21 @@ class 装备76():
         属性.转职被动智力 += 150
         属性.BUFF物攻per *= 1.25
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备77():
     名称 = '撒旦：沸腾之怒'
@@ -1465,7 +1785,21 @@ class 装备77():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备78():
     名称 = '奔流不息之岁月'
@@ -1483,7 +1817,21 @@ class 装备78():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备79():
     名称 = '优雅旋律华尔兹'
@@ -1501,7 +1849,21 @@ class 装备79():
         属性.守护恩赐体精 += 200
         属性.转职被动智力 += 100
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备80():
     名称 = '首席执行官裁决夹克'
@@ -1519,7 +1881,21 @@ class 装备80():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备81():
     名称 = '炙炎：火龙果'
@@ -1539,7 +1915,24 @@ class 装备81():
         属性.BUFF力量per *= 1.02
         属性.BUFF物攻per *= 1.25
         属性.BUFF智力per *= 1.02
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 class 装备82():
     名称 = '妖精之姿'
@@ -1557,7 +1950,21 @@ class 装备82():
         属性.守护恩赐体精 += 241
         属性.转职被动智力 += 141
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +141<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +241<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +141<br>'
+        return temp
 
 class 装备83():
     名称 = '人性的抉择'
@@ -1576,6 +1983,21 @@ class 装备83():
         属性.转职被动智力 += 180
         属性.BUFF物攻per *= 1.25
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +180<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +280<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +180<br>'
+        return temp
 
 class 装备84():
     名称 = '大祭司的星祈礼袍'
@@ -1593,7 +2015,21 @@ class 装备84():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备85():
     名称 = '冲锋陷阵胸甲'
@@ -1611,7 +2047,21 @@ class 装备85():
         属性.守护恩赐体精 += 263
         属性.转职被动智力 += 163
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +163<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +263<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +163<br>'
+        return temp
 
 class 装备86():
     名称 = '气吞山河战甲'
@@ -1630,7 +2080,22 @@ class 装备86():
         属性.守护恩赐体精 += 263
         属性.转职被动智力 += 163
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv45 技能等级 +2<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +163<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +263<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +163<br>'
+        return temp
 
 class 装备87():
     名称 = '千链锁灵战甲'
@@ -1648,7 +2113,21 @@ class 装备87():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备88():
     名称 = '宽恕坚韧之地'
@@ -1666,7 +2145,21 @@ class 装备88():
         属性.守护恩赐体精 += 242
         属性.转职被动智力 += 142
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +142<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +242<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +142<br>'
+        return temp
 
 class 装备89():
     名称 = '堕落深渊黑魔法衬衫'
@@ -1684,7 +2177,21 @@ class 装备89():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 173
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +173<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +173<br>'
+        return temp
 
 class 装备90():
     名称 = '引路者的黄昏披风'
@@ -1702,7 +2209,21 @@ class 装备90():
         属性.守护恩赐体精 += 236
         属性.转职被动智力 += 136
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +136<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +236<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +136<br>'
+        return temp
 
 class 装备91():
     名称 = '地狱边缘'
@@ -1720,7 +2241,21 @@ class 装备91():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备92():
     名称 = '泣血之恨'
@@ -1738,10 +2273,24 @@ class 装备92():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF物攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备93():
-    名称 = '大魔法师[---]的长袍'
+    名称 = '大魔法师[???]的长袍'
     所属套装 = '遗忘魔法师的馈赠'
     模式 = 0
     等级 = 100
@@ -1776,7 +2325,33 @@ class 装备93():
         属性.BUFF物攻per *= 1.25
         属性.BUFF智力per *= 1.11 - self.属性1选择 / 100
         属性.一觉力智 += 90 - self.属性2选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (11 - self.属性1选择)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (90 - self.属性2选择 * 10)
+            temp += '[启示：圣歌]智力 +%d<br>' % (200 - self.属性3选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (11 - self.属性1选择)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (90 - self.属性2选择 * 10)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (200 - self.属性3选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (11 - self.属性1选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (90 - self.属性2选择 * 10)
+            temp += '[人偶操纵者]智力 +%d<br>' % (200 - self.属性3选择 * 20)
+        return temp
 
 class 装备94():
     名称 = '掌管生死之影夹克'
@@ -1815,7 +2390,36 @@ class 装备94():
         属性.BUFF智力per *= 1.1 - self.属性2选择 / 100
         属性.一觉被动力智 += 280 - self.属性3选择 * 20
         属性.一觉力智 += 100 - self.属性1选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +50<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d<br>' % (100 - self.属性1选择 * 10)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (280 - self.属性3选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d<br>' % (100 - self.属性1选择 * 10)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (300 - self.属性3选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +50<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (100 - self.属性1选择 * 10)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[少女的爱]力量、智力 +%d<br>' % (280 - self.属性3选择 * 20)
+        return temp
 
 class 装备95():
     名称 = '爆裂大地之勇猛'
@@ -1852,7 +2456,33 @@ class 装备95():
         属性.BUFF魔攻per *= 1.08 - self.属性2选择 / 100
         属性.BUFF独立per *= 1.08 - self.属性2选择 / 100
         属性.一觉力智 += 150 - self.属性3选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[启示：圣歌]智力 +%d<br>' % (240 - self.属性1选择 * 20)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (8 - self.属性2选择)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (150 - self.属性3选择 * 10)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (240 - self.属性1选择 * 20)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (8 - self.属性2选择)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (150 - self.属性3选择 * 10)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[人偶操纵者]智力 +%d<br>' % (240 - self.属性1选择 * 20)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (8 - self.属性2选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (150 - self.属性3选择 * 10)
+        return temp
 
 class 装备96():
     名称 = '撒旦：愤怒之王'
@@ -1893,7 +2523,37 @@ class 装备96():
         属性.BUFF独立per *= 1.07 - self.属性2选择 / 100
         属性.一觉被动力智 += 200 - self.属性1选择 * 20
         属性.一觉力智 += 50 - self.属性3选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (200 - self.属性1选择 * 20)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性2选择)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (50 - self.属性3选择 * 10)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (9 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (220 - self.属性1选择 * 20)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性2选择)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (50 - self.属性3选择 * 10)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (9 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[少女的爱]力量、智力 +%d<br>' % (200 - self.属性1选择 * 20)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性2选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (50 - self.属性3选择 * 10)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (9 - self.属性4选择)
+
+        return temp
 
 class 装备97():
     名称 = '英明循环之生命'
@@ -1935,7 +2595,36 @@ class 装备97():
         属性.BUFF魔攻per *= 1.09 - self.属性3选择 / 100
         属性.BUFF独立per *= 1.09 - self.属性3选择 / 100
         属性.一觉力智 += 60 - self.属性2选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (6 - self.属性1选择)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (50 - self.属性2选择 * 10)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (9 - self.属性3选择)
+            temp += '[启示：圣歌]技能等级 +%d<br>' % (6 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (6 - self.属性1选择)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (50 - self.属性2选择 * 10)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (9 - self.属性3选择)
+            temp += '[守护恩赐]技能等级 +%d<br>' % (6 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (6 - self.属性1选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (50 - self.属性2选择 * 10)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (9 - self.属性3选择)
+            temp += '[人偶操纵者]技能等级 +%d<br>' % (6 - self.属性4选择)
+        return temp
 
 class 装备98():
     名称 = '浪漫旋律华尔兹'
@@ -1974,7 +2663,37 @@ class 装备98():
         属性.BUFF独立per *= 1.08 - self.属性3选择 / 100
         属性.一觉被动力智 += 140 - self.属性1选择 * 20
         属性.一觉力智 += 100 - self.属性2选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (140 - self.属性1选择 * 20)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (100 - self.属性2选择 * 10)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (8 - self.属性3选择)
+            temp += '[启示：圣歌]智力 +%d<br>' % (140 - self.属性4选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (160 - self.属性1选择 * 20)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (100 - self.属性2选择 * 10)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (8 - self.属性3选择)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (140 - self.属性4选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[少女的爱]力量、智力 +%d<br>' % (140 - self.属性1选择 * 20)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (100 - self.属性2选择 * 10)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (8 - self.属性3选择)
+            temp += '[人偶操纵者]智力 +%d<br>' % (140 - self.属性4选择 * 20)
+        return temp
+
 
 class 装备99():
     名称 = '皇家裁决者审判外套'
@@ -2015,7 +2734,36 @@ class 装备99():
         属性.BUFF独立per *= 1.05 - self.属性2选择 / 100
         属性.一觉被动力智 += 280 - self.属性4选择 * 20
         属性.一觉力智 += 60 - self.属性3选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (8 - self.属性1选择)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (5 - self.属性2选择)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (60 - self.属性3选择 * 10)
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (280 - self.属性4选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (8 - self.属性1选择)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (5 - self.属性2选择)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (60 - self.属性3选择 * 10)
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (300 - self.属性4选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (8 - self.属性1选择)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (5 - self.属性2选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (60 - self.属性3选择 * 10)
+            temp += '[少女的爱]力量、智力 +%d<br>' % (280 - self.属性4选择 * 20)
+        return temp
 
 class 装备100():
     名称 = '炙炎：霸王树'
@@ -2058,7 +2806,39 @@ class 装备100():
         属性.BUFF独立per *= 1.04 - self.属性3选择 / 100
         属性.一觉被动力智 += 200 - self.属性4选择 * 20
         属性.一觉力智 += 80 - self.属性2选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (10 - self.属性1选择)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (80 - self.属性2选择 * 10)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (4 - self.属性3选择)
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (200 - self.属性4选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (10 - self.属性1选择)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (80 - self.属性2选择 * 10)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (4 - self.属性3选择)
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (220 - self.属性4选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (10 - self.属性1选择)
+            temp += '[开幕！人偶剧场]]力量、智力 +%d<br>' % (80 - self.属性2选择 * 10)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (4 - self.属性3选择)
+            temp += '[少女的爱]力量、智力 +%d<br>' % (200 - self.属性4选择 * 20)
+        return temp
 
 class 装备101():
     名称 = '天堂之翼'
@@ -2096,7 +2876,36 @@ class 装备101():
         属性.BUFF智力per *= 1.07 - self.属性4选择 / 100
         属性.一觉被动力智 += 180 - self.属性3选择 * 20
         属性.一觉力智 += 90 - self.属性1选择 * 20
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +141<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d<br>' % (90 - self.属性1选择 * 20)
+            temp += '[启示：圣歌]智力 +%d<br>' % (200 - self.属性2选择 * 20)
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (180 - self.属性3选择 * 20)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (7 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +241<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d<br>' % (90 - self.属性1选择 * 20)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (200 - self.属性2选择 * 20)
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (200 - self.属性3选择 * 20)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (7 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +141<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (90 - self.属性1选择 * 20)
+            temp += '[人偶操纵者]智力 +%d<br>' % (200 - self.属性2选择 * 20)
+            temp += '[少女的爱]力量、智力 +%d<br>' % (180 - self.属性3选择 * 20)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (7 - self.属性4选择)
+        return temp
 
 class 装备102():
     名称 = '神赐的抉择'
@@ -2136,7 +2945,36 @@ class 装备102():
         属性.BUFF魔攻per *= 1.07 - self.属性2选择 / 100
         属性.BUFF独立per *= 1.07 - self.属性2选择 / 100
         属性.一觉被动力智 += 200 - self.属性4选择 * 20
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +180<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (5 - self.属性1选择)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性2选择)
+            temp += '[启示：圣歌]智力 +%d<br>' % (200 - self.属性3选择 * 20)
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (200 - self.属性4选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +280<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (5 - self.属性1选择)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性2选择)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (200 - self.属性3选择 * 20)
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (220 - self.属性4选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +180<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (5 - self.属性1选择)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性2选择)
+            temp += '[人偶操纵者]智力 +%d<br>' % (200 - self.属性3选择 * 20)
+            temp += '[少女的爱]力量、智力 +%d<br>' % (200 - self.属性4选择 * 20)
+        return temp
 
 class 装备103():
     名称 = '大祭司的神启礼服'
@@ -2175,7 +3013,33 @@ class 装备103():
         属性.BUFF魔攻per *= 1.10 - self.属性1选择 / 100
         属性.BUFF独立per *= 1.10 - self.属性1选择 / 100
         属性.一觉力智 += 150 - self.属性3选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性1选择)
+            temp += '[启示：圣歌]技能等级 +%d<br>' % (12 - self.属性2选择)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (150 - self.属性3选择 * 10)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性1选择)
+            temp += '[守护恩赐]技能等级 +%d<br>' % (12 - self.属性2选择)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (150 - self.属性3选择 * 10)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性1选择)
+            temp += '[人偶操纵者]技能等级 +%d<br>' % (12 - self.属性2选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (150 - self.属性3选择 * 10)
+        return temp
 
 class 装备104():
     名称 = '战无不胜上衣'
@@ -2214,7 +3078,37 @@ class 装备104():
         属性.BUFF独立per *= 1.10 - self.属性3选择 / 100
         属性.一觉被动力智 += 140 - self.属性2选择 * 20
         属性.一觉力智per *= 1.04 - self.属性1选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +163<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (140 - self.属性2选择 * 20)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性3选择)
+            temp += '[启示：圣歌]智力 +%d<br>' % (200 - self.属性4选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +263<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (160 - self.属性2选择 * 20)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性3选择)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (200 - self.属性4选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +163<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[少女的爱]力量、智力 +%d<br>' % (140 - self.属性2选择 * 20)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性3选择)
+            temp += '[人偶操纵者]智力 +%d<br>' % (200 - self.属性4选择 * 20)
+        return temp
+
 
 class 装备105():
     名称 = '摧枯拉朽胸甲'
@@ -2256,7 +3150,37 @@ class 装备105():
         属性.BUFF独立per *= 1.04 - self.属性2选择 / 100
         属性.一觉被动力智 += 240 - self.属性3选择 * 20
         属性.一觉力智per *= 1.04 - self.属性1选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv45 技能等级 +2<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +163<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (4 - self.属性2选择)
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (240 - self.属性3选择 * 20)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (7 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +263<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (4 - self.属性2选择)
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (260 - self.属性3选择 * 20)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (7 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +163<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (4 - self.属性2选择)
+            temp += '[少女的爱]力量、智力 +%d<br>' % (240 - self.属性3选择 * 20)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (7 - self.属性4选择)
+        return temp
 
 class 装备106():
     名称 = '千链万化战甲'
@@ -2294,7 +3218,33 @@ class 装备106():
         属性.BUFF物攻per *= 1.25
         属性.BUFF智力per *= 1.11 - self.属性1选择 / 100
         属性.一觉力智per *= 1.12 - self.属性3选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (10 - self.属性1选择)
+            temp += '[启示：圣歌]技能等级 +%d<br>' % (10 - self.属性2选择)
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (12 - self.属性3选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (10 - self.属性1选择)
+            temp += '[守护恩赐]技能等级 +%d<br>' % (10 - self.属性2选择)
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (12 - self.属性3选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (10 - self.属性1选择)
+            temp += '[人偶操纵者]技能等级 +%d<br>' % (10 - self.属性2选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (12 - self.属性3选择)
+        return temp
 
 class 装备107():
     名称 = '生命脉动之地'
@@ -2334,7 +3284,33 @@ class 装备107():
         属性.BUFF智力per *= 1.13 - self.属性1选择 / 100
         属性.BUFF魔攻per *= 1.1 - self.属性2选择 / 100
         属性.BUFF独立per *= 1.1 - self.属性2选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +142<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (13 - self.属性1选择)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[启示：圣歌]技能等级 +%d<br>' % (9 - self.属性3选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +242<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (13 - self.属性1选择)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[守护恩赐]技能等级 +%d<br>' % (9 - self.属性3选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +142<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (13 - self.属性1选择)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[人偶操纵者]技能等级 +%d<br>' % (9 - self.属性3选择)
+        return temp
 
 class 装备108():
     名称 = '深渊囚禁者长袍'
@@ -2372,7 +3348,33 @@ class 装备108():
         属性.转职被动智力 += 373 - self.属性3选择 * 20
         属性.BUFF物攻per *= 1.25
         属性.一觉被动力智 += 140 - self.属性2选择 * 20
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +173<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[启示：圣歌]技能等级 +%d<br>' % (17 - self.属性1选择)
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (140 - self.属性2选择 * 20)
+            temp += '[启示：圣歌]智力 +%d<br>' % (200 - self.属性3选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[守护恩赐]技能等级 +%d<br>' % (17 - self.属性1选择)
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (160 - self.属性2选择 * 20)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (200 - self.属性3选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +173<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[人偶操纵者]技能等级 +%d<br>' % (17 - self.属性1选择)
+            temp += '[少女的爱]力量、智力 +%d<br>' % (140 - self.属性2选择 * 20)
+            temp += '[人偶操纵者]智力 +%d<br>' % (200 - self.属性3选择 * 20)
+        return temp
 
 class 装备109():
     名称 = '圣者的黄昏披风'
@@ -2410,7 +3412,33 @@ class 装备109():
         属性.BUFF魔攻per *= 1.1 - self.属性2选择 / 100
         属性.BUFF独立per *= 1.1 - self.属性2选择 / 100
         属性.一觉被动力智 += 200 - self.属性1选择 * 20
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +136<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (200 - self.属性1选择 * 20)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[启示：圣歌]智力 +%d<br>' % (240 - self.属性3选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +236<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (220 - self.属性1选择 * 20)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (240 - self.属性3选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +136<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[少女的爱]力量、智力 +%d<br>' % (200 - self.属性1选择 * 20)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[人偶操纵者]智力 +%d<br>' % (240 - self.属性3选择 * 20)
+        return temp
 
 class 装备110():
     名称 = '逆转结局'
@@ -2444,14 +3472,42 @@ class 装备110():
         属性.守护恩赐Lv += 7 - self.属性2选择
         属性.守护恩赐体精 += 410 - self.属性4选择 * 20
         属性.转职被动Lv += 7 - self.属性2选择
-        属性.转职被动智力 +=\
-            150 - self.属性4选择
+        属性.转职被动智力 += 150 - self.属性4选择
         属性.BUFF物攻per *= 1.25
         属性.BUFF物攻per *= 1.05 - self.属性3选择 / 100
         属性.BUFF魔攻per *= 1.05 - self.属性3选择 / 100
         属性.BUFF独立per *= 1.05 - self.属性3选择 / 100
         属性.一觉力智per *= 1.04 - self.属性1选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[启示：圣歌]技能等级 +%d<br>' % (7 - self.属性2选择)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (5 - self.属性3选择)
+            temp += '[启示：圣歌]智力 +%d<br>' % (160 - self.属性4选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[守护恩赐]技能等级 +%d<br>' % (7 - self.属性2选择)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (5 - self.属性3选择)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (160 - self.属性4选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[人偶操纵者]技能等级 +%d<br>' % (7 - self.属性2选择)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (5 - self.属性3选择)
+            temp += '[人偶操纵者]智力 +%d<br>' % (160 - self.属性4选择 * 20)
+        return temp
 
 class 装备111():
     名称 = '灭世之怒'
@@ -2489,10 +3545,39 @@ class 装备111():
         属性.BUFF智力per *= 1.13 - self.属性2选择 / 100
         属性.一觉被动力智 += 140 - self.属性1选择 * 20
         属性.一觉力智 += 50 - self.属性4选择 * 10 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +150<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (140 - self.属性1选择 * 20)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (13 - self.属性2选择)
+            temp += '[启示：圣歌]智力 +%d<br>' % (200 - self.属性3选择 * 20)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (50 - self.属性4选择 * 10)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +55<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (160 - self.属性1选择 * 20)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (13 - self.属性2选择)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (200 - self.属性3选择 * 20)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (50 - self.属性4选择 * 10)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +150<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[少女的爱]力量、智力 +%d<br>' % (140 - self.属性1选择 * 20)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (13 - self.属性2选择)
+            temp += '[人偶操纵者]智力 +%d<br>' % (200 - self.属性3选择 * 20)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (50 - self.属性4选择 * 10)
+        return temp
 
 class 装备112():
-    名称 = '魔法师[---]的护腿'
+    名称 = '魔法师[???]的护腿'
     所属套装 = '遗忘魔法师的馈赠'
     模式 = 0
     等级 = 100
@@ -2507,7 +3592,21 @@ class 装备112():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备113():
     名称 = '死亡阴影短裤'
@@ -2526,7 +3625,24 @@ class 装备113():
         属性.转职被动智力 += 50
         属性.BUFFLv += 1
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +50<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +150<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +50<br>'
+        return temp
 
 class 装备114():
     名称 = '肆虐狂风之意志'
@@ -2544,7 +3660,21 @@ class 装备114():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备115():
     名称 = '亚蒙：谎言之力'
@@ -2562,7 +3692,21 @@ class 装备115():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备116():
     名称 = '奔流不息之伽蓝'
@@ -2580,7 +3724,21 @@ class 装备116():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备117():
     名称 = '魅惑律动伦巴'
@@ -2598,7 +3756,21 @@ class 装备117():
         属性.守护恩赐体精 += 200
         属性.转职被动智力 += 100
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 class 装备118():
     名称 = '首席执行官裁决短裤'
@@ -2616,7 +3788,21 @@ class 装备118():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备119():
     名称 = '炙炎：荔枝'
@@ -2636,7 +3822,24 @@ class 装备119():
         属性.BUFF力量per *= 1.02
         属性.BUFF智力per *= 1.02
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 class 装备120():
     名称 = '邪恶之角'
@@ -2654,7 +3857,21 @@ class 装备120():
         属性.守护恩赐体精 += 241
         属性.转职被动智力 += 141
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +141<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +241<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +141<br>'
+        return temp
 
 class 装备121():
     名称 = '命运的抉择'
@@ -2672,7 +3889,21 @@ class 装备121():
         属性.守护恩赐体精 += 280
         属性.转职被动智力 += 180
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +180<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +280<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +180<br>'
+        return temp
 
 class 装备122():
     名称 = '大祭司的星祈长裙'
@@ -2690,7 +3921,21 @@ class 装备122():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备123():
     名称 = '破釜沉舟护腿'
@@ -2708,7 +3953,21 @@ class 装备123():
         属性.守护恩赐体精 += 263
         属性.转职被动智力 += 163
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +163<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +263<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +163<br>'
+        return temp
 
 class 装备124():
     名称 = '雷霆万钧护腿'
@@ -2727,7 +3986,21 @@ class 装备124():
         属性.守护恩赐体精 += 263
         属性.转职被动智力 += 163
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +163<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +263<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +163<br>'
+        return temp
 
 class 装备125():
     名称 = '千链锁灵护腿'
@@ -2745,7 +4018,21 @@ class 装备125():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备126():
     名称 = '蚕食新绿之息'
@@ -2763,7 +4050,21 @@ class 装备126():
         属性.守护恩赐体精 += 242
         属性.转职被动智力 += 142
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +142<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +242<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +142<br>'
+        return temp
 
 class 装备127():
     名称 = '驱散黑暗短裤'
@@ -2781,7 +4082,21 @@ class 装备127():
         属性.守护恩赐体精 += 275
         属性.转职被动智力 += 150
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +275<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备128():
     名称 = '时空漩涡护腿'
@@ -2799,7 +4114,21 @@ class 装备128():
         属性.守护恩赐体精 += 242
         属性.转职被动智力 += 142
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +142<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +242<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +142<br>'
+        return temp
 
 class 装备129():
     名称 = '灵魂的呐喊'
@@ -2817,7 +4146,21 @@ class 装备129():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备130():
     名称 = '疯狂之如影随形'
@@ -2835,10 +4178,24 @@ class 装备130():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF魔攻per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备131():
-    名称 = '魔法师[---]的披风'
+    名称 = '魔法师[???]的披风'
     所属套装 = '遗忘魔法师的馈赠'
     模式 = 0
     等级 = 100
@@ -2854,7 +4211,21 @@ class 装备131():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备132():
     名称 = '死亡阴影头肩'
@@ -2873,7 +4244,21 @@ class 装备132():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备133():
     名称 = '艰难求生之斗志'
@@ -2892,7 +4277,21 @@ class 装备133():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备134():
     名称 = '贝利亚尔：毁灭之种'
@@ -2911,7 +4310,21 @@ class 装备134():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备135():
     名称 = '奔流不息之山川'
@@ -2930,7 +4343,21 @@ class 装备135():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备136():
     名称 = '性感洒脱探戈'
@@ -2949,7 +4376,21 @@ class 装备136():
         属性.转职被动智力 += 160
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +160<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +260<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +160<br>'
+        return temp
 
 class 装备137():
     名称 = '首席执行官裁决肩甲'
@@ -2968,7 +4409,21 @@ class 装备137():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备138():
     名称 = '炙炎：榴莲'
@@ -2987,7 +4442,21 @@ class 装备138():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.05
         属性.BUFF智力per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备139():
     名称 = '魔龙之心'
@@ -3006,7 +4475,21 @@ class 装备139():
         属性.转职被动智力 += 212
         属性.BUFF力量per *= 1.03
         属性.BUFF智力per *= 1.03
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +212<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +312<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +212<br>'
+        return temp
 
 class 装备140():
     名称 = '矛盾的抉择'
@@ -3025,7 +4508,21 @@ class 装备140():
         属性.转职被动智力 += 220
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +220<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +320<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +220<br>'
+        return temp
 
 class 装备141():
     名称 = '大祭司的星祈披肩'
@@ -3044,7 +4541,21 @@ class 装备141():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备142():
     名称 = '枪林弹雨护肩'
@@ -3063,7 +4574,21 @@ class 装备142():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.05
         属性.BUFF智力per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +5%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +5%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备143():
     名称 = '排山倒海头肩'
@@ -3083,7 +4608,21 @@ class 装备143():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备144():
     名称 = '千链锁灵肩甲'
@@ -3102,7 +4641,21 @@ class 装备144():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备145():
     名称 = '猛烈燃烧之炎'
@@ -3122,10 +4675,27 @@ class 装备145():
         属性.BUFFLv += 1
         属性.BUFF力量per *= 1.02
         属性.BUFF智力per *= 1.02
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +139<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[启示：圣歌]智力 +170<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +43<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +270<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +139<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[人偶操纵者]智力 +170<br>'
+        return temp
 
 class 装备146():
-    名称 = '魔法师[---]的长靴'
+    名称 = '魔法师[???]的长靴'
     所属套装 = '遗忘魔法师的馈赠'
     模式 = 0
     等级 = 100
@@ -3141,7 +4711,21 @@ class 装备146():
         属性.转职被动智力 += 200
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备147():
     名称 = '死亡阴影长靴'
@@ -3161,7 +4745,24 @@ class 装备147():
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
         属性.一觉被动Lv += 2
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[虔诚信念]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +130<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[信念光环]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[少女的爱]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +130<br>'
+        return temp
 
 class 装备148():
     名称 = '寂静寒夜之忍耐'
@@ -3180,7 +4781,21 @@ class 装备148():
         属性.转职被动智力 += 168
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +168<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +268<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +168<br>'
+        return temp
 
 class 装备149():
     名称 = '巴尔：堕落之魂'
@@ -3199,7 +4814,21 @@ class 装备149():
         属性.转职被动智力 += 130
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备150():
     名称 = '奔流不息之银河'
@@ -3218,7 +4847,21 @@ class 装备150():
         属性.转职被动智力 += 130
         属性.BUFF力量per *= 1.06
         属性.BUFF智力per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[启示：圣歌]智力 +130<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[人偶操纵者]智力 +130<br>'
+        return temp
 
 class 装备151():
     名称 = '激烈欢动踢踏'
@@ -3238,7 +4881,24 @@ class 装备151():
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
         属性.一觉被动Lv += 2
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[虔诚信念]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +80<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[信念光环]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +180<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[少女的爱]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +80<br>'
+        return temp
 
 class 装备152():
     名称 = '首席执行官裁决长靴'
@@ -3257,7 +4917,21 @@ class 装备152():
         属性.转职被动智力 += 130
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +130<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +130<br>'
+        return temp
 
 class 装备153():
     名称 = '炙炎：木瓜'
@@ -3276,7 +4950,21 @@ class 装备153():
         属性.转职被动智力 += 130
         属性.BUFF力量per *= 1.05
         属性.BUFF智力per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +130<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +130<br>'
+        return temp
 
 class 装备154():
     名称 = '自然之核'
@@ -3296,7 +4984,21 @@ class 装备154():
         属性.守护恩赐体精 += 100
         属性.BUFF力量per *= 1.05
         属性.BUFF智力per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-85 技能等级 +1<br>'
+        temp += 'Lv100 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +5%<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +5%<br>'
+        return temp
 
 class 装备155():
     名称 = '守护的抉择'
@@ -3319,7 +5021,24 @@ class 装备155():
         if 属性.护石第二栏 != '无':
             属性.BUFF力量per *= 1.02
             属性.BUFF智力per *= 1.02
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '第一栏中护石的[勇气祝福]力量、智力 +4%<br>'
+            temp += '第二栏中护石的[勇气祝福]力量、智力 +2%<br>'
+            temp += '[启示：圣歌]智力 +180<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '第一栏中护石的[荣誉祝福]力量、智力 +4%<br>'
+            temp += '第二栏中护石的[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +280<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '第一栏中护石的[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '第二栏中护石的[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[人偶操纵者]智力 +180<br>'
+        return temp
 
 class 装备156():
     名称 = '大祭司的星祈凉鞋'
@@ -3338,7 +5057,21 @@ class 装备156():
         属性.转职被动智力 += 130
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +130<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +130<br>'
+        return temp
 
 class 装备157():
     名称 = '赤地千里战靴'
@@ -3357,7 +5090,21 @@ class 装备157():
         属性.转职被动智力 += 130
         属性.BUFF力量per *= 1.05
         属性.BUFF智力per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +5%<br>'
+            temp += '[启示：圣歌]智力 +130<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +5%<br>'
+            temp += '[人偶操纵者]智力 +130<br>'
+        return temp
 
 class 装备158():
     名称 = '遮天蔽日长靴'
@@ -3377,7 +5124,22 @@ class 装备158():
         属性.转职被动智力 += 130
         属性.BUFF力量per *= 1.05
         属性.BUFF智力per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv70 技能等级 +2<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +5%<br>'
+            temp += '[启示：圣歌]智力 +130<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +5%<br>'
+            temp += '[人偶操纵者]智力 +130<br>'
+        return temp
 
 class 装备159():
     名称 = '千链锁灵战靴'
@@ -3396,7 +5158,21 @@ class 装备159():
         属性.转职被动智力 += 130
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +130<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +130<br>'
+        return temp
 
 class 装备160():
     名称 = '交织烈日之风'
@@ -3417,7 +5193,27 @@ class 装备160():
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
         属性.一觉被动Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]Lv +1<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[虔诚信念]Lv +1<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]Lv +1<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[信念光环]Lv +1<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]Lv +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[少女的爱]Lv +1<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 class 装备161():
     名称 = '堕入地狱之脚'
@@ -3439,7 +5235,24 @@ class 装备161():
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
         属性.一觉被动Lv += 2
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[虔诚信念]技能等级 +2<br>'
+            temp += '[启示：圣歌]智力 +163<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[信念光环]技能等级 +2<br>'
+            temp += '[守护恩赐]体力、精神 +263<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[少女的爱]技能等级 +2<br>'
+            temp += '[人偶操纵者]智力 +163<br>'
+        return temp
 
 class 装备162():
     名称 = '次元漫步者长靴'
@@ -3459,7 +5272,23 @@ class 装备162():
         属性.转职被动智力 += 100
         属性.BUFF力量per *= 1.02
         属性.BUFF智力per *= 1.02
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-45 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
+
 
 class 装备163():
     名称 = '悲喜交加'
@@ -3478,7 +5307,21 @@ class 装备163():
         属性.转职被动智力 += 150
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +270<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +5%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备164():
     名称 = '崩溃世界的忧伤'
@@ -3498,10 +5341,27 @@ class 装备164():
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
         属性.一觉被动Lv += 2
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[虔诚信念]技能等级 +2<br>'
+            temp += '[启示：圣歌]智力 +130<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[信念光环]技能等级 +2<br>'
+            temp += '[守护恩赐]体力、精神 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[少女的爱]技能等级 +2<br>'
+            temp += '[人偶操纵者]智力 +130<br>'
+        return temp
 
 class 装备165():
-    名称 = '魔法师[---]的腰带'
+    名称 = '魔法师[???]的腰带'
     所属套装 = '遗忘魔法师的馈赠'
     模式 = 0
     等级 = 100
@@ -3516,7 +5376,21 @@ class 装备165():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备166():
     名称 = '死亡阴影腰带'
@@ -3535,7 +5409,24 @@ class 装备166():
         属性.转职被动智力 += 50
         属性.BUFFLv += 1
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +50<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +150<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +50<br>'
+        return temp
 
 class 装备167():
     名称 = '守护战士之苦难'
@@ -3553,7 +5444,21 @@ class 装备167():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备168():
     名称 = '亚巴顿：绝望地狱'
@@ -3571,7 +5476,21 @@ class 装备168():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备169():
     名称 = '奔流不息之狂风'
@@ -3589,7 +5508,21 @@ class 装备169():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备170():
     名称 = '热情舞动桑巴'
@@ -3607,7 +5540,21 @@ class 装备170():
         属性.守护恩赐体精 += 200
         属性.转职被动智力 += 100
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 class 装备171():
     名称 = '首席执行官裁决腰带'
@@ -3625,7 +5572,21 @@ class 装备171():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备172():
     名称 = '炙炎：山竹'
@@ -3645,7 +5606,24 @@ class 装备172():
         属性.BUFF力量per *= 1.02
         属性.BUFF智力per *= 1.02
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 class 装备173():
     名称 = '碎钢之牙'
@@ -3663,7 +5641,22 @@ class 装备173():
         属性.守护恩赐体精 += 241
         属性.转职被动智力 += 141
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +141<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +241<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +141<br>'
+        return temp
+
 
 class 装备174():
     名称 = '正义的抉择'
@@ -3681,7 +5674,21 @@ class 装备174():
         属性.守护恩赐体精 += 280
         属性.转职被动智力 += 180
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +180<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +280<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +180<br>'
+        return temp
 
 class 装备175():
     名称 = '大祭司的星祈腰带'
@@ -3699,7 +5706,21 @@ class 装备175():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备176():
     名称 = '浴血奋战腰带'
@@ -3718,7 +5739,21 @@ class 装备176():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 100
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-85 技能等级 +1<br>'
+        temp += 'Lv100 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+        return temp
 
 class 装备177():
     名称 = '风起云涌腰带'
@@ -3737,7 +5772,22 @@ class 装备177():
         属性.守护恩赐体精 += 263
         属性.转职被动智力 += 163
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv40 技能等级 +2<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +163<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +263<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +163<br>'
+        return temp
 
 class 装备178():
     名称 = '千链锁灵腰带'
@@ -3755,7 +5805,21 @@ class 装备178():
         属性.守护恩赐体精 += 250
         属性.转职被动智力 += 150
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +150<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 装备179():
     名称 = '宁静苍翠之水'
@@ -3773,7 +5837,21 @@ class 装备179():
         属性.守护恩赐体精 += 242
         属性.转职被动智力 += 142
         属性.BUFF独立per *= 1.25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +130<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +25%<br>'
+            temp += '[启示：圣歌]智力 +142<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +32<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +25%<br>'
+            temp += '[守护恩赐]体力、精神 +242<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +130<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +25%<br>'
+            temp += '[人偶操纵者]智力 +142<br>'
+        return temp
 
 class 装备180():
     名称 = '莱多：变幻的规律'
@@ -3795,7 +5873,21 @@ class 装备180():
         属性.转职被动智力 += 250
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +117<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+        return temp
 
 class 装备181():
     名称 = '拥抱晨曦之温暖'
@@ -3817,7 +5909,20 @@ class 装备181():
         属性.守护恩赐体精 += 100
         属性.BUFF力量per *= 1.05
         属性.BUFF智力per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-48 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +5%<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +117<br>'
+            temp += '[荣誉祝福]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +5%<br>'
+        return temp
 
 class 装备182():
     名称 = '白象之庇护'
@@ -3835,11 +5940,25 @@ class 装备182():
     def 进图属性(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        属性.守护恩赐体精 += 220
+        属性.守护恩赐体精 += 230
         属性.转职被动智力 += 250
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +117<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+        return temp
 
 class 装备183():
     名称 = '火魔之焰-沙罗曼达'
@@ -3857,11 +5976,25 @@ class 装备183():
     def 进图属性(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        属性.守护恩赐体精 += 220
+        属性.守护恩赐体精 += 230
         属性.转职被动智力 += 250
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +117<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+        return temp
 
 class 装备184():
     名称 = '执着的探求'
@@ -3883,7 +6016,21 @@ class 装备184():
         属性.转职被动智力 += 270
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +245<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +117<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +270<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +245<br>'
+        return temp
 
 class 装备185():
     名称 = '时间指引之针'
@@ -3905,7 +6052,21 @@ class 装备185():
         属性.转职被动智力 += 242
         属性.BUFF力量per *= 1.07
         属性.BUFF智力per *= 1.07
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +7%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +117<br>'
+            temp += '[荣誉祝福]力量、智力 +7%<br>'
+            temp += '[守护恩赐]体力、精神 +242<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +7%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+        return temp
 
 class 装备186():
     名称 = '支配战场的呐喊'
@@ -3923,11 +6084,25 @@ class 装备186():
     def 进图属性(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        属性.守护恩赐体精 += 220
+        属性.守护恩赐体精 += 230
         属性.转职被动智力 += 250
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +117<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+        return temp
 
 class 装备187():
     名称 = '狂乱之坚如磐石'
@@ -3945,11 +6120,25 @@ class 装备187():
     def 进图属性(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        属性.守护恩赐体精 += 220
+        属性.守护恩赐体精 += 230
         属性.转职被动智力 += 250
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +117<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+        return temp
 
 class 装备188():
     名称 = '莱多：秩序创造者'
@@ -3991,7 +6180,36 @@ class 装备188():
         属性.BUFF独立per *= 1.07 - self.属性4选择 / 100
         属性.一觉力智 += 60 - self.属性1选择 * 10
         属性.一觉力智per *= 1.09 - self.属性3选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d<br>' % (60 - self.属性1选择 * 10)
+            temp += '[启示：圣歌]智力 +%d<br>' % (200 - self.属性2选择 * 20)
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (9 - self.属性3选择)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +120<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d<br>' % (60 - self.属性1选择 * 10)
+            temp += '[守护恩赐]体力、精神力 +%d<br>' % (200 - self.属性2选择 * 20)
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (9 - self.属性3选择)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (60 - self.属性1选择 * 10)
+            temp += '[人偶操纵者]智力 +%d<br>' % (200 - self.属性2选择 * 20)
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (9 - self.属性3选择)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性4选择)
+        return temp
 
 class 装备189():
     名称 = '融化黑暗之温暖'
@@ -4034,7 +6252,32 @@ class 装备189():
         属性.BUFF魔攻per *= 1.09 - self.属性1选择 / 100
         属性.BUFF独立per *= 1.09 - self.属性1选择 / 100
         属性.一觉力智per *= 1.10 - self.属性2选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-48 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +5%<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (9 - self.属性1选择)
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (11 - self.属性3选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +120<br>'
+            temp += '[荣誉祝福]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (9 - self.属性1选择)
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (11 - self.属性3选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +5%<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (9 - self.属性1选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (11 - self.属性3选择)
+        return temp
 
 class 装备190():
     名称 = '伽内什的永恒庇护'
@@ -4077,7 +6320,36 @@ class 装备190():
         属性.一觉被动力智 += 140 - self.属性3选择 * 20
         属性.一觉力智 += 50 - self.属性1选择 * 10
         属性.一觉力智per *= 1.1 - self.属性2选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d<br>' % (50 - self.属性1选择 * 10)
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (140 - self.属性3选择 * 20)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (9 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +120<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d<br>' % (50 - self.属性1选择 * 10)
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (160 - self.属性3选择 * 20)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (9 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (50 - self.属性1选择 * 10)
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[少女的爱]力量、智力 +%d<br>' % (140 - self.属性3选择 * 20)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (9 - self.属性4选择)
+        return temp
 
 class 装备191():
     名称 = '至高之炎-伊芙利特'
@@ -4119,7 +6391,33 @@ class 装备191():
         属性.BUFF魔攻per *= 1.12 - self.属性3选择 / 100
         属性.BUFF独立per *= 1.12 - self.属性3选择 / 100
         属性.一觉力智 += 120 - self.属性2选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '力量、智力 +%d<br>' % (160 - self.属性1选择 * 20)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (120 - self.属性2选择 * 10)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (12 - self.属性3选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +120<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (160 - self.属性1选择 * 20)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (120 - self.属性2选择 * 10)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (12 - self.属性3选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '力量、智力 +%d<br>' % (160 - self.属性1选择 * 20)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (120 - self.属性2选择 * 10)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (12 - self.属性3选择)
+        return temp
 
 class 装备192():
     名称 = '无尽的探求'
@@ -4161,7 +6459,33 @@ class 装备192():
         属性.BUFF魔攻per *= 1.1 - self.属性2选择 / 100
         属性.BUFF独立per *= 1.1 - self.属性2选择 / 100
         属性.一觉力智 += 120 - self.属性3选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +245<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '力量、智力 +%d<br>' % (240 - self.属性1选择 * 20)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (120 - self.属性3选择 * 10)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +120<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +270<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (240 - self.属性1选择 * 20)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (120 - self.属性3选择 * 10)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +245<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '力量、智力 +%d<br>' % (240 - self.属性1选择 * 20)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (120 - self.属性3选择 * 10)
+        return temp
 
 class 装备193():
     名称 = '时间回溯之针'
@@ -4205,7 +6529,36 @@ class 装备193():
         属性.BUFF独立per *= 1.1 - self.属性4选择 / 100
         属性.一觉力智 += 110 - self.属性3选择 * 10
         属性.一觉力智per *= 1.04 - self.属性1选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +7%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[启示：圣歌]技能等级 +%d<br>' % (5 - self.属性2选择)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (110 - self.属性3选择 * 10)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +120<br>'
+            temp += '[荣誉祝福]力量、智力 +7%<br>'
+            temp += '[守护恩赐]体力、精神 +242<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[守护恩赐技能等级 +%d<br>' % (5 - self.属性2选择)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (110 - self.属性3选择 * 10)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +7%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (4 - self.属性1选择)
+            temp += '[人偶操纵者]技能等级 +%d<br>' % (5 - self.属性2选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (110 - self.属性3选择 * 10)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (10 - self.属性4选择)
+        return temp
 
 class 装备194():
     名称 = '响彻天地的咆哮'
@@ -4248,7 +6601,36 @@ class 装备194():
         属性.BUFF魔攻per *= 1.07 - self.属性3选择 / 100
         属性.BUFF独立per *= 1.07 - self.属性3选择 / 100
         属性.一觉力智per *= 1.04 - self.属性2选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[启示：圣歌]智力 +%d<br>' % (160 - self.属性1选择 * 20)
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (4 - self.属性2选择)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性3选择)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (12 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +120<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (160 - self.属性1选择 * 20)
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (4 - self.属性2选择)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性3选择)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (12 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[人偶操纵者]智力 +%d<br>' % (160 - self.属性1选择 * 20)
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (4 - self.属性2选择)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性3选择)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (12 - self.属性4选择)
+        return temp
 
 class 装备195():
     名称 = '狂乱之逆转宿命'
@@ -4291,7 +6673,33 @@ class 装备195():
         属性.BUFF魔攻per *= 1.08 - self.属性2选择 / 100
         属性.BUFF独立per *= 1.08 - self.属性2选择 / 100
         属性.一觉力智 += 110 - self.属性1选择 * 20
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d<br>' % (110 - self.属性1选择)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (8 - self.属性2选择)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (12 - self.属性3选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +120<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d<br>' % (110 - self.属性1选择)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (8 - self.属性2选择)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (12 - self.属性3选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (110 - self.属性1选择)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (8 - self.属性2选择)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (12 - self.属性3选择)
+        return temp
 
 class 装备196():
     名称 = '肯那兹：精神燎原之火'
@@ -4313,7 +6721,21 @@ class 装备196():
         属性.守护恩赐体精 += 277
         属性.转职被动智力 += 151
         属性.BUFF物攻per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +147<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +151<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +117<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +277<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +147<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +151<br>'
+        return temp
 
 class 装备197():
     名称 = '驱散月光之黎明'
@@ -4335,7 +6757,22 @@ class 装备197():
         属性.守护恩赐体精 += 154
         属性.转职被动智力 += 151
         属性.BUFF物攻per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv50-70 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +147<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +151<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +117<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +154<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +147<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +151<br>'
+        return temp
 
 class 装备198():
     名称 = '四叶草之初心'
@@ -4356,7 +6793,21 @@ class 装备198():
         属性.守护恩赐体精 += 264
         属性.转职被动智力 += 151
         属性.BUFF物攻per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +147<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +151<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +117<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +264<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +147<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +151<br>'
+        return temp
 
 class 装备199():
     名称 = '冷焰之冰-温蒂妮'
@@ -4377,7 +6828,21 @@ class 装备199():
         属性.守护恩赐体精 += 264
         属性.转职被动智力 += 151
         属性.BUFF物攻per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +147<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +151<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +117<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +264<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +147<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +151<br>'
+        return temp
 
 class 装备200():
     名称 = '堕落世界树之生命'
@@ -4399,7 +6864,24 @@ class 装备200():
         属性.转职被动智力 += 48
         属性.BUFFLv += 1
         属性.BUFF物攻per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +147<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +48<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +117<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +134<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +147<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +48<br>'
+        return temp
 
 class 装备201():
     名称 = '引路者的四季项链'
@@ -4420,7 +6902,21 @@ class 装备201():
         属性.守护恩赐体精 += 248
         属性.转职被动智力 += 128
         属性.BUFF物攻per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +147<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +128<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +117<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +248<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +147<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +128<br>'
+        return temp
 
 class 装备202():
     名称 = '悲痛者项链'
@@ -4441,7 +6937,21 @@ class 装备202():
         属性.守护恩赐体精 += 264
         属性.转职被动智力 += 151
         属性.BUFF物攻per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +147<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +151<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +117<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +264<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +147<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +151<br>'
+        return temp
 
 class 装备203():
     名称 = '激狂之怒'
@@ -4462,7 +6972,21 @@ class 装备203():
         属性.守护恩赐体精 += 264
         属性.转职被动智力 += 151
         属性.BUFF物攻per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +147<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +151<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +117<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +264<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +147<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +151<br>'
+        return temp
 
 class 装备204():
     名称 = '盖柏：完美的均衡'
@@ -4484,7 +7008,20 @@ class 装备204():
         属性.转职被动智力 += 86
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +86<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +266<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +86<br>'
+        return temp
 
 class 装备205():
     名称 = '寂静无言之露珠'
@@ -4507,7 +7044,21 @@ class 装备205():
         属性.转职被动智力 += 86
         属性.BUFF力量per *= 1.06
         属性.BUFF智力per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv75-85 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[启示：圣歌]智力 +86<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +181<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[人偶操纵者]智力 +86<br>'
+        return temp
 
 class 装备206():
     名称 = '红兔之祝福'
@@ -4529,7 +7080,21 @@ class 装备206():
         属性.转职被动智力 += 86
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +86<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +266<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +86<br>'
+        return temp
+
 
 class 装备207():
     名称 = '祝福之风-西尔芙'
@@ -4551,7 +7116,21 @@ class 装备207():
         属性.转职被动智力 += 86
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +86<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +266<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +86<br>'
+        return temp
+
 
 class 装备208():
     名称 = '支配黑暗之环'
@@ -4573,7 +7152,21 @@ class 装备208():
         属性.转职被动智力 += 115
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +115<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +299<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +115<br>'
+        return temp
+
 
 class 装备209():
     名称 = '次元穿越者之印'
@@ -4596,7 +7189,22 @@ class 装备209():
         属性.转职被动智力 += 92
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv60-80 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +92<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +246<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +92<br>'
+        return temp
+
 
 class 装备210():
     名称 = '命运的捉弄'
@@ -4618,7 +7226,21 @@ class 装备210():
         属性.转职被动智力 += 70
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +70<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +253<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +70<br>'
+        return temp
+
 
 class 装备211():
     名称 = '蓬勃生命的落幕'
@@ -4640,7 +7262,21 @@ class 装备211():
         属性.转职被动智力 += 86
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +86<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +266<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +86<br>'
+        return temp
+
 
 class 装备212():
     名称 = '军神的遗书'
@@ -4662,7 +7298,25 @@ class 装备212():
         属性.转职被动智力 += 124
         属性.BUFF魔攻per *= 1.06
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +146<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +124<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +46<br>'
+            temp += '精神 +46<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +208<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +146<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +124<br>'
+        return temp
 
 class 装备213():
     名称 = '末日之刻'
@@ -4685,7 +7339,28 @@ class 装备213():
         属性.BUFF魔攻per *= 1.06
         属性.一觉被动Lv += 1
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +146<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[虔诚信念]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +98<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +46<br>'
+            temp += '精神 +46<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[信念光环]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +195<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +146<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[少女的爱]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +98<br>'
+        return temp
 
 class 装备214():
     名称 = '高贵之天'
@@ -4707,7 +7382,25 @@ class 装备214():
         属性.转职被动智力 += 130
         属性.BUFF魔攻per *= 1.06
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +146<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +130<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +46<br>'
+            temp += '精神 +46<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +195<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +146<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +130<br>'
+        return temp
 
 class 装备215():
     名称 = '能量回流控制者'
@@ -4729,7 +7422,25 @@ class 装备215():
         属性.转职被动智力 += 124
         属性.BUFF魔攻per *= 1.06
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +146<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +124<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +46<br>'
+            temp += '精神 +46<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +208<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +146<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +124<br>'
+        return temp
 
 class 装备216():
     名称 = '暗黑术士亲笔古书'
@@ -4751,7 +7462,25 @@ class 装备216():
         属性.转职被动智力 += 156
         属性.BUFF魔攻per *= 1.06
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +146<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +156<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +46<br>'
+            temp += '精神 +46<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +208<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +146<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +156<br>'
+        return temp
 
 class 装备217():
     名称 = '引路者的旅行书'
@@ -4773,7 +7502,25 @@ class 装备217():
         属性.转职被动智力 += 108
         属性.BUFF魔攻per *= 1.06
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +146<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +108<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +46<br>'
+            temp += '精神 +46<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +195<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +146<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +108<br>'
+        return temp
 
 class 装备218():
     名称 = '悲情者遗物'
@@ -4790,22 +7537,30 @@ class 装备218():
         pass
     def 进图属性(self, 属性):
         pass
-    def 触发(self, 属性):
-        if 属性.装备检查('地狱边缘'):
-            属性.攻击速度 -= 0.01
-            属性.移动速度 -= 0.01
-            属性.释放速度 -= 0.015
-        if 属性.装备检查('悲痛者项链'):
-            属性.攻击速度 -= 0.01
-            属性.移动速度 -= 0.01
-            属性.释放速度 -= 0.015
-        pass
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 208
         属性.转职被动智力 += 124
         属性.BUFF魔攻per *= 1.06
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +146<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +124<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +46<br>'
+            temp += '精神 +46<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +208<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +146<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +124<br>'
+        return temp
 
 class 装备219():
     名称 = '失控之怒'
@@ -4827,7 +7582,25 @@ class 装备219():
         属性.转职被动智力 += 124
         属性.BUFF魔攻per *= 1.06
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +146<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +124<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +46<br>'
+            temp += '精神 +46<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +208<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +146<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +124<br>'
+        return temp
 
 class 装备220():
     名称 = '军神的庇护宝石'
@@ -4851,7 +7624,28 @@ class 装备220():
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +73<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +170<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +73<br>'
+        return temp
 
 class 装备221():
     名称 = '时之漩涡'
@@ -4880,7 +7674,29 @@ class 装备221():
         属性.BUFF智力per *= 1.08
         属性.一觉被动Lv += 1
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-50 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +48<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +138<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +48<br>'
+        return temp
 
 class 装备222():
     名称 = '智慧之地'
@@ -4905,7 +7721,28 @@ class 装备222():
         属性.BUFF智力per *= 1.08
         属性.一觉被动Lv += 1
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +45<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +150<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +45<br>'
+        return temp
 
 class 装备223():
     名称 = '电光能量支配者'
@@ -4934,7 +7771,29 @@ class 装备223():
         属性.BUFF智力per *= 1.06
         属性.一觉被动Lv += 1
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-50 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[启示：圣歌]智力 +36<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +130<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[人偶操纵者]智力 +36<br>'
+        return temp
 
 class 装备224():
     名称 = '暗黑术士的精髓'
@@ -4958,7 +7817,28 @@ class 装备224():
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +95<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +195<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +95<br>'
+        return temp
 
 class 装备225():
     名称 = '被困的时之沙'
@@ -4987,7 +7867,29 @@ class 装备225():
         属性.BUFF智力per *= 1.06
         属性.一觉被动Lv += 1
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-50 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[启示：圣歌]智力 +48<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +142<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[人偶操纵者]智力 +48<br>'
+        return temp
 
 class 装备226():
     名称 = '寂寞的呼喊'
@@ -5012,7 +7914,23 @@ class 装备226():
         属性.BUFF智力per *= 1.08
         属性.一觉被动Lv += 1
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv30-50 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +48<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +155<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +48<br>'
+        return temp
 
 class 装备227():
     名称 = '狂乱之天灾降临'
@@ -5036,7 +7954,28 @@ class 装备227():
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[启示：圣歌]智力 +73<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护恩赐]体力、精神 +170<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[人偶操纵者]智力 +73<br>'
+        return temp
 
 class 装备228():
     名称 = '军神的古怪耳环'
@@ -5057,7 +7996,23 @@ class 装备228():
         属性.守护恩赐体精 += 158
         属性.转职被动智力 += 62
         属性.BUFF独立per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +62<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +158<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +62<br>'
+        return temp
 
 class 装备229():
     名称 = '时之矛盾'
@@ -5078,7 +8033,23 @@ class 装备229():
         属性.守护恩赐体精 += 143
         属性.转职被动智力 += 49
         属性.BUFF独立per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +49<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +143<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +49<br>'
+        return temp
 
 class 装备230():
     名称 = '宽容之海'
@@ -5099,7 +8070,23 @@ class 装备230():
         属性.守护恩赐体精 += 143
         属性.转职被动智力 += 62
         属性.BUFF独立per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +62<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +143<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +62<br>'
+        return temp
 
 class 装备231():
     名称 = '电磁能量传送者'
@@ -5120,7 +8107,23 @@ class 装备231():
         属性.守护恩赐体精 += 158
         属性.转职被动智力 += 62
         属性.BUFF独立per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +62<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +158<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +62<br>'
+        return temp
 
 class 装备232():
     名称 = '无尽地狱黑暗之印'
@@ -5141,7 +8144,23 @@ class 装备232():
         属性.守护恩赐体精 += 192
         属性.转职被动智力 += 95
         属性.BUFF独立per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +95<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +192<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +95<br>'
+        return temp
 
 class 装备233():
     名称 = '次元流星坠'
@@ -5165,7 +8184,26 @@ class 装备233():
         属性.守护恩赐体精 += 178
         属性.转职被动智力 += 82
         属性.BUFF独立per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv50 技能等级 +1<br>'
+        temp += 'Lv85 技能等级 +1<br>'
+        temp += 'Lv100 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +82<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +178<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +82<br>'
+        return temp
 
 class 装备234():
     名称 = '命运挑战者'
@@ -5186,7 +8224,23 @@ class 装备234():
         属性.守护恩赐体精 += 146
         属性.转职被动智力 += 45
         属性.BUFF独立per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +45<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +146<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +45<br>'
+        return temp
 
 class 装备235():
     名称 = '悲剧人生的归寂'
@@ -5207,7 +8261,23 @@ class 装备235():
         属性.守护恩赐体精 += 166
         属性.转职被动智力 += 62
         属性.BUFF独立per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +62<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +166<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +62<br>'
+        return temp
 
 class 装备236():
     名称 = '军神的心之所念'
@@ -5247,7 +8317,38 @@ class 装备236():
         属性.一觉被动力智 += 200 - self.属性1选择 * 20
         属性.一觉力智 += 90 - self.属性2选择 * 10
         属性.一觉力智per *= 1.07 - self.属性4选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +62<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (200 - self.属性1选择 * 20)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (90 - self.属性2选择 * 10)
+            temp += '[启示：圣歌]智力 +%d<br>' % (160 - self.属性3选择 * 20)
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (7 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +70<br>'
+            temp += '精神 +70<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +158<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (220 - self.属性1选择 * 20)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (90 - self.属性2选择 * 10)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (160 - self.属性3选择 * 20)
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (7 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +62<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[少女的爱]力量、智力 +%d<br>' % (200 - self.属性1选择 * 20)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (90 - self.属性2选择 * 10)
+            temp += '[人偶操纵者]智力 +%d<br>' % (160 - self.属性3选择 * 20)
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (7 - self.属性4选择)
+        return temp
 
 class 装备237():
     名称 = '时之魅影'
@@ -5287,7 +8388,38 @@ class 装备237():
         属性.BUFF独立per *= 1.06
         属性.一觉力智 += 70 - self.属性1选择 * 10
         属性.一觉力智per *= 1.06 - self.属性4选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +49<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d<br>' % (70 - self.属性1选择 * 10)
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (200 - self.属性2选择 * 20)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (11 - self.属性3选择)
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (6 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +70<br>'
+            temp += '精神 +70<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +143<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d<br>' % (70 - self.属性1选择 * 10)
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (220 - self.属性2选择 * 20)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (11 - self.属性3选择)
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (6 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +49<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (70 - self.属性1选择 * 10)
+            temp += '[少女的爱]力量、智力 +%d<br>' % (200 - self.属性2选择 * 20)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (11 - self.属性3选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (6 - self.属性4选择)
+        return temp
 
 class 装备238():
     名称 = '永恒之海'
@@ -5327,7 +8459,38 @@ class 装备238():
         属性.一觉被动力智 += 140 - self.属性4选择 * 20
         属性.一觉力智 += 80 - self.属性2选择 * 10
         属性.一觉力智per *= 1.06 - self.属性1选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +62<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (6 - self.属性1选择)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (80 - self.属性2选择 * 10)
+            temp += '[启示：圣歌]智力 +%d<br>' % (330 - self.属性3选择 * 20)
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (140 - self.属性4选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +70<br>'
+            temp += '精神 +70<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +143<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (6 - self.属性1选择)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (80 - self.属性2选择 * 10)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (330 - self.属性3选择 * 20)
+            temp += '[信念光环]力量、智力 +%d<br>' % (160 - self.属性4选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +62<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (6 - self.属性1选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (80 - self.属性2选择 * 10)
+            temp += '[人偶操纵者智力 +%d<br>' % (330 - self.属性3选择 * 20)
+            temp += '[少女的爱]力量、智力 +%d<br>' % (140 - self.属性4选择 * 20)
+        return temp
 
 class 装备239():
     名称 = '等离子操控者'
@@ -5368,7 +8531,36 @@ class 装备239():
         属性.BUFF独立per *= 1.12 - self.属性1选择 / 100
         属性.BUFF独立per *= 1.06
         属性.一觉力智 += 120 - self.属性3选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +62<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (12 - self.属性1选择)
+            temp += '[启示：圣歌]智力 +%d<br>' % (220 - self.属性2选择 * 20)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (120 - self.属性3选择 * 10)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +70<br>'
+            temp += '精神 +70<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +158<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (12 - self.属性1选择)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (220 - self.属性2选择 * 20)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (120 - self.属性3选择 * 10)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +62<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (12 - self.属性1选择)
+            temp += '[人偶操纵者]智力 +%d<br>' % (220 - self.属性2选择 * 20)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (120 - self.属性3选择 * 10)
+        return temp
+
 
 class 装备240():
     名称 = '永恒地狱黑暗之印'
@@ -5407,7 +8599,35 @@ class 装备240():
         属性.BUFF智力per *= 1.12 - self.属性1选择 / 100
         属性.BUFF独立per *= 1.06
         属性.一觉力智 += 90 - self.属性3选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +95<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (12 - self.属性1选择)
+            temp += '[启示：圣歌]智力 +%d<br>' % (240 - self.属性2选择 * 20)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (90 - self.属性3选择 * 10)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +70<br>'
+            temp += '精神 +70<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +192<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (12 - self.属性1选择)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (240 - self.属性2选择 * 20)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (90 - self.属性3选择 * 10)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +95<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (12 - self.属性1选择)
+            temp += '[人偶操纵者]智力 +%d<br>' % (240 - self.属性2选择 * 20)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (90 - self.属性3选择 * 10)
+        return temp
 
 class 装备241():
     名称 = '次元穿越者之星'
@@ -5451,7 +8671,41 @@ class 装备241():
         属性.BUFF独立per *= 1.06
         属性.一觉被动力智 += 140 - self.属性3选择 * 20
         属性.一觉力智 += 110 - self.属性2选择 * 10
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv50 技能等级 +1<br>'
+        temp += 'Lv85 技能等级 +1<br>'
+        temp += 'Lv100 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +82<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[启示：圣歌]智力 +%d<br>' % (300 - self.属性1选择 * 20)
+            temp += '[圣光天启]力量、智力 +%d<br>' % (110 - self.属性2选择 * 10)
+            temp += 'Lv60-100 技能等级 +1<br>'
+            temp += '[虔诚信念]力量、智力 +%d<br>' % (140 - self.属性3选择 * 20)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +70<br>'
+            temp += '精神 +70<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +178<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (300 - self.属性1选择 * 20)
+            temp += '[天启之珠]力量、智力 +%d<br>' % (110 - self.属性2选择 * 10)
+            temp += 'Lv60-100 技能等级 +1<br>'
+            temp += '[信念光环]体力、精神增加量 +%d<br>' % (160 - self.属性3选择 * 20)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +82<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[人偶操纵者]智力 +%d<br>' % (300 - self.属性1选择 * 20)
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (110 - self.属性2选择 * 10)
+            temp += 'Lv60-100 技能等级 +1<br>'
+            temp += '[少女的爱]力量、智力 +%d<br>' % (140 - self.属性3选择 * 20)
+        return temp
 
 class 装备242():
     名称 = '命运反抗者'
@@ -5495,7 +8749,38 @@ class 装备242():
         属性.BUFF独立per *= 1.07 - self.属性4选择 / 100
         属性.一觉力智 += 90 - self.属性1选择 * 10
         属性.一觉力智per *= 1.04 - self.属性2选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +45<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[圣光天启]力量、智力 +%d<br>' % (90 - self.属性1选择 * 10)
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (4 - self.属性2选择)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (4 - self.属性3选择)
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +70<br>'
+            temp += '精神 +70<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +146<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[天启之珠]力量、智力 +%d<br>' % (90 - self.属性1选择 * 10)
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (4 - self.属性2选择)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (4 - self.属性3选择)
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +45<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[开幕！人偶剧场]力量、智力 +%d<br>' % (90 - self.属性1选择 * 10)
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (4 - self.属性2选择)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (4 - self.属性3选择)
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (7 - self.属性4选择)
+        return temp
 
 class 装备243():
     名称 = '心痛如绞的诀别'
@@ -5538,7 +8823,38 @@ class 装备243():
         属性.BUFF独立per *= 1.05 - self.属性1选择 / 100
         属性.BUFF独立per *= 1.06
         属性.一觉力智per *= 1.08 - self.属性3选择 / 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +171<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +6%<br>'
+            temp += '[启示：圣歌]智力 +62<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (5 - self.属性1选择)
+            temp += '[勇气祝福]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[圣光天启]力量、智力 +%d%%<br>' % (8 - self.属性3选择)
+            temp += '[启示：圣歌]智力 +%d<br>' % (140 - self.属性4选择)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +70<br>'
+            temp += '精神 +70<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +166<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +%d%%<br>' % (5 - self.属性1选择)
+            temp += '[荣誉祝福]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[天启之珠]力量、智力 +%d%%<br>' % (8 - self.属性3选择)
+            temp += '[守护恩赐]体力、精神 +%d<br>' % (140 - self.属性4选择)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +171<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +6%<br>'
+            temp += '[人偶操纵者]智力 +62<br>'
+            temp += '<font color="#00A2E8">神话属性：</font><br>'
+            temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +%d%%<br>' % (5 - self.属性1选择)
+            temp += '[禁忌诅咒]力量、智力 +%d%%<br>' % (10 - self.属性2选择)
+            temp += '[开幕！人偶剧场]力量、智力 +%d%%<br>' % (8 - self.属性3选择)
+            temp += '[人偶操纵者]智力 +%d<br>' % (140 - self.属性4选择)
+        return temp
 
 class 装备244():
     名称 = '完美掌控'
@@ -5555,6 +8871,9 @@ class 装备244():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备245():
     名称 = '噙毒手套'
@@ -5574,6 +8893,9 @@ class 装备245():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备246():
     名称 = '先知者的预言'
@@ -5592,6 +8914,9 @@ class 装备246():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备247():
     名称 = '骸麒之戒'
@@ -5610,6 +8935,9 @@ class 装备247():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 
 class 装备248():
@@ -5629,6 +8957,9 @@ class 装备248():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备249():
     名称 = '青面修罗的面具'
@@ -5650,6 +8981,9 @@ class 装备249():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备250():
     名称 = '赤鬼的次元石'
@@ -5668,6 +9002,9 @@ class 装备250():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备251():
     名称 = '原初之梦手炮'
@@ -5686,6 +9023,9 @@ class 装备251():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备252():
     名称 = '无念的仪服'
@@ -5705,6 +9045,9 @@ class 装备252():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备253():
     名称 = '无意识的花'
@@ -5720,6 +9063,9 @@ class 装备253():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备254():
     名称 = '无形的贞节'
@@ -5738,6 +9084,9 @@ class 装备254():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备255():
     名称 = '无言的罪恶'
@@ -5753,6 +9102,9 @@ class 装备255():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备256():
     名称 = '无我之轮'
@@ -5768,6 +9120,9 @@ class 装备256():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备257():
     名称 = '原初之梦巨剑'
@@ -5786,6 +9141,9 @@ class 装备257():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备258():
     名称 = '原初之梦手弩'
@@ -5804,6 +9162,9 @@ class 装备258():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备259():
     名称 = '原初之梦步枪'
@@ -5822,6 +9183,9 @@ class 装备259():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备260():
     名称 = '原初之梦十字架'
@@ -5852,7 +9216,32 @@ class 装备260():
         属性.BUFF独立per *= 1.2
         属性.一觉Lv += 2
         属性.一觉力智 += 68
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +81<br>'
+            temp += '[勇气祝福]技能等级 +5<br>'
+            temp += '[勇气祝福]力量、智力 +12%<br>'
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +20%<br>'
+            temp += '[圣光天启]技能等级 +3<br>'
+            temp += '[圣光天启]力量、智力 +68<br>'
+            temp += '[启示：圣歌]智力 +127<br>'
+            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+            temp += '智力 +{}<br>'.format(20 * 改造等级)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +97<br>'
+            temp += '精神 +97<br>'
+            temp += '[荣誉祝福]技能等级 +5<br>'
+            temp += '[荣誉祝福]力量、智力 +12%<br>'
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +20%<br>'
+            temp += '[天启之珠]技能等级 +3<br>'
+            temp += '[天启之珠]力量、智力 +68<br>'
+            temp += '[守护恩赐]体力、精神 +127<br>'
+            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+            temp += '体力 +{}<br>'.format(20 * 改造等级)
+            temp += '精神 +{}<br>'.format(20 * 改造等级)
+        return temp
 
 class 装备261():
     名称 = '原初之梦短剑'
@@ -5872,6 +9261,9 @@ class 装备261():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备262():
     名称 = '原初之梦钝器'
@@ -5891,6 +9283,9 @@ class 装备262():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备263():
     名称 = '原初之梦法杖'
@@ -5910,6 +9305,9 @@ class 装备263():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备264():
     名称 = '原初之梦光剑'
@@ -5929,6 +9327,9 @@ class 装备264():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备265():
     名称 = '原初之梦棍棒'
@@ -5948,6 +9349,9 @@ class 装备265():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备266():
     名称 = '原初之梦矛'
@@ -5967,6 +9371,9 @@ class 装备266():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备267():
     名称 = '原初之梦魔杖'
@@ -5986,6 +9393,9 @@ class 装备267():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备268():
     名称 = '原初之梦拳套'
@@ -6005,6 +9415,9 @@ class 装备268():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备269():
     名称 = '原初之梦扫把'
@@ -6036,7 +9449,19 @@ class 装备269():
         属性.BUFF独立per *= 1.2
         属性.一觉Lv += 2
         属性.一觉力智 += 68
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        temp += '智力 +81<br>'
+        temp += '[禁忌诅咒]技能等级 +5<br>'
+        temp += '[禁忌诅咒]力量、智力 +12%<br>'
+        temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +20%<br>'
+        temp += '[开幕！人偶剧场]技能等级 +3<br>'
+        temp += '[开幕！人偶剧场]力量、智力 +68<br>'
+        temp += '[人偶操纵者]智力 +127<br>'
+        temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+        temp += '智力 +{}<br>'.format(20 * 改造等级)
+        return temp
 
 class 装备270():
     名称 = '原初之梦手套'
@@ -6056,6 +9481,9 @@ class 装备270():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备271():
     名称 = '原初之梦太刀'
@@ -6075,6 +9503,9 @@ class 装备271():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备272():
     名称 = '原初之梦爪'
@@ -6094,6 +9525,9 @@ class 装备272():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备273():
     名称 = '原初之梦左轮枪'
@@ -6113,6 +9547,9 @@ class 装备273():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 
 #添加装备位置,添加后函数中的数字需要与Img下的图标对应
@@ -6129,6 +9566,9 @@ class 夜语黑瞳武器():
         pass
     def BUFF属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
 
 class 装备274(夜语黑瞳武器):
     名称 = '界·夜语黑瞳短剑'
@@ -6298,7 +9738,16 @@ class 装备293(夜语黑瞳武器):
         属性.BUFF独立per *= 1.2
         属性.一觉Lv += 2
         属性.一觉力智 += 42
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += '智力 +78<br>'
+        temp += '[禁忌诅咒]技能等级 +5<br>'
+        temp += '[禁忌诅咒]力量、智力 +10%<br>'
+        temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +20%<br>'
+        temp += '[开幕！人偶剧场]技能等级 +2<br>'
+        temp += '[开幕！人偶剧场]力量、智力 +42<br>'
+        temp += '[禁忌诅咒]智力 +127<br>'
+        return temp
 
 
 class 装备294(夜语黑瞳武器):
@@ -6319,7 +9768,26 @@ class 装备294(夜语黑瞳武器):
         属性.BUFF独立per *= 1.2
         属性.一觉Lv += 2
         属性.一觉力智 += 44
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +78<br>'
+            temp += '[勇气祝福]技能等级 +5<br>'
+            temp += '[勇气祝福]力量、智力 +10%<br>'
+            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +20%<br>'
+            temp += '[圣光天启]技能等级 +2<br>'
+            temp += '[圣光天启]力量、智力 +44<br>'
+            temp += '[启示：圣歌]智力 +127<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +94<br>'
+            temp += '精神 +94<br>'
+            temp += '[荣誉祝福]技能等级 +5<br>'
+            temp += '[荣誉祝福]力量、智力 +10%<br>'
+            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +20%<br>'
+            temp += '[天启之珠]技能等级 +2<br>'
+            temp += '[天启之珠]力量、智力 +44<br>'
+            temp += '[守护恩赐]体力、精神 +127<br>'
+        return temp
 
 
 class 装备295(夜语黑瞳武器):
@@ -6471,8 +9939,21 @@ class 装备311():
         属性.守护恩赐体精 += 80
         属性.转职被动智力 += 100
         属性.BUFF物攻per *= 1.22
-        pass
-
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +46<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +80<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +46<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 class 装备312():
     名称 = '超界·苍天之碧：卷云'
@@ -6492,8 +9973,18 @@ class 装备312():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 270
         属性.转职被动智力 += 270
-        pass
-
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +37<br>'
+            temp += '[启示：圣歌]智力 +270<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +41<br>'
+            temp += '[守护恩赐]体力、精神 +270<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +37<br>'
+            temp += '[人偶操纵者]智力 +270<br>'
+        return temp
 
 class 装备313():
     名称 = '超界· 苍天之流：层云'
@@ -6514,7 +10005,21 @@ class 装备313():
         属性.守护恩赐体精 += 80
         属性.转职被动智力 += 100
         属性.BUFF魔攻per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +46<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +80<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +46<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 
 class 装备314():
@@ -6536,7 +10041,21 @@ class 装备314():
         属性.守护恩赐体精 += 80
         属性.转职被动智力 += 100
         属性.BUFF独立per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +28<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +80<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +28<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 
 class 装备315():
@@ -6557,7 +10076,18 @@ class 装备315():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 200
         属性.转职被动智力 += 200
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +28<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +28<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 
 class 装备316():
@@ -6579,7 +10109,22 @@ class 装备316():
         属性.守护恩赐体精 += 30
         属性.转职被动智力 += 30
         属性.BUFF物攻per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-45 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +46<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +30<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +30<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +46<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +30<br>'
+        return temp
 
 
 class 装备317():
@@ -6600,7 +10145,19 @@ class 装备317():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 200
         属性.转职被动智力 += 200
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-45 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +37<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +41<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +37<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 
 class 装备318():
@@ -6622,7 +10179,22 @@ class 装备318():
         属性.守护恩赐体精 += 90
         属性.转职被动智力 += 90
         属性.BUFF魔攻per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv35-48 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +46<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +30<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +30<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +46<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +30<br>'
+        return temp
 
 
 class 装备319():
@@ -6644,7 +10216,22 @@ class 装备319():
         属性.守护恩赐体精 += 90
         属性.转职被动智力 += 90
         属性.BUFF独立per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv35-48 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +28<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +30<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +30<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +28<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +30<br>'
+        return temp
 
 
 class 装备320():
@@ -6665,7 +10252,19 @@ class 装备320():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 40
         属性.转职被动智力 += 40
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-85 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +28<br>'
+            temp += '[启示：圣歌]智力 +40<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[守护恩赐]体力、精神 +40<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +28<br>'
+            temp += '[人偶操纵者]智力 +40<br>'
+        return temp
 
 
 class 装备321():
@@ -6685,7 +10284,20 @@ class 装备321():
 
     def BUFF属性(self, 属性):
         属性.BUFF物攻per *= 1.22
-        pass
+
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv85 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +46<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +22%<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +22%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +46<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +22%<br>'
+        return temp
 
 
 class 装备322():
@@ -6706,7 +10318,18 @@ class 装备322():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 270
         属性.转职被动智力 += 270
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +37<br>'
+            temp += '[启示：圣歌]智力 +270<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +41<br>'
+            temp += '[守护恩赐]体力、精神 +270<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +37<br>'
+            temp += '[人偶操纵者]智力 +270<br>'
+        return temp
 
 
 class 装备323():
@@ -6726,7 +10349,19 @@ class 装备323():
 
     def BUFF属性(self, 属性):
         属性.BUFF魔攻per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv50 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +46<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +22%<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +22%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +46<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +22%<br>'
+        return temp
 
 
 class 装备324():
@@ -6746,7 +10381,19 @@ class 装备324():
 
     def BUFF属性(self, 属性):
         属性.BUFF独立per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv50 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +28<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +22%<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +22%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +28<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +22%<br>'
+        return temp
 
 
 class 装备325():
@@ -6767,7 +10414,19 @@ class 装备325():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 140
         属性.转职被动智力 += 200
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv50 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +28<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[守护恩赐]体力、精神 +140<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +28<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 
 class 装备326():
@@ -6789,7 +10448,21 @@ class 装备326():
         属性.守护恩赐体精 += 100
         属性.转职被动智力 += 100
         属性.BUFF物攻per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +46<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +46<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 
 class 装备327():
@@ -6810,7 +10483,18 @@ class 装备327():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 270
         属性.转职被动智力 += 270
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +37<br>'
+            temp += '[启示：圣歌]智力 +270<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +41<br>'
+            temp += '[守护恩赐]体力、精神 +270<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +37<br>'
+            temp += '[人偶操纵者]智力 +270<br>'
+        return temp
 
 
 class 装备328():
@@ -6832,7 +10516,21 @@ class 装备328():
         属性.守护恩赐体精 += 100
         属性.转职被动智力 += 100
         属性.BUFF魔攻per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +46<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +80<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +46<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 
 class 装备329():
@@ -6854,7 +10552,21 @@ class 装备329():
         属性.守护恩赐体精 += 100
         属性.转职被动智力 += 100
         属性.BUFF独立per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +28<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +28<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 
 class 装备330():
@@ -6875,8 +10587,18 @@ class 装备330():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 200
         属性.转职被动智力 += 200
-        pass
-
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +28<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +28<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 装备331():
     名称 = '超界·梦纤石的牵绊'
@@ -6897,7 +10619,21 @@ class 装备331():
         属性.守护恩赐体精 += 100
         属性.转职被动智力 += 100
         属性.BUFF物攻per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +46<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +46<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 
 class 装备332():
@@ -6918,7 +10654,18 @@ class 装备332():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 270
         属性.转职被动智力 += 270
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +37<br>'
+            temp += '[启示：圣歌]智力 +270<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +41<br>'
+            temp += '[守护恩赐]体力、精神 +270<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +37<br>'
+            temp += '[人偶操纵者]智力 +270<br>'
+        return temp
 
 
 class 装备333():
@@ -6940,7 +10687,21 @@ class 装备333():
         属性.守护恩赐体精 += 100
         属性.转职被动智力 += 100
         属性.BUFF魔攻per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +46<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +46<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 
 class 装备334():
@@ -6962,7 +10723,21 @@ class 装备334():
         属性.守护恩赐体精 += 100
         属性.转职被动智力 += 100
         属性.BUFF独立per *= 1.22
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +28<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +22%<br>'
+            temp += '[启示：圣歌]智力 +100<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +22%<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +28<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +22%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 
 class 装备335():
@@ -6983,7 +10758,18 @@ class 装备335():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 200
         属性.转职被动智力 += 200
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +28<br>'
+            temp += '[启示：圣歌]智力 +200<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +28<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 
 # endregion
@@ -7012,7 +10798,19 @@ class 装备336():
         属性.转职被动智力 += 300
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +300<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +112<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<<br>'
+            temp += '[守护恩赐]体力、精神 +170<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +4%<<br>'
+            temp += '[人偶操纵者]智力 +300<br>'
+        return temp
 
 
 class 装备337():
@@ -7037,7 +10835,21 @@ class 装备337():
         属性.守护恩赐体精 += 164
         属性.转职被动智力 += 151
         属性.BUFF物攻per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +45<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +4%<br>'
+            temp += '[启示：圣歌]智力 +151<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +112<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +4%<<br>'
+            temp += '[守护恩赐]体力、精神 +164<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +45<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +4%<<br>'
+            temp += '[人偶操纵者]智力 +151<br>'
+        return temp
 
 
 class 装备338():
@@ -7063,7 +10875,20 @@ class 装备338():
         属性.转职被动智力 += 136
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +67<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +136<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +4%<<br>'
+            temp += '[守护恩赐]体力、精神 +216<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +67<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<<br>'
+            temp += '[人偶操纵者]智力 +136<br>'
+        return temp
 
 
 class 装备339():
@@ -7088,7 +10913,19 @@ class 装备339():
         属性.转职被动智力 += 102
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-48 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +102<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +112<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +4%<<br>'
+            temp += '[人偶操纵者]智力 +102<br>'
+        return temp
 
 
 class 装备340():
@@ -7113,8 +10950,22 @@ class 装备340():
         属性.守护恩赐体精 += 154
         属性.转职被动智力 += 131
         属性.BUFF物攻per *= 1.04
-        pass
-
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv60-80 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +45<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +4%<br>'
+            temp += '[启示：圣歌]智力 +131<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +112<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +4%<<br>'
+            temp += '[守护恩赐]体力、精神 +154<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +45<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +4%<<br>'
+            temp += '[人偶操纵者]智力 +131<br>'
+        return temp
 
 class 装备341():
     名称 = '暗黑之炎：被蚕食的大地'
@@ -7139,8 +10990,21 @@ class 装备341():
         属性.转职被动智力 += 126
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
-
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv80-85 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +67<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +126<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +4%<<br>'
+            temp += '[守护恩赐]体力、精神 +155<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +67<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<<br>'
+            temp += '[人偶操纵者]智力 +126<br>'
+        return temp
 
 class 装备342():
     名称 = '暗黑之云：被吞噬的天空'
@@ -7165,7 +11029,19 @@ class 装备342():
         属性.转职被动智力 += 280
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +280<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +112<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<<br>'
+            temp += '[守护恩赐]体力、精神 +140<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +4%<<br>'
+            temp += '[人偶操纵者]智力 +280<br>'
+        return temp
 
 
 class 装备343():
@@ -7194,7 +11070,21 @@ class 装备343():
             属性.技能栏[属性.技能序号['人偶操控者']].额外智力 -= 15
         except:
             pass
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +45<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +131<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +112<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<<br>'
+            temp += '[守护恩赐]体力、精神 +144<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +45<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<<br>'
+            temp += '[人偶操纵者]智力 +116<br>'
+        return temp
 
 
 class 装备344():
@@ -7224,7 +11114,20 @@ class 装备344():
             属性.技能栏[属性.技能序号['人偶操控者']].额外智力 -= 15
         except:
             pass
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +67<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +116<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +4%<<br>'
+            temp += '[守护恩赐]体力、精神 +196<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +67<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<<br>'
+            temp += '[人偶操纵者]智力 +101<br>'
+        return temp
 
 
 class 装备345():
@@ -7249,7 +11152,22 @@ class 装备345():
         属性.守护恩赐体精 += 116
         属性.转职被动智力 += 116
         属性.BUFF独立per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +66<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +4%<br>'
+            temp += '[启示：圣歌]智力 +116<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +66<br>'
+            temp += '精神 +66<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +4%<<br>'
+            temp += '[守护恩赐]体力、精神 +116<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +66<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +4%<<br>'
+            temp += '[人偶操纵者]智力 +116<br>'
+        return temp
 
 
 class 装备346():
@@ -7275,7 +11193,25 @@ class 装备346():
         属性.转职被动智力 += 128
         属性.BUFF魔攻per *= 1.04
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +44<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +4%<br>'
+            temp += '[启示：圣歌]智力 +128<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +44<br>'
+            temp += '精神 +44<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +108<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +44<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +4%<br>'
+            temp += '[人偶操纵者]智力 +128<br>'
+        return temp
 
 
 class 装备347():
@@ -7302,7 +11238,25 @@ class 装备347():
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +66<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +126<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +66<br>'
+            temp += '精神 +66<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +120<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +66<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +126<br>'
+        return temp
 
 
 class 装备348():
@@ -7327,7 +11281,23 @@ class 装备348():
         属性.守护恩赐体精 += 106
         属性.转职被动智力 += 96
         属性.BUFF独立per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv60-80 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +66<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +4%<br>'
+            temp += '[启示：圣歌]智力 +96<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +66<br>'
+            temp += '精神 +66<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +106<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +66<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +4%<br>'
+            temp += '[人偶操纵者]智力 +96<br>'
+        return temp
 
 
 class 装备349():
@@ -7352,7 +11322,23 @@ class 装备349():
         属性.守护恩赐体精 += 84
         属性.转职被动智力 += 94
         属性.BUFF魔攻per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv48-70 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +44<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +4%<br>'
+            temp += '[启示：圣歌]智力 +96<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +44<br>'
+            temp += '精神 +44<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +84<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +44<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +4%<br>'
+            temp += '[人偶操纵者]智力 +96<br>'
+        return temp
 
 
 class 装备350():
@@ -7378,7 +11364,23 @@ class 装备350():
         属性.转职被动智力 += 106
         属性.BUFF力量per *= 1.06
         属性.BUFF智力per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv35-50 技能等级 +1<br>'
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +66<br>'
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[启示：圣歌]智力 +106<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +66<br>'
+            temp += '精神 +66<br>'
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[守护恩赐]体力、精神 +111<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +66<br>'
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[人偶操纵者]智力 +106<br>'
+        return temp
 
 
 class 装备351():
@@ -7403,8 +11405,22 @@ class 装备351():
         属性.守护恩赐体精 += 101
         属性.转职被动智力 += 86
         属性.BUFF独立per *= 1.04
-        pass
-
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +66<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +4%<br>'
+            temp += '[启示：圣歌]智力 +86<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +66<br>'
+            temp += '精神 +66<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +101<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +66<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +4%<br>'
+            temp += '[人偶操纵者]智力 +86<br>'
+        return temp
 
 class 装备352():
     名称 = '暗黑之翼：被蚕食的天空'
@@ -7429,7 +11445,25 @@ class 装备352():
         属性.转职被动智力 += 108
         属性.BUFF魔攻per *= 1.04
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +44<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +4%<br>'
+            temp += '[启示：圣歌]智力 +72<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +44<br>'
+            temp += '精神 +44<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +108<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +44<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +4%<br>'
+            temp += '[人偶操纵者]智力 +72<br>'
+        return temp
 
 
 class 装备353():
@@ -7456,7 +11490,25 @@ class 装备353():
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +66<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[启示：圣歌]智力 +106<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +44<br>'
+            temp += '精神 +44<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +66<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +106<br>'
+        return temp
 
 
 # endregion
@@ -7489,37 +11541,70 @@ class 装备354():
         属性.转职被动智力 += 285
         属性.BUFF力量per *= 1.05
         属性.BUFF智力per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +100<br>'
+            temp += '[勇气祝福]力量、智力 +5%<br>'
+            temp += '[启示：圣歌]智力 +285<br>'
+            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+            temp += '智力 +{}<br>'.format(25 * 改造等级)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +117<br>'
+            temp += '[荣誉祝福]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +262<br>'
+            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+            temp += '体力 +{}<br>'.format(25 * 改造等级)
+            temp += '精神 +{}<br>'.format(25 * 改造等级)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +100<br>'
+            temp += '[禁忌诅咒]力量、智力 +5%<br>'
+            temp += '[人偶操纵者]智力 +285<br>'
+            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+            temp += '智力 +{}<br>'.format(25 * 改造等级)
+        return temp
 
 
 class 装备355():
-    名称 = '轮回·维度冲击臂环(庭院)'
+    名称 = '时空·维度冲击臂环'
     模式 = 1
     所属套装 = '智慧产物'
     所属套装2 = '维度崩坏'
     等级 = 100
-    品质 = '史诗'
+    品质 = '传说'
     部位 = '手镯'
     类型 = '首饰'
-    智力 = 100
-    体力 = 117
+    智力 = 0
+    体力 = 114
     精神 = 0
 
     def 城镇属性(self, 属性):
         pass
 
     def 进图属性(self, 属性):
-        属性.智力 += 25 * 属性.获取改造(self.部位)
-        属性.体力 += 25 * 属性.获取改造(self.部位)
-        属性.精神 += 25 * 属性.获取改造(self.部位)
         pass
 
     def BUFF属性(self, 属性):
-        属性.守护恩赐体精 += 262
-        属性.转职被动智力 += 285
+        属性.守护恩赐体精 += 222
+        属性.转职被动智力 += 345
         属性.BUFF力量per *= 1.05
         属性.BUFF智力per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        if 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +5%<br>'
+            temp += '[启示：圣歌]智力 +345<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +114<br>'
+            temp += '[荣誉祝福]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +222<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +5%<br>'
+            temp += '[人偶操纵者]智力 +345<br>'
+        return temp
+
 
 
 class 装备356():
@@ -7544,7 +11629,22 @@ class 装备356():
         属性.BUFF物攻per *= 1.03
         属性.守护恩赐体精 += 156
         属性.转职被动智力 += 143
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +46<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +3%<br>'
+            temp += '[启示：圣歌]智力 +143<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '精神 +114<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +156<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +46<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +3%<br>'
+            temp += '[人偶操纵者]智力 +143<br>'
+        return temp
 
 
 class 装备357():
@@ -7570,7 +11670,21 @@ class 装备357():
         属性.转职被动智力 += 129
         属性.BUFF力量per *= 1.03
         属性.BUFF智力per *= 1.03
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +68<br>'
+            temp += '[勇气祝福]力量、智力 +3%<br>'
+            temp += '[启示：圣歌]智力 +129<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +205<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +68<br>'
+            temp += '[禁忌诅咒]力量、智力 +3%<br>'
+            temp += '[人偶操纵者]智力 +129<br>'
+        return temp
 
 class 装备358():
     名称 = '轮回·腐蚀之黑色十字耳环'
@@ -7600,11 +11714,38 @@ class 装备358():
         属性.BUFF力量per *= 1.03
         属性.BUFF智力per *= 1.03
         属性.BUFF独立per *= 1.03
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +169<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +3%<br>'
+            temp += '[勇气祝福]力量、智力 +3%<br>'
+            temp += '[启示：圣歌]智力 +20<br>'
+            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+            temp += '智力 +{}<br>'.format(25 * 改造等级)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +69<br>'
+            temp += '精神 +69<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +3%<br>'
+            temp += '[荣誉祝福]力量、智力 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +120<br>'
+            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+            temp += '体力 +{}<br>'.format(25 * 改造等级)
+            temp += '精神 +{}<br>'.format(25 * 改造等级)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +169<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +3%<br>'
+            temp += '[禁忌诅咒]力量、智力 +3%<br>'
+            temp += '[人偶操纵者]智力 +20<br>'
+            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+            temp += '智力 +{}<br>'.format(25 * 改造等级)
+        return temp
+
 
 
 class 装备359():
-    名称 = '轮回·腐蚀之黑色十字耳环(庭院)'
+    名称 = '时空·腐蚀之黑色十字耳环'
     模式 = 1
     所属套装 = '智慧产物'
     所属套装2 = '暗之腐蚀'
@@ -7612,27 +11753,41 @@ class 装备359():
     品质 = '史诗'
     部位 = '耳环'
     类型 = '特殊'
-    智力 = 169
-    体力 = 69
-    精神 = 69
+    智力 = 67
+    体力 = 67
+    精神 = 67
 
     def 城镇属性(self, 属性):
         pass
 
     def 进图属性(self, 属性):
-        属性.智力 += 25 * 属性.获取改造(self.部位)
-        属性.体力 += 25 * 属性.获取改造(self.部位)
-        属性.精神 += 25 * 属性.获取改造(self.部位)
         pass
 
     def BUFF属性(self, 属性):
-        属性.守护恩赐体精 += 120
-        属性.转职被动智力 += 20
+        属性.守护恩赐体精 += 116
+        属性.转职被动智力 += 116
         属性.BUFF力量per *= 1.03
         属性.BUFF智力per *= 1.03
         属性.BUFF独立per *= 1.03
-        pass
-
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +67<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +3%<br>'
+            temp += '[勇气祝福]力量、智力 +3%<br>'
+            temp += '[启示：圣歌]智力 +116<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +67<br>'
+            temp += '精神 +67<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +3%<br>'
+            temp += '[荣誉祝福]力量、智力 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +116<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +67<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +3%<br>'
+            temp += '[禁忌诅咒]力量、智力 +3%<br>'
+            temp += '[人偶操纵者]智力 +116<br>'
+        return temp
 
 class 装备360():
     名称 = '腐蚀之黑色面具'
@@ -7657,7 +11812,26 @@ class 装备360():
         属性.BUFF魔攻per *= 1.03
         属性.守护恩赐体精 += 108
         属性.转职被动智力 += 128
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +45<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +3%<br>'
+            temp += '[启示：圣歌]智力 +108<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +45<br>'
+            temp += '精神 +45<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +128<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +45<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +3%<br>'
+            temp += '[人偶操纵者]智力 +108<br>'
+        return temp
 
 
 class 装备361():
@@ -7685,7 +11859,27 @@ class 装备361():
         属性.一觉力智 += 20
         属性.守护恩赐体精 += 120
         属性.转职被动智力 += 126
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +67<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +3%<br>'
+            temp += '[启示：圣歌]智力 +126<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +67<br>'
+            temp += '精神 +67<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +120<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +67<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +3%<br>'
+            temp += '[人偶操纵者]智力 +126<br>'
+        return temp
+
 
 class 装备362():
     名称 = '轮回·黑暗幽灵紫杉胸甲'
@@ -7712,11 +11906,37 @@ class 装备362():
         属性.BUFF物攻per *= 1.2
         属性.守护恩赐体精 += 145
         属性.转职被动智力 += 145
-        pass
+
+    def 装备描述(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +149<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +2%<br>'
+            temp += '[勇气祝福]力量、智力 +3%<br>'
+            temp += '[启示：圣歌]智力 +145<br>'
+            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+            temp += '智力 +{}<br>'.format(25 * 改造等级)
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +54<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +2%<br>'
+            temp += '[荣誉祝福]力量、智力 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +145<br>'
+            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+            temp += '体力 +{}<br>'.format(25 * 改造等级)
+            temp += '精神 +{}<br>'.format(25 * 改造等级)
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +149<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +2%<br>'
+            temp += '[禁忌诅咒]力量、智力 +3%<br>'
+            temp += '[人偶操纵者]智力 +145<br>'
+            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+            temp += '智力 +{}<br>'.format(25 * 改造等级)
+        return temp
 
 
 class 装备363():
-    名称 = '轮回·黑暗幽灵紫杉胸甲(庭院)'
+    名称 = '时空·黑暗幽灵紫杉胸甲'
     模式 = 1
     所属套装 = '智慧产物'
     所属套装2 = '堕落的暗黑之力'
@@ -7729,18 +11949,32 @@ class 装备363():
         pass
 
     def 进图属性(self, 属性):
-        属性.智力 += 25 * 属性.获取改造(self.部位)
-        属性.体力 += 25 * 属性.获取改造(self.部位)
-        属性.精神 += 25 * 属性.获取改造(self.部位)
         pass
 
     def BUFF属性(self, 属性):
         属性.BUFF力量per *= 1.03
         属性.BUFF智力per *= 1.03
         属性.BUFF物攻per *= 1.2
-        属性.守护恩赐体精 += 145
-        属性.转职被动智力 += 145
-        pass
+        属性.守护恩赐体精 += 105
+        属性.转职被动智力 += 105
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +47<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +20%<br>'
+            temp += '[勇气祝福]力量、智力 +3%<br>'
+            temp += '[启示：圣歌]智力 +105<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +20%<br>'
+            temp += '[荣誉祝福]力量、智力 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +105<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +47<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +20%<br>'
+            temp += '[禁忌诅咒]力量、智力 +3%<br>'
+            temp += '[人偶操纵者]智力 +105<br>'
+        return temp
 
 class 装备364():
     名称 = '黑暗幽灵紫杉护肩'
@@ -7761,7 +11995,18 @@ class 装备364():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 216
         属性.转职被动智力 += 216
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +39<br>'
+            temp += '[启示：圣歌]智力 +216<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +42<br>'
+            temp += '[守护恩赐]体力、精神 +216<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +39<br>'
+            temp += '[人偶操纵者]智力 +216<br>'
+        return temp
 
 class 装备365():
     名称 = '黑暗幽灵紫杉护腿'
@@ -7782,7 +12027,22 @@ class 装备365():
         属性.BUFF魔攻per *= 1.2
         属性.守护恩赐体精 += 80
         属性.转职被动智力 += 80
-        pass
+
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +47<br>'
+            temp += '[勇气祝福]魔法攻击力增加量 +2%<br>'
+            temp += '[启示：圣歌]智力 +80<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]魔法攻击力增加量 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +80<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +47<br>'
+            temp += '[禁忌诅咒]魔法攻击力增加量 +2%<br>'
+            temp += '[人偶操纵者]智力 +80<br>'
+        return temp
 
 class 装备366():
     名称 = '黑暗幽灵紫杉腰带'
@@ -7803,7 +12063,22 @@ class 装备366():
         属性.BUFF独立per *= 1.2
         属性.守护恩赐体精 += 80
         属性.转职被动智力 += 80
-        pass
+
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +29<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +2%<br>'
+            temp += '[启示：圣歌]智力 +80<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +80<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +29<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +2%<br>'
+            temp += '[人偶操纵者]智力 +80<br>'
+        return temp
 
 class 装备367():
     名称 = '黑暗幽灵紫杉长靴'
@@ -7823,8 +12098,18 @@ class 装备367():
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 160
         属性.转职被动智力 += 160
-        pass
-
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +29<br>'
+            temp += '[启示：圣歌]智力 +160<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +31<br>'
+            temp += '[守护恩赐]体力、精神 +160<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +29<br>'
+            temp += '[人偶操纵者]智力 +160<br>'
+        return temp
 class 装备368():
     名称 = '维度冲击臂环'
     模式 = 1
@@ -7848,7 +12133,19 @@ class 装备368():
         属性.BUFF智力per *= 1.03
         属性.守护恩赐体精 += 162
         属性.转职被动智力 += 285
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +3%<br>'
+            temp += '[启示：圣歌]智力 +285<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +114<br>'
+            temp += '[荣誉祝福]力量、智力 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +162<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +3%<br>'
+            temp += '[人偶操纵者]智力 +285<br>'
+        return temp
 
 class 装备369():
     名称 = '腐蚀之黑色十字耳环'
@@ -7872,7 +12169,23 @@ class 装备369():
         属性.BUFF独立per *= 1.03
         属性.守护恩赐体精 += 116
         属性.转职被动智力 += 116
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +67<br>'
+            temp += '[勇气祝福]独立攻击力增加量 +3%<br>'
+            temp += '[启示：圣歌]智力 +116<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +67<br>'
+            temp += '精神 +67<br>'
+            temp += '[荣誉祝福]独立攻击力增加量 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +116<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +67<br>'
+            temp += '[禁忌诅咒]独立攻击力增加量 +3%<br>'
+            temp += '[人偶操纵者]智力 +116<br>'
+        return temp
+
 
 class 装备370():
     名称 = '黑暗幽灵紫杉胸甲'
@@ -7893,7 +12206,22 @@ class 装备370():
         属性.BUFF物攻per *= 1.2
         属性.守护恩赐体精 += 80
         属性.转职被动智力 += 80
-        pass
+
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == '奶妈':
+            temp += '智力 +47<br>'
+            temp += '[勇气祝福]物理攻击力增加量 +2%<br>'
+            temp += '[启示：圣歌]智力 +80<br>'
+        elif 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '体力 +52<br>'
+            temp += '[荣誉祝福]物理攻击力增加量 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +80<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '智力 +47<br>'
+            temp += '[禁忌诅咒]物理攻击力增加量 +2%<br>'
+            temp += '[人偶操纵者]智力 +80<br>'
+        return temp
 
 # endregion
 
@@ -7947,6 +12275,7 @@ class 装备370():
 
 
 # endregion
+# endregion
 
 class 套装效果0():
     名称 = '遗忘魔法师的馈赠'
@@ -7962,7 +12291,20 @@ class 套装效果0():
         属性.BUFFLv += 2
         属性.一觉Lv += 1
         属性.一觉力智 += 135
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv30 技能等级 +2<br>'
+        temp += 'Lv50 技能等级 +1<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[天启之珠]力量、智力 +135<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[圣光天启] 力量、智力 +135<br>'
+            temp += '[启示圣歌] 智力 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[开幕！人偶剧场]力量、智力 +135<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 class 套装效果1():
     名称 = '死亡阴影'
@@ -7976,7 +12318,18 @@ class 套装效果1():
         属性.守护恩赐体精 += 190
         属性.转职被动智力 += 190
         属性.一觉力智 += 220
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[天启之珠]力量、智力 +220<br>'
+            temp += '[守护恩赐]体力、精神 +190<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[圣光天启]力量、智力 +220<br>'
+            temp += '[启示圣歌]智力 +190<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[开幕！人偶剧场]力量、智力 +220<br>'
+            temp += '[人偶操纵者]智力 +190<br>'
+        return temp
 
 class 套装效果2():
     名称 = '贫瘠沙漠的遗产'
@@ -7995,7 +12348,19 @@ class 套装效果2():
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
         属性.一觉力智 += 175
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-30 技能等级 +1<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[天启之珠]力量、智力 +175<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[圣光天启]力量、智力 +175<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +175<br>'
+        return temp
 
 class 套装效果3():
     名称 = '噩梦：地狱之路'
@@ -8011,7 +12376,24 @@ class 套装效果3():
         属性.BUFF智力per *= 1.08
         属性.一觉力智 += 100
         属性.一觉力智per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[天启之珠]力量、智力 +100<br>'
+            temp += '[天启之珠]力量、智力 +4%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[圣光天启]力量、智力 +100<br>'
+            temp += '[圣光天启]力量、智力 +4%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +100<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +4%<br>'
+        return temp
 
 class 套装效果4():
     名称 = '永恒不息之路'
@@ -8026,7 +12408,21 @@ class 套装效果4():
         属性.BUFF力量per *= 1.12
         属性.BUFF智力per *= 1.12
         属性.一觉力智 += 175
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +12%<br>'
+            temp += '[天启之珠]力量、智力 +175<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +12%<br>'
+            temp += '[圣光天启]力量、智力 +175<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +12%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +175<br>'
+        return temp
 
 class 套装效果5():
     名称 = '天堂舞姬'
@@ -8043,7 +12439,24 @@ class 套装效果5():
         属性.BUFF力量per *= 1.12
         属性.BUFF智力per *= 1.12
         属性.一觉力智 += 135
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +12%<br>'
+            temp += '[天启之珠]力量、智力 +135<br>'
+            temp += '[守护恩赐]体力、精神 +105<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +12%<br>'
+            temp += '[圣光天启]力量、智力 +135<br>'
+            temp += '[启示圣歌]智力 +105<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +12%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +135<br>'
+            temp += '[人偶操纵者]智力 +105<br>'
+        return temp
 
 class 套装效果6():
     名称 = '皇家裁决者宣言'
@@ -8057,7 +12470,18 @@ class 套装效果6():
         属性.BUFF力量per *= 1.12
         属性.BUFF智力per *= 1.12
         属性.一觉力智 += 220
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +12%<br>'
+            temp += '[天启之珠]力量、智力 +220<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +12%<br>'
+            temp += '[圣光天启]力量、智力 +220<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +12%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +220<br>'
+        return temp
 
 class 套装效果7():
     名称 = '炙炎之盛宴'
@@ -8072,7 +12496,21 @@ class 套装效果7():
         属性.转职被动智力 += 100
         属性.BUFFLv += 1
         属性.一觉力智 += 175
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]力量、智力 +175<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]力量、智力 +175<br>'
+            temp += '[启示圣歌]智力 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +175<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 class 套装效果8():
     名称 = '传奇铁匠-封神'
@@ -8089,7 +12527,24 @@ class 套装效果8():
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
         属性.一觉力智 += 120
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[天启之珠]力量、智力 +120<br>'
+            temp += '[守护恩赐]体力、精神 +80<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[圣光天启]力量、智力 +120<br>'
+            temp += '[启示圣歌]智力 +80<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +120<br>'
+            temp += '[人偶操纵者]智力 +80<br>'
+        return temp
 
 class 套装效果9():
     名称 = '命运歧路'
@@ -8104,7 +12559,21 @@ class 套装效果9():
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
         属性.一觉力智 += 135
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[天启之珠]力量、智力 +135<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[圣光天启]力量、智力 +135<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +135<br>'
+        return temp
 
 class 套装效果10():
     名称 = '古代祭祀的神圣仪式'
@@ -8117,7 +12586,18 @@ class 套装效果10():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 3
         属性.一觉力智 += 230
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +3<br>'
+            temp += '[天启之珠]力量、智力 +230<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +3<br>'
+            temp += '[圣光天启]力量、智力 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +3<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +230<br>'
+        return temp
 
 class 套装效果11():
     名称 = '龙血玄黄'
@@ -8133,7 +12613,24 @@ class 套装效果11():
         属性.BUFF智力per *= 1.08
         属性.一觉Lv += 1
         属性.一觉力智 += 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[天启之珠]力量、智力 +100<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[圣光天启]力量、智力 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +100<br>'
+        return temp
 
 class 套装效果12():
     名称 = '擎天战甲'
@@ -8148,7 +12645,21 @@ class 套装效果12():
         属性.BUFF力量per *= 1.06
         属性.BUFF智力per *= 1.06
         属性.一觉力智 += 150
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[天启之珠]力量、智力 +150<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[圣光天启]力量、智力 +150<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +150<br>'
+        return temp
 
 class 套装效果13():
     名称 = '荆棘漫天'
@@ -8163,7 +12674,21 @@ class 套装效果13():
         属性.BUFF力量per *= 1.12
         属性.BUFF智力per *= 1.12
         属性.一觉力智 += 175
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +12%<br>'
+            temp += '[天启之珠]力量、智力 +175<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +12%<br>'
+            temp += '[圣光天启]力量、智力 +175<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +12%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +175<br>'
+        return temp
 
 class 套装效果14():
     名称 = '大自然的呼吸'
@@ -8180,7 +12705,24 @@ class 套装效果14():
         属性.BUFF智力per *= 1.15
         属性.一觉力智 += 60
         属性.一觉力智per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +15%<br>'
+            temp += '[天启之珠]力量、智力 +60<br>'
+            temp += '[天启之珠]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +145<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +15%<br>'
+            temp += '[圣光天启]力量、智力 +60<br>'
+            temp += '[圣光天启]力量、智力 +5%<br>'
+            temp += '[启示圣歌]智力 +145<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +15%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +60<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
+            temp += '[人偶操纵者]智力 +145<br>'
+        return temp
 
 class 套装效果15():
     名称 = '遗忘魔法师的馈赠'
@@ -8196,7 +12738,21 @@ class 套装效果15():
         属性.BUFF力量per *= 1.24
         属性.BUFF智力per *= 1.24
         属性.一觉力智 += 153
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +24%<br>'
+            temp += '[天启之珠]力量、智力 +153<br>'
+            temp += '[守护恩赐]体力、精神 +50<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +24%<br>'
+            temp += '[圣光天启]力量、智力 +153<br>'
+            temp += '[启示圣歌]智力 +50<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +24%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +153<br>'
+            temp += '[人偶操纵者]智力 +50<br>'
+        return temp
 
 class 套装效果16():
     名称 = '死亡阴影'
@@ -8213,7 +12769,24 @@ class 套装效果16():
         属性.BUFF力量per *= 1.25
         属性.BUFF智力per *= 1.25
         属性.一觉力智 += 130
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +25%<br>'
+            temp += '[天启之珠]力量、智力 +130<br>'
+            temp += '[守护恩赐]体力、精神 +165<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +25%<br>'
+            temp += '[圣光天启]力量、智力 +130<br>'
+            temp += '[启示圣歌]智力 +165<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +25%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +130<br>'
+            temp += '[人偶操纵者]智力 +165<br>'
+        return temp
 
 class 套装效果17():
     名称 = '贫瘠沙漠的遗产'
@@ -8231,7 +12804,22 @@ class 套装效果17():
         属性.BUFF智力per *= 1.1
         属性.一觉被动Lv += 2
         属性.一觉力智 += 150
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv30-48 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +10%<br>'
+            temp += '[天启之珠]力量、智力 +150<br>'
+            temp += '[守护恩赐]体力、精神 +113<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +10%<br>'
+            temp += '[圣光天启]力量、智力 +150<br>'
+            temp += '[启示圣歌]智力 +113<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +10%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +150<br>'
+            temp += '[人偶操纵者]智力 +113<br>'
+        return temp
 
 class 套装效果18():
     名称 = '噩梦：地狱之路'
@@ -8250,7 +12838,26 @@ class 套装效果18():
         属性.BUFF智力per *= 1.08
         属性.一觉力智 += 99
         属性.一觉力智per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-85 技能等级 +1<br>'
+        temp += 'Lv100 技能等级 +1<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[天启之珠]力量、智力 +99<br>'
+            temp += '[天启之珠]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +110<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[圣光天启]力量、智力 +99<br>'
+            temp += '[圣光天启]力量、智力 +4%<br>'
+            temp += '[启示圣歌]智力 +110<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +99<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +110<br>'
+        return temp
 
 class 套装效果19():
     名称 = '永恒不息之路'
@@ -8265,7 +12872,21 @@ class 套装效果19():
         属性.BUFF力量per *= 1.15
         属性.BUFF智力per *= 1.15
         属性.一觉力智 += 130
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +3<br>'
+            temp += '[荣誉祝福]力量、智力 +15%<br>'
+            temp += '[天启之珠]力量、智力 +130<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +3<br>'
+            temp += '[勇气祝福]力量、智力 +15%<br>'
+            temp += '[圣光天启]力量、智力 +130<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +3<br>'
+            temp += '[禁忌诅咒]力量、智力 +15%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +130<br>'
+        return temp
 
 class 套装效果20():
     名称 = '天堂舞姬'
@@ -8283,7 +12904,24 @@ class 套装效果20():
         属性.BUFF智力per *= 1.08
         属性.一觉力智 += 192
         属性.一觉力智per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[圣光天启]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +145<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[天启之珠]力量、智力 +5%<br>'
+            temp += '[启示圣歌]智力 +145<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
+            temp += '[人偶操纵者]智力 +145<br>'
+        return temp
 
 class 套装效果21():
     名称 = '皇家裁决者宣言'
@@ -8299,7 +12937,21 @@ class 套装效果21():
         属性.BUFFLv += 3
         属性.BUFF力量per *= 1.2
         属性.BUFF智力per *= 1.2
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +3<br>'
+            temp += '[荣誉祝福]力量、智力 +20%<br>'
+            temp += '[守护恩赐]体力、精神 +280<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +3<br>'
+            temp += '[勇气祝福]力量、智力 +20%<br>'
+            temp += '[启示圣歌]智力 +280<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +3<br>'
+            temp += '[禁忌诅咒]力量、智力 +20%<br>'
+            temp += '[人偶操纵者]智力 +280<br>'
+        return temp
 
 class 套装效果22():
     名称 = '炙炎之盛宴'
@@ -8319,7 +12971,19 @@ class 套装效果22():
         属性.BUFF智力per *= 1.25
         属性.一觉被动Lv += 2
         属性.一觉力智 += 100
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-48 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +25%<br>'
+            temp += '[天启之珠]力量、智力 +100<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +25%<br>'
+            temp += '[圣光天启]力量、智力 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +25%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +100<br>'
+        return temp
 
 class 套装效果23():
     名称 = '传奇铁匠-封神'
@@ -8337,7 +13001,19 @@ class 套装效果23():
         属性.BUFF智力per *= 1.15
         属性.一觉被动Lv += 2
         属性.一觉Lv += 2
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv30-50 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +15%<br>'
+            temp += '[守护恩赐]体力、精神 +250<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +15%<br>'
+            temp += '[启示圣歌]智力 +250<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +15%<br>'
+            temp += '[人偶操纵者]智力 +250<br>'
+        return temp
 
 class 套装效果24():
     名称 = '命运歧路'
@@ -8351,7 +13027,18 @@ class 套装效果24():
         属性.BUFF力量per *= 1.08
         属性.BUFF智力per *= 1.08
         属性.一觉力智 += 260
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[天启之珠]力量、智力 +260<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[圣光天启]力量、智力 +260<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +260<br>'
+        return temp
 
 class 套装效果25():
     名称 = '古代祭祀的神圣仪式'
@@ -8367,7 +13054,21 @@ class 套装效果25():
         属性.BUFFLv += 1
         属性.BUFF力量per *= 1.32
         属性.BUFF智力per *= 1.32
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +32%<br>'
+            temp += '[守护恩赐]体力、精神 +125<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +32%<br>'
+            temp += '[启示圣歌]智力 +125<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +32%<br>'
+            temp += '[人偶操纵者]智力 +125<br>'
+        return temp
 
 class 套装效果26():
     名称 = '龙血玄黄'
@@ -8385,7 +13086,27 @@ class 套装效果26():
         属性.BUFF智力per *= 1.09
         属性.一觉力智 += 155
         属性.一觉力智per *= 1.02
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +9%<br>'
+            temp += '[天启之珠]力量、智力 +155<br>'
+            temp += '[天启之珠]力量、智力 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +150<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +9%<br>'
+            temp += '[圣光天启]力量、智力 +155<br>'
+            temp += '[圣光天启]力量、智力 +2%<br>'
+            temp += '[启示圣歌]智力 +150<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +9%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +155<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +2%<br>'
+            temp += '[人偶操纵者]智力 +150<br>'
+        return temp
 
 class 套装效果27():
     名称 = '擎天战甲'
@@ -8401,7 +13122,21 @@ class 套装效果27():
         属性.BUFF力量per *= 1.2
         属性.BUFF智力per *= 1.2
         属性.一觉Lv += 2
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[天启之珠]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +20%<br>'
+            temp += '[守护恩赐]体力、精神 +285<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[圣光天启]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +20%<br>'
+            temp += '[启示圣歌]智力 +285<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[开幕！人偶剧场]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +20%<br>'
+            temp += '[人偶操纵者]智力 +285<br>'
+        return temp
 
 class 套装效果28():
     名称 = '荆棘漫天'
@@ -8418,7 +13153,24 @@ class 套装效果28():
         属性.BUFF力量per *= 1.11
         属性.BUFF智力per *= 1.11
         属性.一觉力智 += 130
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +11%<br>'
+            temp += '[天启之珠]力量、智力 +130<br>'
+            temp += '[守护恩赐]体力、精神 +200<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +11%<br>'
+            temp += '[圣光天启]力量、智力 +130<br>'
+            temp += '[启示圣歌]智力 +200<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +11%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +130<br>'
+            temp += '[人偶操纵者]智力 +200<br>'
+        return temp
 
 class 套装效果29():
     名称 = '大自然的呼吸'
@@ -8433,7 +13185,21 @@ class 套装效果29():
         属性.BUFF力量per *= 1.05
         属性.BUFF智力per *= 1.05
         属性.一觉力智 += 248
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +5%<br>'
+            temp += '[天启之珠]力量、智力 +248<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +5%<br>'
+            temp += '[圣光天启]力量、智力 +248<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +5%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +248<br>'
+        return temp
 
 class 套装效果30():
     名称 = '遗忘魔法师的馈赠'
@@ -8451,7 +13217,23 @@ class 套装效果30():
         属性.BUFF智力per *= 1.06
         属性.一觉力智per *= 1.08
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-85 技能等级 +2<br>'
+        temp += 'Lv100 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[天启之珠]力量、智力 +8%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[圣光天启]力量、智力 +8%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +8%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果31():
     名称 = '死亡阴影'
@@ -8473,7 +13255,25 @@ class 套装效果31():
         属性.一觉力智 += 120
         属性.一觉力智per *= 1.08
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-30 技能等级 +1<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +12%<br>'
+            temp += '[天启之珠]力量、智力 +120<br>'
+            temp += '[天启之珠]力量、智力 +8%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +12%<br>'
+            temp += '[圣光天启]力量、智力 +120<br>'
+            temp += '[圣光天启]力量、智力 +8%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +12%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +120<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +8%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果32():
     名称 = '贫瘠沙漠的遗产'
@@ -8492,7 +13292,22 @@ class 套装效果32():
         属性.一觉Lv += 2
         属性.一觉力智per *= 1.1
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv30-50 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +14%<br>'
+            temp += '[天启之珠]力量、智力 +10%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +14%<br>'
+            temp += '[圣光天启]力量、智力 +10%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +14%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +10%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果33():
     名称 = '噩梦：地狱之路'
@@ -8511,7 +13326,27 @@ class 套装效果33():
         属性.BUFF智力per *= 1.15
         属性.一觉力智 += 185
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +15%<br>'
+            temp += '[天启之珠]力量、智力 +185<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+            temp += '[守护恩赐]体力、精神 +80<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +15%<br>'
+            temp += '[圣光天启]力量、智力 +185<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            temp += '[启示圣歌]智力 +80<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +15%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +185<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+            temp += '[人偶操纵者]智力 +80<br>'
+        return temp
 
 class 套装效果34():
     名称 = '永恒不息之路'
@@ -8529,7 +13364,27 @@ class 套装效果34():
         属性.一觉力智 += 150
         属性.一觉力智per *= 1.1
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[天启之珠]力量、智力 +150<br>'
+            temp += '[天启之珠]力量、智力 +10%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[圣光天启]力量、智力 +150<br>'
+            temp += '[圣光天启]力量、智力 +10%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +150<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +10%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果35():
     名称 = '天堂舞姬'
@@ -8550,7 +13405,25 @@ class 套装效果35():
         属性.一觉Lv += 2
         属性.一觉力智per *= 1.05
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv30-50 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +12%<br>'
+            temp += '[天启之珠]力量、智力 +5%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +12%<br>'
+            temp += '[圣光天启]力量、智力 +5%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            temp += '[启示圣歌]智力 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +12%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 class 套装效果36():
     名称 = '皇家裁决者宣言'
@@ -8566,7 +13439,24 @@ class 套装效果36():
         属性.一觉力智 += 180
         属性.一觉力智per *= 1.1
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[天启之珠]力量、智力 +180<br>'
+            temp += '[天启之珠]力量、智力 +10%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[圣光天启]力量、智力 +180<br>'
+            temp += '[圣光天启]力量、智力 +10%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +180<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +10%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果37():
     名称 = '炙炎之盛宴'
@@ -8584,7 +13474,27 @@ class 套装效果37():
         属性.一觉力智 += 70
         属性.一觉力智per *= 1.08
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[天启之珠]力量、智力 +70<br>'
+            temp += '[天启之珠]力量、智力 +8%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+            temp += '[守护恩赐]体力、精神 +300<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[圣光天启]力量、智力 +70<br>'
+            temp += '[圣光天启]力量、智力 +8%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            temp += '[启示圣歌]智力 +300<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +70<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +8%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+            temp += '[人偶操纵者]智力 +300<br>'
+        return temp
 
 class 套装效果38():
     名称 = '传奇铁匠-封神'
@@ -8603,7 +13513,25 @@ class 套装效果38():
         属性.一觉力智 += 20
         属性.一觉力智per *= 1.07
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv30-48 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[天启之珠]力量、智力 +20<br>'
+            temp += '[天启之珠]力量、智力 +7%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[圣光天启]力量、智力 +20<br>'
+            temp += '[圣光天启]力量、智力 +7%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +20<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +7%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果39():
     名称 = '命运歧路'
@@ -8620,7 +13548,24 @@ class 套装效果39():
         属性.BUFF智力per *= 1.17
         属性.一觉力智per *= 1.07
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +3<br>'
+            temp += '[荣誉祝福]力量、智力 +17%<br>'
+            temp += '[天启之珠]力量、智力 +7%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +3<br>'
+            temp += '[勇气祝福]力量、智力 +17%<br>'
+            temp += '[圣光天启]力量、智力 +7%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +3<br>'
+            temp += '[禁忌诅咒]力量、智力 +17%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +7%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果40():
     名称 = '古代祭祀的神圣仪式'
@@ -8635,7 +13580,21 @@ class 套装效果40():
         属性.BUFFLv += 2
         属性.一觉力智 += 305
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[天启之珠]力量、智力 +305<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[圣光天启]力量、智力 +305<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +305<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果41():
     名称 = '龙血玄黄'
@@ -8653,7 +13612,27 @@ class 套装效果41():
         属性.一觉力智 += 120
         属性.一觉力智per *= 1.06
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +10%<br>'
+            temp += '[天启之珠]力量、智力 +120<br>'
+            temp += '[天启之珠]力量、智力 +6%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +10%<br>'
+            temp += '[圣光天启]力量、智力 +120<br>'
+            temp += '[圣光天启]力量、智力 +6%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +10%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +120<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +6%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果42():
     名称 = '擎天战甲'
@@ -8677,7 +13656,25 @@ class 套装效果42():
         属性.一觉力智 += 50
         属性.一觉力智per *= 1.1
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-50 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +7%<br>'
+            temp += '[天启之珠]力量、智力 +50<br>'
+            temp += '[天启之珠]力量、智力 +10%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +7%<br>'
+            temp += '[圣光天启]力量、智力 +50<br>'
+            temp += '[圣光天启]力量、智力 +10%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +7%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +50<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +10%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果43():
     名称 = '荆棘漫天'
@@ -8695,7 +13692,27 @@ class 套装效果43():
         属性.一觉力智 += 150
         属性.一觉力智per *= 1.08
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +10%<br>'
+            temp += '[天启之珠]力量、智力 +150<br>'
+            temp += '[天启之珠]力量、智力 +8%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +10%<br>'
+            temp += '[圣光天启]力量、智力 +150<br>'
+            temp += '[圣光天启]力量、智力 +8%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +10%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +150<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +8%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果44():
     名称 = '大自然的呼吸'
@@ -8713,7 +13730,27 @@ class 套装效果44():
         属性.一觉力智 += 130
         属性.一觉力智per *= 1.04
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +15%<br>'
+            temp += '[天启之珠]力量、智力 +130<br>'
+            temp += '[天启之珠]力量、智力 +4%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +15%<br>'
+            temp += '[圣光天启]力量、智力 +130<br>'
+            temp += '[圣光天启]力量、智力 +4%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +15%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +130<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +4%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果45():
     名称 = '深渊窥视者'
@@ -8726,7 +13763,16 @@ class 套装效果45():
         pass
     def BUFF属性(self, 属性):
         属性.一觉力智per *= 1.02
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-48 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[天启之珠]力量、智力 +2%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[圣光天启]力量、智力 +2%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[开幕！人偶剧场]力量、智力 +2%<br>'
+        return temp
 
 class 套装效果46():
     名称 = '圣者的黄昏'
@@ -8739,7 +13785,18 @@ class 套装效果46():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 1
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+        return temp
 
 class 套装效果47():
     名称 = '坎坷命运'
@@ -8754,7 +13811,21 @@ class 套装效果47():
         属性.BUFF力量per *= 1.02
         属性.BUFF智力per *= 1.02
         属性.一觉力智 += 45
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[天启之珠]力量、智力 +45<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[圣光天启]力量、智力 +45<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
+        return temp
 
 class 套装效果48():
     名称 = '吞噬愤怒'
@@ -8767,7 +13838,18 @@ class 套装效果48():
     def BUFF属性(self, 属性):
         属性.一觉Lv += 1
         属性.一觉力智 += 25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[天启之珠]力量、智力 +25<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[圣光天启]力量、智力 +25<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +25<br>'
+        return temp
 
 class 套装效果49():
     名称 = '黑魔法探求者'
@@ -8780,7 +13862,18 @@ class 套装效果49():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 1
         属性.一觉力智 += 48
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]力量、智力 +48<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]力量、智力 +48<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +48<br>'
+        return temp
 
 class 套装效果50():
     名称 = '时空旅行者'
@@ -8795,7 +13888,21 @@ class 套装效果50():
         属性.转职被动智力 += 46
         属性.BUFFLv += 1
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[守护恩赐]体力、精神 +36<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[启示圣歌]智力 +46<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[人偶操纵者]智力 +46<br>'
+        return temp
 
 class 套装效果51():
     名称 = '穿透命运的呐喊'
@@ -8808,7 +13915,18 @@ class 套装效果51():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 1
         属性.一觉力智 += 25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]力量、智力 +25<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]力量、智力 +25<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +25<br>'
+        return temp
 
 class 套装效果52():
     名称 = '狂乱追随者'
@@ -8821,7 +13939,18 @@ class 套装效果52():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 1
         属性.一觉力智 += 25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]力量、智力 +25<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]力量、智力 +25<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +25<br>'
+        return temp
 
 class 套装效果53():
     名称 = '地狱求道者'
@@ -8834,7 +13963,18 @@ class 套装效果53():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 1
         属性.一觉力智 += 32
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]力量、智力 +32<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]力量、智力 +32<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +32<br>'
+        return temp
 
 class 套装效果54():
     名称 = '次元旅行者'
@@ -8849,7 +13989,21 @@ class 套装效果54():
         属性.转职被动智力 += 60
         属性.BUFFLv += 1
         属性.一觉力智 += 42
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]力量、智力 +42<br>'
+            temp += '[守护恩赐]体力、精神 +40<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]力量、智力 +42<br>'
+            temp += '[启示圣歌]智力 +60<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +42<br>'
+            temp += '[人偶操纵者]智力 +60<br>'
+        return temp
 
 class 套装效果55():
     名称 = '天命无常'
@@ -8863,7 +14017,16 @@ class 套装效果55():
         属性.BUFFLv += 1
         属性.一觉被动Lv += 1
         属性.一觉力智 += 45
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv30-48 技能等级 +1<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[天启之珠]力量、智力 +45<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[圣光天启]力量、智力 +45<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
+        return temp
 
 class 套装效果56():
     名称 = '悲剧的残骸'
@@ -8876,7 +14039,18 @@ class 套装效果56():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 1
         属性.一觉力智 += 25
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]力量、智力 +25<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]力量、智力 +25<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +25<br>'
+        return temp
 
 class 套装效果57():
     名称 = '深渊窥视者'
@@ -8897,7 +14071,26 @@ class 套装效果57():
         属性.BUFF智力per *= 1.06
         属性.一觉力智 += 120
         属性.一觉力智per *= 1.03
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv60-80 技能等级 +2'
+        temp += 'Lv50、Lv85、Lv100 技能等级 +1<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[天启之珠]力量、智力 +120<br>'
+            temp += '[天启之珠]力量、智力 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +195<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[圣光天启]力量、智力 +120<br>'
+            temp += '[圣光天启]力量、智力 +3%<br>'
+            temp += '[启示圣歌]智力 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +120<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +3%<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+        return temp
 
 class 套装效果58():
     名称 = '圣者的黄昏'
@@ -8914,7 +14107,24 @@ class 套装效果58():
         属性.BUFF智力per *= 1.12
         属性.一觉力智 += 125
         属性.一觉力智per *= 1.03
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +12%<br>'
+            temp += '[天启之珠]力量、智力 +125<br>'
+            temp += '[天启之珠]力量、智力 +3%<br>'
+            temp += '[守护恩赐]体力、精神 +225<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +12%<br>'
+            temp += '[圣光天启]力量、智力 +125<br>'
+            temp += '[圣光天启]力量、智力 +3%<br>'
+            temp += '[启示圣歌]智力 +258<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +12%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +125<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +3%<br>'
+            temp += '[人偶操纵者]智力 +258<br>'
+        return temp
 
 class 套装效果59():
     名称 = '坎坷命运'
@@ -8933,7 +14143,30 @@ class 套装效果59():
         属性.一觉Lv += 1
         属性.一觉力智 += 74
         属性.一觉力智per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[天启之珠]力量、智力 +74<br>'
+            temp += '[天启之珠]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +236<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[圣光天启]力量、智力 +74<br>'
+            temp += '[圣光天启]力量、智力 +5%<br>'
+            temp += '[启示圣歌]智力 +255<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +74<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
+            temp += '[人偶操纵者]智力 +255<br>'
+        return temp
 
 class 套装效果60():
     名称 = '吞噬愤怒'
@@ -8952,7 +14185,30 @@ class 套装效果60():
         属性.一觉Lv += 1
         属性.一觉力智 += 99
         属性.一觉力智per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +10%<br>'
+            temp += '[天启之珠]力量、智力 +99<br>'
+            temp += '[天启之珠]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +236<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +10%<br>'
+            temp += '[圣光天启]力量、智力 +9<br>'
+            temp += '[圣光天启]力量、智力 +4%<br>'
+            temp += '[启示圣歌]智力 +255<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +10%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +99<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +255<br>'
+        return temp
 
 class 套装效果61():
     名称 = '黑魔法探求者'
@@ -8969,7 +14225,27 @@ class 套装效果61():
         属性.一觉Lv += 1
         属性.一觉力智 += 38
         属性.一觉力智per *= 1.06
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[天启之珠]力量、智力 +38<br>'
+            temp += '[天启之珠]力量、智力 +6%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[圣光天启]力量、智力 +38<br>'
+            temp += '[圣光天启]力量、智力 +6%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +38<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +6%<br>'
+        return temp
 
 class 套装效果62():
     名称 = '时空旅行者'
@@ -8985,7 +14261,24 @@ class 套装效果62():
         属性.BUFF智力per *= 1.1
         属性.一觉力智 += 45
         属性.一觉力智per *= 1.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +10%<br>'
+            temp += '[天启之珠]力量、智力 +45<br>'
+            temp += '[天启之珠]力量、智力 +5%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +10%<br>'
+            temp += '[圣光天启]力量、智力 +45<br>'
+            temp += '[圣光天启]力量、智力 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +10%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
+        return temp
 
 class 套装效果63():
     名称 = '穿透命运的呐喊'
@@ -9004,7 +14297,22 @@ class 套装效果63():
         属性.一觉被动Lv += 2
         属性.一觉Lv += 2
         属性.一觉力智per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv30-50 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[天启之珠]力量、智力 +4%<br>'
+            temp += '[守护恩赐]体力、精神 +76<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[圣光天启]力量、智力 +4%<br>'
+            temp += '[启示圣歌]智力 +68<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +4%<br>'
+            temp += '[人偶操纵者]智力 +68<br>'
+        return temp
 
 class 套装效果64():
     名称 = '狂乱追随者'
@@ -9023,7 +14331,27 @@ class 套装效果64():
         属性.一觉Lv += 1
         属性.一觉力智 += 85
         属性.一觉力智per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +10%<br>'
+            temp += '[天启之珠]力量、智力 +85<br>'
+            temp += '[守护恩赐]体力、精神 +36<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +10%<br>'
+            temp += '[圣光天启]力量、智力 +85<br>'
+            temp += '[启示圣歌]智力 +38<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +10%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +85<br>'
+            temp += '[人偶操纵者]智力 +38<br>'
+        return temp
 
 class 套装效果65():
     名称 = '地狱求道者'
@@ -9042,7 +14370,27 @@ class 套装效果65():
         属性.BUFF智力per *= 1.06
         属性.一觉Lv += 2
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +6%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+            temp += '[守护恩赐]体力、精神 +195<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +6%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            temp += '[启示圣歌]智力 +188<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +6%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+            temp += '[人偶操纵者]智力 +188<br>'
+        return temp
 
 class 套装效果66():
     名称 = '次元旅行者'
@@ -9061,7 +14409,27 @@ class 套装效果66():
         属性.BUFF智力per *= 1.08
         属性.一觉Lv += 1
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+            temp += '[守护恩赐]体力、精神 +80<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            temp += '[启示圣歌]智力 +120<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+            temp += '[人偶操纵者]智力 +120<br>'
+        return temp
 
 class 套装效果67():
     名称 = '天命无常'
@@ -9079,7 +14447,22 @@ class 套装效果67():
         属性.一觉被动Lv += 2
         属性.一觉Lv += 2
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv30-50 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +8%<br>'
+            temp += '[天启之珠]力量、智力 +35<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +8%<br>'
+            temp += '[圣光天启]力量、智力 +35<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +8%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +35<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
 class 套装效果68():
     名称 = '悲剧的残骸'
@@ -9098,7 +14481,27 @@ class 套装效果68():
         属性.BUFF智力per *= 1.1
         属性.一觉Lv += 1
         属性.BUFF额外增幅率 += 0.05
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +10%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+            temp += '[守护恩赐]体力、精神 +171<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +10%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            temp += '[启示圣歌]智力 +158<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +10%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+            temp += '[人偶操纵者]智力 +158<br>'
+        return temp
 
 class 套装效果69():
     名称 = '上古尘封术士'
@@ -9114,7 +14517,21 @@ class 套装效果69():
         属性.BUFF力量per *= 1.02
         属性.BUFF智力per *= 1.02
         属性.一觉力智 += 45
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[天启之珠]力量、智力 +45<br>'
+            temp += '[守护恩赐]体力、精神 +60<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[圣光天启]力量、智力 +45<br>'
+            temp += '[启示圣歌]智力 +60<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
+            temp += '[人偶操纵者]智力 +60<br>'
+        return temp
 
 class 套装效果70():
     名称 = '破晓曦光'
@@ -9128,7 +14545,18 @@ class 套装效果70():
         属性.BUFF力量per *= 1.03
         属性.BUFF智力per *= 1.03
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +3%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +3%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +3%<br>'
+        return temp
 
 class 套装效果71():
     名称 = '幸运三角'
@@ -9144,7 +14572,21 @@ class 套装效果71():
         属性.BUFF力量per *= 1.04
         属性.BUFF智力per *= 1.04
         属性.一觉力智 += 45
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[天启之珠]力量、智力 +45<br>'
+            temp += '[守护恩赐]体力、精神 +140<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[圣光天启]力量、智力 +45<br>'
+            temp += '[启示：圣歌]智力 +140<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
+            temp += '[人偶操控者]智力 +140<br>'
+        return temp
 
 class 套装效果72():
     名称 = '精灵使的权能'
@@ -9158,7 +14600,18 @@ class 套装效果72():
         属性.守护恩赐体精 += 100
         属性.转职被动智力 += 110
         属性.一觉力智 += 20
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[天启之珠]力量、智力 +20<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[圣光天启]力量、智力 +20<br>'
+            temp += '[启示圣歌]智力 +110<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[开幕！人偶剧场]力量、智力 +20<br>'
+            temp += '[人偶操纵者]智力 +110<br>'
+        return temp
 
 class 套装效果73():
     名称 = '上古尘封术士'
@@ -9172,7 +14625,21 @@ class 套装效果73():
         属性.BUFFLv += 1
         属性.一觉Lv += 1
         属性.一觉力智 += 26
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[天启之珠]力量、智力 +26<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[圣光天启]力量、智力 +26<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +26<br>'
+        return temp
 
 class 套装效果74():
     名称 = '破晓曦光'
@@ -9191,7 +14658,28 @@ class 套装效果74():
         属性.BUFF智力per *= 1.04
         属性.一觉Lv += 1
         属性.一觉力智 += 45
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv100 技能等级 +1<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[天启之珠]力量、智力 +45<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[圣光天启]力量、智力 +45<br>'
+            temp += '[启示圣歌]智力 +100<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
+            temp += '[人偶操纵者]智力 +100<br>'
+        return temp
 
 class 套装效果75():
     名称 = '幸运三角'
@@ -9204,7 +14692,18 @@ class 套装效果75():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 1
         属性.一觉Lv += 2
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +2<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +2<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +2<br>'
+        return temp
 
 class 套装效果76():
     名称 = '精灵使的权能'
@@ -9220,7 +14719,24 @@ class 套装效果76():
         属性.BUFF智力per *= 1.03
         属性.一觉Lv += 1
         属性.一觉力智 += 26
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +3%<br>'
+            temp += '[天启之珠]力量、智力 +26<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +3%<br>'
+            temp += '[圣光天启]力量、智力 +26<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +3%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +26<br>'
+        return temp
 
 class 套装效果77():
     名称 = '军神的隐秘遗产'
@@ -9238,7 +14754,27 @@ class 套装效果77():
         属性.BUFF智力per *= 1.04
         属性.一觉Lv += 1
         属性.一觉力智 += 35
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +4%<br>'
+            temp += '[天启之珠]力量、智力 +35<br>'
+            temp += '[守护恩赐]体力、精神 +230<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +4%<br>'
+            temp += '[圣光天启]力量、智力 +35<br>'
+            temp += '[启示圣歌]智力 +230<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +4%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +35<br>'
+            temp += '[人偶操纵者]智力 +230<br>'
+        return temp
 
 class 套装效果78():
     名称 = '时间战争的残骸'
@@ -9257,7 +14793,19 @@ class 套装效果78():
         属性.BUFF力量per *= 1.02
         属性.BUFF智力per *= 1.02
         属性.一觉力智 += 35
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-30 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[天启之珠]力量、智力 +35<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[圣光天启]力量、智力 +35<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +35<br>'
+        return temp
 
 class 套装效果79():
     名称 = '灵宝：世间真理'
@@ -9273,7 +14821,16 @@ class 套装效果79():
         属性.BUFF智力per *= 1.02
         属性.一觉被动Lv += 1
         属性.一觉Lv += 1
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv30-50 技能等级 +1<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+        return temp
 
 class 套装效果80():
     名称 = '能量主宰'
@@ -9291,7 +14848,27 @@ class 套装效果80():
         属性.BUFF智力per *= 1.02
         属性.一觉Lv += 1
         属性.一觉力智 += 35
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +2<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[天启之珠]力量、智力 +35<br>'
+            temp += '[守护恩赐]体力、精神 +95<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +2<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[圣光天启]力量、智力 +35<br>'
+            temp += '[启示圣歌]智力 +95<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +2<br>'
+            temp += '[开幕！人偶剧场]]技能等级 +1<br>'
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +35<br>'
+            temp += '[人偶操纵者]智力 +95<br>'
+        return temp
 
 class 套装效果81():
     名称 = '军神的隐秘遗产'
@@ -9304,7 +14881,18 @@ class 套装效果81():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 1
         属性.一觉Lv += 2
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +2<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +2<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +2<br>'
+        return temp
 
 class 套装效果82():
     名称 = '时间战争的残骸'
@@ -9319,7 +14907,24 @@ class 套装效果82():
         属性.转职被动智力 += 85
         属性.一觉被动Lv += 1
         属性.一觉Lv += 2
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[信念光环]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +75<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[虔诚信念]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[启示圣歌]智力 +75<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[少女的爱]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[人偶操纵者]智力 +75<br>'
+        return temp
 
 class 套装效果83():
     名称 = '灵宝：世间真理'
@@ -9336,7 +14941,23 @@ class 套装效果83():
         属性.转职被动智力 += 122
         属性.一觉Lv += 1
         属性.一觉力智 += 39
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv1-85 技能等级 +1<br>'
+        temp += 'Lv100 技能等级 +1<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[天启之珠]力量、智力 +39<br>'
+            temp += '[守护恩赐]体力、精神 +100<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[圣光天启]力量、智力 +39<br>'
+            temp += '[启示圣歌]智力 +122<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[开幕！人偶剧场]]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +39<br>'
+            temp += '[人偶操纵者]智力 +122<br>'
+        return temp
 
 class 套装效果84():
     名称 = '能量主宰'
@@ -9352,7 +14973,22 @@ class 套装效果84():
         属性.BUFF力量per *= 1.02
         属性.BUFF智力per *= 1.02
         属性.一觉Lv += 2
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[天启之珠]技能等级 +2<br>'
+            temp += '[天启之珠]Lv +2<br>'
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +110<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[圣光天启]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[启示圣歌]智力 +110<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[开幕！人偶剧场]]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[人偶操纵者]智力 +110<br>'
+        return temp
 
 #region  其它套装
 class 套装效果85():
@@ -9368,7 +15004,23 @@ class 套装效果85():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 6
         属性.一觉力智 += 41
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv50 技能等级 +2<br>'
+        temp += 'Lv85 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[天启之珠]技能等级 +2<br>'
+            temp += '[荣誉祝福]力量、智力 +2%<br>'
+            temp += '[守护恩赐]体力、精神 +110<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[圣光天启]技能等级 +2<br>'
+            temp += '[勇气祝福]力量、智力 +2%<br>'
+            temp += '[启示圣歌]智力 +110<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[开幕！人偶剧场]]技能等级 +2<br>'
+            temp += '[禁忌诅咒]力量、智力 +2%<br>'
+            temp += '[人偶操纵者]智力 +110<br>'
+        return temp
 
 class 套装效果86():
     名称 = '超界·苍穹之云'
@@ -9389,7 +15041,29 @@ class 套装效果86():
         属性.一觉力智per *= 1.05
         属性.守护恩赐体精 += 40
         属性.转职被动智力 += 220
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv50 技能等级 +2<br>'
+        temp += 'Lv85 技能等级 +2<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +23%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+            temp += '[天启之珠]力量、智力 +142<br>'
+            temp += '[天启之珠]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +40<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +23%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            temp += '[圣光天启]力量、智力 +142<br>'
+            temp += '[圣光天启]力量、智力 +5%<br>'
+            temp += '[启示：圣歌]智力 +220<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +23%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +142<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
+            temp += '[人偶操控者]智力 +220<br>'
+        return temp
 
 class 套装效果87():
     名称 = '超界·永恒的季节'
@@ -9404,7 +15078,21 @@ class 套装效果87():
         属性.一觉力智 += 98
         属性.守护恩赐体精 += 120
         属性.转职被动智力 += 120
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +3<br>'
+            temp += '[天启之珠]力量、智力 +98<br>'
+            temp += '[守护恩赐]体力、精神 +120<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +3<br>'
+            temp += '[圣光天启]力量、智力 +98<br>'
+            temp += '[启示：圣歌]智力 +120<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +3<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +98<br>'
+            temp += '[人偶操控者]智力 +120<br>'
+        return temp
 
 class 套装效果88():
     名称 = '超界·永恒的季节'
@@ -9423,7 +15111,27 @@ class 套装效果88():
         属性.一觉力智per *= 1.05
         属性.守护恩赐体精 += 220
         属性.转职被动智力 += 220
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +23%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+            temp += '[天启之珠]力量、智力 +232<br>'
+            temp += '[天启之珠]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +220<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +23%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            temp += '[圣光天启]力量、智力 +232<br>'
+            temp += '[圣光天启]力量、智力 +5%<br>'
+            temp += '[启示：圣歌]智力 +220<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +23%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +232<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
+            temp += '[人偶操控者]智力 +220<br>'
+        return temp
 
 class 套装效果89():
     名称 = '超界·亿万年的星光'
@@ -9438,7 +15146,20 @@ class 套装效果89():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 6
         属性.一觉力智 += 20
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv50 技能等级 +2<br>'
+        temp += 'Lv85 技能等级 +1<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +6<br>'
+            temp += '[天启之珠]力量、智力 +20<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +6<br>'
+            temp += '[圣光天启]力量、智力 +20<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +6<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +20<br>'
+        return temp
 
 class 套装效果90():
     名称 = '超界·亿万年的星光'
@@ -9458,8 +15179,27 @@ class 套装效果90():
         属性.一觉力智per *= 1.05
         属性.守护恩赐体精 += 340
         属性.转职被动智力 += 520
-        pass
-
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += 'Lv85 技能等级 +1<br>'
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +23%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+            temp += '[天启之珠]力量、智力 +163<br>'
+            temp += '[天启之珠]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +340<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +23%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            temp += '[圣光天启]力量、智力 +163<br>'
+            temp += '[圣光天启]力量、智力 +5%<br>'
+            temp += '[启示：圣歌]智力 +520<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +23%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +163<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
+            temp += '[人偶操控者]智力 +520<br>'
 class 套装效果91():
     名称 = '超界·精灵的荣耀'
     件数 = 3
@@ -9471,7 +15211,18 @@ class 套装效果91():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 6
         属性.一觉力智 += 150
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +6<br>'
+            temp += '[天启之珠]力量、智力 +150<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +6<br>'
+            temp += '[圣光天启]力量、智力 +150<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +6<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +150<br>'
+        return temp
 
 class 套装效果92():
     名称 = '超界·精灵的荣耀'
@@ -9490,7 +15241,27 @@ class 套装效果92():
         属性.一觉力智per *= 1.05
         属性.守护恩赐体精 += 220
         属性.转职被动智力 += 220
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +23%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+            temp += '[天启之珠]力量、智力 +225<br>'
+            temp += '[天启之珠]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +220<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +23%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            temp += '[圣光天启]力量、智力 +225<br>'
+            temp += '[圣光天启]力量、智力 +5%<br>'
+            temp += '[启示：圣歌]智力 +220<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +23%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +225<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
+            temp += '[人偶操控者]智力 +220<br>'
+        return temp
 
 class 套装效果93():
     名称 = '超界·幸运的五彩石'
@@ -9503,7 +15274,18 @@ class 套装效果93():
     def BUFF属性(self, 属性):
         属性.BUFFLv += 6
         属性.一觉力智 += 150
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +6<br>'
+            temp += '[天启之珠]力量、智力 +150<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +6<br>'
+            temp += '[圣光天启]力量、智力 +150<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +6<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +150<br>'
+        return temp
 
 class 套装效果94():
     名称 = '超界·幸运的五彩石'
@@ -9522,7 +15304,27 @@ class 套装效果94():
         属性.一觉力智per *= 1.05
         属性.守护恩赐体精 += 220
         属性.转职被动智力 += 220
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]力量、智力 +23%<br>'
+            temp += '[守护徽章]体力、精神 +15%<br>'
+            temp += '[天启之珠]力量、智力 +225<br>'
+            temp += '[天启之珠]力量、智力 +5%<br>'
+            temp += '[守护恩赐]体力、精神 +220<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]力量、智力 +23%<br>'
+            temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            temp += '[圣光天启]力量、智力 +225<br>'
+            temp += '[圣光天启]力量、智力 +5%<br>'
+            temp += '[启示：圣歌]智力 +220<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]力量、智力 +23%<br>'
+            temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +225<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
+            temp += '[人偶操控者]智力 +220<br>'
+        return temp
 
 class 套装效果95():
     名称 = '黑暗的第一权能'
@@ -9538,7 +15340,24 @@ class 套装效果95():
         属性.一觉力智 += 26
         属性.守护恩赐体精 += 160
         属性.转职被动智力 += 160
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +1<br>'
+            temp += '[守护恩赐]体力、精神 +160<br>'
+            temp += '[天启之珠]力量、智力 +26<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +1<br>'
+            temp += '[启示：圣歌]智力 +160<br>'
+            temp += '[圣光天启]力量、智力 +26<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +1<br>'
+            temp += '[人偶操控者]智力 +160<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +26<br>'
+        return temp
 
 class 套装效果96():
     名称 = '黑暗的第二权能'
@@ -9556,7 +15375,27 @@ class 套装效果96():
         属性.BUFF智力per *= 1.03
         属性.守护恩赐体精 += 247
         属性.转职被动智力 += 209
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+            temp += '[荣誉祝福]技能等级 +1<br>'
+            temp += '[天启之珠]技能等级 +2<br>'
+            temp += '[守护恩赐]体力、精神 +247<br>'
+            temp += '[荣誉祝福]力量、智力 +3%<br>'
+            temp += '[天启之珠]力量、智力 +26<br>'
+        elif 属性.职业名称 == '奶妈':
+            temp += '[勇气祝福]技能等级 +1<br>'
+            temp += '[圣光天启]技能等级 +2<br>'
+            temp += '[启示：圣歌]智力 +209<br>'
+            temp += '[勇气祝福]力量、智力 +3%<br>'
+            temp += '[圣光天启]力量、智力 +26<br>'
+        elif 属性.职业名称 == '奶萝':
+            temp += '[禁忌诅咒]技能等级 +1<br>'
+            temp += '[开幕！人偶剧场]技能等级 +2<br>'
+            temp += '[人偶操控者]智力 +209<br>'
+            temp += '[禁忌诅咒]力量、智力 +3%<br>'
+            temp += '[开幕！人偶剧场]力量、智力 +26<br>'
+        return temp
 
 class 套装效果97():
     名称 = '维度崩坏'
@@ -9570,10 +15409,15 @@ class 套装效果97():
         if 属性.装备检查('维度冲击臂环'):
             属性.BUFFLv += 1
             属性.一觉Lv += 1
+            属性.守护恩赐体精 += 76
+            属性.转职被动智力 += 76
+        elif 属性.装备检查('时空·维度冲击臂环'):
+            属性.BUFFLv += 1
+            属性.一觉Lv += 1
             属性.一觉被动Lv += 2
-            属性.一觉力智 += 26
-            属性.守护恩赐体精 += 152
-            属性.转职被动智力 += 152
+            属性.BUFF力量per *= 1.02
+            属性.BUFF智力per *= 1.02
+            属性.BUFF物攻per *= 1.02
         else:
             属性.智力 += 200
             属性.BUFFLv += 1
@@ -9583,7 +15427,67 @@ class 套装效果97():
             属性.守护恩赐体精 += 271
             属性.转职被动智力 += 71
             属性.BUFF物攻per *= 1.03
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.装备检查('维度冲击臂环'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +1<br>'
+                temp += '[天启之珠]技能等级 +1<br>'
+                temp += '[守护恩赐]体力、精神 +76<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[勇气祝福]技能等级 +1<br>'
+                temp += '[圣光天启]技能等级 +1<br>'
+                temp += '[启示：圣歌]智力 +76<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[禁忌诅咒]技能等级 +1<br>'
+                temp += '[开幕！人偶剧场]技能等级 +1<br>'
+                temp += '[人偶操控者]智力 +76<br>'
+        elif 属性.装备检查('时空·维度冲击臂环'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +1<br>'
+                temp += '[天启之珠]技能等级 +1<br>'
+                temp += '[信念光环]技能等级 +2<br>'
+                temp += '[荣誉祝福]力量、智力 +2%<br>'
+                temp += '[荣誉祝福]物理攻击力增加量 +2%<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '智力 +200<br>'
+                temp += '[勇气祝福]技能等级 +1<br>'
+                temp += '[圣光天启]技能等级 +1<br>'
+                temp += '[虔诚信念]技能等级 +2<br>'
+                temp += '[勇气祝福]力量、智力 +2%<br>'
+                temp += '[勇气祝福]物理攻击力增加量 +2%<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '智力 +200<br>'
+                temp += '[禁忌诅咒]技能等级 +1<br>'
+                temp += '[开幕！人偶剧场]技能等级 +1<br>'
+                temp += '[少女的爱]技能等级 +2<br>'
+                temp += '[禁忌诅咒]力量、智力 +2%<br>'
+                temp += '[禁忌诅咒]物理攻击力增加量 +2%<br>'
+        else:
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +1<br>'
+                temp += '[天启之珠]技能等级 +1<br>'
+                temp += '[信念光环]技能等级 +2<br>'
+                temp += '[天启之珠]力量、智力 +46<br>'
+                temp += '[荣誉祝福]物理攻击力增加量 +3%<br>'
+                temp += '[守护恩赐]体力、精神 +271<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '智力 +200<br>'
+                temp += '[勇气祝福]技能等级 +1<br>'
+                temp += '[圣光天启]技能等级 +1<br>'
+                temp += '[虔诚信念]技能等级 +2<br>'
+                temp += '[圣光天启]力量、智力 +46<br>'
+                temp += '[勇气祝福]物理攻击力增加量 +3%<br>'
+                temp += '[启示：圣歌]智力 +71<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '智力 +200<br>'
+                temp += '[禁忌诅咒]技能等级 +1<br>'
+                temp += '[开幕！人偶剧场]技能等级 +1<br>'
+                temp += '[少女的爱]技能等级 +2<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +46<br>'
+                temp += '[禁忌诅咒]物理攻击力增加量 +3%<br>'
+                temp += '[人偶操控者]智力 +71<br>'
+        return temp
 
 class 套装效果98():
     名称 = '暗之腐蚀'
@@ -9595,11 +15499,20 @@ class 套装效果98():
         pass
     def BUFF属性(self, 属性):
         if 属性.装备检查('腐蚀之黑色十字耳环'):
+            属性.一觉Lv += 2
+            属性.一觉力智per *= 1.03
+            属性.守护恩赐体精 += 127
+            属性.转职被动智力 += 109
+        elif 属性.装备检查('时空：腐蚀之黑色十字耳环'):
             属性.BUFFLv += 1
             属性.一觉Lv += 2
-            属性.一觉力智 += 50
-            属性.守护恩赐体精 += 247
-            属性.转职被动智力 += 209
+            属性.BUFF力量per *= 1.03
+            属性.BUFF智力per *= 1.03
+            属性.BUFF魔攻per *= 1.03
+            属性.BUFF独立per *= 1.03
+            属性.一觉力智 += 30
+            属性.守护恩赐体精 += 127
+            属性.转职被动智力 += 109
         else:
             属性.智力 += 200
             属性.BUFFLv += 1
@@ -9612,7 +15525,69 @@ class 套装效果98():
             属性.一觉力智 += 50
             属性.守护恩赐体精 += 252
             属性.转职被动智力 += 14
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.装备检查('腐蚀之黑色十字耳环'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[天启之珠]技能等级 +2<br>'
+                temp += '[天启之珠]力量、智力 +3%<br>'
+                temp += '[守护恩赐]体力、精神 +127<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[圣光天启]技能等级 +2<br>'
+                temp += '[圣光天启]力量、智力 +3%<br>'
+                temp += '[启示：圣歌]智力 +109<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[开幕！人偶剧场]技能等级 +2<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +3%<br>'
+                temp += '[人偶操控者]智力 +109<br>'
+        elif 属性.装备检查('时空：腐蚀之黑色十字耳环'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +1<br>'
+                temp += '[天启之珠]技能等级 +2<br>'
+                temp += '[荣誉祝福]力量、智力 +3%<br>'
+                temp += '[荣誉祝福]魔法、独立攻击力增加量 +3%<br>'
+                temp += '[天启之珠]力量、智力 +30<br>'
+                temp += '[守护恩赐]体力、精神 +127<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[勇气祝福]技能等级 +1<br>'
+                temp += '[圣光天启]技能等级 +2<br>'
+                temp += '[勇气祝福]力量、智力 +3%<br>'
+                temp += '[勇气祝福]魔法、独立攻击力增加量 +3%<br>'
+                temp += '[圣光天启]力量、智力 +30<br>'
+                temp += '[启示：圣歌]智力 +109<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[禁忌诅咒]技能等级 +1<br>'
+                temp += '[开幕！人偶剧场]技能等级 +2<br>'
+                temp += '[禁忌诅咒]力量、智力 +3%<br>'
+                temp += '[禁忌诅咒]魔法、独立攻击力增加量 +3%<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +50<br>'
+                temp += '[人偶操控者]智力 +30<br>'
+        else:
+            temp += 'Lv1-40 技能Lv+1<br>'
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +1<br>'
+                temp += '[天启之珠]技能等级 +2<br>'
+                temp += '[荣誉祝福]力量、智力 +3%<br>'
+                temp += '[荣誉祝福]魔法、独立攻击力增加量 +3%<br>'
+                temp += '[天启之珠]力量、智力 +50<br>'
+                temp += '[守护恩赐]体力、精神 +14<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '智力 +200<br>'
+                temp += '[勇气祝福]技能等级 +1<br>'
+                temp += '[圣光天启]技能等级 +2<br>'
+                temp += '[勇气祝福]力量、智力 +3%<br>'
+                temp += '[勇气祝福]魔法、独立攻击力增加量 +3%<br>'
+                temp += '[圣光天启]力量、智力 +50<br>'
+                temp += '[启示：圣歌]智力 +252<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '智力 +200<br>'
+                temp += '[禁忌诅咒]技能等级 +1<br>'
+                temp += '[开幕！人偶剧场]技能等级 +2<br>'
+                temp += '[禁忌诅咒]力量、智力 +3%<br>'
+                temp += '[禁忌诅咒]魔法、独立攻击力增加量 +3%<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +50<br>'
+                temp += '[人偶操控者]智力 +14<br>'
+        return temp
 
 class 套装效果99():
     名称 = '堕落的暗黑之力'
@@ -9625,9 +15600,20 @@ class 套装效果99():
         pass
     def BUFF属性(self, 属性):
         if 属性.装备检查('黑暗幽灵紫杉胸甲'):
-            属性.BUFFLv += 6
+            属性.BUFFLv += 3
             属性.一觉Lv += 1
-            属性.一觉力智 += 80
+            属性.一觉力智 += 15
+        elif 属性.装备检查('时空·黑暗幽灵紫杉胸甲'):
+            属性.BUFFLv += 4
+            属性.一觉Lv += 1
+            属性.一觉力智 += 15
+            属性.守护恩赐体精 += 80
+            属性.转职被动智力 += 80
+            属性.BUFF力量per *= 1.04
+            属性.BUFF智力per *= 1.04
+            属性.BUFF物攻per *= 1.03
+            属性.BUFF魔攻per *= 1.03
+            属性.BUFF独立per *= 1.03
         else:
             属性.智力 += 200
             属性.BUFFLv += 6
@@ -9639,7 +15625,66 @@ class 套装效果99():
             属性.BUFF物攻per *= 1.04
             属性.BUFF魔攻per *= 1.04
             属性.BUFF独立per *= 1.04
-        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.装备检查('黑暗幽灵紫杉胸甲'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +3<br>'
+                temp += '[天启之珠]技能等级 +1<br>'
+                temp += '[天启之珠]力量、智力 +15<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[勇气祝福]技能等级 +3<br>'
+                temp += '[圣光天启]技能等级 +1<br>'
+                temp += '[圣光天启]力量、智力 +15<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[禁忌诅咒]技能等级 +3<br>'
+                temp += '[开幕！人偶剧场]技能等级 +1<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +15<br>'
+        elif 属性.装备检查('时空·黑暗幽灵紫杉胸甲'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +4<br>'
+                temp += '[天启之珠]技能等级 +1<br>'
+                temp += '[荣誉祝福]力量、智力 +4%<br>'
+                temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +3%<br>'
+                temp += '[天启之珠]力量、智力 +15<br>'
+                temp += '[守护恩赐]体力、精神 +80<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[勇气祝福]技能等级 +4<br>'
+                temp += '[圣光天启]技能等级 +1<br>'
+                temp += '[勇气祝福]力量、智力 +4%<br>'
+                temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +3%<br>'
+                temp += '[圣光天启]力量、智力 +15<br>'
+                temp += '[启示：圣歌]智力 +80<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[禁忌诅咒]技能等级 +4<br>'
+                temp += '[开幕！人偶剧场]技能等级 +1<br>'
+                temp += '[禁忌诅咒]力量、智力 +4%<br>'
+                temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +3%<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +15<br>'
+                temp += '[人偶操控者]智力 +80<br>'
+        else:
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +6<br>'
+                temp += '[天启之珠]技能等级 +1<br>'
+                temp += '[荣誉祝福]力量、智力 +8%<br>'
+                temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +4%<br>'
+                temp += '[天启之珠]力量、智力 +80<br>'
+                temp += '[守护恩赐]体力、精神 +200<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '智力 +200<br>'
+                temp += '[勇气祝福]技能等级 +6<br>'
+                temp += '[圣光天启]技能等级 +1<br>'
+                temp += '[勇气祝福]力量、智力 +8%<br>'
+                temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +4%<br>'
+                temp += '[圣光天启]力量、智力 +80<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '智力 +200<br>'
+                temp += '[禁忌诅咒]技能等级 +6<br>'
+                temp += '[开幕！人偶剧场]技能等级 +1<br>'
+                temp += '[禁忌诅咒]力量、智力 +8%<br>'
+                temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +4%<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +80<br>'
+        return temp
 
 class 套装效果100():
     名称 = '堕落的暗黑之力'
@@ -9660,6 +15705,17 @@ class 套装效果100():
             属性.转职被动智力 += 120
             属性.守护徽章per += 0.15
             属性.BUFF额外增幅率 += 0.05
+        elif 属性.装备检查('时空·黑暗幽灵紫杉胸甲'):
+            属性.一觉被动Lv += 2
+            属性.一觉Lv += 1
+            属性.BUFF力量per *= 1.29
+            属性.BUFF智力per *= 1.29
+            属性.一觉力智 += 205
+            属性.一觉力智per *= 1.06
+            属性.守护恩赐体精 += 255
+            属性.转职被动智力 += 255
+            属性.守护徽章per += 0.15
+            属性.BUFF额外增幅率 += 0.05
         else:
             属性.智力 += 200
             属性.BUFF力量per *= 1.33
@@ -9670,9 +15726,249 @@ class 套装效果100():
             属性.转职被动智力 += 65
             属性.守护徽章per += 0.15
             属性.BUFF额外增幅率 += 0.05
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.装备检查('黑暗幽灵紫杉胸甲'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[信念光环]技能等级 +2<br>'
+                temp += '[荣誉祝福]力量、智力 +22%<br>'
+                temp += '[天启之珠]力量、智力 +205<br>'
+                temp += '[天启之珠]力量、智力 +5%<br>'
+                temp += '[守护恩赐]体力、精神 +120<br>'
+                temp += '[守护徽章]体力、精神 +15%<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[虔诚信念]技能等级 +2<br>'
+                temp += '[勇气祝福]力量、智力 +22%<br>'
+                temp += '[圣光天启]力量、智力 +205<br>'
+                temp += '[圣光天启]力量、智力 +5%<br>'
+                temp += '[启示：圣歌]智力 +120<br>'
+                temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[少女的爱]技能等级 +2<br>'
+                temp += '[禁忌诅咒]力量、智力 +22%<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +205<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
+                temp += '[人偶操控者]智力 +120<br>'
+                temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        elif 属性.装备检查('时空·黑暗幽灵紫杉胸甲'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[信念光环]技能等级 +2<br>'
+                temp += '[荣誉祝福]技能等级 +1<br>'
+                temp += '[荣誉祝福]力量、智力 +29%<br>'
+                temp += '[天启之珠]力量、智力 +205<br>'
+                temp += '[天启之珠]力量、智力 +6%<br>'
+                temp += '[守护恩赐]体力、精神 +255<br>'
+                temp += '[守护徽章]体力、精神 +15%<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[虔诚信念]技能等级 +2<br>'
+                temp += '[勇气祝福]技能等级 +1<br>'
+                temp += '[勇气祝福]力量、智力 +29%<br>'
+                temp += '[圣光天启]力量、智力 +205<br>'
+                temp += '[圣光天启]力量、智力 +6%<br>'
+                temp += '[启示：圣歌]智力 +255<br>'
+                temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[少女的爱]技能等级 +2<br>'
+                temp += '[禁忌诅咒]技能等级 +2<br>'
+                temp += '[禁忌诅咒]力量、智力 +29%<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +205<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +6%<br>'
+                temp += '[人偶操控者]智力 +205<br>'
+                temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        else:
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]力量、智力 +33%<br>'
+                temp += '[天启之珠]力量、智力 +205<br>'
+                temp += '[天启之珠]力量、智力 +7%<br>'
+                temp += '[守护恩赐]体力、精神 +265<br>'
+                temp += '[守护徽章]体力、精神 +15%<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '智力 +200<br>'
+                temp += '[勇气祝福]力量、智力 +33%<br>'
+                temp += '[圣光天启]力量、智力 +205<br>'
+                temp += '[圣光天启]力量、智力 +7%<br>'
+                temp += '[启示：圣歌]智力 +65<br>'
+                temp += '[勇气圣歌]Buff效果增幅率 +5%<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '智力 +200<br>'
+                temp += '[禁忌诅咒]力量、智力 +33%<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +205<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +7%<br>'
+                temp += '[人偶操控者]智力 +65<br>'
+                temp += '[死命召唤]Buff效果增幅率 +5%<br>'
+        return temp
 
+class 套装效果101():
+    名称 = '维度崩坏'
+    件数 = 2
+    类型 = '首饰'
 
+    def 城镇属性(self, 属性):
         pass
+
+    def 进图属性(self, 属性):
+        pass
+
+    def BUFF属性(self, 属性):
+        if 属性.装备检查('维度冲击臂环'):
+            属性.一觉被动Lv += 2
+            属性.一觉力智 += 26
+            属性.守护恩赐体精 += 76
+            属性.转职被动智力 += 76
+        elif 属性.装备检查('时空·维度冲击臂环'):
+            属性.一觉力智 += 34
+            属性.BUFF力量per *= 1.04
+            属性.BUFF智力per *= 1.04
+            属性.守护恩赐体精 += 16
+            属性.转职被动智力 += 16
+        else:
+            pass
+
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.装备检查('维度冲击臂环'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +2<br>'
+                temp += '[天启之珠]力量、智力 +26<br>'
+                temp += '[守护恩赐]体力、精神 +76<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[勇气祝福]技能等级 +2<br>'
+                temp += '[启示：圣歌]智力 +76<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[禁忌诅咒]技能等级 +1<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +26<br>'
+                temp += '[人偶操控者]智力 +76<br>'
+        elif 属性.装备检查('时空·维度冲击臂环'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]力量、智力 +4%<br>'
+                temp += '[天启之珠]力量、智力 +34<br>'
+                temp += '[守护恩赐]体力、精神 +16<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[勇气祝福]力量、智力 +4%<br>'
+                temp += '[圣光天启]力量、智力 +34<br>'
+                temp += '[启示：圣歌]智力 +16<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[禁忌诅咒]力量、智力 +4%<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +34<br>'
+                temp += '[人偶操控者]智力 +16<br>'
+        else:
+            temp += '无<br>'
+        return temp
+
+
+class 套装效果102():
+    名称 = '暗之腐蚀'
+    件数 = 2
+    类型 = '特殊'
+    def 城镇属性(self, 属性):
+        pass
+    def 进图属性(self, 属性):
+        pass
+    def BUFF属性(self, 属性):
+        if 属性.装备检查('腐蚀之黑色十字耳环'):
+            属性.BUFFLv += 1
+            属性.一觉力智 += 50
+            属性.守护恩赐体精 += 120
+            属性.转职被动智力 += 100
+        elif 属性.装备检查('时空：腐蚀之黑色十字耳环'):
+            属性.BUFFLv += 1
+            属性.一觉Lv += 1
+            属性.一觉力智 += 20
+            属性.守护恩赐体精 += 120
+            属性.转职被动智力 += 100
+        else:
+            pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.装备检查('腐蚀之黑色十字耳环'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +1<br>'
+                temp += '[天启之珠]力量、智力 +50<br>'
+                temp += '[守护恩赐]体力、精神 +120<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[勇气祝福]技能等级 +1<br>'
+                temp += '[圣光天启]力量、智力 +50<br>'
+                temp += '[启示：圣歌]智力 +100<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[禁忌诅咒]技能等级 +1<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +50<br>'
+                temp += '[人偶操控者]智力 +120<br>'
+        elif 属性.装备检查('时空：腐蚀之黑色十字耳环'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +1<br>'
+                temp += '[天启之珠]技能等级 +1<br>'
+                temp += '[天启之珠]力量、智力 +20<br>'
+                temp += '[守护恩赐]体力、精神 +120<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[勇气祝福]技能等级 +1<br>'
+                temp += '[圣光天启]技能等级 +1<br>'
+                temp += '[圣光天启]力量、智力 +20<br>'
+                temp += '[启示：圣歌]智力 +100<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[禁忌诅咒]技能等级 +1<br>'
+                temp += '[开幕！人偶剧场]技能等级 +1<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +20<br>'
+                temp += '[人偶操控者]智力 +100<br>'
+        else:
+            temp += '无<br>'
+        return temp
+
+class 套装效果103():
+    名称 = '堕落的暗黑之力'
+    件数 = 2
+    类型 = '防具'
+    def 城镇属性(self, 属性):
+        pass
+    def 进图属性(self, 属性):
+        pass
+    def BUFF属性(self, 属性):
+        if 属性.装备检查('黑暗幽灵紫杉胸甲'):
+            属性.BUFFLv += 3
+            属性.一觉Lv += 1
+            属性.一觉力智 += 65
+        elif 属性.装备检查('时空·黑暗幽灵紫杉胸甲'):
+            属性.BUFFLv += 2
+            属性.一觉力智 += 65
+            属性.守护恩赐体精 += 80
+            属性.转职被动智力 += 80
+            属性.BUFF力量per *= 1.04
+            属性.BUFF智力per *= 1.04
+        else:
+            pass
+    def 装备描述(self, 属性):
+        temp = ''
+        if 属性.装备检查('黑暗幽灵紫杉胸甲'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +3<br>'
+                temp += '[天启之珠]技能等级 +1<br>'
+                temp += '[天启之珠]力量、智力 +65<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[勇气祝福]技能等级 +3<br>'
+                temp += '[圣光天启]技能等级 +1<br>'
+                temp += '[圣光天启]力量、智力 +65<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[禁忌诅咒]技能等级 +3<br>'
+                temp += '[开幕！人偶剧场]技能等级 +1<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +65<br>'
+        elif 属性.装备检查('时空·黑暗幽灵紫杉胸甲'):
+            if 属性.职业名称 == 'BUFF神思者' or 属性.职业名称 == 'BUFF垂迹圣骑士':
+                temp += '[荣誉祝福]技能等级 +2<br>'
+                temp += '[荣誉祝福]力量、智力 +4%<br>'
+                temp += '[天启之珠]力量、智力 +65<br>'
+                temp += '[守护恩赐]体力、精神 +80<br>'
+            elif 属性.职业名称 == '奶妈':
+                temp += '[勇气祝福]技能等级 +2<br>'
+                temp += '[勇气祝福]力量、智力 +4%<br>'
+                temp += '[圣光天启]力量、智力 +65<br>'
+                temp += '[启示：圣歌]智力 +80<br>'
+            elif 属性.职业名称 == '奶萝':
+                temp += '[禁忌诅咒]技能等级 +2<br>'
+                temp += '[禁忌诅咒]力量、智力 +4%<br>'
+                temp += '[开幕！人偶剧场]力量、智力 +65<br>'
+                temp += '[人偶操控者]智力 +80<br>'
+        else:
+            temp += '无<br>'
+        return temp
 #endregion
 
 装备列表 = []

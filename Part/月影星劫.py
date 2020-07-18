@@ -455,19 +455,6 @@ class 月影星劫角色属性(角色属性):
                 if i.是否有伤害 == 1:
                     i.攻击次数2 *= 4.25
 
-    def 面板物理攻击力(self):
-        面板物理攻击 = (self.物理攻击力 + self.进图物理攻击力) * (1 + self.百分比三攻) * (1 + self.年宠技能 * 0.10 + self.斗神之吼秘药 * 0.12 + self.白兔子技能 * 0.20)
-        for i in self.技能栏:
-            try : 
-                面板物理攻击 *= i.物理攻击力倍率(self.武器类型)
-            except : 
-                pass
-            try : 
-                面板物理攻击 *= i.物理攻击力倍率进图(self.武器类型)
-            except : 
-                pass
-        return round(面板物理攻击,8) * (self.面板力量() / 250 + 1)
-
     def 伤害计算(self, x = 0):
         
         self.所有属性强化(self.进图属强)

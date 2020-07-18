@@ -365,21 +365,6 @@ class 血狱君主角色属性(角色属性):
         self.技能栏= deepcopy(血狱君主技能列表)
         self.技能序号= deepcopy(血狱君主技能序号)
 
-    def 面板物理攻击力(self):
-        
-        面板物理攻击 = (self.物理攻击力 + self.进图物理攻击力) * (1 + self.百分比三攻) * (1 + self.年宠技能 * 0.10 + self.斗神之吼秘药 * 0.12 + self.白兔子技能 * 0.20)
-        for i in self.技能栏:
-            try : 
-                面板物理攻击 *= i.物理攻击力倍率(self.武器类型)
-            except : 
-                pass
-            try : 
-                面板物理攻击 *= i.物理攻击力倍率进图(self.武器类型)
-            except : 
-                pass
-        return round(面板物理攻击,8) * (self.面板力量() / 250 + 1)
-    
-
 class 血狱君主(角色窗口):
     def 窗口属性输入(self):
         self.初始属性 = 血狱君主角色属性()

@@ -568,6 +568,10 @@ class 毒神绝角色属性(角色属性):
         #毒伤结算丢失开关 
         if 技能释放次数[self.技能序号['万毒噬心诀x4']] > 3 and self.毒伤结算丢失开关 == 1:  
             self.技能栏[self.技能序号['万毒噬心诀x4']].涂毒倍率 *=(技能释放次数[self.技能序号['万毒噬心诀x4']] - 3) / 技能释放次数[self.技能序号['万毒噬心诀x4']]
+        if 技能释放次数[self.技能序号['万毒噬心诀x3']] > 3 and self.毒伤结算丢失开关 == 1:  
+            self.技能栏[self.技能序号['万毒噬心诀x3']].涂毒倍率 *=(技能释放次数[self.技能序号['万毒噬心诀x3']] - 3) / 技能释放次数[self.技能序号['万毒噬心诀x3']]    
+        if 技能释放次数[self.技能序号['裂地飞沙']] > 1 and self.毒伤结算丢失开关 == 1:  
+            self.技能栏[self.技能序号['裂地飞沙']].涂毒倍率 *=(技能释放次数[self.技能序号['裂地飞沙']] - 1) / 技能释放次数[self.技能序号['裂地飞沙']]  
     
         #技能单次伤害计算
         for i in self.技能栏:
@@ -626,11 +630,11 @@ class 毒神绝(角色窗口):
         self.死亡毒雾力智开关.setToolTip('包含力智和减防')
         self.死亡毒雾力智开关.setChecked(False)
 
-        self.毒伤结算丢失开关=QCheckBox('毒伤丢失补正',self.main_frame2)
+        self.毒伤结算丢失开关=QCheckBox('毒伤结算补正',self.main_frame2)
         self.毒伤结算丢失开关.resize(100,20)
         self.毒伤结算丢失开关.move(325,480)
         self.毒伤结算丢失开关.setStyleSheet(复选框样式)
-        self.毒伤结算丢失开关.setToolTip('伤害统计将不计入最后3轮4X蛇拳的毒伤')
+        self.毒伤结算丢失开关.setToolTip('计算结果将不计入部分未结算毒伤')
         self.毒伤结算丢失开关.setChecked(False)
 
 

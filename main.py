@@ -45,11 +45,14 @@ class 选择窗口(QMainWindow):
         pass
 
     def 界面(self):
-        self.setMinimumSize(805,600)
+        self.setMinimumSize(805,630)
         self.setMaximumSize(805,1520)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.7.12 (技能模板仅供参考，请根据自身情况修改)')
-        self.icon = QIcon('ResourceFiles/img/icon.png')
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.7.18 (技能模板仅供参考，请根据自身情况修改)')
+        self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
+
+        if not os.path.exists('./ResourceFiles'):
+            QMessageBox.information(self,"解压错误",  "未找到ResourceFiles(资源文件)，请完整解压再打开main") 
 
         背景颜色 = QLabel(self)
         背景颜色.resize(805,1520)
@@ -125,11 +128,12 @@ class 选择窗口(QMainWindow):
 
         按钮样式3 = 'QPushButton{font-size:13px;color:white;background-color:rgba(255,255,255,0.1);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(65,105,225,0.5)}'
 
-        名称 = ['查看更新', '查看源码', '使用说明']
+        名称 = ['查看更新', '查看源码', '使用说明', '问题反馈']
         链接 = []
         链接.append(['https://pan.lanzou.com/b01bfj76f', 'https://wws.lanzous.com/b01bfj76f'])
         链接.append(['https://github.com/wxh0402/DNFCalculating'])
         链接.append(['https://bbs.colg.cn/thread-7917714-1-1.html', 'https://www.bilibili.com/video/BV1F54y1Q7Bz'])
+        链接.append(['https://jq.qq.com/?_wv=1027&k=bqgkCT40'])
 
         count = 0
         for i in 名称:
@@ -139,6 +143,13 @@ class 选择窗口(QMainWindow):
             链接按钮.setStyleSheet(按钮样式3)
             链接按钮.resize(121,90)
             count += 1
+
+        链接按钮=QtWidgets.QPushButton('打开设置', self.topFiller)
+        链接按钮.clicked.connect(lambda state : os.system('notepad.exe "./ResourceFiles/set.ini"'))
+        链接按钮.move(120 + 4 * 125, 10 + (count + 1) * 100)    
+        链接按钮.setStyleSheet(按钮样式3)
+        链接按钮.resize(121,90)
+        count += 1
 
         self.scroll = QScrollArea()
         self.scroll.setStyleSheet("QScrollArea {background-color:transparent}")
@@ -203,7 +214,7 @@ class 选择窗口(QMainWindow):
             QDesktopServices.openUrl(QUrl(i))
 
 if __name__ == '__main__':
-    if conf.getint('窗口显示', 'value') == 1:
+    if 窗口显示模式 == 1:
         if hasattr(qtc.Qt, 'AA_EnableHighDpiScaling'):
             QtWidgets.QApplication.setAttribute(qtc.Qt.AA_EnableHighDpiScaling, True)
         if hasattr(qtc.Qt, 'AA_UseHighDpiPixmaps'):

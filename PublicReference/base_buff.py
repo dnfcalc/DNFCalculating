@@ -50,6 +50,8 @@ class 主动技能(技能):
 
 部位列表 = ["上衣", "头肩", "下装", "腰带", "鞋", "手镯", "项链", "戒指", "耳环", "辅助装备", "魔法石", "武器"]
 
+颜色 = {'神话':'#E09297', '史诗':'#FFB400', '传说':'#FF7800'}
+
 史诗防具智力Lv100 = {"上衣": 149, "头肩": 139, "下装": 149, "腰带": 130, "鞋": 130}
 史诗防具体力Lv100 = {"上衣": 54, "头肩": 43, "下装": 54, "腰带": 32, "鞋": 32}
 史诗防具精神Lv100 = {"上衣": 0, "头肩": 0, "下装": 0, "腰带": 0, "鞋": 0}
@@ -151,8 +153,8 @@ class 角色属性():
     武器类型 = ''
 
     是否增幅 = [0] * 12
-    强化等级 = [0] * 12
-    改造等级 = [0] * 12
+    强化等级 = [12] * 12
+    改造等级 = [5] * 12
     武器锻造等级 = 0
 
     护石第一栏 = '无'
@@ -181,6 +183,13 @@ class 角色属性():
         self.套装栏 = 套装
         self.武器类型 = 装备列表[装备序号[self.装备栏[11]]].类型
 
+    def 防具精通计算(self, i):
+        temp = 装备列表[装备序号[self.装备栏[i]]]
+        if temp.所属套装 != '智慧产物':
+            return 精通体力(temp.等级, temp.品质, self.强化等级[i],部位列表[i])
+        else:
+            return 精通体力(temp.等级, temp.品质, 0, 部位列表[i])
+
     def 装备基础(self):
         if 装备列表[装备序号[self.装备栏[0]]].品质 == '神话':
             self.智力 += 神话上衣额外智力
@@ -189,10 +198,7 @@ class 角色属性():
         for i in [0,1,2,3,4]:
             #精通
             temp = 装备列表[装备序号[self.装备栏[i]]]
-            if temp.所属套装 != '智慧产物':
-                x = 精通体力(temp.等级, temp.品质, self.强化等级[i],部位列表[i])
-            else:
-                x = 精通体力(temp.等级, temp.品质, 0, 部位列表[i])
+            x = self.防具精通计算(i)
             if '智力' in self.防具精通属性:
                 self.智力 += x * 2
             if '体力' in self.防具精通属性:
@@ -567,6 +573,11 @@ class 角色窗口(QWidget):
         self.setWindowTitle(self.角色属性A.职业名称 + "搭配计算器")
         self.icon = QIcon('./ResourceFiles/'+self.角色属性A.职业名称 + '/技能/BUFF.png')
         self.setWindowIcon(self.icon)
+        self.setStyleSheet('''QToolTip { 
+                   background-color: black; 
+                   color: white; 
+                   border: 0px
+                   }''')
         #窗口大小
         self.setFixedSize(1120, 680)
 
@@ -655,6 +666,20 @@ class 角色窗口(QWidget):
                         self.按钮.setStyleSheet('QPushButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QPushButton:hover{background-color:rgba(65,105,225,0.8)}')
                         self.按钮.resize(120, 28)
                         self.按钮.clicked.connect(lambda state, index = i.名称: self.套装按钮点击事件(index))
+                        temp = ''
+                        temp += '<font size="3" face="宋体"><font color="#78FF1E">' + i.名称 + '[2]</font><br>'
+                        temp += 套装列表[套装序号[i.名称 + '[2]']].装备描述(self.角色属性A)[:-4]
+                        temp += '<br><font color="#78FF1E">' + i.名称 + '[3]</font><br>'
+                        temp += 套装列表[套装序号[i.名称 + '[3]']].装备描述(self.角色属性A)[:-4]
+                        try:
+                            x = 套装列表[套装序号[i.名称 + '[5]']].装备描述(self.角色属性A)[:-4]
+                            temp += '<br><font color="#78FF1E">' + i.名称 + '[5]</font><br>'
+                            temp +=  x
+                        except:
+                            pass
+                        temp += '</font>'
+                        self.按钮.setToolTip(temp)
+
                         counter3 = 0
                         for 品质 in ['神话', '史诗']:
                             for 部位 in ['上衣', '头肩', '下装', '鞋', '腰带', '项链', '手镯', '戒指', '辅助装备', '魔法石', '耳环']:
@@ -668,7 +693,7 @@ class 角色窗口(QWidget):
                                         self.按钮 = QPushButton(self.main_frame1)
                                         self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
                                         self.按钮.resize(28, 28)
-                                        self.按钮.setToolTip(装备列表[j].名称 + '\n'+ 装备列表[j].类型 + '-' + 装备列表[j].部位)
+                                        self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备列表[j].品质] + '">' +装备列表[j].名称+'</font><br>'+ 装备列表[j].类型 + '-' + 装备列表[j].部位 + '<br>' + 装备列表[j].装备描述(self.角色属性A)[:-4] + '</font>')
                                         self.遮罩透明度[j].setOpacity(0.5)
                                         self.按钮.setGraphicsEffect(self.遮罩透明度[j])
                                         self.按钮.clicked.connect(lambda state, index = j: self.装备图标点击事件(index, 10))
@@ -697,7 +722,7 @@ class 角色窗口(QWidget):
                 self.按钮 = QPushButton(self.main_frame1)
                 self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
                 self.按钮.resize(28, 28)
-                self.按钮.setToolTip(i.名称 + '\n' + i.类型) 
+                self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[i.品质] + '">' +i.名称+'</font><br>'+ i.类型 + '-' + i.部位 + '<br>' + i.装备描述(self.角色属性A)[:-4] + '</font>')
                 self.遮罩透明度[装备序号[i.名称]].setOpacity(0.5)
                 self.按钮.setGraphicsEffect(self.遮罩透明度[装备序号[i.名称]])
                 self.按钮.clicked.connect(lambda state, index = 装备序号[i.名称]: self.装备图标点击事件(index, 10))
@@ -728,7 +753,7 @@ class 角色窗口(QWidget):
                 self.按钮 = QPushButton(self.main_frame1)
                 self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
                 self.按钮.resize(28, 28)
-                self.按钮.setToolTip(i.名称 + '\n' + i.类型+ '-' + i.部位) 
+                self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[i.品质] + '">' +i.名称+'</font><br>'+ i.类型 + '-' + i.部位 + '<br>' + i.装备描述(self.角色属性A)[:-4] + '</font>')
                 self.遮罩透明度[装备序号[i.名称]].setOpacity(0.5)
                 self.按钮.setGraphicsEffect(self.遮罩透明度[装备序号[i.名称]])
                 self.按钮.clicked.connect(lambda state, index = 装备序号[i.名称]: self.装备图标点击事件(index, 10))
@@ -2444,6 +2469,11 @@ class 角色窗口(QWidget):
     def 排行界面(self):
         self.排行窗口列表.clear()
         滚动排行 = QMainWindow()
+        滚动排行.setStyleSheet('''QToolTip { 
+           background-color: black; 
+           color: white; 
+           border: 0px
+           }''')
         self.排行窗口列表.append(滚动排行)
         滚动排行.resize(630,530)
         滚动排行.setMinimumSize(630,530)
@@ -2484,6 +2514,7 @@ class 角色窗口(QWidget):
                 图片列表.append(self.装备图片[装备序号[self.排行数据[i][j]]])
             水平间距=[1,2,3,4,5,6.5,7.5,8.5,10,11,12,13.5]
             for j in range(0,12):
+                装备 = 装备列表[装备序号[self.排行数据[i][j]]]
                 图标=QLabel(滚动排行.topFiller)
                 图标.setMovie(图片列表[j])
                 图片列表[j].start()
@@ -2494,8 +2525,9 @@ class 角色窗口(QWidget):
                     图标.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.5)}")
                     图标.resize(28,28)
                     图标.move(int(初始x+x间隔*水平间距[j]),int(初始y+i*y间隔))
-                    图标.setToolTip(self.排行数据[i][j])
-                
+                    # 图标.setToolTip(self.排行数据[i][j])
+                图标.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备.品质] + '">' + 装备.名称 + '</font><br>' + 装备.类型 + '-' + 装备.部位 + '<br>' + 装备.装备描述(self.角色属性A)[:-4] + '</font>')
+
             伤害量 = str(round(self.排行数据[i][12],1)) + '%'
             if 最高伤害!=0:
                 百分比=str(round(self.排行数据[i][12]/最高伤害*100,1))+'%'
@@ -2560,6 +2592,11 @@ class 角色窗口(QWidget):
             del self.输出窗口列表[0]
     
         输出窗口 = QWidget()
+        输出窗口.setStyleSheet('''QToolTip { 
+           background-color: black; 
+           color: white; 
+           border: 0px
+           }''')
         self.输出窗口列表.append(输出窗口)
         输出窗口.setFixedSize(788, 564)
         输出窗口.setWindowTitle('详细数据')
@@ -2572,26 +2609,8 @@ class 角色窗口(QWidget):
         人物.resize(90, 90)
         人物.setAlignment(Qt.AlignTop)
       
-        适用中的套装=QLabel(装备名称[11],输出窗口)
-        适用中的套装.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")   
-        适用中的套装.move(132, 138+180)
-        适用中的套装.resize(132,18)
-        适用中的套装.setAlignment(Qt.AlignCenter)   
-    
-        神话所在套装 = '无'
-        for i in range(0,11):
-            if 装备列表[装备序号[装备名称[i]]].品质 == '神话':
-                神话所在套装 = 装备列表[装备序号[装备名称[i]]].所属套装
-        for i in range(0,len(套装名称)):
-            适用套装名称=QLabel(输出窗口)
-            适用套装名称.setText(套装名称[i])
-            适用套装名称.move(132,158+180+i*20)
-            适用套装名称.resize(132,18)
-            适用套装名称.setAlignment(Qt.AlignCenter)  
-            if 神话所在套装 == 套装名称[i].split('[')[0]:
-                适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(224,146,151)}")   
-            else:
-                适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")  
+
+
         x = self.角色属性B.BUFF面板()
         y = self.角色属性B.一觉面板()
         面板显示=[]
@@ -2654,7 +2673,30 @@ class 角色窗口(QWidget):
             templab.resize(305,18)
             templab.setAlignment(Qt.AlignLeft)
             j+=18
-        
+
+        适用中的套装 = QLabel(装备名称[11], 输出窗口)
+        适用中的套装.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+        适用中的套装.move(132, 138 + 180)
+        适用中的套装.resize(132, 18)
+        适用中的套装.setAlignment(Qt.AlignCenter)
+
+        神话所在套装 = '无'
+        for i in range(0, 11):
+            if 装备列表[装备序号[装备名称[i]]].品质 == '神话':
+                神话所在套装 = 装备列表[装备序号[装备名称[i]]].所属套装
+        for i in range(0, len(套装名称)):
+            适用套装名称 = QLabel(输出窗口)
+            适用套装名称.setText(套装名称[i])
+            适用套装名称.move(132, 158 + 180 + i * 20)
+            适用套装名称.resize(132, 18)
+            适用套装名称.setAlignment(Qt.AlignCenter)
+            if 神话所在套装 == 套装名称[i].split('[')[0]:
+                适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(224,146,151)}")
+            else:
+                适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+            适用套装名称.setToolTip(
+                '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[i] + '</font><br>' + 套装列表[套装序号[套装名称[i]]].装备描述(
+                    self.角色属性B)[:-4] + '</font>')
         合计力量 = 0
         合计智力 = 0
         合计物攻 = 0
@@ -2780,25 +2822,35 @@ class 角色窗口(QWidget):
         for i in range(0,12):
             tempstr.append('')
             装备 =  装备列表[装备序号[self.角色属性B.装备栏[i]]]
+            if 装备.所属套装 != '无':
+                if 装备.所属套装 != '智慧产物':
+                    y = ' ' + 装备.所属套装
+                else:
+                    try:
+                        y = ' ' + 装备.所属套装2
+                    except:
+                        y = ' '
+            else:
+                y = ' '
+            if i == 11:
+                y += ' ' + 装备.类型
+            tempstr[i] += 'Lv' + str(装备.等级) + ' ' + 装备.品质 + y
+
+            if i < 5:
+                x = self.角色属性B.防具精通计算(i)
+                tempstr[i] +='<br>防具精通: '
+                for n in self.角色属性B.防具精通属性:
+                    if n != '体力':
+                        tempstr[i] += n + ' +' + str(2 * x) + ' '
+                    else:
+                        tempstr[i] += n + ' +' + str(x) + ' '
+
             if 装备.所属套装 != '智慧产物':  
                 if self.角色属性B.强化等级[i]!=0:
-                    if i==8:
-                        tempstr[i]+='<font color="#00A2E8">+'+str(self.角色属性B.强化等级[i])+' 强化: '
-                        tempstr[i]+='三攻 + '+str(耳环计算(100,装备.品质,self.角色属性B.强化等级[i]))+'</font>'
                     if i in [9,10]:
-                        tempstr[i]+='<font color="#00A2E8">+'+str(self.角色属性B.强化等级[i])+' 强化: '
+                        tempstr[i]+='<br><font color="#68D5ED">+'+str(self.角色属性B.强化等级[i])+' 强化: '
                         tempstr[i]+='四维 + '+str(左右计算(100,装备.品质,self.角色属性B.强化等级[i])) +'</font>'
-                    if i==11:
-                        tempstr[i]+='<font color="#00A2E8">+'+str(self.角色属性B.强化等级[i])+' 强化: '
-                        tempstr[i]+='物理攻击力 + '+str(武器计算(100,装备.品质,self.角色属性B.强化等级[i],装备.类型,'物理'))+'</font><br>'
-                        tempstr[i]+='<font color="#00A2E8">+'+str(self.角色属性B.强化等级[i])+' 强化: '
-                        tempstr[i]+='魔法攻击力 + '+str(武器计算(100,装备.品质,self.角色属性B.强化等级[i],装备.类型,'魔法'))+'</font>'
-
-                if self.角色属性B.武器锻造等级!=0:
-                    if i==11:
-                        tempstr[i]+='<br><font color="#00A2E8">+'+str(self.角色属性B.武器锻造等级)+'   锻造: '
-                        tempstr[i]+='独立攻击力 + '+str(锻造计算(100,装备.品质,self.角色属性B.武器锻造等级))+'</font>'
-
+                 
                 if self.角色属性B.是否增幅[i]==1:
                     if tempstr[i] !='':
                         tempstr[i]+='<br>'
@@ -2810,6 +2862,10 @@ class 角色窗口(QWidget):
                     elif '智力' in self.角色属性B.系数类型:
                         tempstr[i]+='异次元智力 + '+str(增幅计算(100,装备.品质,self.角色属性B.强化等级[i]))+'</font>'
 
+            if tempstr[i] != '':
+                tempstr[i] += '<br>'
+            tempstr[i] += 装备.装备描述(self.角色属性B)[:-4]
+
         for i in range(0,12):
             装备图标=QLabel(输出窗口)
             装备图标.setMovie(图片列表[i])
@@ -2817,21 +2873,16 @@ class 角色窗口(QWidget):
             装备图标.resize(26,26)
             装备图标.move(初始x+x坐标[i],初始y+y坐标[i])
             装备图标.setAlignment(Qt.AlignCenter) 
-
+            装备 =  装备列表[装备序号[self.角色属性B.装备栏[i]]]
             if self.角色属性B.装备栏[i] == 百变怪:
                 图标遮罩=QLabel(输出窗口)
                 图标遮罩.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.5)}")
                 图标遮罩.resize(26,26)
                 图标遮罩.move(初始x+x坐标[i],初始y+y坐标[i])
-                if tempstr[i]!='':
-                    图标遮罩.setToolTip('<b>'+"{:<12}".format(self.角色属性B.装备栏[i])+'<br>'+tempstr[i]+'</b>')
-                else:
-                    图标遮罩.setToolTip('<b>'+"{:<12}".format(self.角色属性B.装备栏[i])+'</b>')
+                图标遮罩.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备.品质] + '">' +装备.名称+'</font><br>'+tempstr[i]+'</font>')
             else:
-                if tempstr[i]!='':
-                    装备图标.setToolTip('<b>'+"{:<12}".format(self.角色属性B.装备栏[i])+'<br>'+tempstr[i]+'</b>')
-                else:
-                    装备图标.setToolTip('<b>'+"{:<12}".format(self.角色属性B.装备栏[i])+'</b>')
+                装备图标.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备.品质] + '">' +装备.名称+'</font><br>'+tempstr[i]+'</font>')
+
            
         for i in range(0,12):
             装备 =  装备列表[装备序号[self.角色属性B.装备栏[i]]]

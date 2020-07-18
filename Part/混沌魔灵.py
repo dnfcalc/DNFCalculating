@@ -228,6 +228,13 @@ class 混沌魔灵技能14(主动技能):
         else:
             return round(1.96 + 0.02 * self.等级, 5)
 
+    def 等级加成(self, x):
+        if self.等级 != 0:
+            if self.等级 + x > self.等级上限:
+                self.等级 = self.等级上限
+            else:
+                self.等级 += x
+
 class 混沌魔灵技能15(主动技能):
     名称 = '魔灵炸弹'
     所在等级 = 20

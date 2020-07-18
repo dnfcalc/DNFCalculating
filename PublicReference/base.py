@@ -30,10 +30,17 @@ class 技能:
     等级上限 = 0
     等级 = 0
     基础等级 = 0
+    关联技能 = ['无']
+    等级溢出 = 0
 
     def 等级加成(self, x):
         if self.等级 != 0:
-            self.等级 = max(min(self.等级上限, self.等级+x), 0)
+            if self.等级 + x > self.等级上限:
+                self.等级 = self.等级上限
+                if self.基础等级 != self.等级上限 and self.关联技能 != ['无']:
+                    self.等级溢出 = 1
+            else:
+                self.等级 += x
 
 class 主动技能(技能):
     #只扩展了技能的三条属性，第一条技能hit默认1,2、3条hit默认为0，需要手动赋值
@@ -97,6 +104,8 @@ class 被动技能(技能):
 
 部位列表 = ["上衣", "头肩", "下装", "腰带", "鞋", "手镯", "项链", "戒指", "耳环", "辅助装备", "魔法石", "武器"]
 
+颜色 = {'神话':'#E09297', '史诗':'#FFB400', '传说':'#FF7800'}
+
 刀魂之卡赞数据 = [0, 31, 40, 48, 58, 67, 79, 90, 103, 116, 131, 145, 161, 178, 194, 212, 230, 250, 270, 292, 313]
 
 class MyQComboBox(QComboBox):
@@ -130,6 +139,8 @@ class 角色属性():
     白兔子技能 = False
     斗神之吼秘药 = False
     称号触发 = False
+    战术技能BUFF = False
+    兵法技攻BUFF = False
 
     #基础属性(含唤醒)
     基础力量 = 0.0
@@ -194,8 +205,8 @@ class 角色属性():
     武器类型 = ''
 
     是否增幅 = [0] * 12
-    强化等级 = [0] * 12
-    改造等级 = [0] * 12
+    强化等级 = [12] * 12
+    改造等级 = [5] * 12
     武器锻造等级 = 0
 
     时间输入 = 0
@@ -209,7 +220,7 @@ class 角色属性():
     #0英雄 1传说
     角色熟练度 = 0
     #0 1 2 3 4 5 6
-    技能栏空位 = 0
+    技能栏空位 = 6
     #0数学期望 1黄字+35% 2爆伤+35% 3白字+35% 4终伤+35% 5三攻+35%
     命运的抉择 = 0
     #0数学期望 123456
@@ -219,7 +230,7 @@ class 角色属性():
     #0数学期望 1 5%属性附加 2 10%技能攻击力 3 15%技能攻击力
     先知者的预言 = 0
     #0无霸体状态 1 霸体状态 2 无伤状态 
-    贫瘠沙漠的遗产 = 0
+    贫瘠沙漠的遗产 = 1
     #0数学期望 1 7效果 2 77效果 3 777效果
     幸运三角 = 0
     #0过充电状态 1过负荷状态
@@ -231,7 +242,7 @@ class 角色属性():
     #0太极天帝剑：阳  1太极天帝剑：阴  
     太极天帝剑 = 0
     #0绿色生命的面容：无  1绿色生命的面容：阴暗面
-    绿色生命的面容 = 0
+    绿色生命的面容 = 1
 
     护石第一栏 = '无'
     护石第二栏 = '无'
@@ -243,31 +254,48 @@ class 角色属性():
         self.套装栏 = 套装
         self.武器类型 = 装备列表[装备序号[self.装备栏[11]]].类型
 
+    def 防具精通计算(self, i):
+        temp = 装备列表[装备序号[self.装备栏[i]]]
+        if temp.等级 == 100:
+            if temp.所属套装 != '智慧产物':
+                return 精通计算(temp.等级,temp.品质,self.强化等级[i],部位列表[i])
+            else:
+                return 精通计算(temp.等级,temp.品质,0,部位列表[i])
+        elif temp.等级 > 85:
+            计算等级 = temp.等级
+            if temp.所属套装 == '兵法之神':
+                if self.装备检查('过往时光的轮回'): 计算等级 = 100 
+                return 精通计算(计算等级,temp.品质,self.强化等级[i],部位列表[i])
+        else:
+            计算等级 = temp.等级
+            if temp.所属套装 == '战术之王的御敌':
+                if self.装备检查('战术之王的战术指挥棒'): 计算等级 = 100
+            elif temp.所属套装 == '魔战无双':   
+                if self.装备检查('聚魔漩涡'): 计算等级 = 100
+            x = 精通计算(计算等级,temp.品质,self.强化等级[i],部位列表[i])
+            if self.转甲选项 == 1:
+                return x
+            else:
+                return 0.4 * x
+
     def 防具基础(self):
         for i in [0,1,2,3,4]:
             temp = 装备列表[装备序号[self.装备栏[i]]]
-            if temp.等级 >= 95 or self.转甲选项 == 1:
-                if temp.所属套装 != '智慧产物':
-                    x = 精通计算(temp.等级,temp.品质,self.强化等级[i],部位列表[i])
-                else:
-                    x = 精通计算(temp.等级,temp.品质,0,部位列表[i])
-                if '力量' in self.防具精通属性:
-                    self.力量 += x + temp.力量[self.防具类型]
-                if '智力' in self.防具精通属性:
-                    self.智力 += x + temp.智力[self.防具类型]
+            if temp.等级 > 85 or self.转甲选项 == 1:
+                self.力量 += temp.力量[self.防具类型]
+                self.智力 += temp.智力[self.防具类型]
             else:
-                x = 精通计算(temp.等级,temp.品质,self.强化等级[i],部位列表[i])
-                if temp.类型 != self.防具类型:
-                    x *= 0.4
-                if '力量' in self.防具精通属性:
-                    self.力量 += x + temp.力量[temp.类型]
-                if '智力' in self.防具精通属性:
-                    self.智力 += x + temp.智力[temp.类型]
+                self.力量 += temp.力量[temp.类型]
+                self.智力 += temp.智力[temp.类型]
 
-                
+            精通数值 = self.防具精通计算(i)
+            if '力量' in self.防具精通属性:
+                self.力量 += 精通数值
+            if '智力' in self.防具精通属性:
+                self.智力 += 精通数值
+                 
     def 装备基础(self):
         self.防具基础()
-
         for i in [9,10]:
             temp = 装备列表[装备序号[self.装备栏[i]]]
             if temp.所属套装 != '智慧产物':
@@ -387,24 +415,37 @@ class 角色属性():
         else:
             return int(int((self.智力 + int((self.智力 - self.基础智力) * 1.35 + 7664) +self.进图智力)) * (1 + self.百分比力智))
 
-    def 面板物理攻击力(self):
-        
+    def 面板物理攻击力(self, x = 0):
         面板物理攻击 = (self.物理攻击力 + self.进图物理攻击力) * (1 + self.百分比三攻) * (1 + self.年宠技能 * 0.10 + self.斗神之吼秘药 * 0.12 + self.白兔子技能 * 0.20)
         for i in self.技能栏:
             try : 
                 面板物理攻击 *= i.物理攻击力倍率(self.武器类型)
             except : 
                 pass
-        return round(面板物理攻击,8) * (self.面板力量() / 250 + 1) 
+            try : 
+                面板物理攻击 *= i.物理攻击力倍率进图(self.武器类型)
+            except : 
+                pass
+        if x == 1:
+            return 面板物理攻击
+        else:
+            return 面板物理攻击 * (self.面板力量() / 250 + 1) 
 
-    def 面板魔法攻击力(self):
+    def 面板魔法攻击力(self, x = 0):
         面板魔法攻击 = (self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻) * (1 + self.年宠技能 * 0.10 + self.斗神之吼秘药 * 0.12 + self.白兔子技能 * 0.20)
         for i in self.技能栏:
             try : 
                 面板魔法攻击 *= i.魔法攻击力倍率(self.武器类型)
             except : 
                 pass
-        return round(面板魔法攻击,8) * (self.面板智力() / 250 + 1) 
+            try : 
+                面板魔法攻击 *= i.魔法攻击力倍率进图(self.武器类型)
+            except : 
+                pass
+        if x == 1:
+            return 面板魔法攻击
+        else:
+            return 面板魔法攻击 * (self.面板智力() / 250 + 1) 
 
     def 面板独立攻击力(self):
         面板独立攻击 = (self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻)
@@ -417,7 +458,7 @@ class 角色属性():
                 面板独立攻击 *= i.独立攻击力倍率进图(self.武器类型)
             except : 
                 pass
-        return round(面板独立攻击,8)
+        return 面板独立攻击
 
     def 加算冷却计算(self):
         for i in self.技能栏:
@@ -571,7 +612,6 @@ class 角色属性():
         self.伤害指数=面板*属性倍率*增伤倍率*基准倍率/100
 
     def 伤害计算(self, x = 0):
-        
         self.所有属性强化(self.进图属强)
         # Will添加
         self.CD倍率计算()
@@ -639,23 +679,29 @@ class 角色属性():
     def 站街智力(self):
         return int(self.智力)
 
-    def 站街物理攻击力(self):
+    def 站街物理攻击力(self, x = 0):
         站街物理攻击 = self.物理攻击力
         for i in self.技能栏:
             try : 
                 站街物理攻击 *= i.物理攻击力倍率(self.武器类型)
             except : 
                 pass
-        return round(站街物理攻击, 3) * (self.站街力量() / 250 + 1)
+        if x == 1:
+            return 站街物理攻击
+        else:
+            return 站街物理攻击 * (self.站街力量() / 250 + 1)
 
-    def 站街魔法攻击力(self):
+    def 站街魔法攻击力(self, x = 0):
         站街魔法攻击 =  self.魔法攻击力
         for i in self.技能栏:
             try : 
                 站街魔法攻击 *= i.魔法攻击力倍率(self.武器类型)
             except : 
                 pass
-        return round(站街魔法攻击,3) * (self.站街智力() / 250 + 1)
+        if x == 1:
+            return 站街魔法攻击
+        else:
+            return 站街魔法攻击 * (self.站街智力() / 250 + 1)
 
     def 站街独立攻击力(self):
         站街独立攻击 = self.独立攻击力
@@ -664,7 +710,7 @@ class 角色属性():
                 站街独立攻击 *= i.独立攻击力倍率(self.武器类型)
             except : 
                 pass
-        return round(站街独立攻击, 3)
+        return 站街独立攻击
     
     #一键修正站街三攻倍率
     def 站街物理攻击力倍率(self):
@@ -674,7 +720,7 @@ class 角色属性():
                 站街物理攻击倍率 *= i.物理攻击力倍率(self.武器类型)
             except :
                 pass
-        return round(站街物理攻击倍率, 5)
+        return 站街物理攻击倍率
 
     def 站街魔法攻击力倍率(self):
         站街魔法攻击倍率 =  1.0
@@ -683,7 +729,7 @@ class 角色属性():
                 站街魔法攻击倍率 *= i.魔法攻击力倍率(self.武器类型)
             except :
                 pass
-        return round(站街魔法攻击倍率, 5)
+        return 站街魔法攻击倍率
 
     def 站街独立攻击力倍率(self):
         站街独立攻击倍率 = 1.0
@@ -692,11 +738,18 @@ class 角色属性():
                 站街独立攻击倍率 *= i.独立攻击力倍率(self.武器类型)
             except :
                 pass
-        return round(站街独立攻击倍率, 5)
+        return 站街独立攻击倍率
 
-    def 装备属性计算(self):
-        self.装备基础()
-    
+    def 等级溢出判断(self, 装备, 套装):
+        self.穿戴装备(装备, 套装)
+        self.装备词条计算()
+        temp = []
+        for i in self.技能栏:
+            if i.等级溢出 == 1:
+                temp.append(i.名称)
+        return temp
+
+    def 装备词条计算(self):
         for i in range(11):
             装备列表[装备序号[self.装备栏[i]]].城镇属性(self)
             装备列表[装备序号[self.装备栏[i]]].进图属性(self)
@@ -708,6 +761,12 @@ class 角色属性():
             装备列表[武器序号].城镇属性(self)
             装备列表[武器序号].进图属性(self)
 
+        if self.战术技能BUFF:
+            self.技能等级加成('所有', 60, 80, 3)
+
+        if self.兵法技攻BUFF:
+            self.技能攻击力 *= 1 + self.技能攻击力倍率 * (0.10)
+
         for i in self.套装栏:
             套装列表[套装序号[i]].城镇属性(self)
             套装列表[套装序号[i]].进图属性(self)
@@ -716,6 +775,10 @@ class 角色属性():
         self.伤害增加 += self.黄字
         self.暴击伤害 += self.爆伤
 
+    def 装备属性计算(self):
+        self.装备基础()
+        self.装备词条计算()
+    
     def 其它属性计算(self):
         for i in range(11):
             装备列表[装备序号[self.装备栏[i]]].其它属性(self)
@@ -769,6 +832,13 @@ class 角色窗口(QWidget):
         self.setWindowTitle(self.角色属性A.职业名称 + "搭配计算器 （点击标签栏按钮切换界面）")
         self.icon = QIcon('./ResourceFiles/'+self.角色属性A.职业名称 + '/技能/BUFF.png')
         self.setWindowIcon(self.icon)
+
+        self.setStyleSheet('''QToolTip { 
+                   background-color: black; 
+                   color: white; 
+                   border: 0px
+                   }''')
+
         #窗口大小
         count = 0
         for i in self.角色属性A.技能栏:
@@ -788,7 +858,6 @@ class 角色窗口(QWidget):
         主背景.setPixmap(self.主背景图片)
         主背景.move(0, int((self.height() - 1230) / 6))
         主背景.setGraphicsEffect(主背景透明度)
-
 
         self.技能图片 = []
         for i in self.角色属性A.技能栏:
@@ -870,6 +939,19 @@ class 角色窗口(QWidget):
                         self.按钮.setStyleSheet('QPushButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QPushButton:hover{background-color:rgba(65,105,225,0.8)}')
                         self.按钮.resize(120, 28)
                         self.按钮.clicked.connect(lambda state, index = i.名称: self.套装按钮点击事件(index))
+                        temp = ''
+                        temp += '<font size="3" face="宋体"><font color="#78FF1E">' + i.名称 + '[2]</font><br>'
+                        temp += 套装列表[套装序号[i.名称 + '[2]']].装备描述(self.角色属性A)[:-4]
+                        temp += '<br><font color="#78FF1E">' + i.名称 + '[3]</font><br>'
+                        temp += 套装列表[套装序号[i.名称 + '[3]']].装备描述(self.角色属性A)[:-4]
+                        try:
+                            x = 套装列表[套装序号[i.名称 + '[5]']].装备描述(self.角色属性A)[:-4]
+                            temp += '<br><font color="#78FF1E">' + i.名称 + '[5]</font><br>'
+                            temp +=  x           
+                        except:
+                            pass
+                        temp += '</font>'
+                        self.按钮.setToolTip(temp)            
                         counter3 = 0
                         for 品质 in ['神话', '史诗']:
                             for 部位 in ['上衣', '头肩', '下装', '鞋', '腰带', '项链', '手镯', '戒指', '辅助装备', '魔法石', '耳环']:
@@ -883,7 +965,7 @@ class 角色窗口(QWidget):
                                         self.按钮 = QPushButton(self.main_frame1)
                                         self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
                                         self.按钮.resize(28, 28)
-                                        self.按钮.setToolTip(装备列表[j].名称 + '\n'+ 装备列表[j].类型 + '-' + 装备列表[j].部位)
+                                        self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备列表[j].品质] + '">' +装备列表[j].名称+'</font><br>'+ 装备列表[j].类型 + '-' + 装备列表[j].部位 + '<br>' + 装备列表[j].装备描述(self.角色属性A)[:-4] + '</font>')
                                         self.遮罩透明度[j].setOpacity(0.5)
                                         self.按钮.setGraphicsEffect(self.遮罩透明度[j])
                                         self.按钮.clicked.connect(lambda state, index = j: self.装备图标点击事件(index, 10))
@@ -912,7 +994,7 @@ class 角色窗口(QWidget):
                 self.按钮 = QPushButton(self.main_frame1)
                 self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
                 self.按钮.resize(28, 28)
-                self.按钮.setToolTip(i.名称 + '\n' + i.类型) 
+                self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[i.品质] + '">' +i.名称+'</font><br>'+ i.类型 + '-' + i.部位 + '<br>' + i.装备描述(self.角色属性A)[:-4] + '</font>')
                 self.遮罩透明度[装备序号[i.名称]].setOpacity(0.5)
                 self.按钮.setGraphicsEffect(self.遮罩透明度[装备序号[i.名称]])
                 self.按钮.clicked.connect(lambda state, index = 装备序号[i.名称]: self.装备图标点击事件(index, 10))
@@ -943,7 +1025,7 @@ class 角色窗口(QWidget):
                 self.按钮 = QPushButton(self.main_frame1)
                 self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
                 self.按钮.resize(28, 28)
-                self.按钮.setToolTip(i.名称 + '\n' + i.类型+ '-' + i.部位) 
+                self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[i.品质] + '">' +i.名称+'</font><br>'+ i.类型 + '-' + i.部位 + '<br>' + i.装备描述(self.角色属性A)[:-4] + '</font>')
                 self.遮罩透明度[装备序号[i.名称]].setOpacity(0.5)
                 self.按钮.setGraphicsEffect(self.遮罩透明度[装备序号[i.名称]])
                 self.按钮.clicked.connect(lambda state, index = 装备序号[i.名称]: self.装备图标点击事件(index, 10))
@@ -1175,20 +1257,25 @@ class 角色窗口(QWidget):
         一键修正按钮.setStyleSheet(按钮样式)
 
         self.红色宠物装备 = QCheckBox('红色宠物装备', self.main_frame1)
-        self.红色宠物装备.move(990, 505)
+        self.红色宠物装备.move(1010, 505)
         self.红色宠物装备.resize(100, 24)
         self.红色宠物装备.setStyleSheet(复选框样式)
         self.红色宠物装备.setToolTip('7%黄字，7%力智，8%白字取最高值\n\n勾选后禁用第三页红色宠物装备白字数值输入')
         
         self.禁用存档 = QCheckBox('禁用自动存档', self.main_frame1)
-        self.禁用存档.move(990, 540)
+        self.禁用存档.move(1010, 540)
         self.禁用存档.resize(100, 24)
         self.禁用存档.setStyleSheet(复选框样式)
 
+        self.韩服面板 = QCheckBox('韩服面板', self.main_frame1)
+        self.韩服面板.move(920, 540)
+        self.韩服面板.resize(80, 24)
+        self.韩服面板.setStyleSheet(复选框样式)
+
         重置按钮 = QPushButton('全局重置', self.main_frame1)
         重置按钮.clicked.connect(lambda state: self.全局重置())
-        重置按钮.move(880, 540)
-        重置按钮.resize(100, 24)
+        重置按钮.move(920, 505)
+        重置按钮.resize(80, 24)
         重置按钮.setStyleSheet(按钮样式)
         
         self.计算按钮1 = QPushButton('开始计算', self.main_frame1)
@@ -1278,14 +1365,15 @@ class 角色窗口(QWidget):
                 x=QLabel(self.main_frame2)
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
                 x.resize(28,28)
-                tempstr='<font color="#FF0000"><b>'+i.名称 +i.备注 +'</b></font><br>'
-                tempstr+='所在等级：<b>'+str(i.所在等级)+'</b><br>'
-                tempstr+='等级上限：<b>'+str(i.等级上限)+'</b>'
+                tempstr='<font face="宋体"><font color="#FF6666">'+i.名称 +i.备注 +'</font><br>'
+                tempstr+='所在等级：'+str(i.所在等级)+'<br>'
+                tempstr+='等级上限：'+str(i.等级上限)
                 if i.是否主动==1:
-                    tempstr+='<br>百分比：<b>'+str(int(i.等效百分比(self.角色属性A.武器类型)))+'%</b>'
+                    tempstr+='<br>百分比：'+str(int(i.等效百分比(self.角色属性A.武器类型)))+'%'
                     if i.TP上限 !=0:
-                        tempstr+='<br>TP成长：<b>'+str(int(i.TP成长*100))+'%</b>'
-                        tempstr+='<br>TP上限：<b>'+str(i.TP上限)+'</b>'
+                        tempstr+='<br>TP成长：'+str(int(i.TP成长*100))+'%'
+                        tempstr+='<br>TP上限：'+str(i.TP上限)
+                tempstr += '</font>'
                 x.setToolTip(tempstr)
                 x.move(横坐标,纵坐标+7)
                 横坐标+=40
@@ -1327,9 +1415,10 @@ class 角色窗口(QWidget):
                 x=QLabel(self.main_frame2)
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
                 x.resize(28,28)
-                tempstr='<font color="#FF0000"><b>'+i.名称 +i.备注 +'</b></font><br>'
-                tempstr+='所在等级：<b>'+str(i.所在等级)+'</b><br>'
-                tempstr+='等级上限：<b>'+str(i.等级上限)+'</b>'
+                tempstr='<font face="宋体"><font color="#FF6666">'+i.名称 +i.备注 +'</font><br>'
+                tempstr+='所在等级：'+str(i.所在等级)+'<br>'
+                tempstr+='等级上限：'+str(i.等级上限)
+                tempstr += '</font>'
                 x.setToolTip(tempstr)
                 x.move(横坐标,纵坐标+7)
                 横坐标+=40
@@ -1510,7 +1599,7 @@ class 角色窗口(QWidget):
         for i in self.复选框列表:
             i.setStyleSheet(复选框样式)
             i.resize(125,20)
-            i.move(970,10 + counter * 28)
+            i.move(980,10 + counter * 24)
             if counter < 7 and 调试开关 == 0:
                 i.setChecked(True)
             counter+=1
@@ -1520,26 +1609,26 @@ class 角色窗口(QWidget):
             i = QLabel(self.main_frame2)
             i.setPixmap(QPixmap('./ResourceFiles/img/远古记忆.png'))
             i.resize(28,28)
-            i.move(990, 15 + counter * 28)
+            i.move(1000, 15 + counter * 24)
             self.远古记忆 = MyQComboBox(self.main_frame2)
             self.远古记忆.currentIndexChanged.connect(lambda state, index = 100:self.等级调整标注(index))
             for i in range(12):
                 self.远古记忆.addItem(str(i))
             self.远古记忆.resize(50,20)
-            self.远古记忆.move(1025, 19 + counter * 28)
+            self.远古记忆.move(1035, 19 + counter * 24)
             sign = 30
 
         if self.初始属性.刀魂之卡赞 != -1:
             i = QLabel(self.main_frame2)
             i.setPixmap(QPixmap('./ResourceFiles/img/刀魂之卡赞.png'))
             i.resize(28,28)
-            i.move(990, 15 + sign + counter * 28)
+            i.move(1000, 15 + sign + counter * 24)
             self.刀魂之卡赞 = MyQComboBox(self.main_frame2)
             self.刀魂之卡赞.currentIndexChanged.connect(lambda state, index = 200:self.等级调整标注(index))
             for i in range(12):
                 self.刀魂之卡赞.addItem(str(i))
             self.刀魂之卡赞.resize(50,20)
-            self.刀魂之卡赞.move(1025, 19 + sign + counter * 28)
+            self.刀魂之卡赞.move(1035, 19 + sign + counter * 24)
 
         x=QLabel("时间输入：", self.main_frame2)
         x.move(850, self.height() - 62)
@@ -1935,10 +2024,10 @@ class 角色窗口(QWidget):
         self.总伤害.setAlignment(Qt.AlignCenter) 
 
         self.套装名称显示=[]
-        for i in range(0,8):
+        for i in range(0,10):
             self.套装名称显示.append(QLabel(self.main_frame5))
-            self.套装名称显示[i].move(132 + 初始x, 138 + 180 + 20 * i + 初始y)
-            self.套装名称显示[i].resize(132,18)
+            self.套装名称显示[i].move(114 + 初始x, 133 + 180 + 20 * i + 初始y)
+            self.套装名称显示[i].resize(150,18)
             self.套装名称显示[i].setAlignment(Qt.AlignCenter)   
 
         self.自选计算按钮 = QPushButton('查看详情', self.main_frame5)
@@ -2082,7 +2171,6 @@ class 角色窗口(QWidget):
                 x = 11
             if x == 11:
                 self.远古记忆.setStyleSheet(高等级)
-                QMessageBox.information(self,"警告",  警告)
             if x < 10:
                 self.远古记忆.setStyleSheet(低等级)
             if x == 10:
@@ -2094,7 +2182,6 @@ class 角色窗口(QWidget):
                 x = 11
             if x == 11:
                 self.刀魂之卡赞.setStyleSheet(高等级)
-                QMessageBox.information(self,"警告",  警告)
             if x < 10:
                 self.刀魂之卡赞.setStyleSheet(低等级)
             if x == 10:
@@ -3060,10 +3147,15 @@ class 角色窗口(QWidget):
             self.辟邪玉属性计算(B)
             self.总伤害.setText(self.格式化输出(str(int(B.伤害计算(0)))))
 
+            if self.韩服面板.isChecked():
+                y = 1
+            else:
+                y = 0
+
             self.面板显示[0].setText(str(int(B.面板力量())))
-            self.面板显示[1].setText(str(int(B.面板物理攻击力())))
+            self.面板显示[1].setText(str(int(B.面板物理攻击力(y))))
             self.面板显示[2].setText(str(int(B.面板智力())))
-            self.面板显示[3].setText(str(int(B.面板魔法攻击力())))
+            self.面板显示[3].setText(str(int(B.面板魔法攻击力(y))))
 
             self.面板显示[5].setText(str(int(B.火属性强化)))
             self.面板显示[6].setText(str(int(B.冰属性强化)))
@@ -3075,9 +3167,9 @@ class 角色窗口(QWidget):
             self.面板显示[4].setText(tempstr)
 
             self.面板显示[9].setText(str(int(C.站街力量())))
-            self.面板显示[10].setText(str(int(C.站街物理攻击力())))
+            self.面板显示[10].setText(str(int(C.站街物理攻击力(y))))
             self.面板显示[11].setText(str(int(C.站街智力())))
-            self.面板显示[12].setText(str(int(C.站街魔法攻击力())))
+            self.面板显示[12].setText(str(int(C.站街魔法攻击力(y))))
 
             self.面板显示[13].setText(str(int(C.火属性强化)))
             self.面板显示[14].setText(str(int(C.冰属性强化)))
@@ -3123,19 +3215,22 @@ class 角色窗口(QWidget):
 
             for i in self.套装名称显示:
                 i.setText('')
-
-            self.套装名称显示[0].setText(装备[11])
-            self.套装名称显示[0].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")   
+            count = 0
+            for i in [self.称号.currentText(), self.宠物.currentText(), 装备[11]]:
+                self.套装名称显示[count].setText(i)
+                self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")   
+                count += 1
             神话所在套装 = []
             for i in range(0,11):
                 if 装备列表[装备序号[装备[i]]].品质 == '神话':
                     神话所在套装.append(装备列表[装备序号[装备[i]]].所属套装)
             for i in range(0,len(套装)):
-                self.套装名称显示[i + 1].setText(套装[i])
+                self.套装名称显示[count].setText(套装[i])
                 if 套装[i].split('[')[0] in 神话所在套装:
-                    self.套装名称显示[i + 1].setStyleSheet("QLabel{font-size:12px;color:rgb(224,146,151)}")   
+                    self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(224,146,151)}")   
                 else:
-                    self.套装名称显示[i + 1].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")  
+                    self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")  
+                count += 1
 
         if x == 0:
             self.排行数据.append(装备 + [0] + 套装 + ['无'])
@@ -3144,6 +3239,11 @@ class 角色窗口(QWidget):
     def 排行界面(self):
         self.排行窗口列表.clear()
         滚动排行 = QMainWindow()
+        滚动排行.setStyleSheet('''QToolTip { 
+           background-color: black; 
+           color: white; 
+           border: 0px
+           }''')
         self.排行窗口列表.append(滚动排行)
         滚动排行.resize(630,530)
         滚动排行.setMinimumSize(630,530)
@@ -3178,6 +3278,10 @@ class 角色窗口(QWidget):
     
         最高伤害 = self.排行数据[0][12]
 
+        技能选项 = []
+        for i in self.技能设置输入:
+            技能选项.append(i.currentText().replace('Lv+1', ''))
+
         if 输出数据 == 1:
             setfile = open('./'+self.角色属性A.职业名称 + '.csv', 'w', encoding='gbk')
         for i in range(0,len(self.排行数据)):
@@ -3193,17 +3297,17 @@ class 角色窗口(QWidget):
                 图片列表.append(self.装备图片[装备序号[self.排行数据[i][j]]])
             水平间距=[1,2,3,4,5,6.5,7.5,8.5,10,11,12,13.5]
             for j in range(0,12):
+                装备 = 装备列表[装备序号[self.排行数据[i][j]]]
                 图标=QLabel(滚动排行.topFiller)
                 图标.setMovie(图片列表[j])
                 图片列表[j].start()
                 图标.move(int(初始x+x间隔*水平间距[j]),int(初始y+i*y间隔))
-                图标.setToolTip(self.排行数据[i][j])
                 if self.排行数据[i][j] == self.排行数据[i][-1]:
                     图标=QLabel(滚动排行.topFiller)
                     图标.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.5)}")
                     图标.resize(28,28)
                     图标.move(int(初始x+x间隔*水平间距[j]),int(初始y+i*y间隔))
-                    图标.setToolTip(self.排行数据[i][j])
+                图标.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备.品质] + '">' +装备.名称+'</font><br>'+ 装备.类型 + '-' + 装备.部位 + '<br>' + 装备.装备描述(self.角色属性A)[:-4] + '</font>')
                 
             伤害量 = str(int(round(self.排行数据[i][12]/100000000,0)))
             if 最高伤害!=0:
@@ -3217,11 +3321,27 @@ class 角色窗口(QWidget):
                 详情按钮=QtWidgets.QPushButton(伤害量+' | '+百分比,滚动排行.topFiller)
     
             详情按钮.clicked.connect(lambda state, index= i: self.输出界面(index))
-            详情按钮.setToolTip('点击查看详情')
+            
             详情按钮.move(int(初始x+x间隔*15),int(初始y+i*y间隔))
             详情按钮.resize(120,30)
-            详情按钮.setStyleSheet(按钮样式+"QPushButton{font-size:14px}")
-    
+            temp = deepcopy(self.角色属性A)
+            技能等级溢出 = temp.等级溢出判断(self.排行数据[i][0:12], self.排行数据[i][13:(len(self.排行数据[i]) - 1)])
+            if  len(技能等级溢出) != 0:
+                详情按钮.setStyleSheet('QPushButton{font-size:14px;color:white;background-color:rgba(197,34,70,0.8);border:1px;border-radius:10px} QPushButton:hover{background-color:rgba(225,5,65,0.8)}')
+                可调整技能 = ''
+                不可调整技能 = ''
+                for n in 技能等级溢出:
+                    if n in 技能选项:
+                        可调整技能 += n + ' '
+                    else:
+                        不可调整技能 += n + ' '
+                if 可调整技能 != '':
+                    详情按钮.setToolTip('<font size="3" face="宋体"><font color="#FF6666">' + 可调整技能 + 不可调整技能 + '</font>等级溢出，修改白金徽章或时装可以提高伤害。</font>')
+                else:
+                    详情按钮.setToolTip('<font size="3" face="宋体"><font color="#FF6666">' + 不可调整技能 + '</font>等级溢出</font>')
+            else:
+                详情按钮.setStyleSheet(按钮样式+"QPushButton{font-size:14px}")
+                详情按钮.setToolTip('<font size="3" face="宋体">点击查看详情</font>')
         滚动排行.scroll = QScrollArea()
         滚动排行.scroll.setStyleSheet("QScrollArea {background-color:transparent}")
         滚动排行.scroll.viewport().setStyleSheet("background-color:transparent")
@@ -3300,6 +3420,11 @@ class 角色窗口(QWidget):
             del self.输出窗口列表[0]
     
         输出窗口 = QWidget()
+        输出窗口.setStyleSheet('''QToolTip { 
+           background-color: black; 
+           color: white; 
+           border: 0px
+           }''')
         self.输出窗口列表.append(输出窗口)
         输出窗口.setFixedSize(788, 564)
         输出窗口.setWindowTitle('详细数据（最多显示前18个技能）')
@@ -3317,40 +3442,19 @@ class 角色窗口(QWidget):
             excel.append(统计详情[i*4+1])
         excel.sort()
 
-        位置 = 338
-        if self.角色属性B.红色宠物装备 != '默认':
-            套装名称.append('红宠：' + self.角色属性B.红色宠物装备)
-            位置 -= 10
+        if self.韩服面板.isChecked():
+            x = 1
+        else:
+            x = 0
 
-        适用中的套装=QLabel(装备名称[11],输出窗口)
-        适用中的套装.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")   
-        适用中的套装.move(132, 位置 - 20)
-        适用中的套装.resize(132,18)
-        适用中的套装.setAlignment(Qt.AlignCenter)   
-        
-        神话所在套装 = []
-        for i in range(0,11):
-            if 装备列表[装备序号[装备名称[i]]].品质 == '神话':
-                神话所在套装.append(装备列表[装备序号[装备名称[i]]].所属套装)
-        for i in range(0,len(套装名称)):
-            适用套装名称=QLabel(输出窗口)
-            适用套装名称.setText(套装名称[i])
-            适用套装名称.move(132,位置+i*20)
-            适用套装名称.resize(132,18)
-            适用套装名称.setAlignment(Qt.AlignCenter)  
-            if 套装名称[i].split('[')[0] in 神话所在套装:
-                适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(224,146,151)}")   
-            else:
-                适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")  
-    
         面板显示=[]
         for i in range(0,17):
             面板显示.append(QLabel(输出窗口))        
     
         面板显示[0].setText(str(int(self.角色属性B.面板力量())))
-        面板显示[1].setText(str(int(self.角色属性B.面板物理攻击力())))
+        面板显示[1].setText(str(int(self.角色属性B.面板物理攻击力(x))))
         面板显示[2].setText(str(int(self.角色属性B.面板智力())))
-        面板显示[3].setText(str(int(self.角色属性B.面板魔法攻击力())))
+        面板显示[3].setText(str(int(self.角色属性B.面板魔法攻击力(x))))
         
         面板显示[5].setText(str(int(self.角色属性B.火属性强化)))
         面板显示[6].setText(str(int(self.角色属性B.冰属性强化)))
@@ -3362,9 +3466,9 @@ class 角色窗口(QWidget):
         面板显示[4].setText(tempstr)
 
         面板显示[9].setText(str(int(C.站街力量())))
-        面板显示[10].setText(str(int(C.站街物理攻击力())))
+        面板显示[10].setText(str(int(C.站街物理攻击力(x))))
         面板显示[11].setText(str(int(C.站街智力())))
-        面板显示[12].setText(str(int(C.站街魔法攻击力())))
+        面板显示[12].setText(str(int(C.站街魔法攻击力(x))))
         
         面板显示[13].setText(str(int(C.火属性强化)))
         面板显示[14].setText(str(int(C.冰属性强化)))
@@ -3447,7 +3551,43 @@ class 角色窗口(QWidget):
             templab.resize(180,17)
             templab.setAlignment(Qt.AlignLeft)
             j+=17
-    
+
+        位置 = 313
+        间隔 = 20
+        if self.角色属性B.红色宠物装备 != '默认':
+            套装名称.append('红宠：' + self.角色属性B.红色宠物装备)
+            位置 -= 5
+            间隔 -= 1
+        
+        for i in [self.称号.currentText(), self.宠物.currentText(), 装备名称[11]]:
+            显示=QLabel(i,输出窗口)
+            显示.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")   
+            显示.move(114, 位置)
+            显示.resize(150,18)
+            显示.setAlignment(Qt.AlignCenter)
+            位置 += 间隔 
+
+        神话所在套装 = []
+        for i in range(0,11):
+            if 装备列表[装备序号[装备名称[i]]].品质 == '神话':
+                神话所在套装.append(装备列表[装备序号[装备名称[i]]].所属套装)
+        for i in range(0,len(套装名称)):
+            适用套装名称=QLabel(输出窗口)
+            适用套装名称.setText(套装名称[i])
+            适用套装名称.move(114,位置+i*间隔)
+            适用套装名称.resize(150,18)
+            适用套装名称.setAlignment(Qt.AlignCenter)  
+            if 套装名称[i].split('[')[0] in 神话所在套装:
+                适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(224,146,151)}")   
+            else:
+                适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+            sign = 1
+            if self.角色属性B.红色宠物装备 != '默认':
+                if i == len(套装名称) - 1:
+                    sign = 0
+            if sign == 1:
+                适用套装名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">'+套装名称[i]+'</font><br>'+套装列表[套装序号[套装名称[i]]].装备描述(self.角色属性B)[:-4]+'</font>')
+  
         实际技能等级=[]
         技能等效CD=[]
         for i in self.角色属性B.技能栏:
@@ -3485,13 +3625,13 @@ class 角色窗口(QWidget):
                 每行详情[0].setPixmap(self.技能图片[i])
                 每行详情[0].resize(28,min(28,self.行高 - 2)) 
                 try:
-                    tempstr='<font color="#FF0000"><b>'+self.角色属性B.技能栏[i].名称+self.角色属性B.技能栏[i].备注+ '</b></font><br>'
-                    tempstr+='百分比：<b>'+str(int(self.角色属性B.技能栏[i].等效百分比(self.角色属性B.武器类型) / self.角色属性B.技能栏[i].倍率))+'%</b><br>'
-                    tempstr+='被动倍率：<b>'+str(round(self.角色属性B.技能栏[i].被动倍率*100,1))+'%</b><br>'
+                    tempstr='<font face="宋体"><font color="#FF6666">'+self.角色属性B.技能栏[i].名称+self.角色属性B.技能栏[i].备注+ '</font><br>'
+                    tempstr+='百分比：'+str(int(self.角色属性B.技能栏[i].等效百分比(self.角色属性B.武器类型) / self.角色属性B.技能栏[i].倍率))+'%<br>'
+                    tempstr+='被动倍率：'+str(round(self.角色属性B.技能栏[i].被动倍率*100,1))+'%<br>'
                     if self.角色属性B.技能栏[i].倍率!=0:
-                        tempstr+='其它倍率：<b>'+str(round(self.角色属性B.技能栏[i].倍率*100,1))+'%</b><br>'
-                    tempstr+='CD显示：<b>'+str(round(self.角色属性B.技能栏[i].等效CD(self.角色属性B.武器类型) * self.角色属性B.技能栏[i].恢复,2))+'s</b><br>'
-                    tempstr+='CD恢复：<b>'+str(round(self.角色属性B.技能栏[i].恢复*100,1))+'%</b>'
+                        tempstr+='其它倍率：'+str(round(self.角色属性B.技能栏[i].倍率*100,1))+'%<br>'
+                    tempstr+='CD显示：'+str(round(self.角色属性B.技能栏[i].等效CD(self.角色属性B.武器类型) * self.角色属性B.技能栏[i].恢复,2))+'s<br>'
+                    tempstr+='CD恢复：'+str(round(self.角色属性B.技能栏[i].恢复*100,1))+'%</font>'
                     每行详情[0].setToolTip(tempstr)
                 except:
                     pass
@@ -3530,35 +3670,59 @@ class 角色窗口(QWidget):
         num=0
         for i in range(0,len(self.角色属性B.技能栏)):
             # Will修改
+            tempstr = ''
             if self.角色属性B.技能栏[i].所在等级 != 100 or self.角色属性B.技能栏[i].是否主动 == 0:
-                if self.角色属性B.技能栏[i].关联技能 != ['无']:
-                    被动数据=QLabel(输出窗口)
-                    被动数据.setPixmap(self.技能图片[i])
-                    tempstr='<font color="#FF0000"><b>'+self.角色属性B.技能栏[i].名称+'</b></font><br>'
-                    tempstr+='加成倍率：<b>'+str(round(self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型)*100-100,2))+'%</b><br>'
-                    tempstr+='关联技能：<b>'
+                if self.角色属性B.技能栏[i].关联技能 != ['无'] and self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) != 1:
+                    tempstr+='<font face="宋体"><font color="#FF6666">'+self.角色属性B.技能栏[i].名称+'</font><br>'
+                    tempstr+='加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型)*100-100,2))+'%<br>'
+                    tempstr+='关联技能：'
                     for j in self.角色属性B.技能栏[i].关联技能:
                         tempstr+=j
                         if j != self.角色属性B.技能栏[i].关联技能[-1]:
                             tempstr+=','
-                    tempstr+='</b>'
-                    # Will添加
                     if self.角色属性B.技能栏[i].关联技能2 != ['无']:
-                        tempstr+='<br>加成倍率：<b>'+str(round(self.角色属性B.技能栏[i].加成倍率2(self.角色属性B.武器类型)*100-100,2))+'%</b><br>'
-                        tempstr+='关联技能：<b>'
+                        tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率2(self.角色属性B.武器类型)*100-100,2))+'%<br>'
+                        tempstr+='关联技能：'
                         for k in self.角色属性B.技能栏[i].关联技能2:
                             tempstr+=k
                             if k != self.角色属性B.技能栏[i].关联技能2[-1]:
                                 tempstr+=','
-                        tempstr+='</b>'
                     if self.角色属性B.技能栏[i].关联技能3 != ['无']:
-                        tempstr+='<br>加成倍率：<b>'+str(round(self.角色属性B.技能栏[i].加成倍率3(self.角色属性B.武器类型)*100-100,2))+'%</b><br>'
-                        tempstr+='关联技能：<b>'
+                        tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率3(self.角色属性B.武器类型)*100-100,2))+'%<br>'
+                        tempstr+='关联技能：'
                         for l in self.角色属性B.技能栏[i].关联技能3:
                             tempstr+=l
                             if l != self.角色属性B.技能栏[i].关联技能3[-1]:
                                 tempstr+=','
-                        tempstr+='</b>'
+                if self.角色属性B.技能栏[i].冷却关联技能 != ['无'] and self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型) != 1:
+                    if tempstr == '':
+                        tempstr+='<font color="#FF6666">'+self.角色属性B.技能栏[i].名称+'</font><br>'
+                    else:
+                        tempstr+='<br>'
+                    tempstr+='冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型)*100,2))+'%<br>'
+                    tempstr+='冷却关联技能：'
+                    for j in self.角色属性B.技能栏[i].冷却关联技能:
+                        tempstr+=j
+                        if j != self.角色属性B.技能栏[i].冷却关联技能[-1]:
+                            tempstr+=','
+                    if self.角色属性B.技能栏[i].冷却关联技能2 != ['无']:
+                        tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率2(self.角色属性B.武器类型)*100,2))+'%<br>'
+                        tempstr+='冷却关联技能：'
+                        for j in self.角色属性B.技能栏[i].冷却关联技能2:
+                            tempstr+=j
+                            if j != self.角色属性B.技能栏[i].冷却关联技能2[-1]:
+                                tempstr+=','
+                    if self.角色属性B.技能栏[i].冷却关联技能3 != ['无']:
+                        tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率3(self.角色属性B.武器类型)*100,2))+'%<br>'
+                        tempstr+='冷却关联技能：'
+                        for j in self.角色属性B.技能栏[i].冷却关联技能3:
+                            tempstr+=j
+                            if j != self.角色属性B.技能栏[i].冷却关联技能3[-1]:
+                                tempstr+=','             
+                if tempstr != '':
+                    tempstr += '</font>'
+                    被动数据=QLabel(输出窗口)
+                    被动数据.setPixmap(self.技能图片[i])
                     被动数据.setToolTip(tempstr)
                     被动数据.move(300+num*40, 500)
                     被动等级=QLabel(输出窗口)
@@ -3575,8 +3739,8 @@ class 角色窗口(QWidget):
         if self.角色属性B.远古记忆 > 0:
             被动数据=QLabel(输出窗口)
             被动数据.setPixmap((QPixmap('./ResourceFiles/img/远古记忆.png')))
-            tempstr='<font color="#FF0000"><b>'+'远古记忆'+'</b></font><br>'
-            tempstr+='智力+<b>'+str(self.角色属性B.远古记忆 * 15)+'</b>'
+            tempstr='<font face="宋体"><font color="#FF6666">'+'远古记忆'+'</font><br>'
+            tempstr+='智力+'+str(self.角色属性B.远古记忆 * 15)+'</font>'
             被动数据.setToolTip(tempstr)
             被动数据.move(300+num*40, 500)
             被动等级=QLabel(输出窗口)
@@ -3590,8 +3754,8 @@ class 角色窗口(QWidget):
         if self.角色属性B.刀魂之卡赞 > 0:
             被动数据=QLabel(输出窗口)
             被动数据.setPixmap((QPixmap('./ResourceFiles/img/刀魂之卡赞.png')))
-            tempstr='<font color="#FF0000"><b>'+'刀魂之卡赞'+'</b></font><br>'
-            tempstr+='力量/智力+<b>'+str(刀魂之卡赞数据[self.角色属性B.刀魂之卡赞])+'</b>'
+            tempstr='<font face="宋体"><font color="#FF6666">'+'刀魂之卡赞'+'</font><br>'
+            tempstr+='力量/智力+'+str(刀魂之卡赞数据[self.角色属性B.刀魂之卡赞])+'</font>'
             被动数据.setToolTip(tempstr)
             被动数据.move(300+num*40, 500)
             被动等级=QLabel(输出窗口)
@@ -3624,23 +3788,44 @@ class 角色窗口(QWidget):
         for i in range(0,12):
             tempstr.append('')
             装备 =  装备列表[装备序号[self.角色属性B.装备栏[i]]]
+            if 装备.所属套装 != '无':
+                if 装备.所属套装 != '智慧产物':
+                    y = ' ' + 装备.所属套装
+                else:
+                    try:
+                        y = ' ' + 装备.所属套装2
+                    except:
+                        y = ' '
+            else:
+                y = ' '
+            if i == 11:
+                y += ' ' + 装备.类型
+            tempstr[i] += 'Lv' + str(装备.等级) + ' ' + 装备.品质 + y
+
+            if i < 5:
+                x = self.角色属性B.防具精通计算(i)
+                y = '<br>精通:'
+                for n in self.角色属性B.防具精通属性:
+                    y += n + ' '
+                tempstr[i] += y + '+' + str(x)
+
             if 装备.所属套装 != '智慧产物':  
                 if self.角色属性B.强化等级[i]!=0:
                     if i==8:
-                        tempstr[i]+='<font color="#00A2E8">+'+str(self.角色属性B.强化等级[i])+' 强化: '
+                        tempstr[i]+='<br><font color="#68D5ED">+'+str(self.角色属性B.强化等级[i])+' 强化: '
                         tempstr[i]+='三攻 + '+str(耳环计算(装备.等级,装备.品质,self.角色属性B.强化等级[i]))+'</font>'
                     if i in [9,10]:
-                        tempstr[i]+='<font color="#00A2E8">+'+str(self.角色属性B.强化等级[i])+' 强化: '
+                        tempstr[i]+='<br><font color="#68D5ED">+'+str(self.角色属性B.强化等级[i])+' 强化: '
                         tempstr[i]+='四维 + '+str(左右计算(装备.等级,装备.品质,self.角色属性B.强化等级[i])) +'</font>'
                     if i==11:
-                        tempstr[i]+='<font color="#00A2E8">+'+str(self.角色属性B.强化等级[i])+' 强化: '
+                        tempstr[i]+='<br><font color="#68D5ED">+'+str(self.角色属性B.强化等级[i])+' 强化: '
                         tempstr[i]+='物理攻击力 + '+str(武器计算(装备.等级,装备.品质,self.角色属性B.强化等级[i],装备.类型,'物理'))+'</font><br>'
-                        tempstr[i]+='<font color="#00A2E8">+'+str(self.角色属性B.强化等级[i])+' 强化: '
+                        tempstr[i]+='<font color="#68D5ED">+'+str(self.角色属性B.强化等级[i])+' 强化: '
                         tempstr[i]+='魔法攻击力 + '+str(武器计算(装备.等级,装备.品质,self.角色属性B.强化等级[i],装备.类型,'魔法'))+'</font>'
 
                 if self.角色属性B.武器锻造等级!=0:
                     if i==11:
-                        tempstr[i]+='<br><font color="#00A2E8">+'+str(self.角色属性B.武器锻造等级)+'   锻造: '
+                        tempstr[i]+='<br><font color="#68D5ED">+'+str(self.角色属性B.武器锻造等级)+'   锻造: '
                         tempstr[i]+='独立攻击力 + '+str(锻造计算(装备.等级,装备.品质,self.角色属性B.武器锻造等级))+'</font>'
 
                 if self.角色属性B.是否增幅[i]==1:
@@ -3651,7 +3836,11 @@ class 角色窗口(QWidget):
                         tempstr[i]+='异次元力量 + '+str(增幅计算(装备.等级,装备.品质,self.角色属性B.强化等级[i]))+'</font>'
                     else:
                         tempstr[i]+='异次元智力 + '+str(增幅计算(装备.等级,装备.品质,self.角色属性B.强化等级[i]))+'</font>'
- 
+
+            if tempstr[i] != '':
+                tempstr[i] += '<br>'
+            tempstr[i] += 装备.装备描述(self.角色属性B)[:-4]
+
         for i in range(0,12):
             装备图标=QLabel(输出窗口)
             装备图标.setMovie(图片列表[i])
@@ -3659,22 +3848,17 @@ class 角色窗口(QWidget):
             装备图标.resize(26,26)
             装备图标.move(初始x+x坐标[i],初始y+y坐标[i])
             装备图标.setAlignment(Qt.AlignCenter) 
-
+            装备 =  装备列表[装备序号[self.角色属性B.装备栏[i]]]
             if self.角色属性B.装备栏[i] == 百变怪:
                 图标遮罩=QLabel(输出窗口)
                 图标遮罩.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.5)}")
                 图标遮罩.resize(26,26)
                 图标遮罩.move(初始x+x坐标[i],初始y+y坐标[i])
-                if tempstr[i]!='':
-                    图标遮罩.setToolTip('<b>'+"{:<12}".format(self.角色属性B.装备栏[i])+'<br>'+tempstr[i]+'</b>')
-                else:
-                    图标遮罩.setToolTip('<b>'+"{:<12}".format(self.角色属性B.装备栏[i])+'</b>')
+                图标遮罩.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备.品质] + '">' +装备.名称+'</font><br>'+tempstr[i]+'</font>')
             else:
-                if tempstr[i]!='':
-                    装备图标.setToolTip('<b>'+"{:<12}".format(self.角色属性B.装备栏[i])+'<br>'+tempstr[i]+'</b>')
-                else:
-                    装备图标.setToolTip('<b>'+"{:<12}".format(self.角色属性B.装备栏[i])+'</b>')
-           
+                装备图标.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备.品质] + '">' +装备.名称+'</font><br>'+tempstr[i]+'</font>')
+
+        
         for i in range(0,12):
             装备 =  装备列表[装备序号[self.角色属性B.装备栏[i]]]
             打造状态=QLabel(输出窗口)
