@@ -386,5 +386,5 @@ class 血狱君主(角色窗口):
         self.狱血之牙概率.setCurrentIndex(1)
 
     def 输入属性(self, 属性, x = 0):
-        super().输入属性(属性)
+        super().输入属性(属性, x)
         属性.技能栏[属性.技能序号['狱血之牙']].触发概率 = round(self.狱血之牙概率.currentIndex() / 10, 2)

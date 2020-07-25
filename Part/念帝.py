@@ -477,7 +477,7 @@ class 念帝(角色窗口):
         self.雷龙开关.setChecked(True)
 
     def 输入属性(self, 属性, x = 0):
-        super().输入属性(属性)
+        super().输入属性(属性, x)
         try:
             self.BUFF光强 = int(self.BUFF输入2.text())
         except:

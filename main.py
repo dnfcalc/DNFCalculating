@@ -1,7 +1,4 @@
-﻿
-#有意添加职业或优化程序的加群 1019815121 沟通
-
-import multiprocessing
+﻿import multiprocessing
 
 from PyQt5.QtCore import QUrl
 import PyQt5.QtCore as qtc
@@ -47,7 +44,7 @@ class 选择窗口(QMainWindow):
     def 界面(self):
         self.setMinimumSize(805,630)
         self.setMaximumSize(805,1520)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.7.18 (技能模板仅供参考，请根据自身情况修改)')
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.7.25 (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
 
@@ -60,8 +57,12 @@ class 选择窗口(QMainWindow):
 
         self.头像图片 = []
         self.分类图片 = []
+        是否动图 = os.path.exists('ResourceFiles/img/动态头像')
         for i in range(1, 76):
-            self.头像图片.append(QPixmap("ResourceFiles/img/头像/"+ str(i) +".png"))
+            if 是否动图:
+                self.头像图片.append(QMovie("ResourceFiles/img/动态头像/"+ str(i) +".gif"))
+            else:
+                self.头像图片.append(QPixmap("ResourceFiles/img/头像/"+ str(i) +".png"))
         for i in range(17):
             self.分类图片.append(QPixmap("ResourceFiles/img/分类/"+ str(i) +".png"))
 
@@ -75,7 +76,11 @@ class 选择窗口(QMainWindow):
         count = 0
         for i in range(75):
             图标显示 = QLabel(self.topFiller)
-            图标显示.setPixmap(self.头像图片[i])
+            if 是否动图:
+                图标显示.setMovie(self.头像图片[i])
+                self.头像图片[i].start()
+            else:
+                图标显示.setPixmap(self.头像图片[i])
             图标显示.resize(121, 90)
             图标显示.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
             if (i + 1) in 完成职业:
@@ -167,7 +172,7 @@ class 选择窗口(QMainWindow):
             box = QMessageBox(QMessageBox.Question, "提示", "请选择要打开的版本")
             box.setWindowIcon(self.icon)
 
-            if '神思者' in index.类名:
+            if '·神思者' in index.类名:
                 box.setStandardButtons(QMessageBox.Yes | QMessageBox.Retry | QMessageBox.No | QMessageBox.Abort | QMessageBox.Cancel) #Retry
                 A = box.button(QMessageBox.Yes)
                 B = box.button(QMessageBox.Retry)

@@ -18,7 +18,6 @@ class CalcData():
 
         self.minheap_queue = None  # type: Queue
         self.角色属性A = None  # type: 角色属性
-        self.应用的辟邪玉列表 = []  # type: List[BiXieYu]
 
         # 被分配的计算范围
         self.mode_index = 0  # 0-极速模式，1-套装模式，2-散件模式
@@ -91,7 +90,6 @@ def calc_core(data: CalcData):
     :type 有效穿戴组合: List[str]
     :type 有效穿戴套装: List[str]
     :type 百变怪列表: str
-    :type 应用的辟邪玉列表: List[BiXieYu]
     """
     # 计算伤害具体算法
 
@@ -195,7 +193,7 @@ def calc_speed_and_set_mode(data):
                     calc_damage(temp1 + [i], 套装适用[count], sign2, data)
                     # logger.warning("consumer {} {} {} - {}".format(
                     #     data.mode_index, data.start_index, data.end_index, current_index
-                    # ))
+                    #))
     pass
 
 
@@ -328,12 +326,8 @@ def calc_damage(有效穿戴组合, 有效穿戴套装, 百变怪, data: CalcDat
     角色属性A.穿戴装备(有效穿戴组合, 有效穿戴套装)
     if data.是输出职业:
         角色属性A.装备属性计算()
-        for yu in data.应用的辟邪玉列表:
-            yu.进图属性(角色属性A)
         damage = 角色属性A.伤害计算()
     else:
-        for yu in data.应用的辟邪玉列表:
-            yu.进图属性(角色属性A)
         damage = 角色属性A.BUFF计算()
 
     data.minheap.add((damage,) + tuple(角色属性A.装备栏) + (damage,) + tuple(角色属性A.套装栏) + (百变怪,))

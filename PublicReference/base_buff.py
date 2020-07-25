@@ -50,7 +50,7 @@ class 主动技能(技能):
 
 部位列表 = ["上衣", "头肩", "下装", "腰带", "鞋", "手镯", "项链", "戒指", "耳环", "辅助装备", "魔法石", "武器"]
 
-颜色 = {'神话':'#E09297', '史诗':'#FFB400', '传说':'#FF7800'}
+颜色 = {'神话':'#E29692', '史诗':'#FFB400', '传说':'#FF7800'}
 
 史诗防具智力Lv100 = {"上衣": 149, "头肩": 139, "下装": 149, "腰带": 130, "鞋": 130}
 史诗防具体力Lv100 = {"上衣": 54, "头肩": 43, "下装": 54, "腰带": 32, "鞋": 32}
@@ -110,14 +110,12 @@ class 角色属性():
     百分比体精 = 0.0
 
     守护恩赐体精 = 0
-    守护恩赐Lv = 0
-    守护徽章Lv = 0
     守护徽章per = 0
-    圣光十字Lv = 0
-
     转职被动智力 = 0
-    转职被动Lv = 0
     BUFF额外增幅率 = 0
+
+    转职被动Lv = 0
+    一觉被动Lv = 0
 
     BUFFLv = 0
     BUFF力量per = 1
@@ -135,7 +133,6 @@ class 角色属性():
     BUFF魔攻 = 0
     BUFF独立 = 0
 
-    一觉被动Lv = 0
     一觉被动力智 = 0
     信念光环体精 = 0
 
@@ -600,6 +597,8 @@ class 角色窗口(QWidget):
         self.输出窗口列表 = []
         self.行高 = 30 #输出窗口技能伤害标签高度
         self.排行窗口列表 = []
+
+        self.当前页面 = 0
         
         self.装备图片 = []
         self.遮罩透明度 = []
@@ -1584,10 +1583,8 @@ class 角色窗口(QWidget):
         except:
             pass
 
-        try:
+        if self.当前页面 == 4:
             self.自选计算(1)
-        except:
-            pass
 
     def 自选套装更改(self, index):
         name = self.自选套装[index].currentText()
@@ -1670,18 +1667,7 @@ class 角色窗口(QWidget):
             x = self.辟邪玉选择[i].currentIndex()
             if self.辟邪玉数值[i].currentIndex() >= 0:
                 辟邪玉列表[x].当前值 = float(self.辟邪玉数值[i].currentText().replace('%',''))
-            辟邪玉列表[x].进图属性(属性)
-
-    def 应用的辟邪玉列表(self):
-        应用的辟邪玉列表 = []
-        for i in range(4):
-            x = self.辟邪玉选择[i].currentIndex()
-            if self.辟邪玉数值[i].currentIndex() >= 0:
-                辟邪玉列表[x].当前值 = float(self.辟邪玉数值[i].currentText().replace('%', ''))
-            if 辟邪玉列表[x].当前值 != 0:
-                应用的辟邪玉列表.append(辟邪玉列表[x])
-
-        return 应用的辟邪玉列表
+            辟邪玉列表[x].穿戴属性(属性)
 
     def 装备图标点击事件(self, index, sign, x = 1):
         if 装备列表[index].模式 == 0:
@@ -1979,6 +1965,7 @@ class 角色窗口(QWidget):
             i.setStyleSheet("MyQComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} MyQComboBox:hover{background-color:rgba(65,105,225,0.8)} MyQComboBox QAbstractItemView::item {height: 18px;}")
 
     def click_window(self, index):
+        self.当前页面 = index
         if self.stacked_layout.currentIndex() != index:
             self.stacked_layout.setCurrentIndex(index)
         for i in self.window_btn:
@@ -2009,7 +1996,8 @@ class 角色窗口(QWidget):
                             self.神话属性选项[num * 4 + i].move(-1000, -1000)
                     num += 1
 
-        self.自选计算(1)
+        if index == 4:
+            self.自选计算(1)
 
     def 修正套装计算(self):
         self.有效穿戴组合.clear()
@@ -2162,7 +2150,7 @@ class 角色窗口(QWidget):
             log_func("calc#{}: {}: {} remaining_qize={} sync_batch_size={} processed_result={}, speed={:.2f}/s totalWork={}".format(
                 producer_data.calc_index,
                 mq.name, msg, mq.minheap_queue.qsize(), mq.minheap.batch_size, mq.minheap.processed_result_count, mq.process_results_per_second(), producer_data.produced_count
-            ))
+           ))
             self.update_remaining_signal.emit(str(mq.minheap.processed_result_count))
 
         def try_fetch_result(mq: MinHeapWithQueue):
@@ -2221,7 +2209,6 @@ class 角色窗口(QWidget):
             calc_data.角色属性A.改造等级 = copy(self.角色属性A.改造等级)
             calc_data.角色属性A.是否增幅 = copy(self.角色属性A.是否增幅)
             calc_data.角色属性A.次数输入 = copy(self.角色属性A.次数输入)
-            calc_data.应用的辟邪玉列表 = copy(self.应用的辟邪玉列表())
 
             calc_data.mode_index = mode_index
             calc_data.start_index = start_index
@@ -2273,9 +2260,9 @@ class 角色窗口(QWidget):
         logger.info((
             "计算完毕\n"
             "工作线程数={} 总计耗时={}"
-        ).format(
+       ).format(
             工作线程数, format_time(totoalCostTime),
-        ))
+       ))
 
         self.calc_done_signal.emit()
 
@@ -2321,7 +2308,7 @@ class 角色窗口(QWidget):
         if x == 0:
             self.输入属性(self.角色属性A)
         else:
-            self.输入属性(self.角色属性A)
+            self.输入属性(self.角色属性A, 1)
 
         装备 = []
         for i in self.自选装备:
@@ -2353,8 +2340,8 @@ class 角色窗口(QWidget):
             for i in 辟邪玉列表:
                 i.当前值 = i.最大值
                 temp = deepcopy(self.角色属性A)
+                i.穿戴属性(temp)
                 temp.穿戴装备(装备, 套装)
-                i.进图属性(temp)
                 伤害列表.append(temp.BUFF计算(0))
 
             提升率 = []
@@ -2381,7 +2368,6 @@ class 角色窗口(QWidget):
             C = self.站街计算(装备, 套装)
             B = deepcopy(self.角色属性A)
             B.穿戴装备(装备, 套装)
-            self.辟邪玉属性计算(B)
             D = deepcopy(B)
 
             统计详情 = B.BUFF计算(1)
@@ -2455,7 +2441,7 @@ class 角色窗口(QWidget):
             for i in range(0, len(套装)):
                 self.套装名称显示[i + 1].setText(套装[i])
                 if 套装[i].split('[')[0] in 神话所在套装:
-                    self.套装名称显示[i + 1].setStyleSheet("QLabel{font-size:12px;color:rgb(224,146,151)}")
+                    self.套装名称显示[i + 1].setStyleSheet("QLabel{font-size:12px;color:rgb(226,150,146)}")
                 else:
                     self.套装名称显示[i + 1].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
 
@@ -2582,7 +2568,6 @@ class 角色窗口(QWidget):
         self.角色属性B = deepcopy(self.角色属性A)
         self.角色属性B.穿戴装备(装备名称,套装名称)
         #self.角色属性B.装备属性计算()
-        self.辟邪玉属性计算(self.角色属性B)
         temp = deepcopy(self.角色属性B)
         统计详情 = self.角色属性B.BUFF计算(1)
         提升率 = temp.BUFF计算(0)
@@ -2691,7 +2676,7 @@ class 角色窗口(QWidget):
             适用套装名称.resize(132, 18)
             适用套装名称.setAlignment(Qt.AlignCenter)
             if 神话所在套装 == 套装名称[i].split('[')[0]:
-                适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(224,146,151)}")
+                适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(226,150,146)}")
             else:
                 适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
             适用套装名称.setToolTip(
@@ -3005,6 +2990,9 @@ class 角色窗口(QWidget):
                 i.属性4选择 = self.神话属性选项[count * 4 + 3].currentIndex()
                 count += 1
 
+        if x == 0:
+            self.辟邪玉属性计算(属性)
+
         for i in range(len(self.复选框列表)):
             if self.复选框列表[i].isChecked():
                 选项设置列表[i].适用效果(属性)
@@ -3142,7 +3130,7 @@ class 角色窗口(QWidget):
             属性.BUFF物攻per *= 1 + temp[2]
             属性.BUFF魔攻per *= 1 + temp[2]
             属性.BUFF独立per *= 1 + temp[2]
-            属性.守护恩赐Lv += int(temp[3])
+            属性.转职被动Lv += int(temp[3])
             属性.信念光环体精 += int(temp[4])
             属性.一觉力智per *= 1 + temp[5]
             属性.一觉力智 += int(temp[6])

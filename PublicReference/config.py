@@ -1,13 +1,22 @@
 import configparser
 
 conf = configparser.ConfigParser()
-conf.read('./ResourceFiles/set.ini', encoding='utf-8')
+try:
+    conf.read('./ResourceFiles/set.ini', encoding='utf-8')
+except:
+    conf.read('./ResourceFiles/set.ini', encoding='gbk')
 
 #窗口缩放
 try:
     窗口显示模式 = conf.getint('窗口显示', 'value')
 except:
     窗口显示模式 = 0
+
+#控制是否按辟邪玉BUG进行计算
+try:
+    辟邪玉BUG = conf.getint('辟邪玉BUG', 'value')
+except:
+    辟邪玉BUG = 1
 
 #不计算装备属性，武器类型为角色武器选项第一个
 try:
