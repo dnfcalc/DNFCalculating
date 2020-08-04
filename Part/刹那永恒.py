@@ -85,6 +85,10 @@ class 刹那永恒技能4(刹那永恒主动技能):
     基础等级 = 10
     是否有伤害 = 0
 
+    自定义描述 = 1
+    def 技能描述(self, 武器类型):
+        return '冰属性强化增加:' + str(self.属强加成())
+
     def 属强加成(self):
         if self.等级 == 0:
             return 0
@@ -493,36 +497,20 @@ for i in 刹那永恒技能列表:
 
 class 刹那永恒角色属性(角色属性):
 
-    职业名称 = '刹那永恒'
+    实际名称 = '刹那永恒'
+    角色 = '魔法师(男)'
+    职业 = '冰结师'
 
     武器选项 = ['魔杖','法杖']
     
-    #'物理百分比','魔法百分比','物理固伤','魔法固伤'
     伤害类型选择 = ['魔法百分比']
     
-    #默认
     伤害类型 = '魔法百力比'
     防具类型 = '皮甲'
     防具精通属性 = ['智力']
 
     主BUFF = 1.800
    
-    #基础属性(含唤醒)
-    基础力量 = 774.0
-    基础智力 = 976.0
-    
-    #适用系统奶加成
-    力量 = 基础力量
-    智力 = 基础智力
-
-    #人物基础 + 唤醒
-    物理攻击力 = 65.0
-    魔法攻击力 = 65.0
-    独立攻击力 = 1045.0
-    火属性强化 = 13
-    冰属性强化 = 13
-    光属性强化 = 13
-    暗属性强化 = 13
     远古记忆 = 0
 
     冰针显示开关 = 0
@@ -530,15 +518,19 @@ class 刹那永恒角色属性(角色属性):
     大冰轮次数 = 0
   
     def __init__(self):
+        基础属性输入(self)
         self.技能栏= deepcopy(刹那永恒技能列表)
         self.技能序号= deepcopy(刹那永恒技能序号)
 
     def 被动倍率计算(self):
+
+        if self.远古记忆 > 0:
+            self.进图智力 += self.远古记忆 * 15
+            
         self.冰属性强化 += self.技能栏[self.技能序号['冰霜之径']].属强加成()
         self.技能栏[self.技能序号['千旋冰轮破']].攻击次数 = self.小冰轮次数 + 36
         self.技能栏[self.技能序号['千旋冰轮破']].攻击次数2 = self.大冰轮次数 + 20
-        if self.远古记忆 > 0:
-            self.进图智力 += self.远古记忆 * 15
+
         for i in self.技能栏:
             if i.关联技能 != ['无']:
                 if i.关联技能 == ['所有']:
@@ -568,23 +560,15 @@ class 刹那永恒角色属性(角色属性):
                         self.技能栏[self.技能序号[k]].被动倍率 *= i.加成倍率3(self.武器类型)
 
 
-    def 伤害计算(self, x=0):
-
-        self.所有属性强化(self.进图属强)
-        # Will添加
-        self.CD倍率计算()
-        self.加算冷却计算()
-
-        self.被动倍率计算()
-        self.伤害指数计算()
-
-        技能释放次数 = []
-        技能单次伤害 = []
-        技能总伤害 = []
-
-        # 技能单次伤害计算
+    def 数据计算(self, x = 0, y = -1):
+        self.预处理()
+        技能释放次数=[]
+        技能单次伤害=[]
+        技能总伤害=[]
+    
+        #技能单次伤害计算
         for i in self.技能栏:
-            if i.是否有伤害 == 1:
+            if i.是否有伤害==1 and self.技能切装[self.技能序号[i.名称]] != y:
                 技能单次伤害.append(i.等效百分比(self.武器类型) * self.伤害指数 * i.被动倍率)
             else:
                 技能单次伤害.append(0)
@@ -719,7 +703,7 @@ class 刹那永恒(角色窗口):
         super().界面()
         self.冰针显示开关=QCheckBox('冰针伤害独立显示',self.main_frame2)
         self.冰针显示开关.resize(120,20)
-        self.冰针显示开关.move(480,420)
+        self.冰针显示开关.move(490,420)
         self.冰针显示开关.setStyleSheet(复选框样式)
         self.冰针显示开关.setChecked(False)
 
@@ -733,7 +717,7 @@ class 刹那永恒(角色窗口):
         self.小冰轮次数选择.addItem('小冰轮击42次')
         self.小冰轮次数选择.setCurrentIndex(4)
         self.小冰轮次数选择.resize(120,20)
-        self.小冰轮次数选择.move(315,420)
+        self.小冰轮次数选择.move(325,420)
 
         self.大冰轮次数选择=MyQComboBox(self.main_frame2)
         self.大冰轮次数选择.addItem('大冰轮击20次')
@@ -743,7 +727,33 @@ class 刹那永恒(角色窗口):
         self.大冰轮次数选择.addItem('大冰轮击24次')
         self.大冰轮次数选择.setCurrentIndex(4)
         self.大冰轮次数选择.resize(120,20)
-        self.大冰轮次数选择.move(315,450)
+        self.大冰轮次数选择.move(325,450)
+
+    def 载入配置(self, path='set'):
+        super().载入配置(path)
+        try:
+           setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'r',encoding='utf-8').readlines()
+           self.小冰轮次数选择.setCurrentIndex(int(setfile[0].replace('\n', '')));
+           self.大冰轮次数选择.setCurrentIndex(int(setfile[1].replace('\n', '')));
+           if int(setfile[2].replace('\n', '')) == 1:
+              self.冰针显示开关.setChecked(True)
+           else:
+              self.冰针显示开关.setChecked(False)
+        except:
+            pass
+
+    def 保存配置(self, path='set'):
+        super().保存配置(path)
+        try:
+            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'w', encoding='utf-8')
+            setfile.write(str(self.小冰轮次数选择.currentIndex())+'\n')
+            setfile.write(str(self.大冰轮次数选择.currentIndex())+'\n')
+            if self.冰针显示开关.isChecked():
+               setfile.write('1\n')
+            else:
+               setfile.write('0\n')
+        except:
+            pass
         
     def 站街计算(self,装备名称,套装名称):
         C = deepcopy(self.角色属性A)

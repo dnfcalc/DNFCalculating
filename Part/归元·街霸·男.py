@@ -445,39 +445,22 @@ for i in 归元·街霸·男技能列表:
 
 
 class 归元·街霸·男角色属性(角色属性):
-    职业名称 = '归元·街霸·男'
+    实际名称 = '归元·街霸·男'
+    角色 = '格斗家(男)'
+    职业 = '街霸'
 
     武器选项 = ['爪']
 
-    # '物理百分比','魔法百分比','物理固伤','魔法固伤'
     伤害类型选择 = ['物理百分比','魔法百分比']
 
-    # 默认
     伤害类型 = '魔法百分比'
     防具类型 = '重甲'
     防具精通属性 = ['力量','智力']
 
     主BUFF = 1.79
 
-    # 基础属性(含唤醒)
-    基础力量 = 926
-    基础智力 = 909
-
-    # 适用系统奶加成
-    力量 = 基础力量
-    智力 = 基础智力
-
-    # 人物基础 + 唤醒
-    物理攻击力 = 65.0
-    魔法攻击力 = 65.0
-    独立攻击力 = 1045.0
-    火属性强化 = 13
-    冰属性强化 = 13
-    光属性强化 = 13
-    暗属性强化 = 13
-    远古记忆 = 0
-
     def __init__(self):
+        基础属性输入(self)
         self.技能栏 = deepcopy(归元·街霸·男技能列表)
         self.技能序号 = deepcopy(归元·街霸·男技能序号)
 
@@ -497,31 +480,31 @@ class 归元·街霸·男(角色窗口):
         super().界面()
         self.毒瓶强化 = QCheckBox('强化毒瓶投掷', self.main_frame2)
         self.毒瓶强化.resize(100, 20)
-        self.毒瓶强化.move(325, 400)
+        self.毒瓶强化.move(335, 400)
         self.毒瓶强化.setStyleSheet(复选框样式)
         self.毒瓶强化.setChecked(False)
 
         self.毒针强化 = QCheckBox('强化毒针投掷', self.main_frame2)
         self.毒针强化.resize(100, 20)
-        self.毒针强化.move(325, 430)
+        self.毒针强化.move(335, 430)
         self.毒针强化.setStyleSheet(复选框样式)
         self.毒针强化.setChecked(False)
 
         self.砖块强化 = QCheckBox('强化砖块投掷', self.main_frame2)
         self.砖块强化.resize(100, 20)
-        self.砖块强化.move(325, 460)
+        self.砖块强化.move(335, 460)
         self.砖块强化.setStyleSheet(复选框样式)
         self.砖块强化.setChecked(False)
 
         self.污桶强化 = QCheckBox('强化爆破污桶', self.main_frame2)
         self.污桶强化.resize(100, 20)
-        self.污桶强化.move(325, 490)
+        self.污桶强化.move(335, 490)
         self.污桶强化.setStyleSheet(复选框样式)
         self.污桶强化.setChecked(True)
 
         self.爆狱强化 = QCheckBox('强化逆道爆狱', self.main_frame2)
         self.爆狱强化.resize(100, 20)
-        self.爆狱强化.move(325, 520)
+        self.爆狱强化.move(335, 520)
         self.爆狱强化.setStyleSheet(复选框样式)
         self.爆狱强化.setChecked(True)
 

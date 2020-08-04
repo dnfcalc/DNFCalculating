@@ -12,11 +12,17 @@ try:
 except:
     窗口显示模式 = 0
 
-#控制是否按辟邪玉BUG进行计算
+#切装模式
 try:
-    辟邪玉BUG = conf.getint('辟邪玉BUG', 'value')
+    切装模式 = conf.getint('切装模式', 'value')
 except:
-    辟邪玉BUG = 1
+    切装模式 = 0
+
+#补全模式
+try:
+    补全模式 = conf.getint('补全模式', 'value')
+except:
+    补全模式 = 1
 
 #不计算装备属性，武器类型为角色武器选项第一个
 try:

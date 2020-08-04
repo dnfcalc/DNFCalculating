@@ -12,7 +12,7 @@ class 救世主技能0(主动技能):
     TP成长 = 0.08
     TP上限 = 5
     def 等效百分比(self, 武器类型):
-        return (self.数据[self.等级] * self.攻击次数) * (1 + self.TP成长 * self.TP等级) * self.倍率
+        return (self.数据[self.等级] * self.攻击次数 ) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 # 二段技能
 class 救世主技能1(主动技能):
@@ -151,7 +151,7 @@ class 救世主技能9(主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-# 多段技能，基础段数为9段；带护石22段，减伤50.6%，护石倍率2/9*0.496=1.207555，另外护石减少15%冷却
+# 多段技能，基础段数为9段；带护石22段，减伤50.6%，护石倍率22/9*0.494=1.207555，另外护石减少15%冷却
 class 救世主技能10(主动技能):
     名称 = '贪婪之刺'
     所在等级 = 35
@@ -164,7 +164,8 @@ class 救世主技能10(主动技能):
     TP上限 = 5
     是否有护石 = 1
     def 装备护石(self):
-        self.倍率 *= 1.207556
+        self.攻击次数 = 22
+        self.倍率 *= 0.494
         self.CD *= 0.85
     def 等效百分比(self, 武器类型):
             return (self.数据[self.等级] * self.攻击次数) * (1 + self.TP成长 * self.TP等级) * self.倍率
@@ -182,7 +183,8 @@ class 救世主技能11(主动技能):
     TP上限 = 5
     是否有护石 = 1
     def 装备护石(self):
-        self.倍率 *= 1.224
+        self.攻击次数 = 15
+        self.倍率 *= 0.7344
     def 等效百分比(self, 武器类型):
         return (self.数据[self.等级] * self.攻击次数) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
@@ -292,6 +294,8 @@ class 救世主技能18(主动技能):
     演出时间 = 2
     def 等效百分比(self, 武器类型):
         return (self.数据[self.等级] * self.攻击次数) * self.倍率
+    def 等效CD(self, 武器类型):
+        return 2
 
 # 被动技能，由75被动拆分，每级成长2%
 class 救世主技能19(被动技能):
@@ -406,47 +410,30 @@ for i in 救世主技能列表:
 
 class 救世主角色属性(角色属性):
 
-    职业名称 = '救世主'
+    实际名称 = '救世主'
+    角色 = '圣职者(女)'
+    职业 = '诱魔者'
 
     武器选项 = ['镰刀']
     
-    #'物理百分比','魔法百分比','物理固伤','魔法固伤'
     伤害类型选择 = ['魔法百分比']
     
-    #默认
     伤害类型 = '魔法百分比'
     防具类型 = '重甲'
     防具精通属性 = ['智力']
 
     主BUFF = 2.01
-   
-    #基础属性(含唤醒)
-    基础力量 = 793.0
-    基础智力 = 952.0
-    
-    #适用系统奶加成
-    力量 = 基础力量
-    智力 = 基础智力
 
-    #人物基础 + 唤醒
-    物理攻击力 = 65.0
-    魔法攻击力 = 65.0
-    独立攻击力 = 1045.0
-    火属性强化 = 13
-    冰属性强化 = 13
-    光属性强化 = 13
-    暗属性强化 = 13
     远古记忆 = 0
 
     def __init__(self):
+        基础属性输入(self)
         self.技能栏= deepcopy(救世主技能列表)
         self.技能序号= deepcopy(救世主技能序号)
 
-
     def 被动倍率计算(self):
         super().被动倍率计算()
-
-
+        self.技能栏[self.技能序号['原罪结晶']].等级 = self.技能栏[self.技能序号['智慧起源']].等级
 
 class 救世主(角色窗口):
     def 窗口属性输入(self):
@@ -458,3 +445,51 @@ class 救世主(角色窗口):
         self.三觉序号 = 救世主三觉序号
         self.护石选项 = deepcopy(救世主护石选项)
         self.符文选项 = deepcopy(救世主符文选项)
+
+    def 护石判断(self):
+        sign = 0
+        for x in [self.护石第一栏, self.护石第二栏]:
+            if x.currentText() == '暴食之噬':
+                sign = 1
+        if sign == 1:
+            self.暴食段数选择.setEnabled(False)
+            self.暴食段数选择.setStyleSheet(不可选择下拉框样式)
+        else:
+            self.暴食段数选择.setEnabled(True)
+            self.暴食段数选择.setStyleSheet(下拉框样式)
+
+    def 界面(self):
+        super().界面()
+
+        self.护石第一栏.currentIndexChanged.connect(lambda state: self.护石判断())
+        self.护石第二栏.currentIndexChanged.connect(lambda state: self.护石判断())
+
+        self.净化之花冷却Buff = QCheckBox('净化之花冷却Buff', self.main_frame2)
+        self.净化之花冷却Buff.resize(120, 20)
+        self.净化之花冷却Buff.move(320, 370)
+        self.净化之花冷却Buff.setStyleSheet(复选框样式)
+
+        self.凈化之花多段段数选择=MyQComboBox(self.main_frame2)
+        for i in range(16):
+            self.凈化之花多段段数选择.addItem('净化之花:' + str(i) + '+1段')
+        self.凈化之花多段段数选择.setCurrentIndex(15)
+        self.凈化之花多段段数选择.resize(120,20)
+        self.凈化之花多段段数选择.move(320,400)
+
+        self.暴食段数选择=MyQComboBox(self.main_frame2)
+        for i in range(9):
+            self.暴食段数选择.addItem('暴食之噬:' + str(i) + '+4段')
+        self.暴食段数选择.setCurrentIndex(8)
+        self.暴食段数选择.resize(120,20)
+        self.暴食段数选择.move(320,430)
+
+    def 输入属性(self, 属性, x=0):
+        super().输入属性(属性, x)
+        if self.净化之花冷却Buff.isChecked():
+            属性.技能冷却缩减(1, 48, 0.10)
+            属性.技能冷却缩减(55, 100, 0.10)
+        
+        属性.技能栏[属性.技能序号['净化之花']].攻击次数1 = self.凈化之花多段段数选择.currentIndex()
+
+        if self.暴食段数选择.isEnabled():
+            属性.技能栏[属性.技能序号['暴食之噬']].攻击次数1 = self.暴食段数选择.currentIndex()

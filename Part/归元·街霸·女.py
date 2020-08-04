@@ -2,7 +2,7 @@ from PublicReference.base import *
 
 class 归元·街霸·女主动技能(主动技能):
     直伤倍率 = 1
-    直伤基础 = [0] * 61
+    基础 = [0] * 61
     中毒倍率 = 1
     中毒基础 = [0] * 61
     出血倍率 = 1
@@ -13,15 +13,18 @@ class 归元·街霸·女主动技能(主动技能):
     涂毒基础 = [0] * 61
 
     def 等效百分比(self, 武器类型):
-        if self.等级 == 0:
-            return 0
-        else:
-            return int((self.直伤倍率 * self.基础[self.等级]
-                 + self.中毒倍率 * self.中毒基础[self.等级]
-                 + self.出血倍率 * self.出血基础[self.等级]
-                 + self.灼伤倍率 * self.灼伤基础[self.等级]
-                 + self.涂毒倍率 * self.涂毒基础[self.等级])
-                 * (1 + self.TP成长 * self.TP等级) * self.倍率)
+        temp = 0
+        if len(self.基础) > self.等级:
+            temp += self.直伤倍率 * self.基础[self.等级]
+        if len(self.中毒基础) > self.等级:
+            temp += self.中毒倍率 * self.中毒基础[self.等级]
+        if len(self.出血基础) > self.等级:
+            temp += self.出血倍率 * self.出血基础[self.等级]
+        if len(self.灼伤基础) > self.等级:
+            temp += self.灼伤倍率 * self.灼伤基础[self.等级]
+        if len(self.涂毒基础) > self.等级:
+            temp += self.涂毒倍率 * self.涂毒基础[self.等级]
+        return int(temp * (1 + self.TP成长 * self.TP等级) * self.倍率)
                  
 class 归元·街霸·女技能0(被动技能):
     名称 = '基础精通'
@@ -148,10 +151,7 @@ class 归元·街霸·女技能9(归元·街霸·女主动技能):
     TP上限 = 5
     TP数据 = [0,9.29,10.14,10.98,11.83,12.67]
     def 等效百分比(self, 武器类型):
-        if self.等级 == 0:
-            return 0
-        else:
-            return int((self.直伤倍率 * self.基础[self.等级] + self.涂毒倍率 * self.涂毒基础[self.等级]) * self.TP数据[self.TP等级] * self.倍率)
+        return int((self.直伤倍率 * self.基础[self.等级] + self.涂毒倍率 * self.涂毒基础[self.等级]) * self.TP数据[self.TP等级] * self.倍率)
 
 class 归元·街霸·女技能10(被动技能):
     名称 = '狂·霸王拳'
@@ -243,6 +243,14 @@ class 归元·街霸·女技能15(归元·街霸·女主动技能):
         return self.力智[self.等级]
     def 防御减少(self):
         return self.防御[self.等级]
+
+    是否生效 = 0
+    def 技能描述(self, 武器类型):
+        temp = '力量/智力+' + str(self.力智加成())
+        temp += '<br>防御减少:' + str(self.防御减少())
+        if self.是否生效 == 0:
+            temp += '<br>(未生效)'
+        return temp
 
 class 归元·街霸·女技能16(归元·街霸·女主动技能):
     名称 = '猛毒擒月炎'
@@ -401,7 +409,7 @@ class 归元·街霸·女技能27(归元·街霸·女主动技能):
                  + self.中毒倍率 * (self.中毒基础 + self.中毒成长 * self.等级)
                  + self.出血倍率 * (self.出血基础 + self.出血成长 * self.等级) 
                  + self.灼伤倍率 * (self.灼伤基础 + self.灼伤成长 * self.等级) 
-                 + self.涂毒倍率 * (self.涂毒基础 + self.涂毒成长 * self.等级))
+                 + self.涂毒倍率 * (self.涂毒基础 + self.涂毒成长 * self.等级) * self.倍率)
 
 class 归元·街霸·女技能28(归元·街霸·女主动技能):
     名称 = '黑死咒：毒牙吞天'
@@ -422,7 +430,7 @@ class 归元·街霸·女技能28(归元·街霸·女主动技能):
         else:
             return int(self.直伤倍率 * (self.基础 + self.成长 * self.等级)
                  + self.中毒倍率 * (self.中毒基础 + self.中毒成长 * self.等级)
-                 + self.涂毒倍率 * (self.涂毒基础 + self.涂毒成长 * self.等级))
+                 + self.涂毒倍率 * (self.涂毒基础 + self.涂毒成长 * self.等级) * self.倍率)
     def 加成倍率(self, 武器类型):
          return 0.0
          
@@ -455,42 +463,27 @@ for i in 归元·街霸·女技能列表:
 
 class 归元·街霸·女角色属性(角色属性):
 
-    职业名称 = '归元·街霸·女'
+    实际名称 = '归元·街霸·女'
+    角色 = '格斗家(女)'
+    职业 = '街霸'
 
     武器选项 = ['爪']
     
-    #'物理百分比','魔法百分比','物理固伤','魔法固伤'
     伤害类型选择 = ['魔法百分比', '物理百分比']
     
-    #默认
     伤害类型 = '魔法百分比'
     防具类型 = '重甲'
     防具精通属性 = ['力量','智力']
 
     主BUFF = 9.50
    
-    #基础属性(含唤醒)
-    基础力量 = 926.0
-    基础智力 = 909.0
-    
-    #适用系统奶加成
-    力量 = 基础力量
-    智力 = 基础智力
-
-    #人物基础 + 唤醒
-    物理攻击力 = 65.0
-    魔法攻击力 = 65.0
-    独立攻击力 = 1045.0
-    火属性强化 = 13
-    冰属性强化 = 13
-    光属性强化 = 13
-    暗属性强化 = 13
     远古记忆 = 0
 
     死亡毒雾力智开关 = 0
     毒伤结算丢失开关 = 0
   
     def __init__(self):
+        基础属性输入(self)
         self.技能栏= deepcopy(归元·街霸·女技能列表)
         self.技能序号= deepcopy(归元·街霸·女技能序号)
 
@@ -534,16 +527,8 @@ class 归元·街霸·女角色属性(角色属性):
         super().伤害指数计算()
         self.伤害指数 /= self.主BUFF
 
-    def 伤害计算(self, x = 0):
-        
-        self.所有属性强化(self.进图属强)
-        # Will添加
-        self.CD倍率计算()
-        self.加算冷却计算()
-
-        self.被动倍率计算()
-        self.伤害指数计算()
-
+    def 数据计算(self, x = 0, y = -1):
+        self.预处理()
         技能释放次数=[]
         技能单次伤害=[]
         技能总伤害=[]
@@ -580,7 +565,7 @@ class 归元·街霸·女角色属性(角色属性):
         
         #技能单次伤害计算
         for i in self.技能栏:
-            if i.是否有伤害==1:
+            if i.是否有伤害==1 and self.技能切装[self.技能序号[i.名称]] != y:
                 技能单次伤害.append(i.等效百分比(self.武器类型)*self.伤害指数*i.被动倍率)
             else:
                 技能单次伤害.append(0)
@@ -640,14 +625,14 @@ class 归元·街霸·女(角色窗口):
 
         self.死亡毒雾力智开关=QCheckBox('死亡毒雾效果',self.main_frame2)
         self.死亡毒雾力智开关.resize(100,20)
-        self.死亡毒雾力智开关.move(325,420)
+        self.死亡毒雾力智开关.move(335,420)
         self.死亡毒雾力智开关.setStyleSheet(复选框样式)
         self.死亡毒雾力智开关.setToolTip('包含力智和减防')
         self.死亡毒雾力智开关.setChecked(False)
 
         self.毒伤结算丢失开关=QCheckBox('毒伤结算补正',self.main_frame2)
         self.毒伤结算丢失开关.resize(100,20)
-        self.毒伤结算丢失开关.move(325,450)
+        self.毒伤结算丢失开关.move(335,450)
         self.毒伤结算丢失开关.setStyleSheet(复选框样式)
         self.毒伤结算丢失开关.setToolTip('计算结果将不计入部分未结算毒伤')
         self.毒伤结算丢失开关.setChecked(False)
@@ -659,26 +644,27 @@ class 归元·街霸·女(角色窗口):
         self.毒雷个数数选择.setToolTip('包含冲击波次数')
         self.毒雷个数数选择.setCurrentIndex(8)
         self.毒雷个数数选择.resize(120,20)
-        self.毒雷个数数选择.move(315,480)
+        self.毒雷个数数选择.move(325,480)
 
         self.毒雾爆炸段数选择=MyQComboBox(self.main_frame2)
         for i in range(11):
             self.毒雾爆炸段数选择.addItem('毒雾爆炸：' + str(i) + '段')
         self.毒雾爆炸段数选择.setCurrentIndex(8)
         self.毒雾爆炸段数选择.resize(120,20)
-        self.毒雾爆炸段数选择.move(315,510)
+        self.毒雾爆炸段数选择.move(325,510)
     
         self.毒雾中毒次数选择=MyQComboBox(self.main_frame2)
         for i in range(21):
             self.毒雾中毒次数选择.addItem('毒雾中毒：' + str(i) + '段')
         self.毒雾中毒次数选择.setCurrentIndex(10)
         self.毒雾中毒次数选择.resize(120,20)
-        self.毒雾中毒次数选择.move(315,540)   
+        self.毒雾中毒次数选择.move(325,540)   
 
     def 输入属性(self, 属性, x = 0):
-        super().输入属性(属性)
+        super().输入属性(属性, x)
         if self.死亡毒雾力智开关.isChecked():
             属性.死亡毒雾力智开关 = 1
+            属性.技能栏[属性.技能序号['死亡毒雾']].自定义描述 = 1
         if self.毒伤结算丢失开关.isChecked():
             属性.毒伤结算丢失开关 = 1
         属性.技能栏[属性.技能序号['毒雷引爆']].倍率 *= self.毒雷个数数选择.currentIndex()

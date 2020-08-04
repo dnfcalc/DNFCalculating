@@ -208,10 +208,12 @@ for i in BUFF·垂迹·圣骑士技能列表:
         BUFF·垂迹·圣骑士三觉序号 = BUFF·垂迹·圣骑士技能序号[i.名称]
 
 class BUFF·垂迹·圣骑士角色属性(角色属性):
-    职业名称 = 'BUFF·垂迹·圣骑士'
+    实际名称 = 'BUFF·垂迹·圣骑士'
+    角色 = '圣职者(男)'
+    职业 = '圣骑士'
+
     系数类型选择 = ['体力','精神']
-    体力 = 958
-    精神 = 954
+
     武器选项 = ['十字架']
 
     一觉序号 = 5
@@ -221,6 +223,7 @@ class BUFF·垂迹·圣骑士角色属性(角色属性):
     防具精通属性 = ['体力','精神']
 
     def __init__(self):
+        基础属性输入(self)
         self.技能栏 = deepcopy(BUFF·垂迹·圣骑士技能列表)
         self.技能序号 = deepcopy(BUFF·垂迹·圣骑士技能序号)
 
@@ -289,15 +292,10 @@ class BUFF·垂迹·圣骑士角色属性(角色属性):
             self.切换详情 = 切换列表[序号]
             总数据[self.一觉序号] = [0, 0, 0, int(a / 可能组合[序号].技能栏[self.三觉序号].加成倍率()), int(a / 可能组合[序号].技能栏[self.三觉序号].加成倍率()), 0, 0, 0]
             self.切换详情 = 切换列表[序号]
-            self.技能栏[self.一觉序号].等级 = 可能组合[序号].技能栏[self.一觉序号].等级
-            self.技能栏[self.三觉序号].等级 = 可能组合[序号].技能栏[self.三觉序号].等级
 
-            self.技能栏[self.一觉序号].一觉力智 = 可能组合[序号].技能栏[self.一觉序号].一觉力智
-            self.技能栏[self.一觉序号].一觉力智per = 可能组合[序号].技能栏[self.一觉序号].一觉力智per
+            self.技能栏[self.一觉序号] = deepcopy(可能组合[序号].技能栏[self.一觉序号])
+            self.技能栏[self.三觉序号] = deepcopy(可能组合[序号].技能栏[self.三觉序号])
 
-            self.一觉力智 = 可能组合[序号].一觉力智
-            self.一觉力智per = 可能组合[序号].一觉力智per
-            
         else:
             self.装备属性计算()
             self.适用数值计算()
@@ -347,7 +345,7 @@ class BUFF·垂迹·圣骑士(角色窗口):
         x = 横坐标;
         y = 纵坐标
         self.觉醒选择 = QLabel(self.main_frame2)
-        self.觉醒选择.setPixmap(QPixmap('./ResourceFiles/' + self.角色属性A.职业名称 + "/技能/觉醒选择.png"))
+        self.觉醒选择.setPixmap(QPixmap('./ResourceFiles/img/觉醒选择.png'))
         self.觉醒选择.resize(120, 100)
         self.觉醒选择.move(x, y - 20)
 

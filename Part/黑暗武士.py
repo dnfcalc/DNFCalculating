@@ -749,11 +749,9 @@ class 黑暗武士技能38(被动技能):
     等级上限 = 40
     基础等级 = 11
     关联技能 = ['无']
-    def 加成倍率(self, 武器类型):
-        if self.等级 == 0 :
-            return 1.0
-        else:
-            return round(1 + self.等级 * 0.02, 5)
+    自定义描述 = 1
+    def 技能描述(self, 武器类型):
+        return '力量/智力+' + str(int(self.力智倍率() * 100 - 100)) + '%'
 
     def 力智倍率(self):
         return round(1 + 0.02 * self.等级, 5)
@@ -870,11 +868,12 @@ for i in 黑暗武士技能列表:
 
 class 黑暗武士角色属性(角色属性):
 
-    职业名称 = '黑暗武士'
+    实际名称 = '黑暗武士'
+    角色 = '黑暗武士'
+    职业 = '黑暗武士'
 
     武器选项 = ['光剑','太刀','巨剑','短剑','钝器']
     
-    #'物理百分比','魔法百分比','物理固伤','魔法固伤'
     伤害类型选择 = ['物理百分比','魔法百分比']
     
     #默认
@@ -884,32 +883,20 @@ class 黑暗武士角色属性(角色属性):
 
     主BUFF = 1.54
    
-    #基础属性(含唤醒)
-    基础力量 = 906.0
-    基础智力 = 844.0
-    
-    #适用系统奶加成
-    力量 = 基础力量
-    智力 = 基础智力
-
-    #人物基础 + 唤醒
-    物理攻击力 = 65.0
-    魔法攻击力 = 65.0
-    独立攻击力 = 1045.0
-    火属性强化 = 13
-    冰属性强化 = 13
-    光属性强化 = 13
-    暗属性强化 = 13
     远古记忆 = 0
     
     #计算CD
     排列技能 = ['无', '无', '无', '无', '无'] * 6
 
     def __init__(self):
+        基础属性输入(self)
         self.技能栏= deepcopy(黑暗武士技能列表)
         self.技能序号= deepcopy(黑暗武士技能序号)
 
     def 被动倍率计算(self):
+        if self.远古记忆 > 0:
+            self.进图智力 += self.远古记忆 * 15
+
         for i in ['暗·太刀精通','暗·短剑精通','暗·巨剑精通','暗·光剑精通','暗·钝器精通']:
             if self.武器类型 not in i:
                 self.技能栏[self.技能序号[i]].关联技能 = ['无']
@@ -981,23 +968,15 @@ class 黑暗武士角色属性(角色属性):
                     if j != '无':
                         self.技能栏[self.技能序号[j]].计算CD = 计算CD
 
-    def 伤害计算(self, x = 0):
-        
-        self.所有属性强化(self.进图属强)
-        # Will添加
-        self.CD倍率计算()
-        self.加算冷却计算()
-
-        self.被动倍率计算()
-        self.伤害指数计算()
-
+    def 数据计算(self, x = 0, y = -1):
+        self.预处理()
         技能释放次数=[]
         技能单次伤害=[]
         技能总伤害=[]
     
         #技能单次伤害计算
         for i in self.技能栏:
-            if i.是否有伤害==1:
+            if i.是否有伤害==1 and self.技能切装[self.技能序号[i.名称]] != y:
                 # 分物理魔法 乘伤害指数
                 if i.类型 == '物理':
                     技能单次伤害.append(i.等效百分比(self.武器类型)*self.伤害指数1*i.被动倍率)
@@ -1096,7 +1075,7 @@ class 黑暗武士(角色窗口):
         
         初始x = 310; 初始y = 640
         self.技能排列=QLabel(self.main_frame2)
-        self.技能排列.setPixmap(QPixmap('./ResourceFiles/'+self.角色属性A.职业名称 + "/技能/skill.png"))
+        self.技能排列.setPixmap(QPixmap('./ResourceFiles/'+self.角色属性A.实际名称 + "/技能/skill.png"))
         self.技能排列.resize(242, 293)
         self.技能排列.move(初始x, 初始y)
 
@@ -1191,8 +1170,8 @@ class 黑暗武士(角色窗口):
             
         属性.排列技能 = deepcopy(排列技能)
 
-        for i in self.初始属性.技能栏:
-            if i.是否主动 == 1 and i.所在等级 >= 40:
+        for i in 属性.技能栏:
+            if i.是否主动 == 1 and i.所在等级 >= 40 and i.名称 != '禁魂斩':
                 if 属性.伤害类型 == '物理百分比':
                     i.类型 = '物理'
                 else:
@@ -1204,20 +1183,20 @@ class 黑暗武士(角色窗口):
         if 属性.护甲精通 == 0:
             属性.防具类型 = '轻甲'
             属性.防具精通属性 = ['力量']
-        if 属性.护甲精通 == 1:
+        elif 属性.护甲精通 == 1:
             属性.防具类型 = '布甲'
             属性.防具精通属性 = ['智力']
-        if 属性.护甲精通 == 2:
+        elif 属性.护甲精通 == 2:
             属性.防具类型 = '重甲'
             属性.防具精通属性 = ['力量']
-        if 属性.护甲精通 == 3:
+        elif 属性.护甲精通 == 3:
             属性.防具类型 = '板甲'
             属性.防具精通属性 = ['智力']
 
     def 载入配置(self, path = 'set'):
         super().载入配置(path)
         try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/' + path + '/skill4.ini', 'r', encoding='utf-8').readlines()
+            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill4.ini', 'r', encoding='utf-8').readlines()
             num = 0
             for i in range(6):
                 for j in range(6):
@@ -1230,7 +1209,7 @@ class 黑暗武士(角色窗口):
     def 保存配置(self, path = 'set'):
         super().保存配置(path)
         try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.职业名称 + '/' + path + '/skill4.ini', 'w', encoding='utf-8')
+            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill4.ini', 'w', encoding='utf-8')
             for i in range(6):
                 for j in range(6):
                     setfile.write(str(self.技能排列[i][j].currentIndex())+'\n')

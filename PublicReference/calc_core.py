@@ -103,7 +103,7 @@ def calc_core(data: CalcData):
         calc_single_mode(data)
 
     # 全部计算完后，将剩余结果传入结果队列
-    data.minheap_queue.put(copy.deepcopy(data.minheap))
+    data.minheap_queue.put(deepcopy(data.minheap))
 
 
 def calc_speed_and_set_mode(data):
@@ -232,8 +232,14 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类数, data):
 
     for k in 范围:
         套装[k] = '无'
-
-    套装[x] = 装备列表[i].所属套装
+    
+    temp = 装备列表[i].所属套装
+    if temp == '智慧产物':
+        try:
+            temp = 装备列表[i].所属套装2
+        except:
+            pass
+    套装[x] = temp
 
     count = []
     for j in 套装:
@@ -260,10 +266,10 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类数, data):
 
 def calc_single_mode(data):
     if data.是输出职业:
-        from .装备 import 装备序号
+        from .装备 import 装备序号, 套装序号
         from .base import 装备列表, 所有套装列表
     else:
-        from .装备_buff import 装备序号
+        from .装备_buff import 装备序号, 套装序号
         from .base_buff import 装备列表, 所有套装列表
 
     # 散件模式
@@ -308,11 +314,11 @@ def calc_single_mode(data):
                                                         套装字典[i] = 套装字典.get(i, 0) + 1
                                                 套装名称 = []
                                                 for i in 套装字典.keys():
-                                                    if 套装字典[i] >= 2:
+                                                    if 套装字典[i] >= 2 and (i + '[2]') in 套装序号.keys():
                                                         套装名称.append(i + '[2]')
-                                                    if 套装字典[i] >= 3:
+                                                    if 套装字典[i] >= 3 and (i + '[3]') in 套装序号.keys():
                                                         套装名称.append(i + '[3]')
-                                                    if 套装字典[i] >= 5:
+                                                    if 套装字典[i] >= 5 and (i + '[5]') in 套装序号.keys():
                                                         套装名称.append(i + '[5]')
                                                 for a12 in data.有效部位列表[11]:
                                                     装备[11] = a12
@@ -325,10 +331,9 @@ def calc_damage(有效穿戴组合, 有效穿戴套装, 百变怪, data: CalcDat
 
     角色属性A.穿戴装备(有效穿戴组合, 有效穿戴套装)
     if data.是输出职业:
-        角色属性A.装备属性计算()
         damage = 角色属性A.伤害计算()
     else:
-        damage = 角色属性A.BUFF计算()
+        damage = 角色属性A.BUFF计算(2)
 
     data.minheap.add((damage,) + tuple(角色属性A.装备栏) + (damage,) + tuple(角色属性A.套装栏) + (百变怪,))
     data.minheap.processed_result_count += 1
@@ -338,6 +343,6 @@ def calc_damage(有效穿戴组合, 有效穿戴套装, 百变怪, data: CalcDat
         if data.minheap_queue.qsize() > expected_qsize:
             data.minheap.update_batch_size()
         # 同步
-        data.minheap_queue.put(copy.deepcopy(data.minheap))
+        data.minheap_queue.put(deepcopy(data.minheap))
         # 重置
         data.minheap.reset()

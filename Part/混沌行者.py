@@ -2,17 +2,23 @@ from PublicReference.base import *
 
 class 混沌行者主动技能(主动技能):
     攻击次数1 = 1
-    数据1 = [0] * 60
-    数据2 = [0] * 60
-    数据3 = [0] * 60
+    数据1 = []
+    数据2 = []
+    数据3 = []
 
     def 等效百分比(self, 武器类型):
         if self.等级 == 0:
             return 0
         else:
-            return (self.攻击次数1 * self.数据1[self.等级] + \
-                         self.攻击次数2 * self.数据2[self.等级] + \
-                         self.攻击次数3 * self.数据3[self.等级]) * (1 + self.TP成长 * self.TP等级) * self.倍率
+            总倍率 = 1
+            if not self.数据1 == []:
+                总倍率 += self.攻击次数1 * self.数据1[self.等级]
+            if not self.数据2 == []:
+                总倍率 += self.攻击次数2 * self.数据2[self.等级]
+            if not self.数据3 == []:
+                总倍率 += self.攻击次数3 * self.数据3[self.等级]
+            总倍率 *= (1 + self.TP成长 * self.TP等级) * self.倍率
+            return 总倍率
 
 
 class 混沌行者技能0(被动技能):
@@ -36,6 +42,7 @@ class 混沌行者技能1(被动技能):
     基础等级 = 10
     关联技能 = ['次元虚影', '次元跃迁', '次元离子束', '次元坠落', '次元万花镜', '次元粒子风暴', '次元时空磁场', '次元粒子波',
             '次元思维聚爆', '次元奇点', '禁断之盛宴'] #次元系技能
+
     def 加成倍率(self, 武器类型):
         if self.等级 == 0:
             return 1.0
@@ -166,7 +173,8 @@ class 混沌行者技能9(混沌行者主动技能):
     CD = 5.0
 
 class 混沌行者技能10(混沌行者主动技能):
-    名称 = '乖离禁忌的奈雅丽(近战普攻)'
+    名称 = '乖离禁忌的奈雅丽'
+    备注 = '(近战普攻)'
     所在等级 = 20
     等级上限 = 60
     基础等级 = 5
@@ -181,6 +189,9 @@ class 混沌行者技能10(混沌行者主动技能):
     TP成长 = 0.10
     TP上限 = 5
     关联技能 = ["所有"]
+    自定义描述 = 1
+    def 技能描述(self, 武器类型):
+        return '独立攻击力增加{:.1%}'.format( self.独立攻击力倍率进图(武器类型)-1 )
     def 独立攻击力倍率进图(self, 武器类型):
         return 1.10
     def 加成倍率(self, 武器类型):
@@ -571,36 +582,20 @@ for i in 混沌行者技能列表:
 
 
 class 混沌行者角色属性(角色属性):
-    职业名称 = '混沌行者'
+    实际名称 = '混沌行者'
+    角色 = '魔法师(男)'
+    职业 = '次元行者'
 
     武器选项 = ['扫把', '矛', '魔杖', '法杖', '棍棒']
 
-    # '物理百分比','魔法百分比','物理固伤','魔法固伤'
     伤害类型选择 = ['魔法固伤']
 
-    # 默认
     伤害类型 = '魔法固伤'
     防具类型 = '布甲'
     防具精通属性 = ['智力']
 
     主BUFF = 1.850
 
-    # 基础属性(含唤醒)
-    基础力量 = 774.0
-    基础智力 = 976.0
-
-    # 适用系统奶加成
-    力量 = 基础力量
-    智力 = 基础智力
-
-    # 人物基础 + 唤醒
-    物理攻击力 = 65
-    魔法攻击力 = 65
-    独立攻击力 = 1045.0
-    火属性强化 = 13
-    冰属性强化 = 13
-    光属性强化 = 13
-    暗属性强化 = 13
     远古记忆 = 0
 
     坠落形态 = 0
@@ -614,6 +609,7 @@ class 混沌行者角色属性(角色属性):
     二觉形态 = 0
 
     def __init__(self):
+        基础属性输入(self)
         self.技能栏 = deepcopy(混沌行者技能列表)
         self.技能序号 = deepcopy(混沌行者技能序号)
 
@@ -644,7 +640,6 @@ class 混沌行者角色属性(角色属性):
             self.技能栏[self.技能序号['次元万花镜']].攻击次数2 = 4
 
         if self.粒子风暴形态 == 1:
-        #if self.护石第一栏.currentText() == '次元粒子风暴' | self.护石第二栏.currentText() == '次元粒子风暴' | self.粒子风暴形态 == 1:
             self.技能栏[self.技能序号['次元粒子风暴']].攻击次数1 = 0
             self.技能栏[self.技能序号['次元粒子风暴']].攻击次数2 = 1
         if self.粒子风暴形态 == 0:
@@ -708,10 +703,11 @@ class 混沌行者(角色窗口):
             if x.currentText() == '次元粒子风暴':
                 sign = 1
         if sign == 1:
-            self.强化粒子风暴.setChecked(True)
             self.强化粒子风暴.setEnabled(False)
+            self.强化粒子风暴.setStyleSheet(不可勾选复选框样式)
         else:
             self.强化粒子风暴.setEnabled(True)
+            self.强化粒子风暴.setStyleSheet(复选框样式)
 
     def 界面(self):
         super().界面()
@@ -723,38 +719,38 @@ class 混沌行者(角色窗口):
         self.坠落触发箱子.setStyleSheet(复选框样式)
         self.坠落触发箱子.setChecked(False)
         self.坠落触发箱子.resize(120, 20)
-        self.坠落触发箱子.move(315, 380)
+        self.坠落触发箱子.move(325, 380)
 
         self.离子束强化=QCheckBox("强化离子束", self.main_frame2)
         self.离子束强化.setStyleSheet(复选框样式)
         self.离子束强化.setChecked(False)
         self.离子束强化.resize(120, 20)
-        self.离子束强化.move(315, 405)
+        self.离子束强化.move(325, 405)
 
         self.强化万花镜 = QCheckBox("强化万花镜", self.main_frame2)
         self.强化万花镜.setStyleSheet(复选框样式)
         self.强化万花镜.setChecked(True)
         self.强化万花镜.resize(120, 20)
-        self.强化万花镜.move(315, 430)
+        self.强化万花镜.move(325, 430)
 
         self.强化粒子风暴 = QCheckBox("强化粒子风暴", self.main_frame2)
         self.强化粒子风暴.setStyleSheet(复选框样式)
         self.强化粒子风暴.setChecked(True)
         self.强化粒子风暴.resize(120, 20)
-        self.强化粒子风暴.move(315, 455)
-        self.强化粒子风暴.setToolTip('选择粒子风暴护石时常驻为强化模式。')
+        self.强化粒子风暴.move(325, 455)
+        self.强化粒子风暴.setToolTip('选择粒子风暴护石时常驻为强化模式')
 
         self.强化粒子波 = QCheckBox("强化粒子波", self.main_frame2)
         self.强化粒子波.setStyleSheet(复选框样式)
         self.强化粒子波.setChecked(True)
         self.强化粒子波.resize(120, 20)
-        self.强化粒子波.move(315, 480)
+        self.强化粒子波.move(325, 480)
 
         self.聚爆是否瞬爆 = QCheckBox("聚爆取消持续伤害", self.main_frame2)
         self.聚爆是否瞬爆.setStyleSheet(复选框样式)
         self.聚爆是否瞬爆.setChecked(True)
         self.聚爆是否瞬爆.resize(120, 20)
-        self.聚爆是否瞬爆.move(315, 505)
+        self.聚爆是否瞬爆.move(325, 505)
 
         # self.强化奇点 = QCheckBox("强化奇点", self.main_frame2)
         # self.强化奇点.setStyleSheet(复选框样式)
@@ -764,11 +760,11 @@ class 混沌行者(角色窗口):
 
         self.二觉形态选择 = MyQComboBox(self.main_frame2)
         self.二觉形态选择.addItem('不强化二觉')
-        self.二觉形态选择.addItem('强化二觉:取消后摇')
-        self.二觉形态选择.addItem('强化二觉:保留后摇')
+        self.二觉形态选择.addItem('二觉:取消后摇')
+        self.二觉形态选择.addItem('二觉:保留后摇')
         self.二觉形态选择.setCurrentIndex(2)
-        self.二觉形态选择.resize(140, 20)
-        self.二觉形态选择.move(305, 530)
+        self.二觉形态选择.resize(120, 20)
+        self.二觉形态选择.move(325, 530)
 
     def 输入属性(self, 属性, x = 0):
         super().输入属性(属性, x)
