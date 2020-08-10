@@ -163,13 +163,13 @@ class 角色属性():
     精神 = 0
 
     #人物基础 + 唤醒
-    物理攻击力 = 0.0
-    魔法攻击力 = 0.0
-    独立攻击力 = 0.0
-    火属性强化 = 0
-    冰属性强化 = 0
-    光属性强化 = 0
-    暗属性强化 = 0
+    物理攻击力 = 65
+    魔法攻击力 = 65
+    独立攻击力 = 1045
+    火属性强化 = 13
+    冰属性强化 = 13
+    光属性强化 = 13
+    暗属性强化 = 13
     
     #不适用系统奶加成
     进图力量 = 0.0
@@ -3260,8 +3260,10 @@ class 角色窗口(QWidget):
         if self.神话数量判断() and self.神话排名选项.isChecked():
             QMessageBox.information(self,"错误",  "请勾选神话装备或取消勾选神话排名模式选项") 
             return
+        self.有效部位列表备份 = []
         if self.组合计算(self.计算模式选择.currentIndex()) == 0:
             if self.计算模式选择.currentIndex() == 2 and 补全模式 != 0:
+                self.有效部位列表备份 = deepcopy(self.有效部位列表)
                 num = 0
                 for i in self.有效部位列表:
                     if len(i) == 0 or (补全模式 == 2 and self.自选装备[num].currentText() not in i):
@@ -3377,6 +3379,8 @@ class 角色窗口(QWidget):
             for i in self.有效部位列表:
                 for j in i:
                     calc_data.装备选择状态[装备序号[j]] = 1
+            if len(self.有效部位列表备份) != 0:
+                self.有效部位列表 = deepcopy(self.有效部位列表备份)
             calc_data.拥有百变怪 = self.百变怪选项.isChecked()
             calc_data.神话属性选项 = [cb.currentIndex() for cb in self.神话属性选项]
 

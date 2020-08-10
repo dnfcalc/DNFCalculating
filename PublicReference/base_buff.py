@@ -2254,8 +2254,10 @@ class 角色窗口(QWidget):
             QMessageBox.information(self,"错误",  "请勾选神话装备或取消勾选神话排名模式选项") 
             return
 
+        self.有效部位列表备份 = []
         if self.组合计算(self.计算模式选择.currentIndex()) == 0:
             if self.计算模式选择.currentIndex() == 2 and 补全模式 != 0:
+                self.有效部位列表备份 = deepcopy(self.有效部位列表)
                 num = 0
                 for i in self.有效部位列表:
                     if len(i) == 0 or (补全模式 == 2 and self.自选装备[num].currentText() not in i):
@@ -2370,6 +2372,8 @@ class 角色窗口(QWidget):
             for i in self.有效部位列表:
                 for j in i:
                     calc_data.装备选择状态[装备序号[j]] = 1
+            if len(self.有效部位列表备份) != 0:
+                self.有效部位列表 = deepcopy(self.有效部位列表备份)
             calc_data.拥有百变怪 = self.百变怪选项.isChecked()
             calc_data.神话属性选项 = [cb.currentIndex() for cb in self.神话属性选项]
 

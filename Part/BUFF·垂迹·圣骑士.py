@@ -340,8 +340,8 @@ class BUFF·垂迹·圣骑士(角色窗口):
         self.一觉遮罩透明度.setOpacity(0.5)
         self.二觉遮罩透明度 = QGraphicsOpacityEffect()
         self.二觉遮罩透明度.setOpacity(0.0)
-        横坐标 = 80
-        纵坐标 = 300
+        横坐标 = 250
+        纵坐标 = 230
         x = 横坐标;
         y = 纵坐标
         self.觉醒选择 = QLabel(self.main_frame2)
