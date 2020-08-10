@@ -2263,9 +2263,17 @@ class 角色窗口(QWidget):
                     if len(i) == 0 or (补全模式 == 2 and self.自选装备[num].currentText() not in i):
                         i.append(self.自选装备[num].currentText())
                     num += 1
-            else:
-                QMessageBox.information(self,"错误",  "无有效组合，请更换模式或重新选择装备") 
+            elif self.计算模式选择.currentIndex() == 0 and self.组合计算(1) != 0:
+                QMessageBox.information(self, "错误", "已更换为套装模式，请再次计算")
+                self.计算模式选择.setCurrentIndex(1)
                 return
+            elif self.计算模式选择.currentIndex() != 2 and self.组合计算(2) != 0:
+                QMessageBox.information(self, "错误", "请更换为单件模式，并再次计算")
+                return
+            else:
+                QMessageBox.information(self,"错误",  "无有效组合，请重新选择装备")
+                return
+                
         self.计算按钮1.setEnabled(False)
         self.计算按钮1.setStyleSheet(不可点击按钮样式)
         self.计算按钮2.setEnabled(False)

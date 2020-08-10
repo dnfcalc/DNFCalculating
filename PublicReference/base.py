@@ -3269,8 +3269,15 @@ class 角色窗口(QWidget):
                     if len(i) == 0 or (补全模式 == 2 and self.自选装备[num].currentText() not in i):
                         i.append(self.自选装备[num].currentText())
                     num += 1
+            elif self.计算模式选择.currentIndex() == 0 and self.组合计算(1) != 0:
+                QMessageBox.information(self, "错误", "已更换为套装模式，请再次计算")
+                self.计算模式选择.setCurrentIndex(1)
+                return
+            elif self.计算模式选择.currentIndex() != 2 and self.组合计算(2) != 0:
+                QMessageBox.information(self, "错误", "请更换为单件模式，并再次计算")
+                return
             else:
-                QMessageBox.information(self,"错误",  "无有效组合，请更换模式或重新选择装备") 
+                QMessageBox.information(self,"错误",  "无有效组合，请重新选择装备")
                 return
         self.计算按钮1.setEnabled(False)
         self.计算按钮1.setStyleSheet(不可点击按钮样式)
@@ -3622,10 +3629,22 @@ class 角色窗口(QWidget):
             for i in self.套装名称显示:
                 i.setText('')
             count = 0
-            for i in [self.称号.currentText(), self.宠物.currentText(), 装备[11]]:
-                self.套装名称显示[count].setText(i)
-                self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")   
-                count += 1
+
+            self.套装名称显示[count].setText(self.称号.currentText())
+            self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+            self.套装名称显示[count].setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.称号.currentText() + '</font><br>' + 称号列表[self.称号.currentIndex()].装备描述(B)[:-4] + '</font>')
+            count += 1
+
+            self.套装名称显示[count].setText(self.宠物.currentText())
+            self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+            self.套装名称显示[count].setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.宠物.currentText() + '</font><br>' + 宠物列表[self.宠物.currentIndex()].装备描述(B)[:-4] + '</font>')
+            count += 1
+
+
+            self.套装名称显示[count].setText(装备[11])
+            self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+            count += 1
+
             神话所在套装 = []
             for i in range(0,11):
                 if 装备列表[装备序号[装备[i]]].品质 == '神话':
@@ -4053,13 +4072,28 @@ class 角色窗口(QWidget):
             位置 -= 5
             间隔 -= 1
         
-        for i in [self.称号.currentText(), self.宠物.currentText(), 装备名称[11]]:
-            显示=QLabel(i,输出窗口)
-            显示.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")   
-            显示.move(114, 位置)
-            显示.resize(150,18)
-            显示.setAlignment(Qt.AlignCenter)
-            位置 += 间隔 
+        适用称号名称=QLabel(self.称号.currentText(),输出窗口)
+        适用称号名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+        适用称号名称.move(114, 位置)
+        适用称号名称.resize(150,18)
+        适用称号名称.setAlignment(Qt.AlignCenter)
+        位置 += 间隔
+        适用称号名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.称号.currentText()+'</font><br>'+称号列表[self.称号.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
+
+        适用宠物名称=QLabel(self.宠物.currentText(),输出窗口)
+        适用宠物名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+        适用宠物名称.move(114, 位置)
+        适用宠物名称.resize(150,18)
+        适用宠物名称.setAlignment(Qt.AlignCenter)
+        位置 += 间隔
+        适用宠物名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.宠物.currentText()+'</font><br>'+宠物列表[self.宠物.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
+
+        适用武器名称=QLabel(装备名称[11],输出窗口)
+        适用武器名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+        适用武器名称.move(114, 位置)
+        适用武器名称.resize(150,18)
+        适用武器名称.setAlignment(Qt.AlignCenter)
+        位置 += 间隔
 
         神话所在套装 = []
         for i in range(0,11):
