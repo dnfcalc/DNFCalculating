@@ -69,6 +69,7 @@ class 主动技能(技能):
     基础释放次数 = 0
     演出时间 = 0
     是否有护石 = 0
+    护石选项 = ['魔界']
     关联技能 = ['无']
     关联技能2 = ['无']
     关联技能3 = ['无']
@@ -101,9 +102,8 @@ class 被动技能(技能):
     冷却关联技能2 = ['无']
     冷却关联技能3 = ['无']
 
-符文效果选项 = ['无', '攻击+5%,CD+3%', 'CD-4%', '攻击+3%', '攻击-3%,CD-6%', '攻击+3%,CD+2%', 'CD-3%', '攻击+2%', '攻击-2%,CD-4%','攻击+2%,CD+1%', 'CD-2%', '攻击+1%', '攻击-1%,CD-3%']
-
-部位列表 = ["上衣", "头肩", "下装", "腰带", "鞋", "手镯", "项链", "戒指", "耳环", "辅助装备", "魔法石", "武器"]
+符文效果选项 = ['无', '攻击+5%,CD+3%', 'CD-4%', '攻击+3%', '攻击-3%,CD-6%', '攻击+3%,CD+2%', 'CD-3%', '攻击+2%', '攻击-2%,CD-4%',
+    '攻击+2%,CD+1%', 'CD-2%', '攻击+1%', '攻击-1%,CD-3%', '攻击+6%,CD+4%', 'CD-5%', '攻击+4%', '攻击-4%,CD-7%']
 
 部位字典 = {"上衣":0, "头肩":1, "下装":2, "腰带":3, "鞋":4, "手镯":5, "项链":6, "戒指":7, "耳环":8, "辅助装备":9, "魔法石":10, "武器":11}
 
@@ -261,6 +261,7 @@ class 角色属性():
 
     护石第一栏 = '无'
     护石第二栏 = '无'
+    护石第三栏 = '无'
 
     攻击属性 = 0
     
@@ -1475,8 +1476,9 @@ class 角色窗口(QWidget):
         #技能等级、TP、次数输入、宠物次数
         self.BUFF输入 = QLineEdit(self.main_frame2)
         self.时间输入 = MyQComboBox(self.main_frame2)
-        self.护石第一栏 = MyQComboBox(self.main_frame2)
-        self.护石第二栏 = MyQComboBox(self.main_frame2)
+        self.护石栏 = []
+        for i in range(3):
+            self.护石栏.append(MyQComboBox(self.main_frame2))
         self.符文 = []
         self.符文效果 = []
 
@@ -1662,22 +1664,28 @@ class 角色窗口(QWidget):
         self.二觉遮罩.setGraphicsEffect(self.二觉遮罩透明度)
         self.二觉遮罩.clicked.connect(lambda state, index = 2:self.强化觉醒选择(index))
 
-        self.护石第一栏.addItems(self.护石选项)
-        self.护石第二栏.addItems(self.护石选项)
+        for i in range(3):
+            self.护石栏[i].addItems(self.护石选项)
+        self.护石类型选项 = []
 
-        for i in range(0,6):
+        for i in range(0,9):
             self.符文.append(MyQComboBox(self.main_frame2))
             self.符文[i].addItems(self.符文选项)
             self.符文效果.append(MyQComboBox(self.main_frame2))
             self.符文效果[i].addItems(符文效果选项)
         
         横坐标=480;纵坐标=20;行高=18
-        x=QLabel("护石(第一栏/上)：", self.main_frame2)
-        x.move(横坐标,纵坐标-5)
+        x=QLabel("护石1 (上)", self.main_frame2)
+        x.move(横坐标,纵坐标 - 6)
         x.setStyleSheet(标签样式)
+        y = MyQComboBox(self.main_frame2)
+        y.move(横坐标 + 65,纵坐标)
+        y.resize(65, 行高)
+        self.护石类型选项.append(y)     
         纵坐标+=21
-        self.护石第一栏.move(横坐标,纵坐标)
-        self.护石第一栏.resize(130, 行高)
+        self.护石栏[0].move(横坐标,纵坐标)
+        self.护石栏[0].resize(130, 行高)
+        self.护石栏[0].currentIndexChanged.connect(lambda state, index = 0:self.护石类型选项更新(index))
         纵坐标+=25
         for i in range(0,3):
             tempstr='符文'+str(i+1)+'选择: '
@@ -1687,18 +1695,25 @@ class 角色窗口(QWidget):
             纵坐标+=21
             self.符文[i].move(横坐标,纵坐标)
             self.符文[i].resize(130, 行高)
+            self.符文[i].activated.connect(lambda state, index = i :self.符文技能更改(index))
             纵坐标+=21
             self.符文效果[i].move(横坐标,纵坐标)
             self.符文效果[i].resize(130,行高)
+            self.符文效果[i].activated.connect(lambda state, index = i :self.符文效果更改(index))
             纵坐标+=25
         
         横坐标=650;纵坐标=20
-        x=QLabel("护石(第二栏/下)：", self.main_frame2)
-        x.move(横坐标,纵坐标-5)
+        x=QLabel("护石2 (下)", self.main_frame2)
+        x.move(横坐标,纵坐标 - 6)
         x.setStyleSheet(标签样式)
+        y = MyQComboBox(self.main_frame2)
+        y.move(横坐标 + 65,纵坐标)
+        y.resize(65, 行高)
+        self.护石类型选项.append(y)  
         纵坐标+=21
-        self.护石第二栏.move(横坐标,纵坐标)
-        self.护石第二栏.resize(130, 行高)
+        self.护石栏[1].move(横坐标,纵坐标)
+        self.护石栏[1].resize(130, 行高)
+        self.护石栏[1].currentIndexChanged.connect(lambda state, index = 1:self.护石类型选项更新(index))
         纵坐标+=25
         for i in range(3,6):
             tempstr='符文'+str(i+1)+'选择: '
@@ -1713,6 +1728,35 @@ class 角色窗口(QWidget):
             self.符文效果[i].resize(130,行高)
             纵坐标+=25
 
+        横坐标=820;纵坐标=20
+        x=QLabel("护石3 (韩)", self.main_frame2)
+        x.move(横坐标,纵坐标 - 6)
+        x.setStyleSheet(标签样式)
+        y = MyQComboBox(self.main_frame2)
+        y.move(横坐标 + 65,纵坐标)
+        y.resize(65, 行高)
+        self.护石类型选项.append(y)  
+        纵坐标+=21
+        self.护石栏[2].move(横坐标,纵坐标)
+        self.护石栏[2].resize(130, 行高)
+        self.护石栏[2].currentIndexChanged.connect(lambda state, index = 2:self.护石类型选项更新(index))
+        纵坐标+=25
+        for i in range(6,9):
+            tempstr='符文'+str(i+1)+'选择: '
+            x=QLabel(tempstr, self.main_frame2)
+            x.move(横坐标,纵坐标-5)
+            x.setStyleSheet(标签样式)
+            纵坐标+=21
+            self.符文[i].move(横坐标,纵坐标)
+            self.符文[i].resize(130, 行高)
+            纵坐标+=21
+            self.符文效果[i].move(横坐标,纵坐标)
+            self.符文效果[i].resize(130,行高)
+            纵坐标+=25
+        
+        for i in range(3):
+            self.护石类型选项[i].addItem('魔界')
+            self.护石类型选项[i].currentIndexChanged.connect(lambda state, index = i:self.护石描述更新(index))
 
         标签 = QLabel('辟邪玉计算 （鼠标悬停查看算法）',self.main_frame2)
         标签.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
@@ -1746,7 +1790,7 @@ class 角色窗口(QWidget):
             y.move(700,300 + i * 25)
             self.辟邪玉数值.append(y)
 
-        横坐标=815;纵坐标=20
+        横坐标=805;纵坐标=275
         名称 = ['奈克斯', '暗杀者', '卢克西', '守门将', '罗德斯']
         self.希洛克套装按钮 = []
         self.希洛克单件按钮 = []
@@ -1754,23 +1798,23 @@ class 角色窗口(QWidget):
         self.希洛克选择状态 = [0] * 15 
         count = 0
         for i in 名称:
-            self.希洛克套装按钮.append(QPushButton('希洛克融合:' + i, self.main_frame2))
+            self.希洛克套装按钮.append(QPushButton(i, self.main_frame2))
             self.希洛克套装按钮[count].setStyleSheet(按钮样式)
-            self.希洛克套装按钮[count].resize(120,22)
-            self.希洛克套装按钮[count].move(横坐标, 纵坐标 + count * 65)
+            self.希洛克套装按钮[count].resize(50,22)
+            self.希洛克套装按钮[count].move(横坐标, 纵坐标 + 4 + count * 32)
             self.希洛克套装按钮[count].clicked.connect(lambda state, index = (count + 1) * 100:self.希洛克选择(index))
             for j in range(3):
                 序号 = count * 3 + j
                 图片 = QLabel(self.main_frame2)
                 图片.setPixmap(QPixmap('./ResourceFiles/img/希洛克/' + str(序号) + '.png'))
                 图片.resize(28, 28)
-                图片.move(横坐标+ 6 + j * 40, 纵坐标 + 30 + count * 65)
+                图片.move(横坐标+ 60 + j * 30, 纵坐标 + count * 32)
                 self.希洛克遮罩透明度.append(QGraphicsOpacityEffect())
                 self.希洛克遮罩透明度[序号].setOpacity(0.5)
                 self.希洛克单件按钮.append(QPushButton(self.main_frame2))
                 self.希洛克单件按钮[序号].setStyleSheet("background-color: rgb(0, 0, 0)")
                 self.希洛克单件按钮[序号].resize(28, 28)
-                self.希洛克单件按钮[序号].move(横坐标+ 6 + j * 40, 纵坐标 + 30 + count * 65)
+                self.希洛克单件按钮[序号].move(横坐标+ 60 + j * 30, 纵坐标 + count * 32)
                 self.希洛克单件按钮[序号].setGraphicsEffect(self.希洛克遮罩透明度[序号])
                 self.希洛克单件按钮[序号].clicked.connect(lambda state, index = 序号:self.希洛克选择(index))
             count += 1
@@ -1780,7 +1824,7 @@ class 角色窗口(QWidget):
             self.守门将属强.addItem('守门将属强：' + str(15 + i * 5))
         self.守门将属强.resize(120,20)
         self.守门将属强.setCurrentIndex(3)
-        self.守门将属强.move(横坐标, 纵坐标 + count * 65)
+        self.守门将属强.move(横坐标 + 12, 纵坐标 + 3 + count * 32)
                 
         self.复选框列表 = []
         for i in 选项设置列表:
@@ -2030,7 +2074,7 @@ class 角色窗口(QWidget):
                         self.神话属性选项[count * 4 + j].addItem('无')
                 count += 1
 
-    def 界面5(self):        
+    def 界面5(self):
         #第五个布局
         标签 = QLabel('单件选择', self.main_frame5)
         标签.setAlignment(Qt.AlignCenter)
@@ -2289,6 +2333,35 @@ class 角色窗口(QWidget):
         self.对比格式.move(720, 612)
         self.对比格式.resize(70, 24)
         self.对比格式.setStyleSheet(复选框样式)
+    
+    def 护石描述更新(self, x):
+        try:
+            self.护石栏[x].setToolTip('<font face="宋体">' + self.初始属性.技能栏[self.初始属性.技能序号[self.护石栏[x].currentText()]].护石描述(self.护石类型选项[x].currentIndex()) + '</font></font>')
+        except:
+            self.护石栏[x].setToolTip('<font face="宋体">暂缺</font>')
+                    
+    def 护石类型选项更新(self, x):
+        self.护石类型选项[x].clear()
+        if self.护石栏[x].currentText() != '无':
+            try:
+                self.护石类型选项[x].addItems(self.初始属性.技能栏[self.初始属性.技能序号[self.护石栏[x].currentText()]].护石选项)
+            except:
+                self.护石类型选项[x].addItem('魔界')
+                self.护石栏[x].setCurrentIndex(0)
+        else:
+            self.护石类型选项[x].addItem('魔界')
+
+    def 符文技能更改(self, i):
+        if i == 0:
+            for i in range(1, 9):
+                self.符文[i].setCurrentIndex(self.符文[0].currentIndex())
+        else:
+            self.符文[i + 3].setCurrentIndex(self.符文[i].currentIndex())
+            self.符文[i + 6].setCurrentIndex(self.符文[i].currentIndex())
+
+    def 符文效果更改(self, i):
+        self.符文效果[i + 3].setCurrentIndex(self.符文效果[i].currentIndex())
+        self.符文效果[i + 6].setCurrentIndex(self.符文效果[i].currentIndex())
 
     def 基准值设置(self, x = 0):
         self.基准值.clear()
@@ -2760,8 +2833,8 @@ class 角色窗口(QWidget):
             num = 0
             self.BUFF输入.setText(setfile[num].replace('\n', '')); num += 1
             self.时间输入.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
-            self.护石第一栏.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
-            self.护石第二栏.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+            self.护石栏[0].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+            self.护石栏[1].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
             for i in range(0,6):
                 self.符文[i].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
                 self.符文效果[i].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
@@ -2770,6 +2843,12 @@ class 角色窗口(QWidget):
                 self.远古记忆.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
             if self.初始属性.刀魂之卡赞 != -1:
                 self.刀魂之卡赞.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+            self.护石栏[2].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+            for i in range(6,9):
+                self.符文[i].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+                self.符文效果[i].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+            for i in range(3):
+                self.护石类型选项[i].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
         except:
             pass
 
@@ -2900,8 +2979,8 @@ class 角色窗口(QWidget):
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill1.ini', 'w', encoding='utf-8')
             setfile.write(self.BUFF输入.text()+'\n')
             setfile.write(str(self.时间输入.currentIndex())+'\n')
-            setfile.write(str(self.护石第一栏.currentIndex())+'\n')
-            setfile.write(str(self.护石第二栏.currentIndex())+'\n')
+            setfile.write(str(self.护石栏[0].currentIndex())+'\n')
+            setfile.write(str(self.护石栏[1].currentIndex())+'\n')
             for i in range(0,6):
                 setfile.write(str(self.符文[i].currentIndex())+'\n')
                 setfile.write(str(self.符文效果[i].currentIndex())+'\n')
@@ -2910,6 +2989,12 @@ class 角色窗口(QWidget):
                 setfile.write(str(self.远古记忆.currentIndex())+'\n')
             if self.初始属性.刀魂之卡赞 != -1:
                 setfile.write(str(self.刀魂之卡赞.currentIndex())+'\n')
+            setfile.write(str(self.护石栏[2].currentIndex())+'\n')
+            for i in range(6,9):
+                setfile.write(str(self.符文[i].currentIndex())+'\n')
+                setfile.write(str(self.符文效果[i].currentIndex())+'\n')
+            for i in range(3):
+                setfile.write(str(self.护石类型选项[i].currentIndex())+'\n')
         except:
             pass
 
@@ -4524,15 +4609,18 @@ class 角色窗口(QWidget):
 
         宠物列表[self.宠物.currentIndex()].城镇属性(属性)
         
-        if self.护石第一栏.currentText()!= '无':
-            属性.技能栏[self.角色属性A.技能序号[self.护石第一栏.currentText()]].装备护石()
-            属性.护石第一栏 = self.护石第一栏.currentText()
+        for k in range(3):
+            if self.护石栏[k].currentText()!= '无':
+                try:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石()
+                except:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石(self.护石类型选项[k].currentIndex())
+                    
+        属性.护石第一栏 = self.护石栏[0].currentText()
+        属性.护石第二栏 = self.护石栏[1].currentText()
+        属性.护石第三栏 = self.护石栏[2].currentText()
     
-        if self.护石第二栏.currentText()!= '无':
-            属性.技能栏[self.角色属性A.技能序号[self.护石第二栏.currentText()]].装备护石()
-            属性.护石第二栏 = self.护石第二栏.currentText()
-    
-        for i in range(0,6):
+        for i in range(0,9):
             if self.符文[i].currentText()!='无' and self.符文效果[i].currentText() != '无':
                 for j in self.符文效果[i].currentText().split(','):
                     if '攻击' in j:

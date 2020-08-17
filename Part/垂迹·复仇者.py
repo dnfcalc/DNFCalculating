@@ -149,13 +149,18 @@ class 垂迹·复仇者技能7(主动技能):
     CD = 16 * 1.5
     TP成长 = 0.10
     TP上限 = 5
-    是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
         return self.数据1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.倍率 *= 1.25
+    是否有护石 = 1
+    护石选项 = ['魔界', '圣痕']
+
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.25
+        elif x == 1:
+            self.倍率 *= 1.34
 
 class 垂迹·复仇者技能8(主动技能):
     名称 = '恶魔之拳'
@@ -178,15 +183,22 @@ class 垂迹·复仇者技能8(主动技能):
     CD = 20
     TP成长 = 0.10
     TP上限 = 5
-    是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 * self.倍率1 + self.数据2[self.等级] * self.倍率2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.倍率1 *= 1.1
-        self.倍率2 *= 1.25
-        self.CD *= 0.85
+    是否有护石 = 1
+    护石选项 = ['魔界', '圣痕']
+
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率1 *= 1.1
+            self.倍率2 *= 1.25
+            self.CD *= 0.85
+        elif x == 1:
+            self.倍率1 *= 1.1
+            self.倍率2 *= 1.37
+            self.CD *= 0.85
 
 class 垂迹·复仇者技能9(主动技能):
     名称 = '恶魔之握'
@@ -236,14 +248,20 @@ class 垂迹·复仇者技能10(主动技能):
     CD = 40
     TP成长 = 0.10
     TP上限 = 5
-    是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.攻击次数2 = 42
-        self.CD *= 0.9
+    是否有护石 = 1
+    护石选项 = ['魔界', '圣痕']
+
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数2 = 42
+            self.CD *= 0.9
+        elif x == 1:
+            self.攻击次数2 = 42 * 1.09
+            self.CD *= 0.9
 
 class 垂迹·复仇者技能11(主动技能):
     名称 = '魔化：末日审判者'
@@ -338,15 +356,21 @@ class 垂迹·复仇者技能14(主动技能):
     CD = 30
     TP成长 = 0.10
     TP上限 = 5
-    是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
         return self.数据1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.攻击次数1 = 9
-        self.CD *= 0.88
+    是否有护石 = 1
+    护石选项 = ['魔界', '圣痕']
 
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数1 = 9
+            self.CD *= 0.88
+        elif x == 1:
+            self.倍率 *= 1.08
+            self.攻击次数1 = 9
+            self.CD *= 0.88
 
 class 垂迹·复仇者技能15(主动技能):
     名称 = '末日浩劫'
@@ -362,13 +386,18 @@ class 垂迹·复仇者技能15(主动技能):
     CD = 50
     TP成长 = 0.10
     TP上限 = 5
-    是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
         return self.数据1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.倍率 *= 1.18
+    是否有护石 = 1
+    护石选项 = ['魔界', '圣痕']
+
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.08*1.1
+        elif x == 1:
+            self.倍率 *= 1.08*1.18
 
 class 垂迹·复仇者技能16(主动技能):
     名称 = '不朽战吼'
@@ -392,6 +421,13 @@ class 垂迹·复仇者技能16(主动技能):
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * self.倍率
+
+    是否有护石 = 1
+    护石选项 = ['圣痕']
+
+    def 装备护石(self, x):
+        self.倍率 *= 1.29
+        self.CD *= 0.86
 
 class 垂迹·复仇者技能17(被动技能):
     名称 = '原罪之力'
@@ -431,6 +467,12 @@ class 垂迹·复仇者技能18(主动技能):
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * self.倍率
+
+    是否有护石 = 1
+    护石选项 = ['圣痕']
+
+    def 装备护石(self, x):
+        self.倍率 *= 1.35
 
 class 垂迹·复仇者技能19(主动技能):
     名称 = '永堕：混沌弑神'

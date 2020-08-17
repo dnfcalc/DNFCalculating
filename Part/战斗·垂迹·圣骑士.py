@@ -187,13 +187,18 @@ class 战斗·垂迹·圣骑士技能10(主动技能):
     CD = 14.4
     TP成长 = 0.10
     TP上限 = 5
-    是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 * self.倍率1 + self.数据2[self.等级] * self.攻击次数2 * self.倍率2) * (1 + self.TP成长 * self.TP等级) *self.倍率
 
-    def 装备护石(self):
-        self.倍率 *= 1.25
+    是否有护石 = 1
+    护石选项 = ['魔界', '圣痕']
+
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.25
+        elif x == 1:
+            self.倍率 *= 1.34
 
 
 class 战斗·垂迹·圣骑士技能11(主动技能):
@@ -228,14 +233,20 @@ class 战斗·垂迹·圣骑士技能12(主动技能):
     CD = 14.4
     TP成长 = 0.10
     TP上限 = 5
-    是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.倍率 *= 1.25
-        self.CD *= 0.90
+    是否有护石 = 1
+    护石选项 = ['魔界', '圣痕']
+
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.25
+            self.CD *= 0.9
+        elif x == 1:
+            self.倍率 *= 1.34
+            self.CD *= 0.9
 
 class 战斗·垂迹·圣骑士技能13(主动技能):
     名称 = '正义审判'
@@ -252,14 +263,20 @@ class 战斗·垂迹·圣骑士技能13(主动技能):
     CD = 45.0
     TP成长 = 0.10
     TP上限 = 5
-    是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 * self.倍率1 + self.数据2[self.等级] * self.攻击次数2 * self.倍率2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.攻击次数1 = 8
-        self.倍率2 = 2
+    是否有护石 = 1
+    护石选项 = ['魔界', '圣痕']
+
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数1 = 8
+            self.倍率2 = 2
+        elif x == 1:
+            self.攻击次数1 = 8
+            self.倍率2 = 2.16
 
 
 class 战斗·垂迹·圣骑士技能14(被动技能):
@@ -305,14 +322,20 @@ class 战斗·垂迹·圣骑士技能16(主动技能):
     CD = 30.0
     TP成长 = 0.10
     TP上限 = 5
-    是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 * self.倍率1 + self.数据2[self.等级] * self.攻击次数2 * self.倍率2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.倍率2 = 1.36
-        self.CD *= 0.90
+    是否有护石 = 1
+    护石选项 = ['魔界', '圣痕']
+
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率2 *= 1.36
+            self.CD *= 0.9
+        elif x == 1:
+            self.倍率2 *= 1.49
+            self.CD *= 0.9
 
 
 class 战斗·垂迹·圣骑士技能17(主动技能):
@@ -330,11 +353,17 @@ class 战斗·垂迹·圣骑士技能17(主动技能):
     CD = 40.0
     TP成长 = 0.10
     TP上限 = 5
-    是否有护石 = 1
+
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
-    def 装备护石(self):
-        self.倍率 *= 1.23
+    是否有护石 = 1
+    护石选项 = ['魔界', '圣痕']
+
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.23
+        elif x == 1:
+            self.倍率 *= 1.31
 
 
 class 战斗·垂迹·圣骑士技能18(主动技能):
@@ -347,6 +376,12 @@ class 战斗·垂迹·圣骑士技能18(主动技能):
     CD = 20.0
     def 等效百分比(self, 武器类型):
         return self.数据1[self.等级] * self.倍率
+
+    是否有护石 = 1
+    护石选项 = ['圣痕']
+
+    def 装备护石(self, x):
+        self.倍率 *= 1.35
 
 
 class 战斗·垂迹·圣骑士技能19(主动技能):
@@ -362,6 +397,13 @@ class 战斗·垂迹·圣骑士技能19(主动技能):
     CD = 40.0
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
+
+    是否有护石 = 1
+    护石选项 = ['圣痕']
+
+    def 装备护石(self, x):
+        self.攻击次数1 = 0
+        self.倍率 *= 1.78
 
 
 class 战斗·垂迹·圣骑士技能20(主动技能):

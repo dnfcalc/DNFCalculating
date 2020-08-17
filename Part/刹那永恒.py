@@ -207,8 +207,40 @@ class 刹那永恒技能10(刹那永恒主动技能):
         return self.数据1[self.等级] * self.攻击倍率 * (1 + self.TP成长 * self.TP等级) * self.攻击次数 * self.倍率
 
     是否有护石 = 1
-    def 装备护石(self):
-        self.攻击倍率 *= 1.27
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+           self.攻击倍率 *= 1.27
+        if x == 1:
+           self.攻击倍率 *= 1.36
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>冰魄延伸</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[冰魄锤击]<br>"
+            temp += "普通施放时， 发动大范围寒冰冲击波<br>"
+            temp += "攻击力 +9%<br>"
+            temp += "强制中断其他技能后施放时攻击力 +18%<br>"
+            temp += "强制中断其他技能后施放时不产生寒冰冲击波<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "对可抓取的敌人造成和不可抓取的敌人同样的伤害<br>"
+            temp += "普通施放时寒冰冲击波范围 +15%<br>"
+            temp += "普通施放时攻击力 +6%<br>"
+            temp += "强制中断其他技能后施放时攻击力 +9%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>冰魄延伸</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[冰魄锤击]<br>"
+            temp += "普通施放时， 发动大范围寒冰冲击波<br>"
+            temp += "攻击力 +9%<br>"
+            temp += "强制中断其他技能后施放时攻击力 +18%<br>"
+            temp += "强制中断其他技能后施放时不产生寒冰冲击波<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "对可抓取的敌人造成和不可抓取的敌人同样的伤害<br>"
+            temp += "普通施放时寒冰冲击波范围 +15%<br>"
+            temp += "普通施放时攻击力 +6%<br>"
+            temp += "强制中断其他技能后施放时攻击力 +18%"
+        return temp
 
 class 刹那永恒技能11(刹那永恒主动技能):
     名称 = '极冰绽放'
@@ -233,10 +265,44 @@ class 刹那永恒技能11(刹那永恒主动技能):
                 self.数据2[self.等级]* (1 + self.TP成长 * self.TP等级) * self.攻击倍率2* self.攻击次数2) * self.倍率
 
     是否有护石 = 1
-    def 装备护石(self):
-        self.攻击倍率 *= 1.11
-        self.攻击倍率2 *= 1.23
-        self.CD *= 0.90
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+           self.攻击倍率 *= 1.11
+           self.攻击倍率2 *= 1.23
+           self.CD *= 0.90
+        if x == 1:
+           self.攻击倍率 *= 1.11
+           self.攻击倍率2 *= 1.38
+           self.CD *= 0.90
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>冰封制动</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[极冰绽放]<br>"
+            temp += "删除指定魔法阵位置的功能<br>"
+            temp += "缩短魔法阵生成时间<br>"
+            temp += "攻击范围 +20%<br>"
+            temp += "攻击力 +11%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "冷却时间 -10%<br>"
+            temp += "最后强击攻击力 +12%<br>"
+            temp += "冰柱破碎时的攻击力 +18%<br>"
+            temp += "每次攻击时发射[冰之技艺]的冰枪"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>冰封制动</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[极冰绽放]<br>"
+            temp += "删除指定魔法阵位置的功能<br>"
+            temp += "缩短魔法阵生成时间<br>"
+            temp += "攻击范围 +20%<br>"
+            temp += "攻击力 +11%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "冷却时间 -10%<br>"
+            temp += "最后强击攻击力 +27%<br>"
+            temp += "冰柱破碎时的攻击力 +35%<br>"
+            temp += "每次攻击时发射[冰之技艺]的冰枪"
+        return temp
 
 
 class 刹那永恒技能12(刹那永恒主动技能):
@@ -262,9 +328,38 @@ class 刹那永恒技能12(刹那永恒主动技能):
                 self.数据2[self.等级] * self.攻击倍率2 * (1 + self.TP成长 * self.TP等级) * self.攻击次数2) * self.倍率
 
     是否有护石 = 1
-    def 装备护石(self):
-        self.攻击次数 = 16
-        self.攻击倍率2 *= 1.15
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+           self.攻击次数 = 16
+           self.攻击倍率2 *= 1.15
+        if x == 1:
+           self.攻击次数 = 16
+           self.攻击倍率2 *= 1.34
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>冰龙升天破</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[冰雪风暴]<br>"
+            temp += "变更为以施放者为中心生成1个巨大的寒气风暴<br>"
+            temp += "魔法阵范围 -50%<br>"
+            temp += "删除聚集敌人的功能<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "施放技能时直接召唤寒气风暴<br>"
+            temp += "多段攻击次数 +2次<br>"
+            temp += "爆炸攻击力 +15%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>冰龙升天破</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[冰雪风暴]<br>"
+            temp += "变更为以施放者为中心生成1个巨大的寒气风暴<br>"
+            temp += "魔法阵范围 -50%<br>"
+            temp += "删除聚集敌人的功能<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "施放技能时直接召唤寒气风暴<br>"
+            temp += "多段攻击次数 +2次<br>"
+            temp += "爆炸攻击力 +34%"
+        return temp
 
 class 刹那永恒技能13(被动技能):
     名称 = '冰封奥义'
@@ -318,8 +413,32 @@ class 刹那永恒技能15(刹那永恒主动技能):
                 self.数据2[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击倍率 * self.攻击次数2) * self.倍率
 
     是否有护石 = 1
-    def 装备护石(self):
-        self.攻击倍率 *= 1.22
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+           self.攻击倍率 *= 1.22
+        if x == 1:
+           self.攻击倍率 *= 1.31
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>苍白之楔</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[冰凌破]<br>"
+            temp += "[冰之印]开启后， 追踪并攻击有[冰封奥义]光环的敌人中最强的敌人(攻击开始后不再追踪敌人)<br>"
+            temp += "攻击力 +9%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "追击时移动速度 +50%<br>"
+            temp += "攻击力 +13%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>苍白之楔</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[冰凌破]<br>"
+            temp += "[冰之印]开启后， 追踪并攻击有[冰封奥义]光环的敌人中最强的敌人(攻击开始后不再追踪敌人)<br>"
+            temp += "攻击力 +9%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "追击时移动速度 +50%<br>"
+            temp += "攻击力 +22%"
+        return temp
 
 
 class 刹那永恒技能16(刹那永恒主动技能):
@@ -341,9 +460,38 @@ class 刹那永恒技能16(刹那永恒主动技能):
         return self.数据1[self.等级] * self.攻击倍率 * (1 + self.TP成长 * self.TP等级) * self.攻击次数 * self.倍率
 
     是否有护石 = 1
-    def 装备护石(self):
-        self.攻击次数 = 1
-        self.攻击倍率 = 3.56
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+           self.攻击次数 = 1
+           self.攻击倍率 = 3.56
+        if x == 1:
+           self.攻击次数 = 1
+           self.攻击倍率 = 3.8
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>冰凌花</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[千里冰封]<br>"
+            temp += "同时生成所有冰刺<br>"
+            temp += "攻击次数变更为1次<br>"
+            temp += "发动速度 +50%<br>"
+            temp += "攻击力 +230%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "[冰之印]开启时， 冰冻效果变更为强制控制2秒<br>"
+            temp += "攻击力 +26%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>冰凌花</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[千里冰封]<br>"
+            temp += "同时生成所有冰刺<br>"
+            temp += "攻击次数变更为1次<br>"
+            temp += "发动速度 +50%<br>"
+            temp += "攻击力 +230%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "[冰之印]开启时， 冰冻效果变更为强制控制2秒<br>"
+            temp += "攻击力 +50%"
+        return temp
 
 class 刹那永恒技能17(被动技能):
     名称 = '冰之技艺'
@@ -391,6 +539,24 @@ class 刹那永恒技能18(刹那永恒主动技能):
             return (self.数据1[self.等级] * self.攻击倍率 * self.攻击次数 +
                     self.数据2[self.等级] * self.攻击倍率 * self.攻击次数2 + 29) * self.倍率
 
+    是否有护石 = 1
+    护石选项 = ['圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数 *= 1.46
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>碎冰破</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[碎冰破]<br>"
+            temp += "向前方生成多个冰霜结晶<br>"
+            temp += "- 冰霜碎片攻击范围增加<br>"
+            temp += "冰霜碎片攻击力 +12%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "碎冰破攻击速度 +50%<br>"
+            temp += "冰霜碎片攻击力 +34%<br>"
+        return temp[:-4]
+
 class 刹那永恒技能19(刹那永恒主动技能):
     名称 = '极冰领域'
     所在等级 = 80
@@ -399,11 +565,31 @@ class 刹那永恒技能19(刹那永恒主动技能):
     学习间隔 = 2
     基础等级 = min(int((刹那永恒等级 - 所在等级) / 学习间隔 + 1), 等级精通)
     数据 = [0, 40711, 44841, 48971, 53101, 57231, 61361, 65491, 69621, 73751, 77882, 82012, 86142, 90272, 94402, 98532, 102662, 106792, 110922, 115053, 119183, 123313, 127443, 131573, 135703, 139833, 143963, 148093, 152224, 156354, 160484, 164614, 168744, 172874, 177004, 181134, 185264, 189395, 193525, 197655, 201785, 205915, 210045, 214175, 218305, 222435, 226566, 230696, 234826, 238956, 243086, 247216, 251346, 255476, 259606, 263737, 267867, 271997, 276127, 280257, 284387, 288517, 292647, 296777, 300908, 305038, 309168, 313298, 317428, 321558, 325688]
+    攻击倍率 = 1.0
     演出时间 = 0.65
     CD = 40.0
 
     def 等效百分比(self, 武器类型):
-        return self.数据[self.等级] * self.倍率
+        return self.数据[self.等级] * self.攻击倍率 * self.倍率
+
+    是否有护石 = 1
+    护石选项 = ['圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击倍率 *= 1.32
+            self.CD *= 0.9
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>极冰领域</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[极冰领域]<br>"
+            temp += "部分转职技能命中后可以强制中断并连接施放极冰领域<br>"
+            temp += "- 可中断技能列表与冰魄锤击相同<br>"
+            temp += "波动攻击力 +14%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "冷却时间 -10%<br>"
+            temp += "波动攻击力 +18%<br>"
+        return temp[:-4]
 
 class 刹那永恒技能20(刹那永恒主动技能):
     名称 = '永罪冰狱'
@@ -708,24 +894,24 @@ class 刹那永恒(角色窗口):
         self.冰针显示开关.setChecked(False)
 
         self.小冰轮次数选择=MyQComboBox(self.main_frame2)
-        self.小冰轮次数选择.addItem('小冰轮击36次')
-        self.小冰轮次数选择.addItem('小冰轮击37次')
-        self.小冰轮次数选择.addItem('小冰轮击38次')
-        self.小冰轮次数选择.addItem('小冰轮击39次')
-        self.小冰轮次数选择.addItem('小冰轮击40次')
-        self.小冰轮次数选择.addItem('小冰轮击41次')
-        self.小冰轮次数选择.addItem('小冰轮击42次')
-        self.小冰轮次数选择.setCurrentIndex(4)
+        self.小冰轮次数选择.addItem('小冰轮击中36次')
+        self.小冰轮次数选择.addItem('小冰轮击中37次')
+        self.小冰轮次数选择.addItem('小冰轮击中38次')
+        self.小冰轮次数选择.addItem('小冰轮击中39次')
+        self.小冰轮次数选择.addItem('小冰轮击中40次')
+        self.小冰轮次数选择.addItem('小冰轮击中41次')
+        self.小冰轮次数选择.addItem('小冰轮击中42次')
+        self.小冰轮次数选择.setCurrentIndex(6)
         self.小冰轮次数选择.resize(120,20)
         self.小冰轮次数选择.move(325,420)
 
         self.大冰轮次数选择=MyQComboBox(self.main_frame2)
-        self.大冰轮次数选择.addItem('大冰轮击20次')
-        self.大冰轮次数选择.addItem('大冰轮击21次')
-        self.大冰轮次数选择.addItem('大冰轮击22次')
-        self.大冰轮次数选择.addItem('大冰轮击23次')
-        self.大冰轮次数选择.addItem('大冰轮击24次')
-        self.大冰轮次数选择.setCurrentIndex(4)
+        self.大冰轮次数选择.addItem('大冰轮击中20次')
+        self.大冰轮次数选择.addItem('大冰轮击中21次')
+        self.大冰轮次数选择.addItem('大冰轮击中22次')
+        self.大冰轮次数选择.addItem('大冰轮击中23次')
+        self.大冰轮次数选择.addItem('大冰轮击中24次')
+        self.大冰轮次数选择.setCurrentIndex(2)
         self.大冰轮次数选择.resize(120,20)
         self.大冰轮次数选择.move(325,450)
 
@@ -743,6 +929,8 @@ class 刹那永恒(角色窗口):
             pass
 
     def 保存配置(self, path='set'):
+        if self.禁用存档.isChecked():
+            return
         super().保存配置(path)
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'w', encoding='utf-8')

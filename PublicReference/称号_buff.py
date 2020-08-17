@@ -6,9 +6,17 @@ class 称号0():
         属性.智力 += 80
         属性.体力 += 80
         属性.精神 += 80
-        属性.技能等级加成('所有',15,35,1)
+        属性.技能等级加成('主动',15,35,1)
     def 触发属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += '智力 +80<br>'
+        temp += '体力 +80<br>'
+        temp += '精神 +80<br>'
+        temp += 'Lv15-35 技能等级 +1<br>'
+        return temp
+
 
 class 称号1():
     名称 = '(20)五一·LV15-20'
@@ -19,6 +27,13 @@ class 称号1():
         属性.技能等级加成('所有',15,20,1)
     def 触发属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += '智力 +80<br>'
+        temp += '体力 +80<br>'
+        temp += '精神 +80<br>'
+        temp += 'Lv15-20 技能等级 +1<br>'
+        return temp
 
 class 称号2():
     名称 = '(20)五一·LV20-25'
@@ -29,6 +44,13 @@ class 称号2():
         属性.技能等级加成('所有',20,25,1)
     def 触发属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += '智力 +80<br>'
+        temp += '体力 +80<br>'
+        temp += '精神 +80<br>'
+        temp += 'Lv20-25 技能等级 +1<br>'
+        return temp
 
 class 称号3():
     名称 = '(20)五一·LV25-30'
@@ -39,6 +61,13 @@ class 称号3():
         属性.技能等级加成('所有',25,30,1)
     def 触发属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += '智力 +80<br>'
+        temp += '体力 +80<br>'
+        temp += '精神 +80<br>'
+        temp += 'Lv25-30 技能等级 +1<br>'
+        return temp
 
 class 称号4():
     名称 = '(20)五一·LV30-35'
@@ -49,6 +78,13 @@ class 称号4():
         属性.技能等级加成('所有',30,35,1)
     def 触发属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += '智力 +80<br>'
+        temp += '体力 +80<br>'
+        temp += '精神 +80<br>'
+        temp += 'Lv30-35 技能等级 +1<br>'
+        return temp
 
 class 称号5():
     名称 = '无'
@@ -56,6 +92,10 @@ class 称号5():
         pass
     def 触发属性(self, 属性):
         pass
+    def 装备描述(self, 属性):
+        temp = ''
+        return temp
+    
 
 #class 称号2():
 #    名称 = '(19)至尊·神选之英杰'

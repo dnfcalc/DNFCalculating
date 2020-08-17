@@ -55,8 +55,6 @@ class 主动技能(技能):
     是否主动 = 1
     适用数值 = 0
 
-部位列表 = ["上衣", "头肩", "下装", "腰带", "鞋", "手镯", "项链", "戒指", "耳环", "辅助装备", "魔法石", "武器"]
-
 颜色 = {'神话':'#E29692', '史诗':'#FFB400', '传说':'#FF7800'}
 
 史诗防具智力Lv100 = {"上衣": 149, "头肩": 139, "下装": 149, "腰带": 130, "鞋": 130}
@@ -172,6 +170,7 @@ class 角色属性():
 
     护石第一栏 = '无'
     护石第二栏 = '无'
+    护石第三栏 = '无'
 
     次数输入 = []
 
@@ -524,15 +523,18 @@ class 角色属性():
                 self.精神 += i.结算统计()[2]
 
     def 护石计算(self, 护石选项):
-        if 护石选项 == 'buff力智增加量+2%':
+        if 护石选项 == 'BUFF力量、智力+2%':
             self.BUFF力量per *= 1.02
             self.BUFF智力per *= 1.02
-        elif 护石选项 == 'buff力智增加量+4%':
+        elif 护石选项 == 'BUFF力量、智力+4%':
             self.BUFF力量per *= 1.04
             self.BUFF智力per *= 1.04
-        elif 护石选项 == 'buff力智增加量+6%':
+        elif 护石选项 == 'BUFF力量、智力+6%':
             self.BUFF力量per *= 1.06
             self.BUFF智力per *= 1.06
+        elif 护石选项 == 'BUFF力量、智力+8%':
+            self.BUFF力量per *= 1.08
+            self.BUFF智力per *= 1.08
 
     def BUFF面板(self):
         for i in self.技能栏:
@@ -568,7 +570,7 @@ class 角色窗口(QWidget):
         self.calc_done_signal.connect(self.calc_done)
         self.update_remaining_signal.connect(self.update_remaining)
 
-        self.护石选项 = ['无','buff力智增加量+2%', 'buff力智增加量+4%', 'buff力智增加量+6%']
+        self.护石选项 = ['无','BUFF力量、智力+2%', 'BUFF力量、智力+4%', 'BUFF力量、智力+6%', 'BUFF力量、智力+8%']
         self.窗口属性输入()
         self.界面()
         self.布局界面()
@@ -1012,6 +1014,7 @@ class 角色窗口(QWidget):
 
         self.护石第一栏 = MyQComboBox(self.main_frame2)
         self.护石第二栏 = MyQComboBox(self.main_frame2)
+        self.护石第三栏 = MyQComboBox(self.main_frame2)
  
         self.等级调整 = []
         self.次数输入 = []
@@ -1077,6 +1080,7 @@ class 角色窗口(QWidget):
 
         self.护石第一栏.addItems(self.护石选项)
         self.护石第二栏.addItems(self.护石选项)
+        self.护石第三栏.addItems(self.护石选项)
 
        
         横坐标=430;纵坐标=20;行高=18
@@ -1094,7 +1098,15 @@ class 角色窗口(QWidget):
         纵坐标+=21
         self.护石第二栏.move(横坐标,纵坐标)
         self.护石第二栏.resize(130, 行高)
-        
+
+        横坐标=430;纵坐标=70;行高=18
+        x=QLabel("护石(第三栏/韩)：", self.main_frame2)
+        x.move(横坐标,纵坐标-5)
+        x.setStyleSheet(标签样式)
+        纵坐标+=21
+        self.护石第三栏.move(横坐标,纵坐标)
+        self.护石第三栏.resize(130, 行高)
+
         self.辟邪玉选择 = []
         self.辟邪玉数值 = []
         for i in range(4):
@@ -1103,12 +1115,12 @@ class 角色窗口(QWidget):
                 #'[' + str(j.编号) + ']' + 
                 x.addItem(j.名称)
             x.resize(200,20)
-            x.move(430,80 + i * 25)
+            x.move(430,130 + i * 25)
             x.currentIndexChanged.connect(lambda state, index = i:self.辟邪玉数值选项更新(index))
             self.辟邪玉选择.append(x)
             y = MyQComboBox(self.main_frame2) 
             y.resize(80,20)
-            y.move(650,80 + i * 25)
+            y.move(650,130 + i * 25)
             self.辟邪玉数值.append(y)
 
         self.复选框列表 = []
@@ -1279,7 +1291,8 @@ class 角色窗口(QWidget):
 
         for j in [2, 3, 4]:
             self.技能设置输入[j].addItems(['Lv1-30(主动)Lv+1', 'Lv1-50(主动)Lv+1'])
-        self.技能设置输入[2].addItem('Lv1-35(主动)Lv+1')
+        self.技能设置输入[2].addItems(['Lv1-35(主动)Lv+1', 'Lv30-50(主动)Lv+1'])
+        self.技能设置输入[3].addItem('Lv30-50(主动)Lv+1')
 
         for j in [8, 9, 16]:
             for i in self.角色属性A.技能栏:
@@ -1959,6 +1972,7 @@ class 角色窗口(QWidget):
             num = 0
             self.护石第一栏.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
             self.护石第二栏.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+            self.护石第三栏.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
         except:
             pass
 
@@ -2052,6 +2066,7 @@ class 角色窗口(QWidget):
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill1.ini', 'w', encoding='utf-8')
             setfile.write(str(self.护石第一栏.currentIndex())+'\n')
             setfile.write(str(self.护石第二栏.currentIndex())+'\n')
+            setfile.write(str(self.护石第三栏.currentIndex())+'\n')
         except:
             pass
 
@@ -2371,7 +2386,7 @@ class 角色窗口(QWidget):
             calc_data.角色属性A.改造等级 = copy(self.角色属性A.改造等级)
             calc_data.角色属性A.是否增幅 = copy(self.角色属性A.是否增幅)
             calc_data.角色属性A.次数输入 = copy(self.角色属性A.次数输入)
-
+            
             calc_data.mode_index = mode_index
             calc_data.start_index = start_index
             calc_data.end_index = end_index
@@ -2882,21 +2897,40 @@ class 角色窗口(QWidget):
             templab.resize(305,18)
             templab.setAlignment(Qt.AlignLeft)
             j+=18
+        
+        位置 = 313
+        间隔 = 20
+        适用称号名称=QLabel(self.称号.currentText(),输出窗口)
+        适用称号名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+        适用称号名称.move(114, 位置)
+        适用称号名称.resize(150,18)
+        适用称号名称.setAlignment(Qt.AlignCenter)
+        位置 += 间隔
+        适用称号名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.称号.currentText()+'</font><br>'+称号列表[self.称号.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
+
+        适用宠物名称=QLabel(self.宠物.currentText(),输出窗口)
+        适用宠物名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+        适用宠物名称.move(114, 位置)
+        适用宠物名称.resize(150,18)
+        适用宠物名称.setAlignment(Qt.AlignCenter)
+        位置 += 间隔
+        适用宠物名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.宠物.currentText()+'</font><br>'+宠物列表[self.宠物.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
 
         适用中的套装 = QLabel(装备名称[11], 输出窗口)
         适用中的套装.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
-        适用中的套装.move(132, 138 + 180)
+        适用中的套装.move(132, 位置)
         适用中的套装.resize(132, 18)
         适用中的套装.setAlignment(Qt.AlignCenter)
-
+       
         神话所在套装 = '无'
         for i in range(0, 11):
             if 装备列表[装备序号[装备名称[i]]].品质 == '神话':
                 神话所在套装 = 装备列表[装备序号[装备名称[i]]].所属套装
         for i in range(0, len(套装名称)):
+            位置 += 间隔
             适用套装名称 = QLabel(输出窗口)
             适用套装名称.setText(套装名称[i])
-            适用套装名称.move(132, 158 + 180 + i * 20)
+            适用套装名称.move(132, 位置)
             适用套装名称.resize(132, 18)
             适用套装名称.setAlignment(Qt.AlignCenter)
             if 神话所在套装 == 套装名称[i].split('[')[0]:
@@ -2904,6 +2938,7 @@ class 角色窗口(QWidget):
             else:
                 适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
             适用套装名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[i] + '</font><br>' + 套装列表[套装序号[套装名称[i]]].装备描述(self.角色属性B)[:-4] + '</font>')
+        
         合计力量 = 0
         合计智力 = 0
         合计物攻 = 0
@@ -3297,6 +3332,9 @@ class 角色窗口(QWidget):
 
         if self.护石第二栏.currentText()!= '无':
            属性.护石第二栏 = self.护石第二栏.currentText()
+        
+        if self.护石第三栏.currentText()!= '无':
+           属性.护石第三栏 = self.护石第三栏.currentText()
     
         for i in range(0,12):
             属性.是否增幅[i] = self.装备打造选项[i].currentIndex()
@@ -3321,6 +3359,9 @@ class 角色窗口(QWidget):
         if name == 'Lv1-35(主动)Lv+1':
             属性.技能等级加成('主动',1,35,1)
             return
+        if name == 'Lv30-50(主动)Lv+1':
+            属性.技能等级加成('主动',30,50,1)
+            return
         if name == 'Lv1-30(所有)Lv+1':
             属性.技能等级加成('所有',1,30,1)
             return
@@ -3333,6 +3374,7 @@ class 角色窗口(QWidget):
         if name == 'Lv20-30(所有)Lv+1':
             属性.技能等级加成('所有',20,30,1)
             return
+            
         if name == '一觉Lv+1':
             属性.一觉Lv += 1
             return
@@ -3460,6 +3502,7 @@ class 角色窗口(QWidget):
 
         属性.护石计算(属性.护石第一栏)
         属性.护石计算(属性.护石第二栏)
+        属性.护石计算(属性.护石第三栏)
 
     def 组合计算(self, index):
         套装组合=[]

@@ -153,11 +153,43 @@ class 风暴骑兵技能8(主动技能):
         return self.数据[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
-    def 装备护石(self):
-        self.基础释放次数 = 4
-        self.攻击次数 = 2
-        self.倍率 *= 1.18
-        self.CD *= float(4 / 15)
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.基础释放次数 = 4
+            self.攻击次数 = 2
+            self.倍率 *= 1.18
+            self.CD *= float(4 / 15)
+        elif x == 1:
+            self.基础释放次数 = 4
+            self.攻击次数 = 2
+            self.倍率 *= 1.27
+            self.CD *= float(4 / 15)
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>M102-CERM弹药</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[FM-31榴弹发射器]<br>"
+            temp += "可以补充榴弹<br>"
+            temp += "榴弹冷却时间 : 4秒<br>"
+            temp += "长按技能键可以连续发射<br>"
+            temp += "攻击力 +18%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "装弹数上限 +2 (学习强化技能后 +1)<br>"
+            temp += "爆炸范围 +20%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>M102-CERM弹药</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[FM-31榴弹发射器]<br>"
+            temp += "可以补充榴弹<br>"
+            temp += "榴弹冷却时间 : 4秒<br>"
+            temp += "长按技能键可以连续发射<br>"
+            temp += "攻击力 +18%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "装弹数上限 +2 (学习强化技能后 +1)<br>"
+            temp += "爆炸范围 +20%<br>"
+            temp += "攻击力 +9%"
+        return temp 
 
 class 风暴骑兵技能9(主动技能):
     名称 = 'FM92mk2榴弹'
@@ -201,13 +233,46 @@ class 风暴骑兵技能10(主动技能):
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
-
+  
     是否有护石 = 1
-    def 装备护石(self):
-        self.攻击次数1 = 0
-        self.攻击次数2 = 0.16 * 8 * 1.07
-        self.攻击次数3 *= 0.16 * 8 * 1.07
-        self.CD *= 0.9
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数1 = 0
+            self.攻击次数2 = 0.16 * 8 * 1.07
+            self.攻击次数3 *= 0.16 * 8 * 1.07
+            self.CD *= 0.9
+        elif x == 1:
+            self.攻击次数1 = 0
+            self.攻击次数2 = 0.16 * 8 * 1.14
+            self.攻击次数3 *= 0.16 * 8 * 1.14
+            self.CD *= 0.9
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>原力轰炸</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[量子爆弹]<br>"
+            temp += "变更为地毯式轰炸<br>"
+            temp += "删除导弹物理攻击力<br>"
+            temp += "导弹大小 -65%<br>"
+            temp += "每次爆炸攻击力 -84%<br>"
+            temp += "爆炸次数 +7次<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "冷却时间 -10%<br>"
+            temp += "爆炸攻击力 +7%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>原力轰炸</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[量子爆弹]<br>"
+            temp += "变更为地毯式轰炸<br>"
+            temp += "删除导弹物理攻击力<br>"
+            temp += "导弹大小 -65%<br>"
+            temp += "每次爆炸攻击力 -84%<br>"
+            temp += "爆炸次数 +7次<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "冷却时间 -10%<br>"
+            temp += "爆炸攻击力 +14%"
+        return temp 
 
 class 风暴骑兵技能11(主动技能):
     名称 = 'X1压缩量子炮'
@@ -227,9 +292,34 @@ class 风暴骑兵技能11(主动技能):
         return self.数据[self.等级] * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
-    def 装备护石(self):
-        self.倍率 *= 1.1
-        self.CD *= 0.88
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.1
+            self.CD *= 0.88
+        elif x == 1:
+            self.倍率 *= 1.18
+            self.CD *= 0.88
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>AC.X-1压缩量子炮</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[X-1压缩量子炮]<br>"
+            temp += "立即发射并在最远射程处自动蓄气后爆炸<br>"
+            temp += "冷却时间 -12%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "爆炸范围 +10%<br>"
+            temp += "攻击力 +10%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>AC.X-1压缩量子炮</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[X-1压缩量子炮]<br>"
+            temp += "立即发射并在最远射程处自动蓄气后爆炸<br>"
+            temp += "冷却时间 -12%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "爆炸范围 +10%<br>"
+            temp += "攻击力 +18%"
+        return temp 
 
 class 风暴骑兵技能12(被动技能):
     名称 = '超温重火器'
@@ -282,9 +372,37 @@ class 风暴骑兵技能14(主动技能):
         return self.数据[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
-    def 装备护石(self):
-        self.倍率 *= 0.85
-        self.CD *= 0.60
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 0.94
+            self.CD *= 0.60
+        elif x == 1:
+            self.倍率 *= 0.85
+            self.CD *= 0.60
+
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>高功率等离子体发生器</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[等离子放射器]<br>"
+            temp += "立即发射等离子放射器<br>"
+            temp += "发射位置残留电场<br>"
+            temp += "总攻击力 +8%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "冷却时间 -40%<br>"
+            temp += "总攻击力 -23%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>高功率等离子体发生器</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[等离子放射器]<br>"
+            temp += "立即发射等离子放射器<br>"
+            temp += "发射位置残留电场<br>"
+            temp += "总攻击力 +8%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "冷却时间 -40%<br>"
+            temp += "总攻击力 -14%"
+        return temp  
 
 class 风暴骑兵技能15(主动技能):
     名称 = 'FM92mk2SW榴弹'
@@ -302,11 +420,39 @@ class 风暴骑兵技能15(主动技能):
 
     def 等效百分比(self, 武器类型):
         return self.数据[self.等级] * (1 + self.TP成长 * self.TP等级) * self.倍率
-
+    
     是否有护石 = 1
-    def 装备护石(self):
-        self.倍率 *= 1.19
-        self.CD *= 0.9
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.19
+            self.CD *= 0.9
+        elif x == 1:
+            self.倍率 *= 1.27
+            self.CD *= 0.9
+
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>MIBC诱导装置</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[FM-92 mk2 SW榴弹]<br>"
+            temp += "删除长按技能键操作<br>"
+            temp += "诱导范围扩大为长按操作可调整的范围<br>"
+            temp += "攻击力 +14%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "冷却时间 -10%<br>"
+            temp += "攻击力 +5%</font>"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>MIBC诱导装置</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[FM-92 mk2 SW榴弹]<br>"
+            temp += "删除长按技能键操作<br>"
+            temp += "诱导范围扩大为长按操作可调整的范围<br>"
+            temp += "攻击力 +14%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "冷却时间 -10%<br>"
+            temp += "攻击力 +13%</font>"
+        return temp            
 
 class 风暴骑兵技能16(被动技能):
     名称 = '重武装改造'
@@ -340,6 +486,13 @@ class 风暴骑兵技能17(主动技能):
     CD = 40.0
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * self.倍率
+    
+    是否有护石 = 1
+    护石选项 = ['圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.28
+            self.CD *= 0.9
 
 class 风暴骑兵技能18(主动技能):
     名称 = 'PT15原始型压缩炮'
@@ -356,6 +509,12 @@ class 风暴骑兵技能18(主动技能):
 
     def 等效百分比(self, 武器类型):
         return self.数据[self.等级] * self.倍率
+
+    是否有护石 = 1
+    护石选项 = ['圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.35
 
 class 风暴骑兵技能19(主动技能):
     名称 = '火力全开'

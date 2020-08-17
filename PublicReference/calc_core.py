@@ -46,15 +46,14 @@ class CalcData():
 
     def pre_calc_needed_data(self):
         if self.是输出职业:
-            from .装备 import 总套装列表
-            from .base import 部位列表, 装备列表
+            from .装备 import 总套装列表, 部位列表, 装备列表
         else:
-            from .装备_buff import 总套装列表
-            from .base_buff import 部位列表, 装备列表
+            from .装备_buff import 总套装列表, 部位列表, 装备列表
 
         self.有效武器列表.clear()
         for j in range(0, 6):
             self.有效总套装列表[j].clear()
+
         self.有效部位列表.clear()
         for i in range(0, 12):
             self.有效部位列表.append([])
@@ -63,13 +62,10 @@ class CalcData():
             if self.装备选择状态[i] == 1:
                 if 装备列表[i].部位 == '武器':
                     self.有效武器列表.append(装备列表[i].名称)
-
                 for j in range(0, 6):
                     if (装备列表[i].所属套装 in 总套装列表[j]) and (装备列表[i].所属套装 not in self.有效总套装列表[j]):
                         self.有效总套装列表[j].append(装备列表[i].所属套装)
-
                 self.有效部位列表[部位列表.index(装备列表[i].部位)].append(装备列表[i].名称)
-
 
         count = 0
         for i in 装备列表:
@@ -105,17 +101,15 @@ def calc_core(data: CalcData):
     # 全部计算完后，将剩余结果传入结果队列
     data.minheap_queue.put(deepcopy(data.minheap))
 
-
 def calc_speed_and_set_mode(data):
     if data.是输出职业:
-        from .装备 import 套装映射
-        from .base import 部位列表, 装备列表
+        from .装备 import 套装映射, 部位列表, 装备列表
     else:
-        from .装备_buff import 套装映射
-        from .base_buff import 部位列表, 装备列表
+        from .装备_buff import 套装映射, 部位列表, 装备列表
 
     套装组合 = []
     套装适用 = []
+
     for a in data.有效防具套装:
         for b in data.有效首饰套装:
             for c in data.有效特殊套装:
@@ -196,118 +190,86 @@ def calc_speed_and_set_mode(data):
                     #))
     pass
 
+#11层循环顺序
+顺序 = [5, 8, 1, 3, 2, 4, 6, 9, 7, 10]
+顺序字典 = {0: 0, 5: 1, 8: 2, 1: 3, 3: 4, 2: 5, 4: 6, 6: 7, 9: 8, 7: 9, 10: 10}
 
-def 筛选(名称, x, 装备, 套装, 神话, 种类数, data):
+def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
     if data.是输出职业:
-        from .装备 import 装备序号
-        from .base import 装备列表, 所有套装列表
+        from .装备 import 装备序号, 装备列表
     else:
-        from .装备_buff import 装备序号
-        from .base_buff import 装备列表, 所有套装列表
+        from .装备_buff import 装备序号, 装备列表
 
     i = 装备序号[名称]
     装备[x] = 名称
-    if x == 0:
-        范围 = [5, 8, 1, 3, 2, 4, 6, 9, 7, 10]
-    elif x == 5:
-        范围 = [8, 1, 3, 2, 4, 6, 9, 7, 10]
-    elif x == 8:
-        范围 = [1, 3, 2, 4, 6, 9, 7, 10]
-    elif x == 1:
-        范围 = [3, 2, 4, 6, 9, 7, 10]
-    elif x == 3:
-        范围 = [2, 4, 6, 9, 7, 10]
-    elif x == 2:
-        范围 = [4, 6, 9, 7, 10]
-    elif x == 4:
-        范围 = [6, 9, 7, 10]
-    elif x == 6:
-        范围 = [9, 7, 10]
-    elif x == 9:
-        范围 = [7, 10]
-    elif x == 7:
-        范围 = [10]
-    else:
-        范围 = []
 
-    for k in 范围:
+    for k in 顺序[顺序字典[x]:]:
         套装[k] = '无'
     
     temp = 装备列表[i].所属套装
     if temp == '智慧产物':
-        try:
-            temp = 装备列表[i].所属套装2
-        except:
-            pass
+        try: temp = 装备列表[i].所属套装2
+        except: pass
     套装[x] = temp
 
     count = []
     for j in 套装:
         if (j != '智慧产物') and (j != '无') and (j not in count):
             count.append(j)
-    if len(count) > 种类数[0]:
-        return 1
-    elif x == 10:
-        种类数[0] = max(min(种类数[0], len(count)), 4)
 
-    if x in [0, 5, 8]:
-        if x < 5:
-            神话[5] = 0
-            神话[8] = 0
-        elif x < 8:
-            神话[8] = 0
-        if 装备列表[i].品质 == '神话':
-            神话[x] = 1
-            if sum(神话) > 1:
-                return 1
-        else:
-            神话[x] = 0
+    if len(count) > 种类[0]: return 1
+    elif x == 10 and 种类[0] > 4: 种类[0] = max(min(种类[0], len(count)), 4)
+
+    if x == 0:
+        神话[5] = 0; 神话[8] = 0
+    elif x == 5:
+        神话[8] = 0
+    
+    if 装备列表[i].品质 == '神话': 
+        神话[x] = 1
+        if sum(神话) > 1: return 1
+    else:
+        神话[x] = 0
+
     return 0
 
 def calc_single_mode(data):
     if data.是输出职业:
-        from .装备 import 装备序号, 套装序号
-        from .base import 装备列表, 所有套装列表
+        from .装备 import 装备序号, 套装序号, 装备列表
     else:
-        from .装备_buff import 装备序号, 套装序号
-        from .base_buff import 装备列表, 所有套装列表
+        from .装备_buff import 装备序号, 套装序号, 装备列表
 
-    # 散件模式
     current_index = -1
     装备 = ['无'] * 12
     套装 = ['无'] * 11
     神话 = [0] * 11
-    种类数 = [11]
+    种类 = [11]
 
     for a1 in data.有效部位列表[0]:
-        if 筛选(a1, 0, 装备, 套装, 神话, 种类数, data): continue
+        if 筛选(a1, 0, 装备, 套装, 神话, 种类, data): continue
         for a2 in data.有效部位列表[5]:
-            if 筛选(a2, 5, 装备, 套装, 神话, 种类数, data): continue
+            if 筛选(a2, 5, 装备, 套装, 神话, 种类, data): continue
             for a3 in data.有效部位列表[8]:
-                if 筛选(a3, 8, 装备, 套装, 神话, 种类数, data): continue
+                if 筛选(a3, 8, 装备, 套装, 神话, 种类, data): continue
                 for a4 in data.有效部位列表[1]:
-                    if 筛选(a4, 1, 装备, 套装, 神话, 种类数, data): continue
+                    if 筛选(a4, 1, 装备, 套装, 神话, 种类, data): continue
                     current_index += 1
-                    if current_index < data.start_index:
-                        # 尚未到本工作线程需要计算的范围
-                        continue
-                    if current_index > data.end_index:
-                        # 本工作线程需要计算的范围已全部完成，直接退出
-                        return
+                    if current_index < data.start_index: continue # 尚未到本工作线程需要计算的范围
+                    if current_index > data.end_index: return # 本工作线程需要计算的范围已全部完成，直接退出
                     for a5 in data.有效部位列表[3]:
-                        if 筛选(a5, 3, 装备, 套装, 神话, 种类数, data): continue
+                        if 筛选(a5, 3, 装备, 套装, 神话, 种类, data): continue
                         for a6 in data.有效部位列表[2]:
-                            if 筛选(a6, 2, 装备, 套装, 神话, 种类数, data): continue
+                            if 筛选(a6, 2, 装备, 套装, 神话, 种类, data): continue
                             for a7 in data.有效部位列表[4]:
-                                if 筛选(a7, 4, 装备, 套装, 神话, 种类数, data): continue
+                                if 筛选(a7, 4, 装备, 套装, 神话, 种类, data): continue
                                 for a8 in data.有效部位列表[6]:
-                                    if 筛选(a8, 6, 装备, 套装, 神话, 种类数, data): continue
+                                    if 筛选(a8, 6, 装备, 套装, 神话, 种类, data): continue
                                     for a9 in data.有效部位列表[9]:
-                                        if 筛选(a9, 9, 装备, 套装, 神话, 种类数, data): continue
+                                        if 筛选(a9, 9, 装备, 套装, 神话, 种类, data): continue
                                         for a10 in data.有效部位列表[7]:
-                                            if 筛选(a10, 7, 装备, 套装, 神话, 种类数, data): continue
+                                            if 筛选(a10, 7, 装备, 套装, 神话, 种类, data): continue
                                             for a11 in data.有效部位列表[10]:
-                                                if 筛选(a11, 10, 装备, 套装, 神话, 种类数, data): continue
+                                                if 筛选(a11, 10, 装备, 套装, 神话, 种类, data): continue
                                                 套装字典 = {}
                                                 for i in 套装:
                                                     if i != '智慧产物' and i != '无':

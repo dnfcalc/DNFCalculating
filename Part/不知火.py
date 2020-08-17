@@ -167,9 +167,14 @@ class 不知火技能7(主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.倍率 *= 1.1
-        self.攻击次数3 = 1 * 1.08
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.1
+            self.攻击次数3 = 1 * 1.08
+        elif x == 1:
+            self.倍率 *= 1.1 + 0.08
+            self.攻击次数3 = 1 * 1.08
 
 class 不知火技能8(主动技能):
     名称 = '忍法：残影术'
@@ -207,10 +212,16 @@ class 不知火技能9(主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.倍率 *= 1.05
-        self.攻击次数3 = 1 * 1.19
-        self.CD *= 0.88
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.05
+            self.攻击次数3 = 1 * 1.19
+            self.CD *= 0.88
+        elif x == 1:
+            self.倍率 *= 1.05 + 0.08
+            self.攻击次数3 = 1 * 1.19
+            self.CD *= 0.88
 
 class 不知火技能10(主动技能):
     名称 = '忍法：六道轮回'
@@ -259,11 +270,16 @@ class 不知火技能11(主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.攻击次数1 = 8-5
-        self.攻击次数2 = 25 * 2.15
-        self.CD *= 0.9
-
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数1 = 8 - 5
+            self.攻击次数2 = 25 * 2.15
+            self.CD *= 0.9
+        elif x == 1:
+            self.攻击次数1 = 8 - 5
+            self.攻击次数2 = 25 * (2.15 + 0.23)
+            self.CD *= 0.9
 
 class 不知火技能12(被动技能):
     名称 = '暗炎残星'
@@ -345,8 +361,12 @@ class 不知火技能15(主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率 * self.攻击倍率
 
-    def 装备护石(self):
-        self.倍率 *= 1.07
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.07
+        elif x == 1:
+            self.倍率 *= 1.07 + 0.09
 
 class 不知火技能16(主动技能):
     名称 = '火遁·风魔手里剑'
@@ -370,10 +390,16 @@ class 不知火技能16(主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 装备护石(self):
-        self.攻击次数1 = 0
-        self.攻击次数2 = 10 + 10
-        self.攻击次数3 = 1 * 1.14
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数1 = 0
+            self.攻击次数2 = 10 + 10
+            self.攻击次数3 = 1 * 1.14
+        elif x == 1:
+            self.攻击次数1 = 0
+            self.攻击次数2 = 10 + 10
+            self.攻击次数3 = 1 * (1.14 + 0.16)
 
 class 不知火技能17(主动技能):
     名称 = '八尺琼勾玉'
@@ -410,7 +436,7 @@ class 不知火技能18(被动技能):
 
 class 不知火技能19(主动技能):
     名称 = '八岐大蛇'
-    备注 = '(临兵斗结印)'
+    备注 = '(临兵斗结印，CP者皆阵结印)'
     所在等级 = 75
     等级上限 = 40
     学习间隔 = 2
@@ -424,10 +450,17 @@ class 不知火技能19(主动技能):
     攻击次数3 = 20
     攻击倍率 = 0.94
     CD = 36.1
+    是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率 * self.攻击倍率
 
+    护石选项 = ['圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数1 = 0
+            self.攻击次数2 = (10 + 1) * 1.74
+            self.攻击次数3 = 0
 
 class 不知火技能20(主动技能):
     名称 = '天照'
@@ -444,9 +477,16 @@ class 不知火技能20(主动技能):
     攻击倍率 = 1.06 #者皆阵倍率
     #攻击倍率 = 1.03  # 临兵斗倍率
     CD = 42.8
+    是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率 * self.攻击倍率
+
+    护石选项 = ['圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数2 = 8 * 1.33
+            self.CD *= 0.85
 
 class 不知火技能21(主动技能):
     名称 = '开二觉平x'
@@ -568,7 +608,7 @@ for i in 不知火技能列表:
 
 不知火符文选项 = ['无']
 for i in 不知火技能列表:
-    if i.所在等级 >= 20 and i.所在等级 <= 80 and i.所在等级 != 50 and i.是否有伤害 == 1 and i.名称 != '爆裂弹':
+    if i.所在等级 >= 20 and i.所在等级 <= 80 and i.所在等级 != 50 and i.是否有伤害 == 1:
         不知火符文选项.append(i.名称)
 
 
@@ -586,6 +626,8 @@ class 不知火角色属性(角色属性):
     防具精通属性 = ['智力', '力量']
 
     主BUFF = 2.04
+
+    远古记忆 = 0
 
     六道绑定技能 = []
 

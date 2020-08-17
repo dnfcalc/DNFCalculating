@@ -1,7 +1,7 @@
-from math import *
 from PublicReference.base import *
 
 # 2020.6.29 
+# 2029.8.14 添加韩服新护石,添加引力源光弹护石和能量禁锢护石相关选项
 
 # 武器源力剑
 class 未来开拓者主动技能(主动技能):
@@ -242,9 +242,14 @@ class 未来开拓者技能15(未来开拓者主动技能):
     是否有护石 = 1
     技能施放时间 = 1
     是否装备护石 = 0
-    def 装备护石(self):
-        self.攻击次数2 = 1.28 
-        self.是否装备护石 = 1
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数2 = 1.28 
+            self.是否装备护石 = 1
+        elif x == 1:
+            self.攻击次数2 = 1.60 #修改位置 
+            self.是否装备护石 = 1
 
 
 # 光裂斩，护石取最大蓄气
@@ -268,9 +273,14 @@ class 未来开拓者技能16(未来开拓者主动技能):
     攻击次数2 = 5
    
 
-    def 装备护石(self):
-        self.攻击次数 = 1.98 * 1.06
-        self.攻击次数2 = 0
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数 = 1.98 * 1.06
+            self.攻击次数2 = 0
+        elif x == 1:
+            self.攻击次数 = 1.98 * 1.14#修改位置
+            self.攻击次数2 = 0
 
 # 光导裂地斩
 class 未来开拓者技能17(未来开拓者主动技能):
@@ -292,9 +302,14 @@ class 未来开拓者技能17(未来开拓者主动技能):
     TP上限 = 5
     是否有护石 = 1
 
-    def 装备护石(self):
-        self.攻击次数 *= 1.17
-        self.攻击次数2 *= 1.2
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数 *= 1.17
+            self.攻击次数2 *= 1.2
+        elif x == 1:
+            self.攻击次数 *= 1.17
+            self.攻击次数2 *= 1.33#修改位置
 
 
 # 一觉，非提炼
@@ -315,7 +330,7 @@ class 未来开拓者技能18(未来开拓者主动技能):
     CD = 145
 
 
-# 能量禁锢，两次爆炸
+# 能量禁锢
 class 未来开拓者技能19(未来开拓者主动技能):
     名称 = '能量禁锢'
     所在等级 = 60
@@ -336,10 +351,18 @@ class 未来开拓者技能19(未来开拓者主动技能):
     成长2 = 344.5
     攻击次数2 = 1
 
-
-    def 装备护石(self):
-        self.攻击次数 = 14 * 0.8
-        self.攻击次数2 = 1.66
+    # 爆炸次数 = 0
+    是否装备护石 = 0
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数 = 14 * 0.8 #14是测试结论
+            self.是否装备护石 =1
+            # self.攻击次数2 += self.爆炸次数* 0.33
+        elif x == 1:
+            self.攻击次数 = 14 * 0.89#修改位置
+            self.是否装备护石 =1
+            # self.攻击次数2 += self.爆炸次数 *0.33
         
         
 # 离散能量波
@@ -363,10 +386,16 @@ class 未来开拓者技能20(未来开拓者主动技能):
     TP上限 = 5
     是否有护石 = 1
 
-    def 装备护石(self):
-        self.CD *= 0.9
-        self.攻击次数 = 15 * 0.75
-        self.攻击次数2 *= 1.4
+    护石选项 = ['魔界', '圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.CD *= 0.9
+            self.攻击次数 = 15 * 0.75
+            self.攻击次数2 *= 1.4
+        elif x == 1:
+            self.CD *= 0.9
+            self.攻击次数 = 15 * 0.75
+            self.攻击次数2 *= 1.66#修改位置
  
 # 绝望圆舞
 class 未来开拓者技能21(未来开拓者主动技能):
@@ -378,6 +407,12 @@ class 未来开拓者技能21(未来开拓者主动技能):
     基础 = 38894.00 - 3946.60
     成长 = 3946.60
     CD = 40
+    
+    是否有护石 = 1
+    护石选项 = ['圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *=1.35
 
 # CEAB-2超能爆发，满蓄
 class 未来开拓者技能22(未来开拓者主动技能):
@@ -389,6 +424,13 @@ class 未来开拓者技能22(未来开拓者主动技能):
     基础 = 44464.00 - 4510.92
     成长 = 4510.92
     CD = 45
+    
+    是否有护石 = 1
+    护石选项 = ['圣痕']
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.39
+            self.CD *= 0.9
 
 # 二觉，1.5秒后c
 class 未来开拓者技能23(未来开拓者主动技能):
@@ -461,6 +503,8 @@ class 未来开拓者角色属性(角色属性):
     
     远古记忆 = 0
     
+    引力源光弹充能次数 = 0
+    能量禁锢爆炸次数 = 0
     def __init__(self):
         基础属性输入(self)
         self.技能栏 = deepcopy(未来开拓者技能列表)
@@ -471,7 +515,7 @@ class 未来开拓者角色属性(角色属性):
         技能释放次数=[]
         技能单次伤害=[]
         技能总伤害=[]
-    
+
         #技能单次伤害计算
         for i in self.技能栏:
             if i.是否有伤害==1 and self.技能切装[self.技能序号[i.名称]] != y:
@@ -479,6 +523,18 @@ class 未来开拓者角色属性(角色属性):
             else:
                 技能单次伤害.append(0)
       
+    
+        #能量禁锢护石
+        if self.技能栏[self.技能序号['能量禁锢']].是否装备护石 == 1:
+            技能单次伤害[self.技能序号['能量禁锢']] += (0.33*self.能量禁锢爆炸次数)*(self.技能栏[self.技能序号['能量禁锢']].基础2 + self.技能栏[self.技能序号['能量禁锢']].成长2 * self.技能栏[self.技能序号['能量禁锢']].等级)*(1 + self.技能栏[self.技能序号['能量禁锢']].TP成长 * self.技能栏[self.技能序号['能量禁锢']].TP等级) * self.技能栏[self.技能序号['能量禁锢']].倍率 *self.伤害指数*i.被动倍率
+
+                 
+        # print(self.技能栏[self.技能序号['能量禁锢']].爆炸次数)
+        # print(self.技能栏[self.技能序号['能量禁锢']].攻击次数2)
+
+
+
+
         #技能释放次数计算
         for i in self.技能栏:
             if i.是否有伤害==1:
@@ -504,7 +560,10 @@ class 未来开拓者角色属性(角色属性):
         
         #引力源光弹护石
         if self.技能栏[self.技能序号['引力源光弹']].是否装备护石 == 1:
-            技能总伤害[self.技能序号['CEAB-2超能爆发']] += (技能总伤害[self.技能序号['引力源光弹']] * 0.3)
+            if self.宠物次数[self.技能序号['引力源光弹']] < self.引力源光弹充能次数:
+                技能总伤害[self.技能序号['CEAB-2超能爆发']] += (技能单次伤害[self.技能序号['引力源光弹']] * 0.3 * self.引力源光弹充能次数 * (1+self.白兔子技能*0.20 + self.年宠技能*0.10*self.宠物次数[self.技能序号['引力源光弹']]/self.引力源光弹充能次数+self.斗神之吼秘药*0.12))
+            else:
+                技能总伤害[self.技能序号['CEAB-2超能爆发']] += (技能单次伤害[self.技能序号['引力源光弹']] * 0.3 * self.引力源光弹充能次数 * (1+self.白兔子技能*0.20 + self.年宠技能*0.10+self.斗神之吼秘药*0.12))
         
         
         for i in self.技能栏:
@@ -540,3 +599,166 @@ class 未来开拓者(角色窗口):
         self.护石选项 = deepcopy(未来开拓者护石选项)
         self.符文选项 = deepcopy(未来开拓者符文选项)
 
+    def 引力源光弹充能次数判断(self, 警告,选项变更):
+        引力源光弹次数 = 0
+        超能爆发次数 = 0
+
+        if self.次数输入[15].currentText() != '/CD':
+            引力源光弹次数 = int(self.次数输入[15].currentText())
+        else:
+            引力源光弹次数 = 100
+        if self.次数输入[22].currentText() != '/CD':
+            超能爆发次数 = int(self.次数输入[22].currentText())
+        else:
+            超能爆发次数 = 100
+
+        sign = 0
+        for x in range(3):
+            if self.护石栏[x].currentText() == '引力源光弹' and 引力源光弹次数 != 0 and 超能爆发次数 != 0 :
+                sign = 1
+
+        充能次数上限 = 1
+        if 引力源光弹次数 != 0 and 超能爆发次数 !=0 and (self.次数输入[22].currentText() != '/CD' or self.次数输入[15].currentText() != '/CD'):
+            if 超能爆发次数 >= 引力源光弹次数:
+                充能次数上限 = 引力源光弹次数
+            else:
+                充能次数上限 = 超能爆发次数
+            # self.引力源光弹护石选项.setCurrentIndex(充能次数上限)
+        if self.引力源光弹护石选项.currentIndex() >   充能次数上限 and sign == 1 and (self.次数输入[15].currentText() != '/CD' or self.次数输入[22].currentText() != '/CD' )and 警告 == 0 :
+            self.引力源光弹护石选项.setCurrentIndex(充能次数上限)
+            if 选项变更 == 0:
+                QMessageBox.information(self,"错误",  "输入的充能次数超过上限，已自动修正") 
+            警告 = 1   
+        elif self.引力源光弹护石选项.currentIndex() <   充能次数上限 and sign == 1 and (self.次数输入[15].currentText() != '/CD' or self.次数输入[22].currentText() != '/CD' )and 选项变更 == 1:
+            self.引力源光弹护石选项.setCurrentIndex(充能次数上限)
+            选项变更= 0
+        elif self.次数输入[15].currentText() == '/CD' and self.次数输入[22].currentText() == '/CD' and 选项变更 == 1:
+            self.引力源光弹护石选项.setCurrentIndex(1)
+
+        if sign == 0:
+            self.引力源光弹护石选项.setEnabled(False)
+            self.引力源光弹护石选项.setStyleSheet(不可选择下拉框样式)
+            self.引力源光弹护石选项.setCurrentIndex(0)
+        else:
+            self.引力源光弹护石选项.setEnabled(True)
+            self.引力源光弹护石选项.setStyleSheet(下拉框样式)
+    flag1 = 0
+    flag2 = 0
+    flag3 = 0
+    def 能量禁锢爆炸次数判断(self,警告):
+        能量禁锢次数 = 0 
+        能量飞鱼弹次数 = 0 
+        源能护盾次数 = 0
+        
+ 
+
+        if self.次数输入[19].currentText() != '/CD':
+            能量禁锢次数 = int(self.次数输入[19].currentText())
+        else:
+            能量禁锢次数 = 1
+        if self.次数输入[12].currentText() != '/CD':
+            能量飞鱼弹次数 = int(self.次数输入[12].currentText())
+        else:
+            能量飞鱼弹次数 = 2
+        if self.次数输入[9].currentText() != '/CD':
+            源能护盾次数 = int(self.次数输入[9].currentText())
+        else:
+            源能护盾次数 = 2
+
+
+
+        sign2 = 0
+        for x in range(3):
+            if self.护石栏[x].currentText() == '能量禁锢' and 能量禁锢次数 != 0 and (能量飞鱼弹次数+源能护盾次数) != 0:
+                sign2 = 1
+
+
+        护石 = []
+        for i in range(3):
+            护石.append(self.护石栏[i].currentText())
+        if "能量禁锢" in 护石:
+            self.flag1 = 1
+        elif "能量禁锢" not in 护石 :
+            self.flag1 = 0
+        if self.flag1 == 1 and self.flag2 ==0:
+            self.flag2 = 1
+            self.flag3 = 1
+        elif  self.flag1 == 1 and self.flag2 ==1:
+            self.flag3 = 0
+        if self.flag1 == 0 and self.flag2 ==1:    
+            self.flag2 = 0
+        if self.flag3 == 1:
+            警告 = False
+        护石 = []
+
+
+        if 能量禁锢次数 != 0:
+            if 能量禁锢次数 == 1:
+                if(能量飞鱼弹次数+源能护盾次数) >= 2:
+                    self.能量禁锢护石选项.setCurrentIndex(2)
+                else:
+                    self.能量禁锢护石选项.setCurrentIndex(能量飞鱼弹次数+源能护盾次数)
+            else:
+                self.能量禁锢护石选项.setCurrentIndex(2)
+        else:
+            self.能量禁锢护石选项.setCurrentIndex(0)
+        if (能量飞鱼弹次数+源能护盾次数) < (能量禁锢次数*2)  and sign2 == 1 and 警告 == False and(self.次数输入[9].currentText() != '/CD' and self.次数输入[12].currentText() != '/CD'):
+            QMessageBox.information(self,"错误",  "能量飞鱼弹与源能护盾次数不足以为能量禁锢提供"+str(能量禁锢次数*2)+"次爆炸，建议修改技能及爆炸次数，若不修改则按输入的数值计算") 
+            警告 = True
+
+        if sign2 == 0:
+            self.能量禁锢护石选项.setEnabled(False)
+            self.能量禁锢护石选项.setStyleSheet(不可选择下拉框样式)
+            self.能量禁锢护石选项.setCurrentIndex(0)
+        else:
+            self.能量禁锢护石选项.setEnabled(True)
+            self.能量禁锢护石选项.setStyleSheet(下拉框样式)
+
+    def 界面(self):
+        super().界面()
+
+
+        self.引力源光弹护石选项=MyQComboBox(self.main_frame2)
+        for i in range(100):
+            self.引力源光弹护石选项.addItem('引力源光弹充能次数：'+str(i))
+        self.引力源光弹护石选项.resize(160,20)
+        self.引力源光弹护石选项.move(300,480)
+        self.引力源光弹护石选项.setCurrentIndex(1)
+        self.引力源光弹护石选项.setToolTip('修改对CEAB-2进行充能的次数，每次CEAB-2上限一次，受宠物技能影响。仅佩戴引力源光弹护石时生效')
+
+        for i in range(3):
+            self.护石栏[i].currentIndexChanged.connect(lambda state: self.引力源光弹充能次数判断(警告= 1,选项变更= 1))
+        self.次数输入[15].currentIndexChanged.connect(lambda state: self.引力源光弹充能次数判断(警告= 0,选项变更= 1))
+        self.次数输入[22].currentIndexChanged.connect(lambda state: self.引力源光弹充能次数判断(警告= 0,选项变更= 1))
+        self.引力源光弹护石选项.currentIndexChanged.connect(lambda state: self.引力源光弹充能次数判断(警告= 0,选项变更= 0))
+
+
+
+
+        self.能量禁锢护石选项=MyQComboBox(self.main_frame2)
+        self.能量禁锢护石选项.addItem('能量禁锢爆炸次数：0')
+        self.能量禁锢护石选项.addItem('能量禁锢爆炸次数：1')
+        self.能量禁锢护石选项.addItem('能量禁锢爆炸次数：2')
+        self.能量禁锢护石选项.resize(160,20)
+        self.能量禁锢护石选项.move(300,390)
+        self.能量禁锢护石选项.setCurrentIndex(2)
+        self.能量禁锢护石选项.setToolTip('修改每次能量禁锢爆炸次数，与源能护盾、能量飞鱼弹释放次数关联，仅佩戴能量禁锢护石时生效')
+        # bldic = {True:1,False:0}
+        for i in range(3):
+            self.护石栏[i].currentIndexChanged.connect(lambda state: self.能量禁锢爆炸次数判断(警告 = True ))
+
+        self.次数输入[19].currentIndexChanged.connect(lambda state: self.能量禁锢爆炸次数判断(警告= False))
+        self.次数输入[12].currentIndexChanged.connect(lambda state: self.能量禁锢爆炸次数判断(警告= False))
+        self.次数输入[9].currentIndexChanged.connect(lambda state: self.能量禁锢爆炸次数判断(警告= False))
+
+
+    def 输入属性(self, 属性, x = 0):
+        super().输入属性(属性, x)
+
+
+        属性.引力源光弹充能次数 = self.引力源光弹护石选项.currentIndex()
+        # 属性.技能栏[属性.技能序号['能量禁锢']].爆炸次数 = self.能量禁锢护石选项.currentIndex()
+        属性.能量禁锢爆炸次数 = self.能量禁锢护石选项.currentIndex()
+
+
+    

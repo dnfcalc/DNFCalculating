@@ -92,12 +92,17 @@ class 元素圣灵技能5(元素圣灵主动技能):
     TP上限 = 5
     是否有护石 = 1
     演出时间 = 1.2
+    护石选项 = ['魔界', '圣痕']
     def 等效百分比(self, 武器类型):
         return self.数据[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.天雷攻击力增加率 * self.倍率
 
-    def 装备护石(self):
-        self.攻击次数 = 1
-        self.天雷攻击力增加率 = 5.51
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数 = 1
+            self.天雷攻击力增加率 = 5.51
+        elif x == 1:
+            self.攻击次数 = 1
+            self.天雷攻击力增加率 = 5.91
 
 class 元素圣灵技能6(元素圣灵主动技能):
     名称 = '极冰盛宴'
@@ -128,12 +133,17 @@ class 元素圣灵技能7(元素圣灵主动技能):
     TP上限 = 5
     是否有护石 = 1
     演出时间 = 5.0
+    护石选项 = ['魔界', '圣痕']
     def 等效百分比(self, 武器类型):
         return ((self.数据1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.数据2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率
 
-    def 装备护石(self):
-        self.倍率 *= 1.28
-        self.演出时间 *= 0.6
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.28
+            self.演出时间 *= 0.6
+        elif x == 1:
+            self.倍率 *= 1.37
+            self.演出时间 *= 0.6
 
 class 元素圣灵技能8(元素圣灵主动技能):
     名称 = '杰克降临'
@@ -149,12 +159,17 @@ class 元素圣灵技能8(元素圣灵主动技能):
     TP上限 = 5
     是否有护石 = 1
     演出时间 = 1.2
+    护石选项 = ['魔界', '圣痕']
     def 等效百分比(self, 武器类型):
         return ((self.数据1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.数据2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率
 
-    def 装备护石(self):
-        self.攻击次数1 *= 0.1 * 4
-        self.攻击次数2 *= 1.44
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数1 *= 0.1 * 4
+            self.攻击次数2 *= 1.44
+        elif x == 1:
+            self.攻击次数1 *= 0.1 * 4
+            self.攻击次数2 *= 1.54
 
         
 class 元素圣灵技能9(元素圣灵主动技能):
@@ -171,13 +186,19 @@ class 元素圣灵技能9(元素圣灵主动技能):
     TP上限 = 5
     是否有护石 = 1
     演出时间 = 3.0
+    护石选项 = ['魔界', '圣痕']
     def 等效百分比(self, 武器类型):
         return ((self.数据1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.数据2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率
 
-    def 装备护石(self):
-        self.CD *= 0.95
-        self.攻击次数1 *= 1 + 0.45
-        self.攻击次数2 *= 1.17
+    def 装备护石(self, x):
+        if x == 0:
+            self.CD *= 0.95
+            self.攻击次数1 *= 1 + 0.45
+            self.攻击次数2 *= 1.17
+        if x == 1:
+            self.CD *= 0.95
+            self.攻击次数1 *= 1 + 0.45
+            self.攻击次数2 *= 1.32
         
 class 元素圣灵技能10(被动技能):
     名称 = '魔力增幅'
@@ -232,11 +253,15 @@ class 元素圣灵技能12(元素圣灵主动技能):
     TP上限 = 5
     是否有护石 = 1
     演出时间 = 2.6
+    护石选项 = ['魔界', '圣痕']
     def 等效百分比(self, 武器类型):
         return ((self.数据1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.数据2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率
 
-    def 装备护石(self):
-        self.攻击次数1 += 0.11 * 16
+    def 装备护石(self, x):
+        if x == 0:
+            self.攻击次数1 += 0.11 * 16
+        elif x == 1:
+            self.攻击次数1 += 0.14 * 17
         
 
 class 元素圣灵技能13(元素圣灵主动技能):
@@ -248,9 +273,12 @@ class 元素圣灵技能13(元素圣灵主动技能):
     攻击次数 = 1
     CD = 40.0
     演出时间 = 1.2
+    是否有护石 = 1
     def 等效百分比(self, 武器类型):
         return self.数据[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
-
+    护石选项 = ['圣痕']
+    def 装备护石(self, x):
+        self.倍率 *= 1.25
 
 class 元素圣灵技能14(被动技能):
     名称 = '元素奥义'
@@ -273,9 +301,13 @@ class 元素圣灵技能15(元素圣灵主动技能):
     攻击次数 = 10
     CD = 45.0
     演出时间 = 1.2
+    是否有护石 = 1
     def 等效百分比(self, 武器类型):
         return self.数据[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
-
+    护石选项 = ['圣痕']
+    def 装备护石(self, x):
+        self.攻击次数 = 1 * 13.25
+        
 class 元素圣灵技能17(元素圣灵主动技能):
     名称 = '第六元素'
     所在等级 = 85
