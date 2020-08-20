@@ -1,7 +1,6 @@
 ﻿import multiprocessing
 
 from PyQt5.QtCore import QUrl
-import PyQt5.QtCore as qtc
 from Part.sum import *
 from PublicReference.calc_core import calc_core
 from PublicReference.producer_consumer import producer_data, consumer, 工作线程数
@@ -44,7 +43,7 @@ class 选择窗口(QMainWindow):
     def 界面(self):
         self.setMinimumSize(805,630)
         self.setMaximumSize(805,1520)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.8.10 (技能模板仅供参考，请根据自身情况修改)')
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.8.20 (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
 
@@ -57,10 +56,10 @@ class 选择窗口(QMainWindow):
 
         self.头像图片 = []
         self.分类图片 = []
-        是否动图 = os.path.exists('ResourceFiles/img/动态头像')
+        是否动图 = os.path.exists('动态头像')
         for i in range(1, 76):
             if 是否动图:
-                self.头像图片.append(QMovie("ResourceFiles/img/动态头像/"+ str(i) +".gif"))
+                self.头像图片.append(QMovie("动态头像/"+ str(i) +".gif"))
             else:
                 self.头像图片.append(QPixmap("ResourceFiles/img/头像/"+ str(i) +".png"))
         for i in range(17):
@@ -218,6 +217,7 @@ class 选择窗口(QMainWindow):
         for i in url:
             QDesktopServices.openUrl(QUrl(i))
 
+import PyQt5.QtCore as qtc
 if __name__ == '__main__':
     if 窗口显示模式 == 1:
         if hasattr(qtc.Qt, 'AA_EnableHighDpiScaling'):

@@ -1,6 +1,7 @@
 from PublicReference.base_buff import *
 
-class BUFF·垂迹·圣骑士技能0(被动技能):
+
+class BUFF·垂迹·圣骑士技能0(被动技能) :
     名称 = '守护恩赐'
     所在等级 = 15
     等级上限 = 60
@@ -178,9 +179,9 @@ class BUFF·垂迹·圣骑士技能8(主动技能):
 
     def 加成倍率(self):
         if self.关联技能 == ['天启之珠']:
-            return round(0.08 + self.等级 * 0.01, 2)
+            return round(1.08 + self.等级 * 0.01, 2)
         else:
-            return round(0.23 + self.等级 * 0.01, 2)
+            return round(1.23 + self.等级 * 0.01, 2)
 
 
 

@@ -321,6 +321,28 @@ class 极诣·驭剑士技能13(极诣·驭剑士主动技能):
             self.倍率 *= 1.24
         elif x == 1:
             self.倍率 *= 1.33
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>破空剑舞</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[破军旋舞斩]<br>"
+            temp += "旋转攻击时向前方发射1道剑气<br>"
+            temp += "剑气攻击力为[破军旋舞斩]整体攻击力的19%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "剑气攻击范围 +30%<br>"
+            temp += "剑气攻击力 +5%<br>"
+            temp += "半月斩击范围 +30%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>破空剑舞</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[破军旋舞斩]<br>"
+            temp += "旋转攻击时向前方发射1道剑气<br>"
+            temp += "剑气攻击力为[破军旋舞斩]整体攻击力的19%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "剑气攻击范围 +30%<br>"
+            temp += "剑气攻击力 +14%<br>"
+            temp += "半月斩击范围 +30%"
+        return temp 
 
 class 极诣·驭剑士技能14(极诣·驭剑士主动技能):
     名称 = '瞬影三绝斩'
@@ -375,6 +397,24 @@ class 极诣·驭剑士技能15(极诣·驭剑士主动技能):
             self.次数 = [3 * 1.07, 8 * 1.07 * 1.25, 8 * 1.25]
         elif x == 1:
             self.次数 = [3 * 1.21, 8 * 1.21 * 1.25, 8 * 1.25]
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>千雷轰鸣</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[雷鸣千军破]<br>"
+            temp += "从地面召唤的巨剑数量 +25%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "斩击和从地面召唤的巨剑斩击物理攻击力 +7%<br>"
+            temp += "巨剑冲击波攻击范围 +40%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>千雷轰鸣</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[雷鸣千军破]<br>"
+            temp += "从地面召唤的巨剑数量 +25%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "斩击和从地面召唤的巨剑斩击物理攻击力 +21%<br>"
+            temp += "巨剑冲击波攻击范围 +40%"
+        return temp 
 
 class 极诣·驭剑士技能16(极诣·驭剑士主动技能):
     名称 = '恶即斩'
@@ -405,6 +445,30 @@ class 极诣·驭剑士技能16(极诣·驭剑士主动技能):
         elif x == 1:
             self.次数 = [15 * 1.19, 1.38]
             self.CD *= 0.95
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>斩恶者</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[恶即斩]<br>"
+            temp += "终结攻击前使用[驭剑术]时， 自动发动终结攻击<br>"
+            temp += "连续斩击攻击力 +19%<br>"
+            temp += "冷却时间 -5%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "多段攻击次数固定为最大值<br>"
+            temp += "终结攻击力 +17%<br>"
+            temp += "连续斩击攻击范围 +30%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>斩恶者</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[恶即斩]<br>"
+            temp += "终结攻击前使用[驭剑术]时， 自动发动终结攻击<br>"
+            temp += "连续斩击攻击力 +19%<br>"
+            temp += "冷却时间 -5%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "多段攻击次数固定为最大值<br>"
+            temp += "终结攻击力 +38%<br>"
+            temp += "连续斩击攻击范围 +30%"
+        return temp 
 
 class 极诣·驭剑士技能17(极诣·驭剑士主动技能):
     名称 = '极·驭剑术(时空斩)'
@@ -459,6 +523,32 @@ class 极诣·驭剑士技能19(极诣·驭剑士主动技能):
         elif x == 1:
             self.次数 = [0, 0, 2.01 + 0.27]
             self.CD *= 0.95
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>穿云刃</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[裂刃天冲]<br>"
+            temp += "与魔法剑一起前冲并发动爆炸攻击<br>"
+            temp += "- 删除刺击和升空多段攻击<br>"
+            temp += "- 前冲爆炸攻击力为原爆炸攻击力的201%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "按向前方向键时增加前冲范围<br>"
+            temp += "前冲爆炸攻击范围 +30%<br>"
+            temp += "前冲爆炸攻击力 +11%<br>"
+            temp += "冷却时间 -5%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>穿云刃</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[裂刃天冲]<br>"
+            temp += "与魔法剑一起前冲并发动爆炸攻击<br>"
+            temp += "- 删除刺击和升空多段攻击<br>"
+            temp += "- 前冲爆炸攻击力为原爆炸攻击力的201%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "按向前方向键时增加前冲范围<br>"
+            temp += "前冲爆炸攻击范围 +30%<br>"
+            temp += "前冲爆炸攻击力 +27%<br>"
+            temp += "冷却时间 -5%"
+        return temp 
 
 class 极诣·驭剑士技能20(极诣·驭剑士主动技能):
     名称 = '幻剑阵'
@@ -489,6 +579,34 @@ class 极诣·驭剑士技能20(极诣·驭剑士主动技能):
             self.次数 = [0, 0.50 * 4 * 1.18]
         elif x == 1:
             self.次数 = [0, 0.50 * 4 * 1.26]
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>天衍剑</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[极 · 驭剑术 (幻剑阵)]<br>"
+            temp += "在前方生成幻剑阵后落下强化魔剑并引发爆炸<br>"
+            temp += "- 删除幻剑移动攻击和强制控制效果<br>"
+            temp += "- 魔剑爆炸攻击力为终结攻击力的50%<br>"
+            temp += "- 魔剑爆炸造成4段攻击伤害<br>"
+            temp += "魔剑爆炸攻击力 +12%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "魔剑爆炸范围 +30%<br>"
+            temp += "魔剑爆炸攻击力 +6%<br>"
+            temp += "剑气移动速度 +30%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>天衍剑</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[极 · 驭剑术 (幻剑阵)]<br>"
+            temp += "在前方生成幻剑阵后落下强化魔剑并引发爆炸<br>"
+            temp += "- 删除幻剑移动攻击和强制控制效果<br>"
+            temp += "- 魔剑爆炸攻击力为终结攻击力的50%<br>"
+            temp += "- 魔剑爆炸造成4段攻击伤害<br>"
+            temp += "魔剑爆炸攻击力 +12%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "魔剑爆炸范围 +30%<br>"
+            temp += "魔剑爆炸攻击力 +14%<br>"
+            temp += "剑气移动速度 +30%"
+        return temp  
    
 class 极诣·驭剑士技能21(极诣·驭剑士主动技能):
     名称 = '破剑阵'

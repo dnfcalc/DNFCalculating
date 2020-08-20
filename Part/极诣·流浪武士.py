@@ -172,6 +172,37 @@ class 极诣·流浪武士技能10(极诣·流浪武士主动技能):
         elif x== 1:
             self.次数 = [6 + 4, 1, 5 + 4, 1]
             self.倍率 *= 1.07
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>花无语</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[乱花葬]<br>"
+            temp += "攻击范围 +25%<br>"
+            temp += "念气之花散开攻击效果强化<br>"
+            temp += "- 多段攻击次数 +80%<br>"
+            temp += "- 多段攻击间隔 -45%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "前冲动作可以击退霸体状态的敌人<br>"
+            temp += "念气之花散开攻击时可以吸附敌人<br>"
+            temp += "多段攻击强化<br>"
+            temp += "- 多段攻击次数 +67%<br>"
+            temp += "- 多段攻击间隔 -40%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>花无语</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[乱花葬]<br>"
+            temp += "攻击范围 +25%<br>"
+            temp += "念气之花散开攻击效果强化<br>"
+            temp += "- 多段攻击次数 +80%<br>"
+            temp += "- 多段攻击间隔 -45%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "前冲动作可以击退霸体状态的敌人<br>"
+            temp += "念气之花散开攻击时可以吸附敌人<br>"
+            temp += "多段攻击强化<br>"
+            temp += "- 多段攻击次数 +67%<br>"
+            temp += "- 多段攻击间隔 -40%<br>"
+            temp += "攻击力 +7%"
+        return temp  
 
 class 极诣·流浪武士技能11(极诣·流浪武士主动技能):
     名称 = '回天璇鸣剑'
@@ -217,6 +248,34 @@ class 极诣·流浪武士技能12(极诣·流浪武士主动技能):
             self.次数 = [1 + 3.11, 1 + 0.14]
         elif x== 1:
             self.次数 = [1 + 3.11, 1 + 0.27]
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>湮灭掌</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[湮烈掌]<br>"
+            temp += "攻击范围 +25%<br>"
+            temp += "内劲被吸收至爆炸的时间 +1秒<br>"
+            temp += "内劲爆炸攻击强化<br>"
+            temp += "- 多段攻击次数 -2次<br>"
+            temp += "- 攻击力 +311%<br>"
+            temp += "- 大小 +50%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "蓄气时间 -40%<br>"
+            temp += "内劲释放攻击力 +14%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>湮灭掌</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[湮烈掌]<br>"
+            temp += "攻击范围 +25%<br>"
+            temp += "内劲被吸收至爆炸的时间 +1秒<br>"
+            temp += "内劲爆炸攻击强化<br>"
+            temp += "- 多段攻击次数 -2次<br>"
+            temp += "- 攻击力 +311%<br>"
+            temp += "- 大小 +50%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "蓄气时间 -40%<br>"
+            temp += "内劲释放攻击力 +27%"
+        return temp  
 
 class 极诣·流浪武士技能13(极诣·流浪武士主动技能):
     名称 = '花舞千魂杀'
@@ -244,6 +303,30 @@ class 极诣·流浪武士技能13(极诣·流浪武士主动技能):
             self.次数 = [1 + 1.19, 0, 0]
         elif x== 1:
             self.次数 = [1 + 1.33, 0, 0]
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>花飞万里</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[花舞千魂杀]<br>"
+            temp += "攻击范围 +25%<br>"
+            temp += "删除剑插地攻击和最后下斩攻击<br>"
+            temp += "一闪攻击力 +100%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "一闪攻击后僵直时间 -30%<br>"
+            temp += "一闪攻击后转换角色朝向<br>"
+            temp += "一闪攻击力 +19%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>花飞万里</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[花舞千魂杀]<br>"
+            temp += "攻击范围 +25%<br>"
+            temp += "删除剑插地攻击和最后下斩攻击<br>"
+            temp += "一闪攻击力 +100%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "一闪攻击后僵直时间 -30%<br>"
+            temp += "一闪攻击后转换角色朝向<br>"
+            temp += "一闪攻击力 +33%"
+        return temp  
 
 class 极诣·流浪武士技能14(极诣·流浪武士主动技能):
     名称 = '花开寒影'
@@ -291,6 +374,31 @@ class 极诣·流浪武士技能15(极诣·流浪武士主动技能):
             self.次数 = [1, 0, 1 + 0.88]
             self.CD *= 0.80
             self.倍率 *= 1.09
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>日落黄昏</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[啸空十字斩]<br>"
+            temp += "删除垂直斩击<br>"
+            temp += "爆炸攻击力 +88%<br>"
+            temp += "冷却时间 -20%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "爆炸攻击范围 +25%<br>"
+            temp += "水平斩击持续时间 +1.5秒<br>"
+            temp += "再次按技能键时， 立即引发爆炸"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>日落黄昏</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[啸空十字斩]<br>"
+            temp += "删除垂直斩击<br>"
+            temp += "爆炸攻击力 +88%<br>"
+            temp += "冷却时间 -20%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "爆炸攻击范围 +25%<br>"
+            temp += "水平斩击持续时间 +1.5秒<br>"
+            temp += "再次按技能键时， 立即引发爆炸<br>"
+            temp += "攻击力 +9%"
+        return temp  
 
 class 极诣·流浪武士技能16(极诣·流浪武士主动技能):
     名称 = '如来神掌'
@@ -317,6 +425,38 @@ class 极诣·流浪武士技能16(极诣·流浪武士主动技能):
             self.次数 = [1 + 1.71 + 0.25, 0]
         elif x== 1:
             self.次数 = [1 + 1.71 + 0.45, 0]
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>如影随形</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += " [如来神掌]<br>"
+            temp += "在地面施放时跳跃后发射掌风<br>"
+            temp += "掌风变更为无形状， 删除爆炸攻击<br>"
+            temp += "增加发射距离和速度<br>"
+            temp += "掌风发射准备时间 -50%<br>"
+            temp += "攻击范围 +50%<br>"
+            temp += "命中敌人时攻击力 +171% <br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "可以在后跳过程中施放， 减少施放所需的最低高度<br>"
+            temp += "在地面施放时， 减少角色跳跃高度<br>"
+            temp += "施放掌风后的僵直时间 -30%<br>"
+            temp += "命中敌人时攻击力 +25%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>如影随形</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += " [如来神掌]<br>"
+            temp += "在地面施放时跳跃后发射掌风<br>"
+            temp += "掌风变更为无形状， 删除爆炸攻击<br>"
+            temp += "增加发射距离和速度<br>"
+            temp += "掌风发射准备时间 -50%<br>"
+            temp += "攻击范围 +50%<br>"
+            temp += "命中敌人时攻击力 +171% <br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "可以在后跳过程中施放， 减少施放所需的最低高度<br>"
+            temp += "在地面施放时， 减少角色跳跃高度<br>"
+            temp += "施放掌风后的僵直时间 -30%<br>"
+            temp += "命中敌人时攻击力 +45%"
+        return temp  
             
 class 极诣·流浪武士技能17(极诣·流浪武士主动技能):
     名称 = '莲花剑舞'

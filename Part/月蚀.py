@@ -10,11 +10,14 @@ class 月蚀主动技能(主动技能):
         if 武器类型 == '魔杖':
             return round(self.CD / self.恢复 * 1.00, 1)
 
+    def 秒伤数据(self):
+        return self.秒伤基础 + self.秒伤成长 * self.等级
+
     def 秒伤百分比(self):
         if self.等级 == 0:
             return 0
         else:
-            return int((self.秒伤基础 + self.秒伤成长 * self.等级) * (1 + self.TP成长 * self.TP等级) * self.倍率 * self.秒伤倍率)
+            return int(self.秒伤数据() * (1 + self.TP成长 * self.TP等级) * self.倍率 * self.秒伤倍率)
 
 class 月蚀技能0(被动技能):
     名称 = '召唤兽强化'
@@ -532,7 +535,7 @@ class 月蚀角色属性(角色属性):
                 if 技能释放次数[i]!=0:
                     详细数据.append(技能总伤害[i]/技能释放次数[i])
                 else:
-                    详细数据.append(0)
+                    详细数据.append(技能总伤害[i]/1)
                 if 总伤害!=0:
                     详细数据.append(技能总伤害[i]/总伤害*100)
                 else:

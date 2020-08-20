@@ -140,6 +140,28 @@ class 极诣·契魔者技能7(极诣·契魔者主动技能):
         elif x == 1:
             self.次数 = [14 * 2 * 0.56, 1 + 1.25]
             self.CD *= 0.9
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>猩红女王</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[血饮狂舞]<br>"
+            temp += "多段攻击次数 +100%<br>"
+            temp += "多段攻击力 -44%<br>"
+            temp += "冷却时间 -10%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "范围 +20%<br>"
+            temp += "最后一击攻击力 +72%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>猩红女王</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[血饮狂舞]<br>"
+            temp += "多段攻击次数 +100%<br>"
+            temp += "多段攻击力 -44%<br>"
+            temp += "冷却时间 -10%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "范围 +20%<br>"
+            temp += "最后一击攻击力 +125%"
+        return temp  
 
 class 极诣·契魔者技能8(极诣·契魔者主动技能):
     名称 = '碎魔剑'
@@ -193,6 +215,34 @@ class 极诣·契魔者技能9(极诣·契魔者主动技能):
             self.倍率 = 1.24
         elif x == 1:
             self.倍率 = 1.34
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>魔人大军</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[群魔乱舞]<br>"
+            temp += "幻影可使用技能增加[蛇腹剑 : 破]、 [蛇腹剑 : 舞]、 [蛇腹剑 : 刺]<br>"
+            temp += "敌人可承受攻击的幻影数量增加至8个<br>"
+            temp += "寻敌范围 +10%<br>"
+            temp += "幻影攻击力 -28%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "幻影可使用技能增加[蛇腹剑 : 灭]、 [血饮狂舞]<br>"
+            temp += "敌人可承受攻击的幻影数量上限增加至10个<br>"
+            temp += "寻敌范围 +10%<br>"
+            temp += "幻影攻击力 -10%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>魔人大军</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[群魔乱舞]<br>"
+            temp += "幻影可使用技能增加[蛇腹剑 : 破]、 [蛇腹剑 : 舞]、 [蛇腹剑 : 刺]<br>"
+            temp += "敌人可承受攻击的幻影数量增加至8个<br>"
+            temp += "寻敌范围 +10%<br>"
+            temp += "幻影攻击力 -28%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "幻影可使用技能增加[蛇腹剑 : 灭]、 [血饮狂舞]<br>"
+            temp += "敌人可承受攻击的幻影数量上限增加至10个<br>"
+            temp += "寻敌范围 +10%<br>"
+            temp += "幻影攻击力 -5%"
+        return temp  
 
 class 极诣·契魔者技能10(极诣·契魔者主动技能):
     名称 = '唤魔塔莫斯之袭'
@@ -225,6 +275,32 @@ class 极诣·契魔者技能10(极诣·契魔者主动技能):
         elif x == 1:
             self.倍率 *= 1.48
             self.次数 = [8, 1, 0]
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>塔莫斯的觉醒</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[唤魔 : 塔莫斯之袭]<br>"
+            temp += "用除觉醒技之外的技能攻击时， 立即发动[唤魔 : 塔莫斯之袭]<br>"
+            temp += "- 删除斩击攻击<br>"
+            temp += "- 塔莫斯出现在技能命中的敌人身边发动攻击<br>"
+            temp += "- 未命中的状态下无法使用该技能<br>"
+            temp += "- 攻击力 +29%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "塔莫斯大小 +20%<br>"
+            temp += "攻击力 +10%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>塔莫斯的觉醒</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[唤魔 : 塔莫斯之袭]<br>"
+            temp += "用除觉醒技之外的技能攻击时， 立即发动[唤魔 : 塔莫斯之袭]<br>"
+            temp += "- 删除斩击攻击<br>"
+            temp += "- 塔莫斯出现在技能命中的敌人身边发动攻击<br>"
+            temp += "- 未命中的状态下无法使用该技能<br>"
+            temp += "- 攻击力 +29%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "塔莫斯大小 +20%<br>"
+            temp += "攻击力 +19%"
+        return temp  
             
 class 极诣·契魔者技能11(被动技能):
     名称 = '贪欲之燔祭'
@@ -281,6 +357,29 @@ class 极诣·契魔者技能13(极诣·契魔者主动技能):
             self.次数[2] = 1 + 0.08
         elif x == 1:
             self.次数[2] = 1 + 0.08 + 0.31
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>魔人监狱</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[唤魔 : 逆天之普诺]<br>"
+            temp += "克库斯和塔莫斯在角色前方出现并发动攻击<br>"
+            temp += "- 克库斯的攻击可以吸附敌人<br>"
+            temp += "- 塔莫斯终结爆炸攻击力 +8%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "敌人被克库斯和塔莫斯击中时无法行动<br>"
+            temp += "塔莫斯终结爆炸范围 +20%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>魔人监狱</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[唤魔 : 逆天之普诺]<br>"
+            temp += "克库斯和塔莫斯在角色前方出现并发动攻击<br>"
+            temp += "- 克库斯的攻击可以吸附敌人<br>"
+            temp += "- 塔莫斯终结爆炸攻击力 +8%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "敌人被克库斯和塔莫斯击中时无法行动<br>"
+            temp += "塔莫斯终结爆炸范围 +20%<br>"
+            temp += "塔莫斯终结爆炸攻击力 +31%<br>"
+        return temp  
 
 class 极诣·契魔者技能14(极诣·契魔者主动技能):
     名称 = '汲血魔剑'
@@ -309,6 +408,32 @@ class 极诣·契魔者技能14(极诣·契魔者主动技能):
             self.次数 = [1 + 0.07 + 0.07]
         elif x == 1:
             self.次数 = [1 + 0.07 + 0.15]
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>魔血峥嵘</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[汲血魔剑]<br>"
+            temp += "施放蛇腹剑技能过程中， 可以强制中断并立即施放[汲血魔剑]<br>"
+            temp += "- 施放[汲血魔剑]过程中， 可以强制中断并施放其他蛇腹剑技能<br>"
+            temp += "- 中断蛇腹剑技能施放[汲血魔剑]时删除施放动作<br>"
+            temp += "- 施放[蛇腹剑 : 缠]、 [弑神剑 : 极]、 [空绝斩 : 地裂]时无法强制中断<br>"
+            temp += "- 攻击力 +7%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "范围 +20%<br>"
+            temp += "攻击力 +7%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>魔血峥嵘</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[汲血魔剑]<br>"
+            temp += "施放蛇腹剑技能过程中， 可以强制中断并立即施放[汲血魔剑]<br>"
+            temp += "- 施放[汲血魔剑]过程中， 可以强制中断并施放其他蛇腹剑技能<br>"
+            temp += "- 中断蛇腹剑技能施放[汲血魔剑]时删除施放动作<br>"
+            temp += "- 施放[蛇腹剑 : 缠]、 [弑神剑 : 极]、 [空绝斩 : 地裂]时无法强制中断<br>"
+            temp += "- 攻击力 +7%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "范围 +20%<br>"
+            temp += "攻击力 +15%"
+        return temp  
 
 class 极诣·契魔者技能15(被动技能):
     名称 = '唤魔弑神剑'

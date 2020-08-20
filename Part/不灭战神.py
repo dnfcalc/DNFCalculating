@@ -1,7 +1,6 @@
 from math import *
 from PublicReference.base import *
 
-#加站街物理攻击力 10级30%？ 算的28.4%
 class 不灭战神技能0(被动技能):
     名称 = '战戟精通'
     所在等级 = 15

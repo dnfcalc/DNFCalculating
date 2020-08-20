@@ -82,7 +82,7 @@ class 真·圣骑士技能3(被动技能):
             return 0
 
     def 结算统计(self): 
-        return [self.力智加成(), 0, 0, self.力智加成(), self.力智加成(), self.三攻加成(), self.三攻加成(), self.三攻加成()]
+        return [self.力智加成(), 0, 0, self.力智加成(), self.力智加成(), 0, 0, 0]
         #智力 体力 精神  力量  智力  物攻  魔攻 独立
 
 class 真·圣骑士技能4(主动技能):
@@ -156,9 +156,9 @@ class 真·圣骑士技能8(主动技能):
 
     def 加成倍率(self):
         if self.关联技能 == ['圣光天启']:
-            return round(0.08 + self.等级 * 0.01, 2)
+            return round(1.08 + self.等级 * 0.01, 2)
         else:
-            return round(0.23 + self.等级 * 0.01, 2)
+            return round(1.23 + self.等级 * 0.01, 2)
 
 
 真·圣骑士技能列表 = []

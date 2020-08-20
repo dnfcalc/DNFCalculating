@@ -99,6 +99,10 @@ class 归元·气功师·女技能5(归元·气功师·女主动技能):
         else:
             return round(self.基础 + self.成长 * self.等级, 5)
 
+    def 等效CD(self, 武器类型):
+        if 武器类型 == '手套':
+            return round(self.CD * 1.05, 1)
+
 
 # 念气波
 class 归元·气功师·女技能6(归元·气功师·女主动技能):

@@ -128,6 +128,10 @@ class 归元·气功师·男技能6(归元·气功师·男主动技能):
     def 等效百分比(self, 武器类型):
         return self.数据[self.等级] * self.倍率
 
+    def 等效CD(self, 武器类型):
+        if 武器类型 == '手套':
+            return round(self.CD * 1.05, 1)
+
 
 # 念气波 数组
 class 归元·气功师·男技能7(归元·气功师·男主动技能):

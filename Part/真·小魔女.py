@@ -94,7 +94,7 @@ class 真·小魔女技能4(被动技能):
             return 0
 
     def 结算统计(self): 
-        return [self.力智加成(), 0, 0, self.力智加成(), self.力智加成(), self.三攻加成(), self.三攻加成(), self.三攻加成()]
+        return [self.力智加成(), 0, 0, self.力智加成(), self.力智加成(), 0, 0, 0]
         #智力 体力 精神  力量  智力  物攻  魔攻 独立
 
 class 真·小魔女技能5(主动技能):
@@ -169,9 +169,9 @@ class 真·小魔女技能9(主动技能):
 
     def 加成倍率(self):
         if self.关联技能 == ['开幕！人偶剧场']:
-            return round(0.08 + self.等级 * 0.01, 2)
+            return round(1.08 + self.等级 * 0.01, 2)
         else:
-            return round(0.23 + self.等级 * 0.01, 2)
+            return round(1.23 + self.等级 * 0.01, 2)
 
 真·小魔女技能列表 = []
 i = 0

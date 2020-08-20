@@ -182,6 +182,28 @@ class 极诣·狂战士技能7(主动技能):
             self.攻击次数2 *= 1.56
             self.攻击次数3 *= 1.56
             self.CD *= 0.9
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>狂暴之怒</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[暴怒狂斩]<br>"
+            temp += "删除下劈<br>"
+            temp += "冷却时间 -10%<br>"
+            temp += "攻击力 +32%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "可以取消最后一击的僵直， 直接施放转职后的技能。<br>"
+            temp += "攻击力 +14% "
+        elif x == 1:
+            temp = "<font color='#FF00FF'>狂暴之怒</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[暴怒狂斩]<br>"
+            temp += "删除下劈<br>"
+            temp += "冷却时间 -10%<br>"
+            temp += "攻击力 +32%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "可以取消最后一击的僵直， 直接施放转职后的技能。<br>"
+            temp += "攻击力 +24% "
+        return temp 
 
 class 极诣·狂战士技能8(主动技能):
     名称 = '嗜血'
@@ -228,6 +250,26 @@ class 极诣·狂战士技能9(主动技能):
             self.倍率 *= 1.28
         elif x == 1:
             self.倍率 *= 1.37
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>嗜血战歌</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[血气之刃]<br>"
+            temp += "即使血刃未刺中敌人也会快速发生爆炸<br>"
+            temp += "攻击力 +16%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "爆炸范围 +20%<br>"
+            temp += "攻击力 +12%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>嗜血战歌</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[血气之刃]<br>"
+            temp += "即使血刃未刺中敌人也会快速发生爆炸<br>"
+            temp += "攻击力 +16%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "爆炸范围 +20%<br>"
+            temp += "攻击力 +21%"
+        return temp 
 
 class 极诣·狂战士技能10(主动技能):
     名称 = '崩山裂地斩'
@@ -275,6 +317,30 @@ class 极诣·狂战士技能10(主动技能):
         elif x == 1:
             self.倍率 *= 1.26
             self.CD *= 0.95
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>血气狂涌</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[崩山裂地斩]<br>"
+            temp += "血剑锤击地面的瞬间喷出岩浆<br>"
+            temp += "冷却时间 -5%<br>"
+            temp += "攻击力 +9%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "跳跃高度 +20%<br>"
+            temp += "范围 +20%<br>"
+            temp += "攻击力 +9%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>血气狂涌</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[崩山裂地斩]<br>"
+            temp += "血剑锤击地面的瞬间喷出岩浆<br>"
+            temp += "冷却时间 -5%<br>"
+            temp += "攻击力 +9%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "跳跃高度 +20%<br>"
+            temp += "范围 +20%<br>"
+            temp += "攻击力 +17%"
+        return temp 
 
 class 极诣·狂战士技能11(被动技能):
     名称 = '鲜血之忆'
@@ -353,6 +419,28 @@ class 极诣·狂战士技能13(主动技能):
             self.倍率 *= 1.20
         elif x == 1:
             self.倍率 *= 1.29
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>血之连接</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[鲜血暴掠]<br>"
+            temp += "施放过程中连接[崩山裂地斩]时， 血气爆炸的瞬间施放[崩山裂地斩]<br>"
+            temp += "攻击力 +14%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "不抓取敌人也可以引发血气爆炸<br>"
+            temp += "血气爆炸范围 +20%<br>"
+            temp += "攻击力 +6%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>血之连接</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[鲜血暴掠]<br>"
+            temp += "施放过程中连接[崩山裂地斩]时， 血气爆炸的瞬间施放[崩山裂地斩]<br>"
+            temp += "攻击力 +14%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "不抓取敌人也可以引发血气爆炸<br>"
+            temp += "血气爆炸范围 +20%<br>"
+            temp += "攻击力 +15%"
+        return temp 
 
 class 极诣·狂战士技能14(主动技能):
     名称 = '血气爆发'
@@ -398,6 +486,34 @@ class 极诣·狂战士技能14(主动技能):
         elif x == 1:
             self.倍率 *= 1.25
             self.CD *= 0.95
+    def 护石描述(self, x):
+        if x == 0:
+            temp = "<font color='#FF00FF'>血之漩涡</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[血气爆发]<br>"
+            temp += "将周围敌人吸附到中心点<br>"
+            temp += "多段攻击间隔 -20%<br>"
+            temp += "血气喷射时间上限 -20%<br>"
+            temp += "冷却时间 -5%<br>"
+            temp += "攻击力 +6%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "多段攻击间隔 -20%<br>"
+            temp += "血气喷射时间上限 -20%<br>"
+            temp += "攻击力 +11%"
+        elif x == 1:
+            temp = "<font color='#FF00FF'>血之漩涡</font>"
+            temp += "<br><br><font color='#68D5ED'>"
+            temp += "[血气爆发]<br>"
+            temp += "将周围敌人吸附到中心点<br>"
+            temp += "多段攻击间隔 -20%<br>"
+            temp += "血气喷射时间上限 -20%<br>"
+            temp += "冷却时间 -5%<br>"
+            temp += "攻击力 +6%<br>"
+            temp += "<br>-护石附加效果：<br>"
+            temp += "多段攻击间隔 -20%<br>"
+            temp += "血气喷射时间上限 -20%<br>"
+            temp += "攻击力 +19%"
+        return temp 
 
 class 极诣·狂战士技能15(被动技能):
     名称 = '汲血之力'

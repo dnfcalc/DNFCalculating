@@ -128,6 +128,10 @@ class 念帝技能7(念帝主动技能):
         else:
             return round(self.基础 + self.成长 * self.等级, 5)
 
+    def 等效CD(self, 武器类型):
+        if 武器类型 == '手套':
+            return round(self.CD * 1.05, 1)
+
 
 # 念气波
 class 念帝技能8(念帝主动技能):

@@ -30,9 +30,15 @@ class 技能:
     等级上限 = 0
     等级 = 0
     基础等级 = 0
-    关联技能 = ['无']
     等级溢出 = 0
     自定义描述 = 0
+
+    关联技能 = ['无']
+    关联技能2 = ['无']
+    关联技能3 = ['无']
+    冷却关联技能 = ['无']
+    冷却关联技能2 = ['无']
+    冷却关联技能3 = ['无']
 
     def 等级加成(self, x):
         if self.等级 != 0:
@@ -57,7 +63,6 @@ class 主动技能(技能):
     成长3 = 0.0
     攻击次数3 = 0.0
     CD = 0.0
-    # Will添加
     TP成长 = 0.0
     TP上限 = 0
     TP等级 = 0
@@ -70,14 +75,6 @@ class 主动技能(技能):
     演出时间 = 0
     是否有护石 = 0
     护石选项 = ['魔界']
-    关联技能 = ['无']
-    关联技能2 = ['无']
-    关联技能3 = ['无']
-    # Will添加
-    冷却关联技能 = ['无']
-    冷却关联技能2 = ['无']
-    冷却关联技能3 = ['无']
-
 
     def 等效百分比(self, 武器类型):
         if self.等级 == 0:
@@ -94,20 +91,13 @@ class 被动技能(技能):
     是否主动 = 0
     是否有伤害 = 0
     关联技能 = ['所有']
-    # Will添加
-    关联技能2 = ['无']
-    关联技能3 = ['无']
-
-    冷却关联技能 = ['无']
-    冷却关联技能2 = ['无']
-    冷却关联技能3 = ['无']
 
 符文效果选项 = ['无', '攻击+5%,CD+3%', 'CD-4%', '攻击+3%', '攻击-3%,CD-6%', '攻击+3%,CD+2%', 'CD-3%', '攻击+2%', '攻击-2%,CD-4%',
     '攻击+2%,CD+1%', 'CD-2%', '攻击+1%', '攻击-1%,CD-3%', '攻击+6%,CD+4%', 'CD-5%', '攻击+4%', '攻击-4%,CD-7%']
 
 部位字典 = {"上衣":0, "头肩":1, "下装":2, "腰带":3, "鞋":4, "手镯":5, "项链":6, "戒指":7, "耳环":8, "辅助装备":9, "魔法石":10, "武器":11}
 
-颜色 = {'神话':'#E29692', '史诗':'#FFB400', '传说':'#FF7800'}
+颜色 = {'神话':'#E0502F', '史诗':'#FFB400', '传说':'#FF7800'}
 
 刀魂之卡赞数据 = [0, 31, 40, 48, 58, 67, 79, 90, 103, 116, 131, 145, 161, 178, 194, 212, 230, 250, 270, 292, 313]
 
@@ -250,7 +240,7 @@ class 角色属性():
     幸运三角 = 0
     #0过充电状态 1过负荷状态
     擎天战甲 = 0
-    #0 100%  1 90%  2 80%  3 70%  4 60%  5 50%  6 40%  7 30%  8 20%  9 10%  10 0%
+    #0.00~1.00
     持续伤害计算比例 = 0
     #0 120+ 1 120-100 2 100-80 3 80-60 4 60-40 5 40-
     军神的隐秘遗产 = 0
@@ -690,7 +680,7 @@ class 角色属性():
         增伤倍率*=1+self.暴击伤害
         增伤倍率*=1+self.最终伤害
         增伤倍率*=self.技能攻击力
-        增伤倍率*=1+self.持续伤害*(1-0.1*self.持续伤害计算比例)
+        增伤倍率*=1+self.持续伤害*self.持续伤害计算比例
         增伤倍率*=1+self.附加伤害+self.属性附加*属性倍率
         self.伤害指数=面板*属性倍率*增伤倍率*基准倍率/100
 
@@ -1247,7 +1237,8 @@ class 角色窗口(QWidget):
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['擎天战甲：过充电状态', '擎天战甲：过负荷状态'])
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems(['持续伤害适用：100%', '持续伤害适用：90%', '持续伤害适用：80%', '持续伤害适用：70%', '持续伤害适用：60%', '持续伤害适用：50%', '持续伤害适用：40%', '持续伤害适用：30%', '持续伤害适用：20%', '持续伤害适用：10%', '持续伤害适用：0%'])
+        for i in range(101):
+            self.装备条件选择[-1].addItem('持续伤害适用：' + str(100 - i) + '%')
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['军神的隐秘遗产：120%以上', '军神的隐秘遗产：120-100%', '军神的隐秘遗产：100-80%', '军神的隐秘遗产：80-60%', '军神的隐秘遗产：60-40%', '军神的隐秘遗产：40%以下'])
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
@@ -1560,7 +1551,7 @@ class 角色窗口(QWidget):
                 tempstr='<font face="宋体"><font color="#FF6666">'+i.名称 +i.备注 +'</font><br>'
                 tempstr+='所在等级：'+str(i.所在等级)+'<br>'
                 tempstr+='等级上限：'+str(i.等级上限)
-                if i.是否主动==1:
+                if i.是否主动 == 1:
                     tempstr+='<br>百分比：'+str(int(i.等效百分比(self.角色属性A.武器类型)))+'%'
                     if i.TP上限 !=0:
                         tempstr+='<br>TP成长：'+str(int(i.TP成长*100))+'%'
@@ -4296,57 +4287,58 @@ class 角色窗口(QWidget):
             # Will修改
             tempstr = ''
             if self.角色属性B.技能栏[i].所在等级 != 100 or self.角色属性B.技能栏[i].是否主动 == 0:
-                if self.角色属性B.技能栏[i].自定义描述 == 1:
-                    tempstr+= '<font face="宋体"><font color="#FF6666">'+self.角色属性B.技能栏[i].名称+'</font><br>'
-                    tempstr+= self.角色属性B.技能栏[i].技能描述(self.角色属性B.武器类型)            
-                else:
-                    if self.角色属性B.技能栏[i].关联技能 != ['无'] and self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) != 1:
-                        tempstr+='<font face="宋体"><font color="#FF6666">'+self.角色属性B.技能栏[i].名称+'</font><br>'
-                        tempstr+='加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型)*100-100,2))+'%<br>'
-                        tempstr+='关联技能：'
-                        for j in self.角色属性B.技能栏[i].关联技能:
-                            tempstr+=j
-                            if j != self.角色属性B.技能栏[i].关联技能[-1]:
-                                tempstr+=','
-                        if self.角色属性B.技能栏[i].关联技能2 != ['无']:
-                            tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率2(self.角色属性B.武器类型)*100-100,2))+'%<br>'
-                            tempstr+='关联技能：'
-                            for k in self.角色属性B.技能栏[i].关联技能2:
-                                tempstr+=k
-                                if k != self.角色属性B.技能栏[i].关联技能2[-1]:
-                                    tempstr+=','
-                        if self.角色属性B.技能栏[i].关联技能3 != ['无']:
-                            tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率3(self.角色属性B.武器类型)*100-100,2))+'%<br>'
-                            tempstr+='关联技能：'
-                            for l in self.角色属性B.技能栏[i].关联技能3:
-                                tempstr+=l
-                                if l != self.角色属性B.技能栏[i].关联技能3[-1]:
-                                    tempstr+=','
-                    if self.角色属性B.技能栏[i].冷却关联技能 != ['无'] and self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型) != 1:
-                        if tempstr == '':
+                if self.角色属性B.技能栏[i].等级 > 0:
+                    if self.角色属性B.技能栏[i].自定义描述 == 1:
+                        tempstr+= '<font face="宋体"><font color="#FF6666">'+self.角色属性B.技能栏[i].名称+'</font><br>'
+                        tempstr+= self.角色属性B.技能栏[i].技能描述(self.角色属性B.武器类型)            
+                    else:
+                        if self.角色属性B.技能栏[i].关联技能 != ['无'] and self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) != 1:
                             tempstr+='<font face="宋体"><font color="#FF6666">'+self.角色属性B.技能栏[i].名称+'</font><br>'
-                        else:
-                            tempstr+='<br>'
-                        tempstr+='冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型)*100,2))+'%<br>'
-                        tempstr+='冷却关联技能：'
-                        for j in self.角色属性B.技能栏[i].冷却关联技能:
-                            tempstr+=j
-                            if j != self.角色属性B.技能栏[i].冷却关联技能[-1]:
-                                tempstr+=','
-                        if self.角色属性B.技能栏[i].冷却关联技能2 != ['无']:
-                            tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率2(self.角色属性B.武器类型)*100,2))+'%<br>'
-                            tempstr+='冷却关联技能：'
-                            for j in self.角色属性B.技能栏[i].冷却关联技能2:
+                            tempstr+='加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型)*100-100,2))+'%<br>'
+                            tempstr+='关联技能：'
+                            for j in self.角色属性B.技能栏[i].关联技能:
                                 tempstr+=j
-                                if j != self.角色属性B.技能栏[i].冷却关联技能2[-1]:
+                                if j != self.角色属性B.技能栏[i].关联技能[-1]:
                                     tempstr+=','
-                        if self.角色属性B.技能栏[i].冷却关联技能3 != ['无']:
-                            tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率3(self.角色属性B.武器类型)*100,2))+'%<br>'
+                            if self.角色属性B.技能栏[i].关联技能2 != ['无']:
+                                tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率2(self.角色属性B.武器类型)*100-100,2))+'%<br>'
+                                tempstr+='关联技能：'
+                                for k in self.角色属性B.技能栏[i].关联技能2:
+                                    tempstr+=k
+                                    if k != self.角色属性B.技能栏[i].关联技能2[-1]:
+                                        tempstr+=','
+                            if self.角色属性B.技能栏[i].关联技能3 != ['无']:
+                                tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率3(self.角色属性B.武器类型)*100-100,2))+'%<br>'
+                                tempstr+='关联技能：'
+                                for l in self.角色属性B.技能栏[i].关联技能3:
+                                    tempstr+=l
+                                    if l != self.角色属性B.技能栏[i].关联技能3[-1]:
+                                        tempstr+=','
+                        if self.角色属性B.技能栏[i].冷却关联技能 != ['无'] and self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型) != 1:
+                            if tempstr == '':
+                                tempstr+='<font face="宋体"><font color="#FF6666">'+self.角色属性B.技能栏[i].名称+'</font><br>'
+                            else:
+                                tempstr+='<br>'
+                            tempstr+='冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型)*100,2))+'%<br>'
                             tempstr+='冷却关联技能：'
-                            for j in self.角色属性B.技能栏[i].冷却关联技能3:
+                            for j in self.角色属性B.技能栏[i].冷却关联技能:
                                 tempstr+=j
-                                if j != self.角色属性B.技能栏[i].冷却关联技能3[-1]:
-                                    tempstr+=','             
+                                if j != self.角色属性B.技能栏[i].冷却关联技能[-1]:
+                                    tempstr+=','
+                            if self.角色属性B.技能栏[i].冷却关联技能2 != ['无']:
+                                tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率2(self.角色属性B.武器类型)*100,2))+'%<br>'
+                                tempstr+='冷却关联技能：'
+                                for j in self.角色属性B.技能栏[i].冷却关联技能2:
+                                    tempstr+=j
+                                    if j != self.角色属性B.技能栏[i].冷却关联技能2[-1]:
+                                        tempstr+=','
+                            if self.角色属性B.技能栏[i].冷却关联技能3 != ['无']:
+                                tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率3(self.角色属性B.武器类型)*100,2))+'%<br>'
+                                tempstr+='冷却关联技能：'
+                                for j in self.角色属性B.技能栏[i].冷却关联技能3:
+                                    tempstr+=j
+                                    if j != self.角色属性B.技能栏[i].冷却关联技能3[-1]:
+                                        tempstr+=','             
                 if tempstr != '':
                     tempstr += '</font>'
                     被动数据=QLabel(输出窗口)
@@ -4658,7 +4650,7 @@ class 角色窗口(QWidget):
         属性.贫瘠沙漠的遗产 = self.装备条件选择[6].currentIndex()
         属性.幸运三角 = self.装备条件选择[7].currentIndex()
         属性.擎天战甲 = self.装备条件选择[8].currentIndex()
-        属性.持续伤害计算比例 = self.装备条件选择[9].currentIndex()
+        属性.持续伤害计算比例 = 1 - 0.01 * self.装备条件选择[9].currentIndex()
         属性.军神的隐秘遗产 = self.装备条件选择[10].currentIndex()
         属性.太极天帝剑 = self.装备条件选择[11].currentIndex()
         属性.绿色生命的面容 = self.装备条件选择[12].currentIndex()
