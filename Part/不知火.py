@@ -238,9 +238,9 @@ class 不知火技能10(主动技能):
         temp += '加成倍率:80%<br>'
         temp += '关联技能:'
         try:
-            for i in range(len(self.六道技能显示)-1):
-                temp += self.六道技能显示[i]+','
-            temp += self.六道技能显示[len(self.六道技能显示)-1]
+            for i in range(len(self.六道技能显示) - 1):
+                temp += self.六道技能显示[i] + ','
+            temp += self.六道技能显示[len(self.六道技能显示) - 1]
         except:
             temp += '无'
         return temp
@@ -643,66 +643,23 @@ class 不知火角色属性(角色属性):
 
     def 数据计算(self, x = 0, y = -1):
         self.预处理()
-        技能释放次数=[]
-        技能单次伤害=[]
-        技能总伤害=[]
-    
-        #技能单次伤害计算
-        for i in self.技能栏:
-            if i.是否有伤害==1 and self.技能切装[self.技能序号[i.名称]] != y:
-                技能单次伤害.append(i.等效百分比(self.武器类型)*self.伤害指数*i.被动倍率)
-            else:
-                技能单次伤害.append(0)
-      
-        #技能释放次数计算
-        for i in self.技能栏:
-            if i.是否有伤害==1:
-                if self.次数输入[self.技能序号[i.名称]] =='/CD':
-                    技能释放次数.append(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型) + 1 +i.基础释放次数))
-                else:
-                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
-            else:
-                技能释放次数.append(0)
-    
-        #单技能伤害合计
-
-        for i in self.技能栏:
-            if i.是否有伤害==1 and 技能释放次数[self.技能序号[i.名称]] != 0:
-                技能总伤害.append(技能单次伤害[self.技能序号[i.名称]]*技能释放次数[self.技能序号[i.名称]]*(1+self.白兔子技能*0.20+self.年宠技能*0.10*self.宠物次数[self.技能序号[i.名称]]/技能释放次数[self.技能序号[i.名称]]+self.斗神之吼秘药*0.12))
-            else:
-                技能总伤害.append(0)
+        #初步计算
+        技能释放次数 = self.技能释放次数计算()
+        技能单次伤害 = self.技能单次伤害计算(y)
+        技能总伤害 = self.技能总伤害计算(技能释放次数, 技能单次伤害)
 
         #六道伤害计算
         if self.技能栏[self.技能序号['忍法：六道轮回']].等级 != 0 and 技能释放次数[self.技能序号['忍法：六道轮回']] !=0 :
            self.技能栏[self.技能序号['忍法：六道轮回']].六道技能显示 = []
            for i in self.六道绑定技能:
-               if 技能释放次数[self.技能序号[i]] != 0 and self.技能栏[self.技能序号[i]].等级 !=0:
+               if 技能释放次数[self.技能序号[i]] != 0 and self.技能栏[self.技能序号[i]].等级 != 0:
                    技能总伤害[self.技能序号[i]] += 0.8 * 技能单次伤害[self.技能序号[i]] * 技能释放次数[self.技能序号['忍法：六道轮回']] * (1+self.白兔子技能*0.20+self.年宠技能*0.10*self.宠物次数[self.技能序号['忍法：六道轮回']]/技能释放次数[self.技能序号['忍法：六道轮回']]+self.斗神之吼秘药*0.12)
                    self.技能栏[self.技能序号['忍法：六道轮回']].六道技能显示.append(i)
         else:
             self.技能栏[self.技能序号['忍法：六道轮回']].自定义描述 = 0
 
-        总伤害=0
-        for i in self.技能栏:
-            总伤害+=技能总伤害[self.技能序号[i.名称]]
-        
-        if x==0:
-            return 总伤害
-    
-        if x==1:
-            详细数据=[]
-            for i in range(0,len(self.技能栏)):
-                详细数据.append(技能释放次数[i])
-                详细数据.append(技能总伤害[i])
-                if 技能释放次数[i] != 0 :
-                    详细数据.append(技能总伤害[i]/技能释放次数[i])
-                else:
-                    详细数据.append(0)
-                if 总伤害 != 0:
-                    详细数据.append(技能总伤害[i]/总伤害*100)
-                else:
-                    详细数据.append(0)
-            return 详细数据
+        #返回结果
+        return self.数据返回(x, 技能释放次数, 技能总伤害)
 
 class 不知火(角色窗口):
     def 窗口属性输入(self):

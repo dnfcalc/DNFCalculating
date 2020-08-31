@@ -5,7 +5,7 @@ class 湮灭之瞳主动技能(主动技能):
 
     def 等效CD(self, 武器类型):
         if 武器类型 == '魔杖':
-            return round(self.CD / self.恢复 * 1.0, 1)
+            return round(self.CD / self.恢复 * 1, 1)
         if 武器类型 == '法杖':
             return round(self.CD / self.恢复 * 1.1, 1)
 
@@ -584,29 +584,9 @@ class 湮灭之瞳角色属性(角色属性):
         self.所有属性强化(self.技能栏[self.技能序号['元素环绕']].属强加成() + self.技能栏[self.技能序号['元素融合']].属强加成())
         super().伤害指数计算()
 
-    def 数据计算(self, x = 0, y = -1):
-        self.预处理()
-        技能释放次数=[]
-        技能单次伤害=[]
-        技能总伤害=[]
-    
-        #技能单次伤害计算
-        for i in self.技能栏:
-            if i.是否有伤害==1 and self.技能切装[self.技能序号[i.名称]] != y:
-                if self.次数输入[self.技能序号[i.名称]] == '/CD':
-                    技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型) + 1 + i.基础释放次数))
-                elif self.次数输入[self.技能序号[i.名称]] != '0':
-                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
-                else:
-                    技能释放次数.append(0)
-            else:
-                技能释放次数.append(0)
-
-        for i in self.技能栏:
-            if i.关联技能4 != ['无']:
-                    for j in i.关联技能4:
-                        i.元素之力蓄力数量 += 技能释放次数[self.技能序号[j]]
-        # 技能单次伤害计算
+    def 技能单次伤害计算(self, y):
+        #y切装标记
+        技能单次伤害 = []
         for i in self.技能栏:
             if i.是否主动 == 1 and i.名称 != '元素炮' :
                 技能单次伤害.append(i.等效百分比(self.武器类型) * self.伤害指数 * i.被动倍率)
@@ -618,39 +598,7 @@ class 湮灭之瞳角色属性(角色属性):
                                  (1.0 + self.技能栏[self.技能序号['元素之力']].加成倍率(self.武器类型)*5))
             else:
                 技能单次伤害.append(0)
-
-
-        # 单技能伤害合计
-
-        for i in self.技能栏:
-            if i.是否主动 == 1 and 技能释放次数[self.技能序号[i.名称]] != 0:
-                技能总伤害.append(技能单次伤害[self.技能序号[i.名称]] * 技能释放次数[self.技能序号[i.名称]] * (
-                            1 + self.白兔子技能 * 0.20 + self.年宠技能 * 0.10 * self.宠物次数[self.技能序号[i.名称]] / 技能释放次数[
-                        self.技能序号[i.名称]] + self.斗神之吼秘药 * 0.12))
-            else:
-                技能总伤害.append(0)
-
-        总伤害 = 0
-        for i in self.技能栏:
-            总伤害 += 技能总伤害[self.技能序号[i.名称]]
-
-        if x == 0:
-            return 总伤害
-
-        if x == 1:
-            详细数据 = []
-            for i in range(0, len(self.技能栏)):
-                详细数据.append(技能释放次数[i])
-                详细数据.append(技能总伤害[i])
-                if 技能释放次数[i] != 0:
-                    详细数据.append(技能总伤害[i] / 技能释放次数[i])
-                else:
-                    详细数据.append(0)
-                if 总伤害 != 0:
-                    详细数据.append(技能总伤害[i] / 总伤害 * 100)
-                else:
-                    详细数据.append(0)
-            return 详细数据
+        return 技能单次伤害
 
 class 湮灭之瞳(角色窗口):
     def 窗口属性输入(self):

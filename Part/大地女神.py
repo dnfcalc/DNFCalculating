@@ -6,7 +6,7 @@ from PublicReference.base import *
 class 大地女神主动技能(主动技能):
     def 等效CD(self, 武器类型):
         if 武器类型 == '巨剑':
-            return round(self.CD / self.恢复 * 1.0, 1)
+            return round(self.CD / self.恢复 * 1, 1)
 
 # 骑士信念
 class 大地女神技能0(被动技能):

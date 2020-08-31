@@ -386,61 +386,20 @@ class 缔造者角色属性(角色属性):
                 if 加成类型 == '所有':
                     i.等级加成(lv)
 
-    def 数据计算(self, x = 0, y = -1):
-        self.预处理()
-        技能释放次数=[]
-        技能单次伤害=[]
-        技能总伤害=[]
-    
-        #技能单次伤害计算
+    def 技能释放次数计算(self):
+        技能释放次数 = []
         for i in self.技能栏:
-            if i.是否有伤害==1 and self.技能切装[self.技能序号[i.名称]] != y:
-                技能单次伤害.append(i.等效百分比(self.武器类型)*self.伤害指数*i.被动倍率)
-            else:
-                技能单次伤害.append(0)
-      
-        #技能释放次数计算
-        for i in self.技能栏:
-            if i.是否有伤害==1:
-                if self.次数输入[self.技能序号[i.名称]] =='/CD':
-                    技能释放次数.append(int(int(i.能量 * (1 + (self.时间输入 - 2)/i.等效CD(self.武器类型)))/i.最小值))
+            if i.是否有伤害 == 1:
+                if self.次数输入[self.技能序号[i.名称]] == '/CD':
+                    技能释放次数.append(int(int(i.能量 * (1 + (self.时间输入 - 2) / i.等效CD(self.武器类型))) / i.最小值))
                 elif self.次数输入[self.技能序号[i.名称]] != '0':
                     技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
                 else:
                     技能释放次数.append(0)
             else:
                 技能释放次数.append(0)
+        return 技能释放次数
     
-        #单技能伤害合计
-    
-        for i in self.技能栏:
-            if i.是否有伤害==1 and 技能释放次数[self.技能序号[i.名称]] != 0:
-                技能总伤害.append(技能单次伤害[self.技能序号[i.名称]]*技能释放次数[self.技能序号[i.名称]]*(1+self.白兔子技能*0.20+self.年宠技能*0.10*self.宠物次数[self.技能序号[i.名称]]/技能释放次数[self.技能序号[i.名称]]+self.斗神之吼秘药*0.12))
-            else:
-                技能总伤害.append(0)
-    
-        总伤害=0
-        for i in self.技能栏:
-            总伤害+=技能总伤害[self.技能序号[i.名称]]
-        
-        if x==0:
-            return 总伤害
-    
-        if x==1:
-            详细数据=[]
-            for i in range(0,len(self.技能栏)):
-                详细数据.append(技能释放次数[i])
-                详细数据.append(技能总伤害[i])
-                if 技能释放次数[i]!=0:
-                    详细数据.append(技能总伤害[i]/技能释放次数[i])
-                else:
-                    详细数据.append(0)
-                if 总伤害!=0:
-                    详细数据.append(技能总伤害[i]/总伤害*100)
-                else:
-                    详细数据.append(0)
-            return 详细数据
-
 class 缔造者(角色窗口):
     def 窗口属性输入(self):
         self.初始属性 = 缔造者角色属性()

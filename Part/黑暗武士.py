@@ -978,32 +978,25 @@ class 黑暗武士角色属性(角色属性):
 
         #避免出现浮点数取整BUG
         self.伤害增加 += 0.00000001
-
-        if self.攻击属性 == 0:
-            属性倍率=1.05+0.0045*int(max(self.火属性强化 - 火抗输入,self.冰属性强化 - 冰抗输入,self.光属性强化 - 光抗输入,self.暗属性强化 - 暗抗输入))
-        elif self.攻击属性 == 1:
-            属性倍率=1.05+0.0045*int(self.火属性强化 - 火抗输入)
-        elif self.攻击属性 == 2:
-            属性倍率=1.05+0.0045*int(self.冰属性强化 - 冰抗输入)
-        elif self.攻击属性 == 3:
-            属性倍率=1.05+0.0045*int(self.光属性强化 - 光抗输入)
-        elif self.攻击属性 == 4:
-            属性倍率=1.05+0.0045*int(self.暗属性强化 - 暗抗输入)
+        
+        属性倍率 = self.属性倍率计算()
 
         if self.红色宠物装备 == '自适应':
             self.宠物装备判断(属性倍率)
 
-        面板1 = int((self.面板力量()/250+1) * (self.物理攻击力 + self.进图物理攻击力) * (1 + self.百分比三攻))
-        面板2 = int((self.面板智力()/250+1) * (self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻))
+        self.词条提升率计算(属性倍率)
 
-        增伤倍率=1+int(self.伤害增加*100)/100
-        增伤倍率*=1+self.暴击伤害
-        增伤倍率*=1+self.最终伤害
-        增伤倍率*=self.技能攻击力
-        增伤倍率*=1+self.持续伤害*self.持续伤害计算比例
-        增伤倍率*=1+self.附加伤害+self.属性附加*属性倍率
-        self.伤害指数1=面板1*属性倍率*增伤倍率*基准倍率/100
-        self.伤害指数2=面板2*属性倍率*增伤倍率*基准倍率/100
+        面板1 = int((self.面板力量() / 250 + 1) * (self.物理攻击力 + self.进图物理攻击力) * (1 + self.百分比三攻))
+        面板2 = int((self.面板智力() / 250 + 1) * (self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻))
+
+        增伤倍率 = 1 + int(self.伤害增加 * 100) / 100
+        增伤倍率 *= 1 + self.暴击伤害
+        增伤倍率 *= 1 + self.最终伤害
+        增伤倍率 *= self.技能攻击力
+        增伤倍率 *= 1 + self.持续伤害 * self.持续伤害计算比例
+        增伤倍率 *= 1 + self.附加伤害 + self.属性附加 * 属性倍率
+        self.伤害指数1 = 面板1 * 属性倍率 * 增伤倍率 * 基准倍率 / 100
+        self.伤害指数2 = 面板2 * 属性倍率 * 增伤倍率 * 基准倍率 / 100
 
     def CD倍率计算(self):
         super().CD倍率计算()
@@ -1020,64 +1013,19 @@ class 黑暗武士角色属性(角色属性):
                     if j != '无':
                         self.技能栏[self.技能序号[j]].计算CD = 计算CD
 
-    def 数据计算(self, x = 0, y = -1):
-        self.预处理()
-        技能释放次数=[]
-        技能单次伤害=[]
-        技能总伤害=[]
-    
-        #技能单次伤害计算
+    def 技能单次伤害计算(self, y):
+        #y切装标记
+        技能单次伤害 = []
         for i in self.技能栏:
-            if i.是否有伤害==1 and self.技能切装[self.技能序号[i.名称]] != y:
+            if i.是否有伤害 == 1 and self.技能切装[self.技能序号[i.名称]] != y:
                 # 分物理魔法 乘伤害指数
                 if i.类型 == '物理':
-                    技能单次伤害.append(i.等效百分比(self.武器类型)*self.伤害指数1*i.被动倍率)
+                    技能单次伤害.append(i.等效百分比(self.武器类型) * self.伤害指数1 * i.被动倍率)
                 else:
-                    技能单次伤害.append(i.等效百分比(self.武器类型)*self.伤害指数2*i.被动倍率)
+                    技能单次伤害.append(i.等效百分比(self.武器类型) * self.伤害指数2 * i.被动倍率)
             else:
                 技能单次伤害.append(0)
-      
-        #技能释放次数计算
-        for i in self.技能栏:
-            if i.是否有伤害==1:
-                if self.次数输入[self.技能序号[i.名称]] =='/CD':
-                    技能释放次数.append(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型) + 1 +i.基础释放次数))
-                elif self.次数输入[self.技能序号[i.名称]] != '0':
-                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
-                else:
-                    技能释放次数.append(0)
-            else:
-                技能释放次数.append(0)
-    
-        #单技能伤害合计
-    
-        for i in self.技能栏:
-            if i.是否有伤害==1 and 技能释放次数[self.技能序号[i.名称]] != 0:
-                技能总伤害.append(技能单次伤害[self.技能序号[i.名称]]*技能释放次数[self.技能序号[i.名称]]*(1+self.白兔子技能*0.20+self.年宠技能*0.10*self.宠物次数[self.技能序号[i.名称]]/技能释放次数[self.技能序号[i.名称]]+self.斗神之吼秘药*0.12))
-            else:
-                技能总伤害.append(0)
-    
-        总伤害=0
-        for i in self.技能栏:
-            总伤害+=技能总伤害[self.技能序号[i.名称]]
-        
-        if x==0:
-            return 总伤害
-    
-        if x==1:
-            详细数据=[]
-            for i in range(0,len(self.技能栏)):
-                详细数据.append(技能释放次数[i])
-                详细数据.append(技能总伤害[i])
-                if 技能释放次数[i]!=0:
-                    详细数据.append(技能总伤害[i]/技能释放次数[i])
-                else:
-                    详细数据.append(0)
-                if 总伤害!=0:
-                    详细数据.append(技能总伤害[i]/总伤害*100)
-                else:
-                    详细数据.append(0)
-            return 详细数据
+        return 技能单次伤害
 
     def 站街力量(self):
         return int(max(self.力量, self.智力) * self.技能栏[self.技能序号['次元融合']].力智倍率())
@@ -1090,15 +1038,13 @@ class 黑暗武士角色属性(角色属性):
             power = int(int((self.力量 + self.进图力量)) * (1 + self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率())
             intelligence = int(int((self.智力 + self.进图智力)) * (1 + self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率())
             return int(max(power,intelligence))
-            #return int(int((self.力量 + self.进图力量)) * (1 + self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率())
         else:
             power = int(int((self.力量 + int((self.力量 - self.基础力量) * 1.35 + 7664) +self.进图力量)) * (1 + self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率())
             intelligence = int(int((self.智力 + int((self.智力 - self.基础智力) * 1.35 + 7664) +self.进图智力)) * (1 + self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率())
             return int(max(power,intelligence))
-            #return int(int((self.力量 + int((self.力量 - self.基础力量) * 1.35 + 7664) +self.进图力量)) * (1 + self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率())
-
+           
     def 面板智力(self):
-        return self.面板力量();
+        return self.面板力量()
 
 class 黑暗武士(角色窗口):
 
@@ -1114,6 +1060,8 @@ class 黑暗武士(角色窗口):
 
     def 界面(self):
         super().界面()
+
+        self.守门将属强.move(self.守门将属强.x() - 135, self.守门将属强.y() - 30)
 
         for i in [self.觉醒选择, self.一觉图片, self.二觉图片, self.一觉遮罩, self.二觉遮罩]:
             i.move(-1000, -1000)
@@ -1206,7 +1154,7 @@ class 黑暗武士(角色窗口):
     def 输入属性(self, 属性, x = 0):
         super().输入属性(属性, x)
 
-        排列倍率 = [2.0, 1.0, 1.3, 1.5, 1.8, 2.0]
+        排列倍率 = [2, 1, 1.3, 1.5, 1.8, 2]
 
         for i in range(6):
             for j in range(6):

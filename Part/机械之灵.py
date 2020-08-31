@@ -24,7 +24,7 @@ class 机械之灵技能1(主动技能):
     TP上限 = 5
    
     def 等效CD(self, 武器类型):
-        return round(1.0,1)
+        return round(1,1)
     
     def G系加成倍率(self):
         if self.等级==0:
@@ -44,7 +44,7 @@ class 机械之灵技能2(主动技能):
     TP上限 = 5
     
     def 等效CD(self, 武器类型):
-        return round(6.0,1)
+        return round(6,1)
 
     def G系加成倍率(self):
         if self.等级==0:
@@ -89,7 +89,7 @@ class 机械之灵技能5(主动技能):
     TP上限 = 5
     
     def 等效CD(self, 武器类型):
-        return round(1.0,1)
+        return round(1,1)
 
     def G系加成倍率(self):
         if self.等级==0:
@@ -138,7 +138,7 @@ class 机械之灵技能8(主动技能):
     TP上限 = 5
 
     def 等效CD(self, 武器类型):
-        return round(1.0,1)
+        return round(1,1)
 
 class 机械之灵技能9(主动技能):
     名称='空投支援'
@@ -427,7 +427,7 @@ class 机械之灵技能25(主动技能):
     
 
     def 等效CD(self, 武器类型):
-        return round(1.0,1)        
+        return round(1,1)        
 
 机械之灵技能列表 = []
 i = 0

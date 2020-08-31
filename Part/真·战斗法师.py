@@ -498,53 +498,38 @@ class 真·战斗法师角色属性(角色属性):
       
     def 面板智力(self):
         return self.面板力量()
-    
-    def 装备基础(self):
-        self.防具基础()
-  
-        for i in [9,10]:
-            temp = 装备列表[装备序号[self.装备栏[i]]]
-            if temp.所属套装 != '智慧产物':
-                x = 左右计算(temp.等级,temp.品质,self.强化等级[i])
-                self.力量 += x
-                self.智力 += x
 
-        for i in range(0,12):
-            temp = 装备列表[装备序号[self.装备栏[i]]]
-            if self.是否增幅[i] and temp.所属套装 != '智慧产物':
-                x = 增幅计算(temp.等级,temp.品质,self.强化等级[i])
-                if '物理' in self.伤害类型 or '力量' in self.伤害类型:
-                    self.力量 += x
+    def 技能释放次数计算(self):
+        技能释放次数 = []
+        for i in self.技能栏:
+            if i.是否有伤害 == 1:
+                if self.次数输入[self.技能序号[i.名称]] == '/CD':
+                    技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型) + 1 + i.基础释放次数))
+                elif self.次数输入[self.技能序号[i.名称]] != '0':
+                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
                 else:
-                    self.智力 += x
-        
-        temp = 装备列表[装备序号[self.装备栏[11]]]
-        if temp.所属套装 != '智慧产物':
-            self.物理攻击力 += 武器计算(temp.等级,temp.品质,self.强化等级[11],self.武器类型,'魔法')
-            self.魔法攻击力 += 武器计算(temp.等级,temp.品质,self.强化等级[11],self.武器类型,'魔法')
-            self.独立攻击力 += 锻造计算(temp.等级,temp.品质,self.武器锻造等级)
-        
-        temp = 装备列表[装备序号[self.装备栏[8]]]
-        if temp.所属套装 != '智慧产物':
-            x = 耳环计算(temp.等级,temp.品质,self.强化等级[8])
-            self.物理攻击力 += x
-            self.魔法攻击力 += x
-            self.独立攻击力 += x
+                    技能释放次数.append(0)
+            else:
+                技能释放次数.append(0)
 
-        for i in [5,6,7,8,9,10]:
-            temp = 装备列表[装备序号[self.装备栏[i]]]
-            self.力量 += temp.力量
-            self.智力 += temp.智力
-            self.物理攻击力 += temp.物理攻击力
-            self.魔法攻击力 += temp.魔法攻击力
-            self.独立攻击力 += temp.独立攻击力
+        if '闪击碎霸' in [self.护石第一栏, self.护石第二栏, self.护石第三栏]:
+            技能释放次数[self.技能序号['碎霸']] += 技能释放次数[self.技能序号['闪击碎霸']]
+            
+        return 技能释放次数
 
+    def 武器基础(self):
         temp = 装备列表[装备序号[self.装备栏[11]]]
+
         self.力量 += temp.力量
         self.智力 += temp.智力
         self.物理攻击力 += temp.物理攻击力
         self.魔法攻击力 += temp.物理攻击力
         self.独立攻击力 += temp.独立攻击力
+
+        if temp.所属套装 != '智慧产物':
+            self.物理攻击力 += 武器计算(temp.等级,temp.品质,self.强化等级[11],self.武器类型,'物理')
+            self.魔法攻击力 += 武器计算(temp.等级,temp.品质,self.强化等级[11],self.武器类型,'物理')
+            self.独立攻击力 += 锻造计算(temp.等级,temp.品质,self.武器锻造等级)
 
 class 真·战斗法师(角色窗口):
     def 窗口属性输入(self):
@@ -569,5 +554,4 @@ class 真·战斗法师(角色窗口):
     def 输入属性(self, 属性, x = 0):
         super().输入属性(属性, x)
         属性.技能栏[属性.技能序号['碎霸']].触发概率 = round(self.碎霸概率.currentIndex() / 10, 2)
-        if 属性.护石第一栏 == "闪击碎霸" or 属性.护石第二栏 == "闪击碎霸" or 属性.护石第三栏 == "闪击碎霸":
-            属性.技能栏[属性.技能序号['碎霸']].基础释放次数 += 1
+

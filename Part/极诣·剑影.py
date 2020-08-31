@@ -46,7 +46,7 @@ class 极诣·剑影技能1(极诣·剑影主动技能):
 
 class 极诣·剑影技能2(被动技能):
     名称 = '剑影太刀精通'
-    所在等级 = 15
+    所在等级 = 20
     等级上限 = 20
     基础等级 = 10
     def 加成倍率(self, 武器类型):
@@ -471,53 +471,19 @@ class 极诣·剑影角色属性(角色属性):
         self.技能栏= deepcopy(极诣·剑影技能列表)
         self.技能序号= deepcopy(极诣·剑影技能序号)
 
-    def 装备基础(self):
-        self.防具基础()
-  
-        for i in [9,10]:
-            temp = 装备列表[装备序号[self.装备栏[i]]]
-            if temp.所属套装 != '智慧产物':
-                x = 左右计算(temp.等级,temp.品质,self.强化等级[i])
-                self.力量 += x
-                self.智力 += x
-
-        for i in range(0,12):
-            temp = 装备列表[装备序号[self.装备栏[i]]]
-            if self.是否增幅[i] and temp.所属套装 != '智慧产物':
-                x = 增幅计算(temp.等级,temp.品质,self.强化等级[i])
-                if '物理' in self.伤害类型 or '力量' in self.伤害类型:
-                    self.力量 += x
-                else:
-                    self.智力 += x
-        
+    def 武器基础(self):
         temp = 装备列表[装备序号[self.装备栏[11]]]
-        if temp.所属套装 != '智慧产物':
-            self.物理攻击力 += 武器计算(temp.等级,temp.品质,self.强化等级[11],self.武器类型,'魔法')
-            self.魔法攻击力 += 武器计算(temp.等级,temp.品质,self.强化等级[11],self.武器类型,'魔法')
-            self.独立攻击力 += 锻造计算(temp.等级,temp.品质,self.武器锻造等级)
-        
-        temp = 装备列表[装备序号[self.装备栏[8]]]
-        if temp.所属套装 != '智慧产物':
-            x = 耳环计算(temp.等级,temp.品质,self.强化等级[8])
-            self.物理攻击力 += x
-            self.魔法攻击力 += x
-            self.独立攻击力 += x
 
-        for i in [5,6,7,8,9,10]:
-            temp = 装备列表[装备序号[self.装备栏[i]]]
-            self.力量 += temp.力量
-            self.智力 += temp.智力
-            self.物理攻击力 += temp.物理攻击力
-            self.魔法攻击力 += temp.魔法攻击力
-            self.独立攻击力 += temp.独立攻击力
-            
-        #剑影被动将武器魔攻转换成物攻
-        temp = 装备列表[装备序号[self.装备栏[11]]]
         self.力量 += temp.力量
         self.智力 += temp.智力
         self.物理攻击力 += temp.魔法攻击力
         self.魔法攻击力 += temp.魔法攻击力
         self.独立攻击力 += temp.独立攻击力
+
+        if temp.所属套装 != '智慧产物':
+            self.物理攻击力 += 武器计算(temp.等级,temp.品质,self.强化等级[11],self.武器类型,'魔法')
+            self.魔法攻击力 += 武器计算(temp.等级,temp.品质,self.强化等级[11],self.武器类型,'魔法')
+            self.独立攻击力 += 锻造计算(temp.等级,temp.品质,self.武器锻造等级)
 
     def 被动倍率计算(self):
         super().被动倍率计算()

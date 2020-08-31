@@ -7,7 +7,7 @@ class 元素圣灵主动技能(主动技能):
         if 武器类型 == '法杖':
             return round(self.CD / self.恢复 * 1.1, 1)
         if 武器类型 == '魔杖':
-            return round(self.CD / self.恢复 * 1.0, 1)
+            return round(self.CD / self.恢复 * 1, 1)
 
 class 元素圣灵技能0(元素圣灵主动技能):
     名称 = '烈焰冲击'

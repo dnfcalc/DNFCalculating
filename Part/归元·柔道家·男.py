@@ -8,9 +8,9 @@ class 归元·柔道家·男主动技能(主动技能):
         if 武器类型 == '手套':
             return round(self.CD / self.恢复 * 0.9, 1)
         if 武器类型 == '东方棍':
-            return round(self.CD / self.恢复 * 1.0, 1)
+            return round(self.CD / self.恢复 * 1, 1)
         if 武器类型 == '爪':
-            return round(self.CD / self.恢复 * 1.0, 1)
+            return round(self.CD / self.恢复 * 1, 1)
 
 #class Buff技能(归元·柔道家·男主动技能):
 #	名称="暴力抓取"
