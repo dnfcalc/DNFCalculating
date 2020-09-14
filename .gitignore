@@ -1,4 +1,3 @@
 .vscode
-.vs
-._pycache_
-.logs
+__pycache__
+logs
