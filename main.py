@@ -8,20 +8,12 @@ from PublicReference.producer_consumer import producer_data, consumer, 工作线
 if __name__ == '__main__':
     multiprocessing.freeze_support()
 
-窗口列表 = []
-
-def 打开窗口(index):
-    if len(窗口列表) != 0:
-        窗口列表[-1].关闭窗口()
-        窗口列表.clear()
-    exec('窗口列表.append('+ index +'())')
-    窗口列表[-1].show()
-
 class 选择窗口(QMainWindow):
     def __init__(self):
         super().__init__()
         self.初始化工作进程()
         self.界面()
+        self.职业窗口 = None
 
     def 初始化工作进程(self):
         # 工作队列
@@ -43,7 +35,7 @@ class 选择窗口(QMainWindow):
     def 界面(self):
         self.setMinimumSize(805,630)
         self.setMaximumSize(805,1520)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.8.30 (技能模板仅供参考，请根据自身情况修改)')
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.9.12 (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
 
@@ -163,10 +155,16 @@ class 选择窗口(QMainWindow):
         self.vbox.addWidget(self.scroll)
         wrapper.setLayout(self.vbox)
 
+    def 打开窗口(self, name):
+        if self.职业窗口 != None:
+            self.职业窗口.close()
+        self.职业窗口 = eval(name + '()')
+        self.职业窗口.show()
+
     def 职业版本判断(self, index):
         try:
             if index.类名2 == '无':
-                打开窗口(index.类名)
+                self.打开窗口(index.类名)
                 return
             box = QMessageBox(QMessageBox.Question, "提示", "请选择要打开的版本")
             box.setWindowIcon(self.icon)
@@ -186,13 +184,13 @@ class 选择窗口(QMainWindow):
                 E.setText('取消')
                 box.exec_()
                 if box.clickedButton() == A:
-                    打开窗口(index.类名)
+                    self.打开窗口(index.类名)
                 elif box.clickedButton() == B:
-                    打开窗口(index.类名2)
+                    self.打开窗口(index.类名2)
                 elif box.clickedButton() == C:
-                    打开窗口(index.类名3)
+                    self.打开窗口(index.类名3)
                 elif box.clickedButton() == D:
-                    打开窗口(index.类名4)
+                    self.打开窗口(index.类名4)
                 else:
                     return
             else:
@@ -205,9 +203,9 @@ class 选择窗口(QMainWindow):
                 C.setText('取消')
                 box.exec_()
                 if box.clickedButton() == A:
-                    打开窗口(index.类名)
+                    self.打开窗口(index.类名)
                 elif box.clickedButton() == B:
-                    打开窗口(index.类名2)
+                    self.打开窗口(index.类名2)
                 else:
                     return
         except:

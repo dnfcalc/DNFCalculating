@@ -546,7 +546,7 @@ class 幽冥角色属性(角色属性):
             self.技能栏[self.技能序号['影斩·乱舞']].自定义描述 = 1
             x = self.技能栏[self.技能序号['暗杀之匕首精通']]
             temp = [x.等级, x.加成倍率(self.武器类型)]
-            x.等级加成(3)
+            x.等级 += 3
             temp.append(x.等级)
             temp.append(x.加成倍率(self.武器类型))
             self.技能栏[self.技能序号['影斩·乱舞']].描述信息 = deepcopy(temp)

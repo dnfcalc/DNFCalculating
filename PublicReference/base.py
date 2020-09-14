@@ -21,6 +21,7 @@ from PublicReference.装备 import *
 from PublicReference.基础函数 import *
 from PublicReference.辟邪玉 import *
 from PublicReference.选项设置 import *
+from PublicReference.择优词条 import *
 from PublicReference.copy import *
 
 class 技能:
@@ -188,6 +189,7 @@ class 角色属性():
     百分比减防 = 0.0
     固定减防 = 0
     词条提升率 = [0] * 6
+    词条选择 = []
 
     攻击速度 = 0.00
     移动速度 = 0.00
@@ -199,8 +201,9 @@ class 角色属性():
 
     技能栏 = []
     技能序号 = dict()
-
-    红色宠物装备 = '默认'
+        
+    自适应选项 = [0] * 2
+    自适应描述 = ['无'] * 2
 
     装备栏 = []
     套装栏 = []
@@ -222,6 +225,8 @@ class 角色属性():
     特色选项 = 0
 
     转甲选项 = 0
+
+    希洛克武器词条 = 0
     
     #0英雄 1传说
     角色熟练度 = 0
@@ -434,11 +439,12 @@ class 角色属性():
             self.独立攻击力 += 锻造计算(temp.等级,temp.品质,self.武器锻造等级)
 
     def 装备基础(self):
-        self.防具基础()
-        self.首饰基础()
-        self.特殊基础()
-        self.武器基础()
-        self.增幅基础()
+        if 调试开关 == 0:
+            self.防具基础()
+            self.首饰基础()
+            self.特殊基础()
+            self.武器基础()
+            self.增幅基础()
 
     def 获取增幅(self, 部位):
         return self.是否增幅[部位列表.index(部位)]
@@ -644,89 +650,101 @@ class 角色属性():
         elif self.伤害类型 == '魔法固伤':
             return int((self.面板智力() / 250 + 1) * (self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻))
 
-    def 宠物装备判断(self, 属性倍率):
+    def 词条提升率计算(self, 词条范围, 词条数值, y = 0):
 
-        #8%白字
-        x = 1 + self.附加伤害 + self.属性附加 * 属性倍率
-        self.附加伤害加成(0.08)
-        temp1 = (1 + self.附加伤害 + self.属性附加 * 属性倍率) / x
-        self.附加伤害加成(-0.08)
+        词条提升率 = [0] * 6
 
-        #7%黄字
-        x = 1 + int(self.伤害增加 * 100) / 100
-        self.伤害增加加成(0.07)
-        temp2 = (1 + int(self.伤害增加 * 100) / 100) / x
-        self.伤害增加加成(-0.07)
+        if 0 in 词条范围:
+            #百分比力智
+            x = self.面板系数计算()
+            self.百分比力智加成(词条数值[0])
+            词条提升率[0] = self.面板系数计算() / x - 1
+            self.百分比力智加成(-词条数值[0])
 
-        #7%力智
-        x = self.面板系数计算()
-        self.百分比力智加成(0.07)
-        temp3 = self.面板系数计算() / x
-        self.百分比力智加成(-0.07)
+        if 1 in 词条范围:
+            #百分比三攻
+            x = 1 + self.百分比三攻
+            self.百分比三攻加成(词条数值[1])
+            词条提升率[1] = (1 + self.百分比三攻) / x - 1
+            self.百分比三攻加成(-词条数值[1])  
+        
+        if 2 in 词条范围:
+            #伤害增加
+            x = 1 + int(self.伤害增加 * 100) / 100
+            self.伤害增加加成(词条数值[2])
+            词条提升率[2] = (1 + int(self.伤害增加 * 100) / 100) / x - 1
+            self.伤害增加加成(-词条数值[2])
 
-        #判断
-        maxtemp = max(temp1, temp2, temp3)
-        if temp1 == maxtemp:
-            self.附加伤害加成(0.08)
-            self.红色宠物装备 = '8%白字'
-        elif temp2 == maxtemp:
-            self.伤害增加加成(0.07)
-            self.红色宠物装备 = '7%黄字'
-        elif temp3 == maxtemp:
-            self.百分比力智加成(0.07)
-            self.红色宠物装备 = '7%力智'
+        if 3 in 词条范围:    
+            #附加伤害
+            x = 1 + self.附加伤害 + self.属性附加 * self.属性倍率
+            self.附加伤害加成(词条数值[3])
+            词条提升率[3] = (1 + self.附加伤害 + self.属性附加 * self.属性倍率) / x - 1
+            self.附加伤害加成(-词条数值[3])
 
-    def 词条提升率计算(self, 属性倍率):
+        if 4 in 词条范围:    
+            #暴击伤害
+            x = 1 + self.暴击伤害
+            self.暴击伤害加成(词条数值[4])
+            词条提升率[4] = (1 + self.暴击伤害) / x - 1
+            self.暴击伤害加成(-词条数值[4])        
 
-        词条数值 = 0.1
+        if 5 in 词条范围:    
+            #最终伤害
+            x = 1 + self.最终伤害
+            self.最终伤害加成(词条数值[5])
+            词条提升率[5] = (1 + self.最终伤害) / x - 1
+            self.最终伤害加成(-词条数值[5])  
+        
+        if y == 1:
+            self.词条提升率 = copy(词条提升率)
 
-        #百分比力智
-        x = self.面板系数计算()
-        self.百分比力智加成(词条数值)
-        self.词条提升率[0] = self.面板系数计算() / x - 1
-        self.百分比力智加成(-词条数值)
+        index = 0
+        for k in range(6):
+            if 词条提升率[k] == max(词条提升率):
+                词条属性列表[k].加成属性(self, 词条数值[k])
+                return k
 
-        #百分比三攻
-        x = 1 + self.百分比三攻
-        self.百分比三攻加成(词条数值)
-        self.词条提升率[1] = (1 + self.百分比三攻) / x - 1
-        self.百分比三攻加成(-词条数值)  
+    def 自适应计算(self):
+        if self.自适应选项[0] != 0: #宠物
+            词条数值 = {0:0.07, 2:0.07, 3:0.08}
+            index = self.词条提升率计算([0, 2, 3], 词条数值)
+            self.自适应描述[0] = '{}%{}'.format(int(词条数值[index] * 100), 词条属性列表[index].描述)
+        
+        if self.自适应选项[1] != 0: #光环
+            index = self.词条提升率计算([1, 2, 4], [0.05] * 6)
+            self.自适应描述[1] = '{}%{}'.format(5, 词条属性列表[index].描述)
 
-        #伤害增加
-        x = 1 + int(self.伤害增加 * 100) / 100
-        self.伤害增加加成(词条数值)
-        self.词条提升率[2] = (1 + int(self.伤害增加 * 100) / 100) / x - 1
-        self.伤害增加加成(-词条数值)
+    def 自适应输出(self):
+        temp = ''
+        if self.自适应选项[0] != 0: #宠物
+            temp += '宠物:' + self.自适应描述[0]
+        if self.自适应选项[1] != 0: #光环
+            if temp != '':
+                temp += '|'
+            temp += '光环:' + self.自适应描述[1]
+        return temp
 
-        #附加伤害
-        x = 1 + self.附加伤害 + self.属性附加 * 属性倍率
-        self.附加伤害加成(词条数值)
-        self.词条提升率[3] = (1 + self.附加伤害 + self.属性附加 * 属性倍率) / x - 1
-        self.附加伤害加成(-词条数值)
+    def 希洛克武器提升(self):
+        if self.希洛克武器词条 == 0:
+            self.词条提升率 = [0] * 6
+            return
 
-        #暴击伤害
-        x = 1 + self.暴击伤害
-        self.暴击伤害加成(词条数值)
-        self.词条提升率[4] = (1 + self.暴击伤害) / x - 1
-        self.暴击伤害加成(-词条数值)        
-
-        #最终伤害
-        x = 1 + self.最终伤害
-        self.最终伤害加成(词条数值)
-        self.词条提升率[5] = (1 + self.最终伤害) / x - 1
-        self.最终伤害加成(-词条数值)  
+        self.词条选择.clear()
+        self.词条选择.append(self.词条提升率计算([0, 1, 2, 3, 4, 5], [0.10] * 6, 1))
+        self.词条选择.append(self.词条提升率计算([0, 1, 2, 3, 4, 5], [0.05] * 6))
 
     def 属性倍率计算(self):
         if self.攻击属性 == 0:
-            return 1.05 + 0.0045 * int(max(self.火属性强化 - 火抗输入,self.冰属性强化 - 冰抗输入,self.光属性强化 - 光抗输入,self.暗属性强化 - 暗抗输入))
+            self.属性倍率 = 1.05 + 0.0045 * int(max(self.火属性强化 - 火抗输入,self.冰属性强化 - 冰抗输入,self.光属性强化 - 光抗输入,self.暗属性强化 - 暗抗输入))
         elif self.攻击属性 == 1:
-            return 1.05 + 0.0045 * int(self.火属性强化 - 火抗输入)
+            self.属性倍率 = 1.05 + 0.0045 * int(self.火属性强化 - 火抗输入)
         elif self.攻击属性 == 2:
-            return 1.05 + 0.0045 * int(self.冰属性强化 - 冰抗输入)
+            self.属性倍率 = 1.05 + 0.0045 * int(self.冰属性强化 - 冰抗输入)
         elif self.攻击属性 == 3:
-            return 1.05 + 0.0045 * int(self.光属性强化 - 光抗输入)
+            self.属性倍率 = 1.05 + 0.0045 * int(self.光属性强化 - 光抗输入)
         elif self.攻击属性 == 4:
-            return 1.05 + 0.0045 * int(self.暗属性强化 - 暗抗输入)
+            self.属性倍率 = 1.05 + 0.0045 * int(self.暗属性强化 - 暗抗输入)
 
     def 伤害指数计算(self):
         
@@ -736,12 +754,12 @@ class 角色属性():
         #避免出现浮点数取整BUG
         self.伤害增加 += 0.00000001
         
-        属性倍率 = self.属性倍率计算()
+        self.属性倍率计算()
+        
+        if sum(self.自适应选项) != 0:
+            self.自适应计算()
 
-        if self.红色宠物装备 == '自适应':
-            self.宠物装备判断(属性倍率)
-
-        self.词条提升率计算(属性倍率)
+        self.希洛克武器提升()
 
         面板 = self.面板系数计算()
 
@@ -750,8 +768,8 @@ class 角色属性():
         增伤倍率 *= 1 + self.最终伤害
         增伤倍率 *= self.技能攻击力
         增伤倍率 *= 1 + self.持续伤害 * self.持续伤害计算比例
-        增伤倍率 *= 1 + self.附加伤害 + self.属性附加 * 属性倍率
-        self.伤害指数 = 面板 * 属性倍率 * 增伤倍率 * 基准倍率 / 100
+        增伤倍率 *= 1 + self.附加伤害 + self.属性附加 * self.属性倍率
+        self.伤害指数 = 面板 * self.属性倍率 * 增伤倍率 * 基准倍率 / 100
 
     def 切装判断(self):
         for i in self.装备切装:
@@ -986,30 +1004,31 @@ class 角色属性():
         return temp
 
     def 装备词条计算(self):
-        for i in range(11):
-            装备列表[装备序号[self.装备栏[i]]].城镇属性(self)
+        if 调试开关 == 0:
+            for i in range(11):
+                装备列表[装备序号[self.装备栏[i]]].城镇属性(self)
 
-        if 武器序号 == -1:
-            装备列表[装备序号[self.装备栏[11]]].城镇属性(self)
-        else:
-            装备列表[武器序号].城镇属性(self)
+            if 武器序号 == -1:
+                装备列表[装备序号[self.装备栏[11]]].城镇属性(self)
+            else:
+                装备列表[武器序号].城镇属性(self)
 
-        for i in self.套装栏:
-            套装列表[套装序号[i]].城镇属性(self)
+            for i in self.套装栏:
+                套装列表[套装序号[i]].城镇属性(self)
 
-        #进图触发属强向下取整
-        self.状态 = 1
-        for i in range(11):
-            装备列表[装备序号[self.装备栏[i]]].进图属性(self)
+            #进图触发属强向下取整
+            self.状态 = 1
+            for i in range(11):
+                装备列表[装备序号[self.装备栏[i]]].进图属性(self)
 
-        if 武器序号 == -1:
-            装备列表[装备序号[self.装备栏[11]]].进图属性(self)
-        else:
-            装备列表[武器序号].进图属性(self)
+            if 武器序号 == -1:
+                装备列表[装备序号[self.装备栏[11]]].进图属性(self)
+            else:
+                装备列表[武器序号].进图属性(self)
 
-        for i in self.套装栏:
-            套装列表[套装序号[i]].进图属性(self)
-        self.状态 = 0
+            for i in self.套装栏:
+                套装列表[套装序号[i]].进图属性(self)
+            self.状态 = 0
 
         #冲突属性计算
         self.伤害增加加成(self.黄字)
@@ -1522,21 +1541,27 @@ class 角色窗口(QWidget):
         一键修正按钮.resize(170, 25)
         一键修正按钮.setStyleSheet(按钮样式)
 
-        self.红色宠物装备 = QCheckBox('红色宠物装备', self.main_frame1)
-        self.红色宠物装备.move(1010, 505)
+        self.红色宠物装备 = QCheckBox('宠物装备择优', self.main_frame1)
+        self.红色宠物装备.move(810, 540)
         self.红色宠物装备.resize(100, 24)
         self.红色宠物装备.setStyleSheet(复选框样式)
-        self.红色宠物装备.setToolTip('<font size="3" face="宋体">7%黄字，7%力智，8%白字取最高值<br><br>勾选后禁用第三页红色宠物装备白字数值输入</font>')
+        self.红色宠物装备.setToolTip('<font size="3" face="宋体">7%黄字，7%力智，8%白字取最高值<br><br>需配合修改第三页相关选项</font>')
+
+        self.光环自适应 = QCheckBox('光环词条择优', self.main_frame1)
+        self.光环自适应.move(810, 505)
+        self.光环自适应.resize(100, 24)
+        self.光环自适应.setStyleSheet(复选框样式)
+        self.光环自适应.setToolTip('<font size="3" face="宋体">5%黄字，5%爆伤，5%三攻取最高值<br><br>需配合修改第三页相关选项</font>')
         
         self.禁用存档 = QCheckBox('禁用自动存档', self.main_frame1)
         self.禁用存档.move(1010, 540)
         self.禁用存档.resize(100, 24)
         self.禁用存档.setStyleSheet(复选框样式)
 
-        self.韩服面板 = QCheckBox('韩服面板', self.main_frame1)
-        self.韩服面板.move(920, 540)
-        self.韩服面板.resize(80, 24)
-        self.韩服面板.setStyleSheet(复选框样式)
+        self.新版面板 = QCheckBox('新版面板', self.main_frame1)
+        self.新版面板.move(920, 540)
+        self.新版面板.resize(80, 24)
+        self.新版面板.setStyleSheet(复选框样式)
 
         重置按钮 = QPushButton('全局重置', self.main_frame1)
         重置按钮.clicked.connect(lambda state: self.全局重置())
@@ -1549,6 +1574,14 @@ class 角色窗口(QWidget):
         self.计算按钮1.move(990, 610)
         self.计算按钮1.resize(100, 30)
         self.计算按钮1.setStyleSheet(按钮样式)
+
+        self.智慧产物限制 = MyQComboBox(self.main_frame1)
+        self.智慧产物限制.move(1010, 505)
+        self.智慧产物限制.resize(100, 22)
+        for i in range(1, 12):
+            self.智慧产物限制.addItem('智慧产物≤' + str(i))
+        self.智慧产物限制.setCurrentIndex(2)
+        self.智慧产物限制.setToolTip('<font size="3" face="宋体">不计智慧产物武器以及轮回SS</font>')
 
     def 界面2(self):
         # 第二个布局界面
@@ -1638,12 +1671,12 @@ class 角色窗口(QWidget):
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
                 x.resize(28,28)
                 tempstr='<font face="宋体"><font color="#FF6666">'+i.名称 +i.备注 +'</font><br>'
-                tempstr+='所在等级：'+str(i.所在等级)+'<br>'
+                tempstr+='所在等级：'+str(i.所在等级) + '<br>'
                 tempstr+='等级上限：'+str(i.等级上限)
                 if i.是否主动 == 1:
-                    tempstr+='<br>百分比：'+str(int(i.等效百分比(self.角色属性A.武器类型)))+'%'
+                    tempstr+='<br>百分比：'+str(int(i.等效百分比(self.角色属性A.武器类型))) + '%'
                     if i.TP上限 !=0:
-                        tempstr+='<br>TP成长：'+str(int(i.TP成长*100))+'%'
+                        tempstr+='<br>TP成长：'+str(int(i.TP成长*100)) + '%'
                         tempstr+='<br>TP上限：'+str(i.TP上限)
                 tempstr += '</font>'
                 x.setToolTip(tempstr)
@@ -1689,7 +1722,7 @@ class 角色窗口(QWidget):
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
                 x.resize(28,28)
                 tempstr='<font face="宋体"><font color="#FF6666">'+i.名称 +i.备注 +'</font><br>'
-                tempstr+='所在等级：'+str(i.所在等级)+'<br>'
+                tempstr+='所在等级：'+str(i.所在等级) + '<br>'
                 tempstr+='等级上限：'+str(i.等级上限)
                 tempstr += '</font>'
                 x.setToolTip(tempstr)
@@ -1768,7 +1801,7 @@ class 角色窗口(QWidget):
         self.护石栏[0].currentIndexChanged.connect(lambda state, index = 0:self.护石类型选项更新(index))
         纵坐标+=25
         for i in range(0,3):
-            tempstr='符文'+str(i+1)+'选择: '
+            tempstr='符文'+str(i+1) + '选择: '
             x=QLabel(tempstr, self.main_frame2)
             x.move(横坐标,纵坐标-5)
             x.setStyleSheet(标签样式)
@@ -1796,7 +1829,7 @@ class 角色窗口(QWidget):
         self.护石栏[1].currentIndexChanged.connect(lambda state, index = 1:self.护石类型选项更新(index))
         纵坐标+=25
         for i in range(3,6):
-            tempstr='符文'+str(i+1)+'选择: '
+            tempstr='符文'+str(i+1) + '选择: '
             x=QLabel(tempstr, self.main_frame2)
             x.move(横坐标,纵坐标-5)
             x.setStyleSheet(标签样式)
@@ -1822,7 +1855,7 @@ class 角色窗口(QWidget):
         self.护石栏[2].currentIndexChanged.connect(lambda state, index = 2:self.护石类型选项更新(index))
         纵坐标+=25
         for i in range(6,9):
-            tempstr='符文'+str(i+1)+'选择: '
+            tempstr='符文'+str(i+1) + '选择: '
             x=QLabel(tempstr, self.main_frame2)
             x.move(横坐标,纵坐标-5)
             x.setStyleSheet(标签样式)
@@ -1875,6 +1908,7 @@ class 角色窗口(QWidget):
         self.希洛克套装按钮 = []
         self.希洛克单件按钮 = []
         self.希洛克遮罩透明度 = []
+        self.希洛克装备图标 = []
         self.希洛克选择状态 = [0] * 15 
         count = 0
         for i in 名称:
@@ -1889,6 +1923,7 @@ class 角色窗口(QWidget):
                 图片.setPixmap(QPixmap('./ResourceFiles/img/希洛克/' + str(序号) + '.png'))
                 图片.resize(28, 28)
                 图片.move(横坐标+ 60 + j * 30, 纵坐标 + count * 32)
+                self.希洛克装备图标.append(图片)
                 self.希洛克遮罩透明度.append(QGraphicsOpacityEffect())
                 self.希洛克遮罩透明度[序号].setOpacity(0.5)
                 self.希洛克单件按钮.append(QPushButton(self.main_frame2))
@@ -1905,7 +1940,37 @@ class 角色窗口(QWidget):
         self.守门将属强.resize(120,20)
         self.守门将属强.setCurrentIndex(3)
         self.守门将属强.move(横坐标 + 12, 纵坐标 + 3 + count * 32)
-                
+    
+        self.希洛克武器词条 = []
+        count += 1
+        self.希洛克武器词条.append(MyQComboBox(self.main_frame2))
+        self.希洛克武器词条[0].addItems(['武器词条：无', '自适应最高值', '自选词条数值'])
+        self.希洛克武器词条[0].resize(120,20)
+        self.希洛克武器词条[0].move(横坐标 + 12, 纵坐标 + 3 + count * 32)
+        self.希洛克武器词条[0].currentIndexChanged.connect(lambda state: self.希洛克武器词条更新())
+
+
+        for i in range(1, 3):
+            count += 1
+            self.希洛克武器词条.append(MyQComboBox(self.main_frame2))
+            for k in 词条属性列表:
+                self.希洛克武器词条[i].addItem(k.描述)
+            self.希洛克武器词条[i].resize(72,20)
+            self.希洛克武器词条[i].move(横坐标 + 12, 纵坐标 + 3 + count * 32)
+        
+        count -= 2
+        for i in range(3, 5):
+            count += 1
+            self.希洛克武器词条.append(MyQComboBox(self.main_frame2))
+            for k in [3, 4, 5]:
+                self.希洛克武器词条[i].addItem(str(k * (5 - i)) + '%')
+            self.希洛克武器词条[i].resize(43,20)
+            self.希洛克武器词条[i].move(横坐标 + 89, 纵坐标 + 3 + count * 32)
+
+        for i in range(1, 5):
+            self.希洛克武器词条[i].setEnabled(False)
+            self.希洛克武器词条[i].setStyleSheet(不可选择下拉框样式)
+
         self.复选框列表 = []
         for i in 选项设置列表:
             self.复选框列表.append(QCheckBox(i.名称, self.main_frame2))
@@ -2068,8 +2133,7 @@ class 角色窗口(QWidget):
             for i in self.角色属性A.技能栏:
                 self.技能设置输入[j].addItem(i.名称+'Lv+1')
         self.技能设置输入[12].addItem('Lv1-50(主动)Lv+1')
-        self.技能设置输入[13].addItems(['Lv1-30(所有)Lv+1', 'Lv1-50(所有)Lv+1', 'Lv1-20(所有)Lv+1', 'Lv20-30(所有)Lv+1'])
-
+        self.技能设置输入[13].addItems(['Lv1-30(所有)Lv+1', 'Lv1-50(所有)Lv+1', 'Lv1-20(所有)Lv+1', 'Lv20-30(所有)Lv+1', 'Lv1-80(所有)Lv+1'])
         self.技能设置输入[12].addItem('Lv1-35(主动)Lv+1')
 
         self.修正列表名称 = ['力智%', '三攻%', '黄字', '白字', '属白', '爆伤', '终伤', '技攻']
@@ -2413,7 +2477,17 @@ class 角色窗口(QWidget):
         self.对比格式.move(720, 612)
         self.对比格式.resize(70, 24)
         self.对比格式.setStyleSheet(复选框样式)
-    
+
+    def 希洛克武器词条更新(self):
+        if self.希洛克武器词条[0].currentIndex() != 2:
+            for i in range(1, 5):
+                self.希洛克武器词条[i].setEnabled(False)
+                self.希洛克武器词条[i].setStyleSheet(不可选择下拉框样式)
+        else:
+            for i in range(1, 5):
+                self.希洛克武器词条[i].setEnabled(True)
+                self.希洛克武器词条[i].setStyleSheet(下拉框样式)
+
     def 护石描述更新(self, x):
         try:
             self.护石栏[x].setToolTip('<font face="宋体">' + self.初始属性.技能栏[self.初始属性.技能序号[self.护石栏[x].currentText()]].护石描述(self.护石类型选项[x].currentIndex()) + '</font></font>')
@@ -2907,6 +2981,8 @@ class 角色窗口(QWidget):
                 self.符文效果[i].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
             for i in range(3):
                 self.护石类型选项[i].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+            for i in range(5):
+                self.希洛克武器词条[i].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
         except:
             pass
 
@@ -2987,9 +3063,9 @@ class 角色窗口(QWidget):
             return
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/equ3.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.称号.currentIndex())+'\n')
-            setfile.write(str(self.宠物.currentIndex())+'\n')
-            setfile.write(str(self.计算模式选择.currentIndex())+'\n')
+            setfile.write(str(self.称号.currentIndex()) + '\n')
+            setfile.write(str(self.宠物.currentIndex()) + '\n')
+            setfile.write(str(self.计算模式选择.currentIndex()) + '\n')
             # 百变怪 && 神话排名 && 显示选项 && 时装选择
             setfile.write(str(int(self.百变怪选项.isChecked())) + '\n')
             setfile.write(str(int(self.神话排名选项.isChecked())) + '\n')
@@ -3003,11 +3079,11 @@ class 角色窗口(QWidget):
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/attr.ini', 'w', encoding='utf-8')
             for i in range(0, 17):
                 for j in range(0, len(self.属性设置输入[i])):
-                    setfile.write(self.属性设置输入[i][j].text()+',')
+                    setfile.write(self.属性设置输入[i][j].text() + ',')
                 setfile.write('\n')
         
             for j in range(0, 17):
-                setfile.write(str(self.技能设置输入[j].currentIndex())+',')
+                setfile.write(str(self.技能设置输入[j].currentIndex()) + ',')
             setfile.write('\n')
         except:
             pass
@@ -3015,44 +3091,46 @@ class 角色窗口(QWidget):
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/equ.ini', 'w', encoding='utf-8')
             for i in range(0, len(装备列表)):
-                setfile.write(str(self.装备选择状态[i])+'\n')
+                setfile.write(str(self.装备选择状态[i]) + '\n')
         except:
             pass
 
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/equ1.ini', 'w', encoding='utf-8')
             for i in range(0,len(self.装备打造选项)):
-                setfile.write(str(self.装备打造选项[i].currentIndex())+'\n')
+                setfile.write(str(self.装备打造选项[i].currentIndex()) + '\n')
         except:
             pass
 
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/equ2.ini', 'w', encoding='utf-8')
             for i in range(0,len(self.装备条件选择)):
-                setfile.write(str(self.装备条件选择[i].currentIndex())+'\n')
+                setfile.write(str(self.装备条件选择[i].currentIndex()) + '\n')
         except:
             pass
 
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill1.ini', 'w', encoding='utf-8')
-            setfile.write(self.BUFF输入.text()+'\n')
-            setfile.write(str(self.时间输入.currentIndex())+'\n')
-            setfile.write(str(self.护石栏[0].currentIndex())+'\n')
-            setfile.write(str(self.护石栏[1].currentIndex())+'\n')
+            setfile.write(self.BUFF输入.text() + '\n')
+            setfile.write(str(self.时间输入.currentIndex()) + '\n')
+            setfile.write(str(self.护石栏[0].currentIndex()) + '\n')
+            setfile.write(str(self.护石栏[1].currentIndex()) + '\n')
             for i in range(0,6):
-                setfile.write(str(self.符文[i].currentIndex())+'\n')
-                setfile.write(str(self.符文效果[i].currentIndex())+'\n')
-            setfile.write(str(self.觉醒选择状态)+'\n')
+                setfile.write(str(self.符文[i].currentIndex()) + '\n')
+                setfile.write(str(self.符文效果[i].currentIndex()) + '\n')
+            setfile.write(str(self.觉醒选择状态) + '\n')
             if self.初始属性.远古记忆 != -1:
-                setfile.write(str(self.远古记忆.currentIndex())+'\n')
+                setfile.write(str(self.远古记忆.currentIndex()) + '\n')
             if self.初始属性.刀魂之卡赞 != -1:
-                setfile.write(str(self.刀魂之卡赞.currentIndex())+'\n')
-            setfile.write(str(self.护石栏[2].currentIndex())+'\n')
+                setfile.write(str(self.刀魂之卡赞.currentIndex()) + '\n')
+            setfile.write(str(self.护石栏[2].currentIndex()) + '\n')
             for i in range(6,9):
-                setfile.write(str(self.符文[i].currentIndex())+'\n')
-                setfile.write(str(self.符文效果[i].currentIndex())+'\n')
+                setfile.write(str(self.符文[i].currentIndex()) + '\n')
+                setfile.write(str(self.符文效果[i].currentIndex()) + '\n')
             for i in range(3):
-                setfile.write(str(self.护石类型选项[i].currentIndex())+'\n')
+                setfile.write(str(self.护石类型选项[i].currentIndex()) + '\n')
+            for i in range(5):
+                setfile.write(str(self.希洛克武器词条[i].currentIndex()) + '\n')
         except:
             pass
 
@@ -3060,23 +3138,23 @@ class 角色窗口(QWidget):
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill2.ini', 'w', encoding='utf-8')
             for i in self.角色属性A.技能栏:
                 序号 = self.角色属性A.技能序号[i.名称]
-                setfile.write(str(self.等级调整[序号].currentIndex())+'\n')
+                setfile.write(str(self.等级调整[序号].currentIndex()) + '\n')
                 if i.是否有伤害 == 1 and i.TP上限 != 0:
-                    setfile.write(str(self.TP输入[序号].currentIndex())+'\n')
+                    setfile.write(str(self.TP输入[序号].currentIndex()) + '\n')
                 if i.是否有伤害 == 1:
-                    setfile.write(str(self.次数输入[序号].currentIndex())+'\n')
-                    setfile.write(str(self.宠物次数[序号].currentIndex())+'\n')
+                    setfile.write(str(self.次数输入[序号].currentIndex()) + '\n')
+                    setfile.write(str(self.宠物次数[序号].currentIndex()) + '\n')
         except:
             pass
 
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill3.ini', 'w', encoding='utf-8')
             for i in range(4):
-                setfile.write(str(self.辟邪玉选择[i].currentIndex())+'\n')
-                setfile.write(str(self.辟邪玉数值[i].currentIndex())+'\n')
+                setfile.write(str(self.辟邪玉选择[i].currentIndex()) + '\n')
+                setfile.write(str(self.辟邪玉数值[i].currentIndex()) + '\n')
             for i in range(15):
-                setfile.write(str(self.希洛克选择状态[i])+'\n')
-            setfile.write(str(self.守门将属强.currentIndex())+'\n')
+                setfile.write(str(self.希洛克选择状态[i]) + '\n')
+            setfile.write(str(self.守门将属强.currentIndex()) + '\n')
         except:
             pass
 
@@ -3093,14 +3171,14 @@ class 角色窗口(QWidget):
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/equ4.ini', 'w', encoding='utf-8')
             for i in range(4 * 35):
-                setfile.write(str(self.神话属性选项[i].currentIndex())+'\n')
+                setfile.write(str(self.神话属性选项[i].currentIndex()) + '\n')
         except:
             pass
 
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/equ5.ini', 'w', encoding='utf-8')
             for i in range(12):
-                setfile.write(str(self.自选装备[i].currentIndex())+'\n')
+                setfile.write(str(self.自选装备[i].currentIndex()) + '\n')
         except:
             pass
         
@@ -3235,80 +3313,62 @@ class 角色窗口(QWidget):
         self.click_window(2)
         QMessageBox.information(self,"自动修正计算完毕",  "仅对站街修正进行了修改，使面板与输入一致<br>请自行核对其它页面 非力智三攻属强 条目")
 
-    def 物理百分比修正(self, 输入力智, 输入三攻, 修正力量2, 修正物理攻击力2):
+    def 力量一键修正(self, 输入力智, 修正力量2):
         修正前力量 = self.角色属性B.力量
-        修正前物理攻击力 =self.角色属性B.物理攻击力
-        站街物理攻击倍率 = self.角色属性B.站街物理攻击力倍率()
-        j = round(输入三攻/站街物理攻击倍率/(输入力智 / 250 + 1),0)
         if self.初始属性.实际名称 == '黑暗武士':
             self.角色属性B.力量 = 输入力智 / self.角色属性B.技能栏[38].力智倍率()
             修正力量 = int(输入力智 / self.角色属性B.技能栏[38].力智倍率() + 1) - int(修正前力量)
         else:
             self.角色属性B.力量 = 输入力智
             修正力量 = 输入力智- int(修正前力量)
-        #验证
-        站街实际三攻 = int(j)
-        for k in range(int(j)-2,int(j)+3):
-            self.角色属性B.物理攻击力 = float(k)
-            验证物理攻击力1 = int(self.角色属性B.站街物理攻击力())
-            self.角色属性B.物理攻击力 = float(k+1)
-            验证物理攻击力2 = int(self.角色属性B.站街物理攻击力())
-            if 验证物理攻击力1 <= 输入三攻 and 验证物理攻击力2 > 输入三攻:
-                站街实际三攻 = float(k)
-        修正物理攻击力 = 站街实际三攻 - 修正前物理攻击力
         self.属性设置输入[0][15].setText(str(int(修正力量 + 修正力量2)))
-        self.属性设置输入[2][15].setText(str(int(修正物理攻击力 + 修正物理攻击力2)))
 
-    def 魔法百分比修正(self, 输入力智, 输入三攻, 修正智力2, 修正魔法攻击力2):
+    def 智力一键修正(self, 输入力智, 修正智力2):
         修正前智力 = self.角色属性B.智力
-        修正前魔法攻击力 =self.角色属性B.魔法攻击力
-        站街魔法攻击倍率 = self.角色属性B.站街魔法攻击力倍率()
-        j = round(输入三攻/站街魔法攻击倍率/(输入力智 / 250 + 1),0)
         if self.初始属性.实际名称 == '黑暗武士':
             self.角色属性B.智力 = 输入力智 / self.角色属性B.技能栏[38].力智倍率()
             修正智力 = int(输入力智 / self.角色属性B.技能栏[38].力智倍率() + 1) - int(修正前智力)
         else:
             self.角色属性B.智力 = 输入力智
-            修正智力 = 输入力智 - int(修正前智力)
-        #验证
+            修正智力 = 输入力智- int(修正前智力)
+        self.属性设置输入[1][15].setText(str(int(修正智力 + 修正智力2)))        
+
+    def 物攻一键修正(self, 输入力智, 输入三攻, 修正物理攻击力2):
+        修正前物理攻击力 =self.角色属性B.物理攻击力
+        站街物理攻击倍率 = self.角色属性B.站街物理攻击力倍率()
+        x = (1 if self.新版面板.isChecked() else 0)
+        j = round(输入三攻/站街物理攻击倍率/(输入力智 / 250 * (1 - x) + 1),0)
         站街实际三攻 = int(j)
-        for k in range(int(j)-2,int(j)+3):
+        for k in range(int(j) - 2, int(j) + 3):
+            self.角色属性B.物理攻击力 = float(k)
+            验证物理攻击力1 = int(self.角色属性B.站街物理攻击力(x))
+            self.角色属性B.物理攻击力 = float(k + 1)
+            验证物理攻击力2 = int(self.角色属性B.站街物理攻击力(x))
+            if 验证物理攻击力1 <= 输入三攻 and 验证物理攻击力2 > 输入三攻:
+                站街实际三攻 = float(k)
+        修正物理攻击力 = 站街实际三攻 - 修正前物理攻击力
+        self.属性设置输入[2][15].setText(str(int(修正物理攻击力 + 修正物理攻击力2)))
+
+    def 魔攻一键修正(self, 输入力智, 输入三攻, 修正魔法攻击力2):
+        修正前魔法攻击力 =self.角色属性B.魔法攻击力
+        站街魔法攻击倍率 = self.角色属性B.站街魔法攻击力倍率()
+        x = (1 if self.新版面板.isChecked() else 0)
+        j = round(输入三攻/站街魔法攻击倍率/(输入力智 / 250 * (1 - x) + 1),0)
+        站街实际三攻 = int(j)
+        for k in range(int(j) - 2, int(j) + 3):
             self.角色属性B.魔法攻击力 = float(k)
-            验证魔法攻击力1 = int(self.角色属性B.站街魔法攻击力())
+            验证魔法攻击力1 = int(self.角色属性B.站街魔法攻击力(x))
             self.角色属性B.魔法攻击力 = float(k+1)
-            验证魔法攻击力2 = int(self.角色属性B.站街魔法攻击力())
+            验证魔法攻击力2 = int(self.角色属性B.站街魔法攻击力(x))
             if 验证魔法攻击力1 <= 输入三攻 and 验证魔法攻击力2 > 输入三攻:
                 站街实际三攻 = float(k)
         修正魔法攻击力 = 站街实际三攻 - 修正前魔法攻击力
-        self.属性设置输入[1][15].setText(str(int(修正智力 + 修正智力2)))
         self.属性设置输入[3][15].setText(str(int(修正魔法攻击力 + 修正魔法攻击力2)))
 
-    def 物理固伤修正(self, 输入力智, 输入三攻, 修正力量2, 修正独立攻击力2):
-        修正前力量 = self.角色属性B.力量
-        修正前独立攻击力 =self.角色属性B.独立攻击力
-        修正力量 = 输入力智 - int(修正前力量)
-        站街独立攻击倍率 = self.角色属性B.站街独立攻击力倍率()
-        j = round(输入三攻/站街独立攻击倍率,0)
-        #验证
-        站街实际三攻 = int(j)
-        for k in range(int(j)-2,int(j)+3):
-            self.角色属性B.独立攻击力 = float(k)
-            验证独立攻击力1 = int(self.角色属性B.站街独立攻击力())
-            self.角色属性B.独立攻击力 = float(k+1)
-            验证独立攻击力2 = int(self.角色属性B.站街独立攻击力())
-            if 验证独立攻击力1 <= 输入三攻 and 验证独立攻击力2 > 输入三攻:
-                站街实际三攻 = float(k)
-        修正独立攻击力 = 站街实际三攻 - 修正前独立攻击力
-        self.属性设置输入[0][15].setText(str(int(修正力量 + 修正力量2)))
-        self.属性设置输入[4][15].setText(str(int(修正独立攻击力 + 修正独立攻击力2)))
-
-    def 魔法固伤修正(self, 输入力智, 输入三攻, 修正智力2, 修正独立攻击力2):
-        修正前智力 = self.角色属性B.智力
+    def 独立一键修正(self, 输入力智, 输入三攻, 修正独立攻击力2):
         修正前独立攻击力 = self.角色属性B.独立攻击力
-        修正智力 = 输入力智 - int(修正前智力)
         站街独立攻击倍率 = self.角色属性B.站街独立攻击力倍率()
         j = round(输入三攻 / 站街独立攻击倍率, 0)
-        # 验证
         站街实际三攻 = int(j)
         for k in range(int(j) - 2, int(j) + 3):
             self.角色属性B.独立攻击力 = float(k)
@@ -3318,8 +3378,23 @@ class 角色窗口(QWidget):
             if 验证独立攻击力1 <= 输入三攻 and 验证独立攻击力2 > 输入三攻:
                 站街实际三攻 = float(k)
         修正独立攻击力 = 站街实际三攻 - 修正前独立攻击力
-        self.属性设置输入[1][15].setText(str(int(修正智力 + 修正智力2)))
         self.属性设置输入[4][15].setText(str(int(修正独立攻击力 + 修正独立攻击力2)))
+
+    def 物理百分比修正(self, 输入力智, 输入三攻, 修正力量2, 修正物理攻击力2):
+        self.力量一键修正(输入力智, 修正力量2)
+        self.物攻一键修正(输入力智, 输入三攻, 修正物理攻击力2)
+
+    def 魔法百分比修正(self, 输入力智, 输入三攻, 修正智力2, 修正魔法攻击力2):
+        self.智力一键修正(输入力智, 修正智力2)
+        self.魔攻一键修正(输入力智, 输入三攻, 修正魔法攻击力2)
+
+    def 物理固伤修正(self, 输入力智, 输入三攻, 修正力量2, 修正独立攻击力2):
+        self.力量一键修正(输入力智, 修正力量2)
+        self.独立一键修正(输入力智, 输入三攻, 修正独立攻击力2)
+
+    def 魔法固伤修正(self, 输入力智, 输入三攻, 修正智力2, 修正独立攻击力2):
+        self.智力一键修正(输入力智, 修正智力2)
+        self.独立一键修正(输入力智, 输入三攻, 修正独立攻击力2)        
 
     def 属强修正(self, 输入属强):
         try:
@@ -3487,6 +3562,7 @@ class 角色窗口(QWidget):
             calc_data = CalcData()
 
             calc_data.是输出职业 = True
+            calc_data.智慧产物限制 = self.智慧产物限制.currentIndex() + 1
 
             calc_data.minheap_queue = mq.minheap_queue
             calc_data.角色属性A = deepcopy(self.角色属性A)
@@ -3600,6 +3676,68 @@ class 角色窗口(QWidget):
         else:
             self.排行界面()
 
+    def 提升率颜色显示(self, 属性, k):
+        if k in 属性.词条选择:
+            if k == 属性.词条选择[0]:
+                if k == 属性.词条选择[1]:
+                    颜色 = '<font color="#FF00FF">'
+                else:
+                    颜色 = '<font color="#CC00CC">'
+            elif k == 属性.词条选择[1]:
+                颜色 = '<font color="#990099">'
+            return 颜色 + '%.2f' % (属性.词条提升率[k] * 100) + ' </font>'
+        else:
+            return '<font color="#96FF1E">%.2f' % (属性.词条提升率[k] * 100) + ' </font>'
+
+    def 希洛克武器词条提升率显示(self, 属性):
+        tempstr = []
+        if sum(属性.词条提升率) > 0:
+            tempstr.append(self.提升率颜色显示(属性, 0)) 
+            tempstr.append(self.提升率颜色显示(属性, 1))  
+            tempstr.append(self.提升率颜色显示(属性, 2)) 
+            tempstr.append(self.提升率颜色显示(属性, 3)) 
+            tempstr.append('<font color="#96FF1E">\b无\b\b</font>')
+            tempstr.append(self.提升率颜色显示(属性, 4)) 
+            tempstr.append(self.提升率颜色显示(属性, 5)) 
+            tempstr.append('<font color="#96FF1E">\b无\b\b</font>')
+            tempstr.append('<font color="#96FF1E">\b无\b\b</font>') 
+            tempstr.append('<font color="#96FF1E">\b无\b\b</font>') 
+            tempstr.append('<font color="#96FF1E">\b无\b\b</font>') 
+            tempstr.append('<font color="#96FF1E">\b无\b\b</font>')
+        else:
+            for i in range(12):
+                tempstr.append('\b\b')
+        return tempstr
+
+    def 词条显示计算(self, 属性):
+        词条提升率 = self.希洛克武器词条提升率显示(属性)
+
+        属白换算 = 属性.属性倍率 * 属性.属性附加
+
+        tempstr = []
+
+        tempstr.append(词条提升率[0] + '力智:' + str(int(round(属性.百分比力智 * 100, 0))) + '%') 
+        tempstr.append(词条提升率[1] + '三攻:' + str(int(round(属性.百分比三攻 * 100, 0))) + '%') 
+        tempstr.append(词条提升率[2] + '黄字:' + str(int(round(属性.伤害增加 * 100, 0))) + '%')
+
+        temp = 词条提升率[3] + '白字:' + str(int(round(属性.附加伤害 * 100, 0))) + '%'
+        if 属白换算 != 0: temp += ' (' + str(int(round(属白换算 * 100 + 属性.附加伤害 * 100, 0))) + '%)'
+        tempstr.append(temp)
+
+        temp = 词条提升率[4] + '属白:'+str(int(round(属性.属性附加 * 100, 0))) + '%'
+        if 属白换算 != 0: temp += ' (' + str(int(round(属白换算*100,0))) + '%)'
+        tempstr.append(temp)
+
+        tempstr.append(词条提升率[5] + '爆伤:'+str(int(round(属性.暴击伤害 * 100, 0))) + '%')
+        tempstr.append(词条提升率[6] + '终伤:'+str(int(round(属性.最终伤害 * 100, 0))) + '%')
+        tempstr.append(词条提升率[7] + '技攻:'+str(int(round(属性.技能攻击力 * 100 - 100, 0))) + '%')
+        tempstr.append(词条提升率[8] + '持续:'+str(int(round(属性.持续伤害 * 100, 0))) + '%') 
+        tempstr.append(词条提升率[9] + '攻速:'+str(int(round(属性.攻击速度 * 100, 0))) + '%') 
+        tempstr.append(词条提升率[10] + '释放:'+str(int(round(属性.释放速度 * 100, 0))) + '%') 
+        tempstr.append(词条提升率[11] + '移速:'+str(int(round(属性.移动速度 * 100, 0))) + '%')
+
+        return tempstr
+        
     def 自选计算(self, x = 0):
         if x == 0:
             self.保存配置()
@@ -3660,7 +3798,7 @@ class 角色窗口(QWidget):
             else:
                 self.总伤害.setText(self.格式化输出(str(int(总伤害数值))))
 
-            if self.韩服面板.isChecked():
+            if self.新版面板.isChecked():
                 y = 1
             else:
                 y = 0
@@ -3679,8 +3817,8 @@ class 角色窗口(QWidget):
             self.面板显示[7].setText(str(int(B.光属性强化)))
             self.面板显示[8].setText(str(int(B.暗属性强化)))
 
-            tempstr = '<font color="#FFFFFF">'+str(int(C.站街独立攻击力()))+'</font>   '
-            tempstr += '<font color="#96FF32">'+str(int(B.面板独立攻击力()))+'</font>'
+            tempstr = '<font color="#FFFFFF">'+str(int(C.站街独立攻击力())) + '</font>   '
+            tempstr += '<font color="#96FF32">'+str(int(B.面板独立攻击力())) + '</font>'
             self.面板显示[4].setText(tempstr)
 
             self.面板显示[9].setText(str(int(C.站街力量())))
@@ -3693,43 +3831,8 @@ class 角色窗口(QWidget):
             self.面板显示[15].setText(str(int(C.光属性强化)))
             self.面板显示[16].setText(str(int(C.暗属性强化)))
 
-            if B.攻击属性 == 0:
-                属性倍率=1.05+0.0045*max(B.火属性强化 - 火抗输入,B.冰属性强化 - 冰抗输入,B.光属性强化 - 光抗输入,B.暗属性强化 - 暗抗输入)
-            elif B.攻击属性 == 1:
-                属性倍率=1.05+0.0045*(B.火属性强化 - 火抗输入)
-            elif B.攻击属性 == 2:
-                属性倍率=1.05+0.0045*(B.冰属性强化 - 冰抗输入)
-            elif B.攻击属性 == 3:
-                属性倍率=1.05+0.0045*(B.光属性强化 - 光抗输入)
-            elif B.攻击属性 == 4:
-                属性倍率=1.05+0.0045*(B.暗属性强化 - 暗抗输入)
-
-            属白换算 = B.属性附加 * 属性倍率
-            tempstr=[]
-            tempstr.append('<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[0]*100)+' </font>力智:'+str(int(round(B.百分比力智*100,0)))+'%') 
-            tempstr.append('<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[1]*100)+' </font>三攻:'+str(int(round(B.百分比三攻*100,0)))+'%') 
-            tempstr.append('<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[2]*100)+' </font>黄字:'+str(int(round(B.伤害增加*100,0)))+'%')
-
-            temp = '<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[3]*100)+' </font>白字:'+str(int(round(B.附加伤害*100,0))) +'%'
-            if 属白换算 != 0:
-                temp += ' ('+str(int(round(属白换算*100+B.附加伤害*100,0)))+'%)'
-            tempstr.append(temp)
-
-            temp = '<font color="#96FF1E">\b-\b\b\b</font>属白:'+str(int(round(B.属性附加*100,0)))+'%'
-            if 属白换算 != 0:
-                temp += ' ('+str(int(round(属白换算*100,0)))+'%)'
-            tempstr.append(temp)
-
-            tempstr.append('<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[4]*100)+' </font>爆伤:'+str(int(round(B.暴击伤害*100,0)))+'%')
-            tempstr.append('<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[5]*100)+' </font>终伤:'+str(int(round(B.最终伤害*100,0)))+'%')
-            tempstr.append('<font color="#96FF1E">\b-\b\b\b</font>技攻:'+str(int(round(B.技能攻击力*100-100,0)))+'%')
-            tempstr.append('<font color="#96FF1E">\b-\b\b\b</font>持续:'+str(int(round(B.持续伤害*100,0)))+'%') 
-            tempstr.append('<font color="#96FF1E">\b-\b\b\b</font>攻速:'+str(int(round(B.攻击速度*100,0)))+'%') 
-            tempstr.append('<font color="#96FF1E">\b-\b\b\b</font>释放:'+str(int(round(B.释放速度*100,0)))+'%') 
-            tempstr.append('<font color="#96FF1E">\b-\b\b\b</font>移速:'+str(int(round(B.移动速度*100,0)))+'%')
-
             count = 0
-            for i in tempstr:
+            for i in self.词条显示计算(B):
                 self.词条显示[count].setText(i)
                 count += 1
 
@@ -3844,7 +3947,7 @@ class 角色窗口(QWidget):
                 
             伤害量 = str(int(round(self.排行数据[i][12]/100000000,0)))
             if 最高伤害!=0:
-                百分比=str(round(self.排行数据[i][12]/最高伤害*100,1))+'%'
+                百分比=str(round(self.排行数据[i][12]/最高伤害*100,1)) + '%'
             else:
                 百分比=' 0.0%'
     
@@ -3907,11 +4010,12 @@ class 角色窗口(QWidget):
     def 站街计算(self,装备名称,套装名称):
         C = deepcopy(self.角色属性A)
         C.穿戴装备(装备名称,套装名称)
-        for i in C.装备栏:
-            装备列表[装备序号[i]].城镇属性(C)
-        for i in C.套装栏:
-            套装列表[套装序号[i]].城镇属性(C)
-        C.装备基础()
+        if 调试开关 == 0:
+            for i in C.装备栏:
+                装备列表[装备序号[i]].城镇属性(C)
+            for i in C.套装栏:
+                套装列表[套装序号[i]].城镇属性(C)
+            C.装备基础()
         C.被动倍率计算()
 
         return C
@@ -3945,30 +4049,30 @@ class 角色窗口(QWidget):
             if 装备.所属套装 != '智慧产物':  
                 if 属性.强化等级[i]!=0:
                     if i==8:
-                        tempstr[i]+='<br><font color="#68D5ED">+'+str(属性.强化等级[i])+' 强化: '
-                        tempstr[i]+='三攻 + '+str(耳环计算(装备.等级,装备.品质,属性.强化等级[i]))+'</font>'
+                        tempstr[i]+='<br><font color="#68D5ED">+'+str(属性.强化等级[i]) + ' 强化: '
+                        tempstr[i]+='三攻 + '+str(耳环计算(装备.等级,装备.品质,属性.强化等级[i])) + '</font>'
                     if i in [9,10]:
-                        tempstr[i]+='<br><font color="#68D5ED">+'+str(属性.强化等级[i])+' 强化: '
+                        tempstr[i]+='<br><font color="#68D5ED">+'+str(属性.强化等级[i]) + ' 强化: '
                         tempstr[i]+='四维 + '+str(左右计算(装备.等级,装备.品质,属性.强化等级[i])) +'</font>'
                     if i==11:
-                        tempstr[i]+='<br><font color="#68D5ED">+'+str(属性.强化等级[i])+' 强化: '
-                        tempstr[i]+='物理攻击力 + '+str(武器计算(装备.等级,装备.品质,属性.强化等级[i],装备.类型,'物理'))+'</font><br>'
-                        tempstr[i]+='<font color="#68D5ED">+'+str(属性.强化等级[i])+' 强化: '
-                        tempstr[i]+='魔法攻击力 + '+str(武器计算(装备.等级,装备.品质,属性.强化等级[i],装备.类型,'魔法'))+'</font>'
+                        tempstr[i]+='<br><font color="#68D5ED">+'+str(属性.强化等级[i]) + ' 强化: '
+                        tempstr[i]+='物理攻击力 + '+str(武器计算(装备.等级,装备.品质,属性.强化等级[i],装备.类型,'物理')) + '</font><br>'
+                        tempstr[i]+='<font color="#68D5ED">+'+str(属性.强化等级[i]) + ' 强化: '
+                        tempstr[i]+='魔法攻击力 + '+str(武器计算(装备.等级,装备.品质,属性.强化等级[i],装备.类型,'魔法')) + '</font>'
 
                 if 属性.武器锻造等级!=0:
                     if i==11:
-                        tempstr[i]+='<br><font color="#68D5ED">+'+str(属性.武器锻造等级)+'   锻造: '
-                        tempstr[i]+='独立攻击力 + '+str(锻造计算(装备.等级,装备.品质,属性.武器锻造等级))+'</font>'
+                        tempstr[i]+='<br><font color="#68D5ED">+'+str(属性.武器锻造等级) + '   锻造: '
+                        tempstr[i]+='独立攻击力 + '+str(锻造计算(装备.等级,装备.品质,属性.武器锻造等级)) + '</font>'
 
                 if 属性.是否增幅[i]==1:
                     if tempstr[i] !='':
                         tempstr[i]+='<br>'
-                    tempstr[i]+='<font color="#FF00FF">+'+str(属性.强化等级[i])+' 增幅: '
+                    tempstr[i]+='<font color="#FF00FF">+'+str(属性.强化等级[i]) + ' 增幅: '
                     if '物理' in 属性.伤害类型 or '力量' in 属性.伤害类型:
-                        tempstr[i]+='异次元力量 + '+str(增幅计算(装备.等级,装备.品质,属性.强化等级[i]))+'</font>'
+                        tempstr[i]+='异次元力量 + '+str(增幅计算(装备.等级,装备.品质,属性.强化等级[i])) + '</font>'
                     else:
-                        tempstr[i]+='异次元智力 + '+str(增幅计算(装备.等级,装备.品质,属性.强化等级[i]))+'</font>'
+                        tempstr[i]+='异次元智力 + '+str(增幅计算(装备.等级,装备.品质,属性.强化等级[i])) + '</font>'
 
             if tempstr[i] != '':
                 tempstr[i] += '<br>'
@@ -4062,7 +4166,7 @@ class 角色窗口(QWidget):
             excel.append(统计详情[i*4+1])
         excel.sort()
 
-        if self.韩服面板.isChecked():
+        if self.新版面板.isChecked():
             x = 1
         else:
             x = 0
@@ -4081,8 +4185,8 @@ class 角色窗口(QWidget):
         面板显示[7].setText(str(int(self.角色属性B.光属性强化)))
         面板显示[8].setText(str(int(self.角色属性B.暗属性强化)))
         
-        tempstr = '<font color="#FFFFFF">'+str(int(C.站街独立攻击力()))+'</font>   '
-        tempstr += '<font color="#96FF1E">'+str(int(self.角色属性B.面板独立攻击力()))+'</font>'
+        tempstr = '<font color="#FFFFFF">'+str(int(C.站街独立攻击力())) + '</font>   '
+        tempstr += '<font color="#96FF1E">'+str(int(self.角色属性B.面板独立攻击力())) + '</font>'
         面板显示[4].setText(tempstr)
 
         面板显示[9].setText(str(int(C.站街力量())))
@@ -4126,42 +4230,8 @@ class 角色窗口(QWidget):
             面板显示[i].resize(100,18)
             面板显示[i].setAlignment(Qt.AlignRight)
 
-        if self.角色属性B.攻击属性 == 0:
-            属性倍率=1.05+0.0045*max(self.角色属性B.火属性强化 - 火抗输入,self.角色属性B.冰属性强化 - 冰抗输入,self.角色属性B.光属性强化 - 光抗输入,self.角色属性B.暗属性强化 - 暗抗输入)
-        elif self.角色属性B.攻击属性 == 1:
-            属性倍率=1.05+0.0045*(self.角色属性B.火属性强化 - 火抗输入)
-        elif self.角色属性B.攻击属性 == 2:
-            属性倍率=1.05+0.0045*(self.角色属性B.冰属性强化 - 冰抗输入)
-        elif self.角色属性B.攻击属性 == 3:
-            属性倍率=1.05+0.0045*(self.角色属性B.光属性强化 - 光抗输入)
-        elif self.角色属性B.攻击属性 == 4:
-            属性倍率=1.05+0.0045*(self.角色属性B.暗属性强化 - 暗抗输入)
-
-        属白换算 = self.角色属性B.属性附加 * 属性倍率
-        tempstr=[]
-        tempstr.append('<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[0]*100)+' </font>力智:'+str(int(round(self.角色属性B.百分比力智*100,0)))+'%') 
-        tempstr.append('<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[1]*100)+' </font>三攻:'+str(int(round(self.角色属性B.百分比三攻*100,0)))+'%') 
-        tempstr.append('<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[2]*100)+' </font>黄字:'+str(int(round(self.角色属性B.伤害增加*100,0)))+'%')
-        
-        temp = '<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[3]*100)+' </font>白字:'+str(int(round(self.角色属性B.附加伤害*100,0))) +'%'
-        if 属白换算 != 0:
-            temp += ' ('+str(int(round(属白换算*100+self.角色属性B.附加伤害*100,0)))+'%)'
-        tempstr.append(temp)
-        temp = '<font color="#96FF1E">\b-\b\b\b</font>属白:'+str(int(round(self.角色属性B.属性附加*100,0)))+'%'
-        if 属白换算 != 0:
-            temp += ' ('+str(int(round(属白换算*100,0)))+'%)'
-        tempstr.append(temp)
-
-        tempstr.append('<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[4]*100)+' </font>爆伤:'+str(int(round(self.角色属性B.暴击伤害*100,0)))+'%')
-        tempstr.append('<font color="#96FF1E">%.2f' % (self.角色属性B.词条提升率[5]*100)+' </font>终伤:'+str(int(round(self.角色属性B.最终伤害*100,0)))+'%')
-        tempstr.append('<font color="#96FF1E">\b-\b\b\b</font>技攻:'+str(int(round(self.角色属性B.技能攻击力*100-100,0)))+'%')
-        tempstr.append('<font color="#96FF1E">\b-\b\b\b</font>持续:'+str(int(round(self.角色属性B.持续伤害*100,0)))+'%') 
-        tempstr.append('<font color="#96FF1E">\b-\b\b\b</font>攻速:'+str(int(round(self.角色属性B.攻击速度*100,0)))+'%') 
-        tempstr.append('<font color="#96FF1E">\b-\b\b\b</font>释放:'+str(int(round(self.角色属性B.释放速度*100,0)))+'%') 
-        tempstr.append('<font color="#96FF1E">\b-\b\b\b</font>移速:'+str(int(round(self.角色属性B.移动速度*100,0)))+'%') 
-
         j=312
-        for i in tempstr:
+        for i in self.词条显示计算(self.角色属性B):
             templab=QLabel(输出窗口)
             templab.setText(i)
             templab.setStyleSheet("QLabel{font-size:12px;color:rgb(104,213,237)}")
@@ -4172,8 +4242,8 @@ class 角色窗口(QWidget):
 
         位置 = 313
         间隔 = 20
-        if self.角色属性B.红色宠物装备 != '默认':
-            套装名称.append('红宠：' + self.角色属性B.红色宠物装备)
+        if sum(self.角色属性B.自适应选项) != 0:
+            套装名称.append(self.角色属性B.自适应输出())
             位置 -= 5
             间隔 -= 1
         
@@ -4183,7 +4253,7 @@ class 角色窗口(QWidget):
         适用称号名称.resize(150,18)
         适用称号名称.setAlignment(Qt.AlignCenter)
         位置 += 间隔
-        适用称号名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.称号.currentText()+'</font><br>'+称号列表[self.称号.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
+        适用称号名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.称号.currentText() + '</font><br>'+称号列表[self.称号.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
 
         适用宠物名称=QLabel(self.宠物.currentText(),输出窗口)
         适用宠物名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
@@ -4191,7 +4261,7 @@ class 角色窗口(QWidget):
         适用宠物名称.resize(150,18)
         适用宠物名称.setAlignment(Qt.AlignCenter)
         位置 += 间隔
-        适用宠物名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.宠物.currentText()+'</font><br>'+宠物列表[self.宠物.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
+        适用宠物名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.宠物.currentText() + '</font><br>'+宠物列表[self.宠物.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
 
         适用武器名称=QLabel(装备名称[11],输出窗口)
         适用武器名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
@@ -4215,7 +4285,7 @@ class 角色窗口(QWidget):
             else:
                 适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
             sign = 1
-            if self.角色属性B.红色宠物装备 != '默认':
+            if sum(self.角色属性B.自适应选项) != 0:
                 if i == len(套装名称) - 1:
                     sign = 0
             if sign == 1:
@@ -4264,12 +4334,12 @@ class 角色窗口(QWidget):
                 每行详情[0].resize(28,min(28,self.行高 - 2)) 
                 try:
                     tempstr='<font face="宋体"><font color="#FF6666">'+self.角色属性B.技能栏[i].名称+self.角色属性B.技能栏[i].备注+ '</font><br>'
-                    tempstr+='百分比：'+str(int(self.角色属性B.技能栏[i].等效百分比(self.角色属性B.武器类型) / self.角色属性B.技能栏[i].倍率))+'%<br>'
-                    tempstr+='被动倍率：'+str(round(self.角色属性B.技能栏[i].被动倍率*100,1))+'%<br>'
+                    tempstr+='百分比：'+str(int(self.角色属性B.技能栏[i].等效百分比(self.角色属性B.武器类型) / self.角色属性B.技能栏[i].倍率)) + '%<br>'
+                    tempstr+='被动倍率：'+str(round(self.角色属性B.技能栏[i].被动倍率*100,1)) + '%<br>'
                     if self.角色属性B.技能栏[i].倍率!=0:
-                        tempstr+='其它倍率：'+str(round(self.角色属性B.技能栏[i].倍率*100,1))+'%<br>'
-                    tempstr+='CD显示：'+str(round(self.角色属性B.技能栏[i].等效CD(self.角色属性B.武器类型) * self.角色属性B.技能栏[i].恢复,2))+'s<br>'
-                    tempstr+='CD恢复：'+str(round(self.角色属性B.技能栏[i].恢复*100,1))+'%</font>'
+                        tempstr+='其它倍率：'+str(round(self.角色属性B.技能栏[i].倍率*100,1)) + '%<br>'
+                    tempstr+='CD显示：'+str(round(self.角色属性B.技能栏[i].等效CD(self.角色属性B.武器类型) * self.角色属性B.技能栏[i].恢复,2)) + 's<br>'
+                    tempstr+='CD恢复：'+str(round(self.角色属性B.技能栏[i].恢复*100,1)) + '%</font>'
                     每行详情[0].setToolTip(tempstr)
                 except:
                     pass
@@ -4280,7 +4350,7 @@ class 角色窗口(QWidget):
                 每行详情[1].move(337, 50 + j * self.行高)
                 每行详情[1].resize(30,min(28,self.行高)) 
                 #CD
-                每行详情[2].setText(str(技能等效CD[i])+'s')
+                每行详情[2].setText(str(技能等效CD[i]) + 's')
                 每行详情[2].move(380, 50 + j * self.行高)
                 每行详情[2].resize(36,min(28,self.行高))
                 #次数
@@ -4302,7 +4372,7 @@ class 角色窗口(QWidget):
                 每行详情[5].move(555, 50 + j * self.行高) 
                 每行详情[5].resize(108,min(28,self.行高)) 
                 #占比
-                每行详情[6].setText(str(round(统计详情[i*4+3],1))+'%')
+                每行详情[6].setText(str(round(统计详情[i*4+3],1)) + '%')
                 每行详情[6].move(660, 50 + j * self.行高)
                 每行详情[6].resize(108,min(28,self.行高))
      
@@ -4323,21 +4393,21 @@ class 角色窗口(QWidget):
                     else:
                         if self.角色属性B.技能栏[i].关联技能 != ['无'] and self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) != 1:
                             tempstr+='<font face="宋体"><font color="#FF6666">'+self.角色属性B.技能栏[i].名称+'</font><br>'
-                            tempstr+='加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型)*100-100,2))+'%<br>'
+                            tempstr+='加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型)*100-100,2)) + '%<br>'
                             tempstr+='关联技能：'
                             for j in self.角色属性B.技能栏[i].关联技能:
                                 tempstr+=j
                                 if j != self.角色属性B.技能栏[i].关联技能[-1]:
                                     tempstr+=','
                             if self.角色属性B.技能栏[i].关联技能2 != ['无']:
-                                tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率2(self.角色属性B.武器类型)*100-100,2))+'%<br>'
+                                tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率2(self.角色属性B.武器类型)*100-100,2)) + '%<br>'
                                 tempstr+='关联技能：'
                                 for k in self.角色属性B.技能栏[i].关联技能2:
                                     tempstr+=k
                                     if k != self.角色属性B.技能栏[i].关联技能2[-1]:
                                         tempstr+=','
                             if self.角色属性B.技能栏[i].关联技能3 != ['无']:
-                                tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率3(self.角色属性B.武器类型)*100-100,2))+'%<br>'
+                                tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率3(self.角色属性B.武器类型)*100-100,2)) + '%<br>'
                                 tempstr+='关联技能：'
                                 for l in self.角色属性B.技能栏[i].关联技能3:
                                     tempstr+=l
@@ -4348,21 +4418,21 @@ class 角色窗口(QWidget):
                                 tempstr+='<font face="宋体"><font color="#FF6666">'+self.角色属性B.技能栏[i].名称+'</font><br>'
                             else:
                                 tempstr+='<br>'
-                            tempstr+='冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型)*100,2))+'%<br>'
+                            tempstr+='冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型)*100,2)) + '%<br>'
                             tempstr+='冷却关联技能：'
                             for j in self.角色属性B.技能栏[i].冷却关联技能:
                                 tempstr+=j
                                 if j != self.角色属性B.技能栏[i].冷却关联技能[-1]:
                                     tempstr+=','
                             if self.角色属性B.技能栏[i].冷却关联技能2 != ['无']:
-                                tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率2(self.角色属性B.武器类型)*100,2))+'%<br>'
+                                tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率2(self.角色属性B.武器类型)*100,2)) + '%<br>'
                                 tempstr+='冷却关联技能：'
                                 for j in self.角色属性B.技能栏[i].冷却关联技能2:
                                     tempstr+=j
                                     if j != self.角色属性B.技能栏[i].冷却关联技能2[-1]:
                                         tempstr+=','
                             if self.角色属性B.技能栏[i].冷却关联技能3 != ['无']:
-                                tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率3(self.角色属性B.武器类型)*100,2))+'%<br>'
+                                tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率3(self.角色属性B.武器类型)*100,2)) + '%<br>'
                                 tempstr+='冷却关联技能：'
                                 for j in self.角色属性B.技能栏[i].冷却关联技能3:
                                     tempstr+=j
@@ -4389,7 +4459,7 @@ class 角色窗口(QWidget):
             被动数据=QLabel(输出窗口)
             被动数据.setPixmap((QPixmap('./ResourceFiles/img/远古记忆.png')))
             tempstr='<font face="宋体"><font color="#FF6666">'+'远古记忆'+'</font><br>'
-            tempstr+='智力+'+str(self.角色属性B.远古记忆 * 15)+'</font>'
+            tempstr+='智力+'+str(self.角色属性B.远古记忆 * 15) + '</font>'
             被动数据.setToolTip(tempstr)
             被动数据.move(293+num*40, 500)
             被动等级=QLabel(输出窗口)
@@ -4404,7 +4474,7 @@ class 角色窗口(QWidget):
             被动数据=QLabel(输出窗口)
             被动数据.setPixmap((QPixmap('./ResourceFiles/img/刀魂之卡赞.png')))
             tempstr='<font face="宋体"><font color="#FF6666">'+'刀魂之卡赞'+'</font><br>'
-            tempstr+='力量/智力+'+str(刀魂之卡赞数据[self.角色属性B.刀魂之卡赞])+'</font>'
+            tempstr+='力量/智力+'+str(刀魂之卡赞数据[self.角色属性B.刀魂之卡赞]) + '</font>'
             被动数据.setToolTip(tempstr)
             被动数据.move(293+num*40, 500)
             被动等级=QLabel(输出窗口)
@@ -4555,13 +4625,18 @@ class 角色窗口(QWidget):
         if self.特色选项.isChecked():
             属性.特色选项 = 1
 
-        if self.红色宠物装备.isChecked():
-            属性.红色宠物装备 = '自适应'
+        属性.自适应选项 = copy([(1 if self.红色宠物装备.isChecked() else 0), (1 if self.光环自适应.isChecked() else 0)])
 
         if self.转甲选项.isChecked():
             属性.转甲选项 = 1
         else:
             属性.转甲选项 = 0
+
+        if self.希洛克武器词条[0].currentIndex() == 1:
+            属性.希洛克武器词条 = 1
+        elif self.希洛克武器词条[0].currentIndex() == 2:
+            词条属性列表[self.希洛克武器词条[1].currentIndex()].加成属性(属性, (self.希洛克武器词条[3].currentIndex() + 3) * 0.02)
+            词条属性列表[self.希洛克武器词条[2].currentIndex()].加成属性(属性, (self.希洛克武器词条[4].currentIndex() + 3) * 0.01)
 
         for j in [self.等级调整, self.TP输入, self.次数输入, self.宠物次数]:
             for i in j:
@@ -4712,6 +4787,9 @@ class 角色窗口(QWidget):
             if name == 'Lv1-50(所有)Lv+1':
                 属性.技能等级加成('所有',1,50,1)
                 return
+            if name == 'Lv1-80(所有)Lv+1':
+                属性.技能等级加成('所有',1,80,1)
+                return
         for i in 属性.技能栏:
             if name == i.名称+'Lv+1':
                 i.等级加成(1)
@@ -4826,15 +4904,9 @@ class 角色窗口(QWidget):
                     else:
                         属性.所有属性强化加成(float(self.属性设置输入[i][j].text()))
                         
-        #禁用红色宠物装备白字输入
-        sign = -1
-        if self.红色宠物装备.isChecked():
-            sign = 11
-
         for j in range(0,17):
-            if j != sign:
-                if self.属性设置输入[6][j].text() != '':
-                    属性.附加伤害加成(float(self.属性设置输入[6][j].text())/100)
+            if self.属性设置输入[6][j].text() != '':
+                属性.附加伤害加成(float(self.属性设置输入[6][j].text())/100)
     
         for j in range(0,17):
             if self.属性设置输入[15][j].text() != '':

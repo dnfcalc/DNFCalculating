@@ -1398,7 +1398,7 @@ class 角色窗口(QWidget):
                 self.技能设置输入[j].addItem(i.名称 + 'Lv+1')
         self.技能设置输入[12].addItems(['BUFFLv+1', 'BUFFLv+2','BUFFLv+3','BUFFLv+4'])
         self.技能设置输入[13].addItems(['Lv1-50(主动)Lv+1', '一觉Lv+1', '一觉Lv+2'])
-        self.技能设置输入[14].addItems(['Lv1-30(所有)Lv+1', 'Lv1-50(所有)Lv+1', 'Lv1-20(所有)Lv+1', 'Lv20-30(所有)Lv+1'])
+        self.技能设置输入[14].addItems(['Lv1-30(所有)Lv+1', 'Lv1-50(所有)Lv+1', 'Lv1-20(所有)Lv+1', 'Lv20-30(所有)Lv+1', 'Lv1-80(所有)Lv+1'])
 
         if '智力' in self.角色属性A.系数类型选择:
             self.修正列表名称 = ['转职被动智力', 'BUFF力智%', 'BUFF三攻%', '转职被动等级', '一觉被动力智', '一觉力智%', '一觉力智']
@@ -3564,6 +3564,9 @@ class 角色窗口(QWidget):
             return
         if name == 'Lv20-30(所有)Lv+1':
             属性.技能等级加成('所有',20,30,1)
+            return
+        if name == 'Lv1-80(所有)Lv+1':
+            属性.技能等级加成('所有',1,80,1)
             return
             
         if name == '一觉Lv+1':

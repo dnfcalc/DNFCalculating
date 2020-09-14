@@ -1,6 +1,8 @@
 ##宠物属性部分
 
-class 宠物0():
+宠物列表 = [None] * 11
+
+class 宠物10():
     名称 = '(20)至尊·暴风圣女'
     def 城镇属性(self, 属性):
         属性.力量 += 150
@@ -25,7 +27,7 @@ class 宠物0():
         temp += '百分比力智 +12%<br>'
         return temp
 
-class 宠物1():
+class 宠物9():
     名称 = '(19)至尊·神迹·莱恩'
     def 城镇属性(self, 属性):
         属性.力量 += 120
@@ -50,7 +52,7 @@ class 宠物1():
         temp += '百分比力智 +8%<br>'
         return temp
 
-class 宠物2():
+class 宠物8():
     名称 = '(20)普通·神官'
     def 城镇属性(self, 属性):
         属性.力量 += 140
@@ -73,7 +75,7 @@ class 宠物2():
         temp += '百分比力智 +10%<br>'
         return temp
 
-class 宠物3():
+class 宠物7():
     名称 = '(19)至尊·莱恩'
     def 城镇属性(self, 属性):
         属性.力量 += 120
@@ -96,7 +98,7 @@ class 宠物3():
         temp += '最终伤害 +5%<br>'
         return temp
 
-class 宠物4():
+class 宠物6():
     名称 = '(19)普通·莱恩'
     def 城镇属性(self, 属性):
         属性.力量 += 120
@@ -138,7 +140,7 @@ class 宠物5():
         temp += '技能冷却 -5%(加算)<br>'
         return temp
 
-class 宠物6():
+class 宠物4():
     名称 = '(18)普通·蒂娅'
     def 城镇属性(self, 属性):
         属性.力量 += 100
@@ -159,7 +161,7 @@ class 宠物6():
         temp += '技能冷却 -5%(加算)<br>'
         return temp
 
-class 宠物7():
+class 宠物3():
     名称 = '(17)克里斯'
     def 城镇属性(self, 属性):
         属性.物理攻击力 += 35
@@ -182,7 +184,7 @@ class 宠物7():
         temp += '技能冷却 -5%(加算)<br>'
         return temp
 
-class 宠物8():
+class 宠物2():
     名称 = '(16)关羽'
     def 城镇属性(self, 属性):
         属性.力量 += 50
@@ -203,7 +205,7 @@ class 宠物8():
         temp += '技能冷却 -5%(加算)<br>'
         return temp
 
-class 宠物9():
+class 宠物1():
     名称 = '(15)墨仙雪莲'
     def 城镇属性(self, 属性):
         属性.力量 += 45
@@ -226,7 +228,7 @@ class 宠物9():
             temp += 'Lv1-50 技能等级+1<br>'
         return temp
 
-class 宠物10():
+class 宠物0():
     名称 = '无'
     def 城镇属性(self, 属性):
         pass
@@ -236,14 +238,8 @@ class 宠物10():
         temp = ''
         return temp
 
-宠物列表 = []
-i = 0
-while i >= 0:
-    try:
-        exec('宠物列表.append(宠物'+str(i)+'())')
-        i += 1
-    except:
-        i = -1
+for i in range(len(宠物列表)):
+    exec('宠物列表[{}] = 宠物{}()'.format(len(宠物列表) - i - 1, i))
 
 宠物序号 = dict()
 for i in range(len(宠物列表)):

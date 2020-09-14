@@ -15,6 +15,7 @@ import copy
 class CalcData():
     def __init__(self):
         self.是输出职业 = True
+        self.智慧产物限制 = 3
 
         self.minheap_queue = None  # type: Queue
         self.角色属性A = None  # type: 角色属性
@@ -213,8 +214,12 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
     套装[x] = temp
 
     count = []
+    num = 0
     for j in 套装:
-        if (j != '智慧产物') and (j != '无') and (j not in count):
+        if j == '智慧产物':
+            num += 1
+            if num > 种类[1]: return 1
+        elif (j != '无') and (j not in count):
             count.append(j)
 
     if len(count) > 种类[0]: return 1
@@ -243,7 +248,7 @@ def calc_single_mode(data):
     装备 = ['无'] * 12
     套装 = ['无'] * 11
     神话 = [0] * 11
-    种类 = [11]
+    种类 = [11, data.智慧产物限制]
 
     for a1 in data.有效部位列表[0]:
         if 筛选(a1, 0, 装备, 套装, 神话, 种类, data): continue

@@ -877,8 +877,6 @@ class 混沌行者(角色窗口):
         for x in range(3):
             if self.护石栏[x].currentText() == '次元粒子风暴':
                 sign = 1
-            if self.护石栏[x].currentText() == '次元奇点':
-                sign2 = 1
         if sign == 1:
             self.强化粒子风暴.setChecked(True)
             self.强化粒子风暴.setEnabled(False)
@@ -886,10 +884,6 @@ class 混沌行者(角色窗口):
         else:
             self.强化粒子风暴.setEnabled(True)
             self.强化粒子风暴.setStyleSheet(复选框样式)
-        if sign2 == 1:
-            self.强化奇点.setChecked(False)
-        else:
-            self.强化奇点.setChecked(True)
 
     def 界面(self):
         super().界面()
@@ -959,21 +953,42 @@ class 混沌行者(角色窗口):
             属性.离子束形态 = 1
         if self.强化万花镜.isChecked():
             属性.万花镜形态 = 1
-
         if self.强化粒子风暴.isChecked():
             属性.粒子风暴形态 = 1
-
-        for x in range(3):
-            if self.护石栏[x].currentText() == '次元奇点':
-                属性.装备奇点护石 = 1
-
         if self.强化奇点.isChecked():
             属性.奇点形态 = 1
-
         if self.强化粒子波.isChecked():
             属性.粒子波形态 = 1
-
         if self.聚爆是否瞬爆.isChecked():
             属性.聚爆形态 = 1
-
         属性.二觉形态 = self.二觉形态选择.currentIndex()
+
+    def 载入配置(self, path = 'set'):
+        super().载入配置(path)
+        try:
+            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill4.ini', 'r', encoding='utf-8').readlines()
+            num = 0
+            for i in [ self.坠落触发箱子, self.离子束强化, self.强化万花镜, self.强化粒子风暴,
+                       self.强化粒子波, self.聚爆是否瞬爆, self.强化奇点 ]:
+                if setfile[num].replace('\n', '') == 'True':
+                    i.setChecked(True)
+                else:
+                    i.setChecked(False)
+                num += 1
+            self.二觉形态选择.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+        except:
+            pass
+
+    def 保存配置(self, path = 'set'):
+        try:
+            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill4.ini', 'w', encoding='utf-8')
+            setfile.write(str(self.坠落触发箱子.isChecked()) + '\n')
+            setfile.write(str(self.离子束强化.isChecked()) + '\n')
+            setfile.write(str(self.强化万花镜.isChecked()) + '\n')
+            setfile.write(str(self.强化粒子风暴.isChecked()) + '\n')
+            setfile.write(str(self.强化粒子波.isChecked()) + '\n')
+            setfile.write(str(self.聚爆是否瞬爆.isChecked()) + '\n')
+            setfile.write(str(self.强化奇点.isChecked()) + '\n')
+            setfile.write(str(self.二觉形态选择.currentIndex()) + '\n')
+        except:
+            pass

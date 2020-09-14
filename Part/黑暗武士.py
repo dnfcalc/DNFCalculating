@@ -979,12 +979,12 @@ class 黑暗武士角色属性(角色属性):
         #避免出现浮点数取整BUG
         self.伤害增加 += 0.00000001
         
-        属性倍率 = self.属性倍率计算()
+        self.属性倍率计算()
 
-        if self.红色宠物装备 == '自适应':
-            self.宠物装备判断(属性倍率)
+        if sum(self.自适应选项) != 0:
+            self.自适应计算()
 
-        self.词条提升率计算(属性倍率)
+        self.希洛克武器提升()
 
         面板1 = int((self.面板力量() / 250 + 1) * (self.物理攻击力 + self.进图物理攻击力) * (1 + self.百分比三攻))
         面板2 = int((self.面板智力() / 250 + 1) * (self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻))
@@ -994,9 +994,9 @@ class 黑暗武士角色属性(角色属性):
         增伤倍率 *= 1 + self.最终伤害
         增伤倍率 *= self.技能攻击力
         增伤倍率 *= 1 + self.持续伤害 * self.持续伤害计算比例
-        增伤倍率 *= 1 + self.附加伤害 + self.属性附加 * 属性倍率
-        self.伤害指数1 = 面板1 * 属性倍率 * 增伤倍率 * 基准倍率 / 100
-        self.伤害指数2 = 面板2 * 属性倍率 * 增伤倍率 * 基准倍率 / 100
+        增伤倍率 *= 1 + self.附加伤害 + self.属性附加 * self.属性倍率
+        self.伤害指数1 = 面板1 * self.属性倍率 * 增伤倍率 * 基准倍率 / 100
+        self.伤害指数2 = 面板2 * self.属性倍率 * 增伤倍率 * 基准倍率 / 100
 
     def CD倍率计算(self):
         super().CD倍率计算()
@@ -1060,8 +1060,9 @@ class 黑暗武士(角色窗口):
 
     def 界面(self):
         super().界面()
-
-        self.守门将属强.move(self.守门将属强.x() - 135, self.守门将属强.y() - 30)
+        
+        for i in ([self.守门将属强] + self.希洛克套装按钮 + self.希洛克单件按钮 + self.希洛克装备图标 + self.希洛克武器词条):
+            i.move(i.x() - 85, i.y() + 380)
 
         for i in [self.觉醒选择, self.一觉图片, self.二觉图片, self.一觉遮罩, self.二觉遮罩]:
             i.move(-1000, -1000)
@@ -1110,8 +1111,8 @@ class 黑暗武士(角色窗口):
 
         self.清空排列按钮 = QPushButton('清空排列', self.main_frame2)
         self.清空排列按钮.clicked.connect(lambda state: self.清空排列())
-        self.清空排列按钮.move(850, 660)
-        self.清空排列按钮.resize(100, 30)
+        self.清空排列按钮.move(850, 630)
+        self.清空排列按钮.resize(100, 20)
         self.清空排列按钮.setStyleSheet(按钮样式)
 
         self.护甲精通选择=MyQComboBox(self.main_frame2)
@@ -1120,7 +1121,7 @@ class 黑暗武士(角色窗口):
         self.护甲精通选择.addItem('重甲')
         self.护甲精通选择.addItem('板甲')
         self.护甲精通选择.resize(120,20)
-        self.护甲精通选择.move(720,665)
+        self.护甲精通选择.move(720,630)
 
     def 清空排列(self):
 
