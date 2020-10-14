@@ -663,7 +663,7 @@ class 归元·气功师·男角色属性(角色属性):
         self.技能栏 = deepcopy(归元·气功师·男技能列表)
         self.技能序号 = deepcopy(归元·气功师·男技能序号)
 
-    def 面板魔法攻击力(self, x = 0):
+    def 面板魔法攻击力(self):
         面板魔法攻击 = self.主BUFF * (self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻) * (
                 1 + self.年宠技能 * 0.10 + self.斗神之吼秘药 * 0.12 + self.白兔子技能 * 0.20)
         for i in self.技能栏:
@@ -671,10 +671,7 @@ class 归元·气功师·男角色属性(角色属性):
                 面板魔法攻击 *= i.魔法攻击力倍率(self.武器类型)
             except:
                 pass
-        if x == 1:
-            return round(面板魔法攻击,8)
-        else:
-            return round(面板魔法攻击,8) * (self.面板智力() / 250 + 1)
+        return 面板魔法攻击
 
     def 被动倍率计算(self):
         self.技能栏[self.技能序号['分身']].基础个数 = self.技能栏[self.技能序号['幻影爆碎']].TP等级

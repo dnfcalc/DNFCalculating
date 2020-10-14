@@ -980,6 +980,7 @@ class 混沌行者(角色窗口):
             pass
 
     def 保存配置(self, path = 'set'):
+        super().保存配置(path)
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill4.ini', 'w', encoding='utf-8')
             setfile.write(str(self.坠落触发箱子.isChecked()) + '\n')

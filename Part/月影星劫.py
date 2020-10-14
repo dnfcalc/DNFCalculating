@@ -554,6 +554,11 @@ class 月影星劫(角色窗口):
     def 界面(self):
         super().界面()
         self.收招选择 = []
+        self.打桩展示 = QPushButton('打桩展示(25S)',self.main_frame2)
+        self.打桩展示.setStyleSheet(按钮样式)
+        self.打桩展示.resize(100,25)
+        self.打桩展示.move(990, self.height() - 100)
+        self.打桩展示.clicked.connect(lambda state, index = 0: QDesktopServices.openUrl(QUrl('https://www.bilibili.com/video/BV1Si4y1g7uS/')))
         count = 0
         for i in self.初始属性.技能栏:
             if i.是否有伤害 == 1:
@@ -562,8 +567,7 @@ class 月影星劫(角色窗口):
                     self.收招选择[count].resize(120,20)
                     self.收招选择[count].move(335 + 135 * int(count / 7),440 + 26 * (count % 7))
                     self.收招选择[count].setStyleSheet(复选框样式)
-                    if i.名称 not in ['旋刃冲击']:
-                        self.收招选择[count].setChecked(True)
+                    self.收招选择[count].setChecked(True)
                     count += 1
 
         self.旋舞斩收招次数=MyQComboBox(self.main_frame2)
@@ -579,7 +583,7 @@ class 月影星劫(角色窗口):
         self.剑刃风暴旋转次数.resize(170,20)
         self.剑刃风暴旋转次数.move(125,548)
         self.剑刃风暴旋转次数.setToolTip('旋转次数最高10次')
-        self.剑刃风暴旋转次数.setCurrentIndex(7)
+        self.剑刃风暴旋转次数.setCurrentIndex(8)
 
         self.螺旋穿刺旋转次数=MyQComboBox(self.main_frame2)
         for i in range(7):
@@ -594,7 +598,7 @@ class 月影星劫(角色窗口):
         self.死亡风暴攻击次数.resize(170,20)
         self.死亡风暴攻击次数.move(125,604)
         self.死亡风暴攻击次数.setToolTip('最高30次')
-        self.死亡风暴攻击次数.setCurrentIndex(23)
+        self.死亡风暴攻击次数.setCurrentIndex(27)
 
     def 输入属性(self, 属性, x = 0):
         super().输入属性(属性, x)
@@ -617,4 +621,4 @@ class 月影星劫(角色窗口):
                 for j in self.符文效果[i].currentText().split(','):
                     if '攻击' in j:
                         属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].攻击次数2 *= 1 + int(j.replace('攻击','').replace('%',''))/100
-
+    

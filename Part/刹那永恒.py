@@ -726,7 +726,7 @@ class 刹那永恒角色属性(角色属性):
                 else :
                     for k in i.关联技能:
                         self.技能栏[self.技能序号[k]].被动倍率 *= i.加成倍率(self.武器类型)
-            # Will添加
+            
             if i.关联技能2 != ['无']:
                 if i.关联技能2 == ['所有']:
                     for j in self.技能栏:
@@ -735,7 +735,7 @@ class 刹那永恒角色属性(角色属性):
                 elif i.名称 != '冰之技艺' :
                     for k in i.关联技能2:
                         self.技能栏[self.技能序号[k]].被动倍率 *= i.加成倍率2(self.武器类型)
-            # Will添加
+            
             if i.关联技能3 != ['无']:
                 if i.关联技能3 == ['所有']:
                     for j in self.技能栏:

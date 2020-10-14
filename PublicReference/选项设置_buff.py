@@ -24,13 +24,8 @@ class 选项设置3():
         属性.技能等级加成('所有',1,85,1)
 
 选项设置列表 = []
-i = 0
-while i >= 0:
-    try:
-        exec('选项设置列表.append(选项设置'+str(i)+'())')
-        i += 1
-    except:
-        i = -1
+for i in range(4):
+    exec('选项设置列表.append(选项设置'+str(i)+'())')
 
 选项设置序号 = dict()
 for i in range(len(选项设置列表)):

@@ -11,8 +11,8 @@ import multiprocessing
 from PublicReference import logger
 
 
-工作线程数 = multiprocessing.cpu_count()
-每个工作线程应处理的任务数 = 4
+thread_num = multiprocessing.cpu_count()
+thread_task = 4
 
 class ProducerData:
     def __init__(self):

@@ -1,11 +1,14 @@
 import configparser
+from PublicReference.constant import *
 
 conf = configparser.ConfigParser()
-try:
-    conf.read('./ResourceFiles/set.ini', encoding='utf-8')
-except:
-    conf.read('./ResourceFiles/set.ini', encoding='gbk')
 
+#基础设置##################################################################
+try:
+    conf.read('./ResourceFiles/Config/基础设置.ini', encoding='utf-8')
+except:
+    conf.read('./ResourceFiles/Config/基础设置.ini', encoding='gbk')
+    
 #窗口缩放
 try:
     窗口显示模式 = conf.getint('窗口显示', 'value')
@@ -36,6 +39,10 @@ try:
 except:
     输出数据 = 0
 
+if 输出数据 == 1:
+    if not os.path.exists('./数据记录'):
+        os.makedirs('./数据记录') 
+
 #控制夜语黑瞳武器是否显示在第一页
 try:
     普雷武器显示 =  1 - conf.getint('夜语黑瞳', 'value')
@@ -47,20 +54,6 @@ try:
     武器排名 = conf.getint('武器排名', 'value') 
 except:
     武器排名 = 0
-
-#怪物属性
-try:
-    防御输入 = conf.getint('怪物属性', '防御')
-    火抗输入 = conf.getint('怪物属性', '火抗')
-    冰抗输入 = conf.getint('怪物属性', '冰抗')
-    光抗输入 = conf.getint('怪物属性', '光抗')
-    暗抗输入 = conf.getint('怪物属性', '暗抗')
-except:
-    防御输入 = 443243
-    火抗输入 = 0
-    冰抗输入 = 0
-    光抗输入 = 0
-    暗抗输入 = 0
 
 #武器序号
 try:
@@ -93,3 +86,29 @@ try:
     千蛛减防 = conf.getint('千蛛碎影', '减防生效')
 except:
     千蛛减防 = 0
+
+
+#攻击目标##################################################################
+try:
+    conf.read('./ResourceFiles/Config/攻击目标.ini', encoding='utf-8')
+except:
+    conf.read('./ResourceFiles/Config/攻击目标.ini', encoding='gbk')
+
+#怪物属性
+攻击目标 = []
+for i in range(100):
+    try: 
+        temp = []
+        item = 'item' + str(i)
+        temp.append(conf.get(item, '名称'))
+        temp.append(conf.getint(item, '防御'))
+        temp.append(conf.getint(item, '火抗'))
+        temp.append(conf.getint(item, '冰抗'))
+        temp.append(conf.getint(item, '光抗'))
+        temp.append(conf.getint(item, '暗抗'))
+        攻击目标.append(temp)
+    except: 
+        break
+
+if len(攻击目标) == 0:
+    攻击目标 = [['120沙袋(绿)', 443243, 0, 0, 0, 0]]

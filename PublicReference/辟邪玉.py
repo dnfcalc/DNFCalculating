@@ -142,15 +142,9 @@ class 辟邪玉18(辟邪玉):
         属性.技能等级加成('所有', 85, 85, self.当前值)
         pass
  
-
 辟邪玉列表 = []
-i = 0
-while i >= 0:
-    try:
-        exec('辟邪玉列表.append(辟邪玉'+str(i)+'())')
-        i += 1
-    except:
-        i = -1
+for i in range(19):
+    exec('辟邪玉列表.append(辟邪玉'+str(i)+'())')
 
 辟邪玉序号 = dict()
 for i in range(len(辟邪玉列表)):
