@@ -120,7 +120,7 @@ class 亡魂主宰技能5(亡魂主宰主动技能):
 
     def 等效百分比(self, 武器类型):
         return self.数据[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
-    
+
 class 亡魂主宰技能6(亡魂主宰主动技能):
     名称 = '服从（远程）'
     所在等级 = 20
@@ -216,15 +216,7 @@ class 亡魂主宰技能11(亡魂主宰主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        if self.TP等级 == 0:
-            return self.数据[self.等级] * self.攻击次数 * self.攻击倍率 * self.倍率
-        else:
-            if self.TP等级 <= 3:
-                return self.数据[self.等级] * (self.攻击次数 + (self.TP等级 + 1)) * self.攻击倍率 * self.倍率
-            else:
-                if self.TP等级 <= 5:
-                    return self.数据[self.等级] * (self.攻击次数 + (self.TP等级 + 2)) * self.攻击倍率 * self.倍率
-
+        return self.数据[self.等级] * (self.攻击次数 + (self.TP等级+1))* self.攻击倍率 * self.倍率
 
 class 亡魂主宰技能12(被动技能):
     名称 = '黑魔法书：亡者之魂'

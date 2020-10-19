@@ -226,18 +226,11 @@ class 角色属性():
             self.精神 += temp.精神
      
         temp = 装备列表[装备序号[self.装备栏[11]]]
-<<<<<<< HEAD
         if temp.所属套装 != '智慧产物':
             四维 = 锻造四维(temp.等级,temp.品质,self.武器锻造等级)
             self.智力 += temp.智力 + 四维
             self.体力 += temp.体力 + 四维
             self.精神 += temp.精神 + 四维
-=======
-        四维 = 锻造四维(temp.等级,temp.品质,self.武器锻造等级)
-        self.智力 += temp.智力 + 四维
-        self.体力 += temp.体力 + 四维
-        self.精神 += temp.精神 + 四维
->>>>>>> 4e77c44b7904c375b318590499da12b743d7b998
 
     def 获取增幅(self, 部位):
         return self.是否增幅[部位列表.index(部位)]
