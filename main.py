@@ -3,7 +3,7 @@
 from PyQt5.QtCore import QUrl
 from Part.sum import *
 from PublicReference.calc_core import calc_core
-from PublicReference.producer_consumer import producer_data, consumer, 工作线程数
+from PublicReference.producer_consumer import producer_data, consumer, thread_num
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()
@@ -11,95 +11,96 @@ if __name__ == '__main__':
 class 选择窗口(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.初始化工作进程()
-        self.界面()
-        self.职业窗口 = None
+        self.thread_init()
+        self.ui()
+        self.char_window = None
 
-    def 初始化工作进程(self):
+    def thread_init(self):
         # 工作队列
         work_queue = multiprocessing.JoinableQueue()
         work_queue.cancel_join_thread()  # or else thread that puts data will not term
         producer_data.work_queue = work_queue
         # 工作进程
         workers = []
-        for i in range(工作线程数):
+        for i in range(thread_num):
             p = multiprocessing.Process(target=consumer, args=(work_queue, calc_core), daemon=True, name="worker#{}".format(i + 1))
             p.start()
             workers.append(p)
 
-        logger.info("已启动{}个工作进程".format(工作线程数))
+        logger.info("已启动{}个工作进程".format(thread_num))
 
         self.worker = workers
         pass
 
-    def 界面(self):
+    def ui(self):
+        self.setStyleSheet('''QToolTip { 
+                   background-color: black; 
+                   color: white; 
+                   border: 0px
+                   }''')
         self.setMinimumSize(805,630)
         self.setMaximumSize(805,1520)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.9.12 (技能模板仅供参考，请根据自身情况修改)')
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.10.17 (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
 
         if not os.path.exists('./ResourceFiles'):
             QMessageBox.information(self,"解压错误",  "未找到ResourceFiles(资源文件)，请完整解压再打开main") 
 
-        背景颜色 = QLabel(self)
-        背景颜色.resize(805,1520)
-        背景颜色.setStyleSheet("QLabel{background-color:rgba(0,0,0,1)}")
+        bgcolor = QLabel(self)
+        bgcolor.resize(805,1520)
+        bgcolor.setStyleSheet("QLabel{background-color:rgba(0,0,0,1)}")
 
-        self.头像图片 = []
-        self.分类图片 = []
-        是否动图 = os.path.exists('动态头像')
+        self.char_img = []
+        self.family_img = []
+        is_gif = os.path.exists('动态头像')
         for i in range(1, 76):
-            if 是否动图:
-                self.头像图片.append(QMovie("动态头像/"+ str(i) +".gif"))
+            if is_gif:
+                self.char_img.append(QMovie("动态头像/"+ str(i) +".gif"))
             else:
-                self.头像图片.append(QPixmap("ResourceFiles/img/头像/"+ str(i) +".png"))
+                self.char_img.append(QPixmap("ResourceFiles/img/头像/"+ str(i) +".png"))
         for i in range(17):
-            self.分类图片.append(QPixmap("ResourceFiles/img/分类/"+ str(i) +".png"))
+            self.family_img.append(QPixmap("ResourceFiles/img/分类/"+ str(i) +".png"))
 
         wrapper = QWidget()
         self.setCentralWidget(wrapper)
         self.topFiller = QWidget()
         self.topFiller.setMinimumSize(750, 1520)
 
-        按钮样式2 = 'QPushButton{background-color:rgba(0,0,0,0);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(252,224,0,0.2)}'
-
         count = 0
         for i in range(75):
-            图标显示 = QLabel(self.topFiller)
-            if 是否动图:
-                图标显示.setMovie(self.头像图片[i])
-                self.头像图片[i].start()
+            img_box = QLabel(self.topFiller)
+            if is_gif:
+                img_box.setMovie(self.char_img[i])
+                self.char_img[i].start()
             else:
-                图标显示.setPixmap(self.头像图片[i])
-            图标显示.resize(121, 90)
-            图标显示.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
+                img_box.setPixmap(self.char_img[i])
+            img_box.resize(121, 90)
+            img_box.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
             if (i + 1) in 完成职业:
                 if 角色列表[角色序号[i + 1]].类名 != '空':
-                    图标显示2 = QLabel(self.topFiller)
-                    图标显示2.setPixmap(self.分类图片[16])
-                    图标显示2.resize(121, 90)
-                    图标显示2.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
-                    文字显示 = QLabel(self.topFiller)
-                    文字显示.setStyleSheet('QLabel{font-size:13px;color:rgb(175,148,89)}')
-                    文字显示.setText(角色列表[角色序号[i + 1]].显示名称)
-                    文字显示.resize(121, 24)
-                    文字显示.setAlignment(Qt.AlignCenter)
-                    文字显示.move(120 + (count % 5) * 125, 76 + int(count / 5) * 100)
-                    按钮 = QPushButton(self.topFiller)
-                    按钮.setStyleSheet(按钮样式2)
-                    按钮.resize(121, 90)
-                    按钮.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
-                    按钮.clicked.connect(lambda state, index = 角色列表[角色序号[i + 1]]: self.职业版本判断(index))
-                    temp = '<b>作者：<font color="#FF0000">'+ 角色列表[角色序号[i + 1]].作者 +'</font><br><br>'
-                    temp += '时间：'+角色列表[角色序号[i + 1]].时间 +'<br><br>'
-                    temp += '备注：'+角色列表[角色序号[i + 1]].备注 +'</b>'
-                    按钮.setToolTip(temp)
+                    img_box_2 = QLabel(self.topFiller)
+                    img_box_2.setPixmap(self.family_img[16])
+                    img_box_2.resize(121, 90)
+                    img_box_2.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
+                    txt_box = QLabel(self.topFiller)
+                    txt_box.setStyleSheet('QLabel{font-size:13px;color:rgb(175,148,89)}')
+                    txt_box.setText(角色列表[角色序号[i + 1]].显示名称)
+                    txt_box.resize(121, 24)
+                    txt_box.setAlignment(Qt.AlignCenter)
+                    txt_box.move(120 + (count % 5) * 125, 76 + int(count / 5) * 100)
+                    butten = QPushButton(self.topFiller)
+                    butten.setStyleSheet(按钮样式2)
+                    butten.resize(121, 90)
+                    butten.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
+                    butten.clicked.connect(lambda state, index = 角色列表[角色序号[i + 1]]: self.职业版本判断(index))
+                    temp = '<b>作者：<font color="#FF0000">'+ 角色列表[角色序号[i + 1]].作者 +'</font>'
+                    butten.setToolTip(temp)
             else:
-                图标显示2 = QLabel(self.topFiller)
-                图标显示2.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.8)}")
-                图标显示2.resize(121, 90)
-                图标显示2.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
+                img_box_2 = QLabel(self.topFiller)
+                img_box_2.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.8)}")
+                img_box_2.resize(121, 90)
+                img_box_2.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
             count += 1
 
         count = 0
@@ -110,19 +111,17 @@ class 选择窗口(QMainWindow):
                     sign = 0
                     break
             if sign == 1:
-                图标显示2 = QLabel(self.topFiller)
-                图标显示2.setPixmap(self.分类图片[15])
-                图标显示2.resize(94, 90)
-                图标显示2.setAlignment(Qt.AlignCenter)
-                图标显示2.move(15, 10 + count* 100)
-            图标显示 = QLabel(self.topFiller)
-            图标显示.setPixmap(self.分类图片[i])
-            图标显示.resize(94, 90)
-            图标显示.setAlignment(Qt.AlignCenter)
-            图标显示.move(15, 10 + count* 100)
+                img_box_2 = QLabel(self.topFiller)
+                img_box_2.setPixmap(self.family_img[15])
+                img_box_2.resize(94, 90)
+                img_box_2.setAlignment(Qt.AlignCenter)
+                img_box_2.move(15, 10 + count* 100)
+            img_box = QLabel(self.topFiller)
+            img_box.setPixmap(self.family_img[i])
+            img_box.resize(94, 90)
+            img_box.setAlignment(Qt.AlignCenter)
+            img_box.move(15, 10 + count* 100)
             count += 1
-
-        按钮样式3 = 'QPushButton{font-size:13px;color:white;background-color:rgba(255,255,255,0.1);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(65,105,225,0.5)}'
 
         名称 = ['查看更新', '查看源码', '使用说明', '问题反馈']
         链接 = []
@@ -133,18 +132,18 @@ class 选择窗口(QMainWindow):
 
         count = 0
         for i in 名称:
-            链接按钮=QtWidgets.QPushButton(i, self.topFiller)
-            链接按钮.clicked.connect(lambda state, index = count: self.打开链接(链接[index]))
-            链接按钮.move(120 + 4 * 125, 10 + (count + 1) * 100)    
-            链接按钮.setStyleSheet(按钮样式3)
-            链接按钮.resize(121,90)
+            butten=QtWidgets.QPushButton(i, self.topFiller)
+            butten.clicked.connect(lambda state, index = count: self.打开链接(链接[index]))
+            butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
+            butten.setStyleSheet(按钮样式3)
+            butten.resize(121,90)
             count += 1
 
-        链接按钮=QtWidgets.QPushButton('打开设置', self.topFiller)
-        链接按钮.clicked.connect(lambda state : os.system('notepad.exe "./ResourceFiles/set.ini"'))
-        链接按钮.move(120 + 4 * 125, 10 + (count + 1) * 100)    
-        链接按钮.setStyleSheet(按钮样式3)
-        链接按钮.resize(121,90)
+        butten=QtWidgets.QPushButton('打开设置', self.topFiller)
+        butten.clicked.connect(lambda state : os.system('notepad.exe "./ResourceFiles/Config/基础设置.ini"'))
+        butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
+        butten.setStyleSheet(按钮样式3)
+        butten.resize(121,90)
         count += 1
 
         self.scroll = QScrollArea()
@@ -156,10 +155,10 @@ class 选择窗口(QMainWindow):
         wrapper.setLayout(self.vbox)
 
     def 打开窗口(self, name):
-        if self.职业窗口 != None:
-            self.职业窗口.close()
-        self.职业窗口 = eval(name + '()')
-        self.职业窗口.show()
+        if self.char_window != None:
+            self.char_window.close()
+        self.char_window = eval(name + '()')
+        self.char_window.show()
 
     def 职业版本判断(self, index):
         try:
@@ -168,46 +167,24 @@ class 选择窗口(QMainWindow):
                 return
             box = QMessageBox(QMessageBox.Question, "提示", "请选择要打开的版本")
             box.setWindowIcon(self.icon)
-
-            if '·神思者' in index.类名:
-                box.setStandardButtons(QMessageBox.Yes | QMessageBox.Retry | QMessageBox.No | QMessageBox.Abort | QMessageBox.Cancel) #Retry
-                A = box.button(QMessageBox.Yes)
-                B = box.button(QMessageBox.Retry)
-                C = box.button(QMessageBox.No)
-                D = box.button(QMessageBox.Abort)
-                E = box.button(QMessageBox.Cancel)
-                box.setDefaultButton(QMessageBox.Yes)
+            box.setStandardButtons(QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
+            A = box.button(QMessageBox.Yes)
+            B = box.button(QMessageBox.No)
+            C = box.button(QMessageBox.Cancel)
+            if index.序号 == 41:
                 A.setText('BUFF')
                 B.setText('战斗')
-                C.setText('BUFF(三觉)')
-                D.setText('战斗(三觉)')
-                E.setText('取消')
-                box.exec_()
-                if box.clickedButton() == A:
-                    self.打开窗口(index.类名)
-                elif box.clickedButton() == B:
-                    self.打开窗口(index.类名2)
-                elif box.clickedButton() == C:
-                    self.打开窗口(index.类名3)
-                elif box.clickedButton() == D:
-                    self.打开窗口(index.类名4)
-                else:
-                    return
             else:
-                box.setStandardButtons(QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
-                A = box.button(QMessageBox.Yes)
-                B = box.button(QMessageBox.No)
-                C = box.button(QMessageBox.Cancel)
                 A.setText('二觉')
                 B.setText('三觉')
-                C.setText('取消')
-                box.exec_()
-                if box.clickedButton() == A:
-                    self.打开窗口(index.类名)
-                elif box.clickedButton() == B:
-                    self.打开窗口(index.类名2)
-                else:
-                    return
+            C.setText('取消')
+            box.exec_()
+            if box.clickedButton() == A:
+                self.打开窗口(index.类名)
+            elif box.clickedButton() == B:
+                self.打开窗口(index.类名2)
+            else:
+                return
         except:
             return
 
@@ -223,6 +200,6 @@ if __name__ == '__main__':
         if hasattr(qtc.Qt, 'AA_UseHighDpiPixmaps'):
             QtWidgets.QApplication.setAttribute(qtc.Qt.AA_UseHighDpiPixmaps, True)
     app = QApplication([])
-    a = 选择窗口()
-    a.show()
+    instance = 选择窗口()
+    instance.show()
     app.exec_()

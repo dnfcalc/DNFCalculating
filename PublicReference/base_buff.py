@@ -1,28 +1,10 @@
-import multiprocessing
-import queue
-import threading
-import time
-import os
-import math
-
-from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-
-from PublicReference import logger
-from PublicReference.calc_core import CalcData
-from PublicReference.common import format_time
-from PublicReference.minheap import MinHeap, MinHeapWithQueue, batch_size
-from PublicReference.producer_consumer import producer, producer_data, 工作线程数, 每个工作线程应处理的任务数
 from PublicReference.装备_buff import *
 from PublicReference.基础函数 import *
 from PublicReference.辟邪玉_buff import *
 from PublicReference.称号_buff import *
 from PublicReference.宠物_buff import *
 from PublicReference.选项设置_buff import *
-from PublicReference.希洛克武器融合_buff import *
-from PublicReference.copy import *
+from PublicReference.武器融合_buff import *
 
 class 技能:
     名称 = ''
@@ -56,8 +38,6 @@ class 主动技能(技能):
     是否主动 = 1
     适用数值 = 0
 
-颜色 = {'神话':'#E0502F', '史诗':'#FFB400', '传说':'#FF7800'}
-
 史诗防具智力Lv100 = {"上衣": 149, "头肩": 139, "下装": 149, "腰带": 130, "鞋": 130}
 史诗防具体力Lv100 = {"上衣": 54, "头肩": 43, "下装": 54, "腰带": 32, "鞋": 32}
 史诗防具精神Lv100 = {"上衣": 0, "头肩": 0, "下装": 0, "腰带": 0, "鞋": 0}
@@ -72,19 +52,6 @@ class 主动技能(技能):
 防具智力Lv95 = {"上衣": 46, "头肩": 37, "下装": 46, "腰带": 28, "鞋": 28}
 防具体力Lv95 = {"上衣": 52, "头肩": 41, "下装": 52, "腰带": 31, "鞋": 31}
 防具精神Lv95 = {"上衣": 0, "头肩": 0, "下装": 0, "腰带": 0, "鞋": 0}
-
-class MyQComboBox(QComboBox):
-    def __init__(self,窗口):
-        super().__init__(窗口)
-        self.setView(QListView())
-        self.setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
-
-复选框样式 = "QCheckBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:3px} QCheckBox:hover{background-color:rgba(65,105,225,0.8)}"
-按钮样式 = 'QPushButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:10px} QPushButton:hover{background-color:rgba(65,105,225,0.8)}'
-不可点击按钮样式 = 'QPushButton{font-size:12px;color:white;background-color:grey;border:1px;border-radius:10px} QPushButton:hover{background-color:rgba(65,105,225,0.8)}'
-标签样式 = "QLabel{font-size:12px;color:white}"
-
-堆大小上限 = 100
 
 class 角色属性():
 
@@ -119,8 +86,6 @@ class 角色属性():
     进图体力 = 0.0
     进图精神 = 0.0
 
-    锻造四维 = 0
-    
     排行系数 = 0
     站街系数 = 0 
 
@@ -261,7 +226,7 @@ class 角色属性():
             self.精神 += temp.精神
      
         temp = 装备列表[装备序号[self.装备栏[11]]]
-        四维 = 锻造四维(temp.等级,temp.品质,self.武器锻造等级) if self.锻造四维 == 1 else 0
+        四维 = 锻造四维(temp.等级,temp.品质,self.武器锻造等级)
         self.智力 += temp.智力 + 四维
         self.体力 += temp.体力 + 四维
         self.精神 += temp.精神 + 四维
@@ -593,15 +558,17 @@ class 角色窗口(QWidget):
         self.窗口属性输入()
         self.界面()
         self.布局界面()
-
+        
         #创建配置文件夹
-        path = './ResourceFiles/'+self.角色属性A.实际名称 + '/set'
+        path = './ResourceFiles/{}/set'.format(self.角色属性A.实际名称)
         if not os.path.exists(path):
             os.makedirs(path) 
+        
+        self.存档列表读取()
 
         #判断从哪读取数据
         if os.path.exists(path + '/attr.ini'):
-            self.载入配置()
+            self.载入配置('set')
         else:
             self.载入配置('reset')
             
@@ -611,7 +578,7 @@ class 角色窗口(QWidget):
         self.close()
 
     def closeEvent(self, event):
-        self.保存配置()
+        self.保存配置(self.存档位置)
         self.排行窗口列表.clear()
 
     def 窗口属性输入(self):
@@ -983,11 +950,11 @@ class 角色窗口(QWidget):
         self.神话排名选项.setToolTip('<font size="3" face="宋体">仅显示有神话的组合，且每件神话装备只会出现一次</font>')
         self.神话排名选项.setStyleSheet(复选框样式)
         
-        self.最大使用线程数 = 工作线程数
+        self.最大使用线程数 = thread_num
         self.线程数选择 = MyQComboBox(self.main_frame1)
         self.线程数选择.move(660, 580)
         self.线程数选择.resize(80, 24)
-        for i in range(工作线程数, 0, -1):
+        for i in range(thread_num, 0, -1):
             self.线程数选择.addItem('进程:' + str(i))
 
         self.禁用存档 = QCheckBox('禁用自动存档', self.main_frame1)
@@ -1006,10 +973,10 @@ class 角色窗口(QWidget):
         self.排行参数.move(770, 545)
         self.排行参数.resize(100, 24)
 
-        self.锻造四维 = QCheckBox('锻造四维', self.main_frame1)
-        self.锻造四维.move(690, 545)
-        self.锻造四维.resize(70, 24)
-        self.锻造四维.setStyleSheet(复选框样式)
+        self.存档选择 = MyQComboBox(self.main_frame1)
+        self.存档选择.move(660, 545)
+        self.存档选择.resize(90, 24)
+        self.存档选择.currentIndexChanged.connect(lambda state :self.存档更换())
 
         #一键修正按钮添加
         self.一键站街设置输入.append(QLineEdit(self.main_frame1))
@@ -1157,7 +1124,7 @@ class 角色窗口(QWidget):
         横坐标 = 395
         纵坐标 = 240
 
-        x=QLabel("希洛克武器融合(固定词条/随机词条/随机数值)：", self.main_frame2)
+        x=QLabel("武器融合(固定词条/随机词条/随机数值)：", self.main_frame2)
         x.move(横坐标,纵坐标 + 5)
         x.resize(300,20)
         x.setStyleSheet(标签样式)
@@ -1165,36 +1132,36 @@ class 角色窗口(QWidget):
         self.武器融合属性A = MyQComboBox(self.main_frame2) 
         for j in 武器属性A列表:
             self.武器融合属性A.addItem(j.固定属性描述)
-        self.武器融合属性A.resize(140,20)
+        self.武器融合属性A.resize(105,20)
         self.武器融合属性A.move(横坐标,纵坐标 + 25)
 
         self.武器融合属性A1 = MyQComboBox(self.main_frame2)
-        self.武器融合属性A1.resize(120,20)
-        self.武器融合属性A1.move(横坐标 + 150,纵坐标 + 25)
+        self.武器融合属性A1.resize(90,20)
+        self.武器融合属性A1.move(横坐标 + 110,纵坐标 + 25)
 
         self.武器融合属性A2 = MyQComboBox(self.main_frame2) 
-        self.武器融合属性A2.resize(60,20)
-        self.武器融合属性A2.move(横坐标 + 280,纵坐标 + 25)
+        self.武器融合属性A2.resize(50,20)
+        self.武器融合属性A2.move(横坐标 + 205,纵坐标 + 25)
         self.武器融合属性A.currentIndexChanged.connect(lambda:self.希洛克武器随机词条更新(self.武器融合属性A.currentIndex()))
 
         纵坐标 = 纵坐标 + 30
         self.武器融合属性B = MyQComboBox(self.main_frame2) 
         for j in 武器属性B列表:
             self.武器融合属性B.addItem(j.固定属性描述)
-        self.武器融合属性B.resize(140,20)
+        self.武器融合属性B.resize(105,20)
         self.武器融合属性B.move(横坐标,纵坐标 + 25)
 
         self.武器融合属性B1 = MyQComboBox(self.main_frame2)
-        self.武器融合属性B1.resize(120,20)
-        self.武器融合属性B1.move(横坐标 + 150,纵坐标 + 25)
+        self.武器融合属性B1.resize(90,20)
+        self.武器融合属性B1.move(横坐标 + 110,纵坐标 + 25)
 
         self.武器融合属性B2 = MyQComboBox(self.main_frame2) 
-        self.武器融合属性B2.resize(60,20)
-        self.武器融合属性B2.move(横坐标 + 280,纵坐标 + 25)
+        self.武器融合属性B2.resize(50,20)
+        self.武器融合属性B2.move(横坐标 + 205,纵坐标 + 25)
         self.武器融合属性B.currentIndexChanged.connect(lambda:self.希洛克武器随机词条更新(self.武器融合属性B.currentIndex(), 1))
 
         横坐标=740;纵坐标=30
-        名称 = ['奈克斯', '暗杀者', '卢克西', '守门将', '罗德斯']
+        名称 = ['奈克斯', '暗杀者', '卢克西', '守门人', '洛多斯']
         self.希洛克套装按钮 = []
         self.希洛克单件按钮 = []
         self.希洛克遮罩透明度 = []
@@ -1497,20 +1464,27 @@ class 角色窗口(QWidget):
         标签.resize(240, 25)
         标签.move(70, 20)
 
+        标签 = QLabel('锁定', self.main_frame5)
+        标签.setAlignment(Qt.AlignCenter)
+        标签.setStyleSheet(标签样式)
+        标签.resize(70, 25)
+        标签.move(10, 20)
+
         self.图片显示 = []
         self.图片列表 = []
 
         count = 0
         self.自选装备 = []
+        self.装备锁定 = []
         for i in 部位列表:
-            标签 = QLabel(i, self.main_frame5)
-            标签.setAlignment(Qt.AlignCenter)
-            标签.setStyleSheet(标签样式)
-            标签.resize(60, 25)
-            标签.move(10, 50 + 30 * count)
+            锁定选择 = QCheckBox(i, self.main_frame5)
+            锁定选择.setStyleSheet(复选框样式)
+            锁定选择.resize(70, 22)
+            锁定选择.move(10, 50 + 30 * count)
+            self.装备锁定.append(锁定选择)
             self.自选装备.append(MyQComboBox(self.main_frame5))
-            self.自选装备[count].resize(240, 22)
-            self.自选装备[count].move(70, 50 + 30 * count)
+            self.自选装备[count].resize(220, 22)
+            self.自选装备[count].move(90, 50 + 30 * count)
             self.自选装备[count].currentIndexChanged.connect(lambda state, index=count: self.自选装备更改(index))
             for j in 装备列表:
                 if j.部位 == i:
@@ -1782,6 +1756,32 @@ class 角色窗口(QWidget):
                 self.希洛克遮罩透明度[index].setOpacity(0.5)
                 self.希洛克选择状态[index] = 0
 
+    def 存档更换(self):
+        if self.存档位置 == self.存档选择.currentText():
+            return
+        box = QMessageBox(QMessageBox.Warning, "提示", "即将载入<font color='#FF0000'>{}</font>存档，是否保存当前配置到<font color='#FF0000'>{}</font>存档？".format(self.存档选择.currentText(), self.存档位置))
+        box.setWindowIcon(self.icon)
+        yes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
+        no = box.addButton(self.tr("取消"), QMessageBox.NoRole)
+        box.exec_()
+        if box.clickedButton() == yes:
+            self.保存配置(self.存档位置)
+        self.存档位置 = self.存档选择.currentText()
+        self.载入配置(self.存档位置)
+
+    def 存档列表读取(self):
+        self.存档位置 = 'set'
+        path = './ResourceFiles/'+self.角色属性A.实际名称 + '/'
+        setfile = []
+        for root, dirs, files in os.walk(path):
+            for dir in dirs:
+                if dir.startswith('set'):
+                    setfile.append(dir)
+        self.存档选择.clear()
+        for k in setfile:
+            self.存档选择.addItem(k)
+        self.存档位置 = self.存档选择.currentText()
+
     def 全局重置(self):
         box = QMessageBox(QMessageBox.Warning, "提示", "是否恢复默认设置？")
         box.setWindowIcon(self.icon)
@@ -1831,6 +1831,8 @@ class 角色窗口(QWidget):
         self.计算标识 = 0
         name = self.自选套装[index].currentText()
         for i in range(11):
+            if self.装备锁定[i].isChecked():
+                continue
             x = -1
             for j in 装备列表:
                 if j.部位 == 部位列表[i]:
@@ -1940,7 +1942,7 @@ class 角色窗口(QWidget):
                 temp -= 属性B.间隔
             self.武器融合属性B1.addItem(属性B.随机属性描述)
             
-    def 希洛克武器融合属性计算(self, 属性):
+    def 武器融合属性计算(self, 属性):
         武器融合属性A选择 = self.武器融合属性A.currentIndex()
         武器融合属性B选择 = self.武器融合属性B.currentIndex()
         武器融合属性A数值 = self.武器融合属性A2.currentText().replace('%','')
@@ -2173,6 +2175,12 @@ class 角色窗口(QWidget):
             for i in range(12):
                 self.自选装备[i].setCurrentIndex(int(setfile[num].replace('\n', '')));
                 num += 1
+            for i in range(12):
+                if int(setfile[num].replace('\n', '')) == 1:
+                    self.装备锁定[i].setChecked(True)
+                else:
+                    self.装备锁定[i].setChecked(False)
+                num += 1                
         except:
             pass
 
@@ -2271,6 +2279,8 @@ class 角色窗口(QWidget):
             setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path + '/equ5.ini', 'w', encoding='utf-8')
             for i in range(12):
                 setfile.write(str(self.自选装备[i].currentIndex()) + '\n')
+            for i in range(12):
+                setfile.write(str(1 if self.装备锁定[i].isChecked() else 0) + '\n')
         except:
             pass
 
@@ -2414,12 +2424,19 @@ class 角色窗口(QWidget):
         self.click_window(2)
         QMessageBox.information(self, "自动修正计算完毕", "仅对站街修正进行了修改，使面板与输入一致<br>请自行核对其它页面 非智力/体力/精神条目")
 
-    def 神话数量判断(self):
+    def 神话数量判断(self, x = 0):
+        count = 0
         for j in range(len(装备列表)):
             if 装备列表[j].品质 == '神话':
                 if self.装备选择状态[j] == 1:
-                    return False
-        return True
+                    count += 1
+        if x == 0:
+            if count != 0:
+                return False
+            else:
+                return True
+        else:
+            return count
 
     def 站街面板修正(self, 类型, 输入面板, 修正面板):
         if 类型 == '智力':
@@ -2436,7 +2453,7 @@ class 角色窗口(QWidget):
             self.属性设置输入[2][15].setText(str(int(修正后面板)))
 
     def 计算(self):
-        self.保存配置()
+        self.保存配置(self.存档位置)
 
         if self.神话数量判断() and self.神话排名选项.isChecked():
             QMessageBox.information(self,"错误",  "请勾选神话装备或取消勾选神话排名模式选项") 
@@ -2488,7 +2505,7 @@ class 角色窗口(QWidget):
         self.角色属性A = deepcopy(self.初始属性)
         self.输入属性(self.角色属性A)
 
-        self.最大使用线程数 = 工作线程数 - self.线程数选择.currentIndex()
+        self.最大使用线程数 = thread_num - self.线程数选择.currentIndex()
         # -------------------------------------多线程计算流程开始-------------------------------------
 
         startTime = time.time()
@@ -2522,9 +2539,7 @@ class 角色窗口(QWidget):
                 try_fetch_result(mq)
                 time.sleep(0.5)
 
-        save_top_n = 堆大小上限
-        if self.神话排名选项.isChecked():
-            save_top_n = 2 << 64
+        save_top_n = 2 << 64
 
         mq = MinHeapWithQueue("排行", MinHeap(save_top_n, batch_size), multiprocessing.Manager().Queue())
 
@@ -2539,7 +2554,7 @@ class 角色窗口(QWidget):
             # 散件模式时
             total_task_count = self.单件模式前四层组合()
 
-        batch_task_count = min(每个工作线程应处理的任务数 * 工作线程数, total_task_count, self.最大使用线程数)
+        batch_task_count = min(thread_task * thread_num, total_task_count, self.最大使用线程数)
 
         start_index, end_index = 0, 0
         task_batch_size = total_task_count // batch_task_count
@@ -2597,26 +2612,15 @@ class 角色窗口(QWidget):
 
         self.排行数据.clear()
         self.伤害列表 = mq.minheap.getTop()
-        if self.神话排名选项.isChecked():
-            神话列表 = []
-            for i in range(len(self.伤害列表)):
-                tempstr = self.伤害列表[i][1:]
-                for j in [0, 5, 8]:
-                    if 装备列表[装备序号[tempstr[j]]].品质 == '神话' and tempstr[j] not in 神话列表:
-                        神话列表.append(tempstr[j])
-                        self.排行数据.append(tempstr)
-                if len(神话列表) >= 35:
-                    break
-        else:
-            for i in range(len(self.伤害列表)):
-                self.排行数据.append(self.伤害列表[i][1:])
+        for i in range(len(self.伤害列表)):
+            self.排行数据.append(self.伤害列表[i][1:])
 
         totoalCostTime = time.time() - startTime
         logger.info((
             "计算完毕\n"
-            "工作线程数={} 总计耗时={}"
+            "工作线程={} 总计耗时={}"
        ).format(
-            工作线程数, format_time(totoalCostTime),
+            thread_num, format_time(totoalCostTime),
        ))
 
         self.calc_done_signal.emit()
@@ -2650,11 +2654,66 @@ class 角色窗口(QWidget):
         if len(self.排行数据) == 1:
             self.输出界面(0)
         else:
+            self.排行窗口列表.clear()
+            if self.装备限定判断():
+                self.其他限定判断()
+
+    def 单条排行数据判断(self, s, l):
+        for i in l:
+            if s[i] != self.自选装备[i].currentText():
+                return 0
+        return 1
+
+    def 其他限定判断(self):
+        if self.神话排名选项.isChecked():
+            神话列表 = []
+            对应序号 = []
+            for i in range(len(self.排行数据)):
+                tempstr = self.排行数据[i]
+                for j in [0,5,8]:
+                    if 装备列表[装备序号[tempstr[j]]].品质=='神话' and tempstr[j] not in 神话列表:
+                        神话列表.append(tempstr[j])
+                        对应序号.append(i)
+                if len(神话列表) >= self.神话数量判断(1):
+                    break
+            if len(对应序号) == 0:
+                QMessageBox.information(self,"计算错误",  "请取消勾选神话排名模式或重新勾选装备")
+                return 
+            self.排行界面({}, 对应序号)        
+        elif 武器排名 == 1:
+            武器列表 = []
+            对应序号 = []
+            for i in range(len(self.排行数据)):
+                tempstr = self.排行数据[i]
+                if 装备列表[装备序号[tempstr[11]]].部位=='武器' and tempstr[11] not in 武器列表:
+                    武器列表.append(tempstr[11])
+                    对应序号.append(i)
+                if len(武器列表) >= len(self.有效武器列表):
+                    break
+            self.排行界面({}, 对应序号)                       
+        else:
             self.排行界面()
+
+    def 装备限定判断(self):
+        temp = []
+        l = []
+        for i in range(12):
+            if self.装备锁定[i].isChecked():
+                l.append(i)
+        if len(l) == 0:
+            return 1
+        for s in self.排行数据:
+            if self.单条排行数据判断(s, l):
+                temp.append(s)
+        if len(temp) == 0:
+            QMessageBox.information(self,"计算错误",  "无符合条件组合，请解除第五页装备限定或重新勾选")
+            return 0
+        self.排行数据 = copy(temp)
+        return 1
 
     def 自选计算(self, x=0):
         if x == 0:
-            self.保存配置()
+            self.保存配置(self.存档位置)
             self.排行窗口列表.clear()
             self.排行数据.clear()
 
@@ -2815,8 +2874,25 @@ class 角色窗口(QWidget):
             self.排行数据.append(装备 + [0] + 套装 + ['无'])
             self.输出界面(0)
 
-    def 排行界面(self):
-        self.排行窗口列表.clear()
+    def 指定装备排序(self, dic, x, n):
+        dic[x] = n
+        temp = []
+        num = -1
+        for i in self.排行数据:
+            num += 1
+            sign = 1
+            for n in dic.keys():
+                if dic[n] != i[n]:
+                    sign = 0
+                    break
+            if sign == 1:
+                temp.append(num)
+            if len(temp) == 100:
+                break
+        self.排行界面(dic, temp)
+
+    def 排行界面(self, 筛选 = {}, 显示序号 = [x for x in range(100)]):
+        显示序号 = 显示序号[:min(100, len(self.排行数据))]
         滚动排行 = QMainWindow()
         滚动排行.setStyleSheet('''QToolTip { 
            background-color: black; 
@@ -2826,8 +2902,14 @@ class 角色窗口(QWidget):
         self.排行窗口列表.append(滚动排行)
         滚动排行.resize(630,530)
         滚动排行.setMinimumSize(630,530)
-        滚动排行.setMaximumSize(630,1030)
-        滚动排行.setWindowTitle('配装排行 （点击数字可查看详情）')  
+        滚动排行.setMaximumSize(630,1230)
+        if len(筛选) == 0:
+            滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）')  
+        else:
+            temp = ''
+            for name in 筛选.values():
+                temp += name + ' | '
+            滚动排行.setWindowTitle(temp[:-3])   
         滚动排行.setWindowIcon(self.icon)  
     
         背景颜色=QLabel(滚动排行)
@@ -2845,44 +2927,61 @@ class 角色窗口(QWidget):
         wrapper = QWidget()
         滚动排行.setCentralWidget(wrapper)
         滚动排行.topFiller = QWidget()
-        滚动排行.topFiller.setMinimumSize(570, 50*len(self.排行数据)+30)
+        滚动排行.topFiller.setMinimumSize(570, 50 * len(显示序号) + 30)
     
-        if len(self.排行数据)>10:
-            初始x=-10
+        if len(显示序号) > 10:
+            初始x = -10
         else:
-            初始x=0
-        初始y=15
-        x间隔=30
-        y间隔=50
+            初始x = 0
+        初始y = 15
+        x间隔 = 30
+        y间隔 = 50
     
-        最高伤害 = self.排行数据[0][12]
+        最高伤害 = self.排行数据[显示序号[0]][12]
 
         技能选项 = []
         for i in self.技能设置输入:
             技能选项.append(i.currentText().replace('Lv+1', ''))
 
+        if 输出数据 == 1 and len(筛选) == 0:
+            setfile = open('./数据记录/{}-{}.csv'.format(self.角色属性A.实际名称, time.strftime('%Y-%m-%d-%H-%M-%S')), 'w', encoding='gbk')
+            for i in range(len(显示序号)):
+                temp = ''
+                for j in range(13):
+                    temp += str(self.排行数据[显示序号[i]][j]) + ','
+                temp += self.角色属性A.实际名称 + ','
+                temp += 装备列表[装备序号[self.排行数据[显示序号[i]][11]]].类型
+                setfile.write(temp + '\n') 
 
-        for i in range(0,len(self.排行数据)):
+        for i in range(len(显示序号)):
             图片列表 = []
             for j in range(0,12):
-                图片列表.append(self.装备图片[装备序号[self.排行数据[i][j]]])
+                图片列表.append(self.装备图片[装备序号[self.排行数据[显示序号[i]][j]]])
             水平间距=[1,2,3,4,5,6.5,7.5,8.5,10,11,12,13.5]
             for j in range(0,12):
-                装备 = 装备列表[装备序号[self.排行数据[i][j]]]
+                装备 = 装备列表[装备序号[self.排行数据[显示序号[i]][j]]]
                 图标=QLabel(滚动排行.topFiller)
                 图标.setMovie(图片列表[j])
                 图片列表[j].start()
                 图标.move(int(初始x+x间隔*水平间距[j]),int(初始y+i*y间隔))
-                if self.排行数据[i][j] == self.排行数据[i][-1]:
+                if self.排行数据[显示序号[i]][j] == self.排行数据[显示序号[i]][-1]:
                     图标=QLabel(滚动排行.topFiller)
                     图标.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.5)}")
                     图标.resize(28,28)
                     图标.move(int(初始x+x间隔*水平间距[j]),int(初始y+i*y间隔))
-                图标.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备.品质] + '">' + 装备.名称 + '</font><br>' + 装备.类型 + '-' + 装备.部位 + '<br>' + 装备.装备描述(self.角色属性A)[:-4] + '</font>')
+                
+                按钮 = QPushButton(滚动排行.topFiller)
+                按钮.move(int(初始x+x间隔*水平间距[j]),int(初始y+i*y间隔))
+                按钮.resize(28,28)
+                按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备.品质] + '">' +装备.名称+'</font><br>'+ 装备.类型 + '-' + 装备.部位 + '<br>' + 装备.装备描述(self.角色属性A)[:-4] + '</font>')
+                a = QGraphicsOpacityEffect()
+                a.setOpacity(0.0)
+                按钮.setGraphicsEffect(a)
+                按钮.clicked.connect(lambda state, dic = deepcopy(筛选), x = j, n = 装备.名称: self.指定装备排序(dic, x, n))
 
-            伤害量 = str(round(self.排行数据[i][12],1)) + ('%' if self.排行参数.currentIndex() == 0 else '')
+            伤害量 = str(round(self.排行数据[显示序号[i]][12],1)) + ('%' if self.排行参数.currentIndex() == 0 else '')
             if 最高伤害!=0:
-                百分比=str(round(self.排行数据[i][12]/最高伤害*100,1))+'%'
+                百分比=str(round(self.排行数据[显示序号[i]][12]/最高伤害*100,1))+'%'
             else:
                 百分比=' 0.0%'
     
@@ -2891,12 +2990,12 @@ class 角色窗口(QWidget):
             else:
                 详情按钮=QtWidgets.QPushButton(伤害量+' | '+百分比,滚动排行.topFiller)
     
-            详情按钮.clicked.connect(lambda state, index= i: self.输出界面(index))
+            详情按钮.clicked.connect(lambda state, index= 显示序号[i]: self.输出界面(index))
             详情按钮.setToolTip('<font size="3" face="宋体">点击查看详情</font>')
             详情按钮.move(int(初始x+x间隔*15),int(初始y+i*y间隔))
             详情按钮.resize(120,30)
             temp = deepcopy(self.角色属性A)
-            技能等级溢出 = temp.等级溢出判断(self.排行数据[i][0:12], self.排行数据[i][13:(len(self.排行数据[i]) - 1)])
+            技能等级溢出 = temp.等级溢出判断(self.排行数据[显示序号[i]][0:12], self.排行数据[显示序号[i]][13:(len(self.排行数据[显示序号[i]]) - 1)])
             if  len(技能等级溢出) != 0:
                 可调整技能 = ''
                 不可调整技能 = ''
@@ -3288,8 +3387,30 @@ class 角色窗口(QWidget):
         提升率显示.move(10,517)
         提升率显示.setAlignment(Qt.AlignCenter) 
     
+        数量 = [0] * 3
+        for i in range(15):
+            数量[i % 3] += self.希洛克选择状态[i]
+
+        # 0 上衣 1护肩 2护腿 3腰带 4鞋子 5 手镯 6 项链 7 戒指 8 耳环 9辅助 10魔法石 11 武器
         for i in range(0,12):
-            图片列表.append(self.装备图片[装备序号[self.排行数据[index][i]]])
+            # 下装
+            if 数量[0] == 1 and i == 2:
+                for item in range(5):
+                    if self.希洛克选择状态[item*3+0] > 0:
+                        图片列表.append(QMovie('./ResourceFiles/img/希洛克/'+str(item*3+0)+'.gif'))
+            elif 数量[1] == 1 and i == 7:
+                for item in range(5):
+                    if self.希洛克选择状态[item*3+1] > 0:
+                        图片列表.append(QMovie('./ResourceFiles/img/希洛克/'+str(item*3+1)+'.gif'))
+            elif 数量[2] == 1 and i == 9:
+                for item in range(5):
+                    if self.希洛克选择状态[item*3+2] > 0:
+                        图片列表.append(QMovie('./ResourceFiles/img/希洛克/'+str(item*3+2)+'.gif')) 
+            elif self.武器融合属性A.currentIndex()+self.武器融合属性B.currentIndex() > 0 and i == 11:
+                # 图片列表.append(QMovie('./ResourceFiles/img/希洛克/融-7.gif'))
+                图片列表.append(QMovie('./ResourceFiles/img/希洛克/武器/'+ str(装备序号[self.排行数据[index][i]]) +'.gif'))    
+            else:          
+                图片列表.append(self.装备图片[装备序号[self.排行数据[index][i]]])
     
         偏移量=187
         x坐标=[32,0,0,32,0,偏移量,偏移量+32,偏移量+32,偏移量,偏移量,偏移量+32,32]
@@ -3373,7 +3494,7 @@ class 角色窗口(QWidget):
                         tempstr[i]+='<br><font color="#68D5ED">+'+str(属性.强化等级[i])+' 强化: '
                         tempstr[i]+='四维 + '+str(左右计算(100,装备.品质,属性.强化等级[i])) +'</font>'
 
-                if (属性.武器锻造等级 * 属性.锻造四维) != 0:
+                if 属性.武器锻造等级 != 0:
                     if i==11:
                         tempstr[i]+='<br><font color="#68D5ED">+'+str(属性.武器锻造等级)+'   锻造: '
                         tempstr[i]+='四维 + '+str(锻造四维(装备.等级,装备.品质,属性.武器锻造等级))+'</font>'
@@ -3446,7 +3567,7 @@ class 角色窗口(QWidget):
         if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
             pass # 辅助装备
 
-        i = 3  # 守门将属性2
+        i = 3  # 守门人属性2
         if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
             属性.一觉力智per *= 1.01
             属性.一觉力智 += 20
@@ -3459,7 +3580,7 @@ class 角色窗口(QWidget):
             属性.守护恩赐体精 += 30
             属性.转职被动智力 += 30  # 辅助装备
 
-        i = 4  # 罗德斯属性2
+        i = 4  # 洛多斯属性2
         if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
             属性.一觉力智per *= 1.02  # 下装
         if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
@@ -3487,9 +3608,6 @@ class 角色窗口(QWidget):
             elif self.觉醒选择状态 == 2:
                 属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.二觉序号].名称]            
 
-        if self.锻造四维.isChecked():
-            属性.锻造四维 = 1
-
         if self.切装模式选项.isChecked() and self.计算模式选择.currentIndex() != 2:
             属性.双装备模式 = 1
 
@@ -3506,7 +3624,7 @@ class 角色窗口(QWidget):
             self.辟邪玉属性计算(属性)
 
         if x in [0,1]:
-            self.希洛克武器融合属性计算(属性)
+            self.武器融合属性计算(属性)
 
         for i in range(len(self.复选框列表)):
             if self.复选框列表[i].isChecked():

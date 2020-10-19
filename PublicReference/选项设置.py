@@ -132,13 +132,8 @@ class 选项设置19():
             属性.技能攻击力加成(0.05)
 
 选项设置列表 = []
-i = 0
-while i >= 0:
-    try:
-        exec('选项设置列表.append(选项设置'+str(i)+'())')
-        i += 1
-    except:
-        i = -1
+for i in range(20):
+    exec('选项设置列表.append(选项设置'+str(i)+'())')
 
 选项设置序号 = dict()
 for i in range(len(选项设置列表)):
