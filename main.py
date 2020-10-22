@@ -128,7 +128,7 @@ class 选择窗口(QMainWindow):
         链接.append(['https://pan.lanzou.com/b01bfj76f', 'https://wws.lanzous.com/b01bfj76f'])
         链接.append(['https://github.com/wxh0402/DNFCalculating'])
         链接.append(['https://bbs.colg.cn/thread-7917714-1-1.html', 'https://www.bilibili.com/video/BV1F54y1Q7Bz'])
-        链接.append(['https://jq.qq.com/?_wv=1027&k=bqgkCT40'])
+        链接.append(['https://jq.qq.com/?_wv=1027&k=9S6c2xIb'])
 
         count = 0
         for i in 名称:
