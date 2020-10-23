@@ -657,10 +657,19 @@ class 不知火角色属性(角色属性):
         #六道伤害计算
         if self.技能栏[self.技能序号['忍法：六道轮回']].等级 != 0 and 技能释放次数[self.技能序号['忍法：六道轮回']] !=0 :
            self.技能栏[self.技能序号['忍法：六道轮回']].六道技能显示 = []
+           默认宠物技能 = ['忍法：替身术','火遁·蟾蜍油炎弹', '火遁·炎舞天璇', '八岐大蛇', '火遁·风魔手里剑', '天照']
+           if self.宠物次数[self.技能序号['忍法：六道轮回']] == 0 :
+               self.宠物次数[self.技能序号['忍法：六道轮回']] = 0
+           else:
+               self.宠物次数[self.技能序号['忍法：六道轮回']] = 1
            for i in self.六道绑定技能:
                if 技能释放次数[self.技能序号[i]] != 0 and self.技能栏[self.技能序号[i]].等级 != 0:
-                   技能总伤害[self.技能序号[i]] += 0.8 * 技能单次伤害[self.技能序号[i]] * 技能释放次数[self.技能序号['忍法：六道轮回']] * (1+self.白兔子技能*0.20+self.年宠技能*0.10*self.宠物次数[self.技能序号['忍法：六道轮回']]/技能释放次数[self.技能序号['忍法：六道轮回']]+self.斗神之吼秘药*0.12)
-                   self.技能栏[self.技能序号['忍法：六道轮回']].六道技能显示.append(i)
+                   if i in 默认宠物技能:
+                       技能总伤害[self.技能序号[i]] += 0.8 * 技能单次伤害[self.技能序号[i]]  * (1+self.白兔子技能*0.20+self.年宠技能*0.10*self.宠物次数[self.技能序号['忍法：六道轮回']]+self.斗神之吼秘药*0.12)
+                       self.技能栏[self.技能序号['忍法：六道轮回']].六道技能显示.append(i)
+                   else:
+                       技能总伤害[self.技能序号[i]] += 0.8 * 技能单次伤害[self.技能序号[i]]  * (1+self.白兔子技能*0.20 + self.斗神之吼秘药*0.12)
+                       self.技能栏[self.技能序号['忍法：六道轮回']].六道技能显示.append(i)
         else:
             self.技能栏[self.技能序号['忍法：六道轮回']].自定义描述 = 0
 
@@ -681,52 +690,56 @@ class 不知火(角色窗口):
     def 载入配置(self, path='set'):
         super().载入配置(path)
         try:
-           setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'r',encoding='utf-8').readlines()
-           num = 0
-           for i in range(len(self.可绑定技能)):
-               if int(setfile[num].replace('\n', '')) == 1:
-                   self.六道绑定按钮[i].setChecked(True)
-               else:
-                   self.六道绑定按钮[i].setChecked(False)
-               num += 1
+            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'r',
+                           encoding='utf-8').readlines()
+            num = 0
+            for i in range(len(self.可绑定技能)):
+                self.绑定技能次数[i].setCurrentIndex(int(setfile[num].replace('\n', '')));
+                num += 1
         except:
             pass
 
     def 保存配置(self, path='set'):
         super().保存配置(path)
         try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'w', encoding='utf-8')
+            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'w', encoding='utf-8')
             for i in range(len(self.可绑定技能)):
-                if self.六道绑定按钮[i].isChecked():
-                    setfile.write('1\n')
-                else:
-                    setfile.write('0\n')
+                setfile.write(str(self.绑定技能次数[i].currentIndex()) + '\n')
         except:
             pass
-        
+
     def 界面(self):
         super().界面()
 
         self.六道绑定按钮 = []
-        self.可绑定技能 = ['火遁·豪火球之术', '忍法：幻影手里剑', '火遁·飓风煞', '火遁·螺旋手里剑','忍法：替身术','火遁·炎天道','火遁·蟾蜍油炎弹', '火遁·炎舞天璇', '八岐大蛇','火遁·风魔手里剑', '天照']
-        默认勾选 = [ '忍法：替身术',  '火遁·蟾蜍油炎弹', '火遁·炎舞天璇', '八岐大蛇','火遁·风魔手里剑', '天照']
+        self.可绑定技能 = ['火遁·豪火球之术', '忍法：幻影手里剑', '火遁·飓风煞', '火遁·螺旋手里剑', '忍法：替身术', '火遁·炎天道', '火遁·蟾蜍油炎弹', '火遁·炎舞天璇', '八岐大蛇',
+                      '火遁·风魔手里剑', '天照']
+        self.绑定技能次数 = []
 
-        水平间隔 = 145
+        水平间隔 = 210
         竖直间隔 = 30
 
         for i in range(len(self.可绑定技能)):
-            self.六道绑定按钮.append(QCheckBox(self.可绑定技能[i], self.main_frame2))
-            self.六道绑定按钮[i].resize(120, 20)
-            self.六道绑定按钮[i].move(325 + (i % 3) * 水平间隔, 450 + int(i / 3) * 竖直间隔)
-            self.六道绑定按钮[i].setStyleSheet(复选框样式)
-            if self.可绑定技能[i] in 默认勾选:
-                self.六道绑定按钮[i].setChecked(True)
+            self.六道绑定按钮.append(QLabel(self.可绑定技能[i], self.main_frame2))
+            self.六道绑定按钮[i].setAlignment(Qt.AlignCenter)
+            self.六道绑定按钮[i].resize(100, 20)
+            self.六道绑定按钮[i].move(325 + (i % 2) * 水平间隔, 420 + int(i / 2) * 竖直间隔)
+            self.六道绑定按钮[i].setStyleSheet(白色字体标签)
+            self.绑定技能次数.append(MyQComboBox(self.main_frame2))
+            self.绑定技能次数[i].resize(48, 20)
+            self.绑定技能次数[i].move(440 + (i % 2) * 水平间隔, 420 + int(i / 2) * 竖直间隔)
+            self.绑定技能次数[i].addItem('0')
+            self.绑定技能次数[i].addItem('1')
+            self.绑定技能次数[i].addItem('2')
 
-    def 输入属性(self, 属性, x = 0):
+    def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)
         temp = []
         for i in range(len(self.可绑定技能)):
-            if self.六道绑定按钮[i].isChecked():
+            if self.绑定技能次数[i].currentIndex() == 1:
+                temp.append(self.可绑定技能[i])
+            elif self.绑定技能次数[i].currentIndex() == 2:
+                temp.append(self.可绑定技能[i])
                 temp.append(self.可绑定技能[i])
         属性.六道绑定技能 = deepcopy(temp)
     
