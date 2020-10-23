@@ -304,7 +304,8 @@ class 知源·元素师技能15(知源·元素师主动技能):
     演出时间 = 1.2
     是否有护石 = 1
     def 等效百分比(self, 武器类型):
-        return self.数据[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
+        # 根据外门数量的攻击力最大增幅率110%
+        return self.数据[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率 * 1.1
     护石选项 = ['圣痕']
     def 装备护石(self, x):
         self.攻击次数 = 1 * 13.25
