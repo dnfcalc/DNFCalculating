@@ -131,8 +131,14 @@ class 选项设置19():
         if not 属性.兵法技攻BUFF:
             属性.技能攻击力加成(0.05)
 
+class 选项设置20():
+    名称 = '未三觉希洛克buff'
+    def 适用效果(self, 属性):
+        if "·" not in 属性.实际名称:
+            属性.希洛克BUFF = True
+
 选项设置列表 = []
-for i in range(20):
+for i in range(21):
     exec('选项设置列表.append(选项设置'+str(i)+'())')
 
 选项设置序号 = dict()

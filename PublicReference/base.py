@@ -103,6 +103,7 @@ class 角色属性():
     称号触发 = False
     战术技能BUFF = False
     兵法技攻BUFF = False
+    希洛克BUFF = False
 
     #基础属性(含唤醒)
     基础力量 = 0
@@ -752,7 +753,9 @@ class 角色属性():
         增伤倍率 *= self.技能攻击力
         增伤倍率 *= 1 + self.持续伤害 * self.持续伤害计算比例
         增伤倍率 *= 1 + self.附加伤害 + self.属性附加 * self.属性倍率
-        self.伤害指数 = 面板 * self.属性倍率 * 增伤倍率 * 基准倍率 / 100 * self.队友增幅系数
+        # 添加希洛克BUFF
+        self.伤害指数 = 面板 * self.属性倍率 * 增伤倍率 * 基准倍率 / 100 * self.队友增幅系数 * (1 + self.希洛克BUFF * 0.15)
+        
 
     def 切装判断(self):
         for i in self.装备切装:
@@ -1894,9 +1897,14 @@ class 角色窗口(QWidget):
             self.希洛克武器词条[i].setStyleSheet(不可选择下拉框样式)
 
         self.复选框列表 = []
+        
         for i in 选项设置列表:
-            self.复选框列表.append(QCheckBox(i.名称, self.main_frame2))
-
+            # 已三觉职业移除希洛克未三觉buff属性
+            if i.名称 == '未三觉希洛克buff' and "·" in self.初始属性.实际名称:
+                pass
+            else:
+                self.复选框列表.append(QCheckBox(i.名称, self.main_frame2))
+            
         counter=0
 
         for i in self.复选框列表:
