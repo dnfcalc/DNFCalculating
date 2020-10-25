@@ -40,7 +40,7 @@ class 选择窗口(QMainWindow):
                    }''')
         self.setMinimumSize(805,630)
         self.setMaximumSize(805,1520)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.10.25 (技能模板仅供参考，请根据自身情况修改)')
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.10.26 (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
 
@@ -165,7 +165,10 @@ class 选择窗口(QMainWindow):
             if index.类名2 == '无':
                 self.打开窗口(index.类名)
                 return
-            box = QMessageBox(QMessageBox.Question, "提示", "请选择要打开的版本")
+            if index.序号 == 54:
+                box = QMessageBox(QMessageBox.Question, "提示", "不想三觉,请勿使用")
+            else:
+                box = QMessageBox(QMessageBox.Question, "提示", "请选择要打开的版本")
             box.setWindowIcon(self.icon)
             box.setStandardButtons(QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
             A = box.button(QMessageBox.Yes)
@@ -187,11 +190,11 @@ class 选择窗口(QMainWindow):
                 return
         except:
             return
-
+        
     def 打开链接(self, url):
         for i in url:
             QDesktopServices.openUrl(QUrl(i))
-
+            
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
     if 窗口显示模式 == 1:
