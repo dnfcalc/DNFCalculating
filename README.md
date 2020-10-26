@@ -7,6 +7,16 @@ python（3.8）编写，使用 pyqt5（5.14.2） 图形 GUI 库<br>
 
 ## 程序目录结构说明
 
+### build.bat
+
+自动化生成版本的脚本,打包生成可执行程序并与资源文件压缩,同时根据提交的git commit,生成更新日志说明,版本相关文件生成在Publish目录<br>
+执行脚本需要事先安装[node.js](https://nodejs.org/zh-cn/download/)及[pandoc](https://github.com/jgm/pandoc/releases/tag/2.11.0.4)
+
+### main.py
+
+程序入口页面,职业相关部分已经抽出,无需修改<br>
+
+
 ### Part 目录
 
 职业相关文件目录,由职业名.py 及 sum.py 组成,职业名.py 负责各个职业的个性化数据,sum.py 负责引用所有职业<br>
@@ -16,9 +26,6 @@ python（3.8）编写，使用 pyqt5（5.14.2） 图形 GUI 库<br>
 
 资源文件目录,由公用资源文件及职业资源文件组成<br>
 
-### main.py
-
-程序入口页面,职业相关部分已经抽出,无需修改<br>
 
 ### PublicReference 目录
 
@@ -38,11 +45,6 @@ python（3.8）编写，使用 pyqt5（5.14.2） 图形 GUI 库<br>
 #### PublicReference/装备函数.py
 
 一些计算公式部分,除非公式出现偏差,否则无需修改<br>
-
-### build.bat
-
-自动化生成版本的脚本,打包生成可执行程序并与资源文件压缩,同时根据提交的git commit,生成更新日志说明,版本相关文件生成在Publish目录<br>
-执行脚本需要事先安装[node.js](https://nodejs.org/zh-cn/download/)及[pandoc](https://github.com/jgm/pandoc/releases/tag/2.11.0.4)
 
 ## 更新日志
 
