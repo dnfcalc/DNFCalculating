@@ -38,3 +38,7 @@ python（3.8）编写，使用 pyqt5（5.14.2） 图形 GUI 库<br>
 #### PublicReference/装备函数.py
 
 一些计算公式部分,除非公式出现偏差,否则无需修改<br>
+
+## 更新日志
+
+[更新日志](https://github.com/wxh0402/DNFCalculating/blob/master/CHANGELOG.md)
