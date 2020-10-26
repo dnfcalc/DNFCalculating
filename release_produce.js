@@ -32,7 +32,7 @@ const commitsArray = output
 
 const currentChangelog = fs.readFileSync("./CHANGELOG.md", "utf-8");
 // const currentVersion = Number(require("./release_version.json").version);
-const newVersion = new Date().toISOString().split("T")[0]
+
 
 // 用version和时间作为release 标记
 var now = new Date();
@@ -47,6 +47,8 @@ time = year + "." + month + "." + date;
 let newChangelog = `# ${
   time
 }\n\n`;
+
+const newVersion = time
 
 const features = [];
 const Bugfixes = [];
