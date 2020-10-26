@@ -89,7 +89,7 @@ fs.writeFileSync("./release_version.json", JSON.stringify({ version: String(newV
 
 // create a new commit
 child.execSync('git add .');
-child.execSync(`git commit -m "chore: Bump to version ${newVersion}"`);
+child.execSync(`git commit -m "chore: Bump to  ${newVersion}"`);
 
 // tag the commit
-child.execSync(`git tag -a -m "Tag for version ${newVersion}" version${newVersion}`);
+child.execSync(`git tag -a -m "Tag for ${newVersion}" ${newVersion}`);
