@@ -18,7 +18,7 @@ if not exist Publish MD Publish
 echo [提示]: 开始压缩打包版本
 :: 复制生成的结果后删除临时文件
 COPY /Y "dist\main.exe" "\publish\main.exe"
-RMDIR /S /Q "build" "dist" "__pycache__" "logs" "'.\Part\__pycache__" ".\PublicReference\__pycache__"
+RMDIR /S /Q "build" "dist" "__pycache__" "logs" ".\Part\__pycache__" ".\PublicReference\__pycache__"
 DEL /Q ".\Publish\*.*"
 DEL /Q "main.spec"
 
