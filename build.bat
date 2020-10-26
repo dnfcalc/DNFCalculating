@@ -11,6 +11,8 @@ echo.
 :: 使用pyinstaller打包
 pyinstaller.exe --hidden-import pkg_resources.py2_warn  --noconsole -F -i ./ResourceFiles/img/logo.ico "main.py"
 
+node release_produce.js
+
 :: 复制生成的结果后删除临时文件
 COPY /Y "dist\main.exe" "main.exe"
 RMDIR /S /Q "build" "dist" "__pycache__"
