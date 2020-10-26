@@ -18,7 +18,7 @@
 
 ## NewFeatures
 * 添加更新日志 ([c05738](https://github.com/wxh0402/DNFCalculating/commit/c057386df4186680be2e4473e924c7c268f6d00e))
-* 女弹药添加弹药改良选择<br>修改默认为25秒打桩 ([42faf8](https://github.com/wxh0402/DNFCalculating/commit/42faf8934702eb4960cc6bdd9ed39bf243555a74))
+* 女弹药:添加弹药改良选择<br>修改默认为25秒打桩 ([42faf8](https://github.com/wxh0402/DNFCalculating/commit/42faf8934702eb4960cc6bdd9ed39bf243555a74))
 * 影舞者:添加三觉版本提示 ([2565c2](https://github.com/wxh0402/DNFCalculating/commit/2565c268e6a5a2b4f2f26a315f1562a089e399a0))
 * 添加未三觉希洛BUFF ([6c774f](https://github.com/wxh0402/DNFCalculating/commit/6c774fa9815cfb8056e40920e359919287e8b379))
 * 同步国服女法三觉数据 ([a467f8](https://github.com/wxh0402/DNFCalculating/commit/a467f89dc1e7887a9eec30c07dc849e710a14f5d))

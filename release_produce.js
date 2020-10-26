@@ -20,12 +20,6 @@ const commitsArray = output
        returndata[0]+=data[i]+(i<data.length-2?'<br>':'')
      }
     const [message, sha] = [returndata[0],data[data.length-1]];
-    // let retmessage = "测试"
-    // for(let i =0;i<msg.length-1;i++){
-    //   retmessage+=msg[i]+i<msg.length-2?'\n':''
-    // }
-    // let retsha = msg[msg.length-1]
-    // const [message, sha] = [retmessage,retsha]
     return {sha, message };
   })
   .filter(commit => Boolean(commit.sha));
