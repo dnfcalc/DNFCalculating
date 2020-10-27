@@ -1,8 +1,11 @@
 const currentVersion = (require("./release_version.json").version).toString();
-const newVersion = new Date().toISOString().split("T")[0]
+const child = require("child_process");
+const gitVersion = child
+.execSync(`git log --format=%B%H----DELIMITER----`)
+.toString("utf-8");
 
-if(currentVersion!=newVersion){
-  const child = require("child_process");
+if(currentVersion!=gitVersion){
+  const newVersion = new Date().toISOString().split("T")[0]
   const fs = require("fs");
   
   const output = child
@@ -73,7 +76,7 @@ if(currentVersion!=newVersion){
     });
     newChangelog += '\n';
   }
-  
+  if(features.length + Bugfixes.length >0){
   // prepend the newChangelog to the current one
   fs.writeFileSync("./CHANGELOG.md", `${newChangelog}${currentChangelog}`);
   // update package.json
@@ -85,5 +88,5 @@ if(currentVersion!=newVersion){
   
   // tag the commit
   child.execSync(`git tag -a -m "Tag for ${newVersion}" ${newVersion}`);
-
+  }
 }
