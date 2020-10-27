@@ -21,10 +21,10 @@ COPY /Y "dist\main.exe" "\publish\main.exe"
 RMDIR /S /Q "build" "dist" "__pycache__" "logs" ".\Part\__pycache__" ".\PublicReference\__pycache__"
 DEL /Q ".\Publish\*.*"
 DEL /Q "main.spec"
+::rar压缩
+Rar.exe a ".\publish\DNF计算器%Date:~5,2%.%Date:~8,2%.zip" "\publish\main.exe" "ResourceFiles"
 
-Rar.exe a ".\publish\DNF计算器%date:~8,2%.%date:~11,2%.zip" "\publish\main.exe" "ResourceFiles"
-
-Rar.exe a ".\publish\%date:~8,2%.%date:~11,2%.zip" "ResourceFiles" "main.py" "Part" "PublicReference"
+Rar.exe a ".\publish\%Date:~5,2%.%Date:~8,2%.zip" "ResourceFiles" "main.py" "Part" "PublicReference"
 
 DEL /Q "\publish\main.exe"
 echo [提示]: 打包结束
@@ -32,7 +32,8 @@ echo [提示]: 打包结束
 echo [提示]: 开始记录更新日志
 node release_produce.js
 
-pandoc -s CHANGELOG.md -o ".\publish\更新日志%date:~8,2%.%date:~11,2%.docx"
+::pandoc将md转换为docx
+pandoc -s CHANGELOG.md -o ".\publish\更新日志%Date:~5,2%.%Date:~8,2%.docx"
 
 echo [提示]: 记录结束
 

@@ -5,3 +5,5 @@ set
 main.exe
 *.zip
 publish
+upload_lanzouyun.py
+upload_cookie.json
