@@ -1,4 +1,4 @@
-const currentVersion = (require("./release_version.json").version).toString();
+const currentVersion = (require("./Bulid/release_version.json").version).toString();
 const child = require("child_process");
 const gitVersion = child
 .execSync(`git log --format=%B%H----DELIMITER----`)
@@ -80,7 +80,7 @@ if(currentVersion!=gitVersion){
   // prepend the newChangelog to the current one
   fs.writeFileSync("./CHANGELOG.md", `${newChangelog}${currentChangelog}`);
   // update package.json
-  fs.writeFileSync("./release_version.json", JSON.stringify({ version: String(newVersion) }, null, 2));
+  fs.writeFileSync("./Bulid/release_version.json", JSON.stringify({ version: String(newVersion) }, null, 2));
   
   // create a new commit
   child.execSync('git add .');
