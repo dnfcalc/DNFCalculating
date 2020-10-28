@@ -46,6 +46,7 @@ if exist AutoRelese\Rar.exe echo [提示]: 开始压缩打包版本
 ::rar压缩
 if exist AutoRelese\Rar.exe AutoRelese\Rar.exe a "AutoRelese\publish\DNF计算器%Date:~5,2%.%Date:~8,2%.zip" "main.exe" "ResourceFiles"
 if exist AutoRelese\Rar.exe AutoRelese\Rar.exe a "AutoRelese\publish\源码%Date:~5,2%.%Date:~8,2%.zip" "ResourceFiles" "main.py" "Part" "PublicReference"
+if exist AutoRelese\Rar.exe AutoRelese\Rar.exe rn "AutoRelese\publish\DNF计算器%Date:~5,2%.%Date:~8,2%.zip" "main.exe" "DNF计算器%Date:~5,2%.%Date:~8,2%.exe"
 if exist AutoRelese\Rar.exe DEL /Q "main.exe"
 if exist AutoRelese\Rar.exe echo [提示]: 打包结束
 

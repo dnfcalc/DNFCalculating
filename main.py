@@ -40,7 +40,7 @@ class 选择窗口(QMainWindow):
                    }''')
         self.setMinimumSize(805,630)
         self.setMaximumSize(805,1520)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.10.26 (技能模板仅供参考，请根据自身情况修改)')
+        self.setWindowTitle('DNF-100SS搭配计算器-2020.10.28 (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
 
