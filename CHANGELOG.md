@@ -1,7 +1,7 @@
 # 2020-10-28
 
 ## NewFeatures
-* 真·忍者:同步韩服正式服一气化三清无法被六道轮回记录,攻击力+57.1% ([a8efc2](https://github.com/wxh0402/DNFCalculating/commit/a8efc29b37ddad6c1adeaa032cd42473ecf6d692))
+* 真·忍者:同步韩服正式服勾玉之火·镰鼬无法被六道轮回记录,攻击力+57.1% ([a8efc2](https://github.com/wxh0402/DNFCalculating/commit/a8efc29b37ddad6c1adeaa032cd42473ecf6d692))
 * 暗夜三觉系列背景图替换为三觉立绘 ([b35e0d](https://github.com/wxh0402/DNFCalculating/commit/b35e0de50003a57ad8920cb66a7f7b5b14693745))
 * 弑心镇魂者:修改锁定射击演出时间 ([80de2a](https://github.com/wxh0402/DNFCalculating/commit/80de2a90cee7914bb2fa984a3c0efd694ee003fb))
 * 知源·元素师:修改技能演出时间 ([a0aa0b](https://github.com/wxh0402/DNFCalculating/commit/a0aa0bca29a8bf2e52a04bf4f18a83c7c3cdd777))
