@@ -184,7 +184,7 @@ class 知源·元素师技能9(知源·元素师主动技能):
     TP成长 = 0.10
     TP上限 = 5
     是否有护石 = 1
-    演出时间 = 4.0
+    演出时间 = 3.0
     护石选项 = ['魔界', '圣痕']
     def 等效百分比(self, 武器类型):
         return ((self.数据1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.数据2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率
