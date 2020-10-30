@@ -1,3 +1,13 @@
+# 2020-10-30
+
+## NewFeatures
+* 知源·元素师:调整元素/CD算法 ([7af090](https://github.com/wxh0402/DNFCalculating/commit/7af090d55a8a424df8e9b3c3a93cd18bb4758413))
+* 更新女法师、男圣职三觉头像 ([e69793](https://github.com/wxh0402/DNFCalculating/commit/e6979310d614a6a63d0fe28a43e6b48fa80393ee))
+* 知源·元素师修改默认加点 ([fad622](https://github.com/wxh0402/DNFCalculating/commit/fad622b84c1e1122ae693a4e033108a71c4f4c82))
+
+## BugFixes
+* 知源·元素师:修正元素之幕演出时间 ([98b9a5](https://github.com/wxh0402/DNFCalculating/commit/98b9a53e6cbd90b279a4148441d3efc8248b6773))
+
 # 2020-10-28
 
 ## NewFeatures
