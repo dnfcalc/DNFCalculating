@@ -1,3 +1,30 @@
+# 2020-11-01
+
+## NewFeatures
+* 知源·魔道学者:调整三觉后默认输出模板 ([225e42](https://github.com/wxh0402/DNFCalculating/commit/225e4201eb7c1af364f49d9d12593a5ca8ca3a59))
+* 知源·元素师:调整元素/CD算法 ([7af090](https://github.com/wxh0402/DNFCalculating/commit/7af090d55a8a424df8e9b3c3a93cd18bb4758413))
+* 更新女法师、男圣职三觉头像 ([e69793](https://github.com/wxh0402/DNFCalculating/commit/e6979310d614a6a63d0fe28a43e6b48fa80393ee))
+* 知源·元素师修改默认加点 ([fad622](https://github.com/wxh0402/DNFCalculating/commit/fad622b84c1e1122ae693a4e033108a71c4f4c82))
+* 真·忍者:同步韩服正式服一气化三清无法被六道轮回记录,攻击力+57.1% ([a8efc2](https://github.com/wxh0402/DNFCalculating/commit/a8efc29b37ddad6c1adeaa032cd42473ecf6d692))
+* 暗夜三觉系列背景图替换为三觉立绘 ([b35e0d](https://github.com/wxh0402/DNFCalculating/commit/b35e0de50003a57ad8920cb66a7f7b5b14693745))
+* 弑心镇魂者:修改锁定射击演出时间 ([80de2a](https://github.com/wxh0402/DNFCalculating/commit/80de2a90cee7914bb2fa984a3c0efd694ee003fb))
+* 知源·元素师:修改技能演出时间 ([a0aa0b](https://github.com/wxh0402/DNFCalculating/commit/a0aa0bca29a8bf2e52a04bf4f18a83c7c3cdd777))
+* 幽冥、真·影舞者:修改默认配置 ([80e8fa](https://github.com/wxh0402/DNFCalculating/commit/80e8fa88e8994be6a1870a2331e8388beced01d3))
+* 归元·街霸·女:修改默认设置配置 ([a9924d](https://github.com/wxh0402/DNFCalculating/commit/a9924d795e53efacc033c6f080ea69beca7e9a83))
+* 归元·街霸·女:添加钻心毒爆、万毒噬心诀：毒龙吞天技能形态说明 ([28d595](https://github.com/wxh0402/DNFCalculating/commit/28d59574be814f7bb7b5e5837888cedeb8fee87b))
+* 同步国服女法师三觉版本,移除二觉版本 ([f260bc](https://github.com/wxh0402/DNFCalculating/commit/f260bcd0718e738ef36b6bd6611f2515e1bf7d51))
+* 神启·圣骑士buff系数下调（630->620） ([cc80fa](https://github.com/wxh0402/DNFCalculating/commit/cc80fa9e2c66e0d85c46b4bf47a100a0d5955c56))
+* 炽天使buff系数下调（675->665） ([4427fd](https://github.com/wxh0402/DNFCalculating/commit/4427fd60c767e81ecea46a92826d200576c66c3e))
+* 奶系删除装备的守护徽章、勇气圣歌、死命召唤加成及相关描述 ([c10bf0](https://github.com/wxh0402/DNFCalculating/commit/c10bf077c42015a29c88fe4ad7477dfd9883184d))
+
+## BugFixes
+* 真·忍者:修正二觉平x苦无爆炸部分的增伤 ([534b5c](https://github.com/wxh0402/DNFCalculating/commit/534b5c6b9b11b9c696b226f2b2a422ce15e7ab3c))
+* 知源·魔道学者:修正魔道酸云雨、糖果大作战-捣蛋杰克HIT攻击次数 ([e25de8](https://github.com/wxh0402/DNFCalculating/commit/e25de867335a99a0141f56f6c04f8f224aa0077b))
+* 知源·战斗法师:修正炫纹之源:太古神光漏算的炫纹攻击力 ([5cb50c](https://github.com/wxh0402/DNFCalculating/commit/5cb50c897724b35dc0af681114d0dc6380b604f9))
+* 知源·元素师:修正元素之幕演出时间 ([98b9a5](https://github.com/wxh0402/DNFCalculating/commit/98b9a53e6cbd90b279a4148441d3efc8248b6773))
+* 修正血色舞会、神话-深渊囚禁者长袍描述问题<br>
+修正末日之刻CD算法 ([c354f5](https://github.com/wxh0402/DNFCalculating/commit/c354f5ae9ed07813dae7dd86a19836e62d715f35))
+
 # 2020-10-30
 
 ## NewFeatures
