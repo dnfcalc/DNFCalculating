@@ -2,4 +2,5 @@
 __pycache__
 logs
 set
-AutoRelese
+AutoRelese/Publish
+AutoRelese/upload_cookie.json
