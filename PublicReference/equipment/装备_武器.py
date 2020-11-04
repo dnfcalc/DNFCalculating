@@ -1,4 +1,4 @@
-from PublicReference.config import *
+from PublicReference.utils.config import *
 
 #region  100SS武器
 class 装备0():

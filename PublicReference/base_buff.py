@@ -1,10 +1,5 @@
-from PublicReference.装备_buff import *
-from PublicReference.基础函数 import *
-from PublicReference.辟邪玉_buff import *
-from PublicReference.称号_buff import *
-from PublicReference.宠物_buff import *
-from PublicReference.选项设置_buff import *
-from PublicReference.武器融合_buff import *
+from PublicReference.equipment.sum_buff import *
+from PublicReference.choise.选项设置_buff import *
 
 class 技能:
     名称 = ''

@@ -1,5 +1,5 @@
 import configparser
-from PublicReference.constant import *
+from PublicReference.utils.constant import *
 
 conf = configparser.ConfigParser()
 

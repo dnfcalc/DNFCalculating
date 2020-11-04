@@ -1,11 +1,6 @@
-from PublicReference.宠物 import *
-from PublicReference.称号 import *
-from PublicReference.装备 import *
-from PublicReference.基础函数 import *
-from PublicReference.辟邪玉 import *
-from PublicReference.选项设置 import *
-from PublicReference.择优词条 import *
-from PublicReference.细节选项 import *
+from PublicReference.equipment.sum import *
+from PublicReference.choise.选项设置 import *
+from PublicReference.choise.细节选项 import *
 
 class 技能:
     名称 = ''

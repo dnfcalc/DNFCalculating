@@ -1,6 +1,11 @@
 ##装备属性部分
 
-from PublicReference.config import *
+from PublicReference.utils.config import *
+from PublicReference.equipment.宠物_buff import *
+from PublicReference.equipment.武器融合_buff import *
+from PublicReference.equipment.称号_buff import *
+from PublicReference.equipment.辟邪玉_buff import *
+from .基础函数 import *
 
 class 装备0():
     名称 = '信念徽章：自由'

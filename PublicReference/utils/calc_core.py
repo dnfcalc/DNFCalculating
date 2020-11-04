@@ -6,10 +6,10 @@
 # Author    : Chen Ji
 # Email     : fzls.zju@gmail.com
 # -------------------------------
-from PublicReference.copy import *
+from .copy import *
 from multiprocessing import Queue
 from typing import List
-from .minheap import MinHeap, expected_qsize
+from PublicReference.utils.minheap import MinHeap, expected_qsize
 import copy
 
 class CalcData():
@@ -47,9 +47,9 @@ class CalcData():
 
     def pre_calc_needed_data(self):
         if self.是输出职业:
-            from .装备 import 总套装列表, 部位列表, 装备列表
+            from PublicReference.equipment.sum import 总套装列表, 部位列表, 装备列表
         else:
-            from .装备_buff import 总套装列表, 部位列表, 装备列表
+            from PublicReference.equipment.sum_buff import 总套装列表, 部位列表, 装备列表
 
         self.有效武器列表.clear()
         for j in range(0, 6):
@@ -104,9 +104,9 @@ def calc_core(data: CalcData):
 
 def calc_speed_and_set_mode(data):
     if data.是输出职业:
-        from .装备 import 套装映射, 部位列表, 装备列表
+        from PublicReference.equipment.sum import 套装映射, 部位列表, 装备列表
     else:
-        from .装备_buff import 套装映射, 部位列表, 装备列表
+        from PublicReference.equipment.sum_buff import 套装映射, 部位列表, 装备列表
 
     套装组合 = []
     套装适用 = []
@@ -197,9 +197,9 @@ def calc_speed_and_set_mode(data):
 
 def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
     if data.是输出职业:
-        from .装备 import 装备序号, 装备列表
+        from PublicReference.equipment.sum import 装备序号, 装备列表
     else:
-        from .装备_buff import 装备序号, 装备列表
+        from PublicReference.equipment.sum_buff import 装备序号, 装备列表
 
     i = 装备序号[名称]
     装备[x] = 名称
@@ -240,9 +240,9 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
 
 def calc_single_mode(data):
     if data.是输出职业:
-        from .装备 import 装备序号, 套装序号, 装备列表
+        from PublicReference.equipment.sum import 装备序号, 套装序号, 装备列表
     else:
-        from .装备_buff import 装备序号, 套装序号, 装备列表
+        from PublicReference.equipment.sum_buff import 装备序号, 套装序号, 装备列表
 
     current_index = -1
     装备 = ['无'] * 12

@@ -2,8 +2,8 @@
 
 from PyQt5.QtCore import QUrl
 from Part.sum import *
-from PublicReference.calc_core import calc_core
-from PublicReference.producer_consumer import producer_data, consumer, thread_num
+from PublicReference.utils.calc_core import calc_core
+from PublicReference.utils.producer_consumer import producer_data, consumer, thread_num
 import json
 import os
 

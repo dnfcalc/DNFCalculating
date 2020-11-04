@@ -1,7 +1,7 @@
 #第三页选项文本
 #行1行2条目必须相等
 #列1(选项) 列2(选项，技能) 不能修改删除
-from PublicReference.基础函数 import *
+from PublicReference.equipment.基础函数 import *
 
 表头名称1 = "基础细节"
 
