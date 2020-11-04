@@ -62,7 +62,7 @@ if __name__ == '__main__':
     # 	"ylogin": "~~~~~~~",
     # 	"phpdisk_info": "~~~~~~~~~~~"
     # }
-    with open("upload_cookie.json") as fp:
+    with open("AutoRelese\\upload_cookie.json") as fp:
         cookie = json.load(fp)
     uploader = Uploader(cookie)   
     if uploader.login_ok:
