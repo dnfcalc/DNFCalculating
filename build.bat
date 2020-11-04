@@ -41,14 +41,14 @@ echo [提示]: 生成结束
 
 if not exist AutoRelese\Publish MD AutoRelese\Publish
 
-if exist AutoRelese\Rar.exe echo [提示]: 开始压缩打包版本
+if exist AutoRelese\bz.exe echo [提示]: 开始压缩打包版本
 ::复制生成的结果后删除临时文件
 ::rar压缩
-if exist AutoRelese\Rar.exe AutoRelese\Rar.exe a "AutoRelese\publish\DNF计算器%Date:~5,2%.%Date:~8,2%.zip" "main.exe" "ResourceFiles"
-if exist AutoRelese\Rar.exe AutoRelese\Rar.exe a "AutoRelese\publish\源码%Date:~5,2%.%Date:~8,2%.zip" "ResourceFiles" "main.py" "Part" "PublicReference"
-if exist AutoRelese\Rar.exe AutoRelese\Rar.exe rn "AutoRelese\publish\DNF计算器%Date:~5,2%.%Date:~8,2%.zip" "main.exe" "DNF计算器%Date:~5,2%.%Date:~8,2%.exe"
-if exist AutoRelese\Rar.exe DEL /Q "main.exe"
-if exist AutoRelese\Rar.exe echo [提示]: 打包结束
+if exist AutoRelese\bz.exe AutoRelese\bz.exe c -y -r -aoa -fmt:zip -l:9 "AutoRelese\publish\DNF计算器%Date:~5,2%.%Date:~8,2%.zip" "main.exe" "ResourceFiles"
+if exist AutoRelese\bz.exe AutoRelese\bz.exe c -y -r -aoa -fmt:zip -l:9 "AutoRelese\publish\源码%Date:~5,2%.%Date:~8,2%.zip" "ResourceFiles" "main.py" "Part" "PublicReference"
+if exist AutoRelese\bz.exe AutoRelese\bz.exe rn "AutoRelese\publish\DNF计算器%Date:~5,2%.%Date:~8,2%.zip" "main.exe" "DNF计算器%Date:~5,2%.%Date:~8,2%.exe"
+if exist AutoRelese\bz.exe DEL /Q "main.exe"
+if exist AutoRelese\bz.exe echo [提示]: 打包结束
 
 if exist AutoRelese\release_produce.js echo [提示]: 开始记录更新日志
 if exist AutoRelese\release_produce.js node AutoRelese/release_produce.js
@@ -60,8 +60,10 @@ if exist AutoRelese\upload_lanzouyun.py echo [提示]: 开始上传到网盘
 if exist AutoRelese\upload_lanzouyun.py python AutoRelese/upload_lanzouyun.py
 if exist AutoRelese\upload_lanzouyun.py echo [提示]: 上传结束
 
+RMDIR /S /Q AutoRelese\Publish
+
 echo.
-echo [提示]: 发布结束,发布包参见AutoRelese\Publish文件夹
+echo [提示]: 发布结束
 echo.
 
 
