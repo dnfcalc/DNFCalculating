@@ -1,6 +1,6 @@
   const child = require("child_process");
   const latestTag = child.execSync('git describe --long').toString('utf-8').split("-");
-  const currentVersion = (require("../AutoRelese/release_version.json").version).toString();
+  const currentVersion = (require("../ResourceFiles/Config/release_version.json").version).toString();
   // const gitVersion = latestTag[0]+'-'+latestTag[1]+'-'+latestTag[2]
   const newVersion = new Date().toISOString().split("T")[0]
   const fs = require("fs");
@@ -76,7 +76,7 @@
   // prepend the newChangelog to the current one
   fs.writeFileSync("CHANGELOG.md", `${newChangelog}${currentChangelog}`);
   // update package.json
-  fs.writeFileSync("AutoRelese/release_version.json", JSON.stringify({ version: String(newVersion) }, null, 2));
+  fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ version: String(newVersion) }, null, 2));
   
   // create a new commit
   child.execSync('git add .');

@@ -4,6 +4,8 @@ from PyQt5.QtCore import QUrl
 from Part.sum import *
 from PublicReference.calc_core import calc_core
 from PublicReference.producer_consumer import producer_data, consumer, thread_num
+import json
+import os
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()
@@ -40,7 +42,10 @@ class 选择窗口(QMainWindow):
                    }''')
         self.setMinimumSize(805,630)
         self.setMaximumSize(805,1520)
-        self.setWindowTitle('DNF-100SS搭配计算器-2020.10.30 (技能模板仅供参考，请根据自身情况修改)')
+        version = "-"
+        with open("ResourceFiles\\Config\\release_version.json") as fp:
+            version += json.load(fp)['version'].replace('-','.')
+        self.setWindowTitle('DNF搭配计算器'+version+' (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
 
