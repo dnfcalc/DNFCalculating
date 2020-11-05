@@ -819,7 +819,32 @@ class 装备19(装备):
         temp += '移动速度 +15%<br>'
         temp += '释放速度 +22.5%<br>'
         return temp     
-
+    def 城镇属性_BUFF(self, 属性):
+        pass
+    def 进图属性_BUFF(self, 属性):
+        pass
+    def BUFF属性(self, 属性):
+        属性.转职被动智力 += 127
+        属性.BUFFLv += 5
+        属性.BUFF力量per *= 1.12
+        属性.BUFF物攻per *= 1.2
+        属性.BUFF智力per *= 1.12
+        属性.BUFF魔攻per *= 1.2
+        属性.BUFF独立per *= 1.2
+        属性.一觉Lv += 2
+        属性.一觉力智 += 68
+        pass
+    def 装备描述_BUFF(self, 属性):
+        temp = ''
+        temp += '智力 +81<br>'
+        temp += '[禁忌诅咒]技能等级 +5<br>'
+        temp += '[禁忌诅咒]力量、智力 +12%<br>'
+        temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +20%<br>'
+        temp += '[开幕！人偶剧场]技能等级 +2<br>'
+        temp += '[开幕！人偶剧场]力量、智力 +68<br>'
+        temp += '[人偶操纵者]智力 +127<br>'
+        return temp
+        
 class 装备20(装备):
     名称 = '圣者的慈悲'
     模式 = 0
@@ -2325,6 +2350,31 @@ class 装备56(装备):
         temp += '物理暴击率 +5%<br>'
         temp += '魔法暴击率 +5%<br>'
         return temp      
+    def 城镇属性_BUFF(self, 属性):
+        pass
+    def 进图属性_BUFF(self, 属性):
+        pass
+    def BUFF属性(self, 属性):
+        属性.转职被动智力 += 127
+        属性.BUFFLv += 5
+        属性.BUFF力量per *= 1.12
+        属性.BUFF物攻per *= 1.2
+        属性.BUFF智力per *= 1.12
+        属性.BUFF魔攻per *= 1.2
+        属性.BUFF独立per *= 1.2
+        属性.一觉Lv += 2
+        属性.一觉力智 += 68
+        pass
+    def 装备描述_BUFF(self, 属性):
+        temp = ''
+        temp += '智力 +81<br>'
+        temp += '[禁忌诅咒]技能等级 +5<br>'
+        temp += '[禁忌诅咒]力量、智力 +12%<br>'
+        temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +20%<br>'
+        temp += '[开幕！人偶剧场]技能等级 +2<br>'
+        temp += '[开幕！人偶剧场]力量、智力 +68<br>'
+        temp += '[人偶操纵者]智力 +127<br>'
+        return temp
 
 class 装备57(装备):
     名称 = '闪耀的神威'
@@ -3253,6 +3303,38 @@ class 装备269(飘零之花武器):
     独立攻击力 = 711
     物攻成长 = 187
     魔攻成长 = 188
+    def 城镇属性_BUFF(self, 属性):
+        pass
+    def 进图属性_BUFF(self, 属性):
+        属性.智力 += 30 * 属性.获取改造(self.部位)
+        属性.体力 += 30 * 属性.获取改造(self.部位)
+        属性.精神 += 30 * 属性.获取改造(self.部位)
+        pass
+    def BUFF属性(self, 属性):
+        属性.守护恩赐体精 += 127
+        属性.转职被动智力 += 127
+        属性.BUFFLv += 5
+        属性.BUFF力量per *= 1.12
+        属性.BUFF智力per *= 1.12
+        属性.BUFF物攻per *= 1.2
+        属性.BUFF魔攻per *= 1.2
+        属性.BUFF独立per *= 1.2
+        属性.一觉Lv += 2
+        属性.一觉力智 += 68
+    def 装备描述_BUFF(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        temp += '智力 +81<br>'
+        temp += '[禁忌诅咒]技能等级 +5<br>'
+        temp += '[禁忌诅咒]力量、智力 +12%<br>'
+        temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +20%<br>'
+        temp += '[开幕！人偶剧场]技能等级 +2<br>'
+        temp += '[开幕！人偶剧场]力量、智力 +68<br>'
+        temp += '[人偶操纵者]智力 +127<br>'
+        temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+        temp += '智力 +{}<br>'.format(20 * 改造等级)
+        temp += '辅助职业专属四维 +{}<br>'.format(10 * 改造等级)
+        return temp
 
 class 装备270(飘零之花武器):
     名称 = '飘零之花手套'
@@ -3721,6 +3803,38 @@ class 装备293(夜语黑瞳武器):
     物理攻击力 = 1172
     魔法攻击力 = 1288
     独立攻击力 = 723
+    def 城镇属性_BUFF(self, 属性):
+        pass
+    def 进图属性_BUFF(self, 属性):
+        属性.智力 += 30 * 属性.获取改造(self.部位)
+        属性.体力 += 30 * 属性.获取改造(self.部位)
+        属性.精神 += 30 * 属性.获取改造(self.部位)
+        pass
+    def BUFF属性(self, 属性):
+        属性.守护恩赐体精 += 127
+        属性.转职被动智力 += 127
+        属性.BUFFLv += 5
+        属性.BUFF力量per *= 1.12
+        属性.BUFF智力per *= 1.12
+        属性.BUFF物攻per *= 1.2
+        属性.BUFF魔攻per *= 1.2
+        属性.BUFF独立per *= 1.2
+        属性.一觉Lv += 2
+        属性.一觉力智 += 68
+    def 装备描述_BUFF(self, 属性):
+        temp = ''
+        改造等级 = 属性.获取改造(self.部位)
+        temp += '智力 +81<br>'
+        temp += '[禁忌诅咒]技能等级 +5<br>'
+        temp += '[禁忌诅咒]力量、智力 +12%<br>'
+        temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +20%<br>'
+        temp += '[开幕！人偶剧场]技能等级 +2<br>'
+        temp += '[开幕！人偶剧场]力量、智力 +68<br>'
+        temp += '[人偶操纵者]智力 +127<br>'
+        temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
+        temp += '智力 +{}<br>'.format(20 * 改造等级)
+        temp += '辅助职业专属四维 +{}<br>'.format(10 * 改造等级)
+        return temp
 
 class 装备294(夜语黑瞳武器):
     名称 = '界·夜语黑瞳十字架'
