@@ -475,11 +475,11 @@ class 角色属性():
     def 装备属性计算(self):
         self.装备基础()
         for i in self.装备栏:
-            装备列表[装备序号[i]].城镇属性(self)
+            装备列表[装备序号[i]].城镇属性_BUFF(self)
             装备列表[装备序号[i]].BUFF属性(self)
 
         for i in self.套装栏:
-            套装列表[套装序号[i]].城镇属性(self)
+            套装列表[套装序号[i]].城镇属性_BUFF(self)
             套装列表[套装序号[i]].BUFF属性(self)
         
         if self.排行系数 == 1:
@@ -488,10 +488,10 @@ class 角色属性():
             self.站街系数 = P.系数数值站街()
 
         for i in self.装备栏:
-            装备列表[装备序号[i]].进图属性(self)
+            装备列表[装备序号[i]].进图属性_BUFF(self)
 
         for i in self.套装栏:
-            套装列表[套装序号[i]].进图属性(self)
+            套装列表[套装序号[i]].进图属性_BUFF(self)
 
     def 专属词条计算(self):
         pass
@@ -699,11 +699,11 @@ class 角色窗口(QWidget):
                         self.按钮.clicked.connect(lambda state, index = i.名称: self.套装按钮点击事件(index))
                         temp = ''
                         temp += '<font size="3" face="宋体"><font color="#78FF1E">' + i.名称 + '[2]</font><br>'
-                        temp += 套装列表[套装序号[i.名称 + '[2]']].装备描述(self.角色属性A)[:-4]
+                        temp += 套装列表[套装序号[i.名称 + '[2]']].装备描述_BUFF(self.角色属性A)[:-4]
                         temp += '<br><font color="#78FF1E">' + i.名称 + '[3]</font><br>'
-                        temp += 套装列表[套装序号[i.名称 + '[3]']].装备描述(self.角色属性A)[:-4]
+                        temp += 套装列表[套装序号[i.名称 + '[3]']].装备描述_BUFF(self.角色属性A)[:-4]
                         try:
-                            x = 套装列表[套装序号[i.名称 + '[5]']].装备描述(self.角色属性A)[:-4]
+                            x = 套装列表[套装序号[i.名称 + '[5]']].装备描述_BUFF(self.角色属性A)[:-4]
                             temp += '<br><font color="#78FF1E">' + i.名称 + '[5]</font><br>'
                             temp +=  x
                         except:
@@ -724,7 +724,7 @@ class 角色窗口(QWidget):
                                         self.按钮 = QPushButton(self.main_frame1)
                                         self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
                                         self.按钮.resize(28, 28)
-                                        self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备列表[j].品质] + '">' +装备列表[j].名称+'</font><br>'+ 装备列表[j].类型 + '-' + 装备列表[j].部位 + '<br>' + 装备列表[j].装备描述(self.角色属性A)[:-4] + '</font>')
+                                        self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备列表[j].品质] + '">' +装备列表[j].名称+'</font><br>'+ 装备列表[j].类型 + '-' + 装备列表[j].部位 + '<br>' + 装备列表[j].装备描述_BUFF(self.角色属性A)[:-4] + '</font>')
                                         self.遮罩透明度[j].setOpacity(0.5)
                                         self.按钮.setGraphicsEffect(self.遮罩透明度[j])
                                         self.按钮.clicked.connect(lambda state, index = j: self.装备图标点击事件(index, 10))
@@ -753,7 +753,7 @@ class 角色窗口(QWidget):
                 self.按钮 = QPushButton(self.main_frame1)
                 self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
                 self.按钮.resize(28, 28)
-                self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[i.品质] + '">' +i.名称+'</font><br>'+ i.类型 + '-' + i.部位 + '<br>' + i.装备描述(self.角色属性A)[:-4] + '</font>')
+                self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[i.品质] + '">' +i.名称+'</font><br>'+ i.类型 + '-' + i.部位 + '<br>' + i.装备描述_BUFF(self.角色属性A)[:-4] + '</font>')
                 self.遮罩透明度[装备序号[i.名称]].setOpacity(0.5)
                 self.按钮.setGraphicsEffect(self.遮罩透明度[装备序号[i.名称]])
                 self.按钮.clicked.connect(lambda state, index = 装备序号[i.名称]: self.装备图标点击事件(index, 10))
@@ -784,7 +784,7 @@ class 角色窗口(QWidget):
                 self.按钮 = QPushButton(self.main_frame1)
                 self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
                 self.按钮.resize(28, 28)
-                self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[i.品质] + '">' +i.名称+'</font><br>'+ i.类型 + '-' + i.部位 + '<br>' + i.装备描述(self.角色属性A)[:-4] + '</font>')
+                self.按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[i.品质] + '">' +i.名称+'</font><br>'+ i.类型 + '-' + i.部位 + '<br>' + i.装备描述_BUFF(self.角色属性A)[:-4] + '</font>')
                 self.遮罩透明度[装备序号[i.名称]].setOpacity(0.5)
                 self.按钮.setGraphicsEffect(self.遮罩透明度[装备序号[i.名称]])
                 self.按钮.clicked.connect(lambda state, index = 装备序号[i.名称]: self.装备图标点击事件(index, 10))
@@ -1439,8 +1439,8 @@ class 角色窗口(QWidget):
         count = 0
         for i in 装备列表:
             if i.品质 == '神话':
-                描述列表 = [i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述]
-                范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
+                描述列表 = [i.属性1描述_BUFF, i.属性2描述_BUFF, i.属性3描述_BUFF, i.属性4描述_BUFF]
+                范围列表 = [i.属性1范围_BUFF, i.属性2范围_BUFF, i.属性3范围_BUFF, i.属性4范围_BUFF]
                 for j in range(4):
                     if 描述列表[j] != '无':
                         for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
@@ -2384,10 +2384,10 @@ class 角色窗口(QWidget):
         self.输入属性(self.角色属性B)
         self.角色属性B.穿戴装备(self.有效穿戴组合[0], self.有效穿戴套装[0])
         for i in self.角色属性B.装备栏:
-            装备列表[装备序号[i]].城镇属性(self.角色属性B)
+            装备列表[装备序号[i]].城镇属性_BUFF(self.角色属性B)
             装备列表[装备序号[i]].BUFF属性(self.角色属性B)
         for i in self.角色属性B.套装栏:
-            套装列表[套装序号[i]].城镇属性(self.角色属性B)
+            套装列表[套装序号[i]].城镇属性_BUFF(self.角色属性B)
             套装列表[套装序号[i]].BUFF属性(self.角色属性B)
         self.角色属性B.装备基础()
         self.角色属性B.站街计算()
@@ -2811,7 +2811,7 @@ class 角色窗口(QWidget):
             x = B.BUFF面板()
             y = B.一觉面板()
 
-            tempstr = self.装备描述计算(B)
+            tempstr = self.装备描述_BUFF计算(B)
             for l in range(12):
                 self.图片显示[l].setToolTip(tempstr[l])
 
@@ -2860,7 +2860,7 @@ class 角色窗口(QWidget):
                     self.套装名称显示[i + 1].setStyleSheet("QLabel{font-size:12px;color:rgb(226,150,146)}")
                 else:
                     self.套装名称显示[i + 1].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
-                self.套装名称显示[i + 1].setToolTip('<font size="3" face="宋体"><font color="#78FF1E">'+套装[i]+'</font><br>'+套装列表[套装序号[套装[i]]].装备描述(B)[:-4]+'</font>')
+                self.套装名称显示[i + 1].setToolTip('<font size="3" face="宋体"><font color="#78FF1E">'+套装[i]+'</font><br>'+套装列表[套装序号[套装[i]]].装备描述_BUFF(B)[:-4]+'</font>')
             
             提升率 = D.BUFF计算(0)
             if len(self.基准值) != 0:
@@ -2971,7 +2971,7 @@ class 角色窗口(QWidget):
                 按钮 = QPushButton(滚动排行.topFiller)
                 按钮.move(int(初始x+x间隔*水平间距[j]),int(初始y+i*y间隔))
                 按钮.resize(28,28)
-                按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备.品质] + '">' +装备.名称+'</font><br>'+ 装备.类型 + '-' + 装备.部位 + '<br>' + 装备.装备描述(self.角色属性A)[:-4] + '</font>')
+                按钮.setToolTip('<font size="3" face="宋体"><font color="' + 颜色[装备.品质] + '">' +装备.名称+'</font><br>'+ 装备.类型 + '-' + 装备.部位 + '<br>' + 装备.装备描述_BUFF(self.角色属性A)[:-4] + '</font>')
                 a = QGraphicsOpacityEffect()
                 a.setOpacity(0.0)
                 按钮.setGraphicsEffect(a)
@@ -3026,10 +3026,10 @@ class 角色窗口(QWidget):
         C = deepcopy(self.角色属性A)
         C.穿戴装备(装备名称,套装名称)
         for i in C.装备栏:
-            装备列表[装备序号[i]].城镇属性(C)
+            装备列表[装备序号[i]].城镇属性_BUFF(C)
             装备列表[装备序号[i]].BUFF属性(C)
         for i in C.套装栏:
-            套装列表[套装序号[i]].城镇属性(C)
+            套装列表[套装序号[i]].城镇属性_BUFF(C)
             套装列表[套装序号[i]].BUFF属性(C)
         C.装备基础()
         C.站街计算()
@@ -3176,7 +3176,7 @@ class 角色窗口(QWidget):
         适用称号名称.resize(150,18)
         适用称号名称.setAlignment(Qt.AlignCenter)
         位置 += 间隔
-        适用称号名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.称号.currentText()+'</font><br>'+称号列表[self.称号.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
+        适用称号名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.称号.currentText()+'</font><br>'+称号列表[self.称号.currentIndex()].装备描述_BUFF(self.角色属性B)[:-4]+'</font>')
 
         适用宠物名称=QLabel(self.宠物.currentText(),输出窗口)
         适用宠物名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
@@ -3184,7 +3184,7 @@ class 角色窗口(QWidget):
         适用宠物名称.resize(150,18)
         适用宠物名称.setAlignment(Qt.AlignCenter)
         位置 += 间隔
-        适用宠物名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.宠物.currentText()+'</font><br>'+宠物列表[self.宠物.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
+        适用宠物名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.宠物.currentText()+'</font><br>'+宠物列表[self.宠物.currentIndex()].装备描述_BUFF(self.角色属性B)[:-4]+'</font>')
 
         适用中的套装 = QLabel(装备名称[11], 输出窗口)
         适用中的套装.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
@@ -3207,7 +3207,7 @@ class 角色窗口(QWidget):
                 适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(226,150,146)}")
             else:
                 适用套装名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
-            适用套装名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[i] + '</font><br>' + 套装列表[套装序号[套装名称[i]]].装备描述(self.角色属性B)[:-4] + '</font>')
+            适用套装名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[i] + '</font><br>' + 套装列表[套装序号[套装名称[i]]].装备描述_BUFF(self.角色属性B)[:-4] + '</font>')
         
         合计力量 = 0
         合计智力 = 0
@@ -3414,7 +3414,7 @@ class 角色窗口(QWidget):
         x坐标=[32,0,0,32,0,偏移量,偏移量+32,偏移量+32,偏移量,偏移量,偏移量+32,32]
         y坐标=[0,0,32,32,64,0,0,32,64,32,64,64]
     
-        tempstr = self.装备描述计算(self.角色属性B)
+        tempstr = self.装备描述_BUFF计算(self.角色属性B)
 
         for i in range(0,12):
             装备图标=QLabel(输出窗口)
@@ -3458,7 +3458,7 @@ class 角色窗口(QWidget):
 
         输出窗口.show()  
 
-    def 装备描述计算(self, 属性):
+    def 装备描述_BUFF计算(self, 属性):
         tempstr=[]
         for i in range(0,12):
             装备 =  装备列表[装备序号[属性.装备栏[i]]]
@@ -3510,7 +3510,7 @@ class 角色窗口(QWidget):
 
             if tempstr[i] != '':
                 tempstr[i] += '<br>'
-            tempstr[i] += 装备.装备描述(属性)[:-4]
+            tempstr[i] += 装备.装备描述_BUFF(属性)[:-4]
             tempstr[i] += '</font>'
         return tempstr
 
@@ -3612,10 +3612,10 @@ class 角色窗口(QWidget):
         count = 0
         for i in 装备列表:
             if i.品质 == '神话':
-                i.属性1选择 = self.神话属性选项[count * 4 + 0].currentIndex()
-                i.属性2选择 = self.神话属性选项[count * 4 + 1].currentIndex()
-                i.属性3选择 = self.神话属性选项[count * 4 + 2].currentIndex()
-                i.属性4选择 = self.神话属性选项[count * 4 + 3].currentIndex()
+                i.属性1选择_BUFF = self.神话属性选项[count * 4 + 0].currentIndex()
+                i.属性2选择_BUFF = self.神话属性选项[count * 4 + 1].currentIndex()
+                i.属性3选择_BUFF = self.神话属性选项[count * 4 + 2].currentIndex()
+                i.属性4选择_BUFF = self.神话属性选项[count * 4 + 3].currentIndex()
                 count += 1
 
         if x == 0:
@@ -3628,11 +3628,11 @@ class 角色窗口(QWidget):
             if self.复选框列表[i].isChecked():
                 选项设置列表[i].适用效果(属性)
 
-        称号列表[self.称号.currentIndex()].城镇属性(属性)
+        称号列表[self.称号.currentIndex()].城镇属性_BUFF(属性)
         if 属性.称号触发:
             称号列表[self.称号.currentIndex()].触发属性(属性)
 
-        宠物列表[self.宠物.currentIndex()].城镇属性(属性)
+        宠物列表[self.宠物.currentIndex()].城镇属性_BUFF(属性)
         
         if self.护石第一栏.currentText()!= '无':
            属性.护石第一栏 = self.护石第一栏.currentText()

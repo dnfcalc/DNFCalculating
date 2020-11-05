@@ -1,7 +1,5 @@
 #装备属性部分
 
-#模式 = 1 仅在第五页面显示
-
 from PublicReference.utils.config import *
 from PublicReference.equipment.装备_武器 import *
 from PublicReference.equipment.装备_防具 import *
@@ -35,4 +33,3 @@ while i >= 0:
 套装序号 = dict()
 for i in range(len(套装列表)):
     套装序号[套装列表[i].名称 + '[' + str(套装列表[i].件数) + ']'] = i
-
