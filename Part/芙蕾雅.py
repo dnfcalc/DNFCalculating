@@ -666,7 +666,7 @@ class 芙蕾雅角色属性(角色属性):
             技能释放次数[爆裂弹位置] = int(self.次数输入[self.技能序号['爆裂弹']]) * 每轮空射次数
         return 技能释放次数
 
-    def 被动倍率计算(self):
+    def 预处理(self):
         if self.超负荷属性 == 0:
             self.技能栏[self.技能序号['弹药改良']].加成数值 = 1.1
             self.技能栏[self.技能序号['弹药改良']].自定义描述 = 0
@@ -678,21 +678,10 @@ class 芙蕾雅角色属性(角色属性):
             self.冰属性强化 += 36          
         if self.超负荷属性 == 3:
             self.技能栏[self.技能序号['弹药改良']].技能加成描述 = '光属性强化增加：36'
-            self.光属性强化 += 36
-        super().被动倍率计算()
-
-    # def 伤害指数计算(self):
-    #     if self.超负荷属性 == 1:
-    #         self.火属性强化 += 36
-    #     if self.超负荷属性 == 2:
-    #         self.冰属性强化 += 36            
-    #     if self.超负荷属性 == 3:
-    #         self.光属性强化 += 36    
-    #     super().伤害指数计算()
-
+            self.光属性强化 += 36        
+        super().预处理()
 
 class 芙蕾雅(角色窗口):
-
     def 窗口属性输入(self):
         self.初始属性 = 芙蕾雅角色属性()
         self.角色属性A = 芙蕾雅角色属性()
@@ -739,4 +728,22 @@ class 芙蕾雅(角色窗口):
         super().输入属性(属性, x)
         属性.打桩模式 = self.打桩模式.currentIndex()
         属性.超负荷属性 = self.超负荷属性选择.currentIndex()
+        # 守门人适用于属强差
+        # if (self.希洛克选择状态[9] + self.希洛克选择状态[10] + self.希洛克选择状态[11]) > 1:
+        #     try:
+        #         属性.火属性强化 += int(self.守门人属强输入[0].text())
+        #     except:
+        #         pass
+        #     try:
+        #         属性.冰属性强化 += int(self.守门人属强输入[1].text())
+        #     except:
+        #         pass    
+        #     try:
+        #         属性.暗属性强化 += int(self.守门人属强输入[2].text())
+        #     except:
+        #         pass    
+        #     try:
+        #         属性.光属性强化 += int(self.守门人属强输入[3].text())
+        #     except:
+        #         pass
     

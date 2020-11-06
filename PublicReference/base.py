@@ -714,16 +714,23 @@ class 角色属性():
             self.词条选择.append(self.词条提升率计算([0, 1, 2, 3, 4, 5], [0.05] * 6))
 
     def 属性倍率计算(self):
+        # 火、冰、光、暗
+        self.属性倍率组 = []
+        self.属性倍率组.append(1.05 + 0.0045 * int(self.火属性强化 - self.火抗输入))
+        self.属性倍率组.append(1.05 + 0.0045 * int(self.冰属性强化 - self.冰抗输入))
+        self.属性倍率组.append(1.05 + 0.0045 * int(self.光属性强化 - self.光抗输入))
+        self.属性倍率组.append(1.05 + 0.0045 * int(self.暗属性强化 - self.暗抗输入))        
         if self.攻击属性 == 0:
-            self.属性倍率 = 1.05 + 0.0045 * int(max(self.火属性强化 - self.火抗输入,self.冰属性强化 - self.冰抗输入,self.光属性强化 - self.光抗输入,self.暗属性强化 - self.暗抗输入))
+            self.属性倍率 = max(self.属性倍率组)
         elif self.攻击属性 == 1:
-            self.属性倍率 = 1.05 + 0.0045 * int(self.火属性强化 - self.火抗输入)
+            self.属性倍率 = self.属性倍率组[0]
         elif self.攻击属性 == 2:
-            self.属性倍率 = 1.05 + 0.0045 * int(self.冰属性强化 - self.冰抗输入)
+            self.属性倍率 = self.属性倍率组[1]
         elif self.攻击属性 == 3:
-            self.属性倍率 = 1.05 + 0.0045 * int(self.光属性强化 - self.光抗输入)
+            self.属性倍率 = self.属性倍率组[2]
         elif self.攻击属性 == 4:
-            self.属性倍率 = 1.05 + 0.0045 * int(self.暗属性强化 - self.暗抗输入)
+            self.属性倍率 = self.属性倍率组[3]
+        
 
     def 伤害指数计算(self):
         
