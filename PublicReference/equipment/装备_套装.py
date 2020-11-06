@@ -3090,28 +3090,6 @@ class 套装效果65(套装):
         temp += '移动速度 +15%<br>'
         temp += '释放速度 +20%<br>'
         return temp
-
-class 套装效果66(套装):
-    名称 = '次元旅行者'
-    件数 = 3
-    类型 = '环鞋指'
-    def 城镇属性(self, 属性):
-        属性.暴击伤害加成(0.10)
-        属性.技能攻击力加成(0.18)
-        pass
-    def 进图属性(self, 属性):
-        pass
-    def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +10%<br>'
-        temp += '技能攻击力 +18%<br>'
-        return temp     
-    def 城镇属性_BUFF(self, 属性):
-        pass
-    def 进图属性_BUFF(self, 属性):
-        pass
     def BUFF属性(self, 属性):
         属性.守护恩赐体精 += 195
         属性.转职被动智力 += 188
@@ -3119,7 +3097,7 @@ class 套装效果66(套装):
         属性.BUFF力量per *= 1.06
         属性.BUFF智力per *= 1.06
         属性.一觉Lv += 2
-    def 装备描述_BUFF(self, 属性):
+    def 装备描述(self, 属性):
         temp = ''
         if 属性.角色 == '圣职者(男)':
             temp += '[荣誉祝福]技能等级 +1<br>'
@@ -3137,9 +3115,23 @@ class 套装效果66(套装):
             temp += '[禁忌诅咒]力量、智力 +6%<br>'
             temp += '[人偶操纵者]智力 +188<br>'
         return temp
+class 套装效果66(套装):
     名称 = '次元旅行者'
     件数 = 3
     类型 = '环鞋指'
+    def 城镇属性(self, 属性):
+        属性.暴击伤害加成(0.10)
+        属性.技能攻击力加成(0.18)
+        pass
+    def 进图属性(self, 属性):
+        pass
+    def 其它属性(self, 属性):
+        pass
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += '暴击伤害 +10%<br>'
+        temp += '技能攻击力 +18%<br>'
+        return temp     
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
