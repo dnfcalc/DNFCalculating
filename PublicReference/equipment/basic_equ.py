@@ -1,6 +1,7 @@
 class 装备:
     名称 = ''
     模式 = 0
+    图片ID = ''
     所属套装 = ''
     等级 = 0
     品质 = ''
@@ -33,6 +34,11 @@ class 装备:
         return temp
     def BUFF属性(self, 属性):
         pass
+    def 图片ID(self):
+        if self.图片ID == '':
+            return self.__class__.__name__.replace('装备','')
+        else:
+            return self.图片ID
 
 class 改造产物(装备):
     模式 = 1
