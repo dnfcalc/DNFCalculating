@@ -11,6 +11,7 @@ class 装备:
     智力 = 0
     体力 = 0
     精神 = 0
+    属性描述 = ""
     物理攻击力 = 0
     魔法攻击力 = 0
     独立攻击力 = 0
@@ -27,8 +28,22 @@ class 装备:
     def 其它属性_BUFF(self, 属性):
         pass
     def 装备描述(self, 属性):
-        temp = ''
-        return temp
+        属性.装备描述 = 1
+        self.属性描述 = ''
+        if self.部位 == '防具':
+            self.属性描述 += ('力量 +{}<br>'.format(self.力量[属性.防具类型])) if self.力量 > 0 else '' 
+            self.属性描述 += ('智力 +{}<br>'.format(self.智力[属性.防具类型])) if self.智力 > 0 else ''             
+        else:
+            self.属性描述 += ('力量 +{}<br>'.format(self.力量)) if self.力量 > 0 else '' 
+            self.属性描述 += ('智力 +{}<br>'.format(self.智力)) if self.智力 > 0 else ''        
+        self.属性描述 += ('物理攻击力 +{}<br>'.format(self.物理攻击力)) if self.物理攻击力 > 0 else ''
+        self.属性描述 += ('魔法攻击力 +{}<br>'.format(self.魔法攻击力)) if self.魔法攻击力 > 0 else ''
+        self.属性描述 += ('独立攻击力 +{}<br>'.format(self.独立攻击力)) if self.独立攻击力 > 0 else ''
+        self.城镇属性(属性)
+        self.进图属性(属性)
+        self.其它属性(属性)
+        属性.装备描述 = 0
+        return self.属性描述 
     def 装备描述_BUFF(self, 属性):
         temp = ''
         return temp
