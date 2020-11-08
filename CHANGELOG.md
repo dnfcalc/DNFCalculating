@@ -1,3 +1,16 @@
+# 2020-11-08
+
+## NewFeatures
+* 真·死灵术士:巴拉克降临平打的第三下变为第四下 ([281437](https://github.com/wxh0402/DNFCalculating/commit/28143763d7029570226c305be176a32db79d86ae))
+* 添加希洛克挑战模式智慧产物 ([0fb9c5](https://github.com/wxh0402/DNFCalculating/commit/0fb9c557386c72625b65afdce18dc82aad34b746))
+* 知源·元素师:修改默认25秒技能模板 ([01f8b8](https://github.com/wxh0402/DNFCalculating/commit/01f8b82302ba965f62d6461d6bfa51f1ea08ea19))
+
+## BugFixes
+* 修正奶系天堂舞姬套装属性描述错误 ([92a2e6](https://github.com/wxh0402/DNFCalculating/commit/92a2e6635821c3c64cee363003902f6873056dfe))
+* 修正奶系飘零之花武器改造属性为站街加成 ([23fa04](https://github.com/wxh0402/DNFCalculating/commit/23fa044eaf4786e9e02cef85fd9239709ef1118e))
+* 知源·元素师:修正天雷冲击护石倍率计算 ([a1d4fb](https://github.com/wxh0402/DNFCalculating/commit/a1d4fbe3c49628ed11b8a26833a00f8713aa05e3))
+* 真·忍者:修正勾玉之火·镰鼬数据 ([80c69c](https://github.com/wxh0402/DNFCalculating/commit/80c69c21293c8732b3532f9be91e6c62cd416b8b))
+
 # 2020-11-04
 
 ## NewFeatures
