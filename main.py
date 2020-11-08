@@ -6,6 +6,7 @@ from PublicReference.utils.calc_core import calc_core
 from PublicReference.utils.producer_consumer import producer_data, consumer, thread_num
 import json
 import os
+import traceback
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()
@@ -193,7 +194,8 @@ class 选择窗口(QMainWindow):
                 self.打开窗口(index.类名2)
             else:
                 return
-        except:
+        except Exception as error:
+            logger.error("error={} \n detail {}".format(error,traceback.print_exc()))
             return
         
     def 打开链接(self, url):

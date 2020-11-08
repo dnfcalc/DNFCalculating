@@ -7,7 +7,7 @@
 # Email     : fzls.zju@gmail.com
 # -------------------------------
 import multiprocessing
-# import traceback
+import traceback
 
 from PublicReference import logger
 
@@ -57,8 +57,8 @@ def consumer(work_queue, work_func):
             logger.warning("work thread={} BrokenPipeError quit job".format(current_process))
             continue_wrok = False
         except Exception as error:
-            # logger.error("work thread {} error={} processed count={}\n detail {}".format(current_process, error, processed_count,traceback.print_exc()))
-            logger.error("work thread {} error={} processed count={}\n".format(current_process, error, processed_count))
+            logger.error("work thread {} error={} processed count={}\n detail {}".format(current_process, error, processed_count,traceback.print_exc()))
+            # logger.error("work thread {} error={} processed count={}\n".format(current_process, error, processed_count))
         finally:
             work_queue.task_done()
 
