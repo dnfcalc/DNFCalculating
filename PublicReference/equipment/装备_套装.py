@@ -13,13 +13,38 @@ class 套装:
     def 其它属性_BUFF(self, 属性):
         pass;
     def 装备描述(self, 属性):
-        temp = ''
-        return temp
+        属性.装备描述 = 1
+        self.属性描述 = ''
+        self.城镇属性(属性)
+        self.属性描述 += '<font color="#00A2E8">进图触发：</font><br>'
+        self.进图属性(属性)
+        if self.属性描述.endswith('<font color="#00A2E8">进图触发：</font><br>'):
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">进图触发：</font><br>','')
+        self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
+        self.其它属性(属性)
+        if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">其他属性：</font><br>','')        
+        属性.装备描述 = 0
+        return self.属性描述 
     def 装备描述_BUFF(self, 属性):
-        temp = ''
-        return temp
+        属性.装备描述 = 1
+        self.属性描述 = ''
+        self.城镇属性_BUFF(属性)
+        self.属性描述 += '<font color="#00A2E8">辅助职业专属属性:</font><br>'
+        self.BUFF属性(属性)
+        self.属性描述 += '<font color="#00A2E8">进图触发：</font><br>'
+        self.进图属性_BUFF(属性)
+        if self.属性描述.endswith('<font color="#00A2E8">进图触发：</font><br>'):
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">进图触发：</font><br>','')
+        self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
+        self.其它属性_BUFF(属性)
+        if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">其他属性：</font><br>','')        
+        属性.装备描述 = 0
+        return self.属性描述 
     def BUFF属性(self, 属性):
         pass;
+
 #region  防具套装
 class 套装效果0(套装):
     名称 = '遗忘魔法师的馈赠'
@@ -32,12 +57,7 @@ class 套装效果0(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '最终伤害 +14%<br>'
-        temp += '技能攻击力 +14%<br>'
-        return temp     
+        pass   
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -48,20 +68,6 @@ class 套装效果0(套装):
         self.属性描述 += 属性.BUFF增加(BUFFLv=2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=135)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        temp += 'Lv30 技能等级 +2<br>'
-        temp += 'Lv50 技能等级 +1<br>'
-        if 属性.角色 == '圣职者(男)':
-            temp += '[天启之珠]力量、智力 +135<br>'
-            temp += '[守护恩赐]体力、精神 +100<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[圣光天启] 力量、智力 +135<br>'
-            temp += '[启示圣歌] 智力 +100<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[开幕！人偶剧场]力量、智力 +135<br>'
-            temp += '[人偶操纵者]智力 +100<br>'
-        return temp
 
 class 套装效果1(套装):
     名称 = '死亡阴影'
@@ -76,14 +82,7 @@ class 套装效果1(套装):
     def 其它属性(self, 属性):
         self.属性描述 += 属性.攻击速度增加(0.10)
         self.属性描述 += 属性.释放速度增加(0.15)
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +14%<br>'
-        temp += '所有属性强化 +55<br>'
-        temp += '攻击速度 +10%<br>'
-        temp += '释放速度 +15%<br>'
-        return temp    
+        pass  
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -92,18 +91,6 @@ class 套装效果1(套装):
         self.属性描述 += 属性.被动增加(守护恩赐体精=190)
         self.属性描述 += 属性.被动增加(转职被动智力=190)
         self.属性描述 += 属性.觉醒增加(一觉力智=220)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[天启之珠]力量、智力 +220<br>'
-            temp += '[守护恩赐]体力、精神 +190<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[圣光天启]力量、智力 +220<br>'
-            temp += '[启示圣歌]智力 +190<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[开幕！人偶剧场]力量、智力 +220<br>'
-            temp += '[人偶操纵者]智力 +190<br>'
-        return temp
 
 class 套装效果2(套装):
     名称 = '贫瘠沙漠的遗产'
@@ -118,12 +105,6 @@ class 套装效果2(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +22%<br>'
-        if 属性.贫瘠沙漠的遗产 != 0:
-            temp += '技能攻击力 +' +str(属性.技能栏空位) +'%<br>'
-        return temp  
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -133,19 +114,6 @@ class 套装效果2(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.08)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.08)
         self.属性描述 += 属性.觉醒增加(一觉力智=175)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +8%<br>'
-            temp += '[天启之珠]力量、智力 +175<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +8%<br>'
-            temp += '[圣光天启]力量、智力 +175<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +8%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +175<br>'
-        temp += 'Lv1-30 技能等级 +1<br>'
-        return temp
 
 class 套装效果3(套装):
     名称 = '噩梦：地狱之路'
@@ -159,13 +127,7 @@ class 套装效果3(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +16%<br>'
-        temp += '最终伤害 +6%<br>'
-        temp += '技能攻击力 +6%<br>'
-        return temp     
+        pass  
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -176,24 +138,6 @@ class 套装效果3(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.08)
         self.属性描述 += 属性.觉醒增加(一觉力智=100)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.04)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +8%<br>'
-            temp += '[天启之珠]力量、智力 +100<br>'
-            temp += '[天启之珠]力量、智力 +4%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +8%<br>'
-            temp += '[圣光天启]力量、智力 +100<br>'
-            temp += '[圣光天启]力量、智力 +4%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +8%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +100<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +4%<br>'
-        return temp
 
 class 套装效果4(套装):
     名称 = '永恒不息之路'
@@ -207,12 +151,7 @@ class 套装效果4(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +32%<br>'
-        temp += 'Lv60技能：<br>攻击力 +20% CD +30%<br>'
-        return temp       
+        pass  
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -222,21 +161,6 @@ class 套装效果4(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12)
         self.属性描述 += 属性.觉醒增加(一觉力智=175)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +12%<br>'
-            temp += '[天启之珠]力量、智力 +175<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +12%<br>'
-            temp += '[圣光天启]力量、智力 +175<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +12%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +175<br>'
-        return temp
 
 class 套装效果5(套装):
     名称 = '天堂舞姬'
@@ -249,12 +173,7 @@ class 套装效果5(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +17%<br>'
-        temp += '最终伤害 +10%<br>'
-        return temp     
+        pass    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -266,24 +185,6 @@ class 套装效果5(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12)
         self.属性描述 += 属性.觉醒增加(一觉力智=135)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +12%<br>'
-            temp += '[天启之珠]力量、智力 +135<br>'
-            temp += '[守护恩赐]体力、精神 +105<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +12%<br>'
-            temp += '[圣光天启]力量、智力 +135<br>'
-            temp += '[启示圣歌]智力 +105<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +12%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +135<br>'
-            temp += '[人偶操纵者]智力 +105<br>'
-        return temp
 
 class 套装效果6(套装):
     名称 = '皇家裁决者宣言'
@@ -297,13 +198,7 @@ class 套装效果6(套装):
         pass
     def 其它属性(self, 属性):
         self.属性描述 += 属性.命中率增加(0.05)
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +16%<br>'
-        temp += '所有属性强化 +52<br>'
-        temp += '命中率 +5%<br>'
-        return temp    
+        pass   
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -312,18 +207,6 @@ class 套装效果6(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12)
         self.属性描述 += 属性.觉醒增加(一觉力智=220)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +12%<br>'
-            temp += '[天启之珠]力量、智力 +220<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +12%<br>'
-            temp += '[圣光天启]力量、智力 +220<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +12%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +220<br>'
-        return temp
 
 class 套装效果7(套装):
     名称 = '炙炎之盛宴'
@@ -336,12 +219,7 @@ class 套装效果7(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +18%<br>'
-        temp += '所有属性强化 +40<br>'
-        return temp  
+        pass  
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -351,21 +229,6 @@ class 套装效果7(套装):
         self.属性描述 += 属性.被动增加(转职被动智力=100)
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=175)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]力量、智力 +175<br>'
-            temp += '[守护恩赐]体力、精神 +100<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]力量、智力 +175<br>'
-            temp += '[启示圣歌]智力 +100<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +175<br>'
-            temp += '[人偶操纵者]智力 +100<br>'
-        return temp
 
 class 套装效果8(套装):
     名称 = '传奇铁匠-封神'
@@ -378,12 +241,7 @@ class 套装效果8(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +14%<br>'
-        temp += '最终伤害 +14%<br>'
-        return temp     
+        pass  
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -395,24 +253,6 @@ class 套装效果8(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.08)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.08)
         self.属性描述 += 属性.觉醒增加(一觉力智=120)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +8%<br>'
-            temp += '[天启之珠]力量、智力 +120<br>'
-            temp += '[守护恩赐]体力、精神 +80<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +8%<br>'
-            temp += '[圣光天启]力量、智力 +120<br>'
-            temp += '[启示圣歌]智力 +80<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +8%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +120<br>'
-            temp += '[人偶操纵者]智力 +80<br>'
-        return temp
 
 class 套装效果9(套装):
     名称 = '命运歧路'
@@ -425,12 +265,7 @@ class 套装效果9(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +15%<br>'
-        temp += '附加伤害 +13%<br>'
-        return temp   
+        pass  
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -440,21 +275,6 @@ class 套装效果9(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.08)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.08)
         self.属性描述 += 属性.觉醒增加(一觉力智=135)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +8%<br>'
-            temp += '[天启之珠]力量、智力 +135<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +8%<br>'
-            temp += '[圣光天启]力量、智力 +135<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +8%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +135<br>'
-        return temp
 
 class 套装效果10(套装):
     名称 = '古代祭祀的神圣仪式'
@@ -468,13 +288,7 @@ class 套装效果10(套装):
         pass
     def 其它属性(self, 属性):
         属性.回避率 += 0.06
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +8%<br>'
-        temp += '伤害增加 +21%<br>'
-        temp += '回避率 +6%<br>'
-        return temp      
+        pass     
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -482,18 +296,6 @@ class 套装效果10(套装):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.BUFF增加(BUFFLv=3)
         self.属性描述 += 属性.觉醒增加(一觉力智=230)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +3<br>'
-            temp += '[天启之珠]力量、智力 +230<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +3<br>'
-            temp += '[圣光天启]力量、智力 +230<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +3<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +230<br>'
-        return temp
 
 class 套装效果11(套装):
     名称 = '龙血玄黄'
@@ -507,13 +309,7 @@ class 套装效果11(套装):
     def 其它属性(self, 属性):
         self.属性描述 += 属性.物理暴击率增加(0.1)
         self.属性描述 += 属性.魔法暴击率增加(0.1)
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +23%<br>'
-        temp += '物理暴击率 +10%<br>'
-        temp += '魔法暴击率 +10%<br>'
-        return temp    
+        pass   
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -524,24 +320,6 @@ class 套装效果11(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.08)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=100)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +8%<br>'
-            temp += '[天启之珠]力量、智力 +100<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +8%<br>'
-            temp += '[圣光天启]力量、智力 +100<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +8%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +100<br>'
-        return temp
 
 class 套装效果12(套装):
     名称 = '擎天战甲'
@@ -554,12 +332,7 @@ class 套装效果12(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +14%<br>'
-        temp += '暴击伤害 +14%<br>'
-        return temp      
+        pass     
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -569,21 +342,6 @@ class 套装效果12(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.06)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.06)
         self.属性描述 += 属性.觉醒增加(一觉力智=150)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +6%<br>'
-            temp += '[天启之珠]力量、智力 +150<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +6%<br>'
-            temp += '[圣光天启]力量、智力 +150<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +6%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +150<br>'
-        return temp
 
 class 套装效果13(套装):
     名称 = '荆棘漫天'
@@ -599,13 +357,6 @@ class 套装效果13(套装):
         self.属性描述 += 属性.物理暴击率增加(0.10)
         self.属性描述 += 属性.魔法暴击率增加(0.10)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +12%<br>'
-        temp += '暴击伤害 +11%<br>'
-        temp += '物理暴击率 +10%<br>'
-        temp += '魔法暴击率 +10%<br>'
-        return temp
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -615,21 +366,6 @@ class 套装效果13(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12)
         self.属性描述 += 属性.觉醒增加(一觉力智=175)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +12%<br>'
-            temp += '[天启之珠]力量、智力 +175<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +12%<br>'
-            temp += '[圣光天启]力量、智力 +175<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +12%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +175<br>'
-        return temp
 
 class 套装效果14(套装):
     名称 = '大自然的呼吸'
@@ -643,11 +379,6 @@ class 套装效果14(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +16%<br>'
-        temp += '暴击伤害 +15%<br>'
-        return temp     
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -659,24 +390,6 @@ class 套装效果14(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.15)
         self.属性描述 += 属性.觉醒增加(一觉力智=60)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.05)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +15%<br>'
-            temp += '[天启之珠]力量、智力 +60<br>'
-            temp += '[天启之珠]力量、智力 +5%<br>'
-            temp += '[守护恩赐]体力、精神 +145<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +15%<br>'
-            temp += '[圣光天启]力量、智力 +60<br>'
-            temp += '[圣光天启]力量、智力 +5%<br>'
-            temp += '[启示圣歌]智力 +145<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +15%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +60<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
-            temp += '[人偶操纵者]智力 +145<br>'
-        return temp
 
 class 套装效果15(套装):
     名称 = '遗忘魔法师的馈赠'
@@ -689,12 +402,7 @@ class 套装效果15(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +22%<br>'
-        temp += '暴击伤害 +10%<br>'
-        return temp      
+        pass     
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -705,21 +413,6 @@ class 套装效果15(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.24)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.24)
         self.属性描述 += 属性.觉醒增加(一觉力智=153)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +24%<br>'
-            temp += '[天启之珠]力量、智力 +153<br>'
-            temp += '[守护恩赐]体力、精神 +50<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +24%<br>'
-            temp += '[圣光天启]力量、智力 +153<br>'
-            temp += '[启示圣歌]智力 +50<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +24%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +153<br>'
-            temp += '[人偶操纵者]智力 +50<br>'
-        return temp
 
 class 套装效果16(套装):
     名称 = '死亡阴影'
@@ -733,11 +426,6 @@ class 套装效果16(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '最终伤害 +14%<br>'
-        temp += '技能攻击力 +16%<br>'
-        return temp
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -749,24 +437,6 @@ class 套装效果16(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.25)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.25)
         self.属性描述 += 属性.觉醒增加(一觉力智=130)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +25%<br>'
-            temp += '[天启之珠]力量、智力 +130<br>'
-            temp += '[守护恩赐]体力、精神 +165<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +25%<br>'
-            temp += '[圣光天启]力量、智力 +130<br>'
-            temp += '[启示圣歌]智力 +165<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +25%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +130<br>'
-            temp += '[人偶操纵者]智力 +165<br>'
-        return temp
 
 class 套装效果17(套装):
     名称 = '贫瘠沙漠的遗产'
@@ -780,11 +450,6 @@ class 套装效果17(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '技能攻击力 +15%<br>'
-        temp += '所有属性强化 +60<br>'
-        return temp
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -797,22 +462,6 @@ class 套装效果17(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.1)
         self.属性描述 += 属性.被动增加(一觉被动Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=150)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        temp += 'Lv30-48 技能等级 +2<br>'
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +10%<br>'
-            temp += '[天启之珠]力量、智力 +150<br>'
-            temp += '[守护恩赐]体力、精神 +113<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +10%<br>'
-            temp += '[圣光天启]力量、智力 +150<br>'
-            temp += '[启示圣歌]智力 +113<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +10%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +150<br>'
-            temp += '[人偶操纵者]智力 +113<br>'
-        return temp
 
 class 套装效果18(套装):
     名称 = '噩梦：地狱之路'
@@ -826,13 +475,7 @@ class 套装效果18(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '所有属性强化 +66<br>'
-        temp += 'Lv1-85 技能等级+1<br>'
-        temp += 'Lv100  技能等级+1<br>'
-        return temp    
+        pass   
     def 城镇属性_BUFF(self, 属性):
         self.属性描述 += 属性.技能等级加成('所有', 1, 85, 1)
         self.属性描述 += 属性.技能等级加成('所有', 100, 100, 1)
@@ -846,26 +489,6 @@ class 套装效果18(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.08)
         self.属性描述 += 属性.觉醒增加(一觉力智=99)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.04)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +8%<br>'
-            temp += '[天启之珠]力量、智力 +99<br>'
-            temp += '[天启之珠]力量、智力 +4%<br>'
-            temp += '[守护恩赐]体力、精神 +110<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +8%<br>'
-            temp += '[圣光天启]力量、智力 +99<br>'
-            temp += '[圣光天启]力量、智力 +4%<br>'
-            temp += '[启示圣歌]智力 +110<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +8%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +99<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +4%<br>'
-            temp += '[人偶操纵者]智力 +110<br>'
-        temp += 'Lv1-85 技能等级 +1<br>'
-        temp += 'Lv100 技能等级 +1<br>'
-        return temp
 
 class 套装效果19(套装):
     名称 = '永恒不息之路'
@@ -879,12 +502,7 @@ class 套装效果19(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '最终伤害 +32%<br>'
-        temp += 'Lv70技能：<br>攻击力 +20% CD +30%<br>'
-        return temp     
+        pass     
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -894,21 +512,6 @@ class 套装效果19(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.15)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.15)
         self.属性描述 += 属性.觉醒增加(一觉力智=130)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +3<br>'
-            temp += '[荣誉祝福]力量、智力 +15%<br>'
-            temp += '[天启之珠]力量、智力 +130<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +3<br>'
-            temp += '[勇气祝福]力量、智力 +15%<br>'
-            temp += '[圣光天启]力量、智力 +130<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +3<br>'
-            temp += '[禁忌诅咒]力量、智力 +15%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +130<br>'
-        return temp
 
 class 套装效果20(套装):
     名称 = '天堂舞姬'
@@ -924,15 +527,7 @@ class 套装效果20(套装):
         self.属性描述 += 属性.攻击速度增加(0.10)
         self.属性描述 += 属性.移动速度增加(0.10)
         self.属性描述 += 属性.释放速度增加(0.15)
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +11%<br>'
-        temp += '伤害增加 +16%<br>'
-        temp += '攻击速度 +10%<br>'
-        temp += '移动速度 +10%<br>'
-        temp += '释放速度 +15%<br>'
-        return temp     
+        pass    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -945,27 +540,6 @@ class 套装效果20(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.08)
         self.属性描述 += 属性.觉醒增加(一觉力智=192)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.05)
-    def 装备描述(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +8%<br>'
-            temp += '[圣光天启]力量、智力 +5%<br>'
-            temp += '[圣光天启]力量、智力 +192<br>'
-            temp += '[守护恩赐]体力、精神 +145<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +8%<br>'
-            temp += '[天启之珠]力量、智力 +5%<br>'
-            temp += '[天启之珠]力量、智力 +192<br>'
-            temp += '[启示圣歌]智力 +145<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +8%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +192<br>'
-            temp += '[人偶操纵者]智力 +145<br>'
-        return temp
 
 class 套装效果21(套装):
     名称 = '皇家裁决者宣言'
@@ -982,14 +556,6 @@ class 套装效果21(套装):
         self.属性描述 += 属性.移动速度增加(0.05)
         self.属性描述 += 属性.释放速度增加(0.08)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +15%<br>'
-        temp += '所有属性强化 +62<br>'
-        temp += '攻击速度 +5%<br>'
-        temp += '移动速度 +5%<br>'
-        temp += '释放速度 +8%<br>'
-        return temp  
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1000,21 +566,6 @@ class 套装效果21(套装):
         self.属性描述 += 属性.BUFF增加(BUFFLv=3)
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.2)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.2)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +3<br>'
-            temp += '[荣誉祝福]力量、智力 +20%<br>'
-            temp += '[守护恩赐]体力、精神 +280<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +3<br>'
-            temp += '[勇气祝福]力量、智力 +20%<br>'
-            temp += '[启示圣歌]智力 +280<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +3<br>'
-            temp += '[禁忌诅咒]力量、智力 +20%<br>'
-            temp += '[人偶操纵者]智力 +280<br>'
-        return temp
 
 class 套装效果22(套装):
     名称 = '炙炎之盛宴'
@@ -1029,14 +580,7 @@ class 套装效果22(套装):
     def 其它属性(self, 属性):
         self.属性描述 += 属性.物理暴击率增加(0.05)
         self.属性描述 += 属性.魔法暴击率增加(0.05)
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '附加伤害 +10%<br>'
-        temp += '技能攻击力 +20%<br>'
-        temp += '物理暴击率 +5%<br>'
-        temp += '魔法暴击率 +5%<br>'
-        return temp    
+        pass  
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1046,19 +590,6 @@ class 套装效果22(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.25)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.25)
         self.属性描述 += 属性.觉醒增加(一觉力智=100)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +25%<br>'
-            temp += '[天启之珠]力量、智力 +100<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +25%<br>'
-            temp += '[圣光天启]力量、智力 +100<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +25%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +100<br>'
-        temp += 'Lv1-48 技能等级 +2<br>'
-        return temp
 
 class 套装效果23(套装):
     名称 = '传奇铁匠-封神'
@@ -1076,17 +607,7 @@ class 套装效果23(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +21%<br>'
-        if 属性.装备检查('天堂之翼'):
-            temp += 'Lv1-45  技能CD-30%<br>'
-            temp += 'Lv60-80 技能CD-30%<br>'
-        else:
-            temp += 'Lv1-45  技能CD-20%<br>'
-            temp += 'Lv60-80 技能CD-20%<br>'
-        return temp    
+        pass   
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1099,19 +620,6 @@ class 套装效果23(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.15)
         self.属性描述 += 属性.被动增加(一觉被动Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        temp += 'Lv30-50 技能等级 +2<br>'
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +15%<br>'
-            temp += '[守护恩赐]体力、精神 +250<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +15%<br>'
-            temp += '[启示圣歌]智力 +250<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +15%<br>'
-            temp += '[人偶操纵者]智力 +250<br>'
-        return temp
 
 class 套装效果24(套装):
     名称 = '命运歧路'
@@ -1128,14 +636,6 @@ class 套装效果24(套装):
         self.属性描述 += 属性.移动速度增加(0.21)
         self.属性描述 += 属性.释放速度增加(0.315  )
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +12%<br>'
-        temp += '暴击伤害 +17%<br>'
-        temp += '攻击速度 +21%<br>'
-        temp += '移动速度 +21%<br>'
-        temp += '释放速度 +31.5%<br>'
-        return temp   
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1144,19 +644,6 @@ class 套装效果24(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.08)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.08)
         self.属性描述 += 属性.觉醒增加(一觉力智=260)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +8%<br>'
-            temp += '[天启之珠]力量、智力 +260<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +8%<br>'
-            temp += '[圣光天启]力量、智力 +260<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +8%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +260<br>'
-        return temp
-
 class 套装效果25(套装):
     名称 = '古代祭祀的神圣仪式'
     件数 = 3
@@ -1169,11 +656,6 @@ class 套装效果25(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +8%<br>'
-        temp += '附加伤害 +21%<br>'
-        return temp 
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1184,21 +666,6 @@ class 套装效果25(套装):
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.32)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.32)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +32%<br>'
-            temp += '[守护恩赐]体力、精神 +125<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +32%<br>'
-            temp += '[启示圣歌]智力 +125<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +32%<br>'
-            temp += '[人偶操纵者]智力 +125<br>'
-        return temp
 
 class 套装效果26(套装):
     名称 = '龙血玄黄'
@@ -1211,12 +678,7 @@ class 套装效果26(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +24%<br>'
-        temp += '所有属性强化 +24<br>'
-        return temp    
+        pass 
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1229,27 +691,6 @@ class 套装效果26(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.09)
         self.属性描述 += 属性.觉醒增加(一觉力智=155)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.02)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +9%<br>'
-            temp += '[天启之珠]力量、智力 +155<br>'
-            temp += '[天启之珠]力量、智力 +2%<br>'
-            temp += '[守护恩赐]体力、精神 +150<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +9%<br>'
-            temp += '[圣光天启]力量、智力 +155<br>'
-            temp += '[圣光天启]力量、智力 +2%<br>'
-            temp += '[启示圣歌]智力 +150<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +9%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +155<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +2%<br>'
-            temp += '[人偶操纵者]智力 +150<br>'
-        return temp
 
 class 套装效果27(套装):
     名称 = '擎天战甲'
@@ -1261,11 +702,7 @@ class 套装效果27(套装):
     def 进图属性(self, 属性):
         pass
     def 其它属性(self, 属性):
-        pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +32%<br>'
-        return temp     
+        pass  
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1276,21 +713,6 @@ class 套装效果27(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.2)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[天启之珠]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +20%<br>'
-            temp += '[守护恩赐]体力、精神 +285<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[圣光天启]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +20%<br>'
-            temp += '[启示圣歌]智力 +285<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[开幕！人偶剧场]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +20%<br>'
-            temp += '[人偶操纵者]智力 +285<br>'
-        return temp
 
 class 套装效果28(套装):
     名称 = '荆棘漫天'
@@ -1306,13 +728,6 @@ class 套装效果28(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '附加伤害 +25%<br>'
-        temp += 'Lv1-45  技能CD-15%<br>'
-        temp += 'Lv60-80 技能CD-15%<br>'
-        temp += 'Lv90-95 技能CD-15%<br>'
-        return temp 
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1324,24 +739,6 @@ class 套装效果28(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.11)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.11)
         self.属性描述 += 属性.觉醒增加(一觉力智=130)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +11%<br>'
-            temp += '[天启之珠]力量、智力 +130<br>'
-            temp += '[守护恩赐]体力、精神 +200<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +11%<br>'
-            temp += '[圣光天启]力量、智力 +130<br>'
-            temp += '[启示圣歌]智力 +200<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +11%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +130<br>'
-            temp += '[人偶操纵者]智力 +200<br>'
-        return temp
 
 class 套装效果29(套装):
     名称 = '大自然的呼吸'
@@ -1358,14 +755,7 @@ class 套装效果29(套装):
         self.属性描述 += 属性.移动速度增加(0.05)
         self.属性描述 += 属性.释放速度增加(0.1)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +15%<br>'
-        temp += '技能攻击力 +13%<br>'
-        temp += '攻击速度 +5%<br>'
-        temp += '移动速度 +5%<br>'
-        temp += '释放速度 +10%<br>'
-        return temp      
+          
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1375,21 +765,7 @@ class 套装效果29(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.05)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.05)
         self.属性描述 += 属性.觉醒增加(一觉力智=248)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +5%<br>'
-            temp += '[天启之珠]力量、智力 +248<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +5%<br>'
-            temp += '[圣光天启]力量、智力 +248<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +5%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +248<br>'
-        return temp
+    
 
 class 套装效果30(套装):
     名称 = '遗忘魔法师的馈赠'
@@ -1406,14 +782,7 @@ class 套装效果30(套装):
         self.属性描述 += 属性.物理暴击率增加(0.05)
         self.属性描述 += 属性.魔法暴击率增加(0.05)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +13%<br>'
-        temp += 'Lv1-85 技能等级+2<br>'
-        temp += 'Lv100  技能等级+2<br>'
-        temp += '物理暴击率 +5%<br>'
-        temp += '魔法暴击率 +5%<br>'
-        return temp   
+       
     def 城镇属性_BUFF(self, 属性):
         self.属性描述 += 属性.技能等级加成('所有', 1, 85, 2)
         self.属性描述 += 属性.技能等级加成('所有', 100, 100, 2)
@@ -1425,20 +794,7 @@ class 套装效果30(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.06)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.08)
   
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +6%<br>'
-            temp += '[天启之珠]力量、智力 +8%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +6%<br>'
-            temp += '[圣光天启]力量、智力 +8%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +6%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +8%<br>'
-        temp += 'Lv1-85 技能等级 +2<br>'
-        temp += 'Lv100 技能等级 +2<br>'
-        return temp
+    
 
 class 套装效果31(套装):
     名称 = '死亡阴影'
@@ -1451,10 +807,7 @@ class 套装效果31(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '技能攻击力 +46%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1465,22 +818,7 @@ class 套装效果31(套装):
         self.属性描述 += 属性.觉醒增加(一觉力智=120)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.08)
         self.属性描述 += 属性.技能等级加成('所有', 1, 30, 1)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +12%<br>'
-            temp += '[天启之珠]力量、智力 +120<br>'
-            temp += '[天启之珠]力量、智力 +8%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +12%<br>'
-            temp += '[圣光天启]力量、智力 +120<br>'
-            temp += '[圣光天启]力量、智力 +8%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +12%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +120<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +8%<br>'
-        temp += 'Lv1-30 技能等级 +1<br>'
-        return temp
+    
 
 class 套装效果32(套装):
     名称 = '贫瘠沙漠的遗产'
@@ -1495,12 +833,7 @@ class 套装效果32(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '技能攻击力 +42%<br>'
-        if 属性.贫瘠沙漠的遗产 == 2:
-            temp += '技能攻击力 +4%<br>'
-        return temp      
+          
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1512,19 +845,7 @@ class 套装效果32(套装):
         self.属性描述 += 属性.被动增加(一觉被动Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.1)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        temp += 'Lv30-50 技能等级 +2<br>'
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +14%<br>'
-            temp += '[天启之珠]力量、智力 +10%<br>'   
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +14%<br>'
-            temp += '[圣光天启]力量、智力 +10%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +14%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +10%<br>'
-        return temp
+    
 
 class 套装效果33(套装):
     名称 = '噩梦：地狱之路'
@@ -1537,10 +858,7 @@ class 套装效果33(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '技能攻击力 +46%<br>'
-        return temp    
+        
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1552,24 +870,7 @@ class 套装效果33(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.15)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.15)
         self.属性描述 += 属性.觉醒增加(一觉力智=185)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +15%<br>'
-            temp += '[天启之珠]力量、智力 +185<br>'
-            temp += '[守护恩赐]体力、精神 +80<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +15%<br>'
-            temp += '[圣光天启]力量、智力 +185<br>'
-            temp += '[启示圣歌]智力 +80<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +15%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +185<br>'
-            temp += '[人偶操纵者]智力 +80<br>'
-        return temp
+    
 
 class 套装效果34(套装):
     名称 = '永恒不息之路'
@@ -1585,13 +886,7 @@ class 套装效果34(套装):
         self.属性描述 += 属性.攻击速度增加(0.15)
         self.属性描述 += 属性.释放速度增加(0.225)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +23%<br>'
-        temp += '伤害增加 +20%<br>'
-        temp += '攻击速度 +15%<br>'
-        temp += '释放速度 +22.5%<br>'
-        return temp       
+           
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1602,24 +897,7 @@ class 套装效果34(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.04)
         self.属性描述 += 属性.觉醒增加(一觉力智=150)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.1)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +4%<br>'
-            temp += '[天启之珠]力量、智力 +150<br>'
-            temp += '[天启之珠]力量、智力 +10%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +4%<br>'
-            temp += '[圣光天启]力量、智力 +150<br>'
-            temp += '[圣光天启]力量、智力 +10%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +4%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +150<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +10%<br>' 
-        return temp
+    
 
 class 套装效果35(套装):
     名称 = '天堂舞姬'
@@ -1635,13 +913,7 @@ class 套装效果35(套装):
         self.属性描述 += 属性.物理暴击率增加(0.10)
         self.属性描述 += 属性.魔法暴击率增加(0.10)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +12%<br>'
-        temp += '技能攻击力 +20%<br>'
-        temp += '物理暴击率 +10%<br>'
-        temp += '魔法暴击率 +10%<br>'
-        return temp 
+     
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1655,22 +927,7 @@ class 套装效果35(套装):
         self.属性描述 += 属性.被动增加(一觉被动Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.05)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        temp += 'Lv30-50 技能等级 +2<br>'
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +12%<br>'
-            temp += '[天启之珠]力量、智力 +5%<br>'
-            temp += '[守护恩赐]体力、精神 +100<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +12%<br>'
-            temp += '[圣光天启]力量、智力 +5%<br>'
-            temp += '[启示圣歌]智力 +100<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +12%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
-            temp += '[人偶操纵者]智力 +100<br>'
-        return temp
+    
 
 class 套装效果36(套装):
     名称 = '皇家裁决者宣言'
@@ -1683,10 +940,7 @@ class 套装效果36(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '属性附加 +20%<br>'
-        return temp  
+      
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1695,21 +949,7 @@ class 套装效果36(套装):
         self.属性描述 += 属性.BUFF增加(BUFFLv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=180)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.1)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[天启之珠]力量、智力 +180<br>'
-            temp += '[天启之珠]力量、智力 +10%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[圣光天启]力量、智力 +180<br>'
-            temp += '[圣光天启]力量、智力 +10%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +180<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +10%<br>'
-        return temp
+    
 
 class 套装效果37(套装):
     名称 = '炙炎之盛宴'
@@ -1726,14 +966,7 @@ class 套装效果37(套装):
         self.属性描述 += 属性.攻击速度增加(0.05)
         self.属性描述 += 属性.移动速度增加(0.05)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '最终伤害 +22%<br>'
-        temp += 'Lv1-100 技能CD-15%<br>'
-        temp += '攻击速度 +5%<br>'
-        temp += '攻击速度 +5%<br>'
-        temp += '移动速度 +5%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1744,24 +977,7 @@ class 套装效果37(套装):
         self.属性描述 += 属性.BUFF增加(BUFFLv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=70)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.08)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[天启之珠]力量、智力 +70<br>'
-            temp += '[天启之珠]力量、智力 +8%<br>'
-            temp += '[守护恩赐]体力、精神 +300<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[圣光天启]力量、智力 +70<br>'
-            temp += '[圣光天启]力量、智力 +8%<br>'
-            temp += '[启示圣歌]智力 +300<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +70<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +8%<br>'
-            temp += '[人偶操纵者]智力 +300<br>'
-        return temp      
+          
 
 class 套装效果38(套装):
     名称 = '传奇铁匠-封神'
@@ -1780,16 +996,7 @@ class 套装效果38(套装):
         self.属性描述 += 属性.移动速度增加(0.15)
         self.属性描述 += 属性.释放速度增加(0.20)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '附加伤害 +27%<br>'
-        temp += 'Lv50  技能CD-30%<br>'
-        temp += 'Lv85  技能CD-30%<br>'
-        temp += 'Lv100 技能CD-17%<br>'
-        temp += '攻击速度 +15%<br>'
-        temp += '移动速度 +15%<br>'
-        temp += '释放速度 +20%<br>'
-        return temp    
+        
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1801,22 +1008,7 @@ class 套装效果38(套装):
         self.属性描述 += 属性.被动增加(一觉被动Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=20)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.07)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        temp += 'Lv30-48 技能等级 +2<br>'
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +6%<br>'
-            temp += '[天启之珠]力量、智力 +20<br>'
-            temp += '[天启之珠]力量、智力 +7%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +6%<br>'
-            temp += '[圣光天启]力量、智力 +20<br>'
-            temp += '[圣光天启]力量、智力 +7%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +6%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +20<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +7%<br>'
-        return temp
+    
 
 class 套装效果39(套装):
     名称 = '命运歧路'
@@ -1830,11 +1022,7 @@ class 套装效果39(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +11%<br>'
-        temp += '最终伤害 +30%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1844,21 +1032,7 @@ class 套装效果39(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.17)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.17)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.07)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +3<br>'
-            temp += '[荣誉祝福]力量、智力 +17%<br>'
-            temp += '[天启之珠]力量、智力 +7%<br>'   
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +3<br>'
-            temp += '[勇气祝福]力量、智力 +17%<br>'
-            temp += '[圣光天启]力量、智力 +7%<br>'   
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +3<br>'
-            temp += '[禁忌诅咒]力量、智力 +17%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +7%<br>'
-        return temp
+    
 
 class 套装效果40(套装):
     名称 = '古代祭祀的神圣仪式'
@@ -1872,11 +1046,7 @@ class 套装效果40(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +21%<br>'
-        temp += '技能攻击力 +25%<br>'
-        return temp     
+         
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1884,18 +1054,7 @@ class 套装效果40(套装):
     def BUFF属性(self, 属性):  
         self.属性描述 += 属性.BUFF增加(BUFFLv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=305)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[天启之珠]力量、智力 +305<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[圣光天启]力量、智力 +305<br>' 
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +305<br>'
-        return temp
+    
 
 class 套装效果41(套装):
     名称 = '龙血玄黄'
@@ -1914,16 +1073,7 @@ class 套装效果41(套装):
         self.属性描述 += 属性.移动速度增加(0.15)
         self.属性描述 += 属性.释放速度增加(0.225)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        if 属性.角色熟练度 == 0 or 属性.装备检查('战无不胜上衣'):
-            temp += '附加伤害 +41%<br>'
-        else:
-            temp += '附加伤害 +40%<br>'
-        temp += '攻击速度 +15%<br>'
-        temp += '移动速度 +15%<br>'
-        temp += '释放速度 +22.5%<br>'
-        return temp 
+     
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1934,24 +1084,7 @@ class 套装效果41(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.1)
         self.属性描述 += 属性.觉醒增加(一觉力智=120)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.06)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +10%<br>'
-            temp += '[天启之珠]力量、智力 +120<br>'
-            temp += '[天启之珠]力量、智力 +6%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +10%<br>'
-            temp += '[圣光天启]力量、智力 +120<br>'
-            temp += '[圣光天启]力量、智力 +6%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +10%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +120<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +6%<br>'
-        return temp
+    
 
 class 套装效果42(套装):
     名称 = '擎天战甲'
@@ -1970,15 +1103,7 @@ class 套装效果42(套装):
             self.属性描述 += 属性.移动速度增加(0.2)
             self.属性描述 += 属性.释放速度增加(0.3)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '属性附加 +12%<br>'
-        if 属性.擎天战甲 == 0:
-            temp += '技能攻击力 +5%<br>'
-            temp += '攻击速度 +20%<br>'
-            temp += '移动速度 +20%<br>'
-            temp += '释放速度 +30%<br>'
-        return temp      
+          
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -1989,22 +1114,7 @@ class 套装效果42(套装):
         self.属性描述 += 属性.觉醒增加(一觉力智=50)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.1)
         self.属性描述 += 属性.技能等级加成('所有', 1, 50, 2)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +7%<br>'
-            temp += '[天启之珠]力量、智力 +50<br>'
-            temp += '[天启之珠]力量、智力 +10%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +7%<br>'
-            temp += '[圣光天启]力量、智力 +50<br>'
-            temp += '[圣光天启]力量、智力 +10%<br>' 
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +7%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +50<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +10%<br>'
-        temp += 'Lv1-50 技能等级 +2<br>'
-        return temp
+    
 
 class 套装效果43(套装):
     名称 = '荆棘漫天'
@@ -2021,14 +1131,7 @@ class 套装效果43(套装):
         self.属性描述 += 属性.移动速度增加(-0.02)
         self.属性描述 += 属性.释放速度增加(0.1)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +10%<br>'
-        temp += '技能攻击力 +28%<br>'
-        temp += '攻击速度 +10%<br>'
-        temp += '移动速度 -2%<br>'
-        temp += '释放速度 +10%<br>'
-        return temp       
+           
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2039,24 +1142,7 @@ class 套装效果43(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.1)
         self.属性描述 += 属性.觉醒增加(一觉力智=150)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.08)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +10%<br>'
-            temp += '[天启之珠]力量、智力 +150<br>'
-            temp += '[天启之珠]力量、智力 +8%<br>'    
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +10%<br>'
-            temp += '[圣光天启]力量、智力 +150<br>'
-            temp += '[圣光天启]力量、智力 +8%<br>'   
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +10%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +150<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +8%<br>'  
-        return temp
+    
 
 class 套装效果44(套装):
     名称 = '大自然的呼吸'
@@ -2073,14 +1159,7 @@ class 套装效果44(套装):
         self.属性描述 += 属性.物理暴击率增加(0.10)
         self.属性描述 += 属性.魔法暴击率增加(0.10)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '最终伤害 +11%<br>'
-        temp += '技能攻击力 +10%<br>'
-        temp += '所有属性强化 +64<br>'
-        temp += '物理暴击率 +10%<br>'
-        temp += '魔法暴击率 +10%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2091,24 +1170,7 @@ class 套装效果44(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.15)
         self.属性描述 += 属性.觉醒增加(一觉力智=130)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.04)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +15%<br>'
-            temp += '[天启之珠]力量、智力 +130<br>'
-            temp += '[天启之珠]力量、智力 +4%<br>' 
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +15%<br>'
-            temp += '[圣光天启]力量、智力 +130<br>'
-            temp += '[圣光天启]力量、智力 +4%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +15%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +130<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +4%<br>'
-        return temp
+    
 
 #endregion
 
@@ -2125,11 +1187,7 @@ class 套装效果45(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +9%<br>'
-        temp += 'Lv1-48 技能等级+2<br>'
-        return temp    
+        
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2137,16 +1195,7 @@ class 套装效果45(套装):
         pass
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.02)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[天启之珠]力量、智力 +2%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[圣光天启]力量、智力 +2%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[开幕！人偶剧场]力量、智力 +2%<br>'
-        temp += 'Lv1-48 技能等级 +2<br>'
-        return temp
+    
 
 class 套装效果46(套装):
     名称 = '圣者的黄昏'
@@ -2161,12 +1210,7 @@ class 套装效果46(套装):
     def 其它属性(self, 属性):
         self.属性描述 += 属性.移动速度增加(0.05)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +11%<br>'
-        temp += '附加伤害 +10%<br>'
-        temp += '移动速度 +5%<br>'
-        return temp     
+         
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2174,18 +1218,7 @@ class 套装效果46(套装):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-        return temp
+    
 
 class 套装效果47(套装):
     名称 = '坎坷命运'
@@ -2206,18 +1239,7 @@ class 套装效果47(套装):
             属性.移动速度 -= 0.01
             属性.释放速度 -= 0.015
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +14%<br>'
-        temp += '技能攻击力 +9%<br>'
-        temp += '攻击速度 +3%<br>'
-        temp += '移动速度 +3%<br>'
-        temp += '释放速度 +4.5%<br>'
-        if 属性.装备检查('地狱边缘'):
-            temp += '攻击速度 -1%<br>'
-            temp += '移动速度 -1%<br>'
-            temp += '释放速度 -1.5%<br>'
-        return temp    
+        
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2227,21 +1249,7 @@ class 套装效果47(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.02)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.02)
         self.属性描述 += 属性.觉醒增加(一觉力智=45)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +2%<br>'
-            temp += '[天启之珠]力量、智力 +45<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +2%<br>'
-            temp += '[圣光天启]力量、智力 +45<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +2%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
-        return temp
+    
 
 class 套装效果48(套装):
     名称 = '吞噬愤怒'
@@ -2263,19 +1271,7 @@ class 套装效果48(套装):
             self.属性描述 += 属性.移动速度增加(0.10)
             self.属性描述 += 属性.释放速度增加(0.15)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +10%<br>'
-        temp += '暴击伤害 +11%<br>'
-        if 属性.装备检查('灭世之怒'):
-            temp += '攻击速度 +15%<br>'
-            temp += '移动速度 +15%<br>'
-            temp += '释放速度 +22.5%<br>'
-        else:
-            temp += '攻击速度 +10%<br>'
-            temp += '移动速度 +10%<br>'
-            temp += '释放速度 +15%<br>'
-        return temp   
+       
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2283,18 +1279,7 @@ class 套装效果48(套装):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=25)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[天启之珠]力量、智力 +25<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[圣光天启]力量、智力 +25<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +25<br>'
-        return temp
+    
 
 class 套装效果49(套装):
     名称 = '黑魔法探求者'
@@ -2308,11 +1293,7 @@ class 套装效果49(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +12%<br>'
-        temp += '技能攻击力 +10%<br>'
-        return temp        
+            
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2320,18 +1301,7 @@ class 套装效果49(套装):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=48)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]力量、智力 +48<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]力量、智力 +48<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +48<br>'
-        return temp
+    
 
 class 套装效果50(套装):
     名称 = '时空旅行者'
@@ -2345,11 +1315,7 @@ class 套装效果50(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +10%<br>'
-        temp += '最终伤害 +10%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2359,21 +1325,7 @@ class 套装效果50(套装):
         self.属性描述 += 属性.被动增加(转职被动智力=46)
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[守护恩赐]体力、精神 +36<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[启示圣歌]智力 +46<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[人偶操纵者]智力 +46<br>'
-        return temp
+    
 
 class 套装效果51(套装):
     名称 = '穿透命运的呐喊'
@@ -2386,10 +1338,7 @@ class 套装效果51(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +23%<br>'
-        return temp    
+        
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2397,18 +1346,7 @@ class 套装效果51(套装):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=25)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]力量、智力 +25<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]力量、智力 +25<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +25<br>'
-        return temp
+    
 
 class 套装效果52(套装):
     名称 = '狂乱追随者'
@@ -2424,13 +1362,7 @@ class 套装效果52(套装):
         self.属性描述 += 属性.攻击速度增加(0.15)
         self.属性描述 += 属性.释放速度增加(0.225)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +18%<br>'
-        temp += '所有属性强化 +25<br>'
-        temp += '攻击速度 +15%<br>'
-        temp += '释放速度 +22.5%<br>'
-        return temp  
+      
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2438,18 +1370,7 @@ class 套装效果52(套装):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=25)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]力量、智力 +25<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]力量、智力 +25<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +25<br>'
-        return temp
+    
 
 class 套装效果53(套装):
     名称 = '地狱求道者'
@@ -2463,11 +1384,7 @@ class 套装效果53(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '附加伤害 +10%<br>'
-        temp += '最终伤害 +10%<br>'
-        return temp 
+     
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2475,18 +1392,7 @@ class 套装效果53(套装):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=32)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]力量、智力 +32<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]力量、智力 +32<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +32<br>'
-        return temp
+    
 
 
 class 套装效果54(套装):
@@ -2502,12 +1408,7 @@ class 套装效果54(套装):
         self.属性描述 += 属性.物理暴击率增加(0.10)
         self.属性描述 += 属性.魔法暴击率增加(0.10)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '附加伤害 +22%<br>'
-        temp += '物理暴击率 +10%<br>'
-        temp += '魔法暴击率 +10%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2517,21 +1418,7 @@ class 套装效果54(套装):
         self.属性描述 += 属性.被动增加(转职被动智力=60)
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=42)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]力量、智力 +42<br>'
-            temp += '[守护恩赐]体力、精神 +40<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]力量、智力 +42<br>'
-            temp += '[启示圣歌]智力 +60<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +42<br>'
-            temp += '[人偶操纵者]智力 +60<br>'
-        return temp
+    
 
 class 套装效果55(套装):
     名称 = '天命无常'
@@ -2559,25 +1446,7 @@ class 套装效果55(套装):
             self.属性描述 += 属性.攻击速度增加(0.02 * 属性.天命无常)
             self.属性描述 += 属性.释放速度增加(0.03 * 属性.天命无常)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '伤害增加 +7%<br>'
-        temp += '附加伤害 +8%<br>'
-        temp += '技能攻击力 +5%<br>'
-        if 属性.天命无常 == 0:
-            if 属性.装备检查('命运反抗者'):
-                temp += '移动速度 +8%<br>'
-                temp += '攻击速度 +8%<br>'
-                temp += '释放速度 +12%<br>'
-            else:
-                temp += '移动速度 +7%<br>'
-                temp += '攻击速度 +7%<br>'
-                temp += '释放速度 +10.5%<br>'
-        else:
-            temp += '移动速度 +' +str(2*属性.天命无常) +'%<br>'
-            temp += '攻击速度 +' +str(2*属性.天命无常) +'%<br>'
-            temp += '释放速度 +' +str(3*属性.天命无常) +'%<br>'
-        return temp     
+         
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2586,16 +1455,7 @@ class 套装效果55(套装):
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.被动增加(一觉被动Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=45)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        temp += 'Lv30-48 技能等级 +1<br>'
-        if 属性.角色 == '圣职者(男)':
-            temp += '[天启之珠]力量、智力 +45<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[圣光天启]力量、智力 +45<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
-        return temp
+    
 
 class 套装效果56(套装):
     名称 = '悲剧的残骸'
@@ -2608,10 +1468,7 @@ class 套装效果56(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '最终伤害 +23%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2619,18 +1476,7 @@ class 套装效果56(套装):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=25)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]力量、智力 +25<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]力量、智力 +25<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +25<br>'
-        return temp     
+         
 
 class 套装效果57(套装):
     名称 = '深渊窥视者'
@@ -2647,14 +1493,7 @@ class 套装效果57(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '技能攻击力 +13%<br>'
-        temp += 'Lv60-80 技能等级+2<br>'
-        temp += 'Lv50  技能等级+1<br>'
-        temp += 'Lv85  技能等级+1<br>'
-        temp += 'Lv100 技能等级+1<br>'
-        return temp       
+           
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2670,26 +1509,7 @@ class 套装效果57(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.06)
         self.属性描述 += 属性.觉醒增加(一觉力智=120)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.03)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +6%<br>'
-            temp += '[天启之珠]力量、智力 +120<br>'
-            temp += '[天启之珠]力量、智力 +3%<br>'
-            temp += '[守护恩赐]体力、精神 +195<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +6%<br>'
-            temp += '[圣光天启]力量、智力 +120<br>'
-            temp += '[圣光天启]力量、智力 +3%<br>'
-            temp += '[启示圣歌]智力 +230<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +6%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +120<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +3%<br>'
-            temp += '[人偶操纵者]智力 +230<br>'
-        temp += 'Lv60-80 技能等级 +2'
-        temp += 'Lv50、Lv85、Lv100 技能等级 +1<br>'
-        return temp
+    
 
 class 套装效果58(套装):
     名称 = '圣者的黄昏'
@@ -2710,18 +1530,7 @@ class 套装效果58(套装):
         self.属性描述 += 属性.物理暴击率增加(0.15)
         self.属性描述 += 属性.魔法暴击率增加(0.15)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +5%<br>'
-        temp += '技能攻击力 +12%<br>'
-        temp += '所有属性强化 +32<br>'
-        temp += 'Lv1-45  技能CD-10%<br>'
-        temp += 'Lv60-80 技能CD-10%<br>'
-        temp += 'Lv90-95 技能CD-10%<br>'
-        temp += '移动速度 +5%<br>'
-        temp += '物理暴击率 +15%<br>'
-        temp += '魔法暴击率 +15%<br>'
-        return temp      
+          
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2733,24 +1542,7 @@ class 套装效果58(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12)
         self.属性描述 += 属性.觉醒增加(一觉力智=125)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.03)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +12%<br>'
-            temp += '[天启之珠]力量、智力 +125<br>'
-            temp += '[天启之珠]力量、智力 +3%<br>'
-            temp += '[守护恩赐]体力、精神 +225<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +12%<br>'
-            temp += '[圣光天启]力量、智力 +125<br>'
-            temp += '[圣光天启]力量、智力 +3%<br>'
-            temp += '[启示圣歌]智力 +258<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +12%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +125<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +3%<br>'
-            temp += '[人偶操纵者]智力 +258<br>'
-        return temp
+    
 
 class 套装效果59(套装):
     名称 = '坎坷命运'
@@ -2771,18 +1563,7 @@ class 套装效果59(套装):
             属性.移动速度 -= 0.01
             属性.释放速度 -= 0.015
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +20%<br>'
-        temp += '技能攻击力 +10%<br>'
-        temp += '攻击速度 +3%<br>'
-        temp += '移动速度 +3%<br>'
-        temp += '释放速度 +4.5%<br>'
-        if 属性.装备检查('地狱边缘'):
-            temp += '攻击速度 -1%<br>'
-            temp += '移动速度 -1%<br>'
-            temp += '释放速度 -1.5%<br>'
-        return temp     
+         
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2796,30 +1577,7 @@ class 套装效果59(套装):
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=74)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.05)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +6%<br>'
-            temp += '[天启之珠]力量、智力 +74<br>'
-            temp += '[天启之珠]力量、智力 +5%<br>'
-            temp += '[守护恩赐]体力、精神 +236<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +6%<br>'
-            temp += '[圣光天启]力量、智力 +74<br>'
-            temp += '[圣光天启]力量、智力 +5%<br>'
-            temp += '[启示圣歌]智力 +255<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +6%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +74<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
-            temp += '[人偶操纵者]智力 +255<br>'
-        return temp
+    
 
 class 套装效果60(套装):
     名称 = '吞噬愤怒'
@@ -2832,10 +1590,7 @@ class 套装效果60(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +30%<br>'
-        return temp     
+         
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2849,30 +1604,7 @@ class 套装效果60(套装):
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=99)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.04)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +10%<br>'
-            temp += '[天启之珠]力量、智力 +99<br>'
-            temp += '[天启之珠]力量、智力 +4%<br>'
-            temp += '[守护恩赐]体力、精神 +236<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +10%<br>'
-            temp += '[圣光天启]力量、智力 +9<br>'
-            temp += '[圣光天启]力量、智力 +4%<br>'
-            temp += '[启示圣歌]智力 +255<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +10%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +99<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +4%<br>'
-            temp += '[人偶操纵者]智力 +255<br>'
-        return temp
+    
 
 class 套装效果61(套装):
     名称 = '黑魔法探求者'
@@ -2887,12 +1619,7 @@ class 套装效果61(套装):
         self.属性描述 += 属性.物理暴击率增加(0.10)
         self.属性描述 += 属性.魔法暴击率增加(0.1)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '属性附加 +13%<br>'
-        temp += '物理暴击率 +10%<br>'
-        temp += '魔法暴击率 +10%<br>'
-        return temp       
+           
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2904,27 +1631,7 @@ class 套装效果61(套装):
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=38)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.06)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +8%<br>'
-            temp += '[天启之珠]力量、智力 +38<br>'
-            temp += '[天启之珠]力量、智力 +6%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +8%<br>'
-            temp += '[圣光天启]力量、智力 +38<br>'
-            temp += '[圣光天启]力量、智力 +6%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +8%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +38<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +6%<br>'
-        return temp
+    
 
 class 套装效果62(套装):
     名称 = '时空旅行者'
@@ -2938,11 +1645,7 @@ class 套装效果62(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +17%<br>'
-        temp += '技能攻击力 +13%<br>'
-        return temp    
+        
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -2953,24 +1656,7 @@ class 套装效果62(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.1)
         self.属性描述 += 属性.觉醒增加(一觉力智=45)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.05)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +10%<br>'
-            temp += '[天启之珠]力量、智力 +45<br>'
-            temp += '[天启之珠]力量、智力 +5%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +10%<br>'
-            temp += '[圣光天启]力量、智力 +45<br>'
-            temp += '[圣光天启]力量、智力 +5%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +10%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +5%<br>'
-        return temp
+    
 
 class 套装效果63(套装):
     名称 = '穿透命运的呐喊'
@@ -2984,11 +1670,7 @@ class 套装效果63(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +14%<br>'
-        temp += '技能攻击力 +16%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3002,22 +1684,7 @@ class 套装效果63(套装):
         self.属性描述 += 属性.被动增加(一觉被动Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.04)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        temp += 'Lv30-50 技能等级 +2<br>'
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +6%<br>'
-            temp += '[天启之珠]力量、智力 +4%<br>'
-            temp += '[守护恩赐]体力、精神 +76<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +6%<br>'
-            temp += '[圣光天启]力量、智力 +4%<br>'
-            temp += '[启示圣歌]智力 +68<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +6%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +4%<br>'
-            temp += '[人偶操纵者]智力 +68<br>'
-        return temp
+    
 
 class 套装效果64(套装):
     名称 = '狂乱追随者'
@@ -3031,11 +1698,7 @@ class 套装效果64(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +16%<br>'
-        temp += '技能攻击力 +15%<br>'
-        return temp     
+         
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3049,27 +1712,7 @@ class 套装效果64(套装):
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=85)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.04)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +10%<br>'
-            temp += '[天启之珠]力量、智力 +85<br>'
-            temp += '[守护恩赐]体力、精神 +36<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +10%<br>'
-            temp += '[圣光天启]力量、智力 +85<br>'
-            temp += '[启示圣歌]智力 +38<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +10%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +85<br>'
-            temp += '[人偶操纵者]智力 +38<br>'
-        return temp
+    
 
 class 套装效果65(套装):
     名称 = '地狱求道者'
@@ -3086,14 +1729,7 @@ class 套装效果65(套装):
         self.属性描述 += 属性.移动速度增加(0.15)
         self.属性描述 += 属性.释放速度增加(0.20)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '技能攻击力 +16%<br>'
-        temp += '所有属性强化 +40<br>'
-        temp += '攻击速度 +15%<br>'
-        temp += '移动速度 +15%<br>'
-        temp += '释放速度 +20%<br>'
-        return temp
+    
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.被动增加(守护恩赐体精=195)
         self.属性描述 += 属性.被动增加(转职被动智力=188)
@@ -3101,24 +1737,7 @@ class 套装效果65(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.06)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.06)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
-    def 装备描述(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +6%<br>'
-            temp += '[守护恩赐]体力、精神 +195<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +6%<br>'
-            temp += '[启示圣歌]智力 +188<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +6%<br>'
-            temp += '[人偶操纵者]智力 +188<br>'
-        return temp
+    
 class 套装效果66(套装):
     名称 = '次元旅行者'
     件数 = 3
@@ -3131,11 +1750,7 @@ class 套装效果66(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +10%<br>'
-        temp += '技能攻击力 +18%<br>'
-        return temp     
+         
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3147,24 +1762,7 @@ class 套装效果66(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.08)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.08)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +8%<br>'
-            temp += '[守护恩赐]体力、精神 +80<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +8%<br>'
-            temp += '[启示圣歌]智力 +120<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +8%<br>'
-            temp += '[人偶操纵者]智力 +120<br>'
-        return temp       
+           
 class 套装效果67(套装):
     名称 = '天命无常'
     件数 = 3
@@ -3197,29 +1795,7 @@ class 套装效果67(套装):
             self.属性描述 += 属性.移动速度增加(0.03 * 属性.天命无常)
             self.属性描述 += 属性.攻击速度增加(0.03 * 属性.天命无常)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '附加伤害 +10%<br>'
-        temp += '技能攻击力 +7%<br>'
-        temp += '百分比力智 +7%<br>'
-        if 属性.天命无常 == 0:
-            if 属性.装备检查('命运反抗者'):
-                temp += '百分比力智 +5.6%<br>'
-                temp += '移动速度 +6.6%<br>'
-                temp += '攻击速度 +6.6%<br>'
-            else:
-                temp += '移动速度 +5.5%<br>'
-                temp += '攻击速度 +5.5%<br>'
-                temp += '百分比力智 +4.6666667%<br>'
-        if 属性.天命无常 == 4 or 属性.天命无常 == 5:
-            temp += '百分比力智 +7%<br>'
-            temp += '移动速度 +' +str(3 * 属性.天命无常) +'%<br>'
-            temp += '攻击速度 +' +str(3 * 属性.天命无常) +'%<br>'
-        if 属性.天命无常 == 6:
-            temp += '百分比力智 +14%<br>'
-            temp += '移动速度 +' +str(3 * 属性.天命无常) +'%<br>'
-            temp += '攻击速度 +' +str(3 * 属性.天命无常) +'%<br>'
-        return temp     
+         
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3230,19 +1806,7 @@ class 套装效果67(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.08)
         self.属性描述 += 属性.被动增加(一觉被动Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        temp += 'Lv30-50 技能等级 +2<br>'
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +8%<br>'
-            temp += '[天启之珠]力量、智力 +35<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +8%<br>'
-            temp += '[圣光天启]力量、智力 +35<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +8%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +35<br>'
-        return temp
+    
 class 套装效果68(套装):
     名称 = '悲剧的残骸'
     件数 = 3
@@ -3254,10 +1818,7 @@ class 套装效果68(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +29%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3269,24 +1830,7 @@ class 套装效果68(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.1)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.1)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +10%<br>' 
-            temp += '[守护恩赐]体力、精神 +171<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +10%<br>'
-            temp += '[启示圣歌]智力 +158<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +10%<br>'
-            temp += '[人偶操纵者]智力 +158<br>'
-        return temp
+    
 #endregion
 
 #region  首饰套装
@@ -3302,11 +1846,7 @@ class 套装效果69(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +10%<br>'
-        temp += '百分比三攻 +14%<br>'
-        return temp   
+       
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3317,21 +1857,7 @@ class 套装效果69(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.02)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.02)
         self.属性描述 += 属性.觉醒增加(一觉力智=45)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +2%<br>'
-            temp += '[天启之珠]力量、智力 +45<br>'
-            temp += '[守护恩赐]体力、精神 +60<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +2%<br>'
-            temp += '[圣光天启]力量、智力 +45<br>'
-            temp += '[启示圣歌]智力 +60<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +2%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
-            temp += '[人偶操纵者]智力 +60<br>'
-        return temp
+    
 class 套装效果70(套装):
     名称 = '破晓曦光'
     件数 = 2
@@ -3346,13 +1872,7 @@ class 套装效果70(套装):
         self.属性描述 += 属性.物理暴击率增加(0.05)
         self.属性描述 += 属性.魔法暴击率增加(0.05)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +10%<br>'
-        temp += '最终伤害 +10%<br>'
-        temp += '物理暴击率 +5%<br>'
-        temp += '魔法暴击率 +5%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3361,18 +1881,7 @@ class 套装效果70(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.03)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.03)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +3%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +3%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +3%<br>'
-        return temp
+    
 
 class 套装效果71(套装):
     名称 = '幸运三角'
@@ -3380,9 +1889,7 @@ class 套装效果71(套装):
     类型 = '首饰'
     def 城镇属性(self, 属性):
         self.属性描述 += 属性.所有属性强化加成(77)
-        属性.物理攻击力 += 77
-        属性.魔法攻击力 += 77
-        属性.独立攻击力 += 77
+        self.属性描述 += 属性.三攻固定加成(77)
         pass
     def 进图属性(self, 属性):
         pass
@@ -3390,12 +1897,7 @@ class 套装效果71(套装):
         self.属性描述 += 属性.物理暴击率增加(0.07)
         self.属性描述 += 属性.魔法暴击率增加(0.07)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '所有属性强化 +77<br>'
-        temp += '物理暴击率 +7%<br>'
-        temp += '魔法暴击率 +7%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3406,21 +1908,7 @@ class 套装效果71(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.04)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.04)
         self.属性描述 += 属性.觉醒增加(一觉力智=45)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +4%<br>'
-            temp += '[天启之珠]力量、智力 +45<br>'
-            temp += '[守护恩赐]体力、精神 +140<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +4%<br>'
-            temp += '[圣光天启]力量、智力 +45<br>'
-            temp += '[启示：圣歌]智力 +140<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +4%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
-            temp += '[人偶操控者]智力 +140<br>'
-        return temp    
+        
 
 class 套装效果72(套装):
     名称 = '精灵使的权能'
@@ -3434,11 +1922,7 @@ class 套装效果72(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +10%<br>'
-        temp += '技能攻击力 +12%<br>'
-        return temp   
+       
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3447,18 +1931,7 @@ class 套装效果72(套装):
         self.属性描述 += 属性.被动增加(守护恩赐体精=100)
         self.属性描述 += 属性.被动增加(转职被动智力=110)
         self.属性描述 += 属性.觉醒增加(一觉力智=20)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[天启之珠]力量、智力 +20<br>'
-            temp += '[守护恩赐]体力、精神 +100<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[圣光天启]力量、智力 +20<br>'
-            temp += '[启示圣歌]智力 +110<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[开幕！人偶剧场]力量、智力 +20<br>'
-            temp += '[人偶操纵者]智力 +110<br>'
-        return temp
+    
 
 class 套装效果73(套装):
     名称 = '上古尘封术士'
@@ -3471,10 +1944,7 @@ class 套装效果73(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +20%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3483,21 +1953,7 @@ class 套装效果73(套装):
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=26)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[天启之珠]力量、智力 +26<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[圣光天启]力量、智力 +26<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +26<br>'
-        return temp
+    
 
 class 套装效果74(套装):
     名称 = '破晓曦光'
@@ -3514,14 +1970,7 @@ class 套装效果74(套装):
         self.属性描述 += 属性.移动速度增加(0.10)
         self.属性描述 += 属性.释放速度增加(0.15)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '属性附加 +10%<br>'
-        temp += 'Lv100 技能等级+1<br>'
-        temp += '攻击速度 +10%<br>'
-        temp += '移动速度 +10%<br>'
-        temp += '释放速度 +15%<br>'
-        return temp    
+        
     def 城镇属性_BUFF(self, 属性):
         self.属性描述 += 属性.技能等级加成('所有', 100, 100, 1)
         pass
@@ -3535,28 +1984,7 @@ class 套装效果74(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.04)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=45)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +4%<br>'
-            temp += '[天启之珠]力量、智力 +45<br>'
-            temp += '[守护恩赐]体力、精神 +100<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +4%<br>'
-            temp += '[圣光天启]力量、智力 +45<br>'
-            temp += '[启示圣歌]智力 +100<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +4%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +45<br>'
-            temp += '[人偶操纵者]智力 +100<br>'
-        temp += 'Lv100 技能等级 +1<br>'
-        return temp
+    
 
 class 套装效果75(套装):
     名称 = '幸运三角'
@@ -3582,25 +2010,9 @@ class 套装效果75(套装):
         if 属性.幸运三角 == 3:
             self.属性描述 += 属性.攻击速度增加(0.10)
             self.属性描述 += 属性.移动速度增加(0.10)
-            self.属性描述 += 属性.释放速度增加(0.15  )
+            self.属性描述 += 属性.释放速度增加(0.15)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        if 属性.幸运三角 == 0:
-            temp += '技能攻击力 +29.15%<br>'
-            temp += '攻击速度 +0.5%<br>'
-            temp += '移动速度 +0.5%<br>'
-            temp += '释放速度 +0.75%<br>'
-        if 属性.幸运三角 == 1:
-            temp += '技能攻击力 +27%<br>'
-        if 属性.幸运三角 == 2:
-            temp += '技能攻击力 +31%<br>'
-        if 属性.幸运三角 == 3:
-            temp += '技能攻击力 +34%<br>'
-            temp += '攻击速度 +10%<br>'
-            temp += '移动速度 +10%<br>'
-            temp += '释放速度 +15%<br>'
-        return temp       
+           
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3608,18 +2020,7 @@ class 套装效果75(套装):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +2<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +2<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +2<br>'
-        return temp
+    
 
 class 套装效果76(套装):
     名称 = '精灵使的权能'
@@ -3635,13 +2036,7 @@ class 套装效果76(套装):
         self.属性描述 += 属性.物理暴击率增加(0.05)
         self.属性描述 += 属性.魔法暴击率增加(0.05)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +10%<br>'
-        temp += 'Lv1-100 技能CD-10%<br>'
-        temp += '物理暴击率 +5%<br>'
-        temp += '魔法暴击率 +5%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3652,24 +2047,7 @@ class 套装效果76(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.03)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=26)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +3%<br>'
-            temp += '[天启之珠]力量、智力 +26<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +3%<br>'
-            temp += '[圣光天启]力量、智力 +26<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +3%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +26<br>'
-        return temp
+    
 #endregion
 
 #region  特殊套装
@@ -3697,20 +2075,7 @@ class 套装效果77(套装):
             if 属性.装备检查('军神的古怪耳环'):
                 self.属性描述 += 属性.移动速度增加(0.05)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +10%<br>'
-        temp += '最终伤害 +8%<br>'
-        if 属性.装备检查('军神的遗书'):
-            if 属性.装备检查('军神的心之所念'):
-                temp += '暴击伤害 +5%<br>'
-                temp += '攻击速度 +5%<br>'
-                temp += '移动速度 +10%<br>'
-                temp += '释放速度 +7.5%<br>'
-            if 属性.装备检查('军神的古怪耳环'):
-                temp += '暴击伤害 +5%<br>'
-                temp += '移动速度 +5%<br>'
-        return temp     
+         
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3723,27 +2088,7 @@ class 套装效果77(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.04)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=35)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +4%<br>'
-            temp += '[天启之珠]力量、智力 +35<br>'
-            temp += '[守护恩赐]体力、精神 +230<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +4%<br>'
-            temp += '[圣光天启]力量、智力 +35<br>'
-            temp += '[启示圣歌]智力 +230<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +4%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +35<br>'
-            temp += '[人偶操纵者]智力 +230<br>'
-        return temp
+    
 
 class 套装效果78(套装):
     名称 = '时间战争的残骸'
@@ -3757,11 +2102,7 @@ class 套装效果78(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +11%<br>'
-        temp += '暴击伤害 +11%<br>'
-        return temp    
+        
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3771,19 +2112,7 @@ class 套装效果78(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.02)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.02)
         self.属性描述 += 属性.觉醒增加(一觉力智=35)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +2%<br>'
-            temp += '[天启之珠]力量、智力 +35<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +2%<br>'
-            temp += '[圣光天启]力量、智力 +35<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +2%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +35<br>'
-        temp += 'Lv1-30 技能等级 +2<br>'
-        return temp
+    
 
 class 套装效果79(套装):
     名称 = '灵宝：世间真理'
@@ -3797,11 +2126,7 @@ class 套装效果79(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '附加伤害 +15%<br>'
-        temp += '技能攻击力 +7%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3812,16 +2137,7 @@ class 套装效果79(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.02)
         self.属性描述 += 属性.被动增加(一觉被动Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        temp += 'Lv30-50 技能等级 +1<br>'
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]力量、智力 +2%<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]力量、智力 +2%<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]力量、智力 +2%<br>'
-        return temp
+    
 
 class 套装效果80(套装):
     名称 = '能量主宰'
@@ -3835,11 +2151,7 @@ class 套装效果80(套装):
         pass
     def 其它属性(self, 属性):
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比三攻 +12%<br>'
-        temp += '伤害增加 +12%<br>'
-        return temp  
+      
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3852,27 +2164,7 @@ class 套装效果80(套装):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.02)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=35)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +2<br>'
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[荣誉祝福]力量、智力 +2%<br>'
-            temp += '[天启之珠]力量、智力 +35<br>'
-            temp += '[守护恩赐]体力、精神 +95<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +2<br>'
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[勇气祝福]力量、智力 +2%<br>'
-            temp += '[圣光天启]力量、智力 +35<br>'
-            temp += '[启示圣歌]智力 +95<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +2<br>'
-            temp += '[开幕！人偶剧场]]技能等级 +1<br>'
-            temp += '[禁忌诅咒]力量、智力 +2%<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +35<br>'
-            temp += '[人偶操纵者]智力 +95<br>'
-        return temp
+    
 
 class 套装效果81(套装):
     名称 = '军神的隐秘遗产'
@@ -3900,24 +2192,7 @@ class 套装效果81(套装):
             self.属性描述 += 属性.攻击速度增加(0.10)
             self.属性描述 += 属性.释放速度增加(0.15)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '技能攻击力 +10%<br>'
-        if 属性.军神的隐秘遗产 == 0:
-            temp += '百分比力智 +10%<br>'
-        if 属性.军神的隐秘遗产 == 1:
-            temp += '百分比力智 +10%<br>'
-        if 属性.军神的隐秘遗产 == 2:
-            temp += '百分比力智 +8%<br>'
-        if 属性.军神的隐秘遗产 == 3:
-            temp += '百分比力智 +6%<br>'
-        if 属性.军神的隐秘遗产 == 4:
-            temp += '百分比力智 +4%<br>'
-        if 属性.军神的隐秘遗产 == 5:
-            temp += '百分比力智 +2%<br>'
-        temp += '攻击速度 +10%<br>'
-        temp += '释放速度 +15%<br>'
-        return temp      
+          
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3925,18 +2200,7 @@ class 套装效果81(套装):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[荣誉祝福]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +2<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[勇气祝福]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +2<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[禁忌诅咒]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]技能等级 +2<br>'
-        return temp
+    
 
 class 套装效果82(套装):
     名称 = '时间战争的残骸'
@@ -3952,13 +2216,7 @@ class 套装效果82(套装):
         self.属性描述 += 属性.物理暴击率增加(0.05)
         self.属性描述 += 属性.魔法暴击率增加(0.05)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '百分比力智 +10%<br>'
-        temp += '技能攻击力 +10%<br>'
-        temp += '物理暴击率 +5%<br>'
-        temp += '魔法暴击率 +5%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -3968,24 +2226,7 @@ class 套装效果82(套装):
         self.属性描述 += 属性.被动增加(转职被动智力=85)
         self.属性描述 += 属性.被动增加(一觉被动Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[信念光环]技能等级 +1<br>'
-            temp += '[天启之珠]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +2%<br>'
-            temp += '[守护恩赐]体力、精神 +75<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[虔诚信念]技能等级 +1<br>'
-            temp += '[圣光天启]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +2%<br>'
-            temp += '[启示圣歌]智力 +85<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[少女的爱]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +2%<br>'
-            temp += '[人偶操纵者]智力 +85<br>'
-        return temp      
+          
 
 class 套装效果83(套装):
     名称 = '灵宝：世间真理'
@@ -4005,17 +2246,7 @@ class 套装效果83(套装):
         self.属性描述 += 属性.物理暴击率增加(0.05)
         self.属性描述 += 属性.魔法暴击率增加(0.05)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '暴击伤害 +12%<br>'
-        temp += 'Lv1-85 技能等级+1<br>'
-        temp += 'Lv100  技能等级+1<br>'
-        temp += '攻击速度 +10%<br>'
-        temp += '移动速度 +10%<br>'
-        temp += '释放速度 +15%<br>'
-        temp += '物理暴击率 +5%<br>'
-        temp += '魔法暴击率 +5%<br>'
-        return temp   
+       
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -4027,23 +2258,7 @@ class 套装效果83(套装):
         self.属性描述 += 属性.被动增加(转职被动智力=122)
         self.属性描述 += 属性.觉醒增加(一觉Lv=1)
         self.属性描述 += 属性.觉醒增加(一觉力智=39)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[天启之珠]技能等级 +1<br>'
-            temp += '[天启之珠]力量、智力 +39<br>'
-            temp += '[守护恩赐]体力、精神 +100<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[圣光天启]技能等级 +1<br>'
-            temp += '[圣光天启]力量、智力 +39<br>'
-            temp += '[启示圣歌]智力 +122<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[开幕！人偶剧场]]技能等级 +1<br>'
-            temp += '[开幕！人偶剧场]力量、智力 +39<br>'
-            temp += '[人偶操纵者]智力 +122<br>'
-        temp += 'Lv1-85 技能等级 +1<br>'
-        temp += 'Lv100 技能等级 +1<br>'
-        return temp
+    
 
 class 套装效果84(套装):
     名称 = '能量主宰'
@@ -4059,13 +2274,7 @@ class 套装效果84(套装):
         self.属性描述 += 属性.物理暴击率增加(0.10)
         self.属性描述 += 属性.魔法暴击率增加(0.10)
         pass
-    def 装备描述(self, 属性):
-        temp = ''
-        temp += '附加伤害 +10%<br>'
-        temp += '技能攻击力 +8%<br>'
-        temp += '物理暴击率 +10%<br>'
-        temp += '魔法暴击率 +10%<br>'
-        return temp
+    
     def 城镇属性_BUFF(self, 属性):
         pass
     def 进图属性_BUFF(self, 属性):
@@ -4076,22 +2285,11 @@ class 套装效果84(套装):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.02)
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.02)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(男)':
-            temp += '[天启之珠]技能等级 +2<br>'
-            temp += '[荣誉祝福]力量、智力 +2%<br>'
-            temp += '[守护恩赐]体力、精神 +110<br>'
-        elif 属性.角色 == '圣职者(女)':
-            temp += '[圣光天启]技能等级 +2<br>'
-            temp += '[勇气祝福]力量、智力 +2%<br>'
-            temp += '[启示圣歌]智力 +110<br>'
-        elif 属性.角色 == '魔法师(女)':
-            temp += '[开幕！人偶剧场]]技能等级 +2<br>'
-            temp += '[禁忌诅咒]力量、智力 +2%<br>'
-            temp += '[人偶操纵者]智力 +110<br>'
-        return temp
+    
 #endregion
+
+
+
 
 #region  其它套装
 class 套装效果85(套装):
