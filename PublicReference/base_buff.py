@@ -141,6 +141,13 @@ class 角色属性():
     装备描述 = 0
     
     #词条提升率 = []
+    def 力智固定加成(self, x=0, y=0):
+        if self.装备描述 == 1:
+            return '力量、智力 +{}<br>'.format(x)
+        else:
+             self.力量 += x 
+             self.智力 += x
+        return ''    
 
     def BUFF增加(self,BUFFLv=0,BUFF力量=0,BUFF智力=0,BUFF力量per=1,BUFF智力per=1,BUFF物攻=0,BUFF魔攻=0,BUFF独立=0,BUFF物攻per=1,BUFF魔攻per=1,BUFF独立per=1):
         if self.装备描述 == 1: 
@@ -356,13 +363,26 @@ class 角色属性():
 
     def 技能等级加成(self, 加成类型, min, max, lv):
         lv = int(lv)
-        for i in self.技能栏:
-            if i.所在等级 >= min and i.所在等级 <= max:
-                if 加成类型 == '所有':
-                    i.等级加成(lv)
+        if self.装备描述 ==1:
+            if 加成类型=="所有":
+                if min == max:
+                    return "Lv{} 技能等级+{}<br>".format(min,lv)
                 else:
-                    if i.是否主动 == 1:
+                    return "Lv{}-{} 技能等级+{}<br>".format(min,max,lv)
+            else:
+                if min == max:
+                    return "Lv{} 主动技能等级+{}<br>".format(min,lv)
+                else:
+                    return "Lv{}-{} 主动技能等级+{}<br>".format(min,max,lv) 
+        else:   
+            for i in self.技能栏:
+                if i.所在等级 >= min and i.所在等级 <= max:
+                    if 加成类型 == '所有':
                         i.等级加成(lv)
+                    else:
+                        if i.是否主动 == 1:
+                            i.等级加成(lv)
+        return ''
 
     def 单技能等级加成(self, 名称, lv):
         for i in self.技能栏:
