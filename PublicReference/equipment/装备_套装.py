@@ -1,4 +1,5 @@
 class 套装:
+    属性描述 = ''
     def 城镇属性(self, 属性):
         pass;
     def 城镇属性_BUFF(self, 属性):

@@ -1,5 +1,4 @@
 from .basic_equ import *
-import math
 # region  100SS特殊
 class 装备212(装备):
     名称 = '军神的遗书'
@@ -51,7 +50,9 @@ class 装备213(装备):
     def 城镇属性(self, 属性):
         self.属性描述 += 属性.百分比力智加成(0.15)
         self.属性描述 += 属性.技能攻击力加成(0.12)
-        self.属性描述 += 属性.技能冷却缩减(1, 100, math.pow(0.02,6))
+        self.属性描述 += "Lv1-100 技能CD -2% *6"
+        for i in range(6):
+            属性.技能冷却缩减(1, 100, 0.02)
         pass
     def 进图属性(self, 属性):
         pass
