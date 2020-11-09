@@ -137,8 +137,120 @@ class 角色属性():
     护石第三栏 = '无'
 
     次数输入 = []
-
+    # 是否为输出装备描述
+    装备描述 = 0
+    
     #词条提升率 = []
+
+    def BUFF增加(self,BUFFLv=0,BUFF力量=0,BUFF智力=0,BUFF力量per=1,BUFF智力per=1,BUFF物攻=0,BUFF魔攻=0,BUFF独立=0,BUFF物攻per=1,BUFF魔攻per=1,BUFF独立per=1):
+        if self.装备描述 == 1: 
+            tem = ''
+            if BUFFLv > 0:
+                if self.角色 == '圣职者(女)':
+                    tem += '[勇气祝福]技能Lv +{}<br>'.format(int(BUFFLv))
+                elif self.角色 == '圣职者(男)':
+                    tem += '[荣誉祝福]技能Lv +{}<br>'.format(int(BUFFLv))
+                elif self.角色 == '魔法师(女)':
+                    tem += '[禁忌诅咒]技能Lv +{}<br>'.format(int(BUFFLv))
+
+            if BUFF力量 >0 and BUFF智力 > 0:
+                tem += 'Lv30 Buff技能力量、智力增加量 +{}<br>'.format(int(BUFF力量))
+            elif BUFF力量 > 0:
+                tem += 'Lv30 Buff技能力量增加量 +{}<br>'.format(int(BUFF力量))
+            elif BUFF智力 > 0:
+                tem += 'Lv30 Buff技能智力增加量 +{}<br>'.format(int(BUFF智力))
+
+            if BUFF力量per > 1 and BUFF智力per > 1:
+                tem += 'Lv30 Buff技能力量、智力增加量 +{}%<br>'.format(round((BUFF力量per - 1) * 100,0))
+            elif BUFF力量per > 1:
+                tem += 'Lv30 Buff技能力量增加量 +{}%<br>'.format(round((BUFF力量per - 1) * 100,0))
+            elif BUFF智力per > 1:
+                tem += 'Lv30 Buff技能智力增加量 +{}%<br>'.format(round((BUFF智力per - 1) * 100,0))
+
+            if BUFF物攻 > 0 and BUFF魔攻 > 0 and BUFF独立 > 0:
+                tem += 'Lv30 Buff技能物理、魔法、独立攻击力增加量 +{}<br>'.format(int(BUFF物攻))
+            elif BUFF物攻 > 0:
+                tem += 'Lv30 Buff技能物理攻击力增加量 +{}<br>'.format(int(BUFF物攻))
+            elif BUFF魔攻 > 0:
+                tem += 'Lv30 Buff技能魔法攻击力增加量 +{}<br>'.format(int(BUFF魔攻)) 
+            elif BUFF独立 > 0:
+                tem += 'Lv30 Buff技能独立攻击力增加量 +{}<br>'.format(int(BUFF独立))
+
+            if BUFF物攻per > 1 and BUFF魔攻per > 1 and BUFF独立per > 1:
+                tem += 'Lv30 Buff技能物理、魔法、独立攻击力增加量 +{}%<br>'.format(round((BUFF物攻per - 1) * 100,0))
+            elif BUFF物攻per > 1:
+                tem += 'Lv30 Buff技能物理攻击力增加量 +{}%<br>'.format(round((BUFF物攻per - 1) * 100,0))
+            elif BUFF魔攻per > 1:
+                tem += 'Lv30 Buff技能魔法攻击力增加量 +{}%<br>'.format(round((BUFF魔攻per - 1) * 100,0)) 
+            elif BUFF独立per > 1:
+                tem += 'Lv30 Buff技能独立攻击力增加量 +{}%<br>'.format(round((BUFF独立per - 1) * 100,0))
+            return tem
+        else:
+            self.BUFFLv += BUFFLv
+            self.BUFF力量 += BUFF力量
+            self.BUFF智力 += BUFF智力
+            self.BUFF物攻 += BUFF物攻
+            self.BUFF魔攻 += BUFF魔攻
+            self.BUFF独立 += BUFF独立
+            self.BUFF力量per *= BUFF力量per
+            self.BUFF智力per *= BUFF智力per
+            self.BUFF物攻per *= BUFF物攻per
+            self.BUFF魔攻per *= BUFF魔攻per
+            self.BUFF独立per *= BUFF独立per 
+        return ''  
+
+    def 被动增加(self,守护恩赐Lv=0,守护恩赐体精=0,转职被动Lv=0,转职被动智力=0,信念光环Lv=0,信念光环体精=0,一觉被动Lv=0,一觉被动力智=0):
+        if self.装备描述 == 1:
+            tem = ''
+            if 守护恩赐Lv > 0 or 转职被动Lv > 0:
+                tem += '[守护恩赐]、[启示：圣歌]、[人偶操纵者]技能Lv +{}<br>'.format(int(守护恩赐Lv if 守护恩赐Lv else 转职被动Lv))
+            elif 守护恩赐体精 > 0 and self.角色 == '圣职者(男)':
+                tem += '[守护恩赐]体力、精神 +{}<br>'.format(int(守护恩赐体精))
+            elif 转职被动智力 > 0 and self.角色 != '圣职者(男)':
+                tem += '[启示：圣歌]、[人偶操纵者]智力 +{}<br>'.format(int(转职被动智力))
+            elif 信念光环Lv > 0:
+                tem += '[信念光环]技能Lv +{}'.format(int(信念光环Lv))
+            elif 一觉被动Lv > 0:
+                if self.角色 == '圣职者(女)':
+                    tem += '[虔诚信念]技能Lv +{}<br>'.format(int(一觉被动Lv))
+                elif self.角色 == '魔法师(女)':
+                    tem += '[少女的爱]技能Lv +{}<br>'.format(int(一觉被动Lv))
+            elif 信念光环体精 > 0:
+                tem += '[信念光环]体力、精神增加量 +{}<br>'.format(int(信念光环体精))
+            elif 一觉被动力智 > 0:
+                tem += '[虔诚信念]、[少女的爱]力量、智力增加量 +{}<br>'.format(int(一觉被动力智))
+            return tem
+        else: 
+            self.守护恩赐Lv += 守护恩赐Lv
+            self.转职被动Lv += 转职被动Lv
+            self.守护恩赐体精 += 守护恩赐体精
+            self.转职被动智力 += 转职被动智力
+            self.信念光环Lv += 信念光环Lv
+            self.一觉被动Lv += 一觉被动Lv
+            self.信念光环体精 += 信念光环体精
+            self.一觉被动力智 += 一觉被动力智
+        return '' 
+
+    def 觉醒增加(self,一觉Lv=0,一觉力智=0,一觉力智per=1):
+        if self.装备描述 == 1:
+            tem = ''
+            if 一觉Lv > 0:
+                if self.角色 == '圣职者(女)':
+                    tem += '[圣光天启]技能Lv +{}<br>'.format(int(一觉Lv))
+                elif self.角色 == '圣职者(男)':
+                    tem += '[天启之珠]技能Lv +{}<br>'.format(int(一觉Lv))
+                elif self.角色 == '魔法师(女)':
+                    tem += '[开幕！人偶剧场]技能Lv +{}<br>'.format(int(一觉Lv))
+            elif 一觉力智 > 0:
+                tem += 'Lv50 主动技能力量、智力增加量 +{}<br>'.format(int(一觉力智))
+            elif 一觉力智per > 1:
+                tem += 'Lv50 主动技能力量、智力增加量 +{}%<br>'.format(int(一觉力智per - 1 * 100))
+            return tem
+        else:
+            self.一觉Lv += 一觉Lv      
+            self.一觉力智 += 一觉力智      
+            self.一觉力智per *= 一觉力智per      
+        return ''
 
     def 系数数值站街(self):
         if self.系数类型 == '智力':

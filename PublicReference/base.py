@@ -251,6 +251,30 @@ class 角色属性():
              self.附加伤害 += self.附加伤害增加增幅 * x 
         return ''
 
+    def 三攻固定加成(self, x=0, y=0,z=0):
+        if self.装备描述 == 1:
+            return '物攻/魔攻/独立 +{}<br>'.format(x)
+        else:
+            self.物理攻击力 += x
+            self.魔法攻击力 += x
+            self.独立攻击力 += x
+        return ''
+
+    def 力智固定加成(self, x=0, y=0):
+        if self.装备描述 == 1:
+            return '力量、智力 +{}<br>'.format(x)
+        else:
+             self.力量 += x 
+             self.智力 += x
+        return ''
+
+    def 持续伤害加成(self, x ):
+        if self.装备描述 == 1:
+            return '持续伤害 +{}%<br>'.format(int(x*100))
+        else:
+             self.持续伤害 += x 
+        return ''
+
     def 属性附加加成(self, x ):
         if self.装备描述 == 1:
             return '附加伤害 +{}%<br>'.format(int(x*100))
@@ -288,14 +312,14 @@ class 角色属性():
         
     def 百分比力智加成(self, x):
         if self.装备描述 ==1:
-            return '百分比力智 +{}%<br>'.format(int(x*100))
+            return '力量、智力 +{}%<br>'.format(int(x*100))
         else:
             self.百分比力智 += self.力量智力增加增幅 * x 
         return ''
         
     def 百分比三攻加成(self, x):
         if self.装备描述 ==1:
-            return '百分比三攻 +{}%<br>'.format(int(x*100))
+            return '百分比三攻 {}%<br>'.format(('+' if x>0 else '')+str(round(x*100,0)))
         else:
             self.百分比三攻 += self.物理魔法攻击力增加增幅 * x 
         return ''
@@ -351,6 +375,48 @@ class 角色属性():
             else:
                 temp = int(self.所有属性强化增加 * x)
             self.所有属性强化(temp)
+        return ''
+
+    def 攻击速度增加(self,x):
+        if self.装备描述 ==1:
+            return '攻击速度 {}%<br>'.format(("+" if x > 0 else '')+str(int(x*100)))
+        else:
+            self.攻击速度 += x
+        return ''
+
+    def 移动速度增加(self,x):
+        if self.装备描述 ==1:
+            return '移动速度 {}%<br>'.format(("+" if x > 0 else '')+str(int(x*100)))
+        else:
+            self.移动速度 += x
+        return ''
+
+    def 释放速度增加(self,x):
+        if self.装备描述 ==1:
+            return '释放速度 {}%<br>'.format(("+" if x > 0 else '')+str(int(x*100)))
+        else:
+            self.释放速度 += x
+        return ''
+
+    def 命中率增加(self,x):
+        if self.装备描述 ==1:
+            return '命中率 {}%<br>'.format(("+" if x > 0 else '')+str(int(x*100)))
+        else:
+            self.命中率 +=x
+        return ''
+
+    def 物理暴击率增加(self,x):
+        if self.装备描述 ==1:
+            return '物理暴击率 +{}%<br>'.format(int(x*100))
+        else:
+            self.物理暴击率 += x
+        return ''
+
+    def 魔法暴击率增加(self,x):
+        if self.装备描述 ==1:
+            return '魔法暴击率 +{}%<br>'.format(int(x*100))
+        else:
+            self.魔法暴击率 +=x
         return ''
 
     def 穿戴装备计算套装(self, 装备):
@@ -559,7 +625,7 @@ class 角色属性():
 
     def 技能倍率加成(self, lv, x):
         if self.装备描述 ==1:
-            return "Lv{} 技能攻击力{}%<br>".format(min,('+' if x > 0 else "") + str(int(x*100)))
+            return "Lv{} 技能攻击力{}%<br>".format(lv,('+' if x > 0 else "") + str(int(x*100)))
         else:
             for i in self.技能栏:
                 if i.所在等级 == lv:
