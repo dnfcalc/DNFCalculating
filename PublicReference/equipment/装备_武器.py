@@ -550,11 +550,8 @@ class 装备19(装备):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.被动增加(转职被动智力=127)
         self.属性描述 += 属性.BUFF增加(BUFFLv=5)
-        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF魔攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF独立per=1.2)
+        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12, BUFF智力per=1.12)
+        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2, BUFF魔攻per=1.2, BUFF独立per=1.2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=68)
         pass
@@ -596,11 +593,8 @@ class 装备20(装备):
         self.属性描述 += 属性.被动增加(守护恩赐体精=152)
         self.属性描述 += 属性.被动增加(转职被动智力=152)
         self.属性描述 += 属性.BUFF增加(BUFFLv=5)
-        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF魔攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF独立per=1.2)
+        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12, BUFF智力per=1.12)
+        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2, BUFF魔攻per=1.2, BUFF独立per=1.2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=3)
         self.属性描述 += 属性.觉醒增加(一觉力智=26)
         pass
@@ -1556,11 +1550,8 @@ class 装备56(装备):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.被动增加(转职被动智力=127)
         self.属性描述 += 属性.BUFF增加(BUFFLv=5)
-        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF魔攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF独立per=1.2)
+        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12, BUFF智力per=1.12)
+        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2, BUFF魔攻per=1.2, BUFF独立per=1.2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=68)
         pass
@@ -1600,11 +1591,8 @@ class 装备57(装备):
         self.属性描述 += 属性.被动增加(守护恩赐体精=127)
         self.属性描述 += 属性.被动增加(转职被动智力=127)
         self.属性描述 += 属性.BUFF增加(BUFFLv=5)
-        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF魔攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF独立per=1.2)
+        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12, BUFF智力per=1.12)
+        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2, BUFF魔攻per=1.2, BUFF独立per=1.2))
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=68)
 
@@ -2103,41 +2091,11 @@ class 装备260(飘零之花武器):
         self.属性描述 += 属性.被动增加(守护恩赐体精=127)
         self.属性描述 += 属性.被动增加(转职被动智力=127)
         self.属性描述 += 属性.BUFF增加(BUFFLv=5)
-        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF魔攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF独立per=1.2)
+        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12, BUFF智力per=1.12)
+        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2, BUFF魔攻per=1.2, BUFF独立per=1.2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=68)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        改造等级 = 属性.获取改造(self.部位)
-        if 属性.角色 == '圣职者(女)':
-            temp += '智力 +81<br>'
-            temp += '[勇气祝福]技能等级 +5<br>'
-            temp += '[勇气祝福]力量、智力 +12%<br>'
-            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +20%<br>'
-            temp += '[圣光天启]技能等级 +2<br>'
-            temp += '[圣光天启]力量、智力 +68<br>'
-            temp += '[启示：圣歌]智力 +127<br>'
-            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
-            temp += '智力 +{}<br>'.format(20 * 改造等级)
-            temp += '辅助职业专属四维 +{}<br>'.format(10 * 改造等级)
-        elif 属性.角色 == '圣职者(男)':
-            temp += '体力 +97<br>'
-            temp += '精神 +97<br>'
-            temp += '[荣誉祝福]技能等级 +5<br>'
-            temp += '[荣誉祝福]力量、智力 +12%<br>'
-            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +20%<br>'
-            temp += '[天启之珠]技能等级 +2<br>'
-            temp += '[天启之珠]力量、智力 +68<br>'
-            temp += '[守护恩赐]体力、精神 +127<br>'
-            temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
-            temp += '体力 +{}<br>'.format(20 * 改造等级)
-            temp += '精神 +{}<br>'.format(20 * 改造等级)
-            temp += '辅助职业专属四维 +{}<br>'.format(10 * 改造等级)
-        return temp
+
 class 装备261(飘零之花武器):
     名称 = '飘零之花短剑'
     类型 = '短剑'
@@ -2257,27 +2215,10 @@ class 装备269(飘零之花武器):
         self.属性描述 += 属性.被动增加(守护恩赐体精=127)
         self.属性描述 += 属性.被动增加(转职被动智力=127)
         self.属性描述 += 属性.BUFF增加(BUFFLv=5)
-        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF魔攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF独立per=1.2)
+        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12, BUFF智力per=1.12)
+        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2, BUFF魔攻per=1.2, BUFF独立per=1.2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=68)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        改造等级 = 属性.获取改造(self.部位)
-        temp += '智力 +81<br>'
-        temp += '[禁忌诅咒]技能等级 +5<br>'
-        temp += '[禁忌诅咒]力量、智力 +12%<br>'
-        temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +20%<br>'
-        temp += '[开幕！人偶剧场]技能等级 +2<br>'
-        temp += '[开幕！人偶剧场]力量、智力 +68<br>'
-        temp += '[人偶操纵者]智力 +127<br>'
-        temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
-        temp += '智力 +{}<br>'.format(20 * 改造等级)
-        temp += '辅助职业专属四维 +{}<br>'.format(10 * 改造等级)
-        return temp
 
 class 装备270(飘零之花武器):
     名称 = '飘零之花手套'
@@ -2752,20 +2693,6 @@ class 装备293(夜语黑瞳武器):
         self.属性描述 += 属性.BUFF增加(BUFF独立per=1.2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=68)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        改造等级 = 属性.获取改造(self.部位)
-        temp += '智力 +81<br>'
-        temp += '[禁忌诅咒]技能等级 +5<br>'
-        temp += '[禁忌诅咒]力量、智力 +12%<br>'
-        temp += '[禁忌诅咒]物理、魔法、独立攻击力增加量 +20%<br>'
-        temp += '[开幕！人偶剧场]技能等级 +2<br>'
-        temp += '[开幕！人偶剧场]力量、智力 +68<br>'
-        temp += '[人偶操纵者]智力 +127<br>'
-        temp += '<font color="#FF8200">改造属性(+' + str(改造等级) + ')：</font><br>'
-        temp += '智力 +{}<br>'.format(20 * 改造等级)
-        temp += '辅助职业专属四维 +{}<br>'.format(10 * 改造等级)
-        return temp
 
 class 装备294(夜语黑瞳武器):
     名称 = '界·夜语黑瞳十字架'
@@ -2781,33 +2708,10 @@ class 装备294(夜语黑瞳武器):
         self.属性描述 += 属性.被动增加(守护恩赐体精=127)
         self.属性描述 += 属性.被动增加(转职被动智力=127)
         self.属性描述 += 属性.BUFF增加(BUFFLv=5)
-        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.1)
-        self.属性描述 += 属性.BUFF增加(BUFF智力per=1.1)
-        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF魔攻per=1.2)
-        self.属性描述 += 属性.BUFF增加(BUFF独立per=1.2)
+        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.1, BUFF智力per=1.1)
+        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2, BUFF魔攻per=1.2, BUFF独立per=1.2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=44)
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        if 属性.角色 == '圣职者(女)':
-            temp += '智力 +78<br>'
-            temp += '[勇气祝福]技能等级 +5<br>'
-            temp += '[勇气祝福]力量、智力 +10%<br>'
-            temp += '[勇气祝福]物理、魔法、独立攻击力增加量 +20%<br>'
-            temp += '[圣光天启]技能等级 +2<br>'
-            temp += '[圣光天启]力量、智力 +44<br>'
-            temp += '[启示：圣歌]智力 +127<br>'
-        elif 属性.角色 == '圣职者(男)':
-            temp += '体力 +94<br>'
-            temp += '精神 +94<br>'
-            temp += '[荣誉祝福]技能等级 +5<br>'
-            temp += '[荣誉祝福]力量、智力 +10%<br>'
-            temp += '[荣誉祝福]物理、魔法、独立攻击力增加量 +20%<br>'
-            temp += '[天启之珠]技能等级 +2<br>'
-            temp += '[天启之珠]力量、智力 +44<br>'
-            temp += '[守护恩赐]体力、精神 +127<br>'
-        return temp
         
 class 装备295(夜语黑瞳武器):
     名称 = '界·夜语黑瞳念珠'

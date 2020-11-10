@@ -168,14 +168,14 @@ class 角色属性():
                 tem += 'Lv30 Buff技能智力增加量 +{}<br>'.format(int(BUFF智力))
 
             if BUFF力量per > 1 and BUFF智力per > 1:
-                tem += 'Lv30 Buff技能力量、智力增加量 +{}%<br>'.format(round((BUFF力量per - 1) * 100,0))
+                tem += 'Lv30 Buff技能力智增加量 +{}%<br>'.format(round((BUFF力量per - 1) * 100,0))
             elif BUFF力量per > 1:
                 tem += 'Lv30 Buff技能力量增加量 +{}%<br>'.format(round((BUFF力量per - 1) * 100,0))
             elif BUFF智力per > 1:
                 tem += 'Lv30 Buff技能智力增加量 +{}%<br>'.format(round((BUFF智力per - 1) * 100,0))
 
             if BUFF物攻 > 0 and BUFF魔攻 > 0 and BUFF独立 > 0:
-                tem += 'Lv30 Buff技能物理、魔法、独立攻击力增加量 +{}<br>'.format(int(BUFF物攻))
+                tem += 'Lv30 Buff技能三攻攻击力增加量 +{}<br>'.format(int(BUFF物攻))
             elif BUFF物攻 > 0:
                 tem += 'Lv30 Buff技能物理攻击力增加量 +{}<br>'.format(int(BUFF物攻))
             elif BUFF魔攻 > 0:
@@ -184,7 +184,7 @@ class 角色属性():
                 tem += 'Lv30 Buff技能独立攻击力增加量 +{}<br>'.format(int(BUFF独立))
 
             if BUFF物攻per > 1 and BUFF魔攻per > 1 and BUFF独立per > 1:
-                tem += 'Lv30 Buff技能物理、魔法、独立攻击力增加量 +{}%<br>'.format(round((BUFF物攻per - 1) * 100,0))
+                tem += 'Lv30 Buff技能三攻攻击力增加量 +{}%<br>'.format(round((BUFF物攻per - 1) * 100,0))
             elif BUFF物攻per > 1:
                 tem += 'Lv30 Buff技能物理攻击力增加量 +{}%<br>'.format(round((BUFF物攻per - 1) * 100,0))
             elif BUFF魔攻per > 1:
@@ -228,11 +228,9 @@ class 角色属性():
                 tem += '[虔诚信念]、[少女的爱]力量、智力增加量 +{}<br>'.format(int(一觉被动力智))
             return tem
         else: 
-            self.守护恩赐Lv += 守护恩赐Lv
-            self.转职被动Lv += 转职被动Lv
+            self.转职被动Lv += 转职被动Lv 
             self.守护恩赐体精 += 守护恩赐体精
             self.转职被动智力 += 转职被动智力
-            self.信念光环Lv += 信念光环Lv
             self.一觉被动Lv += 一觉被动Lv
             self.信念光环体精 += 信念光环体精
             self.一觉被动力智 += 一觉被动力智
@@ -251,7 +249,7 @@ class 角色属性():
             elif 一觉力智 > 0:
                 tem += 'Lv50 主动技能力量、智力增加量 +{}<br>'.format(int(一觉力智))
             elif 一觉力智per > 1:
-                tem += 'Lv50 主动技能力量、智力增加量 +{}%<br>'.format(int(一觉力智per - 1 * 100))
+                tem += 'Lv50 主动技能力量、智力增加量 +{}%<br>'.format(round((一觉力智per - 1) * 100,0))
             return tem
         else:
             self.一觉Lv += 一觉Lv      

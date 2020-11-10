@@ -919,12 +919,15 @@ class 装备236(装备):
     def 进图属性_BUFF(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        self.属性描述 += 属性.被动增加(守护恩赐体精=318 - self.属性3选择_BUFF * 20)
-        self.属性描述 += 属性.被动增加(信念光环体精=220 - self.属性1选择_BUFF * 20)
-        self.属性描述 += 属性.被动增加(转职被动智力=222 - self.属性3选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=158)
+        self.属性描述 += 属性.被动增加(转职被动智力=62)
         self.属性描述 += 属性.BUFF增加(BUFF独立per=1.06)
+        self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
+        self.属性描述 += 属性.被动增加(信念光环体精=220 - self.属性1选择_BUFF * 20)
         self.属性描述 += 属性.被动增加(一觉被动力智=200 - self.属性1选择_BUFF * 20)
         self.属性描述 += 属性.觉醒增加(一觉力智=90 - self.属性2选择_BUFF * 10)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=160 - self.属性3选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(转职被动智力=160 - self.属性3选择_BUFF * 20)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.07 - self.属性4选择_BUFF / 100)
 
 class 装备237(装备):
@@ -989,12 +992,14 @@ class 装备237(装备):
     def 进图属性_BUFF(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        self.属性描述 += 属性.被动增加(守护恩赐体精=343 - self.属性2选择_BUFF * 20)
-        self.属性描述 += 属性.被动增加(转职被动智力=249 - self.属性2选择_BUFF * 20)
-        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.11 - self.属性3选择_BUFF / 100)
-        self.属性描述 += 属性.BUFF增加(BUFF智力per=1.11 - self.属性3选择_BUFF / 100)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=143)
+        self.属性描述 += 属性.被动增加(转职被动智力=49)
         self.属性描述 += 属性.BUFF增加(BUFF独立per=1.06)
+        self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
         self.属性描述 += 属性.觉醒增加(一觉力智=70 - self.属性1选择_BUFF * 10)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=200 - self.属性2选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(转职被动智力=200 - self.属性2选择_BUFF * 20)
+        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.11 - self.属性3选择_BUFF / 100, BUFF智力per=1.11 - self.属性3选择_BUFF / 100)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.06 - self.属性4选择_BUFF / 100)
 
 class 装备238(装备):
@@ -1052,7 +1057,7 @@ class 装备238(装备):
     属性2范围_BUFF = [80, 10, 10]  # 最大值 最小值 间隔
     属性2选择_BUFF = 0
     属性3描述_BUFF = '转职被动：'
-    属性3范围_BUFF = [330, 220, 20]  # 最大值 最小值 间隔
+    属性3范围_BUFF = [300, 220, 20]  # 最大值 最小值 间隔
     属性3选择_BUFF = 0
     属性4描述_BUFF = '一觉被动(100/80）'
     属性4范围_BUFF = [60, 0, 20]  # 间隔
@@ -1063,13 +1068,18 @@ class 装备238(装备):
     def 进图属性_BUFF(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        self.属性描述 += 属性.被动增加(守护恩赐体精=443 - self.属性3选择_BUFF * 20)
-        self.属性描述 += 属性.被动增加(信念光环体精=160 - self.属性4选择_BUFF * 20)
-        self.属性描述 += 属性.被动增加(转职被动智力=362 - self.属性3选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=143)
+        self.属性描述 += 属性.被动增加(转职被动智力=62)
         self.属性描述 += 属性.BUFF增加(BUFF独立per=1.06)
-        self.属性描述 += 属性.被动增加(一觉被动力智=140 - self.属性4选择_BUFF * 20)
-        self.属性描述 += 属性.觉醒增加(一觉力智=80 - self.属性2选择_BUFF * 10)
+        self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.06 - self.属性1选择_BUFF / 100)
+        self.属性描述 += 属性.觉醒增加(一觉力智=80 - self.属性2选择_BUFF * 10)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=300 - self.属性3选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(转职被动智力=300 - self.属性3选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(信念光环体精=160 - self.属性4选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(一觉被动力智=140 - self.属性4选择_BUFF * 20)
+
+       
 class 装备239(装备):
     名称 = '等离子操控者'
     模式 = 0
@@ -1140,13 +1150,13 @@ class 装备239(装备):
     def 进图属性_BUFF(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        self.属性描述 += 属性.力智固定加成(x=220 - self.属性2选择_BUFF * 20)
-        self.属性描述 += 属性.被动增加(守护恩赐体精=378 - self.属性2选择_BUFF * 20)
         self.属性描述 += 属性.被动增加(转职被动智力=62)
-        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.12 - self.属性1选择_BUFF / 100)
-        self.属性描述 += 属性.BUFF增加(BUFF魔攻per=1.12 - self.属性1选择_BUFF / 100)
-        self.属性描述 += 属性.BUFF增加(BUFF独立per=1.12 - self.属性1选择_BUFF / 100)
         self.属性描述 += 属性.BUFF增加(BUFF独立per=1.06)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=158)
+        self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
+        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.12 - self.属性1选择_BUFF / 100, BUFF魔攻per=1.12 - self.属性1选择_BUFF / 100, BUFF独立per=1.12 - self.属性1选择_BUFF / 100)
+        self.属性描述 += 属性.力智固定加成(x=220 - self.属性2选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=220 - self.属性2选择_BUFF * 20)
         self.属性描述 += 属性.觉醒增加(一觉力智=120 - self.属性3选择_BUFF * 10)
 
 class 装备240(装备):
@@ -1209,11 +1219,13 @@ class 装备240(装备):
     def 进图属性_BUFF(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        self.属性描述 += 属性.被动增加(守护恩赐体精=432 - self.属性2选择_BUFF * 20)
-        self.属性描述 += 属性.被动增加(转职被动智力=335 - self.属性2选择_BUFF * 20)
-        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12 - self.属性1选择_BUFF / 100)
-        self.属性描述 += 属性.BUFF增加(BUFF智力per=1.12 - self.属性1选择_BUFF / 100)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=192)
+        self.属性描述 += 属性.被动增加(转职被动智力=95)
         self.属性描述 += 属性.BUFF增加(BUFF独立per=1.06)
+        self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
+        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12 - self.属性1选择_BUFF / 100, BUFF智力per=1.12 - self.属性1选择_BUFF / 100)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=240 - self.属性2选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(转职被动智力=240 - self.属性2选择_BUFF * 20)
         self.属性描述 += 属性.觉醒增加(一觉力智=90 - self.属性3选择_BUFF * 10)
 
 class 装备241(装备):
@@ -1284,13 +1296,15 @@ class 装备241(装备):
         self.属性描述 += 属性.技能等级加成('所有', 100, 100, 1)
         pass
     def BUFF属性(self, 属性):
-        self.属性描述 += 属性.被动增加(守护恩赐体精=478 - self.属性1选择_BUFF * 20)
-        self.属性描述 += 属性.力智固定加成(x=300 - self.属性1选择_BUFF * 20)
-        self.属性描述 += 属性.被动增加(信念光环体精=160 - self.属性3选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=178 - self.属性1选择_BUFF * 20)
         self.属性描述 += 属性.被动增加(转职被动智力=82)
         self.属性描述 += 属性.BUFF增加(BUFF独立per=1.06)
-        self.属性描述 += 属性.被动增加(一觉被动力智=140 - self.属性3选择_BUFF * 20)
+        self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
+        self.属性描述 += 属性.被动增加(守护恩赐体精=300 - self.属性1选择_BUFF * 20)
+        self.属性描述 += 属性.力智固定加成(x=300 - self.属性1选择_BUFF * 20)
         self.属性描述 += 属性.觉醒增加(一觉力智=110 - self.属性2选择_BUFF * 10)
+        self.属性描述 += 属性.被动增加(信念光环体精=160 - self.属性3选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(一觉被动力智=140 - self.属性3选择_BUFF * 20)
 
 class 装备242(装备):
     名称 = '命运反抗者'
@@ -1362,14 +1376,12 @@ class 装备242(装备):
     def BUFF属性(self, 属性):
         self.属性描述 += 属性.被动增加(守护恩赐体精=146)
         self.属性描述 += 属性.被动增加(转职被动智力=45)
-        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.04 - self.属性3选择_BUFF / 100)
-        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.07 - self.属性4选择_BUFF / 100)
         self.属性描述 += 属性.BUFF增加(BUFF独立per=1.06)
-        self.属性描述 += 属性.BUFF增加(BUFF智力per=1.04 - self.属性3选择_BUFF / 100)
-        self.属性描述 += 属性.BUFF增加(BUFF魔攻per=1.07 - self.属性4选择_BUFF / 100)
-        self.属性描述 += 属性.BUFF增加(BUFF独立per=1.07 - self.属性4选择_BUFF / 100)
+        self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
         self.属性描述 += 属性.觉醒增加(一觉力智=90 - self.属性1选择_BUFF * 10)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.04 - self.属性2选择_BUFF / 100)
+        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.04 - self.属性3选择_BUFF / 100, BUFF智力per=1.04 - self.属性3选择_BUFF / 100)
+        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.07 - self.属性4选择_BUFF / 100, BUFF魔攻per=1.07 - self.属性4选择_BUFF / 100, BUFF独立per=1.07 - self.属性4选择_BUFF / 100)
 
 class 装备243(装备):
     名称 = '心痛如绞的诀别'
@@ -1448,16 +1460,16 @@ class 装备243(装备):
     def 进图属性_BUFF(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        self.属性描述 += 属性.被动增加(守护恩赐体精=306 - self.属性4选择_BUFF * 20)
-        属性.智力 += 140 - self.属性4选择_BUFF * 20
+        self.属性描述 += 属性.被动增加(守护恩赐体精=166)
         self.属性描述 += 属性.被动增加(转职被动智力=62)
-        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.10 - self.属性2选择_BUFF / 100)
-        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.05 - self.属性1选择_BUFF / 100)
-        self.属性描述 += 属性.BUFF增加(BUFF智力per=1.10 - self.属性2选择_BUFF / 100)
-        self.属性描述 += 属性.BUFF增加(BUFF魔攻per=1.05 - self.属性1选择_BUFF / 100)
-        self.属性描述 += 属性.BUFF增加(BUFF独立per=1.05 - self.属性1选择_BUFF / 100)
         self.属性描述 += 属性.BUFF增加(BUFF独立per=1.06)
+        self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
+        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.05 - self.属性1选择_BUFF / 100, BUFF魔攻per=1.05 - self.属性1选择_BUFF / 100, BUFF独立per=1.05 - self.属性1选择_BUFF / 100)
+        self.属性描述 += 属性.BUFF增加(BUFF力量per=1.10 - self.属性2选择_BUFF / 100, BUFF智力per=1.10 - self.属性2选择_BUFF / 100)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.08 - self.属性3选择_BUFF / 100)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=140 - self.属性4选择_BUFF * 20)
+        self.属性描述 += 属性.力智固定加成(x=140 - self.属性4选择_BUFF * 20)
+
 # endregion
 
 # region  智慧产物
