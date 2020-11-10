@@ -1592,7 +1592,7 @@ class 装备57(装备):
         self.属性描述 += 属性.被动增加(转职被动智力=127)
         self.属性描述 += 属性.BUFF增加(BUFFLv=5)
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.12, BUFF智力per=1.12)
-        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2, BUFF魔攻per=1.2, BUFF独立per=1.2))
+        self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.2, BUFF魔攻per=1.2, BUFF独立per=1.2)
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
         self.属性描述 += 属性.觉醒增加(一觉力智=68)
 
