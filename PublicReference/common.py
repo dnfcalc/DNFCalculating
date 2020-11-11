@@ -314,12 +314,15 @@ class 窗口(QWidget):
         temp = '<font size="3" face="宋体">'
         for n in [2, 3, 5]:
             try:
-                temp += '<font color="#78FF1E">' + i.名称 + '[2]</font><br>'
+                描述 = ''
                 if self.角色属性A.职业分类 == 'BUFF':
-                    temp += 套装列表[套装序号['{}[{}]'.format(i.名称, n)]].装备描述_BUFF(self.角色属性A)[:-4]
+                    描述 = 套装列表[套装序号['{}[{}]'.format(i.名称, n)]].装备描述_BUFF(self.角色属性A)[:-4]
                 else:
-                    temp += 套装列表[套装序号['{}[{}]'.format(i.名称, n)]].装备描述(self.角色属性A)[:-4]
-                temp += '<br>'
+                    描述 = 套装列表[套装序号['{}[{}]'.format(i.名称, n)]].装备描述(self.角色属性A)[:-4]
+                if 描述 != '':
+                     temp+='<font color="#78FF1E">' + i.名称 + '[{}]</font><br>'.format(n)
+                     temp+=描述
+                     temp+='<br>'
             except:
                 pass
         return temp[:-4] + '</font>'        
@@ -331,7 +334,7 @@ class 窗口(QWidget):
             temp += i.装备描述_BUFF(self.角色属性A)
         else:
             temp += i.装备描述(self.角色属性A)
-        temp += '</font>'
+        return temp[:-4] +'</font>'
 
     def 界面1(self):
         self.一键站街设置输入 = []

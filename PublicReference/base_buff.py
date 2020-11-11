@@ -176,8 +176,10 @@ class 角色属性(属性):
                 tem += '[守护恩赐]、[启示：圣歌]、[人偶操纵者]技能Lv +{}<br>'.format(int(守护恩赐Lv if 守护恩赐Lv else 转职被动Lv))
             elif 守护恩赐体精 > 0 and self.角色 == '圣职者(男)':
                 tem += '[守护恩赐]体力、精神 +{}<br>'.format(int(守护恩赐体精))
-            elif 转职被动智力 > 0 and self.角色 != '圣职者(男)':
-                tem += '[启示：圣歌]、[人偶操纵者]智力 +{}<br>'.format(int(转职被动智力))
+            elif 转职被动智力 > 0 and self.角色 == '圣职者(女)':
+                tem += '[启示：圣歌]智力 +{}<br>'.format(int(转职被动智力))
+            elif 转职被动智力 > 0 and self.角色 == '魔法师(女)':
+                tem += '[人偶操纵者]智力 +{}<br>'.format(int(转职被动智力))
             elif 信念光环Lv > 0:
                 tem += '[信念光环]技能Lv +{}'.format(int(信念光环Lv))
             elif 一觉被动Lv > 0:
