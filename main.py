@@ -1,7 +1,8 @@
 ﻿import multiprocessing
 
 from PyQt5.QtCore import QUrl
-from Part.sum import *
+import importlib
+from PublicReference.common import *
 from PublicReference.utils.calc_core import calc_core
 from PublicReference.utils.producer_consumer import producer_data, consumer, thread_num
 import json
@@ -36,6 +37,7 @@ class 选择窗口(QMainWindow):
         pass
 
     def ui(self):
+        角色列表 = []
         self.setStyleSheet('''QToolTip { 
                    background-color: black; 
                    color: white; 
@@ -46,6 +48,8 @@ class 选择窗口(QMainWindow):
         version = "-"
         with open("ResourceFiles\\Config\\release_version.json") as fp:
             version += json.load(fp)['version'].replace('-','.')
+        with open("ResourceFiles\\Config\\adventure_info.json",encoding='utf-8') as fp:
+            角色列表 = json.load(fp)
         self.setWindowTitle('DNF搭配计算器'+version+' (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
@@ -83,15 +87,16 @@ class 选择窗口(QMainWindow):
                 img_box.setPixmap(self.char_img[i])
             img_box.resize(121, 90)
             img_box.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
-            if (i + 1) in 完成职业:
-                if 角色列表[角色序号[i + 1]].类名 != '空':
+            
+            if i  < 75:
+                if 角色列表[i]["类名"] != '空':
                     img_box_2 = QLabel(self.topFiller)
                     img_box_2.setPixmap(self.family_img[16])
                     img_box_2.resize(121, 90)
                     img_box_2.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
                     txt_box = QLabel(self.topFiller)
                     txt_box.setStyleSheet('QLabel{font-size:13px;color:rgb(175,148,89)}')
-                    txt_box.setText(角色列表[角色序号[i + 1]].显示名称)
+                    txt_box.setText(角色列表[i]["显示名称"])
                     txt_box.resize(121, 24)
                     txt_box.setAlignment(Qt.AlignCenter)
                     txt_box.move(120 + (count % 5) * 125, 76 + int(count / 5) * 100)
@@ -99,8 +104,8 @@ class 选择窗口(QMainWindow):
                     butten.setStyleSheet(按钮样式2)
                     butten.resize(121, 90)
                     butten.move(120 + (count % 5) * 125, 10 + int(count / 5) * 100)
-                    butten.clicked.connect(lambda state, index = 角色列表[角色序号[i + 1]]: self.职业版本判断(index))
-                    temp = '<b>作者：<font color="#FF0000">'+ 角色列表[角色序号[i + 1]].作者 +'</font>'
+                    butten.clicked.connect(lambda state, index = 角色列表[i]: self.职业版本判断(index))
+                    temp = '<b>作者：<font color="#C66211">'+ 角色列表[i]["作者"] +'</font>'
                     butten.setToolTip(temp)
             else:
                 img_box_2 = QLabel(self.topFiller)
@@ -113,7 +118,7 @@ class 选择窗口(QMainWindow):
         for i in range(15):
             sign = 1
             for j in range(i * 5 + 1, i * 5 + 6):
-                if j not in 完成职业:
+                if j > 75:
                     sign = 0
                     break
             if sign == 1:
@@ -163,15 +168,16 @@ class 选择窗口(QMainWindow):
     def 打开窗口(self, name):
         if self.char_window != None:
             self.char_window.close()
-        self.char_window = eval(name + '()')
+        职业 = importlib.import_module("Part."+name)
+        self.char_window = eval("职业."+name + '()')
         self.char_window.show()
 
     def 职业版本判断(self, index):
         try:
-            if index.类名2 == '无':
-                self.打开窗口(index.类名)
+            if index["类名2"] == '无':
+                self.打开窗口(index["类名"])
                 return
-            if index.序号 == 54:
+            if index["序号"] == "54":
                 box = QMessageBox(QMessageBox.Question, "提示", "不想三觉,请勿使用")
             else:
                 box = QMessageBox(QMessageBox.Question, "提示", "请选择要打开的版本")
@@ -180,7 +186,9 @@ class 选择窗口(QMainWindow):
             A = box.button(QMessageBox.Yes)
             B = box.button(QMessageBox.No)
             C = box.button(QMessageBox.Cancel)
-            if index.序号 == 41:
+            print(index["序号"])
+            print(index["序号"] == "41")
+            if index["序号"] == "41":
                 A.setText('BUFF')
                 B.setText('战斗')
             else:
@@ -189,9 +197,9 @@ class 选择窗口(QMainWindow):
             C.setText('取消')
             box.exec_()
             if box.clickedButton() == A:
-                self.打开窗口(index.类名)
+                self.打开窗口(index["类名"])
             elif box.clickedButton() == B:
-                self.打开窗口(index.类名2)
+                self.打开窗口(index["类名2"])
             else:
                 return
         except Exception as error:
