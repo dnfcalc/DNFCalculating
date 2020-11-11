@@ -46,10 +46,7 @@ class CalcData():
         self.minheap = None  # type: MinHeap
 
     def pre_calc_needed_data(self):
-        if self.是输出职业:
-            from PublicReference.equipment.sum import 总套装列表, 部位列表, 装备列表
-        else:
-            from PublicReference.equipment.sum_buff import 总套装列表, 部位列表, 装备列表
+        from PublicReference.equipment.equ_list import 总套装列表, 部位列表, 装备列表
 
         self.有效武器列表.clear()
         for j in range(0, 6):
@@ -103,11 +100,7 @@ def calc_core(data: CalcData):
     data.minheap_queue.put(deepcopy(data.minheap))
 
 def calc_speed_and_set_mode(data):
-    if data.是输出职业:
-        from PublicReference.equipment.sum import 套装映射, 部位列表, 装备列表
-    else:
-        from PublicReference.equipment.sum_buff import 套装映射, 部位列表, 装备列表
-
+    from PublicReference.equipment.equ_list import 套装映射, 部位列表, 装备列表
     套装组合 = []
     套装适用 = []
 
@@ -196,10 +189,7 @@ def calc_speed_and_set_mode(data):
 顺序字典 = {0: 0, 5: 1, 8: 2, 1: 3, 3: 4, 2: 5, 4: 6, 6: 7, 9: 8, 7: 9, 10: 10}
 
 def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
-    if data.是输出职业:
-        from PublicReference.equipment.sum import 装备序号, 装备列表
-    else:
-        from PublicReference.equipment.sum_buff import 装备序号, 装备列表
+    from PublicReference.equipment.equ_list import 装备序号, 装备列表
 
     i = 装备序号[名称]
     装备[x] = 名称
@@ -239,11 +229,7 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
     return 0
 
 def calc_single_mode(data):
-    if data.是输出职业:
-        from PublicReference.equipment.sum import 装备序号, 套装序号, 装备列表
-    else:
-        from PublicReference.equipment.sum_buff import 装备序号, 套装序号, 装备列表
-
+    from PublicReference.equipment.equ_list import 装备序号, 套装序号, 装备列表
     current_index = -1
     装备 = ['无'] * 12
     套装 = ['无'] * 11
