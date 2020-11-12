@@ -1,5 +1,10 @@
 # 2020-11-12
 
+## BugFixes
+* 修复缔造、剑魂无法打开的情况 ([0b9774](https://github.com/wxh0402/DNFCalculating/commit/0b977402ab1ac9e763488e68692934c9a4551670))
+
+# 2020-11-12
+
 ## NewFeatures
 * 优化计算器打开速度,采用json配置信息 ([d17608](https://github.com/wxh0402/DNFCalculating/commit/d176080c17fd55532d632885c3b4135860bd9cea))
 
