@@ -1164,20 +1164,32 @@ class 极诣·剑魂角色属性(角色属性):
 
     def 技能等级加成(self, 加成类型, minLv, maxLv, lv):
         lv = int(lv)
+        if self.装备描述 ==1:
+            if 加成类型=="所有":
+                if minLv == maxLv:
+                    return "Lv{} 技能等级+{}<br>".format(minLv,lv)
+                else:
+                    return "Lv{}-{} 技能等级+{}<br>".format(minLv,maxLv,lv)
+            else:
+                if minLv == maxLv:
+                    return "Lv{} 主动技能等级+{}<br>".format(minLv,lv)
+                else:
+                    return "Lv{}-{} 主动技能等级+{}<br>".format(minLv,maxLv,lv)            
+        else:        
+            if self.刀魂之卡赞 > 0:
+                if minLv <= 5 and maxLv >= 5:
+                    self.刀魂之卡赞 = min(20, self.刀魂之卡赞 + lv)
 
-        if self.刀魂之卡赞 > 0:
-            if minLv <= 5 and maxLv >= 5:
-                self.刀魂之卡赞 = min(20, self.刀魂之卡赞 + lv)
-
-        for i in self.技能栏:
-            if i.名称 not in ['太刀精通', '巨剑精通', '短剑精通', '钝器精通']:
-                if i.所在等级 >= minLv and i.所在等级 <= maxLv:
-                    if 加成类型 == '所有':
-                        i.等级加成(lv)
-                    else:
-                        if i.是否主动 == 1:
+            for i in self.技能栏:
+                if i.名称 not in ['太刀精通', '巨剑精通', '短剑精通', '钝器精通']:
+                    if i.所在等级 >= minLv and i.所在等级 <= maxLv:
+                        if 加成类型 == '所有':
                             i.等级加成(lv)
-
+                        else:
+                            if i.是否主动 == 1:
+                                i.等级加成(lv)
+        return ''
+        
     def 被动倍率计算(self):
 
         if self.技能栏[self.技能序号['武器奥义']].等级 != 0:

@@ -377,14 +377,27 @@ class 缔造者角色属性(角色属性):
     def 技能等级加成(self, 加成类型, minLv, maxLv, lv):
         lv = int(lv)
 
-        if self.远古记忆 > 0:
-            if minLv <= 15 and maxLv >= 15:
-                self.远古记忆 = min(20, self.远古记忆 + lv)
+        if self.装备描述 ==1:
+            if 加成类型=="所有":
+                if minLv == maxLv:
+                    return "Lv{} 技能等级+{}<br>".format(minLv,lv)
+                else:
+                    return "Lv{}-{} 技能等级+{}<br>".format(minLv,maxLv,lv)
+            else:
+                if minLv == maxLv:
+                    return "Lv{} 主动技能等级+{}<br>".format(minLv,lv)
+                else:
+                    return "Lv{}-{} 主动技能等级+{}<br>".format(minLv,maxLv,lv)            
+        else:  
+            if self.远古记忆 > 0:
+                if minLv <= 15 and maxLv >= 15:
+                    self.远古记忆 = min(20, self.远古记忆 + lv)
 
-        for i in self.技能栏:
-            if i.所在等级 >= minLv and i.所在等级 <= maxLv:
-                if 加成类型 == '所有':
-                    i.等级加成(lv)
+            for i in self.技能栏:
+                if i.所在等级 >= minLv and i.所在等级 <= maxLv:
+                    if 加成类型 == '所有':
+                        i.等级加成(lv)
+        return ''
 
     def 技能释放次数计算(self):
         技能释放次数 = []
