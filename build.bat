@@ -56,9 +56,9 @@ if exist AutoRelese\release_produce.js node AutoRelese/release_produce.js
 if exist AutoRelese\release_produce.js pandoc -s CHANGELOG.md -o "AutoRelese\publish\更新日志%Date:~5,2%.%Date:~8,2%.docx"
 if exist AutoRelese\release_produce.js echo [提示]: 记录结束
 
-@REM if exist AutoRelese\upload_cookie.json echo [提示]: 开始上传到网盘
-@REM if exist AutoRelese\upload_cookie.json python AutoRelese/upload_lanzouyun.py
-@REM if exist AutoRelese\upload_cookie.json echo [提示]: 上传结束
+if exist AutoRelese\upload_cookie.json echo [提示]: 开始上传到网盘
+if exist AutoRelese\upload_cookie.json python AutoRelese/upload_lanzouyun.py
+if exist AutoRelese\upload_cookie.json echo [提示]: 上传结束
 
 RMDIR /S /Q AutoRelese\Publish
 
