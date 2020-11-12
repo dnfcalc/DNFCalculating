@@ -830,7 +830,7 @@ class 角色属性(属性):
         return [Q, P]
 
     def 伤害计算(self, x = 0):
-        if self.开启切装 == 1 and self.切装判断():
+        if 切装模式 == 1 and self.切装判断():
             temp = self.装备替换()
             A = temp[0].数据计算(1, 1)  #身上装备计算
             B = temp[1].数据计算(1, 0)  #切装装备计算
