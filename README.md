@@ -2,8 +2,25 @@
 
 执行程序下载:https://wws.lanzous.com/b01bfj76f 或 https://pan.lanzou.com/b01bfj76f
 
-python（3.8）编写，使用 pyqt5（5.14.2） 图形 GUI 库<br>
+python(3.8)编写，使用 pyqt5(5.14.2) 图形 GUI 库<br>
 主框架由纸飞机实现，西瓜提供数据公式并协助修改，SCUDRT 对算法进行优化修改，风之凌殇添加多进程优化<br>
+
+## 基础安装及依赖
+
+安装[Python](https://www.python.org/),计算器开发使用的是3.8版本<br>
+安装项目依赖<br>
+> pip intall -r requirements.txt
+
+<!-- ### 修改项目
+* fork本项目
+* 克隆(clone)你fork的项目到本地,如果clone速度太慢,可以在github.com后添加.cnpmjs.org,切换仓库,如
+> 从<br>
+> git clone https://github.com/wxh0402/DNFCalculating.git<br>
+> 变成<br>
+> git clone https://github.com.cnpmjs.org/wxh0402/DNFCalculating.git<br>
+> 提示下载速度
+* 新建分支并检出新分支,如
+> git checkout -b ver0.1<br> -->
 
 ## 程序目录结构说明
 
@@ -19,32 +36,36 @@ python（3.8）编写，使用 pyqt5（5.14.2） 图形 GUI 库<br>
 
 ### Part 目录
 
-职业相关文件目录,由职业名.py 及 sum.py 组成,职业名.py 负责各个职业的个性化数据,sum.py 负责引用所有职业<br>
+职业相关文件目录,由职业名.py组成,职业名.py 负责各个职业的个性化数据<br>
 若项目文件打开时图片显示不正常请将 pyqt5 版本更新至 5.14.2 或以上<br>
 
 ### ResourceFiles 目录
 
-资源文件目录,由公用资源文件及职业资源文件组成<br>
+资源文件目录,由公用资源文件、职业资源文件及配置文件组成<br>
 
+#### ResourceFiles/Config
+* adventure_info.json : 职业加载配置
+* release_version.json ：版本配置
 
 ### PublicReference 目录
 
-公共实现部分,由 base.py 装备.py 装备函数.py 组成
+公共实现部分,由 common.py base.py base_buff.py choise equipment utils 组成
 
-#### PublicReference/base.py
+#### PublicReference/common.py
+奶系与输出系的公共方法
 
-核心算法及主体界面绘制部分<br>
-常规无需修改该部分,如需要优化程序的效率及部分算法，可尝试修改<br>
-主体核心可优化空间比较大,但由于接触 PY 才几个礼拜,对 PY 多核心运算的不熟悉,暂不打算修改,欢迎尝试优化
+#### PublicReference/base.py base_buff.py
 
-#### PublicReference/装备.py
+核心算法及主体界面绘制部分
+
+#### PublicReference/equipment
 
 装备及套装数据部分<br>
 如需要添加修改装备.可在此处修改,注意装备的后缀数字,需要与 img/装备下的文件名一致(新增需要同步添加图标)
 
-#### PublicReference/装备函数.py
+#### PublicReference/utils
 
-一些计算公式部分,除非公式出现偏差,否则无需修改<br>
+公共工具方法,涉及到深度拷贝,最小堆排序算法,多线程,基础配置等
 
 ## 更新日志
 
