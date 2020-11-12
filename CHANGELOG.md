@@ -1,7 +1,3 @@
-# 2020-11-12
-
-## BugFixes
-* 修复缔造、剑魂无法打开的情况 ([0b9774](https://github.com/wxh0402/DNFCalculating/commit/0b977402ab1ac9e763488e68692934c9a4551670))
 
 # 2020-11-12
 
@@ -10,6 +6,8 @@
 
 ## BugFixes
 * 修正世界树之精灵属性错误 ([b62c69](https://github.com/wxh0402/DNFCalculating/commit/b62c697d320668f7769562e74f062ccc3b37a44f))
+* 修复缔造、剑魂无法打开的情况 ([0b9774](https://github.com/wxh0402/DNFCalculating/commit/0b977402ab1ac9e763488e68692934c9a4551670))
+
 
 # 2020-11-08
 
