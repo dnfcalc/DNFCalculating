@@ -29,7 +29,7 @@ echo.
 
 echo [提示]: 开始生成exe文件
 ::使用pyinstaller打包
-pyinstaller.exe --hidden-import pkg_resources.py2_warn  --noconsole -F -i ./ResourceFiles/img/logo.ico "main.py"
+pyinstaller.exe -w AutoRelese\Package.spec
 
 DEL /Q "AutoRelese\Publish\*.*"
 DEL /Q "main.spec"
@@ -56,9 +56,9 @@ if exist AutoRelese\release_produce.js node AutoRelese/release_produce.js
 if exist AutoRelese\release_produce.js pandoc -s CHANGELOG.md -o "AutoRelese\publish\更新日志%Date:~5,2%.%Date:~8,2%.docx"
 if exist AutoRelese\release_produce.js echo [提示]: 记录结束
 
-if exist AutoRelese\upload_lanzouyun.py echo [提示]: 开始上传到网盘
-if exist AutoRelese\upload_lanzouyun.py python AutoRelese/upload_lanzouyun.py
-if exist AutoRelese\upload_lanzouyun.py echo [提示]: 上传结束
+if exist AutoRelese\upload_cookie.json echo [提示]: 开始上传到网盘
+if exist AutoRelese\upload_cookie.json python AutoRelese/upload_lanzouyun.py
+if exist AutoRelese\upload_cookie.json echo [提示]: 上传结束
 
 RMDIR /S /Q AutoRelese\Publish
 
