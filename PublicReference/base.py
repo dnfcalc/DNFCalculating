@@ -784,30 +784,6 @@ class 角色属性(属性):
             if i != '无':
                 return True
         return False
-
-    def 适用套装计算(self):
-        套装 = []
-        套装字典 = {}
-        for i in self.装备栏:
-            j = 装备列表[装备序号[i]].所属套装
-            if j == '智慧产物':
-                try:
-                    k = 装备列表[装备序号[i]].所属套装2
-                    套装字典[k] = 套装字典.get(k, 0) + 1
-                except:
-                    pass
-            elif j != '无':
-                套装字典[j] = 套装字典.get(j, 0) + 1
-
-        for i in 套装字典.keys():
-            if 套装字典[i] >= 2 and (i + '[2]') in 套装序号.keys():
-                套装.append(i + '[2]')
-            if 套装字典[i] >= 3 and (i + '[3]') in 套装序号.keys():
-                套装.append(i + '[3]')
-            if 套装字典[i] >= 5 and (i + '[5]') in 套装序号.keys():
-                套装.append(i + '[5]')
-
-        self.套装栏 = copy(套装)
         
     def 装备替换(self):
         Q = deepcopy(self)
