@@ -1,3 +1,12 @@
+# 2020-11-13
+
+## BugFixes
+* 修复奶系站街属性及等级加成的问题 ([cb7aae](https://github.com/wxh0402/DNFCalculating/commit/cb7aaeee3c4762fb3365d7b5ba36a57977d526fe))
+* 修复奶系一键修正闪退问题 ([9bf1d3](https://github.com/wxh0402/DNFCalculating/commit/9bf1d3067f91c3f472f0b0b276f978f6c90c58f3))
+* 修正[拥抱晨曦之温暖]属性错误 ([358ad8](https://github.com/wxh0402/DNFCalculating/commit/358ad83a3f3b0a53ceaa0bb0175416a1bec57292))
+* 修正切装无效的bug ([1b4615](https://github.com/wxh0402/DNFCalculating/commit/1b461594391e75dd3b969be364909246f057c19a))
+* 修复缔造、剑魂无法打开的情况 ([0b9774](https://github.com/wxh0402/DNFCalculating/commit/0b977402ab1ac9e763488e68692934c9a4551670))
+
 
 # 2020-11-12
 
