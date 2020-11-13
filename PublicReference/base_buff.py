@@ -545,7 +545,7 @@ class 角色属性(属性):
 
     def 装备属性计算(self):
         self.装备基础()
-        self.专属词条计算()
+        # self.专属词条计算()
         for i in self.装备栏:
             装备列表[装备序号[i]].城镇属性_BUFF(self)
             装备列表[装备序号[i]].BUFF属性(self)
@@ -569,6 +569,7 @@ class 角色属性(属性):
         pass
 
     def 站街计算(self):
+        self.专属词条计算()
         for i in self.技能栏:
             if i.站街生效 == 1:
                 self.智力 += i.结算统计()[0]
@@ -1115,45 +1116,6 @@ class 角色窗口(窗口):
         self.计算按钮3.move(990, 610)
         self.计算按钮3.resize(100, 30)
         self.计算按钮3.setStyleSheet(按钮样式)
-
-    def 界面4(self):
-        #第四个布局
-        self.main_frame4 = QMainWindow()
-        
-        self.神话属性选项 = []
-        self.神话属性图片 = []
-
-        for j in range(len(装备列表)):
-            if 装备列表[j].品质 == '神话':
-                self.神话属性图片.append(QLabel(self.main_frame4))
-                self.神话属性图片[-1].setMovie(self.装备图片[j])
-                self.神话属性图片[-1].setToolTip('<font size="3" face="宋体">' + 装备列表[j].名称 + '<br>'+ 装备列表[j].类型 + '-' + 装备列表[j].部位 + '</font>')
-                self.神话属性图片[-1].resize(28, 28)
-                self.神话属性图片[-1].move(-1000, -1000)
-                self.装备图片[j].start()
-
-        for i in range(4 * 35):
-            self.神话属性选项.append(MyQComboBox(self.main_frame4))
-            self.神话属性选项[i].resize(150, 18)
-            self.神话属性选项[i].move(-1000, -1000)
-            self.神话属性选项[i].currentIndexChanged.connect(lambda state, index = i:self.神话属性选项颜色更新(index))
-        
-        count = 0
-        for i in 装备列表:
-            if i.品质 == '神话':
-                描述列表 = [i.属性1描述_BUFF, i.属性2描述_BUFF, i.属性3描述_BUFF, i.属性4描述_BUFF]
-                范围列表 = [i.属性1范围_BUFF, i.属性2范围_BUFF, i.属性3范围_BUFF, i.属性4范围_BUFF]
-                for j in range(4):
-                    if 描述列表[j] != '无':
-                        for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
-                            if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
-                                temp = 描述列表[j] + str(k)
-                                if 范围列表[j][2] == 1 and 'Lv' not in 描述列表[j]:
-                                    temp += '%'
-                                self.神话属性选项[count * 4 + j].addItem(temp)
-                    else:
-                        self.神话属性选项[count * 4 + j].addItem('无')
-                count += 1
 
     def 界面5(self):
         # 第五个布局
