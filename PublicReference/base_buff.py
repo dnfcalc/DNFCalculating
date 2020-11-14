@@ -504,7 +504,7 @@ class 角色属性(属性):
                 一觉计算属性.装备属性计算()
                 一觉计算属性.适用数值计算()
                 一觉计算属性_temp.append(一觉计算属性)
-                数据列表.append(一觉计算属性.技能栏[self.一觉序号].结算统计()[3] * (一觉计算属性.技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0 else 1)) #3是力量属性  一觉力智都是相等的
+                数据列表.append(一觉计算属性.技能栏[self.一觉序号].结算统计()[3] * (一觉计算属性.技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0 and self.次数输入[self.三觉序号] == '1' else 1)) #3是力量属性  一觉力智都是相等的
                 切换列表.append(一觉计算属性.切换详情)
             
             #取一觉最大值，并修改数据
@@ -514,7 +514,7 @@ class 角色属性(属性):
                 temp = '<br><br>' + ((self.技能栏[self.一觉序号].名称 + '+' + self.技能栏[self.三觉序号].名称 + '：') if self.三觉序号 != 0 else (self.技能栏[self.一觉序号].名称 + '：')) + str(int(数据列表[0])) + '→' + str(int(a)) + ' (+' + str(int(a) - int(数据列表[0])) + ')'
             else:
                 temp = ''
-            a = int(a / (一觉计算属性_temp[序号].技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0 else 1))
+            a = int(a / (一觉计算属性_temp[序号].技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0 and self.次数输入[self.三觉序号] == '1' else 1))
             总数据[self.一觉序号] = [0, 0, 0, a, a, 0, 0, 0]
             self.切换详情 = 切换列表[序号] + temp
             self.技能栏[self.一觉序号] = deepcopy(可能组合[序号].技能栏[self.一觉序号])
@@ -1529,6 +1529,11 @@ class 角色窗口(窗口):
             self.武器融合属性A2.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
             self.武器融合属性B.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
             self.武器融合属性B2.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+            self.希洛克选择(0, 1)
+            for i in range(15):
+                if setfile[num].replace('\n', '') == '1':
+                    self.希洛克选择(i)
+                num += 1
         except:
             pass
 
@@ -1636,6 +1641,8 @@ class 角色窗口(窗口):
             setfile.write(str(self.武器融合属性A2.currentIndex())+'\n')
             setfile.write(str(self.武器融合属性B.currentIndex())+'\n')
             setfile.write(str(self.武器融合属性B2.currentIndex())+'\n')
+            for i in range(15):
+                setfile.write(str(self.希洛克选择状态[i]) + '\n')
         except:
             pass
 
