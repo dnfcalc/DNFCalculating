@@ -2,7 +2,7 @@
   const latestTag = child.execSync('git describe --long').toString('utf-8').split("-");
   const currentVersion = (require("../ResourceFiles/Config/release_version.json").version).toString();
   // const gitVersion = latestTag[0]+'-'+latestTag[1]+'-'+latestTag[2]
-  const newVersion = new Date().toISOString().split("T")[0]
+  const newVersion = new Date(+new Date() + 8 * 3600 * 1000).toISOString().split("T")[0]
   const fs = require("fs");
   
   const output = child
