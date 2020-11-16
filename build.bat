@@ -29,6 +29,8 @@ echo.
 
 echo [提示]: 开始生成exe文件
 ::使用pyinstaller打包
+
+RMDIR /S /Q logs
 pyinstaller.exe -w AutoRelese\Package.spec
 
 DEL /Q "AutoRelese\Publish\*.*"
