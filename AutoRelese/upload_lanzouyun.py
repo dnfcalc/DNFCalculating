@@ -64,6 +64,7 @@ if __name__ == '__main__':
     # }
     with open("AutoRelese\\upload_cookie.json") as fp:
         cookie = json.load(fp)
+    fp.close()
     uploader = Uploader(cookie)   
     if uploader.login_ok:
         files = os.listdir("AutoRelese\\Publish")

@@ -8,9 +8,32 @@ from PublicReference.utils.producer_consumer import producer_data, consumer, thr
 import json
 import os
 import traceback
+from lanzou.api import LanZouCloud
+from PublicReference.utils import zipfile
+from pathlib import Path
+import shutil
+
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()
+
+计算器版本 = ''
+
+with open("ResourceFiles\\Config\\release_version.json") as fp:
+    计算器版本 += json.load(fp)['version'].replace('-','.')
+fp.close()
+
+def 网盘检查():
+    云端版本 = ''
+    lzy = LanZouCloud()
+    fileURL = ''
+    folder_info = lzy.get_folder_info_by_url('https://wws.lanzous.com/b01bfj76f')
+    for file in folder_info.files:
+        if file.name.startswith("DNF计算器"):
+            fileURL = file.url
+            if file.name.replace("DNF计算器","").replace(".zip","") == 计算器版本[5:]:
+                return ''
+    return fileURL
 
 class 选择窗口(QMainWindow):
     def __init__(self):
@@ -45,12 +68,10 @@ class 选择窗口(QMainWindow):
                    }''')
         self.setMinimumSize(805,630)
         self.setMaximumSize(805,1520)
-        version = "-"
-        with open("ResourceFiles\\Config\\release_version.json") as fp:
-            version += json.load(fp)['version'].replace('-','.')
         with open("ResourceFiles\\Config\\adventure_info.json",encoding='utf-8') as fp:
             角色列表 = json.load(fp)
-        self.setWindowTitle('DNF搭配计算器'+version+' (技能模板仅供参考，请根据自身情况修改)')
+        fp.close()
+        self.setWindowTitle('DNF搭配计算器-'+计算器版本+' (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
 
@@ -134,9 +155,9 @@ class 选择窗口(QMainWindow):
             img_box.move(15, 10 + count* 100)
             count += 1
 
-        名称 = ['查看更新', '查看源码', '使用说明', '问题反馈']
+        名称 = ['检查更新', '查看源码', '使用说明', '问题反馈']
         链接 = []
-        链接.append(['https://pan.lanzou.com/b01bfj76f', 'https://wws.lanzous.com/b01bfj76f'])
+        链接.append([])
         链接.append(['https://github.com/wxh0402/DNFCalculating'])
         链接.append(['https://bbs.colg.cn/thread-7917714-1-1.html', 'https://www.bilibili.com/video/BV1F54y1Q7Bz'])
         链接.append(['https://jq.qq.com/?_wv=1027&k=9S6c2xIb'])
@@ -144,7 +165,10 @@ class 选择窗口(QMainWindow):
         count = 0
         for i in 名称:
             butten=QtWidgets.QPushButton(i, self.topFiller)
-            butten.clicked.connect(lambda state, index = count: self.打开链接(链接[index]))
+            if i == '检查更新':
+                butten.clicked.connect(lambda state, index = count: self.检查更新())          
+            else:
+                butten.clicked.connect(lambda state, index = count: self.打开链接(链接[index]))
             butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
             butten.setStyleSheet(按钮样式3)
             butten.resize(121,90)
@@ -208,7 +232,64 @@ class 选择窗口(QMainWindow):
     def 打开链接(self, url):
         for i in url:
             QDesktopServices.openUrl(QUrl(i))
-            
+    
+    def 检查更新(self):
+        网盘链接 = 网盘检查()
+        if 网盘链接 == '':
+            box = QMessageBox(QMessageBox.Question, "提示", "已经是最新版本计算器！")  
+            box.exec_()
+        else:
+            box = QMessageBox(QMessageBox.Question, "提示", "检测到新的计算器版本,是否更新？")  
+            box.setWindowIcon(self.icon)
+            box.setStandardButtons(QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
+            A = box.button(QMessageBox.Yes)
+            B = box.button(QMessageBox.No)
+            C = box.button(QMessageBox.Cancel)
+            A.setText("自动更新")
+            B.setText("手动下载")  
+            C.setText("取消")
+            box.exec_()
+            if box.clickedButton() == A:
+                self.自动更新(网盘链接)
+            if box.clickedButton() == B:
+                QDesktopServices.openUrl(QUrl('https://pan.lanzou.com/b01bfj76f'))
+
+    def 自动更新(self,fileURL):
+        path  = os.getcwd()+"/download"
+        print(path)
+        lzy = LanZouCloud()
+        lzy.down_file_by_url(fileURL,'', path , callback=self.show_progress, downloaded_handler=self.after_downloaded)
+
+    def after_downloaded(self,file_path):
+        path = os.getcwd()
+        zip_file = zipfile.ZipFile(file_path)
+        zip_list = zip_file.namelist() # 得到压缩包里所有文件
+        for f in zip_list:
+            if not f.endswith('desktop.ini'):
+                zip_file.extract(f, path)
+                # extracted_path.rename(newName)
+                # 循环解压文件到指定目录
+        zip_file.close()
+        shutil.rmtree('download')
+        box = QMessageBox(QMessageBox.Question, "提示", "已经升级到最新版本,请关闭当前版本计算器自行切换新版本！")  
+        box.setStandardButtons(QMessageBox.Yes)
+        A = box.button(QMessageBox.Yes)
+        A.setText("确定")
+        box.exec_()
+        if box.clickedButton() == A:
+            self.close()
+
+    
+    def show_progress(self,file_name, total_size, now_size):
+        percent = now_size / total_size
+        bar_len = 40  # 进度条长总度
+        bar_str = '>' * round(bar_len * percent) + '=' * round(bar_len * (1 - percent))
+        print('\r{:.2f}%\t[{}] {:.1f}/{:.1f}MB | {} '.format(
+            percent * 100, bar_str, now_size / 1048576, total_size / 1048576, file_name), end='')
+        if total_size == now_size:
+            print('')  # 下载完成换行
+    
+        
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
     if 窗口显示模式 == 1:
