@@ -1,3 +1,15 @@
+# 2020-11-16
+
+## NewFeatures
+* 添加检查版本及自动更新功能 ([70e42e](https://github.com/wxh0402/DNFCalculating/commit/70e42eb56ff31a758ed2380f800cdb865e558726))
+* 适配游戏中武极二档不享受卢克西加成(可能为BUG,后根据游戏内情况调整) ([560525](https://github.com/wxh0402/DNFCalculating/commit/560525b2657662249bbf805ec9272d35b9a62142))
+* 增加奶系希洛克装备存档 ([82ecb4](https://github.com/wxh0402/DNFCalculating/commit/82ecb43108ae00b8c0991c4b7417dbfe85edc5e0))
+
+## BugFixes
+* 修复幻光绽放拳套导致详情界面数据异常的问题 ([5b4c70](https://github.com/wxh0402/DNFCalculating/commit/5b4c70d4bac8c0df05ccb15ddfb7fcbbc18d4820))
+* 修复自选装备计算中部分套装选中会闪退的问题 ([a873f3](https://github.com/wxh0402/DNFCalculating/commit/a873f3cd7ebad881adc732dba7729894d41e4abf))
+* 修复奶系三觉是否使用修改为0时计算结果仍然显示问题 ([dbba9a](https://github.com/wxh0402/DNFCalculating/commit/dbba9aea0c058acd8954173edf46fcaaac437266))
+
 # 2020-11-13
 
 ## BugFixes
