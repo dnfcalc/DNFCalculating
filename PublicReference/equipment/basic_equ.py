@@ -1,3 +1,5 @@
+from PublicReference.utils.config import *
+
 class 装备:
     名称 = ''
     模式 = 0
@@ -160,3 +162,50 @@ class 飘零之花武器(装备):
             temp += '魔法攻击力 +' + str(self.魔攻成长 * 改造等级) + '<br>'
             temp += '独立攻击力 +' + str(self.独立成长 * 改造等级) + '<br>'
         return temp        
+
+class 套装:
+    属性描述 = ''
+    def 城镇属性(self, 属性):
+        pass;
+    def 城镇属性_BUFF(self, 属性):
+        pass;
+    def 进图属性(self, 属性):
+        pass;
+    def 进图属性_BUFF(self, 属性):
+        pass;
+    def 其它属性(self, 属性):
+        pass;
+    def 其它属性_BUFF(self, 属性):
+        pass;
+    def 装备描述(self, 属性):
+        属性.装备描述 = 1
+        self.属性描述 = ''
+        self.城镇属性(属性)
+        self.属性描述 += '<font color="#00A2E8">进图触发：</font><br>'
+        self.进图属性(属性)
+        if self.属性描述.endswith('<font color="#00A2E8">进图触发：</font><br>'):
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">进图触发：</font><br>','')
+        self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
+        self.其它属性(属性)
+        if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">其他属性：</font><br>','')        
+        属性.装备描述 = 0
+        return self.属性描述 
+    def 装备描述_BUFF(self, 属性):
+        属性.装备描述 = 1
+        self.属性描述 = ''
+        self.城镇属性_BUFF(属性)
+        self.属性描述 += '<font color="#00A2E8">辅助职业专属属性:</font><br>'
+        self.BUFF属性(属性)
+        self.属性描述 += '<font color="#00A2E8">进图触发：</font><br>'
+        self.进图属性_BUFF(属性)
+        if self.属性描述.endswith('<font color="#00A2E8">进图触发：</font><br>'):
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">进图触发：</font><br>','')
+        self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
+        self.其它属性_BUFF(属性)
+        if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">其他属性：</font><br>','')        
+        属性.装备描述 = 0
+        return self.属性描述 
+    def BUFF属性(self, 属性):
+        pass;
