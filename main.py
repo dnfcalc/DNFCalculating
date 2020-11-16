@@ -187,8 +187,6 @@ class 选择窗口(QMainWindow):
             A = box.button(QMessageBox.Yes)
             B = box.button(QMessageBox.No)
             C = box.button(QMessageBox.Cancel)
-            print(index["序号"])
-            print(index["序号"] == "41")
             if index["序号"] == "41":
                 A.setText('BUFF')
                 B.setText('战斗')
