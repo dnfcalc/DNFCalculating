@@ -72,14 +72,10 @@
     });
     newChangelog += '\n';
   }
-
-  if(currentVersion!=newVersion){
-    fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ version: String(newVersion) }, null, 2));
-  }
-
   if(features.length + Bugfixes.length >0){
   // prepend the newChangelog to the current one
   fs.writeFileSync("CHANGELOG.md", `${newChangelog}${currentChangelog}`);
+  fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ version: String(newVersion) }, null, 2));
   // create a new commit
   child.execSync('git add .');
   child.execSync(`git commit -m "chore: Bump to  ${newVersion}"`);
