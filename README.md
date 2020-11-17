@@ -9,7 +9,7 @@ python(3.8)编写，使用 pyqt5(5.14.2) 图形 GUI 库<br>
 
 安装[Python](https://www.python.org/),计算器开发使用的是3.8版本<br>
 安装项目依赖<br>
-> pip intall -r requirements.txt
+> pip install --user  -i https://pypi.mirrors.ustc.edu.cn/simple/ -r requirements.txt
 
 <!-- ### 修改项目
 * fork本项目
