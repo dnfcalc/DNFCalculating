@@ -277,6 +277,11 @@ class 选择窗口(QMainWindow):
         A.setText("确定")
         box.exec_()
         if box.clickedButton() == A:
+            for p in self.worker:
+                if p.is_alive:
+                    p.terminate()
+                    p.join()
+
             self.close()
 
     
