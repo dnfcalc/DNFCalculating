@@ -167,6 +167,8 @@ class 选择窗口(QMainWindow):
             butten=QtWidgets.QPushButton(i, self.topFiller)
             if i == '检查更新':
                 butten.clicked.connect(lambda state, index = count: self.检查更新())          
+            elif i == '问题反馈':
+                butten.clicked.connect(lambda state, index = count: self.问题反馈())
             else:
                 butten.clicked.connect(lambda state, index = count: self.打开链接(链接[index]))
             butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
@@ -233,6 +235,22 @@ class 选择窗口(QMainWindow):
         for i in url:
             QDesktopServices.openUrl(QUrl(i))
     
+    def 问题反馈(self):
+        box = QMessageBox(QMessageBox.Question, "提示", "请选择反馈方式")  
+        box.setWindowIcon(self.icon)
+        box.setStandardButtons(QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
+        A = box.button(QMessageBox.Yes)
+        B = box.button(QMessageBox.No)
+        C = box.button(QMessageBox.Cancel)
+        A.setText("B站")
+        B.setText("QQ群")  
+        C.setText("取消")
+        box.exec_()
+        if box.clickedButton() == A:
+            self.打开链接(['https://www.bilibili.com/read/cv8424945'])
+        if box.clickedButton() == B:
+            self.打开链接(['https://jq.qq.com/?_wv=1027&k=9S6c2xIb'])
+
     def 检查更新(self):
         网盘链接 = 网盘检查()
         if 网盘链接 == '':
