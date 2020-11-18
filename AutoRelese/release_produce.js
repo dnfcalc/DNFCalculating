@@ -27,7 +27,7 @@
   
   // 用version和时间作为release 标记
   let newChangelog = `# ${
-    new Date().toISOString().split("T")[0]
+    new Date(+new Date() + 8 * 3600 * 1000).toISOString().split("T")[0]
   }\n\n`;
   
   const features = [];

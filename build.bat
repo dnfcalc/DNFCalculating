@@ -43,6 +43,12 @@ echo [提示]: 生成结束
 
 if not exist AutoRelese\Publish MD AutoRelese\Publish
 
+if exist AutoRelese\release_produce.js echo [提示]: 开始记录更新日志
+if exist AutoRelese\release_produce.js node AutoRelese/release_produce.js
+::pandoc将md转换为docx
+if exist AutoRelese\release_produce.js pandoc -s CHANGELOG.md -o "AutoRelese\publish\更新日志%Date:~5,2%.%Date:~8,2%.docx"
+if exist AutoRelese\release_produce.js echo [提示]: 记录结束
+
 if exist AutoRelese\bz.exe echo [提示]: 开始压缩打包版本
 ::复制生成的结果后删除临时文件
 ::rar压缩
@@ -51,12 +57,6 @@ if exist AutoRelese\bz.exe AutoRelese\bz.exe c -y -r -aoa -fmt:zip -l:9 "AutoRel
 if exist AutoRelese\bz.exe AutoRelese\bz.exe rn "AutoRelese\publish\DNF计算器%Date:~5,2%.%Date:~8,2%.zip" "main.exe" "DNF计算器%Date:~5,2%.%Date:~8,2%.exe"
 if exist AutoRelese\bz.exe DEL /Q "main.exe"
 if exist AutoRelese\bz.exe echo [提示]: 打包结束
-
-if exist AutoRelese\release_produce.js echo [提示]: 开始记录更新日志
-if exist AutoRelese\release_produce.js node AutoRelese/release_produce.js
-::pandoc将md转换为docx
-if exist AutoRelese\release_produce.js pandoc -s CHANGELOG.md -o "AutoRelese\publish\更新日志%Date:~5,2%.%Date:~8,2%.docx"
-if exist AutoRelese\release_produce.js echo [提示]: 记录结束
 
 if exist AutoRelese\upload_cookie.json echo [提示]: 开始上传到网盘
 if exist AutoRelese\upload_cookie.json python AutoRelese/upload_lanzouyun.py
