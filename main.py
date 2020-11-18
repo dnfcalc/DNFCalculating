@@ -17,13 +17,7 @@ import shutil
 if __name__ == '__main__':
     multiprocessing.freeze_support()
 
-计算器版本 = ''
-
-with open("ResourceFiles\\Config\\release_version.json") as fp:
-    计算器版本 += json.load(fp)['version'].replace('-','.')
-fp.close()
-
-def 网盘检查():
+def 网盘检查(计算器版本):
     云端版本 = ''
     lzy = LanZouCloud()
     fileURL = ''
@@ -36,6 +30,8 @@ def 网盘检查():
     return fileURL
 
 class 选择窗口(QMainWindow):
+    计算器版本 = ''
+
     def __init__(self):
         super().__init__()
         self.thread_init()
@@ -68,15 +64,18 @@ class 选择窗口(QMainWindow):
                    }''')
         self.setMinimumSize(805,630)
         self.setMaximumSize(805,1520)
+        if not os.path.exists('./ResourceFiles'):
+            QMessageBox.information(self,"解压错误",  "未找到ResourceFiles(资源文件)，请完整解压再打开main")    
+            return     
         with open("ResourceFiles\\Config\\adventure_info.json",encoding='utf-8') as fp:
             角色列表 = json.load(fp)
         fp.close()
-        self.setWindowTitle('DNF搭配计算器-'+计算器版本+' (技能模板仅供参考，请根据自身情况修改)')
+        with open("ResourceFiles\\Config\\release_version.json") as fp:
+            self.计算器版本 += json.load(fp)['version'].replace('-','.')
+        fp.close()
+        self.setWindowTitle('DNF搭配计算器-'+self.计算器版本+' (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
-
-        if not os.path.exists('./ResourceFiles'):
-            QMessageBox.information(self,"解压错误",  "未找到ResourceFiles(资源文件)，请完整解压再打开main") 
 
         bgcolor = QLabel(self)
         bgcolor.resize(805,1520)
@@ -252,7 +251,7 @@ class 选择窗口(QMainWindow):
             self.打开链接(['https://jq.qq.com/?_wv=1027&k=9S6c2xIb'])
 
     def 检查更新(self):
-        网盘链接 = 网盘检查()
+        网盘链接 = 网盘检查(self.计算器版本)
         if 网盘链接 == '':
             box = QMessageBox(QMessageBox.Question, "提示", "已经是最新版本计算器！")  
             box.exec_()
