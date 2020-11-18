@@ -1,4 +1,5 @@
 from PublicReference.utils.config import *
+from PublicReference.equipment.equ_list import *
 
 class 装备:
     名称 = ''
@@ -99,11 +100,12 @@ class 改造产物(装备):
     def 改造属性(self, 属性, x):
         pass
     def 城镇属性(self, 属性):
-        for i in 属性.装备栏:
-            if 装备列表[装备序号[i]].所属套装 in self.关联套装:
-                属性.力量 += 100
-                属性.智力 += 100
-        self.基础属性(属性)
+        # 后续解决
+        # for i in 属性.装备栏:
+        #     if 装备列表[装备序号[i]].所属套装 in self.关联套装:
+        #         属性.力量 += 100
+        #         属性.智力 += 100
+        # self.基础属性(属性)
         pass
     def 进图属性(self, 属性):
         if self.关联套装 in 属性.套装栏:
