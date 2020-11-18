@@ -1,3 +1,23 @@
+# 2020-11-18
+
+## NewFeatures
+* 添加知源·血法师韩服体验服数据 ([b251a6](https://github.com/wxh0402/DNFCalculating/commit/b251a6012936c7be9d1474a82a886a9e89ecb4b7))
+* 调整知源·元素爆破师默认加点 ([80e434](https://github.com/wxh0402/DNFCalculating/commit/80e434b29faec96207834318a3ff86fa3cfac5a1))
+* 添加反馈通道选择 ([6de30e](https://github.com/wxh0402/DNFCalculating/commit/6de30ed231d703218d4dbf74d0816b6ef3092dd6))
+* 添加知源·元素爆破师韩服体验服数据 ([f5b8aa](https://github.com/wxh0402/DNFCalculating/commit/f5b8aa31822d0c4695d3b336525474f77a9bb8d0))
+* 调整知源·逐风者默认加点 ([3b2076](https://github.com/wxh0402/DNFCalculating/commit/3b20766bcff4fdebd4661337dbacab577e2d5e26))
+* 修改炽天使、神启·圣骑士默认配置 ([536508](https://github.com/wxh0402/DNFCalculating/commit/53650850795667580bda48378a86a5e396b9db76))
+* 机械之灵数据采用数据采用数组精确化 ([36871d](https://github.com/wxh0402/DNFCalculating/commit/36871d5dbe72190287237f0036219a32f1c9028f))
+* 添加知源·次元行者韩服体验服数据 ([83248d](https://github.com/wxh0402/DNFCalculating/commit/83248da7c1d50eb6c569c7bce10f965893c6b3ee))
+* 添加知源·冰洁师韩服体验服数据 ([767a5a](https://github.com/wxh0402/DNFCalculating/commit/767a5a098c9e0f6daa3f2c7d015a2bd60097f20f))
+* 添加知源·逐风者韩服体验服数据 ([b0d3f4](https://github.com/wxh0402/DNFCalculating/commit/b0d3f4ab16ace11633c96d89e9637c39ccf7f5d3))
+* 红色宠物装备添加4%白字选项 ([88b3d2](https://github.com/wxh0402/DNFCalculating/commit/88b3d260f7583d8166a0336c602c1dd2ae728aa1))
+
+## BugFixes
+* 修正神启·圣骑士勇气祝福面板显示问题 ([83551a](https://github.com/wxh0402/DNFCalculating/commit/83551a48c06b025c5408d2caf7789c06afcfc876))
+* 修复自选85相关改造装备闪退问题 ([390c88](https://github.com/wxh0402/DNFCalculating/commit/390c88a00eb46ec1bf93ee8804fc974ee27a60ea))
+* 修复自动更新关闭后进程残留问题 ([2f1ee0](https://github.com/wxh0402/DNFCalculating/commit/2f1ee01eded41a258bfccd91f923fea0b4bf3b62))
+
 # 2020-11-16
 
 ## NewFeatures
