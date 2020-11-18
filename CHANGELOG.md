@@ -1,6 +1,8 @@
-# 2020-11-18
+# 2020-11-19
 
 ## NewFeatures
+* 调整混沌行者、知源·次元行者默认加点 ([2b5c3c](https://github.com/wxh0402/DNFCalculating/commit/2b5c3c3328a102fb2722b069eb786092d2a79beb))
+* 追加解压提示 ([a951d8](https://github.com/wxh0402/DNFCalculating/commit/a951d8d67dc2bea56e9a40e0e73da7fb39281eda))
 * 添加知源·血法师韩服体验服数据 ([b251a6](https://github.com/wxh0402/DNFCalculating/commit/b251a6012936c7be9d1474a82a886a9e89ecb4b7))
 * 调整知源·元素爆破师默认加点 ([80e434](https://github.com/wxh0402/DNFCalculating/commit/80e434b29faec96207834318a3ff86fa3cfac5a1))
 * 添加反馈通道选择 ([6de30e](https://github.com/wxh0402/DNFCalculating/commit/6de30ed231d703218d4dbf74d0816b6ef3092dd6))
