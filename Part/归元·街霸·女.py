@@ -601,9 +601,9 @@ class 归元·街霸·女角色属性(角色属性):
 
     武器选项 = ['爪']
     
-    类型选择 = ['魔法百分比', '物理百分比']
+    伤害类型选择 = ['魔法百分比', '物理百分比']
     
-    类型 = '魔法百分比'
+    伤害类型 = '魔法百分比'
     防具类型 = '重甲'
     防具精通属性 = ['力量','智力']
 
@@ -673,7 +673,7 @@ class 归元·街霸·女角色属性(角色属性):
                     蛇拳次数 = 技能释放次数[self.技能序号[n]]
                     蛇拳 = n
             if 蛇拳次数 > 3:
-                self.技能栏[self.技能序号[蛇拳]].涂毒倍率 *= (蛇拳次数 - 3) / 蛇拳次数
+                self.技能栏[self.技能序号[蛇拳]].涂毒倍率 *= (蛇拳次数 - 2) / 蛇拳次数
    
             for n in ['猛毒擒月炎','毒雷引爆','裂地飞沙','伏虎霸王拳','擒月炎','天罗地网','毒影针','抛沙',]:
                 次数 = 技能释放次数[self.技能序号[n]]
@@ -701,7 +701,14 @@ class 归元·街霸·女(角色窗口):
 
     def 界面(self):
         super().界面()
-        
+        self.收招选择 = []
+        self.打桩展示 = QPushButton('打桩展示(25S)',self.main_frame2)
+        self.打桩展示.setStyleSheet(按钮样式)
+        self.打桩展示.resize(100,25)
+        self.打桩展示.move(990, self.height() - 100)
+        self.打桩展示.clicked.connect(lambda state, index = 0: QDesktopServices.openUrl(QUrl('https://www.bilibili.com/video/BV1jz4y1Z7hp')))
+        count = 0
+
         self.死亡毒雾力智开关=QCheckBox('死亡毒雾效果',self.main_frame2)
         self.死亡毒雾力智开关.resize(100,20)
         self.死亡毒雾力智开关.move(335,420)
