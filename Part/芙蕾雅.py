@@ -140,6 +140,10 @@ class 芙蕾雅技能5(芙蕾雅主动技能):
             return 1.0
         else:
             return round(1 + 0.01 * (self.等级 - 18), 3)
+    
+    def 等效CD(self, 武器类型):
+        # 经过测试,手雷恢复速度无法享受技能冷却恢复加成
+        return round(self.CD, 1)
 
 
 class 芙蕾雅技能6(芙蕾雅主动技能):
@@ -188,6 +192,9 @@ class 芙蕾雅技能8(芙蕾雅主动技能):
     TP成长 = 0.10
     TP基础 = 5
     TP上限 = 5
+    def 等效CD(self, 武器类型):
+    # 经过测试,手雷恢复速度无法享受技能冷却恢复加成
+        return round(self.CD, 1)
 
 
 class 芙蕾雅技能9(芙蕾雅主动技能):
