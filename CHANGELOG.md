@@ -1,3 +1,24 @@
+# 2020-11-23
+
+## NewFeatures
+* 破晓女神:数据采用数组精确化 ([78b5f2](https://github.com/wxh0402/DNFCalculating/commit/78b5f25f1c1b3e8089b6de8ecbfed12e6b3a445c))
+* 大地女神:数据采用数组精确化 ([94ef4d](https://github.com/wxh0402/DNFCalculating/commit/94ef4da7ca13406edd7f9533acb74638d5f180d8))
+* 幽影夜神:数据采用数组精确化 ([d1ebb8](https://github.com/wxh0402/DNFCalculating/commit/d1ebb846e9c2c7489f2c0bb43ee80a711430a567))
+* 屠戮之魂:数据采用数组精确化 ([1d744c](https://github.com/wxh0402/DNFCalculating/commit/1d744c5c6e6f9925bc35fd33a5d133ef13d0d9d6))
+* 圣武枪魂:数据采用数组精确化 ([f2ec65](https://github.com/wxh0402/DNFCalculating/commit/f2ec65bf74dd8390f04d3ea82e8e60f9add24f6c))
+* 不灭战神:修改武器惩罚cd算法 ([7a5d88](https://github.com/wxh0402/DNFCalculating/commit/7a5d88d052a572e936d508183f45b0cf63df0d89))
+* 归元·街霸·女:调整默认连招,新增连招演示链接 ([76c199](https://github.com/wxh0402/DNFCalculating/commit/76c1999f1f473973a2748154fe81ffc711307273))
+* 不灭战神:数据采用数组精确化 ([6b00f7](https://github.com/wxh0402/DNFCalculating/commit/6b00f7ea27bfe3cd94ae6e9a5f6cc72ba97e6283))
+* 绯红玫瑰数据采用数组精确化 ([2821fe](https://github.com/wxh0402/DNFCalculating/commit/2821fe7e93387759ccfc9e0e90f064ac906e840f))
+
+## BugFixes
+* 芙蕾雅:修正冰雷电雷不享受技能冷却恢复加成 ([f9d176](https://github.com/wxh0402/DNFCalculating/commit/f9d176488f716b8577de36c27868d32ef20b034e))
+* 混沌行者、知源·次元行者:修复次元跃迁基础等级 ([7cd41c](https://github.com/wxh0402/DNFCalculating/commit/7cd41cb88e552fcc26d878b7e170f4e7a23ed5ad))
+* 混沌行者、知源·次元行者:修正未强化状态下禁断之盛宴伤害;修正次元跃迁冷却时间 ([5da9fe](https://github.com/wxh0402/DNFCalculating/commit/5da9fef25d04f06f54c3550aeaa8536bc568bd26))
+* 绯红玫瑰:修正血腥狂欢向前斩击攻击次数 ([cea913](https://github.com/wxh0402/DNFCalculating/commit/cea9130ddffbec05d23f58ec2ab1df2e57fb61d7))
+* 知源·次元行者:修正时空碎片默认等级错误问题 ([2694ec](https://github.com/wxh0402/DNFCalculating/commit/2694ec3ba23db9176d722486ccdd0885c6fd5989))
+* 修正知源·次元行者三觉数据错误问题 ([dc2590](https://github.com/wxh0402/DNFCalculating/commit/dc2590c71ea34d76c170545a16478249d310e92f))
+
 # 2020-11-19
 
 ## NewFeatures
