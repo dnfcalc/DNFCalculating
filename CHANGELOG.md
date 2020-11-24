@@ -1,3 +1,9 @@
+# 2020-11-25
+
+## NewFeatures
+* 添加自动更新后自动切换版本 ([e56a55](https://github.com/wxh0402/DNFCalculating/commit/e56a55b994d30b32420a0fdcb9e3730517821405))
+* 女圣职：同步冒险团头像及三觉名称 ([281382](https://github.com/wxh0402/DNFCalculating/commit/2813826ae1de3ae5e0c1bad9131e8473ba491ccf))
+
 # 2020-11-24
 
 ## NewFeatures
