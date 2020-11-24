@@ -12,25 +12,19 @@ from lanzou.api import LanZouCloud
 from PublicReference.utils import zipfile
 from pathlib import Path
 import shutil
+import sys
+import time
 
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()
 
-def 网盘检查(计算器版本):
-    云端版本 = ''
-    lzy = LanZouCloud()
-    fileURL = ''
-    folder_info = lzy.get_folder_info_by_url('https://wws.lanzous.com/b01bfj76f')
-    for file in folder_info.files:
-        if file.name.startswith("DNF计算器"):
-            fileURL = file.url
-            if file.name.replace("DNF计算器","").replace(".zip","") == 计算器版本[5:]:
-                return ''
-    return fileURL
+
+
 
 class 选择窗口(QMainWindow):
     计算器版本 = ''
+    云端版本 = ''
 
     def __init__(self):
         super().__init__()
@@ -54,6 +48,19 @@ class 选择窗口(QMainWindow):
 
         self.worker = workers
         pass
+
+    def 网盘检查(self):
+        lzy = LanZouCloud()
+        fileURL = ''
+        folder_info = lzy.get_folder_info_by_url('https://wws.lanzous.com/b01bfj76f')
+        for file in folder_info.files:
+            if file.name.startswith("DNF计算器"):
+                self.云端版本 = file.name.replace(".zip",".exe")
+                fileURL = file.url
+                if file.name.replace("DNF计算器","").replace(".zip","").replace("-",".") == self.计算器版本[5:]:
+                    return ''
+        return fileURL
+
 
     def ui(self):
         角色列表 = []
@@ -251,7 +258,7 @@ class 选择窗口(QMainWindow):
             self.打开链接(['https://jq.qq.com/?_wv=1027&k=9S6c2xIb'])
 
     def 检查更新(self):
-        网盘链接 = 网盘检查(self.计算器版本)
+        网盘链接 = self.网盘检查()
         if 网盘链接 == '':
             box = QMessageBox(QMessageBox.Question, "提示", "已经是最新版本计算器！")  
             box.exec_()
@@ -288,7 +295,7 @@ class 选择窗口(QMainWindow):
                 # 循环解压文件到指定目录
         zip_file.close()
         shutil.rmtree('download')
-        box = QMessageBox(QMessageBox.Question, "提示", "已经升级到最新版本,请关闭当前版本计算器自行切换新版本！")  
+        box = QMessageBox(QMessageBox.Question, "提示", "升级完毕,确定后切换到最新版本！")  
         box.setStandardButtons(QMessageBox.Yes)
         A = box.button(QMessageBox.Yes)
         A.setText("确定")
@@ -298,10 +305,11 @@ class 选择窗口(QMainWindow):
                 if p.is_alive:
                     p.terminate()
                     p.join()
+        newpath = os.getcwd()+"\\"+self.云端版本  
+        oldpath = sys.argv[0].replace("\\","/").split("/")
+        FileName = oldpath[len(oldpath)-1]
+        os.system(newpath+" "+FileName)
 
-            self.close()
-
-    
     def show_progress(self,file_name, total_size, now_size):
         percent = now_size / total_size
         bar_len = 40  # 进度条长总度
@@ -314,6 +322,16 @@ class 选择窗口(QMainWindow):
         
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
+    # 带参数传入打开程序
+    if len(sys.argv) > 1:
+        if os.path.isfile(sys.argv[1]) and sys.argv[1]!="main.py":
+            try:
+                #杀老进程
+                os.system("taskkill /f /t /im "+sys.argv[1])
+                # 删除老版本
+                os.remove(os.getcwd()+"\\"+sys.argv[1])
+            except Exception as error:
+                logger.error("error={} \n detail {}".format(error,traceback.print_exc())) 
     if 窗口显示模式 == 1:
         if hasattr(qtc.Qt, 'AA_EnableHighDpiScaling'):
             QtWidgets.QApplication.setAttribute(qtc.Qt.AA_EnableHighDpiScaling, True)
