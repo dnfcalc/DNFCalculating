@@ -1,3 +1,12 @@
+# 2020-11-24
+
+## NewFeatures
+* 神启·诱魔者：同步国服技能名称 ([7b420e](https://github.com/wxh0402/DNFCalculating/commit/7b420eee00e3a46e7db4314c9a55970d83abe2e5))
+* 神启·异端审判者：同步国服技能名称 ([ca2729](https://github.com/wxh0402/DNFCalculating/commit/ca272945657af23dd854e94f366b1abcc52dd553))
+* 神启·巫女：同步国服技能名称 ([737ef6](https://github.com/wxh0402/DNFCalculating/commit/737ef6803b3b5488752c07399bc24aafab91cea4))
+* 圣职者(女)：移除二觉相关文件 ([033ad0](https://github.com/wxh0402/DNFCalculating/commit/033ad0318000da8bc6346f9d6333d5f808b8dcd2))
+* 神启·圣骑士(女)：同步国服技能名称 ([7566c7](https://github.com/wxh0402/DNFCalculating/commit/7566c764bd6a88e28dc4ee95140548e5abe49ea4))
+
 # 2020-11-23
 
 ## NewFeatures

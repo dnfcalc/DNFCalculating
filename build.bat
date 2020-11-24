@@ -53,7 +53,7 @@ if exist AutoRelese\bz.exe echo [提示]: 开始压缩打包版本
 ::复制生成的结果后删除临时文件
 ::rar压缩
 if exist AutoRelese\bz.exe AutoRelese\bz.exe c -y -r -aoa -fmt:zip -l:9 "AutoRelese\publish\DNF计算器%Date:~5,2%.%Date:~8,2%.zip" "main.exe" "ResourceFiles"
-if exist AutoRelese\bz.exe AutoRelese\bz.exe c -y -r -aoa -fmt:zip -l:9 "AutoRelese\publish\源码%Date:~5,2%.%Date:~8,2%.zip" "ResourceFiles" "main.py" "Part" "PublicReference"
+if exist AutoRelese\bz.exe AutoRelese\bz.exe c -y -r -aoa -fmt:zip -l:9 "AutoRelese\publish\源码%Date:~5,2%.%Date:~8,2%.zip" "ResourceFiles" "main.py" "Part" "PublicReference" "README.md" "CHANGELOG.md" "requirements.txt" "LICENSE"
 if exist AutoRelese\bz.exe AutoRelese\bz.exe rn "AutoRelese\publish\DNF计算器%Date:~5,2%.%Date:~8,2%.zip" "main.exe" "DNF计算器%Date:~5,2%.%Date:~8,2%.exe"
 if exist AutoRelese\bz.exe DEL /Q "main.exe"
 if exist AutoRelese\bz.exe echo [提示]: 打包结束
