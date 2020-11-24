@@ -36,7 +36,7 @@ pyinstaller.exe -w AutoRelese\Package.spec
 DEL /Q "AutoRelese\Publish\*.*"
 DEL /Q "main.spec"
 COPY /Y "dist\main.exe" "main.exe"
-RMDIR /S /Q "build" "dist" "__pycache__" "logs" ".\Part\__pycache__" ".\PublicReference\__pycache__"
+RMDIR /S /Q "build" "dist" "__pycache__" "logs" ".\Part\__pycache__" ".\PublicReference\__pycache__" ".\PublicReference\utils\__pycache__" ".\PublicReference\choise\__pycache__" ".\PublicReference\equipment\__pycache__"
 for /d %%i in (ResourceFiles\*) do if exist "%%i\set" RMDIR /s /q "%%i\set"
 
 echo [提示]: 生成结束
