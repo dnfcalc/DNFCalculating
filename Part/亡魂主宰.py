@@ -769,6 +769,17 @@ class 亡魂主宰角色属性(角色属性):
             self.技能栏[self.技能序号[j]].被动倍率 *= self.技能栏[self.技能序号['黑魔法书：亡者之魂']].加成倍率4(self.武器类型)
         for j in self.技能栏[self.技能序号['黑魔法书：亡者之魂']].关联技能5:
             self.技能栏[self.技能序号[j]].被动倍率 *= self.技能栏[self.技能序号['黑魔法书：亡者之魂']].加成倍率5(self.武器类型)
+        
+        if self.一觉Buff开关 == 1:
+            self.技能栏[self.技能序号['千魂祭']].自定义描述 = 1
+            x = self.技能栏[self.技能序号[ '降临：尼古拉斯（蜘蛛团）', '降临：尼古拉斯（艾克洛索）']]
+            y = self.技能栏[self.技能序号[ '降临：暴君巴拉克（一轮平x）', '降临：暴君巴拉克（2下平x+黑手）', '降临：暴君巴拉克（暗击拳爆炸）', '降临：暴君巴拉克（强击）', '降临：暴君巴拉克（杀戮乱舞）']]
+            temp = [x.等级, y.等级]
+            x.等级 += 5
+            y.等级 += 4
+            temp.append(x.等级)
+            temp.append(y.等级)
+            self.技能栏[self.技能序号['千魂祭']].描述信息 = deepcopy(temp)
 
 class 亡魂主宰(角色窗口):
     def 窗口属性输入(self):
@@ -780,4 +791,17 @@ class 亡魂主宰(角色窗口):
         self.三觉序号 = 亡魂主宰三觉序号
         self.护石选项 = deepcopy(亡魂主宰护石选项)
         self.符文选项 = deepcopy(亡魂主宰符文选项)
+
+    def 界面(self):
+        super().界面()
+        self.一觉Buff开关=QCheckBox('一觉Buff',self.main_frame2)
+        self.一觉Buff开关.resize(100,20)
+        self.一觉Buff开关.move(335,420)
+        self.一觉Buff开关.setStyleSheet(复选框样式)
+        self.一觉Buff开关.setChecked(True)
+    
+    def 输入属性(self, 属性, x = 0):
+        super().输入属性(属性, x)
+        if self.一觉Buff开关.isChecked():
+            属性.一觉Buff开关= 1
 

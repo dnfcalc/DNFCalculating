@@ -445,6 +445,12 @@ class 真·死灵术士技能22(真·死灵术士主动技能):
     CD = 145
     攻击倍率 = 1.066
 
+    def 技能描述(self, 武器类型):
+        temp = ''
+        temp += '降临：尼古拉斯（蜘蛛团）, 降临：尼古拉斯（艾克洛索） Lv+5<br>'
+        temp += '降临：暴君巴拉克（3下平x+黑手）, 降临：暴君巴拉克（暗击拳爆炸）, 降临：暴君巴拉克（强击）, 降临：暴君巴拉克（杀戮乱舞）Lv+4'
+        return temp
+
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率 * self.攻击倍率
 
@@ -687,12 +693,25 @@ class 真·死灵术士角色属性(角色属性):
 
     远古记忆 = 0
 
+    一觉Buff开关 = 0
+
     def __init__(self):
         基础属性输入(self)
         self.技能栏 = deepcopy(真·死灵术士技能列表)
         self.技能序号 = deepcopy(真·死灵术士技能序号)
 
     def 被动倍率计算(self):
+        if self.一觉Buff开关 == 1:
+            self.一觉提升技能1 = [ '降临：尼古拉斯（蜘蛛团）', '降临：尼古拉斯（艾克洛索）']
+            self.一觉提升技能2 = [ '降临：暴君巴拉克（3下平x+黑手）', '降临：暴君巴拉克（暗击拳爆炸）', '降临：暴君巴拉克（强击）', '降临：暴君巴拉克（杀戮乱舞）']
+            self.技能栏[self.技能序号['千魂祭']].自定义描述 = 1
+            for i in self.一觉提升技能1:
+                x = self.技能栏[self.技能序号[i]]
+                x.等级 += 5
+            for j in self.一觉提升技能2:
+                x = self.技能栏[self.技能序号[j]]
+                x.等级 += 4
+
         super().被动倍率计算()
         self.暗属性强化 += self.技能栏[self.技能序号['黑暗之环']].属强加成()
 
@@ -702,6 +721,7 @@ class 真·死灵术士角色属性(角色属性):
         for i in [13, 14, 15]:
             self.技能栏[i].等级 = self.技能栏[12].等级
             self.技能栏[i].TP等级 = self.技能栏[12].TP等级
+
 
 class 真·死灵术士(角色窗口):
     def 窗口属性输入(self):
@@ -713,3 +733,36 @@ class 真·死灵术士(角色窗口):
         self.三觉序号 = 真·死灵术士三觉序号
         self.护石选项 = deepcopy(真·死灵术士护石选项)
         self.符文选项 = deepcopy(真·死灵术士符文选项)
+
+    def 界面(self):
+        super().界面()
+        self.一觉Buff开关=QCheckBox('一觉Buff',self.main_frame2)
+        self.一觉Buff开关.resize(100,20)
+        self.一觉Buff开关.move(335,420)
+        self.一觉Buff开关.setStyleSheet(复选框样式)
+        self.一觉Buff开关.setChecked(True)
+
+    def 输入属性(self, 属性, x = 0):
+        super().输入属性(属性, x)
+        if self.一觉Buff开关.isChecked():
+            属性.一觉Buff开关= 1
+        if self.觉醒选择状态 == 1:
+            属性.一觉Buff开关 = 0
+
+    def 强化觉醒选择(self, index):
+        self.觉醒选择状态 = index
+        if index == 1:
+            self.一觉遮罩透明度.setOpacity(0.0)
+            self.二觉遮罩透明度.setOpacity(0.5)
+            self.一觉Buff开关.setEnabled(False)
+            self.一觉Buff开关.setStyleSheet(不可勾选复选框样式)
+        if index == 2:
+            self.一觉遮罩透明度.setOpacity(0.5)
+            self.二觉遮罩透明度.setOpacity(0.0)
+            self.一觉Buff开关.setEnabled(True)
+            self.一觉Buff开关.setStyleSheet(复选框样式)
+
+        self.一觉遮罩.setGraphicsEffect(self.一觉遮罩透明度)
+        self.二觉遮罩.setGraphicsEffect(self.二觉遮罩透明度)
+
+    
