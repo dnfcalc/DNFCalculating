@@ -230,8 +230,8 @@ class 角色属性(属性):
         else:
             if y == 0:
                 y = x
-             self.力量 += x 
-             self.智力 += y
+            self.力量 += x 
+            self.智力 += y
         return ''
 
     def 持续伤害加成(self, x ):
