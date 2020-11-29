@@ -216,17 +216,22 @@ class 角色属性(属性):
         if self.装备描述 == 1:
             return '物攻/魔攻/独立 +{}<br>'.format(x)
         else:
+            if y == 0 or z == 0:
+                y = x
+                z = x
             self.物理攻击力 += x
-            self.魔法攻击力 += x
-            self.独立攻击力 += x
+            self.魔法攻击力 += y
+            self.独立攻击力 += z
         return ''
 
     def 力智固定加成(self, x=0, y=0):
         if self.装备描述 == 1:
             return '力量、智力 +{}<br>'.format(x)
         else:
-             self.力量 += x 
-             self.智力 += x
+            if y == 0:
+                y = x
+            self.力量 += x 
+            self.智力 += y
         return ''
 
     def 持续伤害加成(self, x ):

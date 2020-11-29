@@ -111,6 +111,15 @@ class 角色属性(属性):
              self.力量 += x 
              self.智力 += x
         return ''    
+    
+    def 体精固定加成(self,x=0,y=0):
+        if self.装备描述 == 1:
+            return '体力、精神 +{}<br>'.format(x)
+        else:
+             self.体力 += x 
+             self.精神 += x
+        return ''    
+    
 
     def BUFF增加(self,BUFFLv=0,BUFF力量=0,BUFF智力=0,BUFF力量per=1,BUFF智力per=1,BUFF物攻=0,BUFF魔攻=0,BUFF独立=0,BUFF物攻per=1,BUFF魔攻per=1,BUFF独立per=1):
         if self.装备描述 == 1: 

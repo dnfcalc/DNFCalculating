@@ -72,7 +72,7 @@ class 选择窗口(QMainWindow):
         self.setMinimumSize(805,630)
         self.setMaximumSize(805,1520)
         if not os.path.exists('./ResourceFiles'):
-            QMessageBox.information(self,"解压错误",  "未找到ResourceFiles(资源文件)，请完整解压再打开main")    
+            QMessageBox.information(self,"解压错误",  "未找到资源文件，请将压缩包中ResourceFiles解压到同目录后打开计算器")    
             return     
         with open("ResourceFiles\\Config\\adventure_info.json",encoding='utf-8') as fp:
             角色列表 = json.load(fp)
@@ -295,7 +295,7 @@ class 选择窗口(QMainWindow):
                 # 循环解压文件到指定目录
         zip_file.close()
         shutil.rmtree('download')
-        box = QMessageBox(QMessageBox.Question, "提示", "升级完毕,确定后切换到最新版本！")  
+        box = QMessageBox(QMessageBox.Question, "提示", "升级完毕,确定后打开最新版本,旧版本exe自行删除！")  
         box.setStandardButtons(QMessageBox.Yes)
         A = box.button(QMessageBox.Yes)
         A.setText("确定")
@@ -307,8 +307,9 @@ class 选择窗口(QMainWindow):
                     p.join()
         newpath = os.getcwd()+"\\"+self.云端版本  
         oldpath = sys.argv[0].replace("\\","/").split("/")
-        FileName = oldpath[len(oldpath)-1]
-        os.system(newpath+" "+FileName)
+        # FileName = oldpath[len(oldpath)-1]
+        # os.system(newpath+" "+FileName)
+        os.system(newpath)
 
     def show_progress(self,file_name, total_size, now_size):
         percent = now_size / total_size
@@ -322,6 +323,7 @@ class 选择窗口(QMainWindow):
         
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
+    # logger.info(sys.argv)
     # 带参数传入打开程序
     if len(sys.argv) > 1:
         if os.path.isfile(sys.argv[1]) and sys.argv[1]!="main.py":
