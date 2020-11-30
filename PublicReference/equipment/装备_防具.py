@@ -562,7 +562,6 @@ class 装备93(装备):
     def 其它属性(self, 属性):
         pass
     def 城镇属性_BUFF(self, 属性):
-        self.属性描述 += 属性.技能等级加成('所有', 1, 45, 1)
         pass
     def 进图属性_BUFF(self, 属性):
         self.属性描述 += 属性.技能等级加成('所有', 1, 45, 1)
@@ -573,9 +572,11 @@ class 装备93(装备):
         self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.25)
         self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.11 - self.属性1选择_BUFF / 100, BUFF智力per=1.11 - self.属性1选择_BUFF / 100)
+        self.属性描述 += 属性.技能等级加成('所有', 1, (45 - self.属性2选择_BUFF * 5) , 1)
         self.属性描述 += 属性.觉醒增加(一觉力智=90 - self.属性2选择_BUFF * 10)
         self.属性描述 += 属性.被动增加(守护恩赐体精=200 - self.属性3选择_BUFF * 20)
         self.属性描述 += 属性.被动增加(转职被动智力=100 - self.属性3选择_BUFF * 20)
+        
     
 class 装备94(装备):
     名称 = '掌管生死之影夹克'
@@ -823,6 +824,7 @@ class 装备97(装备):
         self.属性描述 += 属性.被动增加(转职被动智力=150)
         self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.25)
         self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
+        self.属性描述 += 属性.技能等级加成('所有', 25, 45 - self.属性1选择_BUFF * 5, 1)
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.06 - self.属性1选择_BUFF / 100, BUFF智力per=1.06 - self.属性1选择_BUFF / 100)
         self.属性描述 += 属性.觉醒增加(一觉力智=60 - self.属性2选择_BUFF * 10)
         self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.09 - self.属性3选择_BUFF / 100, BUFF魔攻per=1.09 - self.属性3选择_BUFF / 100, BUFF独立per=1.09 - self.属性3选择_BUFF / 100)
@@ -1545,7 +1547,6 @@ class 装备108(装备):
     属性4选择_BUFF = 0
 
     def 城镇属性_BUFF(self, 属性):
-        self.属性描述 += 属性.技能等级加成('所有', 5, 100, 1)
         pass
     def 进图属性_BUFF(self, 属性):
         pass
@@ -1554,6 +1555,7 @@ class 装备108(装备):
         self.属性描述 += 属性.被动增加(转职被动智力=173)
         self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.25)
         self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
+        self.属性描述 += 属性.技能等级加成('所有', 5, 100 - self.属性1选择_BUFF * 5, 1)
         self.属性描述 += 属性.被动增加(转职被动Lv=17 - self.属性1选择_BUFF)
         self.属性描述 += 属性.被动增加(守护恩赐Lv=17 - self.属性1选择_BUFF)
         self.属性描述 += 属性.被动增加(信念光环体精=160 - self.属性2选择_BUFF * 20)
@@ -1688,7 +1690,6 @@ class 装备110(装备):
     属性4选择_BUFF = 0
 
     def 城镇属性_BUFF(self, 属性):
-        self.属性描述 += 属性.技能等级加成('所有', 30, 48, 1)
         pass
     def 进图属性_BUFF(self, 属性):
         pass
@@ -1697,6 +1698,7 @@ class 装备110(装备):
         self.属性描述 += 属性.被动增加(转职被动智力=150)
         self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.25)
         self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>' 
+        self.属性描述 += 属性.技能等级加成('所有', 30, min(48, 50 - self.属性1选择_BUFF * 5), 1)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.04 - self.属性1选择_BUFF / 100)
         self.属性描述 += 属性.被动增加(转职被动Lv=7 - self.属性2选择_BUFF)
         self.属性描述 += 属性.被动增加(守护恩赐Lv=7 - self.属性2选择_BUFF)
