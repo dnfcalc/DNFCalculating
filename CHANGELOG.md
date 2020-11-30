@@ -4,6 +4,7 @@
 * 奶系：添加希洛克武器词条寻优功能（勾选切装会依照切装后的计算太阳属性最优词条） ([d41e08](https://github.com/wxh0402/DNFCalculating/commit/d41e08dcfee94c98e43ba05be40521540ad7cc43))
 
 ## BugFixes
+* 知源·魔道学者：修复无法正常计算的问题 ([ac077d](https://github.com/wxh0402/DNFCalculating/commit/ac077dad9aaa0270bd5dae570fb461114823606a))
 * 奶系：修正部分神话等级加成词条默认满属性的情况 ([cb731c](https://github.com/wxh0402/DNFCalculating/commit/cb731c279e027526656413a108016fa5e5d4e9ce))
 * 归元·街霸·女：修复无法正常计算的问题 ([3abe91](https://github.com/wxh0402/DNFCalculating/commit/3abe914b5083c83c27e3b08b5e6632a23d72fd09))
 
