@@ -103,7 +103,10 @@ class 角色属性(属性):
     # 是否为输出装备描述
     装备描述 = 0
     
-    #词条提升率 = []
+    希洛克武器词条 = 0
+    自适应最高值 = []
+    武器词条触发 = 0
+
     def 力智固定加成(self, x=0, y=0):
         if self.装备描述 == 1:
             return '力量、智力 +{}<br>'.format(x)
@@ -494,23 +497,16 @@ class 角色属性(属性):
         if self.双装备模式 == 1 and self.次数输入[self.一觉序号] == '1':
             #用于计算一觉
             temp = deepcopy(self)
-            
-            #计算现有装备BUFF
-            self.装备属性计算()
-            self.适用数值计算()
-            for i in range(len(self.技能栏)):
-                if  self.次数输入[i] == '1':
-                    总数据.append(self.技能栏[i].结算统计())
-                else:
-                    总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
 
             #拷贝数据，并修改装备，返回可能的组合
             数据列表 = []
             切换列表 = []
             一觉计算属性_temp = []
+            替换属性_temp = []
             可能组合 = self.装备替换(temp)
             for 一觉计算属性 in 可能组合:
                 一觉计算属性.装备属性计算()
+                替换属性_temp.append(deepcopy(一觉计算属性))
                 一觉计算属性.适用数值计算()
                 一觉计算属性_temp.append(一觉计算属性)
                 数据列表.append(一觉计算属性.技能栏[self.一觉序号].结算统计()[3] * (一觉计算属性.技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0 and self.次数输入[self.三觉序号] == '1' else 1)) #3是力量属性  一觉力智都是相等的
@@ -523,22 +519,68 @@ class 角色属性(属性):
                 temp = '<br><br>' + ((self.技能栏[self.一觉序号].名称 + '+' + self.技能栏[self.三觉序号].名称 + '：') if self.三觉序号 != 0 else (self.技能栏[self.一觉序号].名称 + '：')) + str(int(数据列表[0])) + '→' + str(int(a)) + ' (+' + str(int(a) - int(数据列表[0])) + ')'
             else:
                 temp = ''
-            a = int(a / (一觉计算属性_temp[序号].技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0 and self.次数输入[self.三觉序号] == '1' else 1))
-            总数据[self.一觉序号] = [0, 0, 0, a, a, 0, 0, 0]
-            self.切换详情 = 切换列表[序号] + temp
-            self.技能栏[self.一觉序号] = deepcopy(可能组合[序号].技能栏[self.一觉序号])
-            if self.三觉序号 != 0:
-                self.技能栏[self.三觉序号] = deepcopy(可能组合[序号].技能栏[self.三觉序号])
-        else:
+            #计算现有装备BUFF
             self.装备属性计算()
+            #一觉属性替换
+            替换属性 = 替换属性_temp[序号]
+            self.一觉Lv = 替换属性.一觉Lv
+            self.一觉力智 = 替换属性.一觉力智
+            self.一觉力智per = 替换属性.一觉力智per
+            self.技能栏[self.一觉序号] = 替换属性.技能栏[self.一觉序号]
+            self.技能栏[self.三觉序号] = 替换属性.技能栏[self.三觉序号]
+            self.自适应计算()
             self.适用数值计算()
+            self.技能栏[self.一觉序号].适用数值 = 一觉计算属性_temp[序号].技能栏[self.一觉序号].适用数值 
+            self.切换详情 = 切换列表[序号] + temp
             for i in range(len(self.技能栏)):
                 if  self.次数输入[i] == '1':
                     总数据.append(self.技能栏[i].结算统计())
                 else:
                     总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
-
+        else:
+            self.装备属性计算()
+            self.自适应计算()
+            self.适用数值计算()
+            for i in range(len(self.技能栏)):
+                if self.次数输入[i] == '1':
+                    总数据.append(self.技能栏[i].结算统计())
+                else:
+                    总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
         return 总数据
+
+    def 自适应计算(self):
+        # 武器词条自适应计算
+        if self.希洛克武器词条 == 1:
+            词条提升率 = []
+            for i in range(len(武器属性组合)):
+                temp = deepcopy(self)
+                总数据 = []
+                武器属性A = 武器属性组合[i][0]
+                武器属性B = 武器属性组合[i][1]
+                temp.武器属性输入(武器属性A, 武器属性B)
+                temp.适用数值计算()
+                for i in range(len(temp.技能栏)):
+                    if temp.次数输入[i] == '1':
+                        总数据.append(temp.技能栏[i].结算统计())
+                    else:
+                        总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
+                三觉属性 = temp.技能栏[temp.一觉序号].结算统计()[3] * (temp.技能栏[temp.三觉序号].加成倍率() - 1)
+                总数据[temp.三觉序号] = [0, 0, 0, 三觉属性, 三觉属性, 0, 0, 0]
+                提升率 = temp.提升率计算(总数据)
+                词条提升率.append(提升率)     
+            a = max(词条提升率)
+            序号 = 词条提升率.index(a)
+            self.自适应最高值 = 武器属性组合[序号]
+            self.武器属性输入(self.自适应最高值[0], self.自适应最高值[1])
+    
+    def 武器属性输入(self, 武器属性A, 武器属性B):
+        武器属性A = 武器属性A列表[武器属性A]
+        武器属性B = 武器属性B列表[武器属性B]
+        武器属性A.当前值 = int(武器属性A.最大值)
+        武器属性B.当前值 = int(武器属性B.最大值)
+        武器属性A.融合属性(self)
+        if self.武器词条触发 == 1:
+            武器属性B.融合属性(self)
 
     def 结果返回(self, x, 总数据):
         if x == 0:
@@ -834,11 +876,17 @@ class 角色窗口(窗口):
         横坐标 = 395
         纵坐标 = 240
 
-        x=QLabel("武器融合(固定词条/随机词条/随机数值)：", self.main_frame2)
+        x=QLabel("武器融合：", self.main_frame2)
         x.move(横坐标,纵坐标 + 5)
         x.resize(300,20)
         x.setStyleSheet(标签样式)
 
+        self.希洛克武器选择 = MyQComboBox(self.main_frame2)
+        self.希洛克武器选择.addItems(['武器词条：无', '自适应最高值', '自选词条数值'])
+        self.希洛克武器选择.resize(120,20)
+        self.希洛克武器选择.move(横坐标 + 60, 纵坐标 + 5)
+        self.希洛克武器选择.currentIndexChanged.connect(lambda state: self.希洛克武器选择更新())
+        纵坐标 += 10
         self.武器融合属性A = MyQComboBox(self.main_frame2) 
         for j in 武器属性A列表:
             self.武器融合属性A.addItem(j.固定属性描述)
@@ -1388,6 +1436,37 @@ class 角色窗口(窗口):
             self.属性设置输入[4][16].setText(str(体力))
             self.属性设置输入[5][16].setText(str(精神))
 
+    def 希洛克武器选择更新(self):
+        if self.希洛克武器选择.currentIndex() != 2:  
+            # 武器融合属性A禁用
+            self.武器融合属性A.setEnabled(False)
+            self.武器融合属性A1.setEnabled(False)
+            self.武器融合属性A2.setEnabled(False)
+            self.武器融合属性A.setStyleSheet(不可选择下拉框样式)
+            self.武器融合属性A1.setStyleSheet(不可选择下拉框样式)
+            self.武器融合属性A2.setStyleSheet(不可选择下拉框样式)
+            # 武器融合属性B禁用
+            self.武器融合属性B.setEnabled(False)
+            self.武器融合属性B1.setEnabled(False)
+            self.武器融合属性B2.setEnabled(False)
+            self.武器融合属性B.setStyleSheet(不可选择下拉框样式)
+            self.武器融合属性B1.setStyleSheet(不可选择下拉框样式)
+            self.武器融合属性B2.setStyleSheet(不可选择下拉框样式)
+        else:
+            # 武器融合属性A启用
+            self.武器融合属性A.setEnabled(True)
+            self.武器融合属性A1.setEnabled(True)
+            self.武器融合属性A2.setEnabled(True)
+            self.武器融合属性A.setStyleSheet(下拉框样式)
+            self.武器融合属性A1.setStyleSheet(下拉框样式)
+            self.武器融合属性A2.setStyleSheet(下拉框样式)
+             # 武器融合属性B启用
+            self.武器融合属性B.setEnabled(True)
+            self.武器融合属性B1.setEnabled(True)
+            self.武器融合属性B2.setEnabled(True)
+            self.武器融合属性B.setStyleSheet(下拉框样式)
+            self.武器融合属性B1.setStyleSheet(下拉框样式)
+            self.武器融合属性B2.setStyleSheet(下拉框样式)
 
     def 希洛克武器随机词条更新(self, index, x = 0):
         if x == 0:
@@ -1415,22 +1494,6 @@ class 角色窗口(窗口):
                     self.武器融合属性B2.addItem(str(temp) + '%')
                 temp -= 属性B.间隔
             self.武器融合属性B1.addItem(属性B.随机属性描述)
-            
-    def 武器融合属性计算(self, 属性):
-        武器融合属性A选择 = self.武器融合属性A.currentIndex()
-        武器融合属性B选择 = self.武器融合属性B.currentIndex()
-        武器融合属性A数值 = self.武器融合属性A2.currentText().replace('%','')
-        武器融合属性B数值 = self.武器融合属性B2.currentText().replace('%','')
-
-        if 武器融合属性A数值 != '':
-            武器融合属性A = 武器属性A列表[武器融合属性A选择]
-            武器融合属性A.当前值 = int(武器融合属性A数值)
-            武器融合属性A.融合属性(属性)
-
-        if 武器融合属性B数值 != '':
-            武器融合属性B = 武器属性B列表[武器融合属性B选择]
-            武器融合属性B.当前值 = int(武器融合属性B数值)
-            武器融合属性B.融合属性(属性)
 
     def 批量选择(self, index):
         if index == 1:
@@ -1538,11 +1601,13 @@ class 角色窗口(窗口):
             self.武器融合属性A2.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
             self.武器融合属性B.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
             self.武器融合属性B2.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+            self.希洛克武器选择.setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
             self.希洛克选择(0, 1)
             for i in range(15):
                 if setfile[num].replace('\n', '') == '1':
                     self.希洛克选择(i)
                 num += 1
+            
         except:
             pass
 
@@ -1650,6 +1715,7 @@ class 角色窗口(窗口):
             setfile.write(str(self.武器融合属性A2.currentIndex())+'\n')
             setfile.write(str(self.武器融合属性B.currentIndex())+'\n')
             setfile.write(str(self.武器融合属性B2.currentIndex())+'\n')
+            setfile.write(str(self.希洛克武器选择.currentIndex())+'\n')
             for i in range(15):
                 setfile.write(str(self.希洛克选择状态[i]) + '\n')
         except:
@@ -2267,10 +2333,18 @@ class 角色窗口(窗口):
                 tempstr += '，独立+' + str(合计独立)
             if self.角色属性B.切换详情 != '无':
                 tempstr += '<br><br>' + self.角色属性B.切换详情 
+
+        if self.角色属性B.希洛克武器词条 == 1:
+            武器词条最高值 = self.角色属性B.自适应最高值
+            武器属性A = 武器属性A列表[武器词条最高值[0]]
+            武器属性B = 武器属性B列表[武器词条最高值[1]]
+            tempstr += '<br><br>' + "属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>，' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else '')
+            if self.角色属性B.武器词条触发 == 1:
+                tempstr += '<br><br>' + "属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>，' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else '')
         合计=QLabel(输出窗口)
         合计.setStyleSheet("QLabel{color:rgb(104,213,237);font-size:15px}")
         合计.setText(tempstr)
-        合计.resize(450,100)
+        合计.resize(450,150)
         合计.move(280, 90 + j * self.行高)
         合计.setAlignment(Qt.AlignCenter) 
     
@@ -2308,7 +2382,7 @@ class 角色窗口(窗口):
                 for item in range(5):
                     if self.希洛克选择状态[item*3+2] > 0:
                         图片列表.append(QMovie('./ResourceFiles/img/希洛克/'+str(item*3+2)+'.gif')) 
-            elif self.武器融合属性A.currentIndex()+self.武器融合属性B.currentIndex() > 0 and i == 11:
+            elif (self.武器融合属性A.currentIndex()+self.武器融合属性B.currentIndex() > 0 or self.角色属性B.希洛克武器词条 != 0) and i == 11:
                 # 图片列表.append(QMovie('./ResourceFiles/img/希洛克/融-7.gif'))
                 图片列表.append(QMovie('./ResourceFiles/img/希洛克/武器/'+ str(装备序号[self.排行数据[index][i]]) +'.gif'))    
             else:          
@@ -2418,6 +2492,17 @@ class 角色窗口(窗口):
             tempstr[i] += '</font>'
         return tempstr
 
+    def 武器融合属性计算(self, 属性):
+        武器融合属性A = 武器属性A列表[self.武器融合属性A.currentIndex()]
+        武器融合属性B = 武器属性B列表[self.武器融合属性B.currentIndex()]
+        武器融合属性A数值 = self.武器融合属性A2.currentText().replace('%','')
+        武器融合属性B数值 = self.武器融合属性B2.currentText().replace('%','')
+        武器融合属性A.当前值 = int(武器融合属性A数值)
+        武器融合属性A.融合属性(属性)
+        if 属性.武器词条触发 == 1:
+            武器融合属性B.当前值 = int(武器融合属性B数值) 
+            武器融合属性B.融合属性(属性)
+
     def 希洛克属性计算(self, 属性):
         数量 = [0] * 3
         for i in range(15):
@@ -2525,8 +2610,14 @@ class 角色窗口(窗口):
         if x == 0:
             self.辟邪玉属性计算(属性)
 
-        if x in [0,1]:
+        if sum(self.希洛克选择状态) == 3:
+            属性.武器词条触发 = 1
+
+        if self.希洛克武器选择.currentIndex() == 1:
+            属性.希洛克武器词条 = 1
+        if self.希洛克武器选择.currentIndex() == 2:
             self.武器融合属性计算(属性)
+
 
         for i in range(len(self.复选框列表)):
             if self.复选框列表[i].isChecked():
@@ -2559,7 +2650,7 @@ class 角色窗口(窗口):
             属性.次数输入.append(self.次数输入[序号].currentText())
         self.希洛克属性计算(属性)
         self.基础属性(属性)
-    
+
     def 技能加成判断(self, name, 属性):
         if name == 'Lv1-30(主动)Lv+1':
             属性.技能等级加成('主动',1,30,1)

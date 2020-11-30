@@ -157,5 +157,10 @@ for i in range(7):
 武器属性B序号 = dict()
 for i in range(len(武器属性A列表)):
     武器属性A序号[武器属性A列表[i].固定属性描述] = i
-for i in range(len(武器属性B序号)):
+for i in range(len(武器属性B列表)):
     武器属性B序号[武器属性B列表[i].固定属性描述] = i
+
+武器属性组合 = []
+for i in range(1, 7):
+    for j in range(1, 7):
+        武器属性组合.append([武器属性A序号[武器属性A列表[i].固定属性描述], 武器属性B序号[武器属性B列表[j].固定属性描述]])
