@@ -2204,8 +2204,10 @@ class 角色窗口(窗口):
         for i in range(0,len(self.角色属性B.技能栏)):
             if sum(统计详情[i]) != 0:
                 count += 1
-
-        self.行高 = min(int(440 / count),30)        
+                
+        self.行高 = 30
+        if count > 0:
+            self.行高 = min(int(440 / count),30)        
         j = -1
 
         for i in range(0,len(self.角色属性B.技能栏)):

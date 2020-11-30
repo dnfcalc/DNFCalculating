@@ -305,11 +305,13 @@ class 选择窗口(QMainWindow):
                 if p.is_alive:
                     p.terminate()
                     p.join()
+        self.close()
         newpath = os.getcwd()+"\\"+self.云端版本  
         oldpath = sys.argv[0].replace("\\","/").split("/")
         # FileName = oldpath[len(oldpath)-1]
         # os.system(newpath+" "+FileName)
         os.system(newpath)
+        
 
     def show_progress(self,file_name, total_size, now_size):
         percent = now_size / total_size
