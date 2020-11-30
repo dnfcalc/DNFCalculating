@@ -1,3 +1,22 @@
+# 2020-11-30
+
+## NewFeatures
+* 调整部分提示说明 ([91a267](https://github.com/wxh0402/DNFCalculating/commit/91a267e4d0fe956f117eba4e5a169bdcbbdc50f8))
+* 神启·异端审判者：修正三觉相关技能数据 ([c4d7be](https://github.com/wxh0402/DNFCalculating/commit/c4d7becce243992f5d89282a3431c5cce951333f))
+* 添加男法三觉立绘背景图 ([2d70d6](https://github.com/wxh0402/DNFCalculating/commit/2d70d64d6a852b6f4ad4d638a2a76bc3500403b9))
+* 神启·诱魔者：修改默认技能设置 ([a7608b](https://github.com/wxh0402/DNFCalculating/commit/a7608bfaefcfe38d89b1c7bc3febbce1968e1b40))
+* 神启·诱魔者：修正三觉相关技能数据；下拉选项[净化之花]多段攻击次数上限提高 ([db448b](https://github.com/wxh0402/DNFCalculating/commit/db448b4f8d8997b732d8724f47e264f3d024c255))
+* 知源·逐风者：适配韩服正式服狂岚律动加强5% ([ebc4a3](https://github.com/wxh0402/DNFCalculating/commit/ebc4a3043089c652395e678466fbafa8d3486839))
+* 亡魂主宰、真·死灵术士：新增千魂祭增加部分技能等级BUFF选项 ([f6f6bf](https://github.com/wxh0402/DNFCalculating/commit/f6f6bfad26c39fb8b94b4d84c264658523c7f18b))
+
+## BugFixes
+* 修正神话·心痛如绞的诀别神话专属属性描述问题 ([f21ae7](https://github.com/wxh0402/DNFCalculating/commit/f21ae7664427f1442481fe192c1e8ded6314ae95))
+* 修正部分装备描述中小数点进位问题 ([110a63](https://github.com/wxh0402/DNFCalculating/commit/110a63b6d8aef2dbf5f42ecc81019b5f6b5fce09))
+* 修正奶系辟邪玉一觉力智增加选项间隔错误 ([11c191](https://github.com/wxh0402/DNFCalculating/commit/11c191f86ae1f5a94171e191e2259a01b194f172))
+* 绯红玫瑰：修正鲜血劫击CD错误 ([cbeb6e](https://github.com/wxh0402/DNFCalculating/commit/cbeb6eabf35748def975cf53706b79a7b684065b))
+* 修正选择改造武器后导致详情界面与排行界面存在出入的问题 ([733d07](https://github.com/wxh0402/DNFCalculating/commit/733d0713c86b94f96a4ea079b2144ff167df624b))
+* 知源·魔道学者：修正电鳗碰撞机CD错误 ([ca0fd4](https://github.com/wxh0402/DNFCalculating/commit/ca0fd4d346898604809a9e1137a8f85c345302f9))
+
 # 2020-11-25
 
 ## NewFeatures
