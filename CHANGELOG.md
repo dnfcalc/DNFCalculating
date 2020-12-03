@@ -1,3 +1,14 @@
+# 2020-12-03
+
+## NewFeatures
+* 奶系职业详情界面优化：合并套装属性,新增希洛克套装显示,武器详情新增融合词条 ([7f17aa](https://github.com/wxh0402/DNFCalculating/commit/7f17aaa5acc4c4bf66dd2e8b3018524f274300e3))
+* 神启·异端审判者：[行刑]护石对[神焰]初始化效果计入[神焰]‘/CD’算法 ([e19a32](https://github.com/wxh0402/DNFCalculating/commit/e19a3274fd372e5dcfb2105e010f2bc5fdf704b0))
+* 输出职业详情界面优化：合并套装属性,新增希洛克套装显示,武器详情新增融合词条 ([227dd3](https://github.com/wxh0402/DNFCalculating/commit/227dd3cfb9850c071dbec296f4f1bc7c36758228))
+
+## BugFixes
+* 奶系：修复生命脉动之地神话词条选择范围问题 ([ec4344](https://github.com/wxh0402/DNFCalculating/commit/ec43445f3f5cbe669aedc9a73d214d7bf204146e))
+* 亡魂主宰：修复点击自选装备计算闪退的情况 ([d55f15](https://github.com/wxh0402/DNFCalculating/commit/d55f152453f3fa48c915a189110616cca94df403))
+
 # 2020-12-01
 
 ## NewFeatures
