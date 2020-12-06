@@ -370,7 +370,7 @@ class 技能15(职业主动技能):
     def 装备护石(self, x):
         if x == 0:
             攻击次数 = 0
-            data1 = [(i*1.45) for i in data1]
+            self.data1 = [(i*1.45) for i in self.data1]
             # self.倍率 *= 1.27049
 
 class 技能16(被动技能):	
