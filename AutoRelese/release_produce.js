@@ -26,7 +26,7 @@
   
   
   // 用version和时间作为release 标记
-  let newChangelog = `# ${
+  let newChangelog = `## ${
     new Date(+new Date() + 8 * 3600 * 1000).toISOString().split("T")[0]
   }\n\n`;
   
@@ -58,7 +58,7 @@
   });
   
   if (features.length) {
-    newChangelog += `## NewFeatures\n`;
+    newChangelog += `### NewFeatures\n`;
     features.forEach(feature => {
       newChangelog += feature;
     });
@@ -66,7 +66,7 @@
   }
   
   if (Bugfixes.length) {
-    newChangelog += `## BugFixes\n`;
+    newChangelog += `### BugFixes\n`;
     Bugfixes.forEach(bugfix => {
       newChangelog += bugfix;
     });
