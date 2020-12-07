@@ -2,5 +2,5 @@
 - [源码简介](README.md)
 - [使用说明](USERMANUAL.md)
 - [更新日志](CHANGELOG.md)
-- **链接**
+- **其他**
 - [下载链接](https://wws.lanzous.com/b01bfj76f)
