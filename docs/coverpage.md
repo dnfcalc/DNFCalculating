@@ -10,4 +10,4 @@
 
 [软件介绍](#main)
 [相关源码](https://github.com/wxh0402/DNFCalculating)
-[下载链接](https://www.npmjs.com/package/docsify-themeable)
+[下载链接](https://wws.lanzous.com/b01bfj76f)
