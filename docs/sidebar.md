@@ -1,6 +1,0 @@
-- **入门**
-- [程序简介](/README.md)
-- [使用说明](/UAERMANUAL.md)
-- [更新日志](/CHANGELOG.md)
-- **链接**
-- [下载链接](https://wws.lanzous.com/b01bfj76f)
