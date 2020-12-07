@@ -22,7 +22,7 @@
     })
     .filter(commit => Boolean(commit.sha));
   
-  const currentChangelog = fs.readFileSync("CHANGELOG.md", "utf-8");
+  const currentChangelog = fs.readFileSync("Docs/CHANGELOG.md", "utf-8");
   
   
   // 用version和时间作为release 标记
@@ -74,7 +74,7 @@
   }
   if(features.length + Bugfixes.length >0){
   // prepend the newChangelog to the current one
-  fs.writeFileSync("CHANGELOG.md", `${newChangelog}${currentChangelog}`);
+  fs.writeFileSync("Docs/CHANGELOG.md", `${newChangelog}${currentChangelog}`);
   fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ version: String(newVersion) }, null, 2));
   // create a new commit
   child.execSync('git add .');
