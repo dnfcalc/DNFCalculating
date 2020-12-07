@@ -1,11 +1,10 @@
-# DNFCalculating
 
 执行程序下载:https://wws.lanzous.com/b01bfj76f 或 https://pan.lanzou.com/b01bfj76f
 
 python(3.8)编写，使用 pyqt5(5.14.2) 图形 GUI 库<br>
-主框架由纸飞机实现，西瓜提供数据公式并协助修改，SCUDRT 对算法进行优化修改，风之凌殇添加多进程优化<br>
+主框架由纸飞机实现，西瓜协助修改，SCUDRT 对算法进行优化修改，风之凌殇添加多进程优化<br>
 
-## 基础安装及依赖
+## 依赖安装
 
 安装[Python](https://www.python.org/),计算器开发使用的是3.8版本<br>
 安装项目依赖<br>
@@ -22,8 +21,7 @@ python(3.8)编写，使用 pyqt5(5.14.2) 图形 GUI 库<br>
 * 新建分支并检出新分支,如
 > git checkout -b ver0.1<br> -->
 
-## 程序目录结构说明
-
+## 程序结构
 
 |--　DNFCalculating</br>
 　　　　|--　build.bat：打包脚本</br>

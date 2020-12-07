@@ -23,16 +23,29 @@
 			/* --base-font-size: 14px; */
 
 			/* Change the theme color hue (0-360) */
-			/* --theme-hue: 325; */
+			--theme-hue: 15;
+			--cover-max-width:700;
 
 			/* Add sidebar navigation bullets */
 			/* --sidebar-nav-link-before-content-l1: '😀'; 
 			--sidebar-nav-link-before-content-l2: '💩'; */
 		}
+		.cover .mask{
+			background:linear-gradient(to left bottom, hsl(172, 100%, 85%) 0%,hsl(15, 100%, 85%) 100%);
+			visibility:visible
+		}
+		
+		.cover h1 span{
+			text-shadow: grey 3px 3px 3px;
+		}
+
 	</style>
 </head>
 
 <body>
+	<!-- <a href="http://dnf.17173.com/" target="_blank" style="position: absolute;z-index: 40;top: 30px;left:30px">
+		<img src="https://ue.17173cdn.com/a/www/index/2016v2/img/logo-2018.png">
+	</a> -->
 	<div id="app">
 		
 	</div>
@@ -42,13 +55,13 @@
 		window.$docsify = {
 			name       : 'DNF计算器',
 			repo       : 'https://github.com/wxh0402/DNFCalculating',
-			coverpage  : 'coverpage.md',
+			coverpage  : 'HTMLSet/coverpage.md',
 			homepage   : 'README.md',
 			// homepage   : 'https://raw.githubusercontent.com/jhildenbiddle/docsify-themeable/master/README.md',
-			loadSidebar: 'sidebar.md',
+			loadSidebar: 'HTMLSet/sidebar.md',
 			auto2top   : true,
-			maxLevel   : 3, 
-			subMaxLevel: 3,
+			subMaxLevel: 2,
+			maxLevel   : 3,
 
 			// 5. docsify-themeable
 			themeable : { 
