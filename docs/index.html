@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
 	<title>纸飞机计算器</title>
-
+	<!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css"> -->
 	<!-- 1. Theme -->
 	<link rel="stylesheet" href="https://unpkg.com/docsify-themeable/dist/css/theme-simple.css">
 	<!-- <link rel="stylesheet" href="https://unpkg.com/docsify-themeable/dist/css/theme-simple-dark.css"> -->
@@ -39,6 +39,31 @@
 			text-shadow: grey 3px 3px 3px;
 		}
 
+		.app-sub-sidebar .app-sub-sidebar li::before {
+			content: '-';
+			/* padding-right: 4px; */
+			float: left;
+			/* position: relative;
+			right: -15px; */
+		}
+
+		.app-sub-sidebar li::before {
+			content: '';
+			/* padding-right: 4px; */
+			float: left;
+			position: relative;
+			right: -15px;
+		}
+
+		.sidebar ul li a {
+			color: #505d6b;
+			font-size: 14px;
+			font-weight: normal;
+			overflow: hidden;
+			text-decoration: none;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
 	</style>
 </head>
 
