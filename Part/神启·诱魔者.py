@@ -539,6 +539,11 @@ class 神启·诱魔者(角色窗口):
         for i in range(3):
             self.护石栏[i].currentIndexChanged.connect(lambda state: self.护石判断())
 
+        self.手搓冷却 = QCheckBox('技能手搓冷却适用', self.main_frame2)
+        self.手搓冷却.resize(120, 20)
+        self.手搓冷却.move(320, 340)
+        self.手搓冷却.setStyleSheet(复选框样式)
+
         self.净化之花冷却Buff = QCheckBox('净化之花冷却Buff', self.main_frame2)
         self.净化之花冷却Buff.resize(120, 20)
         self.净化之花冷却Buff.move(320, 370)
@@ -560,6 +565,11 @@ class 神启·诱魔者(角色窗口):
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)
+        if self.手搓冷却.isChecked():
+            属性.技能冷却缩减(10, 25, 0.01)
+            属性.技能冷却缩减(30, 45, 0.02)
+            属性.技能冷却缩减(50, 100, 0.05)
+
         if self.净化之花冷却Buff.isChecked():
             属性.技能冷却缩减(1, 48, 0.10)
             属性.技能冷却缩减(55, 100, 0.10)
