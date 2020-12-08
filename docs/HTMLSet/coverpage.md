@@ -1,4 +1,4 @@
-![avatar](https://raw.githubusercontent.com/wxh0402/DNFCalculating/master/ResourceFiles/img/logo.ico)
+![avatar](img\logo.ico)
 
 # DNF计算器
 
