@@ -28,9 +28,9 @@ class 辟邪玉1(辟邪玉):
 class 辟邪玉2(辟邪玉):
     名称 = 'BUFF三攻增加量增加'
     def 穿戴属性(self, 属性):
-        属性.BUFF物攻per *= 1 + self.当前值 / 100
-        属性.BUFF魔攻per *= 1 + self.当前值 / 100
-        属性.BUFF独立per *= 1 + self.当前值 / 100
+        属性.BUFF物攻per += self.当前值 / 100
+        属性.BUFF魔攻per += self.当前值 / 100
+        属性.BUFF独立per += self.当前值 / 100
 
 class 辟邪玉3(辟邪玉):
     名称 = 'BUFF力智增加'
@@ -44,8 +44,8 @@ class 辟邪玉3(辟邪玉):
 class 辟邪玉4(辟邪玉):
     名称 = 'BUFF力智增加量增加'
     def 穿戴属性(self, 属性):
-        属性.BUFF力量per *= 1 + self.当前值 / 100
-        属性.BUFF智力per *= 1 + self.当前值 / 100
+        属性.BUFF力量per += self.当前值 / 100
+        属性.BUFF智力per += self.当前值 / 100
 
 class 辟邪玉5(辟邪玉):
     名称 = '一觉力智增加'
@@ -58,7 +58,7 @@ class 辟邪玉5(辟邪玉):
 class 辟邪玉6(辟邪玉):
     名称 = '一觉力智增加量增加'
     def 穿戴属性(self, 属性):
-        属性.一觉力智per *= 1 + self.当前值 / 100
+        属性.一觉力智per += self.当前值 / 100
 
 class 辟邪玉7(辟邪玉):
     名称 = '10~15技能Lv增加'
