@@ -25,6 +25,10 @@
 			/* Change the theme color hue (0-360) */
 			--theme-hue: 15;
 			--cover-max-width:700;
+			--sidebar-nav-link-before-content-l2:'-';
+			--code-inline-color:red;
+			--code-font-size:.8rem 
+
 
 			/* Add sidebar navigation bullets */
 			/* --sidebar-nav-link-before-content-l1: '😀'; 
@@ -37,22 +41,6 @@
 		
 		.cover h1 span{
 			text-shadow: grey 3px 3px 3px;
-		}
-
-		.app-sub-sidebar .app-sub-sidebar li::before {
-			content: '-';
-			/* padding-right: 4px; */
-			float: left;
-			/* position: relative;
-			right: -15px; */
-		}
-
-		.app-sub-sidebar li::before {
-			content: '';
-			/* padding-right: 4px; */
-			float: left;
-			position: relative;
-			right: -15px;
 		}
 
 		.sidebar ul li a {
@@ -85,7 +73,7 @@
 			// homepage   : 'https://raw.githubusercontent.com/jhildenbiddle/docsify-themeable/master/README.md',
 			loadSidebar: 'HTMLSet/sidebar.md',
 			auto2top   : true,
-			subMaxLevel: 3,
+			subMaxLevel: 2,
 			maxLevel   : 3,
 
 			// 5. docsify-themeable

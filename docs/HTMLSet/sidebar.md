@@ -1,6 +1,8 @@
-- **入门**
-- [源码简介](README.md)
+- **指南**
 - [使用说明](USERMANUAL.md)
 - [更新日志](CHANGELOG.md)
-- **其他**
+- **维护**
+- [Git Code](README.md)
+- [Contributors](Contributors.md)
+- **友情链接**
 - [下载链接](https://wws.lanzous.com/b01bfj76f)
