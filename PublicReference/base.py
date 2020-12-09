@@ -3274,7 +3274,7 @@ class 角色窗口(窗口):
             套装件数.append([self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]])
             套装属性.append(temp)
 
-        i = 4 #奈克斯属性
+        i = 4 #洛多斯属性
         temp = ''
         if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
             temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
@@ -3292,7 +3292,7 @@ class 角色窗口(窗口):
             temp += self.角色属性B.百分比力智加成(0.04) #辅助装备
             self.角色属性B.装备描述 = 0
         if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2] ) > 1:
-            套装.append("希洛克-奈克斯")
+            套装.append("希洛克-洛多斯")
             套装件数.append([self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]])
             套装属性.append(temp)
 
