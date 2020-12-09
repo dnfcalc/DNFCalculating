@@ -3,6 +3,6 @@
 - [更新日志](CHANGELOG.md)
 - **维护**
 - [Git Code](README.md)
-- [Contributors](Contributors.md)
+- [Contributors](CONTRIBUTERS.md)
 - **友情链接**
 - [下载链接](https://wws.lanzous.com/b01bfj76f)
