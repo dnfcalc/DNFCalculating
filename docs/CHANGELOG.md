@@ -2,17 +2,17 @@
 
 ### NewFeatures
 * 奶系：替换职业图片 ([f9a072](https://github.com/wxh0402/DNFCalculating/commit/f9a0729f1305a5e1e19e0f7c138abf718652b7c2))
-* 神启·诱魔者：添加技能手搓冷却适用选项 ([15b029](https://github.com/wxh0402/DNFCalculating/commit/15b029413b41a0e7b61b75374333ec284e783aaa))
-* 湮灭之瞳、知源·元素爆破师：调整技能位置 ([974552](https://github.com/wxh0402/DNFCalculating/commit/974552aec84397ed75e0ef62fb607c746d4c41a8))
 * 奶系：添加100传说属性 ([09fb90](https://github.com/wxh0402/DNFCalculating/commit/09fb9096a11367e8b0013f47f557f28b8f2d898f))
 * 奶系：添加改造装备属性 ([557e93](https://github.com/wxh0402/DNFCalculating/commit/557e937733c532c6c7fd1b0c33e96ddc900162c6))
+* 湮灭之瞳、知源·元素爆破师：调整技能位置 ([974552](https://github.com/wxh0402/DNFCalculating/commit/974552aec84397ed75e0ef62fb607c746d4c41a8))
+* 神启·诱魔者：添加技能手搓冷却适用选项 ([15b029](https://github.com/wxh0402/DNFCalculating/commit/15b029413b41a0e7b61b75374333ec284e783aaa))
 
 ### BugFixes
-* 圣武枪魂：修正流光无影闪护石CD计算错误 ([3836ae](https://github.com/wxh0402/DNFCalculating/commit/3836aec69dbe50dfd51f6ad2935b3ea3e63e8d01))
-* 奶系：辟邪玉BUFF三攻、力智、一觉力智百分比词条修正为加算 ([f5f131](https://github.com/wxh0402/DNFCalculating/commit/f5f1313449b245142a549e99f05f3fb7c5a77806))
 * 修正暗杀者套装属性描述错误 ([48f003](https://github.com/wxh0402/DNFCalculating/commit/48f003665124036ea38a320b422bc4c638477cbb))
-* 奶系：希洛克装备系列加成调整为进图生效 ([f5a86a](https://github.com/wxh0402/DNFCalculating/commit/f5a86acf8d19f2ba7ad978179069208b7a50e20c))
 * 圣武枪魂：修复选择无双突刺护石闪退的情况 ([526eb4](https://github.com/wxh0402/DNFCalculating/commit/526eb4a27112eab92636b48fd61939ad5ac86149))
+* 圣武枪魂：修正流光无影闪护石CD计算错误 ([3836ae](https://github.com/wxh0402/DNFCalculating/commit/3836aec69dbe50dfd51f6ad2935b3ea3e63e8d01))
+* 奶系：希洛克装备系列加成调整为进图生效 ([f5a86a](https://github.com/wxh0402/DNFCalculating/commit/f5a86acf8d19f2ba7ad978179069208b7a50e20c))
+* 奶系：辟邪玉BUFF三攻、力智、一觉力智百分比词条修正为加算 ([f5f131](https://github.com/wxh0402/DNFCalculating/commit/f5f1313449b245142a549e99f05f3fb7c5a77806))
 * 知源·血法师：校准技能CD ([3e64a2](https://github.com/wxh0402/DNFCalculating/commit/3e64a2e6946212d9fffeb07f2aca2ba02405491c))
 
 ## 2020-12-03

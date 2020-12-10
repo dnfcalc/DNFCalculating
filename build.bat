@@ -46,7 +46,7 @@ if not exist AutoRelese\Publish MD AutoRelese\Publish
 if exist AutoRelese\release_produce.js echo [提示]: 开始记录更新日志
 if exist AutoRelese\release_produce.js node AutoRelese/release_produce.js
 ::pandoc将md转换为docx
-if exist AutoRelese\release_produce.js pandoc -s CHANGELOG.md -o "AutoRelese\publish\更新日志%Date:~5,2%.%Date:~8,2%.docx"
+if exist AutoRelese\release_produce.js pandoc -s "docs\CHANGELOG.md" -o "AutoRelese\publish\更新日志%Date:~5,2%.%Date:~8,2%.docx"
 if exist AutoRelese\release_produce.js echo [提示]: 记录结束
 
 if exist AutoRelese\bz.exe echo [提示]: 开始压缩打包版本
