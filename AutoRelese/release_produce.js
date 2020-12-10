@@ -3,6 +3,8 @@
   const currentVersion = (require("../ResourceFiles/Config/release_version.json").version).toString();
   // const gitVersion = latestTag[0]+'-'+latestTag[1]+'-'+latestTag[2]
   const newVersion = new Date(+new Date() + 8 * 3600 * 1000).toISOString().split("T")[0]
+  var date = new Date
+  const lastMonth = (date.getMonth() ==0 ? date.getFullYear()-1:date.getFullYear()).toString()+'-'+(date.getMonth() ==0 ? 12 : date.getMonth() ).toString()
   const fs = require("fs");
   
   const output = child
@@ -22,11 +24,10 @@
     })
     .filter(commit => Boolean(commit.sha));
   
-  const currentChangelog = fs.readFileSync("docs/CHANGELOG.md", "utf-8");
-  
+  var currentChangelog = fs.readFileSync("docs/CHANGELOG.md", "utf-8");
   
   // 用version和时间作为release 标记
-  let newChangelog = `## ${
+  let newChangelog = `## Newest\n\n### ${
     new Date(+new Date() + 8 * 3600 * 1000).toISOString().split("T")[0]
   }\n\n`;
   
@@ -58,7 +59,7 @@
   });
   
   if (features.length) {
-    newChangelog += `### NewFeatures\n`;
+    newChangelog += `#### NewFeatures\n`;
     features.sort()
     features.forEach(feature => {
       newChangelog += feature;
@@ -67,7 +68,7 @@
   }
   
   if (Bugfixes.length) {
-    newChangelog += `### BugFixes\n`;
+    newChangelog += `#### BugFixes\n`;
     Bugfixes.sort()
     Bugfixes.forEach(bugfix => {
       newChangelog += bugfix;
@@ -76,6 +77,8 @@
   }
   if(features.length + Bugfixes.length >0){
   // prepend the newChangelog to the current one
+  var start = currentChangelog.replace("## Newest\n\n","").replace("## History\n\n","").indexOf("### "+lastMonth)
+  currentChangelog = currentChangelog.slice(0,start)+"## History\n\n"+currentChangelog.slice(start)
   fs.writeFileSync("docs/CHANGELOG.md", `${newChangelog}${currentChangelog}`);
   fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ version: String(newVersion) }, null, 2));
   // create a new commit
