@@ -11,4 +11,4 @@
 [软件介绍](USERMANUAL)
 [相关源码](https://github.com/wxh0402/DNFCalculating)
 [下载链接](https://wws.lanzous.com/b01bfj76f)
-[BUG反馈](https://wws.lanzous.com/b01bfj76f)
+<!-- [BUG反馈](https://wws.lanzous.com/b01bfj76f) -->
