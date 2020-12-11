@@ -3210,13 +3210,13 @@ class 角色窗口(窗口):
         if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
             temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
             self.角色属性B.装备描述 = 1            
-            temp += self.角色属性B.伤害增加加成(0.02)
+            temp += self.角色属性B.暴击伤害加成(0.03)
             temp += self.角色属性B.技能冷却缩减(60,70,0.2)
             self.角色属性B.装备描述 = 0
         if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
             temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
             self.角色属性B.装备描述 = 1
-            temp += self.角色属性B.伤害增加加成(0.02)
+            temp += self.角色属性B.百分比力智加成(0.03)
             temp += self.角色属性B.技能冷却缩减(75,80,0.2)
             self.角色属性B.装备描述 = 0
         if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2] ) > 1:
