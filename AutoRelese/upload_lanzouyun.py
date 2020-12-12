@@ -1,5 +1,5 @@
 import json
-from lanzou.api import LanZouCloud
+from PublicReference.utils.lanzou.api import LanZouCloud
 import os
 
 # pip install lanzou-api

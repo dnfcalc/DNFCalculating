@@ -8,7 +8,8 @@ from PublicReference.utils.producer_consumer import producer_data, consumer, thr
 import json
 import os
 import traceback
-from lanzou.api import LanZouCloud
+from PublicReference.utils.lanzou.api import LanZouCloud
+# from lanzou.api import LanZouCloud
 from PublicReference.utils import zipfile
 from pathlib import Path
 import shutil
