@@ -38,7 +38,7 @@
   commitsArray.forEach(commit => {
     if (commit.message.startsWith("new")) {
       features.push(
-        `* ${commit.message.replace("newfeature:", "")} ([${commit.sha.substring(
+        `* ${commit.message.replace("new:", "")} ([${commit.sha.substring(
           0,
           6
         )}](https://github.com/wxh0402/DNFCalculating/commit/${
@@ -80,7 +80,7 @@
   currentChangelog = currentChangelog.replace("## Newest\n\n","")
   currentChangelog = currentChangelog.replace("## History\n\n","")
   var start = currentChangelog.indexOf("### "+lastMonth)
-  currentChangelog = currentChangelog.slice(0,start)+"## History\n\n"+currentChangelog.slice(start)
+  currentChangelog = currentChangelog.slice(0,start)+"\n## History\n\n"+currentChangelog.slice(start)
   fs.writeFileSync("docs/CHANGELOG.md", `${newChangelog}${currentChangelog}`);
   fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ version: String(newVersion) }, null, 2));
   // create a new commit

@@ -10,6 +10,16 @@
 * bugfix:修正联通用户无法使用自动更新的问题 ([c766b4](https://github.com/wxh0402/DNFCalculating/commit/c766b46ea68de2830f6ae88ad76504ef85829f71))
 * bugfix:奶系：BUFF力智+3%词条随机属性修正为一觉力智+（40~60）  间隔10 ([84f4d6](https://github.com/wxh0402/DNFCalculating/commit/84f4d6a265eb4e59f5a32b39835cb33fd0edb4df))
 
+### 2020-12-14
+
+#### NewFeatures
+* 完成计算器首页：添加更新日志、使用手册、17173合作信息 ([16a182](https://github.com/wxh0402/DNFCalculating/commit/16a182a6f98817a971dbe454e4cf7ea62a3ce128))
+
+#### BugFixes
+* 修正暗杀者属性描述错误 ([349a2a](https://github.com/wxh0402/DNFCalculating/commit/349a2abce6cb36d0f8d29c0dd0a8b6754be090c8))
+* 修正联通用户无法使用自动更新的问题 ([c766b4](https://github.com/wxh0402/DNFCalculating/commit/c766b46ea68de2830f6ae88ad76504ef85829f71))
+* 奶系：BUFF力智+3%词条随机属性修正为一觉力智+（40~60） 间隔10 ([84f4d6](https://github.com/wxh0402/DNFCalculating/commit/84f4d6a265eb4e59f5a32b39835cb33fd0edb4df))
+
 ### 2020-12-10
 
 #### NewFeatures
@@ -47,6 +57,7 @@
 * 知源·魔道学者：修复无法正常计算的问题 ([ac077d](https://github.com/wxh0402/DNFCalculating/commit/ac077dad9aaa0270bd5dae570fb461114823606a))
 * 奶系：修正部分神话等级加成词条默认满属性的情况 ([cb731c](https://github.com/wxh0402/DNFCalculating/commit/cb731c279e027526656413a108016fa5e5d4e9ce))
 * 归元·街霸·女：修复无法正常计算的问题 ([3abe91](https://github.com/wxh0402/DNFCalculating/commit/3abe914b5083c83c27e3b08b5e6632a23))
+
 ## History
 
 ### 2020-11-30
