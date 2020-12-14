@@ -36,7 +36,7 @@
   
   // 分别维护features和bugfixes的内容，并将message和commit的链接进行绑定
   commitsArray.forEach(commit => {
-    if (commit.message.startsWith("newfeature:")) {
+    if (commit.message.startsWith("new")) {
       features.push(
         `* ${commit.message.replace("newfeature:", "")} ([${commit.sha.substring(
           0,
@@ -46,9 +46,9 @@
         }))\n`
       );
     }
-    if (commit.message.startsWith("bugfix:")) {
+    if (commit.message.startsWith("bug")) {
       Bugfixes.push(
-        `* ${commit.message.replace("bugfix:", "")} ([${commit.sha.substring(
+        `* ${commit.message.replace("bug:", "")} ([${commit.sha.substring(
           0,
           6
         )}](https://github.com/wxh0402/DNFCalculating/commit/${
@@ -77,7 +77,9 @@
   }
   if(features.length + Bugfixes.length >0){
   // prepend the newChangelog to the current one
-  var start = currentChangelog.replace("## Newest\n\n","").replace("## History\n\n","").indexOf("### "+lastMonth)
+  currentChangelog = currentChangelog.replace("## Newest\n\n","")
+  currentChangelog = currentChangelog.replace("## History\n\n","")
+  var start = currentChangelog.indexOf("### "+lastMonth)
   currentChangelog = currentChangelog.slice(0,start)+"## History\n\n"+currentChangelog.slice(start)
   fs.writeFileSync("docs/CHANGELOG.md", `${newChangelog}${currentChangelog}`);
   fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ version: String(newVersion) }, null, 2));
