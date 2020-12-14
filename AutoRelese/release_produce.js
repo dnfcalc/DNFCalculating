@@ -36,9 +36,9 @@
   
   // 分别维护features和bugfixes的内容，并将message和commit的链接进行绑定
   commitsArray.forEach(commit => {
-    if (commit.message.startsWith("new")) {
+    if (commit.message.startsWith("new")||commit.message.startsWith("newfeature")) {
       features.push(
-        `* ${commit.message.replace("new:", "")} ([${commit.sha.substring(
+        `* ${commit.message.replace(/\n/,"<br>\n").replace("new:", "").replace("newfeature:", "").replace("<br><br>","<br>")} ([${commit.sha.substring(
           0,
           6
         )}](https://github.com/wxh0402/DNFCalculating/commit/${
@@ -46,9 +46,9 @@
         }))\n`
       );
     }
-    if (commit.message.startsWith("bug")) {
+    if (commit.message.startsWith("bug")||commit.message.startsWith("bugfix")) {
       Bugfixes.push(
-        `* ${commit.message.replace("bug:", "")} ([${commit.sha.substring(
+        `* ${commit.message.replace(/\n/,"<br>\n").replace("bug:", "").replace("bugfix:", "").replace("<br><br>","<br>")} ([${commit.sha.substring(
           0,
           6
         )}](https://github.com/wxh0402/DNFCalculating/commit/${
@@ -82,14 +82,14 @@
   var start = currentChangelog.indexOf("### "+lastMonth)
   currentChangelog = currentChangelog.slice(0,start)+"\n## History\n\n"+currentChangelog.slice(start)
   fs.writeFileSync("docs/CHANGELOG.md", `${newChangelog}${currentChangelog}`);
-  fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ version: String(newVersion) }, null, 2));
+  // fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ version: String(newVersion) , AutoCheckUpdate:true }, null, 2));
   // create a new commit
-  child.execSync('git add .');
-  child.execSync(`git commit -m "chore: Bump to  ${newVersion}"`);
-  // tag the commit
-  child.execSync(`git tag -a -m "Tag for ${newVersion}" ${newVersion}`);
+  // child.execSync('git add .');
+  // child.execSync(`git commit -m "chore: Bump to  ${newVersion}"`);
+  // // tag the commit
+  // child.execSync(`git tag -a -m "Tag for ${newVersion}" ${newVersion}`);
 
-  child.execSync(`git push origin --tags`);
+  // child.execSync(`git push origin --tags`);
 
-  child.execSync(`git push`);
+  // child.execSync(`git push`);
   }

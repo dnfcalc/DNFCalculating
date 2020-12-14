@@ -26,6 +26,8 @@ if __name__ == '__main__':
 class 选择窗口(QMainWindow):
     计算器版本 = ''
     云端版本 = ''
+    自动检查版本 = False
+    网盘链接 = ''
 
     def __init__(self):
         super().__init__()
@@ -54,14 +56,18 @@ class 选择窗口(QMainWindow):
         lzy = LanZouCloud()
         fileURL = ''
         folder_info = lzy.get_folder_info_by_url('https://wws.lanzous.com/b01bfj76f')
-        for file in folder_info.files:
-            if file.name.startswith("DNF计算器"):
-                self.云端版本 = file.name.replace(".zip",".exe")
-                fileURL = file.url
-                if file.name.replace("DNF计算器","").replace(".zip","").replace("-",".") == self.计算器版本[5:]:
-                    return ''
-        return fileURL
-
+        try:
+            for file in folder_info.files:
+                if file.name.startswith("DNF计算器"):
+                    self.云端版本 = file.name.replace(".zip",".exe")
+                    fileURL = file.url
+                    if file.name.replace("DNF计算器","").replace(".zip","").replace("-",".") == self.计算器版本[5:]:
+                        self.网盘链接 = ''
+                        return 
+            self.网盘链接 =  fileURL
+        except Exception as error:
+            self.网盘链接 =  ''
+            return
 
     def ui(self):
         角色列表 = []
@@ -79,7 +85,9 @@ class 选择窗口(QMainWindow):
             角色列表 = json.load(fp)
         fp.close()
         with open("ResourceFiles\\Config\\release_version.json") as fp:
-            self.计算器版本 += json.load(fp)['version'].replace('-','.')
+            versionInfo = json.load(fp)
+            self.计算器版本 += versionInfo['version'].replace('-','.')
+            self.自动检查版本 = versionInfo['AutoCheckUpdate']
         fp.close()
         self.setWindowTitle('DNF搭配计算器&17173DNF专区-'+self.计算器版本+' (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
@@ -188,6 +196,7 @@ class 选择窗口(QMainWindow):
         butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
         butten.setStyleSheet(按钮样式3)
         butten.resize(121,90)
+
         count += 1
     
         butten=QtWidgets.QPushButton('检查更新', self.topFiller)
@@ -195,6 +204,14 @@ class 选择窗口(QMainWindow):
         butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
         butten.setStyleSheet(按钮样式3)
         butten.resize(121,90)
+
+        if self.自动检查版本:
+            self.网盘检查()
+            if self.网盘链接 != '':
+                m_red_SheetStyle = "padding-left:3px;min-width: 25px; min-height: 16px;border-radius: 5px; background:red;color:white"
+                label = QLabel("New", self.topFiller)
+                label.move(115 + 4 * 125 + 90, 30 + (count + 1) * 100)
+                label.setStyleSheet(m_red_SheetStyle)
         count += 1
 
         butten=QtWidgets.QPushButton('问题反馈', self.topFiller)
@@ -287,8 +304,8 @@ class 选择窗口(QMainWindow):
             self.打开链接(['https://jq.qq.com/?_wv=1027&k=9S6c2xIb'])
 
     def 检查更新(self):
-        网盘链接 = self.网盘检查()
-        if 网盘链接 == '':
+        self.网盘检查()
+        if self.网盘链接 == '':
             box = QMessageBox(QMessageBox.Question, "提示", "已经是最新版本计算器！")  
             box.exec_()
         else:
