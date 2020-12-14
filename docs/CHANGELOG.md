@@ -1,15 +1,4 @@
 ## Newest
-
-### 2020-12-14
-
-#### NewFeatures
-* newfearture:完成计算器首页：添加更新日志、使用手册、17173合作信息 ([16a182](https://github.com/wxh0402/DNFCalculating/commit/16a182a6f98817a971dbe454e4cf7ea62a3ce128))
-
-#### BugFixes
-* bugfix:修正暗杀者属性描述错误 ([349a2a](https://github.com/wxh0402/DNFCalculating/commit/349a2abce6cb36d0f8d29c0dd0a8b6754be090c8))
-* bugfix:修正联通用户无法使用自动更新的问题 ([c766b4](https://github.com/wxh0402/DNFCalculating/commit/c766b46ea68de2830f6ae88ad76504ef85829f71))
-* bugfix:奶系：BUFF力智+3%词条随机属性修正为一觉力智+（40~60）  间隔10 ([84f4d6](https://github.com/wxh0402/DNFCalculating/commit/84f4d6a265eb4e59f5a32b39835cb33fd0edb4df))
-
 ### 2020-12-14
 
 #### NewFeatures
