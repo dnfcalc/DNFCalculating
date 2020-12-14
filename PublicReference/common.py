@@ -234,7 +234,7 @@ class 窗口(QWidget):
         pass
 
     def 界面(self):
-        self.setWindowTitle(self.角色属性A.实际名称 + "搭配计算器 （点击标签栏按钮切换界面）")
+        self.setWindowTitle(self.角色属性A.实际名称 + "搭配计算器&17173DNF专区 （点击标签栏按钮切换界面）")
         self.icon = QIcon('./ResourceFiles/'+self.角色属性A.实际名称 + '/技能/BUFF.png')
         self.setWindowIcon(self.icon)
         self.setStyleSheet('''QToolTip { 

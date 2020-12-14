@@ -81,7 +81,7 @@ class 选择窗口(QMainWindow):
         with open("ResourceFiles\\Config\\release_version.json") as fp:
             self.计算器版本 += json.load(fp)['version'].replace('-','.')
         fp.close()
-        self.setWindowTitle('DNF搭配计算器-'+self.计算器版本+' (技能模板仅供参考，请根据自身情况修改)')
+        self.setWindowTitle('DNF搭配计算器&17173DNF专区-'+self.计算器版本+' (技能模板仅供参考，请根据自身情况修改)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
 
@@ -162,29 +162,57 @@ class 选择窗口(QMainWindow):
             img_box.move(15, 10 + count* 100)
             count += 1
 
-        名称 = ['检查更新', '查看源码', '使用说明', '问题反馈']
-        链接 = []
-        链接.append([])
-        链接.append(['https://github.com/wxh0402/DNFCalculating'])
-        链接.append(['https://bbs.colg.cn/thread-7917714-1-1.html', 'https://www.bilibili.com/video/BV1F54y1Q7Bz'])
-        链接.append(['https://jq.qq.com/?_wv=1027&k=9S6c2xIb'])
+        # 名称 = ['检查更新', '查看源码', '使用说明', '问题反馈']
+        # 链接 = []
+        # 链接.append([])
+        # 链接.append(['https://github.com/wxh0402/DNFCalculating'])
+        # 链接.append(['https://bbs.colg.cn/thread-7917714-1-1.html', 'https://www.bilibili.com/video/BV1F54y1Q7Bz'])
+        # 链接.append(['https://jq.qq.com/?_wv=1027&k=9S6c2xIb'])
 
         count = 0
-        for i in 名称:
-            butten=QtWidgets.QPushButton(i, self.topFiller)
-            if i == '检查更新':
-                butten.clicked.connect(lambda state, index = count: self.检查更新())          
-            elif i == '问题反馈':
-                butten.clicked.connect(lambda state, index = count: self.问题反馈())
-            else:
-                butten.clicked.connect(lambda state, index = count: self.打开链接(链接[index]))
-            butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
-            butten.setStyleSheet(按钮样式3)
-            butten.resize(121,90)
-            count += 1
+        # for i in 名称:
+        #     butten=QtWidgets.QPushButton(i, self.topFiller)
+        #     if i == '检查更新':
+        #         butten.clicked.connect(lambda state, index = count: self.检查更新())          
+        #     elif i == '问题反馈':
+        #         butten.clicked.connect(lambda state, index = count: self.问题反馈())
+        #     else:
+        #         butten.clicked.connect(lambda state, index = count: self.打开链接(链接[index]))
+        #     butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
+        #     butten.setStyleSheet(按钮样式3)
+        #     butten.resize(121,90)
+        #     count += 1
+
+        butten=QtWidgets.QPushButton('首页\n手册|日志|源码', self.topFiller)
+        butten.clicked.connect(lambda state, index = count: self.打开链接(['http://dnf.17173.com/jsq/?khd']))
+        butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
+        butten.setStyleSheet(按钮样式3)
+        butten.resize(121,90)
+        count += 1
+    
+        butten=QtWidgets.QPushButton('检查更新', self.topFiller)
+        butten.clicked.connect(lambda state, index = count: self.检查更新())
+        butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
+        butten.setStyleSheet(按钮样式3)
+        butten.resize(121,90)
+        count += 1
+
+        butten=QtWidgets.QPushButton('问题反馈', self.topFiller)
+        butten.clicked.connect(lambda state, index = count: self.问题反馈())
+        butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
+        butten.setStyleSheet(按钮样式3)
+        butten.resize(121,90)
+        count += 1
 
         butten=QtWidgets.QPushButton('打开设置', self.topFiller)
         butten.clicked.connect(lambda state : os.system('notepad.exe "./ResourceFiles/Config/基础设置.ini"'))
+        butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
+        butten.setStyleSheet(按钮样式3)
+        butten.resize(121,90)
+        count += 1
+
+        butten=QtWidgets.QPushButton('', self.topFiller)
+        butten.clicked.connect(lambda state, index = count: self.打开链接(['http://dnf.17173.com/?jsq']))
         butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
         butten.setStyleSheet(按钮样式3)
         butten.resize(121,90)
@@ -270,14 +298,14 @@ class 选择窗口(QMainWindow):
             A = box.button(QMessageBox.Yes)
             B = box.button(QMessageBox.No)
             C = box.button(QMessageBox.Cancel)
-            A.setText("自动更新")
-            B.setText("手动下载")  
+            A.setText("首页查看更新") 
+            B.setText("自动更新")
             C.setText("取消")
             box.exec_()
-            if box.clickedButton() == A:
+            if box.clickedButton() == B:
                 self.自动更新(网盘链接)
             if box.clickedButton() == B:
-                QDesktopServices.openUrl(QUrl('https://pan.lanzou.com/b01bfj76f'))
+                QDesktopServices.openUrl(QUrl('http://dnf.17173.com/jsq/?khd'))
 
     def 自动更新(self,fileURL):
         path  = os.getcwd()+"/download"
