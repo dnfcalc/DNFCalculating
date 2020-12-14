@@ -1282,7 +1282,7 @@ class 角色窗口(窗口):
                 self.辟邪玉提升率2.append(QLabel('0.00%', self.main_frame5))
                 self.辟邪玉提升率2[count].setAlignment(Qt.AlignCenter)
                 self.辟邪玉提升率2[count].setStyleSheet(标签样式)
-                self.辟邪玉提升率2[count].resize(30, 25)
+                self.辟邪玉提升率2[count].resize(60, 25)
                 self.辟邪玉提升率2[count].move(690, 50 + 30 * count)
                 count += 1
 
