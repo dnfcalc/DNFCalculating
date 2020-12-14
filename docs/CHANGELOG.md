@@ -1,5 +1,13 @@
 ## Newest
 
+### 2020-12-14
+
+#### BugFixes
+* 修正暗杀者属性描述错误 ([349a2a](https://github.com/wxh0402/DNFCalculating/commit/349a2abce6cb36d0f8d29c0dd0a8b6754be090c8))
+* 修正联通用户无法使用自动更新的问题 ([c766b4](https://github.com/wxh0402/DNFCalculating/commit/c766b46ea68de2830f6ae88ad76504ef85829f71))
+
+## Newest
+
 ### 2020-12-10
 
 #### NewFeatures
@@ -36,7 +44,9 @@
 #### BugFixes
 * 知源·魔道学者：修复无法正常计算的问题 ([ac077d](https://github.com/wxh0402/DNFCalculating/commit/ac077dad9aaa0270bd5dae570fb461114823606a))
 * 奶系：修正部分神话等级加成词条默认满属性的情况 ([cb731c](https://github.com/wxh0402/DNFCalculating/commit/cb731c279e027526656413a108016fa5e5d4e9ce))
-* 归元·街霸·女：修复无法正常计算的问题 ([3abe91](https://github.com/wxh0402/DNFCalculating/commit/3abe914b5083c83c27e3b08b5e6632a23d72fd09))
+* 归元·街霸·女：修复无法正常计算的问题 ([3abe91](https://github.com/wxh0402/DNFCalculating/commit/3abe914b5083c83c27e3b08b5e6632a23## History
+
+d72fd09))
 
 ## History
 
