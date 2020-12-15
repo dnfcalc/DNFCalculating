@@ -381,6 +381,11 @@ class 归元·散打·女角色属性(角色属性):
         self.技能栏 = deepcopy(归元·散打·女技能列表)
         self.技能序号 = deepcopy(归元·散打·女技能序号)
 
+    def CD倍率计算(self):
+        if "武神强踢" in self.技能栏[self.技能序号['真烈空星鸣拳']].关联技能:
+            self.技能栏[self.技能序号['武神强踢buff']].等级 = 0
+        super().CD倍率计算()
+
 class 归元·散打·女(角色窗口):
 
     def 窗口属性输入(self):
