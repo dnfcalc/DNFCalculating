@@ -2833,17 +2833,172 @@ class 角色窗口(窗口):
             self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
             count += 1
 
+            套装名称 = []
+            套装名称.extend(套装)
+
             神话所在套装 = []
             for i in range(0,11):
                 if 装备列表[装备序号[装备[i]]].品质 == '神话':
                     神话所在套装.append(装备列表[装备序号[装备[i]]].所属套装)
+
+            # 套装属性合并
+            套装 = []
+            套装件数 = []
+            套装属性= []
+            for i in range(0,len(套装名称)):
+                temp = 套装名称[i].split('[')[0]
+                if temp not in 套装:
+                    套装.append(temp)
+                    套装件数.append([])
+                    套装属性.append('')
+                if len(套装名称[i].split('['))>1:
+                    件数 = 套装名称[i].split('[')[1].split(']')[0]
+                    套装件数[套装.index(temp)].append(件数)
+                    套装属性[套装.index(temp)] += '<font size="3" face="宋体"><font color="#78FF1E">'+套装名称[i]+'</font><br>'+套装列表[套装序号[套装名称[i]]].装备描述(self.角色属性B)[:-4]+'</font><br>'
+
+            #region 希洛克套装属性
+            数量 = [0] * 3
+            for i in range(15):
+                数量[i % 3] += self.希洛克选择状态[i]
+            
+            i = 0 #奈克斯属性
+            temp = ''
+            if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
+                self.角色属性B.装备描述 = 1
+                temp += self.角色属性B.伤害增加加成(0.05) #下装
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
+                self.角色属性B.装备描述 = 1            
+                temp += self.角色属性B.暴击伤害加成(0.05) #戒指
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
+                self.角色属性B.装备描述 = 1
+                temp += self.角色属性B.百分比力智加成(0.05) #辅助装备
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2] ) > 1:
+                套装.append("希洛克-奈克斯")
+                套装件数.append([self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]])
+                套装属性.append(temp)
+
+            i = 1 #暗杀者属性
+            temp = ''
+            if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
+                self.角色属性B.装备描述 = 1
+                temp += self.角色属性B.伤害增加加成(0.02)
+                temp += self.角色属性B.技能冷却缩减(1,45,0.2)
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
+                self.角色属性B.装备描述 = 1            
+                temp += self.角色属性B.伤害增加加成(0.02)
+                temp += self.角色属性B.技能冷却缩减(1,45,0.2)
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
+                self.角色属性B.装备描述 = 1
+                temp += self.角色属性B.伤害增加加成(0.02)
+                temp += self.角色属性B.技能冷却缩减(1,45,0.2)
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2] ) > 1:
+                套装.append("希洛克-暗杀者")
+                套装件数.append([self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]])
+                套装属性.append(temp)
+
+            i = 2 #卢克西属性属性
+            temp = ''
+            if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
+                self.角色属性B.装备描述 = 1
+                temp += self.角色属性B.技能倍率加成(50,0.17)
+                temp += self.角色属性B.技能倍率加成(85,0.17)
+                temp += self.角色属性B.技能倍率加成(100,0.10)
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
+                self.角色属性B.装备描述 = 1            
+                temp += self.角色属性B.技能倍率加成(50,0.17)
+                temp += self.角色属性B.技能倍率加成(85,0.17)
+                temp += self.角色属性B.技能倍率加成(100,0.10)
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
+                self.角色属性B.装备描述 = 1
+                temp += self.角色属性B.技能倍率加成(50,0.17)
+                temp += self.角色属性B.技能倍率加成(85,0.17)
+                temp += self.角色属性B.技能倍率加成(100,0.10)
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2] ) > 1:
+                套装.append("希洛克-卢克西")
+                套装件数.append([self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]])
+                套装属性.append(temp)
+            
+            i = 3 #守门人属性
+            temp = ''
+            if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
+                temp += "- 每5秒增加30点的单个属性强化<br>"
+                temp += "- 赋予单个属性攻击(火\冰\暗\光)<br>"
+                temp += "- 属强差>170时,增加15点所有属性强化<br>"
+            if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
+                temp += "- 每5秒增加30点的单个属性强化<br>"
+                temp += "- 赋予单个属性攻击(火\冰\暗\光)<br>"
+                temp += "- 属强差>170时,增加15点所有属性强化<br>"
+            if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
+                temp += "- 每5秒增加30点的单个属性强化<br>"
+                temp += "- 赋予单个属性攻击(火\冰\暗\光)<br>"
+                temp += "- 属强差>170时,增加15点所有属性强化<br>"
+            if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2] ) > 1:
+                套装.append("希洛克-守门人")
+                套装件数.append([self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]])
+                套装属性.append(temp)
+
+            i = 4 #奈克斯属性
+            temp = ''
+            if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
+                self.角色属性B.装备描述 = 1
+                temp += self.角色属性B.伤害增加加成(0.04) #下装
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
+                self.角色属性B.装备描述 = 1            
+                temp += self.角色属性B.暴击伤害加成(0.04) #戒指
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
+                temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
+                self.角色属性B.装备描述 = 1
+                temp += self.角色属性B.百分比力智加成(0.04) #辅助装备
+                self.角色属性B.装备描述 = 0
+            if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2] ) > 1:
+                套装.append("希洛克-奈克斯")
+                套装件数.append([self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]])
+                套装属性.append(temp)
+
+            #endregion
+
+            # 自适应属性
+            if sum(self.角色属性A.自适应选项) != 0:
+                套装.append(self.角色属性A.自适应输出())
+                套装件数.append([])
+                套装属性.append('')
+
+            # 显示套装
             for i in range(0,len(套装)):
-                self.套装名称显示[count].setText(套装[i])
-                if 套装[i].split('[')[0] in 神话所在套装:
+                if len(套装件数[i]) >0:
+                    self.套装名称显示[count].setText(套装[i]+'['+str(max(套装件数[i]))+']')
+                else:
+                    self.套装名称显示[count].setText(套装[i])            
+                if 套装[i] in 神话所在套装:
                     self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(226,150,146)}")   
                 else:
                     self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")  
-                self.套装名称显示[count].setToolTip('<font size="3" face="宋体"><font color="#78FF1E">'+套装[i]+'</font><br>'+套装列表[套装序号[套装[i]]].装备描述(B)[:-4]+'</font>')
+                self.套装名称显示[count].setToolTip(套装属性[i][:-4])
                 count += 1
 
         if x == 0:
