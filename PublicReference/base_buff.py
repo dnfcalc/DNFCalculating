@@ -257,7 +257,7 @@ class 角色属性(属性):
         if temp.所属套装 != '智慧产物':
             return 精通体力(temp.等级, temp.品质, self.强化等级[i],部位列表[i])
         else:
-            return 精通体力(temp.等级, temp.品质, 0, 部位列表[i])
+            return 精通体力(temp.等级, temp.品质, self.改造等级[i], 部位列表[i])
 
     def 装备基础(self):
         if 装备列表[装备序号[self.装备栏[0]]].品质 == '神话':
