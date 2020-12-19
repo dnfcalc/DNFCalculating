@@ -203,9 +203,15 @@ class 缔造者技能12(主动技能):
     护石选项 = ['魔界', '圣痕']
     def 装备护石(self, x):
         if x == 0:
-            self.倍率 *= 1.28
+            self.最小值 = 2
+            self.基础 = self.基础 / 25 * 1.28
+            self.成长 = self.成长 / 25 * 1.28
+            # self.CD = self.CD / 25
+            # self.倍率 *= 1.28
         elif x == 1:
-            self.倍率 *= 1.37
+            self.最小值 = 2
+            self.基础 = self.基础 / 25 * 1.37
+            self.成长 = self.成长 / 25 * 1.37
 
 class 缔造者技能13(主动技能):
     名称 = '时空链接'
