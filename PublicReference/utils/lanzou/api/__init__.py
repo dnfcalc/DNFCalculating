@@ -1,4 +1,4 @@
-from lanzou.api.core import LanZouCloud
+from PublicReference.utils.lanzou.api.core import LanZouCloud
 
 version = '2.5.7.1'
 

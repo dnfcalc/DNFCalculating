@@ -1,6 +1,12 @@
 import json
-from lanzou.api import LanZouCloud
+
+import sys
 import os
+
+current_dir = os.getcwd()    # obtain work dir
+sys.path.append(current_dir) # add work dir to sys path
+
+from PublicReference.utils.lanzou.api.core import LanZouCloud
 
 # pip install lanzou-api
 # https://github.com/zaxtyson/LanZouCloud-API

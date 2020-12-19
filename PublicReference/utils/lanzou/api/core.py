@@ -17,12 +17,11 @@ from requests_toolbelt import MultipartEncoder, MultipartEncoderMonitor
 from urllib3 import disable_warnings
 from urllib3.exceptions import InsecureRequestWarning
 
-from lanzou.api.models import FileList, FolderList
-from lanzou.api.types import *
-from lanzou.api.utils import *
+from PublicReference.utils.lanzou.api.models import FileList, FolderList
+from PublicReference.utils.lanzou.api.types import *
+from PublicReference.utils.lanzou.api.utils import *
 
 __all__ = ['LanZouCloud']
-
 
 class LanZouCloud(object):
     FAILED = -1
