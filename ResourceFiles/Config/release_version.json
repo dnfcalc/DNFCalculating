@@ -1,4 +1,5 @@
 {
   "version": "2020-12-14",
-  "AutoCheckUpdate":true
+  "AutoCheckUpdate":true,
+  "EquipmentVersion":"HF"
 }
