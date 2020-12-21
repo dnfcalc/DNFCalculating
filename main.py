@@ -21,8 +21,6 @@ if __name__ == '__main__':
     multiprocessing.freeze_support()
 
 
-
-
 class 选择窗口(QMainWindow):
     计算器版本 = ''
     云端版本 = ''
@@ -256,8 +254,6 @@ class 选择窗口(QMainWindow):
             if index["类名2"] == '无':
                 self.打开窗口(index["类名"])
                 return
-            if index["序号"] == "54":
-                box = QMessageBox(QMessageBox.Question, "提示", "不想三觉,请勿使用")
             else:
                 box = QMessageBox(QMessageBox.Question, "提示", "请选择要打开的版本")
             box.setWindowIcon(self.icon)
