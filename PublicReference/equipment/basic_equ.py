@@ -26,6 +26,10 @@ class 装备:
         pass
     def 进图属性_BUFF(self, 属性):
         pass
+    def 变换属性(self,属性):
+        pass
+    def 变换属性_BUFF(self,属性):
+        pass
     def 其它属性(self, 属性):
         pass
     def 其它属性_BUFF(self, 属性):

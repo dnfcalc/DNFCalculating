@@ -205,14 +205,20 @@ class 角色属性(属性):
     物理魔法攻击力增加增幅 = 1.0
     所有属性强化增加 = 1.0
 
-    def 附加伤害加成(self, x ):
+    # 0附加伤害 1持续伤害 2属性附加伤害 
+    # 3技能攻击力 4暴伤 5黄字 6最终 7力智% 8三攻%
+    # 9火属性强化 10冰属性强化 11光属性强化 12暗属性强化
+    # 13力量 14智力 15物攻 16魔攻 17独立
+    可变属性 = [0,0,0,1,0,0,0,0,0,0,0,0,0,0,0]
+
+    def 附加伤害加成(self, x,可变 = 0):
         if self.装备描述 == 1:
             return '附加伤害 +{}%<br>'.format(round(x*100))
         else:
              self.附加伤害 += self.附加伤害增加增幅 * x 
         return ''
 
-    def 三攻固定加成(self, x=0, y=0,z=0):
+    def 三攻固定加成(self, x=0, y=0,z=0,可变 = 0):
         if self.装备描述 == 1:
             return '物攻/魔攻/独立 +{}<br>'.format(x)
         else:
@@ -224,7 +230,7 @@ class 角色属性(属性):
             self.独立攻击力 += z
         return ''
 
-    def 力智固定加成(self, x=0, y=0):
+    def 力智固定加成(self, x=0, y=0,可变 = 0):
         if self.装备描述 == 1:
             return '力量、智力 +{}<br>'.format(x)
         else:
@@ -234,63 +240,63 @@ class 角色属性(属性):
             self.智力 += y
         return ''
 
-    def 持续伤害加成(self, x ):
+    def 持续伤害加成(self, x,可变 = 0):
         if self.装备描述 == 1:
             return '持续伤害 +{}%<br>'.format(round(x*100))
         else:
              self.持续伤害 += x 
         return ''
 
-    def 属性附加加成(self, x ):
+    def 属性附加加成(self, x,可变 = 0):
         if self.装备描述 == 1:
             return '附加伤害 +{}%<br>'.format(round(x*100))
         else:
             self.属性附加 += self.属性附加伤害增加增幅 * x 
         return ''
 
-    def 技能攻击力加成(self, x):
+    def 技能攻击力加成(self, x,可变 = 0):
         if self.装备描述 ==1:
             return '技能攻击力 +{}%<br>'.format(round(x*100,0))
         else:
             self.技能攻击力 *= 1 + self.技能伤害增加增幅 * x 
         return ''
         
-    def 暴击伤害加成(self, x):
+    def 暴击伤害加成(self, x,可变 = 0):
         if self.装备描述 ==1:
             return '暴击伤害 +{}%<br>'.format(round(x*100))
         else:
             self.暴击伤害 += self.暴击伤害增加增幅 * x 
         return ''
         
-    def 伤害增加加成(self, x):
+    def 伤害增加加成(self, x,可变 = 0):
         if self.装备描述 ==1:
             return '伤害增加 +{}%<br>'.format(round(x*100))
         else:
             self.伤害增加 += self.伤害增加增幅 * x 
         return ''
         
-    def 最终伤害加成(self, x):
+    def 最终伤害加成(self, x ,可变 = 0):
         if self.装备描述 ==1:
             return '最终伤害 +{}%<br>'.format(round(x*100))
         else:
             self.最终伤害 += self.最终伤害增加增幅 * x 
         return ''
         
-    def 百分比力智加成(self, x):
+    def 百分比力智加成(self, x,可变 = 0):
         if self.装备描述 ==1:
             return '力量、智力 +{}%<br>'.format(round(x*100))
         else:
             self.百分比力智 += self.力量智力增加增幅 * x 
         return ''
         
-    def 百分比三攻加成(self, x):
+    def 百分比三攻加成(self, x,可变 = 0):
         if self.装备描述 ==1:
             return '百分比三攻 {}%<br>'.format(('+' if x>0 else '')+str(round(x*100)))
         else:
             self.百分比三攻 += self.物理魔法攻击力增加增幅 * x 
         return ''
         
-    def 火属性强化加成(self, x):
+    def 火属性强化加成(self, x,可变 = 0):
         if self.装备描述 ==1:
             return '火属性强化 +{}<br>'.format(x)
         else:
@@ -300,7 +306,7 @@ class 角色属性(属性):
                 self.火属性强化 += int(self.所有属性强化增加 * x)             
         return ''
 
-    def 冰属性强化加成(self, x):
+    def 冰属性强化加成(self, x,可变 = 0):
         if self.装备描述 ==1:
             return '冰属性强化 +{}<br>'.format(x)
         else:
@@ -311,7 +317,7 @@ class 角色属性(属性):
         return ''
 
 
-    def 光属性强化加成(self, x):
+    def 光属性强化加成(self, x,可变 = 0):
         if self.装备描述 ==1:
             return '光属性强化 +{}<br>'.format(x)
         else:
@@ -322,7 +328,7 @@ class 角色属性(属性):
         return ''
 
 
-    def 暗属性强化加成(self, x):
+    def 暗属性强化加成(self, x,可变 = 0):
         if self.装备描述 ==1:
             return '暗属性强化 +{}<br>'.format(x)
         else:
@@ -332,7 +338,7 @@ class 角色属性(属性):
                 self.暗属性强化 += int(self.所有属性强化增加 * x) 
         return ''
 
-    def 所有属性强化加成(self, x):
+    def 所有属性强化加成(self, x,可变 = 0):
         if self.装备描述 ==1:
             return '所有属性强化 +{}<br>'.format(x)
         else:
