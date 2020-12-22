@@ -2,7 +2,6 @@
 
 from PyQt5.QtCore import QUrl
 from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineView
 import importlib
 from PublicReference.common import *
 from PublicReference.utils.calc_core import calc_core
@@ -56,7 +55,7 @@ class 选择窗口(QMainWindow):
         fileURL = ''
         folder_info = lzy.get_folder_info_by_url('https://wws.lanzous.com/b01bfj76f')
         try:
-            resp = urllib.request.urlopen('http://dnf.17173.com/jsq/?khd')
+            resp = urllib.request.urlopen('http://dnf.17173.com/jsq/instructions.html?j')
             for file in folder_info.files:
                 if file.name.startswith("DNF计算器"):
                     self.云端版本 = file.name.replace(".zip",".exe")
@@ -364,18 +363,6 @@ class 选择窗口(QMainWindow):
             percent * 100, bar_str, now_size / 1048576, total_size / 1048576, file_name), end='')
         if total_size == now_size:
             print('')  # 下载完成换行
-    
-class WebEngineView(QWebEngineView):
-  windowList = []
- 
-  # 重写createwindow()
-  def createWindow(self, QWebEnginePage_WebWindowType):
-    new_webview =  WebEngineView()
-    new_window = MainWindow()
-    new_window.setCentralWidget(new_webview)
-    #new_window.show()
-    self.windowList.append(new_window) #注：没有这句会崩溃！！！
-    return new_webview
 
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
@@ -408,12 +395,8 @@ if __name__ == '__main__':
             fp.truncate()
         fp.close()
         if 展示信息 :
-            webview = WebEngineView()
-            webview.setWindowTitle('更新日志')
-            webview.resize(750, 550)
-            webview.load(QUrl("http://dnf.17173.com/jsq/changlog.html#/"))
-            webview.show()
+            QDesktopServices.openUrl(QUrl('http://dnf.17173.com/jsq/changlog.html#/'))
     except Exception as error:
-        print(error)
+        logger.error("error={} \n detail {}".format(error,traceback.print_exc())) 
         pass
     app.exec_()
