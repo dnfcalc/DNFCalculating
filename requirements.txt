@@ -4,3 +4,4 @@ wheel==0.35.1
 pyinstaller==4.0
 pypiwin32==223
 PyQt5==5.15.1
+requests==2.25.0
