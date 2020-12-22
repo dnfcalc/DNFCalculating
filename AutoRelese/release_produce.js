@@ -82,7 +82,12 @@
   var start = currentChangelog.indexOf("### "+lastMonth)
   currentChangelog = currentChangelog.slice(0,start)+"\n## History\n\n"+currentChangelog.slice(start)
   fs.writeFileSync("docs/CHANGELOG.md", `${newChangelog}${currentChangelog}`);
-  fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ version: String(newVersion) , AutoCheckUpdate:true,EquipmentVersion:"GF" }, null, 2));
+  fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ 
+    version: String(newVersion) , 
+    AutoCheckUpdate:true,
+    EquipmentVersion:"GF",
+    ShowChangeLog : true
+   }, null, 2));
   // create a new commit
   child.execSync('git add .');
   child.execSync(`git commit -m "chore: Bump to  ${newVersion}"`);

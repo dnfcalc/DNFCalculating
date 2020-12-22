@@ -1,6 +1,8 @@
 ﻿import multiprocessing
 
 from PyQt5.QtCore import QUrl
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineView
 import importlib
 from PublicReference.common import *
 from PublicReference.utils.calc_core import calc_core
@@ -15,11 +17,10 @@ from pathlib import Path
 import shutil
 import sys
 import time
-
+import urllib.request
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()
-
 
 class 选择窗口(QMainWindow):
     计算器版本 = ''
@@ -55,6 +56,7 @@ class 选择窗口(QMainWindow):
         fileURL = ''
         folder_info = lzy.get_folder_info_by_url('https://wws.lanzous.com/b01bfj76f')
         try:
+            resp = urllib.request.urlopen('http://dnf.17173.com/jsq/?khd')
             for file in folder_info.files:
                 if file.name.startswith("DNF计算器"):
                     self.云端版本 = file.name.replace(".zip",".exe")
@@ -317,7 +319,7 @@ class 选择窗口(QMainWindow):
             box.exec_()
             if box.clickedButton() == B:
                 self.自动更新(网盘链接)
-            if box.clickedButton() == B:
+            if box.clickedButton() == A:
                 QDesktopServices.openUrl(QUrl('http://dnf.17173.com/jsq/?khd'))
 
     def 自动更新(self,fileURL):
@@ -354,7 +356,6 @@ class 选择窗口(QMainWindow):
         # os.system(newpath+" "+FileName)
         os.system(newpath)
         
-
     def show_progress(self,file_name, total_size, now_size):
         percent = now_size / total_size
         bar_len = 40  # 进度条长总度
@@ -364,20 +365,31 @@ class 选择窗口(QMainWindow):
         if total_size == now_size:
             print('')  # 下载完成换行
     
-        
+class WebEngineView(QWebEngineView):
+  windowList = []
+ 
+  # 重写createwindow()
+  def createWindow(self, QWebEnginePage_WebWindowType):
+    new_webview =  WebEngineView()
+    new_window = MainWindow()
+    new_window.setCentralWidget(new_webview)
+    #new_window.show()
+    self.windowList.append(new_window) #注：没有这句会崩溃！！！
+    return new_webview
+
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
     # logger.info(sys.argv)
     # 带参数传入打开程序
-    if len(sys.argv) > 1:
-        if os.path.isfile(sys.argv[1]) and sys.argv[1]!="main.py":
-            try:
-                #杀老进程
-                os.system("taskkill /f /t /im "+sys.argv[1])
-                # 删除老版本
-                os.remove(os.getcwd()+"\\"+sys.argv[1])
-            except Exception as error:
-                logger.error("error={} \n detail {}".format(error,traceback.print_exc())) 
+    # if len(sys.argv) > 1:
+        # if os.path.isfile(sys.argv[1]) and sys.argv[1]!="main.py":
+        #     try:
+        #         #杀老进程
+        #         os.system("taskkill /f /t /im "+sys.argv[1])
+        #         # 删除老版本
+        #         os.remove(os.getcwd()+"\\"+sys.argv[1])
+        #     except Exception as error:
+        #         logger.error("error={} \n detail {}".format(error,traceback.print_exc())) 
     if 窗口显示模式 == 1:
         if hasattr(qtc.Qt, 'AA_EnableHighDpiScaling'):
             QtWidgets.QApplication.setAttribute(qtc.Qt.AA_EnableHighDpiScaling, True)
@@ -386,4 +398,22 @@ if __name__ == '__main__':
     app = QApplication([])
     instance = 选择窗口()
     instance.show()
+    try:
+        with open("ResourceFiles\\Config\\release_version.json", "r+") as fp:
+            versionInfo = json.load(fp)
+            展示信息 = versionInfo['ShowChangeLog']
+            versionInfo['ShowChangeLog'] = False
+            fp.seek(0)
+            json.dump(versionInfo,fp,ensure_ascii=False)
+            fp.truncate()
+        fp.close()
+        if 展示信息 :
+            webview = WebEngineView()
+            webview.setWindowTitle('更新日志')
+            webview.resize(750, 550)
+            webview.load(QUrl("http://dnf.17173.com/jsq/changlog.html#/"))
+            webview.show()
+    except Exception as error:
+        print(error)
+        pass
     app.exec_()

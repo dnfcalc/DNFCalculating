@@ -1,5 +1,6 @@
 {
   "version": "2020-12-14",
-  "AutoCheckUpdate":true,
-  "EquipmentVersion":"GF"
+  "AutoCheckUpdate": true,
+  "EquipmentVersion": "GF",
+  "ShowChangeLog": true
 }
