@@ -317,7 +317,7 @@ class 选择窗口(QMainWindow):
             C.setText("取消")
             box.exec_()
             if box.clickedButton() == B:
-                self.自动更新(网盘链接)
+                self.自动更新(self.网盘链接)
             if box.clickedButton() == A:
                 QDesktopServices.openUrl(QUrl('http://dnf.17173.com/jsq/?khd'))
 
