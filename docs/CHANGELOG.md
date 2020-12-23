@@ -1,4 +1,31 @@
 ## Newest
+
+### 2020-12-23
+
+#### NewFeatures
+* 优化自选装备计算页面显示 ([c27a55](https://github.com/wxh0402/DNFCalculating/commit/c27a5566c2f019caa16294659f4fca0113bef876))
+* 同步韩服幻影狂欢长枪改版属性 ([9cb943](https://github.com/wxh0402/DNFCalculating/commit/9cb943d91ea1b8052612bfdfc36a956fca056540))
+* 在检查更新旁提示用户存在新版本，可通过修改release_version.json关闭 ([97a1b3](https://github.com/wxh0402/DNFCalculating/commit/97a1b31ca5dd6d0cc4437303fa35fd9b89a86c12))
+* 奶系：无形残香面板加成调整为进图生效 ([507915](https://github.com/wxh0402/DNFCalculating/commit/50791529171b728c3e27fd65b088ac8fd1b914a4))
+* 归元·散打·女：当绑定武神强踢时，强制不计算武神强踢冷却缩减BUFF ([c81b76](https://github.com/wxh0402/DNFCalculating/commit/c81b7683898c5f7945be9728f5b5c688b59736f1))
+* 新增第一次打开版本弹窗显示更新日志功能 ([83d24a](https://github.com/wxh0402/DNFCalculating/commit/83d24af445f5f8e21208d660ca7a058d85366d41))
+* 暗夜使者：同步国服登陆三觉 ([98c93a](https://github.com/wxh0402/DNFCalculating/commit/98c93a0dc0cc179ccc6e845372ec8cb9ebfc12ee))
+* 添加切韩服装备属性配置,在ResourceFiles\Config\release_version中修改EquipmentVersion,"GF"为国服属性,"HF为韩服属性" ([febd7a](https://github.com/wxh0402/DNFCalculating/commit/febd7aee8332bb35adea912fcd28d5ed9c2af117))
+* 缔造者：调整冰雪降临护符算法 ([46519f](https://github.com/wxh0402/DNFCalculating/commit/46519fafd3d8a4cf1b1e7cdfc27ab3352aac1968))
+* 调整辟邪玉理论提升数值宽度，适应部分用户显示不全的情况 ([dbab26](https://github.com/wxh0402/DNFCalculating/commit/dbab2620f0b6178a1232815834ec7b45e9c2de4f))
+* 隐夜·刺客：同步三觉相关数据 ([ecd84e](https://github.com/wxh0402/DNFCalculating/commit/ecd84ec2170939461f4f70f13039933a2f1ca7bb))
+* 隐夜·影舞者：同步三觉相关数据 ([2ad320](https://github.com/wxh0402/DNFCalculating/commit/2ad3209843b85f929f37840e8d43b89e03dbbd17))
+* 隐夜·忍者：同步三觉相关数据 ([c94059](https://github.com/wxh0402/DNFCalculating/commit/c940591b050c2d294048a20822e38f8105e2db54))
+* 隐夜·死灵术士：同步三觉相关数据 ([2aabad](https://github.com/wxh0402/DNFCalculating/commit/2aabadcaa60acb512a43bef44fd72be77d7087b8))
+* 韩服防具神话基础词条修改同步到非神话属性上 ([1875f7](https://github.com/wxh0402/DNFCalculating/commit/1875f7e735f2a84787115bf639f28abc6d16fea2))
+
+#### BugFixes
+* 修正改造防具的精通加成数值 ([9bb40f](https://github.com/wxh0402/DNFCalculating/commit/9bb40fd24fc382db54f5f9c46d01a4553257be49))
+* 修正残香属性自选时，辟邪玉不计算其加成的情况 ([ce239b](https://github.com/wxh0402/DNFCalculating/commit/ce239b6334804537e541f1805008e885bf40a56a))
+* 奶系：修正100传说防具和套装属性 ([f80127](https://github.com/wxh0402/DNFCalculating/commit/f80127f7cc6db386a545a2684685ee200bc7c0d3))
+* 奶系：修正工作服鞋等级加成 ([39bcaf](https://github.com/wxh0402/DNFCalculating/commit/39bcaf4201ac59499ee2826f00627d63a254ab1f))
+
+## Newest
 ### 2020-12-14
 
 #### NewFeatures
@@ -46,6 +73,7 @@
 * 知源·魔道学者：修复无法正常计算的问题 ([ac077d](https://github.com/wxh0402/DNFCalculating/commit/ac077dad9aaa0270bd5dae570fb461114823606a))
 * 奶系：修正部分神话等级加成词条默认满属性的情况 ([cb731c](https://github.com/wxh0402/DNFCalculating/commit/cb731c279e027526656413a108016fa5e5d4e9ce))
 * 归元·街霸·女：修复无法正常计算的问题 ([3abe91](https://github.com/wxh0402/DNFCalculating/commit/3abe914b5083c83c27e3b08b5e6632a23))
+
 
 ## History
 
