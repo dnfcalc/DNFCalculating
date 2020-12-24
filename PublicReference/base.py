@@ -3853,6 +3853,17 @@ class 角色窗口(窗口):
         else:
             属性.转甲选项 = 0
 
+        for j in [self.等级调整, self.TP输入, self.次数输入, self.宠物次数]:
+            for i in j:
+                if i != '' and i.currentIndex() == -1:
+                    i.setCurrentIndex(0)
+
+        for i in 属性.技能栏:
+            i.等级 = i.基础等级+int(self.等级调整[self.角色属性A.技能序号[i.名称]].currentText())
+            if i.是否有伤害==1:
+                if i.TP上限!=0:
+                    i.TP等级=int(self.TP输入[self.角色属性A.技能序号[i.名称]].currentText())
+
         if x == 0:
             self.辟邪玉属性计算(属性)
         elif x >= 100:
@@ -3869,17 +3880,6 @@ class 角色窗口(窗口):
             词条属性列表[self.希洛克武器词条[1].currentIndex()].加成属性(属性, (self.希洛克武器词条[3].currentIndex() + 3) * 0.02)
             if 属性.武器词条触发 == 1:
                 词条属性列表[self.希洛克武器词条[2].currentIndex()].加成属性(属性, (self.希洛克武器词条[4].currentIndex() + 3) * 0.01)
-
-        for j in [self.等级调整, self.TP输入, self.次数输入, self.宠物次数]:
-            for i in j:
-                if i != '' and i.currentIndex() == -1:
-                    i.setCurrentIndex(0)
-
-        for i in 属性.技能栏:
-            i.等级 = i.基础等级+int(self.等级调整[self.角色属性A.技能序号[i.名称]].currentText())
-            if i.是否有伤害==1:
-                if i.TP上限!=0:
-                    i.TP等级=int(self.TP输入[self.角色属性A.技能序号[i.名称]].currentText())
 
         属性.时间输入 = int(self.时间输入.currentText())
         属性.次数输入.clear()
