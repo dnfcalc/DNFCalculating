@@ -7,6 +7,14 @@ from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
 
+装备版本 = "GF"
+
+with open("ResourceFiles\\Config\\release_version.json") as fp:
+    versionInfo = json.load(fp)
+    装备版本 = versionInfo['EquipmentVersion'].upper()
+fp.close()
+
+
 class 技能:
     名称 = ''
     备注 = ''
@@ -23,6 +31,8 @@ class 技能:
     冷却关联技能 = ['无']
     冷却关联技能2 = ['无']
     冷却关联技能3 = ['无']
+
+    版本 = 装备版本
 
     def 等级加成(self, x):
         if self.等级 != 0:
@@ -67,9 +77,8 @@ class 主动技能(技能):
             return int((self.攻击次数 * (self.基础 + self.成长 * self.等级) + self.攻击次数2 * (self.基础2 + self.成长2 * self.等级) + self.攻击次数3 * (
                         self.基础3 + self.成长3 * self.等级)) * (1 + self.TP成长 * self.TP等级) * self.倍率)
                         
-    def 等效CD(self, 武器类型):
-        # Will修改
-        return round(self.CD  / self.恢复, 1)
+    def 等效CD(self, 武器类型,输出类型):
+        return round(self.CD  / self.恢复 * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
 
 class 被动技能(技能):
     是否主动 = 0
@@ -856,7 +865,7 @@ class 角色属性(属性):
         for i in self.技能栏:
             if i.是否有伤害 == 1:
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
-                    技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型) + 1 + i.基础释放次数))
+                    技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数))
                 elif self.次数输入[self.技能序号[i.名称]] != '0':
                     技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
                 else:
@@ -3490,7 +3499,7 @@ class 角色窗口(窗口):
         for i in self.角色属性B.技能栏:
             实际技能等级.append(i.等级)
             if i.是否有伤害==1:
-                技能等效CD.append(i.等效CD(self.角色属性B.武器类型))
+                技能等效CD.append(i.等效CD(self.角色属性B.武器类型,self.角色属性B.类型))
             else:
                 技能等效CD.append(0)
     
@@ -3532,7 +3541,7 @@ class 角色窗口(窗口):
                     tempstr+='被动倍率：'+str(round(self.角色属性B.技能栏[i].被动倍率*100,1)) + '%<br>'
                     if self.角色属性B.技能栏[i].倍率!=0:
                         tempstr+='其它倍率：'+str(round(self.角色属性B.技能栏[i].倍率*100,1)) + '%<br>'
-                    tempstr+='CD显示：'+str(round(self.角色属性B.技能栏[i].等效CD(self.角色属性B.武器类型) * self.角色属性B.技能栏[i].恢复,2)) + 's<br>'
+                    tempstr+='CD显示：'+str(round(self.角色属性B.技能栏[i].等效CD(self.角色属性B.武器类型,self.角色属性B.类型) * self.角色属性B.技能栏[i].恢复,2)) + 's<br>'
                     tempstr+='CD恢复：'+str(round(self.角色属性B.技能栏[i].恢复*100,1)) + '%</font>'
                     每行详情[0].setToolTip(tempstr)
                 except:

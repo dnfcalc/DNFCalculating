@@ -1,6 +1,10 @@
 from math import *
 from PublicReference.base import *
 
+class 主动技能(主动技能)
+    def 等效CD(self, 武器类型,输出类型):
+        return round(self.CD  / self.恢复, 1)
+
 class 重霄·弹药专家·男主动技能(主动技能):
     技能施放时间 = 0.0
     脱手 = 1
@@ -525,11 +529,11 @@ class 重霄·弹药专家·男角色属性(角色属性):
                     技能释放次数.append(0)
                 else:
                     if self.次数输入[self.技能序号[i.名称]] == '/CD':
-                        技能释放次数.append(int((self.时间输入) / (i.等效CD(self.武器类型)+i.技能施放时间) + 1 + i.基础释放次数))
+                        技能释放次数.append(int((self.时间输入) / (i.等效CD(self.武器类型,self.类型)+i.技能施放时间) + 1 + i.基础释放次数))
                         if i.脱手 ==1:
-                            技能消耗时间 += int((self.时间输入) / (i.等效CD(self.武器类型) + i.技能施放时间) + 1 + i.基础释放次数) * 0.2
+                            技能消耗时间 += int((self.时间输入) / (i.等效CD(self.武器类型,self.类型) + i.技能施放时间) + 1 + i.基础释放次数) * 0.2
                         else:
-                            技能消耗时间 += int((self.时间输入) / (i.等效CD(self.武器类型) + i.技能施放时间) + 1 + i.基础释放次数) *  i.技能施放时间
+                            技能消耗时间 += int((self.时间输入) / (i.等效CD(self.武器类型,self.类型)) + i.技能施放时间) + 1 + i.基础释放次数) *  i.技能施放时间
                     elif self.次数输入[self.技能序号[i.名称]] != '0':
                         技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
                     else:

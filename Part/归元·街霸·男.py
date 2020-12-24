@@ -29,6 +29,9 @@ class 归元·街霸·男主动技能(主动技能):
                  + self.感电倍率 * (self.感电基础 + self.感电成长 * self.等级))
                  * (1 + self.TP成长 * self.TP等级) * self.倍率)
 
+    def 等效CD(self, 武器类型,输出类型):
+        return round(self.CD  / self.恢复, 1)
+
 class 归元·街霸·男技能0(被动技能):
     名称 = '基础精通'
     倍率 = 1.0

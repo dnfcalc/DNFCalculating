@@ -337,7 +337,7 @@ class 神启·诱魔者技能18(主动技能):
     演出时间 = 2
     def 等效百分比(self, 武器类型):
         return (self.数据[self.等级] * self.攻击次数) * self.倍率
-    def 等效CD(self, 武器类型):
+    def 等效CD(self, 武器类型,输出类型):
         return 2
 
 # 被动技能，由75被动拆分，每级成长2%

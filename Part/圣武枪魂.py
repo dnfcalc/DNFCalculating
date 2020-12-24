@@ -19,12 +19,11 @@ class 职业主动技能(主动技能):
             等效倍率 += self.data3[self.等级] * self.攻击次数4
         return 等效倍率 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 等效CD(self, 武器类型):
+    def 等效CD(self, 武器类型,输出类型):
         # 长枪+5%,长枪精通-13%
         if self.所在等级 == 100 or self.所在等级 == 85 or self.所在等级 == 50:
-            return round(self.CD  / self.恢复 * 1.05, 1)
-        else:
-            return round(self.CD  / self.恢复 * 1.05 * 0.87, 1)
+            self.CD = self.CD / 0.87
+        return super().等效CD(武器类型,输出类型)
 
 class 技能0(被动技能):	
     名称 = '长枪精通'	

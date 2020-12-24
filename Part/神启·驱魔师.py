@@ -1,6 +1,11 @@
 from PublicReference.base import *
 from math import *
 
+
+class 主动技能(主动技能):
+    def 等效CD(self, 武器类型,输出类型):
+        return round(self.CD  / self.恢复, 1)    
+
 class 神启·驱魔师技能0(被动技能):
     名称 = '基础精通'
     倍率 = 1.0

@@ -323,7 +323,6 @@ class 选择窗口(QMainWindow):
 
     def 自动更新(self,fileURL):
         path  = os.getcwd()+"/download"
-        print(path)
         lzy = LanZouCloud()
         lzy.down_file_by_url(fileURL,'', path , callback=self.show_progress, downloaded_handler=self.after_downloaded)
 

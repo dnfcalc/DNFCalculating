@@ -1,11 +1,11 @@
 from PublicReference.base import *
 
-class 主动技能(主动技能):
-    def 等效CD(self, 武器类型):
-        if 武器类型 == '匕首':
-            return round(self.CD / self.恢复  * 0.9, 1)
-        if 武器类型 == '双剑':
-            return round(self.CD / self.恢复  * 1.1, 1)
+# class 主动技能(主动技能):
+#     def 等效CD(self, 武器类型):
+#         if 武器类型 == '匕首':
+#             return round(self.CD / self.恢复  * 0.9, 1)
+#         if 武器类型 == '双剑':
+#             return round(self.CD / self.恢复  * 1.1, 1)
 
 class 技能0(主动技能):
     名称 = '终结追击'

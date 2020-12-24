@@ -2,6 +2,10 @@ from PublicReference.base import *
 
 风暴骑兵等级 = 100 + 5
 
+class 主动技能(主动技能)
+    def 等效CD(self, 武器类型,输出类型):
+        return round(self.CD  / self.恢复, 1)
+
 class 风暴骑兵技能0(主动技能):
     名称 = 'M3喷火器'
     所在等级 = 15
@@ -39,7 +43,6 @@ class 风暴骑兵技能1(被动技能):
 
     def 物理攻击力倍率(self, 武器类型):
         return self.加成倍率2(武器类型)
-
 
 class 风暴骑兵技能2(主动技能):
     名称 = '加农炮'

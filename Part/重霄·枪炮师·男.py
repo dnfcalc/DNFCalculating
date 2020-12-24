@@ -1,5 +1,9 @@
 from PublicReference.base import *
 
+class 主动技能(主动技能)
+    def 等效CD(self, 武器类型,输出类型):
+        return round(self.CD  / self.恢复, 1)
+
 class 重霄·枪炮师·男技能0(主动技能):
     名称 = 'M137格林机枪'
     所在等级 = 15

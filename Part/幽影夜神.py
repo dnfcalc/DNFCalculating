@@ -16,9 +16,9 @@ class 职业主动技能(主动技能):
             等效倍率 += self.data2[self.等级] * self.攻击次数3
         return 等效倍率 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 等效CD(self, 武器类型):
-        # 暗矛1.05
-        return round(self.CD  / self.恢复 * 1.05, 1)
+    # def 等效CD(self, 武器类型):
+    #     # 暗矛1.05
+    #     return round(self.CD  / self.恢复 * 1.05, 1)
 
 class 技能0(被动技能):	
     名称 = '暗蚀'	

@@ -22,9 +22,9 @@ class 职业主动技能(主动技能):
             等效倍率 += self.data3[self.等级] * self.攻击次数4
         return 等效倍率 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 等效CD(self, 武器类型):
-        if 武器类型 == '巨剑':
-            return round(self.CD / self.恢复 * 1.1, 1)
+    # def 等效CD(self, 武器类型):
+    #     if 武器类型 == '巨剑':
+    #         return round(self.CD / self.恢复 * 1.1, 1)
 
 # 骑士信念
 class 技能0(被动技能):

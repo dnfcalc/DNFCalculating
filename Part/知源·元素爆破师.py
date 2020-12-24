@@ -3,11 +3,11 @@ class 知源·元素爆破师主动技能(主动技能):
     元素之力蓄力数量 = 0
     关联技能4 = ['无']
 
-    def 等效CD(self, 武器类型):
-        if 武器类型 == '魔杖':
-            return round(self.CD / self.恢复 * 1, 1)
-        if 武器类型 == '法杖':
-            return round(self.CD / self.恢复 * 1.1, 1)
+    # def 等效CD(self, 武器类型):
+    #     if 武器类型 == '魔杖':
+    #         return round(self.CD / self.恢复 * 1, 1)
+    #     if 武器类型 == '法杖':
+    #         return round(self.CD / self.恢复 * 1.1, 1)
 
 class 知源·元素爆破师被动技能(被动技能):
     关联技能4 = ['无']
@@ -250,17 +250,10 @@ class 知源·元素爆破师技能14(知源·元素爆破师主动技能):
     TP上限 = 1
     演出时间 = 3.0
     攻击倍率 = 1.1
-    def 等效CD(self, 武器类型):
-        if self.TP等级 == 0:
-            if 武器类型 == '魔杖':
-                return round (0.8 * self.CD  / self.恢复, 1)
-            if 武器类型 == '法杖':
-                return round (0.8 * 1.1 * self.CD  / self.恢复, 1)
-        else:
-            if 武器类型 == '魔杖':
-                return round (0.8 * (self.CD - 3.0)  / self.恢复, 1)
-            if 武器类型 == '法杖':
-                return round (0.8 * 1.1 * (self.CD - 3.0)  / self.恢复, 1)
+    def 等效CD(self, 武器类型,输出类型):
+        if self.TP等级 > 0:
+            self.CD = self.CD - 3
+        return super().等效CD(武器类型,输出类型)
 
     def 等效百分比(self, 武器类型):
         return self.数据[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率 * self.攻击倍率

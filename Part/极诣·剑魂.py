@@ -3,11 +3,6 @@ from PublicReference.base import *
 class 极诣·剑魂主动技能(主动技能):
     hit数 = 0  #太刀时所需参数，计算期望刺伤
 
-    武器CD = {'短剑':1, '光剑':0.9, '巨剑':1.1, '钝器':1.05, '太刀':0.95}
-    
-    def 等效CD(self, 武器类型):
-        return round(self.CD / self.恢复  * self.武器CD[武器类型], 1)
-
     def 额外刺伤层数(self, 武器类型):
         return 0
 
@@ -16,6 +11,9 @@ class 极诣·剑魂主动技能(主动技能):
 
 class 极诣·剑魂流系技能(主动技能):
     hit数 = 0
+
+    def 等效CD(self, 武器类型,输出类型):
+        return round(self.CD / self.恢复, 1)    
 
     def 额外刺伤层数(self, 武器类型):
         return 0
@@ -734,7 +732,7 @@ class 极诣·剑魂技能22(极诣·剑魂主动技能):
     def 等效百分比(self, 武器类型):
         return self.数据[self.等级] * self.倍率
 
-    def 等效CD(self, 武器类型):
+    def 等效CD(self, 武器类型,输出类型):
         return 1.0
 
     #该技能hit数不会触发太刀刺伤

@@ -3,11 +3,11 @@ from PublicReference.base import *
     
 
 class 知源·元素师主动技能(主动技能):
-    def 等效CD(self, 武器类型):
-        if 武器类型 == '法杖':
-            return round(self.CD / self.恢复 * 1.1, 1)
-        if 武器类型 == '魔杖':
-            return round(self.CD / self.恢复 * 1, 1)
+    # def 等效CD(self, 武器类型):
+    #     if 武器类型 == '法杖':
+    #         return round(self.CD / self.恢复 * 1.1, 1)
+    #     if 武器类型 == '魔杖':
+    #         return round(self.CD / self.恢复 * 1, 1)
 
     def 实际技能次数(self, 输出时间,武器类型):
         

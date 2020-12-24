@@ -3,6 +3,10 @@ import math
 
 等级 = 100 + 5
 
+
+class 主动技能(主动技能)
+    def 等效CD(self, 武器类型,输出类型):
+        return round(self.CD  / self.恢复, 1)
 class 技能0(主动技能):
     名称 = '火遁·豪火球之术'
     所在等级 = 15
@@ -326,7 +330,7 @@ class 技能13(主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 ) * (1 + self.TP成长 * self.TP等级) * self.倍率 * self.攻击倍率
 
-    def 等效CD(self, 武器类型):
+    def 等效CD(self, 武器类型,输出类型):
         return 1.0
 
 class 技能14(主动技能):
@@ -431,7 +435,7 @@ class 技能17(主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 等效CD(self, 武器类型):
+    def 等效CD(self, 武器类型,输出类型):
         # Will修改
         return round(self.CD  / self.恢复, 1)
 
@@ -525,7 +529,7 @@ class 技能21(主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] * self.攻击次数3 * self.攻击倍率3) * (1 + self.TP成长 * self.TP等级) * self.倍率 * self.攻击倍率
 
-    def 等效CD(self, 武器类型):
+    def 等效CD(self, 武器类型,输出类型):
         # Will修改
         return round(self.CD  / self.恢复, 1)
 

@@ -2,10 +2,10 @@ from PublicReference.base import *
 
 class 极诣·契魔者主动技能(主动技能):
 
-    武器CD = {'短剑':1, '巨剑':1.1, '钝器':1.05, '太刀':0.95}
+    # 武器CD = {'短剑':1, '巨剑':1.1, '钝器':1.05, '太刀':0.95}
     
-    def 等效CD(self, 武器类型):
-        return round(self.CD / self.恢复  * self.武器CD[武器类型], 1)
+    # def 等效CD(self, 武器类型):
+    #     return round(self.CD / self.恢复  * self.武器CD[武器类型], 1)
 
     数据 = []
     次数 = []

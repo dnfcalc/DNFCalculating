@@ -22,9 +22,9 @@ class 职业主动技能(主动技能):
             等效倍率 += self.data3[self.等级] * self.攻击次数4
         return 等效倍率 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 等效CD(self, 武器类型):
-        if 武器类型 == '钝器':
-            return round(self.CD / self.恢复 * 1.05, 1)
+    # def 等效CD(self, 武器类型):
+    #     if 武器类型 == '钝器':
+    #         return round(self.CD / self.恢复 * 1.05, 1)
 
 # 天使光翼
 class 技能0(被动技能):
@@ -375,7 +375,6 @@ class 技能18(职业主动技能):
 
     护石选项 = ['圣痕']
     def 装备护石(self, x):
-        print(self.蓄力)
         if x == 0 and self.蓄力 ==0:
             self.攻击次数 = 0
             self.攻击次数2 = 1

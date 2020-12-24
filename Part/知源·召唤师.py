@@ -4,11 +4,11 @@ class 知源·召唤师主动技能(主动技能):
     秒伤基础 = 0
     秒伤成长 = 0
     秒伤倍率 = 1
-    def 等效CD(self, 武器类型):
-        if 武器类型 == '法杖':
-            return round(self.CD / self.恢复 * 1.10, 1)
-        if 武器类型 == '魔杖':
-            return round(self.CD / self.恢复 * 1.00, 1)
+    # def 等效CD(self, 武器类型):
+    #     if 武器类型 == '法杖':
+    #         return round(self.CD / self.恢复 * 1.10, 1)
+    #     if 武器类型 == '魔杖':
+    #         return round(self.CD / self.恢复 * 1.00, 1)
 
     def 秒伤百分比(self):
         if self.等级 == 0:
@@ -429,7 +429,7 @@ class 知源·召唤师技能26(知源·召唤师主动技能):
     成长 = 61
     攻击次数 = 2
     演出时间 = 1
-    def 等效CD(self, 武器类型):
+    def 等效CD(self, 武器类型,输出类型):
         return 1
 
 class 知源·召唤师技能27(知源·召唤师主动技能):

@@ -1,6 +1,10 @@
 from PublicReference.base import *
 
 
+class 主动技能(主动技能):
+    def 等效CD(self, 武器类型,输出类型):
+        return round(self.CD  / self.恢复, 1)    
+
 class 归元·散打·女技能0(主动技能):
     名称 = '崩拳'
     所在等级 = 15
