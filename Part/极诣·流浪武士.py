@@ -5,7 +5,7 @@ class 主动技能(主动技能):
     def 等效CD(self, 武器类型,输出类型):
         if 武器类型 == '光剑':
             self.CD = self.CD * 0.9
-        super().等效CD(武器类型,输出类型)
+        return super().等效CD(武器类型,输出类型)
 
 class 极诣·流浪武士技能0(被动技能):
     名称 = '返本归元'
