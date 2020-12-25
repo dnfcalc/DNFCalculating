@@ -473,9 +473,9 @@ class 角色属性(属性):
     def 技能冷却缩减(self, min, max, x):
         if self.装备描述 ==1:
             if min == max:
-                return "Lv{} 技能CD-{}%<br>".format(min,round(x*100))
+                return "Lv{} 技能CD -{}%<br>".format(min,round(x*100))
             else:
-                return "Lv{}-{} 技能CD-{}%<br>".format(min,max,round(x*100))
+                return "Lv{}-{} 技能CD -{}%<br>".format(min,max,round(x*100))
         else:
             for i in self.技能栏:
                 if i.所在等级 >= min and i.所在等级 <= max:
@@ -2909,14 +2909,14 @@ class 角色窗口(窗口):
             if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
                 temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
                 self.角色属性B.装备描述 = 1            
-                temp += self.角色属性B.伤害增加加成(0.02)
-                temp += self.角色属性B.技能冷却缩减(1,45,0.2)
+                temp += self.角色属性B.暴击伤害加成(0.03)
+                temp += self.角色属性B.技能冷却缩减(60,70,0.2)
                 self.角色属性B.装备描述 = 0
             if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
                 temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
                 self.角色属性B.装备描述 = 1
-                temp += self.角色属性B.伤害增加加成(0.02)
-                temp += self.角色属性B.技能冷却缩减(1,45,0.2)
+                temp += self.角色属性B.百分比力智加成(0.03)
+                temp += self.角色属性B.技能冷却缩减(75,80,0.17)
                 self.角色属性B.装备描述 = 0
             if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2] ) > 1:
                 套装.append("希洛克-暗杀者")
@@ -3387,7 +3387,7 @@ class 角色窗口(窗口):
             temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
             self.角色属性B.装备描述 = 1
             temp += self.角色属性B.百分比力智加成(0.03)
-            temp += self.角色属性B.技能冷却缩减(75,80,0.2)
+            temp += self.角色属性B.技能冷却缩减(75,80,0.17)
             self.角色属性B.装备描述 = 0
         if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2] ) > 1:
             套装.append("希洛克-暗杀者")
