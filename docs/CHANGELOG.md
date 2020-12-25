@@ -8,6 +8,7 @@
 
 #### BugFixes
 * 修正午夜生死轮盘属性错误 ([3a68a1](https://github.com/wxh0402/DNFCalculating/commit/3a68a158c1705f2c8bdf533812ddf2522c00d84b))
+* 修正命运的捉弄属性错误 ([8a7035](https://github.com/wxh0402/DNFCalculating/commit/8a70359a6ec56a6fdc14629343c2eb773910c670))
 * 修正极诣·流浪武士/CD无法计算的问题 ([d8cab0](https://github.com/wxh0402/DNFCalculating/commit/d8cab079596b7780017f255dbcfdbd85aa8a9d13))
 * 修正死亡阴影神话上衣描述问题 ([0e8278](https://github.com/wxh0402/DNFCalculating/commit/0e827818118c45af571f70c818a9f1d66700e1a0))
 * 修正法杖CD错误 ([e53009](https://github.com/wxh0402/DNFCalculating/commit/e53009492fd16056da56e8cb7a986c5fa0fd4cee))
@@ -111,6 +112,7 @@
 * 知源·魔道学者：修复无法正常计算的问题 ([ac077d](https://github.com/wxh0402/DNFCalculating/commit/ac077dad9aaa0270bd5dae570fb461114823606a))
 * 奶系：修正部分神话等级加成词条默认满属性的情况 ([cb731c](https://github.com/wxh0402/DNFCalculating/commit/cb731c279e027526656413a108016fa5e5d4e9ce))
 * 归元·街霸·女：修复无法正常计算的问题 ([3abe91](https://github.com/wxh0402/DNFCalculating/commit/3abe914b5083c83c27e3b08b5e6632a23))
+
 
 
 
