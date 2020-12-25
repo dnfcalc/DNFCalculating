@@ -199,7 +199,7 @@ class 机械之灵技能10(主动技能):
             self.倍率*=1.17
 
         elif x == 1:
-            self.倍率*=1.
+            self.倍率*=1.25
 
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级]* self.攻击次数1 + self.数据2[self.等级]* self.攻击次数2 + self.数据3[self.等级]* self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
