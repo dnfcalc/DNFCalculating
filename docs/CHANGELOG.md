@@ -1,5 +1,20 @@
 ## Newest
 
+### 2020-12-26
+
+#### NewFeatures
+* 归元·散打·女：补充新护石 ([559009](https://github.com/wxh0402/DNFCalculating/commit/559009ead7732d23be1e7a1317f048869abe8657))
+* 添加奶系国服体验服改版属性 ([8eb5e8](https://github.com/wxh0402/DNFCalculating/commit/8eb5e8553da9c6e3fe753d398537610eb65aed6f))
+
+#### BugFixes
+* 修正午夜生死轮盘属性错误 ([3a68a1](https://github.com/wxh0402/DNFCalculating/commit/3a68a158c1705f2c8bdf533812ddf2522c00d84b))
+* 修正极诣·流浪武士/CD无法计算的问题 ([d8cab0](https://github.com/wxh0402/DNFCalculating/commit/d8cab079596b7780017f255dbcfdbd85aa8a9d13))
+* 修正死亡阴影神话上衣描述问题 ([0e8278](https://github.com/wxh0402/DNFCalculating/commit/0e827818118c45af571f70c818a9f1d66700e1a0))
+* 修正法杖CD错误 ([e53009](https://github.com/wxh0402/DNFCalculating/commit/e53009492fd16056da56e8cb7a986c5fa0fd4cee))
+* 修正窥视未来耳环无法参与计算的情况 ([26567a](https://github.com/wxh0402/DNFCalculating/commit/26567ad9af1a4c43df413a3ef59356f7844d3f6f))
+* 修正部分职业CD显示问题 ([f2598a](https://github.com/wxh0402/DNFCalculating/commit/f2598affb231570dd052c18c0014d8bbbc1edfee))
+* 机械之灵：修正拦截机工厂新护石加成问题 ([454d48](https://github.com/wxh0402/DNFCalculating/commit/454d485e4687079af54cdd55651e34b3175c699a))
+
 ### 2020-12-25
 
 #### NewFeatures
@@ -96,6 +111,7 @@
 * 知源·魔道学者：修复无法正常计算的问题 ([ac077d](https://github.com/wxh0402/DNFCalculating/commit/ac077dad9aaa0270bd5dae570fb461114823606a))
 * 奶系：修正部分神话等级加成词条默认满属性的情况 ([cb731c](https://github.com/wxh0402/DNFCalculating/commit/cb731c279e027526656413a108016fa5e5d4e9ce))
 * 归元·街霸·女：修复无法正常计算的问题 ([3abe91](https://github.com/wxh0402/DNFCalculating/commit/3abe914b5083c83c27e3b08b5e6632a23))
+
 
 
 
