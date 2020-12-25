@@ -1018,7 +1018,7 @@ class 角色窗口(窗口):
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['技能栏空位：0', '技能栏空位：1', '技能栏空位：2', '技能栏空位：3', '技能栏空位：4', '技能栏空位：5', '技能栏空位：6'])
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems(['命运的抉择：数学期望', '命运的抉择：黄字+35%', '命运的抉择：爆伤+35%', '命运的抉择：白字+35%', '命运的抉择：终伤+35%', '命运的抉择：三攻+35%'])
+        self.装备条件选择[-1].addItems(['命运的抉择：数学期望', '命运的抉择：黄字+10%', '命运的抉择：爆伤+10%', '命运的抉择：终伤+10%', '命运的抉择：三攻+10%', '命运的抉择：技攻+10%'])
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['骰子：数学期望', '骰子：1点', '骰子：2点', '骰子：3点', '骰子：4点', '骰子：5点', '骰子：6点'])
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
@@ -2840,7 +2840,7 @@ class 角色窗口(窗口):
 
             self.套装名称显示[count].setText(self.宠物.currentText())
             self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
-            self.套装名称显示[count].setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.宠物.currentText() + '</font><br>' + 宠物列表[self.宠物.currentIndex()].装备描述(B)[:-4] + '</font>')
+            self.套装名称显示[count].setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.宠物.currentText() + '</font><br>' + ��物列表[self.宠物.currentIndex()].装备描述(B)[:-4] + '</font>')
             count += 1
 
 
@@ -3993,7 +3993,7 @@ class 角色窗口(窗口):
         属性.太极天帝剑 = self.装备条件选择[11].currentIndex()
         属性.绿色生命的面容 = self.装备条件选择[12].currentIndex()
         
-        self.希洛克属性计算(属性)
+        self.希洛���属性计算(属性)
         self.基础属性(属性)
     
     def 基础属性(self, 属性):
