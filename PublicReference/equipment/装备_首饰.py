@@ -763,8 +763,8 @@ class 装备194(装备):
     def 进图属性_BUFF(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        self.属性描述 += 属性.被动增加(守护恩赐体精=220 - self.属性1选择_BUFF * 20)
-        self.属性描述 += 属性.被动增加(转职被动智力=250 - self.属性1选择_BUFF * 20)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=220)
+        self.属性描述 += 属性.被动增加(转职被动智力=250)
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.08, BUFF智力per=1.08)
         self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
         self.属性描述 += 属性.被动增加(守护恩赐体精=160 - self.属性1选择_BUFF * 20)
