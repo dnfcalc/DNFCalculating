@@ -715,6 +715,8 @@ class 角色窗口(窗口):
         self.线程数选择.resize(80, 24)
         for i in range(thread_num, 0, -1):
             self.线程数选择.addItem('进程:' + str(i))
+        if thread_num > 1 :
+                self.线程数选择.setCurrentIndex(1)
 
         self.禁用存档 = QCheckBox('禁用自动存档', self.main_frame1)
         self.禁用存档.move(990, 545)

@@ -1122,6 +1122,8 @@ class 角色窗口(窗口):
         self.线程数选择.resize(宽度, 高度)
         for i in range(thread_num, 0, -1):
             self.线程数选择.addItem('进程:' + str(i))
+        if thread_num > 1 :
+                self.线程数选择.setCurrentIndex(1)
 
         self.存档选择 = MyQComboBox(self.main_frame1)
         self.存档选择.move(x, y + (高度 + 间隔) * 2)
