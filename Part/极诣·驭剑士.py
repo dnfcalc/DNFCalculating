@@ -273,6 +273,8 @@ class 极诣·驭剑士技能11(极诣·驭剑士主动技能):
     数据 = [data1, data2, data3]
     def __init__(self):
         self.次数 = [1, 8, 1]
+    def 等效百分比(self, 武器类型):
+        return self.data1 * self.次数[0] * self.倍率 + self.data2 * ( self.次数[1] + self.TP等级 ) * self.倍率 + self.data3 * self.次数[2]  * self.倍率
 
 class 极诣·驭剑士技能12(极诣·驭剑士主动技能):
     名称 = '魔剑奥义'
