@@ -8,8 +8,8 @@ class 黑暗武士主动技能(主动技能):
             return round(self.计算CD, 1)
         # 大恍惚CD加速只加速15级以上的，15级以下无效，所以DK在拿15级以下的技能垫技能的时候，会造成整个下排CD加速无效的BUG
         if self.所在等级 <= 15:
-            self.CD = self.CD * self.恢复
-        return super().等效CD(武器类型 , 输出类型)
+            return round(self.CD * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
+        return round(self.CD  / self.恢复 * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
         # if self.类型 == '物理':
         #     if 武器类型 == '短剑':
         #         return round(self.CD / self.恢复 * 1.00, 1)

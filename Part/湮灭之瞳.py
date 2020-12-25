@@ -273,8 +273,8 @@ class 湮灭之瞳技能16(湮灭之瞳主动技能):
     演出时间 = 3.0
     def 等效CD(self, 武器类型,输出类型):
         if self.TP等级 > 0:
-            self.CD = self.CD - 3
-        return super().等效CD(武器类型,输出类型)
+            return round((self.CD-3)  / self.恢复 * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
+        return round(self.CD  / self.恢复 * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
 
     def 等效百分比(self, 武器类型):
         return self.数据[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率

@@ -22,8 +22,8 @@ class 职业主动技能(主动技能):
     def 等效CD(self, 武器类型,输出类型):
         # 长枪+5%,长枪精通-13%
         if self.所在等级 == 100 or self.所在等级 == 85 or self.所在等级 == 50:
-            self.CD = self.CD / 0.87
-        return super().等效CD(武器类型,输出类型)
+            return round(self.CD / self.恢复 * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
+        return round(self.CD * 0.87 / self.恢复 * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
 
 class 技能0(被动技能):	
     名称 = '长枪精通'	

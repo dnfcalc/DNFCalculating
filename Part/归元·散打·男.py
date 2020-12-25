@@ -2,18 +2,16 @@ from PublicReference.base import *
 
 class 觉醒技能(主动技能):
     def 等效CD(self, 武器类型,输出类型):
-        self.CD = self.CD / 0.9  * (1-0.15)
-        return super().等效CD(武器类型,输出类型)
+        return round(self.CD / 0.9 * 0.85 / self.恢复 * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
 
 #CDR: 拳套精通(10%) + 烈焰焚步(15%)
 #不包含觉醒
 class 拳套精通(主动技能):
     def 等效CD(self, 武器类型,输出类型):
         if 武器类型 == '拳套':
-            self.CD = self.CD / 0.9 * (1-0.1) * (1-0.15)
+            return round(self.CD / 0.9 * 0.9 * 0.85 / self.恢复 * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
         if 武器类型 =='臂铠':
-            self.CD = self.CD / 0.9 * (1-0.15)
-        return super().等效CD(武器类型,输出类型)
+            return round(self.CD / 0.9 *  0.85/ self.恢复 * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
 
 class 归元·散打·男技能0(拳套精通):
     名称 = '下段踢'
