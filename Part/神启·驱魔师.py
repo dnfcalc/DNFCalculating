@@ -374,7 +374,7 @@ class 神启·驱魔师技能16(主动技能):
     TP成长 = 0.10
     TP上限 = 5
 
-    def 等效CD(self, 武器类型):
+    def 等效CD(self, 武器类型,输出类型):
         return round((20.07264407 - 0.0726440677966102 * self.等级) * self.CD / self.恢复 , 1)
 
     def 等效百分比(self, 武器类型):
