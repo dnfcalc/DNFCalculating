@@ -3,7 +3,7 @@ from PublicReference.base import *
 class 主动技能(主动技能):
     # 武器CD = {'短剑':1, '光剑':0.9 * 0.9, '巨剑':1.1, '钝器':1.05, '太刀':0.95}
     def 等效CD(self, 武器类型,输出类型):
-        if 武器类型 == '光剑'
+        if 武器类型 == '光剑':
             self.CD = self.CD * 0.9
         super().等效CD(武器类型,输出类型)
 

@@ -85,7 +85,7 @@
   fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ 
     version: String(newVersion) , 
     AutoCheckUpdate:true,
-    EquipmentVersion:"GF",
+    EquipmentVersion:"TYF",
     ShowChangeLog : true
    }, null, 2));
   // create a new commit
