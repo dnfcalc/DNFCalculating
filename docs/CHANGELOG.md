@@ -1,5 +1,21 @@
 ## Newest
 
+### 2020-12-25
+
+#### NewFeatures
+* 极诣·流浪武士：调整默认细节打造宝珠、光环等级 ([e2d9cd](https://github.com/wxh0402/DNFCalculating/commit/e2d9cd48231f2ec425d1b5e7faf72a7c23712c07))
+* 武器冷却数据可跟随版本配置切换 ([41220c](https://github.com/wxh0402/DNFCalculating/commit/41220c1591d68fb01b185b95838158d2db985f88))
+* 添加国服体验服改版属性<br>
+在ResourceFiles\Config\release_version.json右键记事本打开修改EquipmentVersion,"GF"为国服属性,"HF"为改版属性<br>
+修改后需要重启计算器 ([bcb701](https://github.com/wxh0402/DNFCalculating/commit/bcb701c8976d440405710a4e24e89cc4202bee07))
+
+#### BugFixes
+* 修复死亡阴影5套装属性错误 ([85bc7b](https://github.com/wxh0402/DNFCalculating/commit/85bc7b41752b36fd15a96c1e443ce12fe548d3a7))
+* 修复自选计算界面等级辟邪玉提升显示为0的情况 ([d709c1](https://github.com/wxh0402/DNFCalculating/commit/d709c1abbabb29b0ddc1bcfe6e7382c3aa20d712))
+* 修正自动更新错误 ([725c42](https://github.com/wxh0402/DNFCalculating/commit/725c42ad8e46cca37b33060955534ac53c50ef02))
+* 极诣·驭剑士：修正[穿云破空剑]TP加成计算错误 ([ee5378](https://github.com/wxh0402/DNFCalculating/commit/ee5378957a1035e74857aa55f1a89f875aedc066))
+* 知源·小魔女：修复详情界面闪退的情况 ([db0edf](https://github.com/wxh0402/DNFCalculating/commit/db0edf0789913d237eb6e1ebf98dd24b6180db75))
+
 ### 2020-12-23
 
 #### NewFeatures
@@ -73,6 +89,7 @@
 * 知源·魔道学者：修复无法正常计算的问题 ([ac077d](https://github.com/wxh0402/DNFCalculating/commit/ac077dad9aaa0270bd5dae570fb461114823606a))
 * 奶系：修正部分神话等级加成词条默认满属性的情况 ([cb731c](https://github.com/wxh0402/DNFCalculating/commit/cb731c279e027526656413a108016fa5e5d4e9ce))
 * 归元·街霸·女：修复无法正常计算的问题 ([3abe91](https://github.com/wxh0402/DNFCalculating/commit/3abe914b5083c83c27e3b08b5e6632a23))
+
 
 
 ## History
