@@ -2272,7 +2272,7 @@ class 角色窗口(窗口):
         tempstr.append('守护徽章% ：'+str(int(round(self.角色属性B.守护徽章per * 100, 0))) + '%')
         if self.角色属性B.角色 == '圣职者(男)':
             tempstr.append('守护徽章% ：' + str(int(round(self.角色属性B.守护徽章per * 100, 0))) + '%')
-        elif self.角色属性B.角色 == '圣职者(女)' or B.角色 == '圣职者(女)':
+        elif self.角色属性B.角色 == '圣职者(女)' or self.角色属性B.角色 == '魔法师(女)':
             tempstr.append('BUFF增幅率：' + str(int(round(self.角色属性B.BUFF额外增幅率 * 100, 0))) + '%')
     
         j=318
