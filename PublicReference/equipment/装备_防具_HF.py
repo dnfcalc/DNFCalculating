@@ -817,7 +817,6 @@ class 装备97(装备):
     def 其它属性(self, 属性):
         pass   
     def 城镇属性_BUFF(self, 属性):
-        self.属性描述 += 属性.技能等级加成('所有', 25, 45, 1)
         pass
     def 进图属性_BUFF(self, 属性):
         pass
