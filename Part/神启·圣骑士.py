@@ -38,21 +38,21 @@ class 神启·圣骑士技能1(主动技能):
         temp.append(0) #智力
         temp.append(0) #体力
         temp.append(0) #精神
-        temp.append(int(round((self.力智[self.等级] * 1.131 + self.BUFF力量) * self.BUFF力量per, 3) * 倍率)) #力量
-        temp.append(int(round((self.力智[self.等级] * 1.131 + self.BUFF智力) * self.BUFF智力per, 3) * 倍率)) #智力
-        temp.append(int(round((self.三攻[self.等级] * 1.131 + self.BUFF物攻) * self.BUFF物攻per, 3) * 倍率)) #物攻
-        temp.append(int(round((self.三攻[self.等级] * 1.131 + self.BUFF魔攻) * self.BUFF魔攻per, 3) * 倍率)) #魔攻
-        temp.append(int(round((self.三攻[self.等级] * 1.131 + self.BUFF独立) * self.BUFF独立per, 3) * 倍率)) #独立
+        temp.append(int((round(self.力智[self.等级] * 1.131) + self.BUFF力量) * self.BUFF力量per, 3) * 倍率)) #力量
+        temp.append(int((round(self.力智[self.等级] * 1.131) + self.BUFF智力) * self.BUFF智力per, 3) * 倍率)) #智力
+        temp.append(int((round(self.三攻[self.等级] * 1.131) + self.BUFF物攻) * self.BUFF物攻per, 3) * 倍率)) #物攻
+        temp.append(int((round(self.三攻[self.等级] * 1.131) + self.BUFF魔攻) * self.BUFF魔攻per, 3) * 倍率)) #魔攻
+        temp.append(int((round(self.三攻[self.等级] * 1.131) + self.BUFF独立) * self.BUFF独立per, 3) * 倍率)) #独立
         return temp
 
     def BUFF面板(self):
         temp = []
         temp.append(self.名称)
-        temp.append(int(round((self.力智[self.等级] * 1.131 + self.BUFF力量) * self.BUFF力量per, 0)))
-        temp.append(int(round((self.力智[self.等级] * 1.131 + self.BUFF智力) * self.BUFF智力per, 0)))
-        temp.append(int(round((self.三攻[self.等级] * 1.131 + self.BUFF物攻) * self.BUFF物攻per, 0)))
-        temp.append(int(round((self.三攻[self.等级] * 1.131 + self.BUFF魔攻) * self.BUFF魔攻per, 0)))
-        temp.append(int(round((self.三攻[self.等级] * 1.131 + self.BUFF独立) * self.BUFF独立per, 0)))
+        temp.append(int((round(self.力智[self.等级] * 1.131) + self.BUFF力量) * self.BUFF力量per, 0)))
+        temp.append(int((round(self.力智[self.等级] * 1.131) + self.BUFF智力) * self.BUFF智力per, 0)))
+        temp.append(int((round(self.三攻[self.等级] * 1.131) + self.BUFF物攻) * self.BUFF物攻per, 0)))
+        temp.append(int((round(self.三攻[self.等级] * 1.131) + self.BUFF魔攻) * self.BUFF魔攻per, 0)))
+        temp.append(int((round(self.三攻[self.等级] * 1.131) + self.BUFF独立) * self.BUFF独立per, 0)))
         return temp
 
 class 神启·圣骑士技能2(主动技能):
