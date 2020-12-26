@@ -7,5 +7,5 @@
 - **其他**
 - [反馈](COMMENT.md)
 - **友情链接**
-- [下载链接](https://wws.lanzous.com/b01bfj76f)
+- [下载链接](https://pan.lanzous.com/b01bfj76f)
 - [源码](https://github.com/wxh0402/DNFCalculating)

@@ -34,26 +34,29 @@ class 选择窗口(QMainWindow):
         self.char_window = None
 
     def thread_init(self):
-        # 工作队列
-        work_queue = multiprocessing.JoinableQueue()
-        work_queue.cancel_join_thread()  # or else thread that puts data will not term
-        producer_data.work_queue = work_queue
-        # 工作进程
-        workers = []
-        for i in range(thread_num):
-            p = multiprocessing.Process(target=consumer, args=(work_queue, calc_core), daemon=True, name="worker#{}".format(i + 1))
-            p.start()
-            workers.append(p)
+        try:
+            # 工作队列
+            work_queue = multiprocessing.JoinableQueue()
+            work_queue.cancel_join_thread()  # or else thread that puts data will not term
+            producer_data.work_queue = work_queue
+            # 工作进程
+            workers = []
+            for i in range(thread_num):
+                p = multiprocessing.Process(target=consumer, args=(work_queue, calc_core), daemon=True, name="worker#{}".format(i + 1))
+                p.start()
+                workers.append(p)
 
-        logger.info("已启动{}个工作进程".format(thread_num))
+            logger.info("已启动{}个工作进程".format(thread_num))
 
-        self.worker = workers
-        pass
+            self.worker = workers
+            pass
+        except Exception as error:
+            return error
 
     def 网盘检查(self):
         lzy = LanZouCloud()
         fileURL = ''
-        folder_info = lzy.get_folder_info_by_url('https://wws.lanzous.com/b01bfj76f')
+        folder_info = lzy.get_folder_info_by_url('https://pan.lanzous.com/b01bfj76f')
         try:
             resp = urllib.request.urlopen('http://dnf.17173.com/jsq/instructions.html?j')
             for file in folder_info.files:
