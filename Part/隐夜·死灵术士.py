@@ -2,16 +2,12 @@ from PublicReference.base import *
 
 等级 = 100 + 5
 
-# class 主动技能(主动技能):
-#     def 等效CD(self, 武器类型):
-#         if 武器类型 == '手杖':
-#             if self.所在等级==50 or self.所在等级==85 or self.所在等级==100:
-#                 return round(self.CD / self.恢复 * 1.1, 1)
-#             else:
-#                 return round(self.CD / self.恢复 * 1.0, 1)        
-#         elif 武器类型 == '匕首':
-#             return round(self.CD / self.恢复 * 0.95, 1)
-
+class 主动技能(主动技能):
+    def 等效CD(self, 武器类型,输出类型):
+        if (self.所在等级==50 or self.所在等级==85 or self.所在等级==100) or 武器类型 != '手杖':
+            return round(self.CD  / self.恢复 * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
+        else:
+            return round(self.CD  / self.恢复 , 1)
                 
 class 技能0(主动技能):
     名称 = '暗魂波'
