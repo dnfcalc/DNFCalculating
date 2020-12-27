@@ -324,7 +324,7 @@ class 巅峰狂徒技能17(主动技能):
             self.倍率 = 1.34#改动位置，具体待测试
             self.护石状态 = 1
 
-    def 等效CD(self, 武器类型):
+    def 等效CD(self, 武器类型,输出类型):
         if self.护石状态 == 0:
             return round(self.CD  / self.恢复, 1)
         else:
