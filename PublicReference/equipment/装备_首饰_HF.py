@@ -1599,6 +1599,9 @@ class 装备528(装备):
         if 改造等级 >= 4:
             temp += '属性附加伤害 +5%<br>'
         return temp   
+    def 城镇属性_BUFF(self, 属性):
+        属性.体精固定加成(20 * 属性.获取改造(self.部位))
+        属性.力智固定加成(20 * 属性.获取改造(self.部位))
     def BUFF属性(self, 属性):
         if 属性.获取改造(self.部位) >= 1:
             self.属性描述 += '<font color="#FF8200">改造属性(+' + str(属性.获取改造(self.部位)) + ')：</font><br>'
@@ -1653,6 +1656,9 @@ class 装备529(装备):
         if 改造等级 >= 4:
             temp += '持续伤害 +10%<br>'
         return temp
+    def 城镇属性_BUFF(self, 属性):
+        属性.体精固定加成(20 * 属性.获取改造(self.部位))
+        属性.力智固定加成(20 * 属性.获取改造(self.部位))
     def BUFF属性(self, 属性):
         if 属性.获取改造(self.部位) >= 1:
             self.属性描述 += '<font color="#FF8200">改造属性(+' + str(属性.获取改造(self.部位)) + ')：</font><br>'
@@ -1702,6 +1708,9 @@ class 装备530(装备):
         if 改造等级 >= 4:
             temp += '附加伤害 +10%<br>'
         return temp  
+    def 城镇属性_BUFF(self, 属性):
+        属性.体精固定加成(20 * 属性.获取改造(self.部位))
+        属性.力智固定加成(20 * 属性.获取改造(self.部位))
     def BUFF属性(self, 属性):
         if 属性.获取改造(self.部位) >= 1:
             self.属性描述 += '<font color="#FF8200">改造属性(+' + str(属性.获取改造(self.部位)) + ')：</font><br>'

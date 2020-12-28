@@ -1654,6 +1654,9 @@ class 装备531(装备):
         if 改造等级 >= 4:
             temp += '技能攻击力 +10%<br>'
         return temp        
+    def 城镇属性_BUFF(self, 属性):
+        属性.体精固定加成(20 * 属性.获取改造(self.部位))
+        属性.力智固定加成(20 * 属性.获取改造(self.部位))
     def BUFF属性(self, 属性):
         if 属性.获取改造(self.部位) >= 1:
             self.属性描述 += '<font color="#FF8200">改造属性(+' + str(属性.获取改造(self.部位)) + ')：</font><br>'
@@ -1705,13 +1708,16 @@ class 装备532(装备):
         if 改造等级 >= 4:
             temp += '附加伤害 +14%<br>'
         return temp     
+    def 城镇属性_BUFF(self, 属性):
+        属性.体精固定加成(20 * 属性.获取改造(self.部位))
+        属性.力智固定加成(20 * 属性.获取改造(self.部位))
     def BUFF属性(self, 属性):
         if 属性.获取改造(self.部位) >= 1:
             self.属性描述 += '<font color="#FF8200">改造属性(+' + str(属性.获取改造(self.部位)) + ')：</font><br>'
-            self.属性描述 += 属性.技能等级加成('所有', 30, 50, 1)
+            self.属性描述 += 属性.BUFF增加(BUFFLv=1)
             self.属性描述 += 属性.BUFF增加(BUFF力量per=1.06,BUFF智力per=1.06)
             self.属性描述 += 属性.觉醒增加(一觉力智=35)
-            self.属性描述 += 属性.被动增加(守护恩赐体精=140)
+            self.属性描述 += 属性.被动增加(守护恩赐体精=100)
             self.属性描述 += 属性.被动增加(转职被动智力=40)
         if 属性.获取改造(self.部位) >= 4:
             self.属性描述 += 属性.觉醒增加(一觉Lv=1)
@@ -1754,7 +1760,10 @@ class 装备533(装备):
         if 改造等级 >= 4:
             temp += '技能攻击力 +13%<br>'
         temp += '暴击伤害 +{}%<br>'.format(4 * 改造等级)
-        return temp       
+        return temp 
+    def 城镇属性_BUFF(self, 属性):
+        属性.体精固定加成(20 * 属性.获取改造(self.部位))
+        属性.力智固定加成(20 * 属性.获取改造(self.部位))
     def BUFF属性(self, 属性):
         if 属性.获取改造(self.部位) >= 1:
             self.属性描述 += '<font color="#FF8200">改造属性(+' + str(属性.获取改造(self.部位)) + ')：</font><br>'
