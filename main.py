@@ -223,8 +223,8 @@ class 选择窗口(QMainWindow):
         butten.resize(121,90)
         count += 1
 
-        butten=QtWidgets.QPushButton('打开设置', self.topFiller)
-        butten.clicked.connect(lambda state : os.system('notepad.exe "./ResourceFiles/Config/基础设置.ini"'))
+        butten=QtWidgets.QPushButton('打   赏', self.topFiller)
+        butten.clicked.connect(lambda state , index = count:self.打赏())
         butten.move(120 + 4 * 125, 10 + (count + 1) * 100)    
         butten.setStyleSheet(按钮样式3)
         butten.resize(121,90)
@@ -252,6 +252,27 @@ class 选择窗口(QMainWindow):
         职业 = importlib.import_module(module_name)
         self.char_window = eval("职业."+name + '()')
         self.char_window.show()
+    
+    def 打赏(self):
+        self.w = QWidget()
+        # 设置窗口大小
+        self.w.resize(300, 300)
+        # 移动窗口位置
+        # self.w.move(600, 250)
+        # 设置窗口标题
+        self.w.setWindowTitle('打赏-支付宝')
+        self.打赏 = QPixmap('./ResourceFiles/img/二维码.jpg')
+        # self.w.icon = QIcon('./ResourceFiles/img/logo.ico')
+        self.w.setWindowIcon(self.icon)
+        主背景 = QLabel(self.w)
+        主背景.setPixmap(self.打赏)
+        # 主背景.move(0, int((self.w.height() - 1230) / 6))
+        # 主背景.setGraphicsEffect(主背景透明度)
+
+        # self.w.setStyleSheet("background-image: url(:/ResourceFiles/img/二维码.jpg);")
+        # 展示窗口
+        self.w.show()
+
 
     def 职业版本判断(self, index):
         try:
