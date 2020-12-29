@@ -64,7 +64,6 @@
 * 奶系：修正100传说防具和套装属性 ([f80127](https://github.com/wxh0402/DNFCalculating/commit/f80127f7cc6db386a545a2684685ee200bc7c0d3))
 * 奶系：修正工作服鞋等级加成 ([39bcaf](https://github.com/wxh0402/DNFCalculating/commit/39bcaf4201ac59499ee2826f00627d63a254ab1f))
 
-## Newest
 
 ### 2020-12-14
 

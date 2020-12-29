@@ -431,6 +431,15 @@ class 归元·气功师·男技能18(主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率* self.风雷啸
 
+    def 装备护石(self, x):
+        if x == 0:
+            self.倍率 *= 1.28
+            #self.倍率 *= 1.448
+            #self.风雷啸 = 1.41436
+        elif x == 1:
+            self.倍率 *= 1.4
+            #self.倍率 *= 1.592
+            #self.风雷啸 = 1.41436
 
 # 冲云念气场 618感电分离1次
 class 归元·气功师·男技能19(主动技能):
