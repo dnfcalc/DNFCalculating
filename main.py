@@ -9,8 +9,8 @@ from PublicReference.utils.producer_consumer import producer_data, consumer, thr
 import json
 import os
 import traceback
-from PublicReference.utils.lanzou.api import LanZouCloud
-# from lanzou.api import LanZouCloud
+# from PublicReference.utils.lanzou.api import LanZouCloud
+from lanzou.api import LanZouCloud
 from PublicReference.utils import zipfile
 from pathlib import Path
 import shutil
@@ -58,7 +58,7 @@ class 选择窗口(QMainWindow):
         fileURL = ''
         folder_info = lzy.get_folder_info_by_url('https://pan.lanzous.com/b01bfj76f')
         try:
-            resp = urllib.request.urlopen('http://dnf.17173.com/jsq/instructions.html?j')
+            # resp = urllib.request.urlopen('http://dnf.17173.com/jsq/instructions.html?j')
             for file in folder_info.files:
                 if file.name.startswith("DNF计算器"):
                     self.云端版本 = file.name.replace(".zip",".exe")
