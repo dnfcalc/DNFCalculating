@@ -110,6 +110,7 @@ class 选择窗口(QMainWindow):
         for i in range(17):
             self.family_img.append(QPixmap("ResourceFiles/img/分类/"+ str(i) +".png"))
 
+        
         wrapper = QWidget()
         self.setCentralWidget(wrapper)
         self.topFiller = QWidget()
@@ -261,11 +262,11 @@ class 选择窗口(QMainWindow):
         # self.w.move(600, 250)
         # 设置窗口标题
         self.w.setWindowTitle('打赏-支付宝')
-        self.打赏 = QPixmap('./ResourceFiles/img/二维码.jpg')
+        
         # self.w.icon = QIcon('./ResourceFiles/img/logo.ico')
         self.w.setWindowIcon(self.icon)
         主背景 = QLabel(self.w)
-        主背景.setPixmap(self.打赏)
+        主背景.setPixmap(QPixmap('./ResourceFiles/img/二维码.jpg'))
         # 主背景.move(0, int((self.w.height() - 1230) / 6))
         # 主背景.setGraphicsEffect(主背景透明度)
 
