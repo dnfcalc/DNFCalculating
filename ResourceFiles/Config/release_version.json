@@ -1,6 +1,7 @@
 {
-  "version": "2020-12-26",
+  "version": "2020-12-31",
   "AutoCheckUpdate": true,
-  "EquipmentVersion": "TYF",
-  "ShowChangeLog": true
+  "EquipmentVersion": "GF",
+  "ShowChangeLog": true,
+  "ZFVersion": "GF"
 }
