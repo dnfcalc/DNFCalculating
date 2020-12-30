@@ -86,7 +86,8 @@
     version: String(newVersion) , 
     AutoCheckUpdate:true,
     EquipmentVersion:"GF",
-    ShowChangeLog : true
+    ShowChangeLog : true,
+    ZFVersion: "GF"
    }, null, 2));
   // create a new commit
   child.execSync('git add .');

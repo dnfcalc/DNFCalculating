@@ -298,7 +298,7 @@ class 角色属性(属性):
         for i in range(0,12):
             temp = 装备列表[装备序号[self.装备栏[i]]]
             if self.是否增幅[i] and temp.所属套装 != '智慧产物':
-                x = 增幅计算(temp.等级, temp.品质,self.强化等级[i])
+                x = 增幅计算(temp.等级, temp.品质,self.强化等级[i],temp.增幅版本)
                 if '智力' in self.类型:
                     self.智力 += x
                 if '体力' in self.类型:
@@ -2755,11 +2755,11 @@ class 角色窗口(窗口):
                         tempstr[i]+='<br>'
                     tempstr[i]+='<font color="#FF00FF">+'+str(属性.强化等级[i])+' 增幅: '
                     if '体力' in 属性.类型:
-                        tempstr[i]+='异次元体力 + '+str(增幅计算(100,装备.品质,属性.强化等级[i]))+'</font>'
+                        tempstr[i]+='异次元体力 + '+str(增幅计算(100,装备.品质,属性.强化等级[i],属性.增幅版本))+'</font>'
                     elif '精神' in 属性.类型:
-                        tempstr[i]+='异次元精神 + '+str(增幅计算(100,装备.品质,属性.强化等级[i]))+'</font>'
+                        tempstr[i]+='异次元精神 + '+str(增幅计算(100,装备.品质,属性.强化等级[i],属性.增幅版本))+'</font>'
                     elif '智力' in 属性.类型:
-                        tempstr[i]+='异次元智力 + '+str(增幅计算(100,装备.品质,属性.强化等级[i]))+'</font>'
+                        tempstr[i]+='异次元智力 + '+str(增幅计算(100,装备.品质,属性.强化等级[i],属性.增幅版本))+'</font>'
 
             if tempstr[i] != '':
                 tempstr[i] += '<br>'

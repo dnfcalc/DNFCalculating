@@ -8,10 +8,12 @@ from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
 
 装备版本 = "GF"
+装备增幅版本 = "GF"
 
 with open("ResourceFiles\\Config\\release_version.json") as fp:
     versionInfo = json.load(fp)
     装备版本 = versionInfo['EquipmentVersion'].upper()
+    装备增幅版本 = versionInfo['ZFVersion'].upper()
 fp.close()
 
 
@@ -93,6 +95,7 @@ class 被动技能(技能):
 class 角色属性(属性):
 
     版本 = 装备版本
+    增幅版本 = 装备增幅版本
     职业分类 = '输出'
     主BUFF = 1.0
     系统奶 = False
@@ -216,11 +219,10 @@ class 角色属性(属性):
     物理魔法攻击力增加增幅 = 1.0
     所有属性强化增加 = 1.0
 
-    # 0附加伤害 1持续伤害 2属性附加伤害 
-    # 3技能攻击力 4暴伤 5黄字 6最终 7力智% 8三攻%
-    # 9火属性强化 10冰属性强化 11光属性强化 12暗属性强化
-    # 13力量 14智力 15物攻 16魔攻 17独立
-    可变属性 = [0,0,0,1,0,0,0,0,0,0,0,0,0,0,0]
+    # [属性类型,原词条数值]
+    武器变换 = [0,0]
+    戒指变换 = [0,0]
+    下装变化 = [0,0]
 
     def 附加伤害加成(self, x,可变 = 0):
         if self.装备描述 == 1:
@@ -959,11 +961,14 @@ class 角色属性(属性):
         if 调试开关 == 0:
             for i in range(11):
                 装备列表[装备序号[self.装备栏[i]]].城镇属性(self)
-
+                装备列表[装备序号[self.装备栏[i]]].变换属性(self) 
+                # 添加可洗属性
             if 武器序号 == -1:
                 装备列表[装备序号[self.装备栏[11]]].城镇属性(self)
+                装备列表[装备序号[self.装备栏[11]]].变换属性(self)
             else:
                 装备列表[武器序号].城镇属性(self)
+                装备列表[武器序号].变换属性(self)
 
             for i in self.套装栏:
                 套装列表[套装序号[i]].城镇属性(self)
@@ -3131,9 +3136,9 @@ class 角色窗口(窗口):
                         tempstr[i]+='<br>'
                     tempstr[i]+='<font color="#FF00FF">+'+str(属性.强化等级[i]) + ' 增幅: '
                     if '物理' in 属性.类型 or '力量' in 属性.类型:
-                        tempstr[i]+='异次元力量 + '+str(增幅计算(装备.等级,装备.品质,属性.强化等级[i])) + '</font>'
+                        tempstr[i]+='异次元力量 + '+str(增幅计算(装备.等级,装备.品质,属性.强化等级[i],属性.增幅版本)) + '</font>'
                     else:
-                        tempstr[i]+='异次元智力 + '+str(增幅计算(装备.等级,装备.品质,属性.强化等级[i])) + '</font>'
+                        tempstr[i]+='异次元智力 + '+str(增幅计算(装备.等级,装备.品质,属性.强化等级[i],属性.增幅版本)) + '</font>'
 
             if tempstr[i] != '':
                 tempstr[i] += '<br>'

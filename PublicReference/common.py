@@ -1,9 +1,18 @@
 from PublicReference.equipment.equ_list import *
 
+装备增幅版本 = "GF"
+
+with open("ResourceFiles\\Config\\release_version.json") as fp:
+    versionInfo = json.load(fp)
+    装备增幅版本 = versionInfo['ZFVersion'].upper()
+fp.close()
+
+
 class 属性():
     实际名称 = ''
     角色 = ''
     职业 = ''
+    增幅版本 = 装备增幅版本
 
     武器选项 = []
     类型选择 = []
@@ -98,7 +107,7 @@ class 属性():
         for i in range(0,12):
             temp = 装备列表[装备序号[self.装备栏[i]]]
             if self.是否增幅[i] and temp.所属套装 != '智慧产物':
-                x = 增幅计算(temp.等级,temp.品质,self.强化等级[i])
+                x = 增幅计算(temp.等级,temp.品质,self.强化等级[i],self.增幅版本)
                 if '物理' in self.类型 or '力量' in self.类型:
                     self.力量 += x
                 else:
