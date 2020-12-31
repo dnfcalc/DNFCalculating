@@ -17,7 +17,7 @@
 * 隐夜·死灵术士：添加歧路鞋对暴君巴拉克其余技能加成 ([378eae](https://github.com/wxh0402/DNFCalculating/commit/378eae49ac15275dbd784c9ef7c0c1d4422a727f))
 
 #### BugFixes
-* bugfix重霄·弹药专家·男：修正弹药主宰图标错误的情况 ([2f48b1](https://github.com/wxh0402/DNFCalculating/commit/2f48b17459bee68772753925bba25e4f0e479b52))
+* 重霄·弹药专家·男：修正弹药主宰图标错误的情况 ([2f48b1](https://github.com/wxh0402/DNFCalculating/commit/2f48b17459bee68772753925bba25e4f0e479b52))
 * 修正[优雅旋律华尔兹]属性错误 ([53f672](https://github.com/wxh0402/DNFCalculating/commit/53f672c6db938b389a4f85c3e54014abcece874e))
 * 修正[圣者的慈悲]输出系属性错误 ([d3010c](https://github.com/wxh0402/DNFCalculating/commit/d3010c2c5e7cf52674e92a7ab05a3a5473473c6f))
 * 修正[沙岩幻戟]属性错误 ([66fbae](https://github.com/wxh0402/DNFCalculating/commit/66fbaeca70c9cec1ce9518bd523afd4412889bea))

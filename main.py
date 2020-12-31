@@ -261,7 +261,7 @@ class 选择窗口(QMainWindow):
         # 移动窗口位置
         # self.w.move(600, 250)
         # 设置窗口标题
-        self.w.setWindowTitle('支付宝、微信、QQ')
+        self.w.setWindowTitle('打赏-微信')
         
         # self.w.icon = QIcon('./ResourceFiles/img/logo.ico')
         self.w.setWindowIcon(self.icon)
