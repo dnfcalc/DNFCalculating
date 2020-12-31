@@ -7,16 +7,6 @@ from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
 
-装备版本 = "GF"
-装备增幅版本 = "GF"
-
-with open("ResourceFiles\\Config\\release_version.json") as fp:
-    versionInfo = json.load(fp)
-    装备版本 = versionInfo['EquipmentVersion'].upper()
-    装备增幅版本 = versionInfo['ZFVersion'].upper()
-fp.close()
-
-
 class 技能:
     名称 = ''
     备注 = ''
@@ -94,8 +84,6 @@ class 被动技能(技能):
 
 class 角色属性(属性):
 
-    版本 = 装备版本
-    增幅版本 = 装备增幅版本
     职业分类 = '输出'
     主BUFF = 1.0
     系统奶 = False
@@ -735,10 +723,11 @@ class 角色属性(属性):
         
         if self.希洛克武器词条 == 0:
             self.词条提升率 = [0] * 6
-            return
-        # 残香第一词条-10%
-        self.词条选择.clear()
-        self.词条选择.append(self.词条提升率计算([0, 1, 2, 3, 4, 5], [0.10] * 6, 1))
+            # return
+            # 残香第一词条-10%
+        else:
+            self.词条选择.clear()
+            self.词条选择.append(self.词条提升率计算([0, 1, 2, 3, 4, 5], [0.10] * 6, 1))
 
         # 宠物红色装备词条-7~8%
         if self.自适应选项[0] != 0: #宠物
@@ -752,7 +741,7 @@ class 角色属性(属性):
             self.自适应描述[1] = '{}%{}'.format(5, 词条属性列表[index].描述)
 
         # 残香第二词条-5%
-        if self.武器词条触发 == 1:
+        if self.希洛克武器词条 == 1 and self.武器词条触发 == 1:
             self.词条选择.append(self.词条提升率计算([0, 1, 2, 3, 4, 5], [0.05] * 6))
         
 
@@ -3242,7 +3231,7 @@ class 角色窗口(窗口):
             temp += '详细数据'
         else:
             temp += name
-        temp += '（最多显示前18个技能）'
+        temp += '（最多显示前18个技能）' + "装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本
         输出窗口.setWindowTitle(temp)
         输出窗口.setWindowIcon(self.icon)  
         QLabel(输出窗口).setPixmap(self.输出背景图片)

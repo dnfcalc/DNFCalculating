@@ -1,9 +1,11 @@
 from PublicReference.equipment.equ_list import *
 
+装备版本 = "GF"
 装备增幅版本 = "GF"
 
 with open("ResourceFiles\\Config\\release_version.json") as fp:
     versionInfo = json.load(fp)
+    装备版本 = versionInfo['EquipmentVersion'].upper()
     装备增幅版本 = versionInfo['ZFVersion'].upper()
 fp.close()
 
@@ -12,6 +14,7 @@ class 属性():
     实际名称 = ''
     角色 = ''
     职业 = ''
+    版本 = 装备版本
     增幅版本 = 装备增幅版本
 
     武器选项 = []
@@ -243,7 +246,7 @@ class 窗口(QWidget):
         pass
 
     def 界面(self):
-        self.setWindowTitle(self.角色属性A.实际名称 + "搭配计算器&17173DNF专区 （点击标签栏按钮切换界面）")
+        self.setWindowTitle(self.角色属性A.实际名称 + "搭配计算器&17173DNF专区 （点击标签栏按钮切换界面）"+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)
         self.icon = QIcon('./ResourceFiles/'+self.角色属性A.实际名称 + '/技能/BUFF.png')
         self.setWindowIcon(self.icon)
         self.setStyleSheet('''QToolTip { 
@@ -1368,7 +1371,7 @@ class 窗口(QWidget):
         滚动排行.setMinimumSize(630,530)
         滚动排行.setMaximumSize(630,1230)
         if len(筛选) == 0:
-            滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）')  
+            滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）'+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)  
         else:
             temp = ''
             for name in 筛选.values():

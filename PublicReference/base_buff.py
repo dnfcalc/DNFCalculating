@@ -6,6 +6,7 @@ from PublicReference.equipment.武器融合_buff import *
 from PublicReference.choise.选项设置_buff import *
 from PublicReference.common import *
 
+
 class 技能:
     名称 = ''
     备注 = ''
@@ -298,7 +299,7 @@ class 角色属性(属性):
         for i in range(0,12):
             temp = 装备列表[装备序号[self.装备栏[i]]]
             if self.是否增幅[i] and temp.所属套装 != '智慧产物':
-                x = 增幅计算(temp.等级, temp.品质,self.强化等级[i],temp.增幅版本)
+                x = 增幅计算(temp.等级, temp.品质,self.强化等级[i],self.增幅版本)
                 if '智力' in self.类型:
                     self.智力 += x
                 if '体力' in self.类型:
@@ -2215,7 +2216,7 @@ class 角色窗口(窗口):
             temp += '详细数据'
         else:
             temp += name
-        temp += '（最多显示前18个技能）'
+        temp += '（最多显示前18个技能）'+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本
         输出窗口.setWindowTitle(temp)
         输出窗口.setWindowIcon(self.icon)  
         QLabel(输出窗口).setPixmap(self.输出背景图片)
