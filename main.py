@@ -54,10 +54,10 @@ class 选择窗口(QMainWindow):
             return error
 
     def 网盘检查(self):
-        lzy = LanZouCloud()
-        fileURL = ''
-        folder_info = lzy.get_folder_info_by_url('https://pan.lanzous.com/b01bfj76f')
         try:
+            lzy = LanZouCloud()
+            fileURL = ''
+            folder_info = lzy.get_folder_info_by_url('https://pan.lanzous.com/b01bfj76f')
             # resp = urllib.request.urlopen('http://dnf.17173.com/jsq/instructions.html?j')
             for file in folder_info.files:
                 if file.name.startswith("DNF计算器"):

@@ -68,10 +68,16 @@ class CalcData():
         count = 0
         for i in 装备列表:
             if i.品质 == '神话':
-                i.属性1选择 = self.神话属性选项[count * 4 + 0]
-                i.属性2选择 = self.神话属性选项[count * 4 + 1]
-                i.属性3选择 = self.神话属性选项[count * 4 + 2]
-                i.属性4选择 = self.神话属性选项[count * 4 + 3]
+                if self.是输出职业 == True:
+                    i.属性1选择 = self.神话属性选项[count * 4 + 0]
+                    i.属性2选择 = self.神话属性选项[count * 4 + 1]
+                    i.属性3选择 = self.神话属性选项[count * 4 + 2]
+                    i.属性4选择 = self.神话属性选项[count * 4 + 3]
+                else:
+                    i.属性1选择_BUFF = self.神话属性选项[count * 4 + 0]
+                    i.属性2选择_BUFF = self.神话属性选项[count * 4 + 1]
+                    i.属性3选择_BUFF = self.神话属性选项[count * 4 + 2]
+                    i.属性4选择_BUFF = self.神话属性选项[count * 4 + 3]
                 count += 1
         pass
 
