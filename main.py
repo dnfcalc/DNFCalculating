@@ -26,6 +26,7 @@ class 选择窗口(QMainWindow):
     云端版本 = ''
     自动检查版本 = False
     网盘链接 = ''
+    网盘报错 = 0
 
     def __init__(self):
         super().__init__()
@@ -69,6 +70,7 @@ class 选择窗口(QMainWindow):
             self.网盘链接 =  fileURL
         except Exception as error:
             self.网盘链接 =  ''
+            self.网盘报错 = 1
             return
 
     def ui(self):
@@ -327,7 +329,10 @@ class 选择窗口(QMainWindow):
 
     def 检查更新(self):
         self.网盘检查()
-        if self.网盘链接 == '':
+        if self.网盘报错 == 1:
+            box = QMessageBox(QMessageBox.Question, "提示", "检查计算器版本有误，请参考使用说明-开始使用-常见问题修改DNS")  
+            box.exec_()
+        elif self.网盘链接 == '':
             box = QMessageBox(QMessageBox.Question, "提示", "已经是最新版本计算器！")  
             box.exec_()
         else:
