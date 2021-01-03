@@ -320,7 +320,7 @@ class 角色属性(属性):
             self.精神 += temp.精神 + 四维
 
 
-    def 技能等级加成(self, 加成类型, min, max, lv):
+    def 技能等级加成(self, 加成类型, min, max, lv,可变 = 0):
         lv = int(lv)
         if self.装备描述 ==1:
             if 加成类型=="所有":
@@ -341,6 +341,9 @@ class 角色属性(属性):
                     else:
                         if i.是否主动 == 1:
                             i.等级加成(lv)
+            if 可变 > 0:
+                self.变换词条[可变-1] = [6,2,14 + (2 if 可变 > 1 else 4), 14 + (9 if 可变 > 1 else 17)]
+        
         return ''
 
     def 提升率计算(self, 总数据, x = 0):

@@ -216,11 +216,11 @@ class 角色属性(属性):
         [0,0,0,0]
     ]
 
-    def 附加伤害加成(self, x,可变 = 0):
+    def 附加伤害加成(self, x,可变 = 0,辟邪玉加成 = 1):
         if self.装备描述 == 1:
             return '附加伤害 +{}%<br>'.format(round(x*100))
         else:
-            self.附加伤害 += self.附加伤害增加增幅 * x 
+            self.附加伤害 += self.附加伤害增加增幅* x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
                 self.变换词条[可变-1] = [3,round(x*100) ,round(x*100) + (2 if 可变 > 1 else 4), round(x*100) + (8 if 可变 > 1 else 16)]
         return ''
@@ -261,106 +261,106 @@ class 角色属性(属性):
             self.属性附加 += self.属性附加伤害增加增幅 * x 
         return ''
 
-    def 技能攻击力加成(self, x):
+    def 技能攻击力加成(self, x,辟邪玉加成 = 1):
         if self.装备描述 ==1:
             return '技能攻击力 +{}%<br>'.format(round(x*100,0))
         else:
-            self.技能攻击力 *= 1 + self.技能伤害增加增幅 * x 
+            self.技能攻击力 *= 1 + self.技能伤害增加增幅 * x if 辟邪玉加成 == 1 else x
         return ''
         
-    def 暴击伤害加成(self, x,可变 = 0):
+    def 暴击伤害加成(self, x,可变 = 0,辟邪玉加成 = 1):
         if self.装备描述 ==1:
             return '暴击伤害 +{}%<br>'.format(round(x*100))
         else:
-            self.暴击伤害 += self.暴击伤害增加增幅 * x 
+            self.暴击伤害 += self.暴击伤害增加增幅 * x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
                 self.变换词条[可变-1] = [4,round(x*100) ,round(x*100) + (2 if 可变 > 1 else 4), round(x*100) + (8 if 可变 > 1 else 16)]
         return ''
         
-    def 伤害增加加成(self, x,可变 = 0):
+    def 伤害增加加成(self, x,可变 = 0,辟邪玉加成 = 1):
         if self.装备描述 ==1:
             return '伤害增加 +{}%<br>'.format(round(x*100))
         else:
-            self.伤害增加 += self.伤害增加增幅 * x 
+            self.伤害增加 += self.伤害增加增幅 * x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
                 self.变换词条[可变-1] = [2,round(x*100) ,round(x*100) + (2 if 可变 > 1 else 4), round(x*100) + (8 if 可变 > 1 else 16)]
         return ''
         
-    def 最终伤害加成(self, x ,可变 = 0):
+    def 最终伤害加成(self, x ,可变 = 0,辟邪玉加成 = 1):
         if self.装备描述 ==1:
             return '最终伤害 +{}%<br>'.format(round(x*100))
         else:
-            self.最终伤害 += self.最终伤害增加增幅 * x 
+            self.最终伤害 += self.最终伤害增加增幅 * x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
                 self.变换词条[可变-1] = [5,round(x*100) ,round(x*100) + (2 if 可变 > 1 else 4), round(x*100) + (8 if 可变 > 1 else 16)]
         return ''
         
-    def 百分比力智加成(self, x,可变 = 0):
+    def 百分比力智加成(self, x,可变 = 0,辟邪玉加成 = 1):
         if self.装备描述 ==1:
             return '力量、智力 +{}%<br>'.format(round(x*100))
         else:
-            self.百分比力智 += self.力量智力增加增幅 * x 
+            self.百分比力智 += self.力量智力增加增幅 * x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
                 self.变换词条[可变-1] = [0,round(x*100) ,round(x*100) + (2 if 可变 > 1 else 4), round(x*100) + (8 if 可变 > 1 else 16)]
         return ''
         
-    def 百分比三攻加成(self, x,可变 = 0):
+    def 百分比三攻加成(self, x,可变 = 0,辟邪玉加成 = 1):
         if self.装备描述 ==1:
             return '百分比三攻 {}%<br>'.format(('+' if x>0 else '')+str(round(x*100)))
         else:
-            self.百分比三攻 += self.物理魔法攻击力增加增幅 * x 
+            self.百分比三攻 += self.物理魔法攻击力增加增幅 * x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
                 self.变换词条[可变-1] = [1,round(x*100) ,round(x*100) + (2 if 可变 > 1 else 4), round(x*100) + (8 if 可变 > 1 else 16)]
         return ''
         
-    def 火属性强化加成(self, x):
+    def 火属性强化加成(self, x,辟邪玉加成 = 1):
         if self.装备描述 ==1:
             return '火属性强化 +{}<br>'.format(x)
         else:
             if self.状态 == 0:
-                self.火属性强化 += self.所有属性强化增加 * x 
+                self.火属性强化 += self.所有属性强化增加 * x if 辟邪玉加成 == 1 else x
             else:
                 self.火属性强化 += int(self.所有属性强化增加 * x)             
         return ''
 
-    def 冰属性强化加成(self, x):
+    def 冰属性强化加成(self, x,辟邪玉加成 = 1):
         if self.装备描述 ==1:
             return '冰属性强化 +{}<br>'.format(x)
         else:
             if self.状态 == 0:
-                self.冰属性强化 += self.所有属性强化增加 * x 
+                self.冰属性强化 += self.所有属性强化增加 * x if 辟邪玉加成 == 1 else x
             else:
                 self.冰属性强化 += int(self.所有属性强化增加 * x) 
         return ''
 
 
-    def 光属性强化加成(self, x):
+    def 光属性强化加成(self, x,辟邪玉加成 = 1):
         if self.装备描述 ==1:
             return '光属性强化 +{}<br>'.format(x)
         else:
             if self.状态 == 0:
-                self.光属性强化 += self.所有属性强化增加 * x 
+                self.光属性强化 += self.所有属性强化增加 * x if 辟邪玉加成 == 1 else x
             else:
                 self.光属性强化 += int(self.所有属性强化增加 * x)             
         return ''
 
 
-    def 暗属性强化加成(self, x):
+    def 暗属性强化加成(self, x,辟邪玉加成 = 1):
         if self.装备描述 ==1:
             return '暗属性强化 +{}<br>'.format(x)
         else:
             if self.状态 == 0:
-                self.暗属性强化 += self.所有属性强化增加 * x 
+                self.暗属性强化 += self.所有属性强化增加 * x if 辟邪玉加成 == 1 else x
             else:
                 self.暗属性强化 += int(self.所有属性强化增加 * x) 
         return ''
 
-    def 所有属性强化加成(self, x):
+    def 所有属性强化加成(self, x,辟邪玉加成 = 1):
         if self.装备描述 ==1:
             return '所有属性强化 +{}<br>'.format(x)
         else:
             if self.状态 == 0:
-                temp = self.所有属性强化增加 * x 
+                temp = self.所有属性强化增加 * x if 辟邪玉加成 == 1 else x
             else:
                 temp = int(self.所有属性强化增加 * x)
             self.所有属性强化(temp)
@@ -761,7 +761,7 @@ class 角色属性(属性):
         
     def 择优计算(self,index):
         for i in range(1,5):
-            if index == i and self.黑鸦词条[i-1][0] == 1:
+            if index == i and self.黑鸦词条[i-1][0] == 1 and self.变换词条[i-1][1] != 0:
                 词条数值 = [round(self.变换词条[i-1][3]/100,2)]*6
                 index = self.词条提升率计算([0, 1, 2, 3, 4, 5],词条数值)
                 # self.黑鸦词条[i-1].append("")
@@ -1030,7 +1030,7 @@ class 角色属性(属性):
 
         for i in range(4):
             self.黑鸦词条[i].append("")
-            if self.黑鸦词条[i][0]!=0:
+            if self.黑鸦词条[i][0]!=0 and self.变换词条[i][1] != 0:
                 self.黑鸦词条变更(self.变换词条[i],-1)
                 if self.黑鸦词条[i][0]==2:
                     temp = [self.黑鸦词条[i][1],(0 if self.黑鸦词条[i][1]==6 else self.变换词条[i][1]) + self.黑鸦词条[i][2],0,0]
@@ -2064,6 +2064,7 @@ class 角色窗口(窗口):
         temp += '爆伤终伤白字属白力智三攻同上，黄字向下取整<br>'
         temp += '技攻辟邪玉加成等级技攻(歧路腰类)<br>不加成具体技能技攻(歧路鞋类)<br><br>'
         temp += '3%技攻增幅，佩戴前：100*1.5*1.5=225<br>佩戴后：100*1.515*1.515=229.5225<br><br>'
+        temp += '附加、最终、百分力智增幅：宠物相关词条不享受加成<br>'
         temp += '属强增幅：唤醒(13)婚房(8)药剂和技能属强不享受加成<br>'
         temp += '进图触发属强单独计算向下取整<br><br>'
         temp += '<font color="#B99460">属白增幅分对应属性，计算器未作区分<br>双属性附加(星之海)需手动计算并在第三页修正<br><br>计算方式仅供参考，请以实际游戏为准！</font></font>'
@@ -3282,19 +3283,19 @@ class 角色窗口(窗口):
 
             if tempstr[i] != '':
                 tempstr[i] += '<br>'
-            if i == 2 and 属性.黑鸦词条[3][0]!=0:
+            if i == 2 and 属性.黑鸦词条[3][0]!=0 and 属性.变换词条[3][1]!=0:
                 tempstr[i] += 装备.装备描述_变换属性(属性)[:-4]+"<br>"
                 tempstr[i] += 属性.黑鸦词条[3][4]
                 # 下装
-            elif i == 7 and 属性.黑鸦词条[1][0]!=0:
+            elif i == 7 and 属性.黑鸦词条[1][0]!=0 and 属性.变换词条[1][1]!=0:
                 tempstr[i] += 装备.装备描述_变换属性(属性)[:-4]+"<br>"
                 tempstr[i] += 属性.黑鸦词条[1][4]
                 # 戒指
-            elif i == 9 and 属性.黑鸦词条[2][0]!=0:
+            elif i == 9 and 属性.黑鸦词条[2][0]!=0 and 属性.变换词条[2][1]!=0:
                 tempstr[i] += 装备.装备描述_变换属性(属性)[:-4]+"<br>"
                 tempstr[i] += 属性.黑鸦词条[2][4]
                 # 辅助
-            elif i == 11 and 属性.黑鸦词条[0][0]!=0:
+            elif i == 11 and 属性.黑鸦词条[0][0]!=0 and 属性.变换词条[0][1]!=0:
                 tempstr[i] += 装备.装备描述_变换属性(属性)[:-4]+"<br>"
                 tempstr[i] += 属性.黑鸦词条[0][4]
                 # 武器

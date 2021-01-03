@@ -1160,7 +1160,7 @@ class 极诣·剑魂角色属性(角色属性):
         self.技能栏= deepcopy(极诣·剑魂技能列表)
         self.技能序号= deepcopy(极诣·剑魂技能序号)
 
-    def 技能等级加成(self, 加成类型, minLv, maxLv, lv):
+    def 技能等级加成(self, 加成类型, minLv, maxLv, lv,可变 = 0):
         lv = int(lv)
         if self.装备描述 ==1:
             if 加成类型=="所有":
@@ -1186,6 +1186,8 @@ class 极诣·剑魂角色属性(角色属性):
                         else:
                             if i.是否主动 == 1:
                                 i.等级加成(lv)
+            if 可变 > 0:
+                self.变换词条[可变-1] = [6,2,14 + (2 if 可变 > 1 else 4), 14 + (9 if 可变 > 1 else 17)]
         return ''
         
     def 被动倍率计算(self):
