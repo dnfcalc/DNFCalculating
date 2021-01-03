@@ -220,7 +220,9 @@ class 角色属性(属性):
         if self.装备描述 == 1:
             return '附加伤害 +{}%<br>'.format(round(x*100))
         else:
-             self.附加伤害 += self.附加伤害增加增幅 * x 
+            self.附加伤害 += self.附加伤害增加增幅 * x 
+            if 可变 > 0:
+                self.变换词条[可变-1] = [3,round(x*100) ,round(x*100) + (2 if 可变 > 1 else 4), round(x*100) + (8 if 可变 > 1 else 16)]
         return ''
 
     def 三攻固定加成(self, x=0, y=0,z=0):
@@ -735,6 +737,7 @@ class 角色属性(属性):
         # 此处目前没有其他好的算法，只能先采用由大到小的贪心算法
         # 词条数值高的优先择优，词条数值相同优先可选范围少的择优
         # 序号,洗的最大值,可洗词条数
+        # print(self.变换词条)
         贪心排序 = [
             [1,round(self.变换词条[0][3]/100,2),6],
             [2,round(self.变换词条[1][3]/100,2),6],
@@ -749,10 +752,13 @@ class 角色属性(属性):
         贪心排序.sort(key=lambda x:round(x[1],2),reverse=True)
         贪心排序.sort(key=lambda x:int(x[2]),reverse=True)
 
+        # print(贪心排序)
+
+
         for item in 贪心排序:
             self.择优计算(item[0])
 
-
+        
     def 择优计算(self,index):
         for i in range(1,5):
             if index == i and self.黑鸦词条[i-1][0] == 1:
@@ -761,7 +767,7 @@ class 角色属性(属性):
                 # self.黑鸦词条[i-1].append("")
                 self.黑鸦词条[i-1][4] = 黑鸦武器属性列表[index].描述 +'+' +str(self.变换词条[i-1][3])+'%'
                 # print(self.黑鸦词条)                
-         
+                return 
         # 残香词条1-10%
         if index == 5:
             if self.希洛克武器词条 == 0:
@@ -3176,7 +3182,7 @@ class 角色窗口(窗口):
             黑鸦部位 = ['武器','戒指','辅助装备','下装']
             for i in range(4):
                 if B.黑鸦词条[i][4]!='':
-                    print(count)
+                    # print(count)
                     self.套装名称显示[count].setText(黑鸦部位[i]+':'+B.黑鸦词条[i][4])
                     self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}") 
                     count += 1

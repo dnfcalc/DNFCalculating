@@ -380,7 +380,7 @@ class 缔造者角色属性(角色属性):
         self.技能栏 = deepcopy(缔造者技能列表)
         self.技能序号 = deepcopy(缔造者技能序号)
 
-    def 技能等级加成(self, 加成类型, minLv, maxLv, lv):
+    def 技能等级加成(self, 加成类型, minLv, maxLv, lv,可变 = 0):
         lv = int(lv)
 
         if self.装备描述 ==1:
@@ -403,6 +403,8 @@ class 缔造者角色属性(角色属性):
                 if i.所在等级 >= minLv and i.所在等级 <= maxLv:
                     if 加成类型 == '所有':
                         i.等级加成(lv)
+            if 可变 > 0:
+                self.变换词条[可变-1] = [6,2,14 + (2 if 可变 > 1 else 4), 14 + (9 if 可变 > 1 else 17)]
         return ''
 
     def 技能释放次数计算(self):
