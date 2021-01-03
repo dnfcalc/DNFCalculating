@@ -189,11 +189,11 @@ class 知源·战斗法师技能10(主动技能):
     护石选项 = ['魔界', '圣痕']
     def 装备护石(self, x):
         if x == 0:
-            self.倍率*=1.242
+            self.倍率*=1.23
             self.CD *=0.92
 
         elif x == 1:
-            self.倍率*=1.334
+            self.倍率*=1.31
             self.CD *=0.92
     def 等效百分比(self, 武器类型):
         return self.数据[self.等级]  * (1 + self.TP成长 * self.TP等级) * self.倍率    
