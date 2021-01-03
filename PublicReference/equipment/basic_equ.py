@@ -56,9 +56,42 @@ class 装备:
         self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
         self.其它属性(属性)
         if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
-            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">其他属性：</font><br>','')        
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">其他属性：</font><br>','')
+        self.属性描述 += '<font color="#00A2E8">变换属性：</font><br>'
+        self.变换属性(属性)
+        if self.属性描述.endswith('<font color="#00A2E8">变换属性：</font><br>'):
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">变换属性：</font><br>','')     
         属性.装备描述 = 0
         return self.属性描述 
+
+    def 装备描述_变换属性(self, 属性):
+        属性.装备描述 = 1
+        self.属性描述 = ''
+        if self.部位 in ['上衣','下装','腰带','头肩','鞋']:
+            self.属性描述 += ('力量 +{}<br>'.format(self.力量[属性.防具类型])) if self.力量[属性.防具类型] > 0 else '' 
+            self.属性描述 += ('智力 +{}<br>'.format(self.智力[属性.防具类型])) if self.智力[属性.防具类型] > 0 else ''             
+        else:
+            self.属性描述 += ('力量 +{}<br>'.format(self.力量)) if self.力量 > 0 else '' 
+            self.属性描述 += ('智力 +{}<br>'.format(self.智力)) if self.智力 > 0 else ''        
+        self.属性描述 += ('物理攻击力 +{}<br>'.format(self.物理攻击力)) if self.物理攻击力 > 0 else ''
+        self.属性描述 += ('魔法攻击力 +{}<br>'.format(self.魔法攻击力)) if self.魔法攻击力 > 0 else ''
+        self.属性描述 += ('独立攻击力 +{}<br>'.format(self.独立攻击力)) if self.独立攻击力 > 0 else ''
+        self.城镇属性(属性)
+        self.属性描述 += '<font color="#00A2E8">进图触发：</font><br>'
+        self.进图属性(属性)
+        if self.属性描述.endswith('<font color="#00A2E8">进图触发：</font><br>'):
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">进图触发：</font><br>','')
+        self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
+        self.其它属性(属性)
+        if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
+            self.属性描述 = self.属性描述.replace('<font color="#00A2E8">其他属性：</font><br>','')
+        self.属性描述 += '<font color="#00A2E8">变换属性：</font><br>'
+        # self.变换属性(属性)
+        # if self.属性描述.endswith('<font color="#00A2E8">变换属性：</font><br>'):
+        #     self.属性描述 = self.属性描述.replace('<font color="#00A2E8">变换属性：</font><br>','')     
+        属性.装备描述 = 0
+        return self.属性描述 
+
     def 装备描述_BUFF(self, 属性):
         属性.装备描述 = 1
         self.属性描述 = ''

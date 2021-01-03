@@ -6,7 +6,7 @@ spec_root = os.path.abspath(os.path.join(SPECPATH, '../'))
 
 hideList = ['pkg_resources.py2_warn']
 for fileName in os.listdir(r'./Part/'):
-    if fileName.endswith(".py") and fileName!="__init__.py":
+    if fileName.endswith(".py") and fileName!="__init__.py" and ("幽冥" not in fileName):
         hideList.append("Part."+fileName.replace(".py",""))
 
 block_cipher = None

@@ -307,8 +307,10 @@ class 窗口(QWidget):
         # 工具栏
         self.frame_tool = QFrame(self)
         self.frame_tool.setGeometry(0, 0, self.width(), 24)
-
-        self.页面名称 = ["装备/选择/打造", "技能/符文/其它", "基础/细节/修正","神话属性修正","自选装备计算"]
+        if self.初始属性.职业分类 == '输出':
+            self.页面名称 = ["装备/选择/打造", "技能/符文/药剂", "基础/细节/修正","神话属性修正","自选装备计算","辟邪玉/希洛克/黑鸦"]
+        else:
+            self.页面名称 = ["装备/选择/打造", "技能/符文/其它", "基础/细节/修正","神话属性修正","自选装备计算"]
         self.页面数量 = len(self.页面名称)
         self.btn_group = QButtonGroup(self.frame_tool)
         self.window_btn = []
@@ -332,12 +334,15 @@ class 窗口(QWidget):
         self.main_frame3 = QMainWindow()
         self.main_frame4 = QMainWindow()
         self.main_frame5 = QMainWindow()
+        self.main_frame6 = QMainWindow()
 
         self.界面1()
         self.界面2()
         self.界面3()
         self.界面4()
         self.界面5()
+        if self.初始属性.职业分类 == '输出':
+            self.界面6()
 
     def 布局界面(self):
         # 把布局界面放进去
@@ -346,6 +351,8 @@ class 窗口(QWidget):
         self.stacked_layout.addWidget(self.main_frame3)
         self.stacked_layout.addWidget(self.main_frame4)
         self.stacked_layout.addWidget(self.main_frame5)
+        if self.初始属性.职业分类 == '输出':
+            self.stacked_layout.addWidget(self.main_frame6)
 
     def 套装描述(self, i):
         temp = '<font size="3" face="宋体">'
@@ -661,6 +668,9 @@ class 窗口(QWidget):
         pass
 
     def 界面5(self):
+        pass
+
+    def 界面6(self):
         pass
 
     def 基准值设置(self, x = 0):

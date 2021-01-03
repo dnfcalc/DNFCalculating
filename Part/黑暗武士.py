@@ -1065,8 +1065,8 @@ class 黑暗武士(角色窗口):
     def 界面(self):
         super().界面()
         
-        for i in ([self.守门人属强] + self.希洛克套装按钮 + self.希洛克单件按钮 + self.希洛克装备图标 + self.希洛克武器词条):
-            i.move(i.x() - 85, i.y() + 380)
+        # for i in ([self.守门人属强] + self.希洛克套装按钮 + self.希洛克单件按钮 + self.希洛克装备图标 + self.希洛克武器词条):
+        #     i.move(i.x() - 85, i.y() + 380)
 
         for i in [self.觉醒选择, self.一觉图片, self.二觉图片, self.一觉遮罩, self.二觉遮罩]:
             i.move(-1000, -1000)
