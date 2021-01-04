@@ -3,7 +3,7 @@ from PublicReference.equipment.equ_list import *
 装备版本 = "GF"
 装备增幅版本 = "GF"
 
-with open("ResourceFiles\\Config\\release_version.json") as fp:
+with open("ResourceFiles/Config/release_version.json") as fp:
     versionInfo = json.load(fp)
     装备版本 = versionInfo['EquipmentVersion'].upper()
     装备增幅版本 = versionInfo['ZFVersion'].upper()
