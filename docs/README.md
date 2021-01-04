@@ -23,6 +23,11 @@ python(3.8)编写，使用 pyqt5图形 GUI 库<br>
 
 ## macOS下运行方式
 
+&#160; &#160; &#160; &#160; 直接在`Finder`中双击`run_mac.command`即可运行。
+
+&#160; &#160; &#160; &#160; 或者在`终端(Terminal)`中，执行命令`python3.8 main.py`即可运行。
+
+
 ## 程序结构
 
 |--　DNFCalculating</br>
