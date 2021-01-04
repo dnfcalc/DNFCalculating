@@ -7,3 +7,7 @@ main.exe
 docs/web.config
 .vscode/launch.json
 debug.log
+
+# For macOS
+.DS_Store
+

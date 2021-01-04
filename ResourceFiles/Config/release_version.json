@@ -1,7 +1,1 @@
-{
-  "version": "2020-12-31",
-  "AutoCheckUpdate": true,
-  "EquipmentVersion": "GF",
-  "ShowChangeLog": true,
-  "ZFVersion": "GF"
-}
+{"version": "2020-12-31", "AutoCheckUpdate": true, "EquipmentVersion": "GF", "ShowChangeLog": false, "ZFVersion": "GF"}

@@ -4,7 +4,7 @@ import os
 
 装备版本 = "GF"
 
-with open("ResourceFiles\\Config\\release_version.json") as fp:
+with open("ResourceFiles/Config/release_version.json") as fp:
     versionInfo = json.load(fp)
     装备版本 = versionInfo['EquipmentVersion']
 fp.close()
