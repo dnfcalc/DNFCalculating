@@ -403,19 +403,16 @@ class 选择窗口(QMainWindow):
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
     主进程PID = os.getpid()  
-    # print(主进程PID)
-    # logger.info(sys.argv)
-    # 带参数传入打开程序
     if len(sys.argv) > 1:
-            try:
-                #杀老进程
-                os.system("taskkill /pid {} -f".format(sys.argv[1]))
-                time.sleep(5)
-                if "main.py" not in sys.argv[2]:
-                # 删除老版本
-                    os.remove(sys.argv[2])
-            except Exception as error:
-                logger.error("error={} \n detail {}".format(error,traceback.print_exc())) 
+        try:
+            #杀老进程
+            os.system("taskkill /pid {} -f".format(sys.argv[1]))
+            time.sleep(5)
+            if "main.py" not in sys.argv[2]:
+            # 删除老版本
+                os.remove(sys.argv[2])
+        except Exception as error:
+            logger.error("error={} \n detail {}".format(error,traceback.print_exc())) 
     if 窗口显示模式 == 1:
         if hasattr(qtc.Qt, 'AA_EnableHighDpiScaling'):
             QtWidgets.QApplication.setAttribute(qtc.Qt.AA_EnableHighDpiScaling, True)
