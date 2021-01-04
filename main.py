@@ -17,6 +17,9 @@ import shutil
 import sys
 import time
 import urllib.request
+import subprocess
+
+主进程PID = ''
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()
@@ -62,7 +65,7 @@ class 选择窗口(QMainWindow):
             # resp = urllib.request.urlopen('http://dnf.17173.com/jsq/instructions.html?j')
             for file in folder_info.files:
                 if file.name.startswith("DNF计算器"):
-                    self.云端版本 = file.name.replace(".zip",".exe")
+                    self.云端版本 = file.name.replace(".zip"," 17173DNF.exe")
                     fileURL = file.url
                     if file.name.replace("DNF计算器","").replace(".zip","").replace("-",".") == self.计算器版本[5:]:
                         self.网盘链接 = ''
@@ -367,7 +370,7 @@ class 选择窗口(QMainWindow):
                 # 循环解压文件到指定目录
         zip_file.close()
         shutil.rmtree('download')
-        box = QMessageBox(QMessageBox.Question, "提示", "升级完毕,确定后打开最新版本,旧版本exe自行删除！")  
+        box = QMessageBox(QMessageBox.Question, "提示", "升级完毕,确定后打开最新版本,删除当前旧版本！")  
         box.setStandardButtons(QMessageBox.Yes)
         A = box.button(QMessageBox.Yes)
         A.setText("确定")
@@ -377,12 +380,16 @@ class 选择窗口(QMainWindow):
                 if p.is_alive:
                     p.terminate()
                     p.join()
-        self.close()
-        newpath = os.getcwd()+"\\"+self.云端版本  
-        oldpath = sys.argv[0].replace("\\","/").split("/")
-        # FileName = oldpath[len(oldpath)-1]
-        # os.system(newpath+" "+FileName)
-        os.system(newpath)
+            self.close()
+            newpath = os.getcwd()+"\\"+self.云端版本
+            oldpath = sys.argv[0]
+            p = subprocess.Popen([
+                newpath,str(主进程PID), str(oldpath)
+                # "--cwd", dirpath,
+                # "--exe_name", filename,
+            ], shell=True, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p.wait()    
+            # os.system(newpath)
         
     def show_progress(self,file_name, total_size, now_size):
         percent = now_size / total_size
@@ -395,17 +402,20 @@ class 选择窗口(QMainWindow):
 
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
+    主进程PID = os.getpid()  
+    # print(主进程PID)
     # logger.info(sys.argv)
     # 带参数传入打开程序
-    # if len(sys.argv) > 1:
-        # if os.path.isfile(sys.argv[1]) and sys.argv[1]!="main.py":
-        #     try:
-        #         #杀老进程
-        #         os.system("taskkill /f /t /im "+sys.argv[1])
-        #         # 删除老版本
-        #         os.remove(os.getcwd()+"\\"+sys.argv[1])
-        #     except Exception as error:
-        #         logger.error("error={} \n detail {}".format(error,traceback.print_exc())) 
+    if len(sys.argv) > 1:
+            try:
+                #杀老进程
+                os.system("taskkill /pid {} -f".format(sys.argv[1]))
+                time.sleep(5)
+                if "main.py" not in sys.argv[2]:
+                # 删除老版本
+                    os.remove(sys.argv[2])
+            except Exception as error:
+                logger.error("error={} \n detail {}".format(error,traceback.print_exc())) 
     if 窗口显示模式 == 1:
         if hasattr(qtc.Qt, 'AA_EnableHighDpiScaling'):
             QtWidgets.QApplication.setAttribute(qtc.Qt.AA_EnableHighDpiScaling, True)
