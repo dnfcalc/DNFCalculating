@@ -308,7 +308,7 @@ class 窗口(QWidget):
         self.frame_tool = QFrame(self)
         self.frame_tool.setGeometry(0, 0, self.width(), 24)
         if self.初始属性.职业分类 == '输出':
-            self.页面名称 = ["装备/选择/打造", "技能/符文/药剂", "基础/细节/修正","神话属性修正","自选装备计算","辟邪玉/希洛克/黑鸦"]
+            self.页面名称 = ["装备/选择/打造", "技能/符文/药剂", "基础/细节/修正","神话属性修正","辟邪玉/希洛克/黑鸦","自选装备计算"]
         else:
             self.页面名称 = ["装备/选择/打造", "技能/符文/其它", "基础/细节/修正","神话属性修正","自选装备计算"]
         self.页面数量 = len(self.页面名称)
@@ -340,9 +340,10 @@ class 窗口(QWidget):
         self.界面2()
         self.界面3()
         self.界面4()
-        self.界面5()
         if self.初始属性.职业分类 == '输出':
             self.界面6()
+        self.界面5()
+
 
     def 布局界面(self):
         # 把布局界面放进去
@@ -350,9 +351,10 @@ class 窗口(QWidget):
         self.stacked_layout.addWidget(self.main_frame2)
         self.stacked_layout.addWidget(self.main_frame3)
         self.stacked_layout.addWidget(self.main_frame4)
-        self.stacked_layout.addWidget(self.main_frame5)
         if self.初始属性.职业分类 == '输出':
             self.stacked_layout.addWidget(self.main_frame6)
+        self.stacked_layout.addWidget(self.main_frame5)
+
 
     def 套装描述(self, i):
         temp = '<font size="3" face="宋体">'
@@ -1015,6 +1017,13 @@ class 窗口(QWidget):
         else:
             i.setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
 
+    def 改造产物选项颜色更新(self, index):
+        i = self.改造产物选项[index]
+        if i.currentIndex() != 0:
+            i.setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(197,34,70,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(225,5,65,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+        else:
+            i.setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+
     def click_window(self, index):
         self.当前页面 = index
         if self.stacked_layout.currentIndex() != index:
@@ -1044,8 +1053,29 @@ class 窗口(QWidget):
                         for i in range(4):
                             self.神话属性选项[num * 4 + i].move(-1000,-1000)
                     num += 1
-        if index == 4:
+        if index ==4:
+           self.智慧产物升级洗词条(1 if self.智慧产物升级.isChecked() else 0)
+        if index == 5:
             self.自选计算(1)
+    
+    def 智慧产物升级洗词条(self,x=0):
+        count1 = 0
+        count2 = 0
+        num = 0
+        for j in range(len(装备列表)):
+            if 装备列表[j].所属套装 == '智慧产物' :
+                if self.装备选择状态[j] == 1 and x==1:
+                    self.改造产物图片[num].move(int(self.width() / 7 * (count1 % 5+ 0.42+2)), int(self.height() / 5.2 * (count2 + 0.05)))
+                    for i in range(4):
+                        self.改造产物选项[num * 4 + i].move(int(self.width() / 7 * (count1 % 5+2) + 12), int(self.height() / 5.2 * (count2 + 0.05)) + i * 22 + 32)
+                    count1 += 1
+                    if count1 % 5 == 0:
+                        count2 += 1
+                else:
+                    self.改造产物图片[num].move(-1000,-1000)
+                    for i in range(4):
+                        self.改造产物选项[num * 4 + i].move(-1000,-1000)
+                num += 1 
 
     def 修正套装计算(self, x):
         self.有效穿戴组合.clear()
@@ -1227,6 +1257,7 @@ class 窗口(QWidget):
                 self.有效部位列表 = deepcopy(self.有效部位列表备份)
             calc_data.拥有百变怪 = self.百变怪选项.isChecked()
             calc_data.神话属性选项 = [cb.currentIndex() for cb in self.神话属性选项]
+            calc_data.改造产物选项 = [cb.currentIndex() for cb in self.改造产物选项]
 
             calc_data.minheap = MinHeap(save_top_n, batch_size)
 
@@ -1256,12 +1287,12 @@ class 窗口(QWidget):
             self.排行数据.append(self.伤害列表[i][1:])
 
         totoalCostTime = time.time() - startTime
-        logger.info((
-            "计算完毕\n"
-            "工作线程={} 总计耗时={}"
-       ).format(
-            thread_num, format_time(totoalCostTime),
-       ))
+    #     logger.info((
+    #         "计算完毕\n"
+    #         "工作线程={} 总计耗时={}"
+    #    ).format(
+    #         thread_num, format_time(totoalCostTime),
+    #    ))
 
         self.calc_done_signal.emit()
 

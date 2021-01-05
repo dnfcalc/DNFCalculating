@@ -29,7 +29,7 @@ def producer(*args):
     producer_data.work_queue.put((producer_data.calc_index, args))
 
     producer_data.produced_count += 1
-    logger.info("producer put %3dth work into work queue", producer_data.produced_count)
+    # logger.info("producer put %3dth work into work queue", producer_data.produced_count)
 
 
 def consumer(work_queue, work_func):
@@ -38,7 +38,7 @@ def consumer(work_queue, work_func):
     """
     current_process = multiprocessing.current_process()
 
-    logger.info("work thread={} started, ready to work".format(current_process))
+    # logger.info("work thread={} started, ready to work".format(current_process))
     current_calc_index = 0
     processed_count = 0
     continue_wrok = True
@@ -49,7 +49,7 @@ def consumer(work_queue, work_func):
                 current_calc_index = calc_index
                 processed_count = 0
             processed_count += 1
-            logger.info("work thread {} processing {}th work".format(current_process, processed_count))
+            # logger.info("work thread {} processing {}th work".format(current_process, processed_count))
 
             work_func(*args)
         except BrokenPipeError as error:
@@ -62,4 +62,4 @@ def consumer(work_queue, work_func):
         finally:
             work_queue.task_done()
 
-    logger.info("work thread ={} stopped, processed_count={}".format(current_process, processed_count))
+    # logger.info("work thread ={} stopped, processed_count={}".format(current_process, processed_count))

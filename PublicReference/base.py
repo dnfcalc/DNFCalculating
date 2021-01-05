@@ -190,6 +190,7 @@ class 角色属性(属性):
     绿色生命的面容 = 1
 
     攻击属性 = 0
+    产物升级 = 0
     
     #是否为图内状态
     状态 = 0
@@ -263,7 +264,7 @@ class 角色属性(属性):
 
     def 技能攻击力加成(self, x,辟邪玉加成 = 1):
         if self.装备描述 ==1:
-            return '技能攻击力 +{}%<br>'.format(round(x*100,0))
+            return '技能攻击力 +{}%<br>'.format(round(x*100))
         else:
             self.技能攻击力 *= 1 + self.技能伤害增加增幅 * x if 辟邪玉加成 == 1 else x
         return ''
@@ -477,7 +478,7 @@ class 角色属性(属性):
                         if i.是否主动 == 1:
                             i.等级加成(lv)            
             if 可变 > 0:
-                self.变换词条[可变-1] = [6,2,14 + (2 if 可变 > 1 else 4), 14 + (9 if 可变 > 1 else 17)]
+                self.变换词条[可变-1] = [6,2,14 + (2 if 可变 > 1 else 4), 14 + (8 if 可变 > 1 else 16)]
         return ''
         
     def 技能冷却缩减(self, min, max, x):
@@ -687,57 +688,82 @@ class 角色属性(属性):
             #百分比力智
             x = self.面板系数计算()
             self.百分比力智加成(词条数值[0])
-            词条提升率[0] = self.面板系数计算() / x - 1
+            词条提升率[0] = round(self.面板系数计算() / x - 1,8)
             self.百分比力智加成(-词条数值[0])
 
         if 1 in 词条范围:
             #百分比三攻
             x = 1 + self.百分比三攻
             self.百分比三攻加成(词条数值[1])
-            词条提升率[1] = (1 + self.百分比三攻) / x - 1
+            词条提升率[1] = round((1 + self.百分比三攻) / x - 1,8)
             self.百分比三攻加成(-词条数值[1])  
         
         if 2 in 词条范围:
             #伤害增加
             x = 1 + int(self.伤害增加 * 100) / 100
             self.伤害增加加成(词条数值[2])
-            词条提升率[2] = (1 + int(self.伤害增加 * 100) / 100) / x - 1
+            词条提升率[2] = round((1 + int(self.伤害增加 * 100) / 100) / x - 1,8)
             self.伤害增加加成(-词条数值[2])
 
         if 3 in 词条范围:    
             #附加伤害
             x = 1 + self.附加伤害 + self.属性附加 * self.属性倍率
             self.附加伤害加成(词条数值[3])
-            词条提升率[3] = (1 + self.附加伤害 + self.属性附加 * self.属性倍率) / x - 1
+            词条提升率[3] = round((1 + self.附加伤害 + self.属性附加 * self.属性倍率) / x - 1,8)
             self.附加伤害加成(-词条数值[3])
 
         if 4 in 词条范围:    
             #暴击伤害
             x = 1 + self.暴击伤害
             self.暴击伤害加成(词条数值[4])
-            词条提升率[4] = (1 + self.暴击伤害) / x - 1
+            词条提升率[4] = round((1 + self.暴击伤害) / x - 1,8)
             self.暴击伤害加成(-词条数值[4])        
 
         if 5 in 词条范围:    
             #最终伤害
             x = 1 + self.最终伤害
             self.最终伤害加成(词条数值[5])
-            词条提升率[5] = (1 + self.最终伤害) / x - 1
+            词条提升率[5] = round((1 + self.最终伤害) / x - 1,8)
             self.最终伤害加成(-词条数值[5])  
         
         if y == 1:
             self.词条提升率 = copy(词条提升率)
 
+        # for k in range(6):
+        #     if 词条提升率[k] == max(词条提升率):
+        #         词条属性列表[k].加成属性(self, 词条数值[k])
+        #         return k
+        tem = []
+        最小词条 = 0
         for k in range(6):
             if 词条提升率[k] == max(词条提升率):
-                词条属性列表[k].加成属性(self, 词条数值[k])
-                return k
+                # 词条属性列表[k].加成属性(self, 词条数值[k])
+                tem.append(k)
+        待排序提升率 = []
+        for i in tem:
+            待排序提升率.append([i,self.择优极限[i]])
+        待排序提升率.sort(key=lambda x:round(x[1],2),reverse=False)
+        self.择优极限 = [round(self.择优极限[i]-词条数值[i],3) for i in range(6)]
+        最小词条 = 待排序提升率[0][0]
+        词条属性列表[最小词条].加成属性(self, 词条数值[最小词条])
+        return 最小词条
 
     def 自适应计算(self):
         # 此处目前没有其他好的算法，只能先采用由大到小的贪心算法
         # 词条数值高的优先择优，词条数值相同优先可选范围少的择优
         # 序号,洗的最大值,可洗词条数
         # print(self.变换词条)
+        择优词条 = [
+            [round(self.变换词条[0][3]/100,2)]*6,
+            [round(self.变换词条[1][3]/100,2)]*6,
+            [round(self.变换词条[2][3]/100,2)]*6,
+            [round(self.变换词条[3][3]/100,2)]*6,
+            [0.1]*6,
+            [0.05]*6,
+            [0.07,0,0.07,0.08,0,0,0],
+            [0,0.05,0.05,0,0.05,0,0]
+        ]
+
         贪心排序 = [
             [1,round(self.变换词条[0][3]/100,2),6],
             [2,round(self.变换词条[1][3]/100,2),6],
@@ -752,13 +778,44 @@ class 角色属性(属性):
         贪心排序.sort(key=lambda x:round(x[1],2),reverse=True)
         贪心排序.sort(key=lambda x:int(x[2]),reverse=True)
 
-        # print(贪心排序)
-
+        self.择优极限 = [0]*6
+        for item in 贪心排序:
+            self.择优极限累计(item[0])
 
         for item in 贪心排序:
             self.择优计算(item[0])
+    # 力智，三攻，黄，白，暴，终
+    def 择优极限累计(self,index):
+        for i in range(1,5):
+            if index == i and self.黑鸦词条[i-1][0] == 1 and self.变换词条[i-1][1] != 0:
+                择优词条 = [round(self.变换词条[i-1][3]/100,2)]*6
+                self.择优极限 = [round(self.择优极限[i]+择优词条[i],3) for i in range(6)]
+                return 
+        # 残香词条1-10%
+        if index == 5:
+            if self.希洛克武器词条 != 0:
+                择优词条 = [0.1]*6
+                self.择优极限 = [round(self.择优极限[i]+择优词条[i],3) for i in range(6)]
+            return
+        # 残香词条2
+        if index == 6:
+            if self.希洛克武器词条 == 1 and self.武器词条触发 == 1:
+                择优词条 = [0.05]*6
+                self.择优极限 = [round(self.择优极限[i]+择优词条[i],3) for i in range(6)]
+            return
+        # 宠物红色装备词条
+        if index == 7:
+            if self.自适应选项[0] != 0: #宠物
+                择优词条 = [0.07,0,0.07,0.08,0,0,0]
+                self.择优极限 = [round(self.择优极限[i]+择优词条[i],3) for i in range(6)]
+            return
+        # 光环词条
+        if index == 8:
+            if self.自适应选项[1] != 0: #光环
+                择优词条 = [0,0.05,0.05,0,0.05,0,0]
+                self.择优极限 = [round(self.择优极限[i]+择优词条[i],3) for i in range(6)]
+            return
 
-        
     def 择优计算(self,index):
         for i in range(1,5):
             if index == i and self.黑鸦词条[i-1][0] == 1 and self.变换词条[i-1][1] != 0:
@@ -786,14 +843,15 @@ class 角色属性(属性):
         # 宠物红色装备词条
         if index == 7:
             if self.自适应选项[0] != 0: #宠物
-                词条数值 = {0:0.07, 2:0.07, 3:0.08}
+                词条数值 = [0.07,0,0.07,0.08,0,0,0]
                 index = self.词条提升率计算([0, 2, 3], 词条数值)
                 self.自适应描述[0] = '{}%{}'.format(int(词条数值[index] * 100), 词条属性列表[index].描述)
             return
         # 光环词条
         if index == 8:
             if self.自适应选项[1] != 0: #光环
-                index = self.词条提升率计算([1, 2, 4], [0.05] * 6)
+                词条数值 = [0,0.05,0.05,0,0.05,0,0]
+                index = self.词条提升率计算([1, 2, 4], 词条数值)
                 self.自适应描述[1] = '{}%{}'.format(5, 词条属性列表[index].描述)
             return
 
@@ -999,17 +1057,31 @@ class 角色属性(属性):
         return self.数据返回(x, 技能释放次数, 技能总伤害)
     
     def 装备词条计算(self):
+        # 初始化 以防和自选冲突
+        self.变换词条 = [
+            # 原词条类型，原词条数值，可洗最小值，可洗最大值，择优不考虑觉醒
+            [0,0,0,0],
+            [0,0,0,0],
+            [0,0,0,0],
+            [0,0,0,0]
+        ]
         if 调试开关 == 0:
             for i in range(11):
                 装备列表[装备序号[self.装备栏[i]]].城镇属性(self)
-                装备列表[装备序号[self.装备栏[i]]].变换属性(self) 
+                装备列表[装备序号[self.装备栏[i]]].变换属性(self)
+                if 装备列表[装备序号[self.装备栏[i]]].所属套装 == '智慧产物' and self.产物升级 == 1:
+                    装备列表[装备序号[self.装备栏[i]]].产物升级(self)
                 # 添加可洗属性
             if 武器序号 == -1:
                 装备列表[装备序号[self.装备栏[11]]].城镇属性(self)
                 装备列表[装备序号[self.装备栏[11]]].变换属性(self)
+                if 装备列表[装备序号[self.装备栏[11]]].所属套装 == '智慧产物' and self.产物升级 == 1:
+                    装备列表[装备序号[self.装备栏[11]]].产物升级(self)
             else:
                 装备列表[武器序号].城镇属性(self)
                 装备列表[武器序号].变换属性(self)
+                if 装备列表[武器序号].所属套装 == '智慧产物' and self.产物升级 == 1:
+                    装备列表[武器序号].产物升级(self)
 
             for i in self.套装栏:
                 套装列表[套装序号[i]].城镇属性(self)
@@ -1027,12 +1099,11 @@ class 角色属性(属性):
             for i in self.套装栏:
                 套装列表[套装序号[i]].进图属性(self)
             self.状态 = 0
-
         for i in range(4):
             self.黑鸦词条[i].append("")
             if self.黑鸦词条[i][0]!=0 and self.变换词条[i][1] != 0:
                 self.黑鸦词条变更(self.变换词条[i],-1)
-                if self.黑鸦词条[i][0]==2:
+                if self.黑鸦词条[i][0]==2 and self.变换词条[i][1]:
                     temp = [self.黑鸦词条[i][1],(0 if self.黑鸦词条[i][1]==6 else self.变换词条[i][1]) + self.黑鸦词条[i][2],0,0]
                     self.黑鸦词条变更(temp,1)
                     self.黑鸦词条[i][4] = 黑鸦武器属性列表[temp[0]].描述 +'+'+ str((0 if temp[0]==6 else self.变换词条[i][1]) + self.黑鸦词条[i][2])+('' if temp[0]==6 else '%')
@@ -2055,8 +2126,8 @@ class 角色窗口(窗口):
 
         标签 = QLabel('辟邪玉计算 （鼠标悬停查看算法）',self.main_frame6)
         标签.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
-        标签.resize(300,20)
-        标签.move(横坐标,纵坐标)
+        标签.resize(290,20)
+        标签.move(横坐标+10,纵坐标)
         标签.setAlignment(Qt.AlignCenter)
 
         temp = '<font face="宋体">假定基础伤害为100，词条1=50%，词条2=50%：<br><br>'
@@ -2089,26 +2160,27 @@ class 角色窗口(窗口):
         标签 = QLabel('黑鸦词条选择(武器觉醒不参与择优)',self.main_frame6)
         标签.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
         标签.resize(300,20)
-        标签.move(横坐标,纵坐标+25*7)
+        标签.move(横坐标 + 10,纵坐标 + 330)
         标签.setAlignment(Qt.AlignCenter)
 
-        名称 = ['武器', '戒指', '辅助装备', '下装']
+        名称 = ['武　　器', '戒　　指', '辅助装备', '下　　装']
         
         self.黑鸦词条 = []
         for i in range(4):
             x = QLabel(名称[i],self.main_frame6)
-            x.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
-            x.resize(50,20)
-            x.move(横坐标,纵坐标+(i+8)*25)
+            x.setStyleSheet(标签样式 + 'QLabel{font-size:13px;};text-align: justify;')
+            # x.setStyleSheet('text-align: justify')
+            x.resize(55,20)
+            x.move(横坐标,纵坐标-145+(i+20)*25)
             tem=[]
             tem.append(MyQComboBox(self.main_frame6))
             tem[0].addItems(['无', '计算最高', '自选数值'])
-            tem[0].resize(80,20)
-            tem[0].move(横坐标 + 60, 纵坐标+25*(i+8))
+            tem[0].resize(91,20)
+            tem[0].move(横坐标+60, 纵坐标-20+25*(i+15))
             tem[0].currentIndexChanged.connect(lambda state,index = i : self.黑鸦词条更新(index))
             tem.append(MyQComboBox(self.main_frame6))
-            tem[1].resize(85,20)
-            tem[1].move(横坐标 + 60 + 85 , 纵坐标+25*(i+8))
+            tem[1].resize(70,20)
+            tem[1].move(横坐标+161 , 纵坐标-20+25*(i+15))
             if i > 0:
                 for item in 词条属性列表:
                     tem[1].addItem(item.描述)
@@ -2119,7 +2191,7 @@ class 角色窗口(窗口):
             # tem[1].currentIndexChanged.connect(lambda state: self.希洛克武器词条更新())
             tem.append(MyQComboBox(self.main_frame6))
             tem[2].resize(60,20)
-            tem[2].move(横坐标 + 60 + +85+90 , 纵坐标+25*(i+8))
+            tem[2].move(横坐标+241 , 纵坐标-20+25*(i+15))
             if i > 0:
                 for item in range(2,9):
                     tem[2].addItem("+" + str(item) + '%')
@@ -2129,13 +2201,19 @@ class 角色窗口(窗口):
             self.黑鸦词条.append(tem)
             self.黑鸦词条更新(i)
             # tem[1].currentIndexChanged.connect(lambda state: self.希洛克武器词条更新())
-            #             
+        self.智慧产物升级=QCheckBox(' 智慧产物升级',self.main_frame6)
+        self.智慧产物升级.resize(118,20)
+        self.智慧产物升级.move(横坐标 + 181,纵坐标+ 288)
+        self.智慧产物升级.setStyleSheet(复选框样式)
+        self.智慧产物升级.setChecked(False)      
+        self.智慧产物升级.stateChanged.connect(lambda: self.智慧产物升级洗词条(1 if self.智慧产物升级.isChecked() else 0))
+              
         横坐标=横坐标+320;纵坐标=0
 
         标签 = QLabel('希洛克相关',self.main_frame6)
         标签.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
-        标签.resize(150,20)
-        标签.move(横坐标,纵坐标)
+        标签.resize(300,20)
+        标签.move(横坐标 - 382,纵坐标 + 135)
         标签.setAlignment(Qt.AlignCenter)
 
         名称 = ['奈克斯', '暗杀者', '卢克西', '守门人', '洛多斯']
@@ -2149,21 +2227,21 @@ class 角色窗口(窗口):
             self.希洛克套装按钮.append(QPushButton(i, self.main_frame6))
             self.希洛克套装按钮[count].setStyleSheet(按钮样式)
             self.希洛克套装按钮[count].resize(50,22)
-            self.希洛克套装按钮[count].move(横坐标, 纵坐标 + 25 + 4 + count * 32)
+            self.希洛克套装按钮[count].move(横坐标 - 320, 纵坐标 + 160 + 4 + count * 32)
             self.希洛克套装按钮[count].clicked.connect(lambda state, index = (count + 1) * 100:self.希洛克选择(index))
             for j in range(3):
                 序号 = count * 3 + j
                 图片 = QLabel(self.main_frame6)
                 图片.setPixmap(QPixmap('./ResourceFiles/img/希洛克/' + str(序号) + '.png'))
                 图片.resize(28, 28)
-                图片.move(横坐标+ 60 + j * 30, 纵坐标 + 25 + count * 32)
+                图片.move(横坐标 - 260 + j * 30, 纵坐标 + 160 + count * 32)
                 self.希洛克装备图标.append(图片)
                 self.希洛克遮罩透明度.append(QGraphicsOpacityEffect())
                 self.希洛克遮罩透明度[序号].setOpacity(0.5)
                 self.希洛克单件按钮.append(QPushButton(self.main_frame6))
                 self.希洛克单件按钮[序号].setStyleSheet("background-color: rgb(0, 0, 0)")
                 self.希洛克单件按钮[序号].resize(28, 28)
-                self.希洛克单件按钮[序号].move(横坐标+ 60 + j * 30, 纵坐标 + 25+ count * 32)
+                self.希洛克单件按钮[序号].move(横坐标 - 260 + j * 30, 纵坐标 + 160 + count * 32)
                 self.希洛克单件按钮[序号].setGraphicsEffect(self.希洛克遮罩透明度[序号])
                 self.希洛克单件按钮[序号].clicked.connect(lambda state, index = 序号:self.希洛克选择(index))
             count += 1
@@ -2173,14 +2251,14 @@ class 角色窗口(窗口):
             self.守门人属强.addItem('守门人属强：' + str(15 + i * 5))
         self.守门人属强.resize(120,20)
         self.守门人属强.setCurrentIndex(3)
-        self.守门人属强.move(横坐标 + 12, 纵坐标 + 25+ 3 + count * 32)
+        self.守门人属强.move(横坐标-139, 纵坐标 + 93 + 3 + count * 32)
     
         self.希洛克武器词条 = []
         count += 1
         self.希洛克武器词条.append(MyQComboBox(self.main_frame6))
         self.希洛克武器词条[0].addItems(['武器词条：无', '自适应最高值', '自选词条数值'])
         self.希洛克武器词条[0].resize(120,20)
-        self.希洛克武器词条[0].move(横坐标 + 12, 纵坐标+ 25 + 3 + count * 32)
+        self.希洛克武器词条[0].move(横坐标 - 139, 纵坐标 - 32 + count * 32)
         self.希洛克武器词条[0].currentIndexChanged.connect(lambda state: self.希洛克武器词条更新())
 
 
@@ -2190,7 +2268,7 @@ class 角色窗口(窗口):
             for k in 词条属性列表:
                 self.希洛克武器词条[i].addItem(k.描述)
             self.希洛克武器词条[i].resize(72,20)
-            self.希洛克武器词条[i].move(横坐标 + 12, 纵坐标 + 25+ 3 + count * 32)
+            self.希洛克武器词条[i].move(横坐标 -139, 纵坐标 - 32 + count * 32)
         
         count -= 2
         for i in range(3, 5):
@@ -2199,11 +2277,53 @@ class 角色窗口(窗口):
             for k in [3, 4, 5]:
                 self.希洛克武器词条[i].addItem(str(k * (5 - i)) + '%')
             self.希洛克武器词条[i].resize(43,20)
-            self.希洛克武器词条[i].move(横坐标 + 89, 纵坐标 + 25+ 3 + count * 32)
+            self.希洛克武器词条[i].move(横坐标 - 62, 纵坐标 - 32 + count * 32)
 
         for i in range(1, 5):
             self.希洛克武器词条[i].setEnabled(False)
             self.希洛克武器词条[i].setStyleSheet(不可选择下拉框样式)
+
+        self.改造产物选项 = []
+        self.改造产物图片 = []
+
+        for j in range(len(装备列表)):
+            if 装备列表[j].所属套装 == '智慧产物':
+                # print(装备列表[j].名称)
+                self.改造产物图片.append(QLabel(self.main_frame6))
+                self.改造产物图片[-1].setMovie(self.装备图片[j])
+                self.改造产物图片[-1].setToolTip('<font size="3" face="宋体">' + 装备列表[j].名称 + '<br>'+ 装备列表[j].类型 + '-' + 装备列表[j].部位 + '</font>')
+                self.改造产物图片[-1].resize(28, 28)
+                self.改造产物图片[-1].move(-1000, -1000)
+                self.装备图片[j].start()
+
+        for i in range(4 * 100):
+            self.改造产物选项.append(MyQComboBox(self.main_frame6))
+            self.改造产物选项[i].resize(150, 18)
+            self.改造产物选项[i].move(-1000, -1000)
+            self.改造产物选项[i].currentIndexChanged.connect(lambda state, index = i:self.改造产物选项颜色更新(index))
+        
+        if self.初始属性.职业分类 == '输出':
+            count = 0
+            for i in 装备列表:
+                if i.所属套装 == '智慧产物':
+                    描述列表 = [i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述]
+                    范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
+                    for j in range(4):
+                        if 描述列表[j] != '无':
+                            for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
+                                if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
+                                    temp = 描述列表[j] + str(k)
+                                    if 范围列表[j][2] == 1:
+                                        temp += '%'
+                                    self.改造产物选项[count * 4 + j].addItem(temp)
+                        else:
+                            self.改造产物选项[count * 4 + j].addItem('无')
+                    count += 1
+        self.计算按钮3 = QPushButton('开始计算', self.main_frame6)
+        self.计算按钮3.clicked.connect(lambda state: self.计算())
+        self.计算按钮3.move(990, self.height() - 70)
+        self.计算按钮3.resize(100, 30)
+        self.计算按钮3.setStyleSheet(按钮样式)
 
     def 下拉框禁用(self, a, b):
         if a.isChecked():
@@ -2375,6 +2495,10 @@ class 角色窗口(窗口):
                 self.显示选项.setChecked(True)
             for i in range(0,len(self.时装选项)):
                 self.时装选项[i].setCurrentIndex(int(setfile[i + 6].replace('\n', '')))
+            if int(setfile[len(self.时装选项)+6].replace('\n', '')):
+                self.红色宠物装备.setChecked(True)
+            if int(setfile[len(self.时装选项)+7].replace('\n', '')):
+                self.光环自适应.setChecked(True)
         except:
             pass
 
@@ -2530,6 +2654,9 @@ class 角色窗口(窗口):
             setfile.write(str(int(self.显示选项.isChecked())) + '\n')
             for i in range(0, len(self.时装选项)):
                 setfile.write(str(self.时装选项[i].currentIndex()) + '\n')
+            setfile.write(str(int(self.红色宠物装备.isChecked())) + '\n')
+            setfile.write(str(int(self.光环自适应.isChecked())) + '\n')
+
         except:
             pass
 
@@ -4124,6 +4251,7 @@ class 角色窗口(窗口):
                 选项设置列表[i].适用效果(属性)
         
         count = 0
+        count2 = 0
         for i in 装备列表:
             if i.品质 == '神话':
                 i.属性1选择 = self.神话属性选项[count * 4 + 0].currentIndex()
@@ -4131,6 +4259,13 @@ class 角色窗口(窗口):
                 i.属性3选择 = self.神话属性选项[count * 4 + 2].currentIndex()
                 i.属性4选择 = self.神话属性选项[count * 4 + 3].currentIndex()
                 count += 1
+            if i.所属套装 == '智慧产物':
+                i.属性1选择 = self.改造产物选项[count2 * 4 + 0].currentIndex()
+                i.属性2选择 = self.改造产物选项[count2 * 4 + 1].currentIndex()
+                i.属性3选择 = self.改造产物选项[count2 * 4 + 2].currentIndex()
+                i.属性4选择 = self.改造产物选项[count2 * 4 + 3].currentIndex()
+                count2 += 1
+                
         
         属性.攻击属性 = self.攻击属性选项.currentIndex()
 
@@ -4193,6 +4328,7 @@ class 角色窗口(窗口):
         属性.军神的隐秘遗产 = self.装备条件选择[10].currentIndex()
         属性.太极天帝剑 = self.装备条件选择[11].currentIndex()
         属性.绿色生命的面容 = self.装备条件选择[12].currentIndex()
+        属性.产物升级 = 1 if self.智慧产物升级.isChecked() else 0
         属性.黑鸦词条 = []
         for i in range(4):
             temp = [

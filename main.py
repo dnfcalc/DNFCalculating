@@ -50,7 +50,7 @@ class 选择窗口(QMainWindow):
                 p.start()
                 workers.append(p)
 
-            logger.info("已启动{}个工作进程".format(thread_num))
+            # logger.info("已启动{}个工作进程".format(thread_num))
 
             self.worker = workers
             pass
