@@ -88,10 +88,10 @@ class 选择窗口(QMainWindow):
         if not os.path.exists('./ResourceFiles'):
             QMessageBox.information(self,"解压错误",  "未找到资源文件，请将压缩包中ResourceFiles解压到同目录后打开计算器")    
             return     
-        with open("ResourceFiles\\Config\\adventure_info.json",encoding='utf-8') as fp:
+        with open("ResourceFiles/Config/adventure_info.json",encoding='utf-8') as fp:
             角色列表 = json.load(fp)
         fp.close()
-        with open("ResourceFiles\\Config\\release_version.json") as fp:
+        with open("ResourceFiles/Config/release_version.json") as fp:
             versionInfo = json.load(fp)
             self.计算器版本 += versionInfo['version'].replace('-','.')
             self.自动检查版本 = versionInfo['AutoCheckUpdate']
@@ -381,7 +381,7 @@ class 选择窗口(QMainWindow):
                     p.terminate()
                     p.join()
             self.close()
-            newpath = os.getcwd()+"\\"+self.云端版本
+            newpath = os.path.join(os.getcwd(),self.云端版本)
             oldpath = sys.argv[0]
             p = subprocess.Popen([
                 newpath,str(主进程PID), str(oldpath)
@@ -402,7 +402,7 @@ class 选择窗口(QMainWindow):
 
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
-    主进程PID = os.getpid()  
+    主进程PID = os.getpid() 
     if len(sys.argv) > 1:
         try:
             #杀老进程
@@ -422,7 +422,7 @@ if __name__ == '__main__':
     instance = 选择窗口()
     instance.show()
     try:
-        with open("ResourceFiles\\Config\\release_version.json", "r+") as fp:
+        with open("ResourceFiles/Config/release_version.json", "r+") as fp:
             versionInfo = json.load(fp)
             展示信息 = versionInfo['ShowChangeLog']
             versionInfo['ShowChangeLog'] = False
