@@ -1053,10 +1053,14 @@ class 窗口(QWidget):
                         for i in range(4):
                             self.神话属性选项[num * 4 + i].move(-1000,-1000)
                     num += 1
-        if index ==4:
-           self.智慧产物升级洗词条(1 if self.智慧产物升级.isChecked() else 0)
-        if index == 5:
-            self.自选计算(1)
+        if self.初始属性.职业分类 == '输出':
+            if index ==4:
+                self.智慧产物升级洗词条(1 if self.智慧产物升级.isChecked() else 0)
+            if index == 5:
+                self.自选计算(1)
+        else:
+            if index == 4:
+                self.自选计算(1)
     
     def 智慧产物升级洗词条(self,x=0):
         count1 = 0

@@ -913,8 +913,30 @@ class 角色属性(属性):
                     self.自适应1 = 0
                     词条属性列表[index].加成属性(self,词条数值[index])
                     self.自适应描述[0] = '{}%{}'.format(int(词条数值[index] * 100), 词条属性列表[index].描述)
-                    # print("放白字")            
+                    self.择优极限 = [round(self.择优极限[i]-词条数值[i],3) for i in range(6)]
+                    # print("放白字") 
+                        # 每次择优完计算非完全择优的每一个最高最低收益
+            if self.自适应2 == 1:
+                词条数值 = [0,0.05,0.05,0,0.05,0,0]
+                上下限 = self.词条提示上下限计算([1, 2, 4], 词条数值)
+                # print(上下限)
+                下限提升最高 = max([上下限[i][0] for i in range(len(上下限))])
+                # print(下限提升最高)
+                index = 0
+                for i in range(6):
+                    if 上下限[i][0] == 下限提升最高:
+                        index = i
+                del 上下限[index]
+                # 上下限.remove(上下限[index])
+                # print(上下限)
+                if 下限提升最高 >= max([上下限[i][1] for i in range(len(上下限))]):
+                    self.自适应2 = 0
+                    词条属性列表[index].加成属性(self,词条数值[index])
+                    self.自适应描述[1] = '{}%{}'.format(int(词条数值[index] * 100), 词条属性列表[index].描述)
+                    self.择优极限 = [round(self.择优极限[i]-词条数值[i],3) for i in range(6)]
+                    # print("放白字")           
             self.择优计算(item[0])
+        print(self.择优极限)
     # 力智，三攻，黄，白，暴，终
     def 择优极限累计(self,index):
         for i in range(1,5):
