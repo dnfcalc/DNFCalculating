@@ -1257,7 +1257,8 @@ class 窗口(QWidget):
                 self.有效部位列表 = deepcopy(self.有效部位列表备份)
             calc_data.拥有百变怪 = self.百变怪选项.isChecked()
             calc_data.神话属性选项 = [cb.currentIndex() for cb in self.神话属性选项]
-            calc_data.改造产物选项 = [cb.currentIndex() for cb in self.改造产物选项]
+            if self.初始属性.职业分类 == '输出':
+                calc_data.改造产物选项 = [cb.currentIndex() for cb in self.改造产物选项]
 
             calc_data.minheap = MinHeap(save_top_n, batch_size)
 

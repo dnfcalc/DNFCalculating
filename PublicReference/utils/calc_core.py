@@ -81,7 +81,7 @@ class CalcData():
                     i.属性3选择_BUFF = self.神话属性选项[count * 4 + 2]
                     i.属性4选择_BUFF = self.神话属性选项[count * 4 + 3]
                 count += 1
-            if i.所属套装 == '智慧产物':
+            if  self.是输出职业 == True and i.所属套装 == '智慧产物':
                 i.属性1选择 = self.改造产物选项[count2 * 4 + 0]
                 i.属性2选择 = self.改造产物选项[count2 * 4 + 1]
                 i.属性3选择 = self.改造产物选项[count2 * 4 + 2]
