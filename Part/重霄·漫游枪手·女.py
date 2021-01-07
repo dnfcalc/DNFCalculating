@@ -239,14 +239,14 @@ class 技能11(主动技能):
         if x == 0:
             self.攻击次数 = 0
             self.攻击次数2 = 24
-            self.攻击次数3 = 26
+            self.攻击次数3 = 46
             # self.倍率 *= 1.15  
             # self.倍率 /= 0.8
         elif x == 1:
             self.攻击次数 = 0
             self.data1 = [ int(i*1.2) for i in self.data1]
             self.攻击次数2 = 24
-            self.攻击次数3 = 26
+            self.攻击次数3 = 46
     def 等效百分比(self, 武器类型):
         return self.data0[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率+self.data1[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级) * self.倍率+self.data2[self.等级] * self.攻击次数3 * (1 + self.TP成长 * self.TP等级) * self.倍率
 class 技能12(被动技能):
