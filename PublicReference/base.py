@@ -2031,7 +2031,7 @@ class 角色窗口(窗口):
                         templist[n].setStyleSheet(文本框样式白)
                     templist[n].resize(文本框宽度, 22)
                     templist[n].setAlignment(Qt.AlignCenter)
-                templist[n].move(95 + m * (文本框宽度 + 5), 文本框间隔 + 30 + n * 30)
+                templist[n].move(95 + m * (文本框宽度 + 5), 文本框间隔 + 30 + n * 30+2)
             if i == "选项":
                 self.细节选项输入.append(templist)
             else:
@@ -2072,7 +2072,7 @@ class 角色窗口(窗口):
             名称.resize(80, 25)
             名称.move(160 + (len(列名称1) + 1) * 文本框宽度, 文本框间隔 + 30 + n * 30)
             self.行名称.append(j)
-
+        count = len(self.细节选项输入)
         m = -1
         for i in 列名称2:
             m += 1
@@ -2085,6 +2085,8 @@ class 角色窗口(窗口):
                     templist[n].resize(文本框宽度 * 2 + 5, 22)
                     if 行2选项[j][0] != -1: 
                         templist[n].addItem('无') 
+                        templist[n].setPlaceholderText("增伤词条选择")
+                        templist[n].currentIndexChanged.connect(lambda state, index = templist[n]:self.细节增伤选项颜色更新(index))
                         for s_id in 行2选项[j]:
                             templist[n].addItem(细节选项列表[s_id].描述)
                 elif i == "技能":
@@ -2108,7 +2110,7 @@ class 角色窗口(窗口):
                         templist[n].setStyleSheet(文本框样式白)
                     templist[n].resize(文本框宽度, 22)
                     templist[n].setAlignment(Qt.AlignCenter)
-                templist[n].move(245 + (len(列名称1) + 1) * 文本框宽度 + m * (文本框宽度 + 5), 文本框间隔 + 30 + n * 30)
+                templist[n].move(245 + (len(列名称1) + 1) * 文本框宽度 + m * (文本框宽度 + 5), 文本框间隔 + 30 + n * 30+2)
             if i in ["选项", "技能"]:
                 self.细节选项输入.append(templist)
                 m += 1
@@ -2159,6 +2161,14 @@ class 角色窗口(窗口):
         self.计算按钮3.move(990, 610)
         self.计算按钮3.resize(100, 30)
         self.计算按钮3.setStyleSheet(按钮样式)
+    
+    def 细节增伤选项颜色更新(self,index):
+        if index.currentIndex() <= 0:
+            index.setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(197,34,70,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(225,5,65,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+        else:
+            index.setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+        pass
+
         
     def 界面5(self):
         #第五个布局
