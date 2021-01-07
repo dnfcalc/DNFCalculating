@@ -857,78 +857,78 @@ class 角色属性(属性):
         词条属性列表[最小词条].加成属性(self, 词条数值[最小词条])
         return 最小词条
 
-    def 自适应计算(self):
-        是否择优 = self.词条是否择优()
-        self.择优拷贝.计算自适应 = 0
-        self.择优拷贝.伤害计算(0)
-        # self.择优拷贝.是否择优 = 是否择优
-        # -=self.择优拷贝.黑鸦词条扣除()
-        A = deepcopy(self.择优拷贝)
-        A.是否择优 = deepcopy(是否择优)
-        # A.装备词条计算()
-        # A 常规词条择优
-        A.择优词条 = [
-            [round(self.变换词条[0][3]/100,2)]*6,
-            [round(self.变换词条[1][3]/100,2)]*6,
-            [round(self.变换词条[2][3]/100,2)]*6,
-            [round(self.变换词条[3][3]/100,2)]*6,
-            [0.1]*6,
-            [0.05]*6,
-            [0.07,0,0.07,0.08,0,0,0],
-            [0,0.05,0.05,0,0.05,0,0]
-        ]
-        A.自适应Sub()
-        self.择优结果 = A.择优结果
-        self.词条提升率 = A.词条提升率
-        # 伤害 = A.伤害计算(0)
-        # print(A.择优结果)
-        # print(A.伤害计算(0))
-        # B 非常规词条择优
-        # B.装备词条计算()
-        if 是否择优[0] !=0:
-            B = deepcopy(self.择优拷贝)
-            B.是否择优 = deepcopy(是否择优)
-            B.择优词条 =  [
-                [round(0.16,2)]*6,
-                [round(self.变换词条[1][3]/100,2)]*6,
-                [round(self.变换词条[2][3]/100,2)]*6,
-                [round(self.变换词条[3][3]/100,2)]*6,
-                [0.1]*6,
-                [0.05]*6,
-                [0.07,0,0.07,0.08,0,0,0],
-                [0,0.05,0.05,0,0.05,0,0]
-            ] 
-            B.技能等级加成('所有',50,50,2)
-            B.技能等级加成('所有',85,85,2)
-            B.技能等级加成('所有',100,100,2)
-            B.自适应Sub()
-            if B.伤害计算(0) > A.伤害计算(0):
-                self.择优结果 = B.择优结果
-                self.词条提升率 = B.词条提升率
-        # print(self.择优结果)
-        if self.择优结果[0][1] == 0.16:
-            self.技能等级加成('所有',50,50,2)
-            self.技能等级加成('所有',85,85,2)
-            self.技能等级加成('所有',100,100,2)
-        for i in range(len(self.择优结果)):
-            词条属性列表[self.择优结果[i][0]].加成属性(self,self.择优结果[i][1])
-            if i < 4:
-                self.黑鸦词条[i].append("")
-                if self.择优结果[i][1]!=0:
-                    self.黑鸦词条[i][4] = ("觉醒Lv+2 " if i ==0 and self.择优结果[i][1] == 0.16 else '')+黑鸦武器属性列表[self.择优结果[i][0]].描述 +'+' +str(round(self.择优结果[i][1]*100))+'%'
-            if i == 4:
-                if 是否择优[i]==0:
-                    self.词条提升率 = [0] * 6
-                else:
-                    self.词条选择.clear()
-                    self.词条选择.append(self.择优结果[i][0])
-            if i==5:
-                if 是否择优[i]!=0:
-                    self.词条选择.append(self.择优结果[i][0])
-            if i==6:
-                self.自适应描述[0] = '{}%{}'.format(int(self.择优结果[i][1] * 100), 词条属性列表[self.择优结果[i][0]].描述)
-            if i==7:
-                self.自适应描述[1] = '{}%{}'.format(int(self.择优结果[i][1] * 100), 词条属性列表[self.择优结果[i][0]].描述)
+    # def 自适应计算(self):
+    #     是否择优 = self.词条是否择优()
+    #     self.择优拷贝.计算自适应 = 0
+    #     self.择优拷贝.伤害计算(0)
+    #     # self.择优拷贝.是否择优 = 是否择优
+    #     # -=self.择优拷贝.黑鸦词条扣除()
+    #     A = deepcopy(self.择优拷贝)
+    #     A.是否择优 = deepcopy(是否择优)
+    #     # A.装备词条计算()
+    #     # A 常规词条择优
+    #     A.择优词条 = [
+    #         [round(self.变换词条[0][3]/100,2)]*6,
+    #         [round(self.变换词条[1][3]/100,2)]*6,
+    #         [round(self.变换词条[2][3]/100,2)]*6,
+    #         [round(self.变换词条[3][3]/100,2)]*6,
+    #         [0.1]*6,
+    #         [0.05]*6,
+    #         [0.07,0,0.07,0.08,0,0,0],
+    #         [0,0.05,0.05,0,0.05,0,0]
+    #     ]
+    #     A.自适应Sub()
+    #     self.择优结果 = A.择优结果
+    #     self.词条提升率 = A.词条提升率
+    #     # 伤害 = A.伤害计算(0)
+    #     # print(A.择优结果)
+    #     # print(A.伤害计算(0))
+    #     # B 非常规词条择优
+    #     # B.装备词条计算()
+    #     if 是否择优[0] !=0:
+    #         B = deepcopy(self.择优拷贝)
+    #         B.是否择优 = deepcopy(是否择优)
+    #         B.择优词条 =  [
+    #             [round(0.16,2)]*6,
+    #             [round(self.变换词条[1][3]/100,2)]*6,
+    #             [round(self.变换词条[2][3]/100,2)]*6,
+    #             [round(self.变换词条[3][3]/100,2)]*6,
+    #             [0.1]*6,
+    #             [0.05]*6,
+    #             [0.07,0,0.07,0.08,0,0,0],
+    #             [0,0.05,0.05,0,0.05,0,0]
+    #         ] 
+    #         B.技能等级加成('所有',50,50,2)
+    #         B.技能等级加成('所有',85,85,2)
+    #         B.技能等级加成('所有',100,100,2)
+    #         B.自适应Sub()
+    #         if B.伤害计算(0) > A.伤害计算(0):
+    #             self.择优结果 = B.择优结果
+    #             self.词条提升率 = B.词条提升率
+    #     # print(self.择优结果)
+    #     if self.择优结果[0][1] == 0.16:
+    #         self.技能等级加成('所有',50,50,2)
+    #         self.技能等级加成('所有',85,85,2)
+    #         self.技能等级加成('所有',100,100,2)
+    #     for i in range(len(self.择优结果)):
+    #         词条属性列表[self.择优结果[i][0]].加成属性(self,self.择优结果[i][1])
+    #         if i < 4:
+    #             self.黑鸦词条[i].append("")
+    #             if self.择优结果[i][1]!=0:
+    #                 self.黑鸦词条[i][4] = ("觉醒Lv+2 " if i ==0 and self.择优结果[i][1] == 0.16 else '')+黑鸦武器属性列表[self.择优结果[i][0]].描述 +'+' +str(round(self.择优结果[i][1]*100))+'%'
+    #         if i == 4:
+    #             if 是否择优[i]==0:
+    #                 self.词条提升率 = [0] * 6
+    #             else:
+    #                 self.词条选择.clear()
+    #                 self.词条选择.append(self.择优结果[i][0])
+    #         if i==5:
+    #             if 是否择优[i]!=0:
+    #                 self.词条选择.append(self.择优结果[i][0])
+    #         if i==6:
+    #             self.自适应描述[0] = '{}%{}'.format(int(self.择优结果[i][1] * 100), 词条属性列表[self.择优结果[i][0]].描述)
+    #         if i==7:
+    #             self.自适应描述[1] = '{}%{}'.format(int(self.择优结果[i][1] * 100), 词条属性列表[self.择优结果[i][0]].描述)
         # for item in self.择优结果:
         #     if item[1] !=0:
         #         词条属性列表[item[0]].加成属性(self,item[1])
@@ -938,6 +938,52 @@ class 角色属性(属性):
         # 序号,洗的最大值,可洗词条数
         # print(self.变换词条)
 
+    def 自适应计算(self):
+        if self.黑鸦武器择优模式 == 0:
+            self.择优词条 = [
+            [round(self.变换词条[0][3]/100,2)]*6,
+            [round(self.变换词条[1][3]/100,2)]*6,
+            [round(self.变换词条[2][3]/100,2)]*6,
+            [round(self.变换词条[3][3]/100,2)]*6,
+            [0.1]*6,
+            [0.05]*6,
+            [0.07,0,0.07,0.08,0,0,0],
+            [0,0.05,0.05,0,0.05,0,0]
+            ]
+        else:
+            self.择优词条 = [
+            [round(0.16,2)]*6,
+            [round(self.变换词条[1][3]/100,2)]*6,
+            [round(self.变换词条[2][3]/100,2)]*6,
+            [round(self.变换词条[3][3]/100,2)]*6,
+            [0.1]*6,
+            [0.05]*6,
+            [0.07,0,0.07,0.08,0,0,0],
+            [0,0.05,0.05,0,0.05,0,0]
+            ]
+        # self.是否择优 = self.词条是否择优()
+        # print(self.是否择优)
+        self.自适应Sub()
+        for i in range(len(self.择优结果)):
+            # 词条属性列表[self.择优结果[i][0]].加成属性(self,self.择优结果[i][1])
+            if i < 4:
+                self.黑鸦词条[i].append("")
+                if self.择优结果[i][1]!=0:
+                    self.黑鸦词条[i][4] = ("觉醒Lv+2 " if i ==0 and self.择优结果[i][1] == 0.16 else '')+黑鸦武器属性列表[self.择优结果[i][0]].描述 +'+' +str(round(self.择优结果[i][1]*100))+'%'
+            if i == 4:
+                if self.是否择优[i]==0:
+                    self.词条提升率 = [0] * 6
+                else:
+                    self.词条选择.clear()
+                    self.词条选择.append(self.择优结果[i][0])
+            if i==5:
+                if self.是否择优[i]!=0:
+                    self.词条选择.append(self.择优结果[i][0])
+            if i==6:
+                self.自适应描述[0] = '{}%{}'.format(int(self.择优结果[i][1] * 100), 词条属性列表[self.择优结果[i][0]].描述)
+            if i==7:
+                self.自适应描述[1] = '{}%{}'.format(int(self.择优结果[i][1] * 100), 词条属性列表[self.择优结果[i][0]].描述)
+        
 
 
     def 自适应Sub(self):
@@ -959,7 +1005,7 @@ class 角色属性(属性):
                 if 词条数值[i] != 0:
                     计算范围.append(i)
             self.择优范围.append(计算范围)       
-        # self.是否择优 =  self.词条是否择优()
+        self.是否择优 =  self.词条是否择优()
         self.择优结果 = [[0,0]]*len(self.择优词条)
         贪心排序 = []
         自由择优 = []
@@ -1022,13 +1068,13 @@ class 角色属性(属性):
                     if 下限提升最高 >= max([上下限[i][1] for i in range(len(上下限))]):
                         self.是否择优[temp-1] = 0
                         词条属性列表[index].加成属性(self,词条数值[index])
-                        条件择优结果.append('{}%{}'.format(int(词条数值[index] * 100), 词条属性列表[index].描述))
+                        # 条件择优结果.append('{}%{}'.format(int(词条数值[index] * 100), 词条属性列表[index].描述))
                         self.择优极限 = [round(self.择优极限[i]-词条数值[i],3) for i in range(6)]
                         self.择优结果[temp-1]=[index,词条数值[index]]
-                    else:
-                        条件择优结果.append('')
-                else:
-                    条件择优结果.append('')
+                    # else:
+                    #     条件择优结果.append('')
+                # else:
+                #     条件择优结果.append('')
             # for i in range(len(条件择优)):
             #     if 条件择优结果[i]!='':
             #         self.自适应描述[i]= 条件择优结果[i]
@@ -1218,9 +1264,9 @@ class 角色属性(属性):
                 return C
         else:
             self.技能切装 = [0] * len(self.技能栏)
-            if self.计算自适应 == 1:
-                self.择优拷贝 = deepcopy(self)
-                self.择优拷贝.计算自适应 = 0
+            # if self.计算自适应 == 1:
+            #     self.择优拷贝 = deepcopy(self)
+            #     self.择优拷贝.计算自适应 = 0
             return self.数据计算(x)
             
     def 预处理(self):
@@ -1358,6 +1404,7 @@ class 角色属性(属性):
             self.技能攻击力加成(0.10)
 
     def 黑鸦词条扣除(self):
+        print(self.黑鸦武器择优模式)
         for i in range(4):
             self.黑鸦词条[i].append("")
             if self.黑鸦词条[i][0]!=0 and self.变换词条[i][1] != 0:
@@ -1375,7 +1422,10 @@ class 角色属性(属性):
                     temp = [self.黑鸦词条[i][1],self.黑鸦词条[i][2],0,0]
                     self.黑鸦词条变更(temp,1)
                     self.黑鸦词条[i][4] += 黑鸦武器属性列表[temp[0]].描述 +'+'+ str(self.黑鸦词条[i][2])+ '%'
-
+        if self.黑鸦词条[0][0] == 1 and self.黑鸦武器择优模式 == 1:
+            self.技能等级加成('所有',50,50,2) 
+            self.技能等级加成('所有',85,85,2)
+            self.技能等级加成('所有',100,100,2)  
     def 装备属性计算(self):
         self.装备基础()
         self.装备词条计算()
@@ -2465,9 +2515,18 @@ class 角色窗口(窗口):
             self.黑鸦词条.append(tem)
             self.黑鸦词条更新(i)
             # tem[1].currentIndexChanged.connect(lambda state: self.希洛克武器词条更新())
+
+        self.武器择优模式=MyQComboBox(self.main_frame6)
+        self.武器择优模式.addItems(['武器默认择优词条', '武器默认择优觉醒'])
+        self.武器择优模式.resize(150,20)
+        self.武器择优模式.move(横坐标,纵坐标-20+25*(4+15))
+        # self.武器择优模式.setStyleSheet(复选框样式)
+        # self.武器择优模式.setChecked(False)      
+
         self.智慧产物升级=QCheckBox(' 智慧产物升级',self.main_frame6)
-        self.智慧产物升级.resize(118,20)
-        self.智慧产物升级.move(横坐标 + 181,纵坐标+ 288)
+        
+        self.智慧产物升级.resize(140,20)
+        self.智慧产物升级.move(横坐标 + 161,纵坐标-20+25*(4+15))
         self.智慧产物升级.setStyleSheet(复选框样式)
         self.智慧产物升级.setChecked(False)      
         self.智慧产物升级.stateChanged.connect(lambda: self.智慧产物升级洗词条(1 if self.智慧产物升级.isChecked() else 0))
@@ -4592,6 +4651,7 @@ class 角色窗口(窗口):
         属性.太极天帝剑 = self.装备条件选择[11].currentIndex()
         属性.绿色生命的面容 = self.装备条件选择[12].currentIndex()
         属性.产物升级 = 1 if self.智慧产物升级.isChecked() else 0
+        属性.黑鸦武器择优模式 = self.武器择优模式.currentIndex()
         属性.黑鸦词条 = []
         for i in range(4):
             temp = [
