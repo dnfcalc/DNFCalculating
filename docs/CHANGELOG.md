@@ -1,5 +1,41 @@
 ## Newest
 
+### 2021-01-07
+
+#### NewFeatures
+*  新增macOS下程序启动脚本 ([4c182d](https://github.com/wxh0402/DNFCalculating/commit/4c182d87572c6dcc7e5f2464c80fb18a39fdf422))
+* 下版本开始支持杀老进程及自动删除旧版本exe ([7701ef](https://github.com/wxh0402/DNFCalculating/commit/7701ef5e0258ee7a4d9ee895275c023d8e2e2d62))
+* 修复部分用户无法打开进程残留的情况，添加检查更新报错提示 ([8e685c](https://github.com/wxh0402/DNFCalculating/commit/8e685cd4b637230a3dd18a9901de7fb69b3009c7))
+* 同步女枪三觉背景 ([a559ae](https://github.com/wxh0402/DNFCalculating/commit/a559ae97d66f34588998e8340077ca75ba3a8a5d))
+* 同步游戏辟邪玉对宠物伤害词条的加成算法：辟邪玉目前不加成宠物的增伤词条（涉及百分比力智、附加伤害、最终伤害），后续试游戏修复情况修改 ([548bee](https://github.com/wxh0402/DNFCalculating/commit/548bee9365d389cdc5c5e723124b2c0c4670151e))
+* 同步韩服正式服增幅系数调整 ([c88636](https://github.com/wxh0402/DNFCalculating/commit/c88636c735e38d60653ad101653b419d8a7c3cc3))
+* 同步韩服正式服武器黑鸦洗属性的调整 ([1027f4](https://github.com/wxh0402/DNFCalculating/commit/1027f4eae70674c413eae1a654d2cc67e2dedaa9))
+* 同步韩服正式服装备属性改版 ([8301a6](https://github.com/wxh0402/DNFCalculating/commit/8301a65f13e23230c6c40ac270d1a560a5808591))
+* 新增2021春节礼包相关内容 ([1de062](https://github.com/wxh0402/DNFCalculating/commit/1de062b7a551b3004f54862d2ac6b931c311dc4b))
+* 窗口添加装备版本、增幅版本显示 ([ca1d13](https://github.com/wxh0402/DNFCalculating/commit/ca1d13ea29769d531d8ce59e17d357c5cad0c89a))
+* 缔造者：添加觉醒及精算模式 ([2ac228](https://github.com/wxh0402/DNFCalculating/commit/2ac22844306cae44dff5372e4f4a0cfffeb41883))
+* 输出系：择优贪心算法调整，对宠物装备词条进行相关算法调整 ([b16e36](https://github.com/wxh0402/DNFCalculating/commit/b16e362fade45950ea0eefb136f1c21660ba5e5f))
+* 输出系：新增黑鸦智慧产物升级相关功能 ([5697e1](https://github.com/wxh0402/DNFCalculating/commit/5697e103b828c48d9dc34858fb656354241a8c07))
+* 输出系：新增黑鸦相关功能，光环、宠物装备、残香、黑鸦择优目前没有其他好的算法，采用由大到小的贪心算法，词条数值高的优先择优，词条数值相同优先可选范围少的择优 ([7d692c](https://github.com/wxh0402/DNFCalculating/commit/7d692cf75921177d165586d220253d857674c979))
+* 输出系：黑鸦武器添加择优选项 ([673c18](https://github.com/wxh0402/DNFCalculating/commit/673c1808e3c5133c27d3084b43388edffc56f03b))
+
+#### BugFixes
+* 修复奶系无法打开的问题 ([6c7682](https://github.com/wxh0402/DNFCalculating/commit/6c7682024b4ed9e2cf7313a0d3aeae5a726be97a))
+* 修正飘零之花武器武器系列当前国服版本属性错误 ([952d70](https://github.com/wxh0402/DNFCalculating/commit/952d703d7d802deca9aa8c84af1b94a8e99fd7d2))
+* 奶系：修复排行与详情不符的情况 ([c58242](https://github.com/wxh0402/DNFCalculating/commit/c58242f8baf624c9bc62451929c6179115ec66cc))
+* 知源·召唤师：修正鞭挞CD ([04c41c](https://github.com/wxh0402/DNFCalculating/commit/04c41c5b8445770f6cc91da3cc0bc2a5c4b7f83e))
+* 知源·战斗法师：修正炫纹强压护石加成 ([1fc144](https://github.com/wxh0402/DNFCalculating/commit/1fc144b0e3be43512d966f1be1feb3ae2a514fe3))
+* 知源·战斗法：修正炫纹强压CD错误 ([c3b367](https://github.com/wxh0402/DNFCalculating/commit/c3b367dbcd7622a7088a453bb0d1f8db5ebe391a))
+* 神启·蓝拳圣使：修正意念驱动对装备图腾时的冷却缩减 ([a64ffa](https://github.com/wxh0402/DNFCalculating/commit/a64ffa984b873ae2cd9da6e155c9fe3b1b05a616))
+* 绯红玫瑰、重霄·漫游枪手：修正双鹰回旋圣痕加成倍率 ([95fcff](https://github.com/wxh0402/DNFCalculating/commit/95fcff5ccab2e2d056804f54306e5e59d9419b99))
+* 隐夜·刺客：修正一叶障目不加成死亡风暴的问题 ([2a4fa6](https://github.com/wxh0402/DNFCalculating/commit/2a4fa643605d76ce47b3af5b090e80d5c6898c5b))
+* 隐夜·刺客：修正旋刃伤害偏低的问题 ([4b5861](https://github.com/wxh0402/DNFCalculating/commit/4b5861ef03928d8a2ae43e883e8684630f416257))
+* 风神、知源·逐风者：修正棍棒精通冷却缩减遗漏的问题 ([eece44](https://github.com/wxh0402/DNFCalculating/commit/eece44cd581b7d2ff9dc3c93dd5a8bb6a0fef56a))
+* 黑暗武士：修正无法计算的问题 ([81e999](https://github.com/wxh0402/DNFCalculating/commit/81e9991b33b9e4d39362bc182ec1554411ed06aa))
+
+
+## History
+
 ### 2020-12-31
 
 #### NewFeatures
@@ -150,8 +186,6 @@
 
 
 
-
-## History
 
 ### 2020-11-30
 
