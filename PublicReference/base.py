@@ -1404,7 +1404,7 @@ class 角色属性(属性):
             self.技能攻击力加成(0.10)
 
     def 黑鸦词条扣除(self):
-        print(self.黑鸦武器择优模式)
+        # print(self.黑鸦武器择优模式)
         for i in range(4):
             self.黑鸦词条[i].append("")
             if self.黑鸦词条[i][0]!=0 and self.变换词条[i][1] != 0:
