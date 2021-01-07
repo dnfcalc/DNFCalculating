@@ -154,7 +154,7 @@ class 技能8(主动技能):
     CD = 8.0
 
     def 等效百分比(self, 武器类型):
-        return ((self.数据[self.等级] * 3 + self.数据1[self.等级] * 3 +self.数据2[self.等级] * 3) * self.攻击次数 + self.数据3[self.等级] * self.攻击次数2) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.161
+        return ((self.数据[self.等级] * 3 + self.数据1[self.等级] * 3 +self.数据2[self.等级] * 3) * self.攻击次数 + self.数据3[self.等级] * 3 * self.攻击次数2) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.161
 
 class 技能9(主动技能):
     名称 = '剑刃风暴'
