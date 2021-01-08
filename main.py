@@ -62,6 +62,10 @@ class 选择窗口(QMainWindow):
             lzy = LanZouCloud()
             fileURL = ''
             folder_info = lzy.get_folder_info_by_url('https://pan.lanzous.com/b01bfj76f')
+            if folder_info.code != LanZouCloud.SUCCESS:
+                self.网盘链接 =  ''
+                self.网盘报错 = 1
+                return
             # resp = urllib.request.urlopen('http://dnf.17173.com/jsq/instructions.html?j')
             for file in folder_info.files:
                 if file.name.startswith("DNF计算器"):
@@ -215,6 +219,9 @@ class 选择窗口(QMainWindow):
 
         if self.自动检查版本:
             self.网盘检查()
+            if self.网盘报错 == 1:
+                box = QMessageBox(QMessageBox.Question, "提示", "检查计算器版本有误,无法自动更新<br>请参考使用说明->开始使用->常见问题修改DNS")  
+                box.exec_()            
             if self.网盘链接 != '':
                 m_red_SheetStyle = "padding-left:3px;min-width: 25px; min-height: 16px;border-radius: 5px; background:red;color:white"
                 label = QLabel("New", self.topFiller)
@@ -333,7 +340,7 @@ class 选择窗口(QMainWindow):
     def 检查更新(self):
         self.网盘检查()
         if self.网盘报错 == 1:
-            box = QMessageBox(QMessageBox.Question, "提示", "检查计算器版本有误，请参考使用说明-开始使用-常见问题修改DNS")  
+            box = QMessageBox(QMessageBox.Question, "提示", "检查计算器版本有误,无法解析网盘地址<br>请参考使用说明->开始使用->常见问题修改DNS")  
             box.exec_()
         elif self.网盘链接 == '':
             box = QMessageBox(QMessageBox.Question, "提示", "已经是最新版本计算器！")  
