@@ -833,9 +833,13 @@ class 窗口(QWidget):
             self.图片列表[index].start()
         except:
             pass
-        
-        if self.当前页面 == 4 and self.计算标识 == 1:
-            self.自选计算(1)
+
+        if self.初始属性.职业分类 == '输出':
+            if self.当前页面 == 5 and self.计算标识 == 1:
+                self.自选计算(1)
+        else:     
+            if self.当前页面 == 4 and self.计算标识 == 1:
+                self.自选计算(1)
 
     def 自选套装更改(self, index):
         self.计算标识 = 0
