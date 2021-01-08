@@ -218,15 +218,18 @@ class 选择窗口(QMainWindow):
         butten.resize(121,90)
 
         if self.自动检查版本:
-            self.网盘检查()
-            if self.网盘报错 == 1:
-                box = QMessageBox(QMessageBox.Question, "提示", "检查计算器版本有误,无法自动更新<br>请参考使用说明->开始使用->常见问题修改DNS")  
-                box.exec_()            
-            if self.网盘链接 != '':
-                m_red_SheetStyle = "padding-left:3px;min-width: 25px; min-height: 16px;border-radius: 5px; background:red;color:white"
-                label = QLabel("New", self.topFiller)
-                label.move(115 + 4 * 125 + 90, 30 + (count + 1) * 100)
-                label.setStyleSheet(m_red_SheetStyle)
+            try:
+                self.网盘检查()
+                if self.网盘报错 == 1:
+                    self.报错提示 = QMessageBox(QMessageBox.Question, "提示", "无法自动检查更新，请在每周三/四自行前往检查版本")  
+                    # box.exec_()            
+                if self.网盘链接 != '':
+                    m_red_SheetStyle = "padding-left:3px;min-width: 25px; min-height: 16px;border-radius: 5px; background:red;color:white"
+                    label = QLabel("New", self.topFiller)
+                    label.move(115 + 4 * 125 + 90, 30 + (count + 1) * 100)
+                    label.setStyleSheet(m_red_SheetStyle)
+            except Exception as error:
+                pass
         count += 1
 
         butten=QtWidgets.QPushButton('问题反馈', self.topFiller)
@@ -340,7 +343,7 @@ class 选择窗口(QMainWindow):
     def 检查更新(self):
         self.网盘检查()
         if self.网盘报错 == 1:
-            box = QMessageBox(QMessageBox.Question, "提示", "检查计算器版本有误,无法解析网盘地址<br>请参考使用说明->开始使用->常见问题修改DNS")  
+            box = QMessageBox(QMessageBox.Question, "提示", "无法自动检查更新，请手动前往官网下载")  
             box.exec_()
         elif self.网盘链接 == '':
             box = QMessageBox(QMessageBox.Question, "提示", "已经是最新版本计算器！")  
@@ -428,6 +431,10 @@ if __name__ == '__main__':
     app = QApplication([])
     instance = 选择窗口()
     instance.show()
+    try:
+        instance.报错提示.exec()
+    except Exception as error:
+        pass    
     try:
         with open("ResourceFiles/Config/release_version.json", "r+") as fp:
             versionInfo = json.load(fp)
