@@ -703,6 +703,24 @@ class 窗口(QWidget):
             return
         if index >= 100:
             序号 = int(index / 100 - 1)
+            # 守门人全属强方案
+            if 序号 == 3:
+                if self.初始属性.职业分类 == '输出':
+                    if self.角色属性A.职业 not in ('冰结师' , '鬼泣' , '死灵术士' , '气功师' , '忍者' , '暗枪士'):
+                        number = self.希洛克选择状态[9] + self.希洛克选择状态[10] + self.希洛克选择状态[11]
+                        if number != 3:
+                            self.守门人属强.setCurrentIndex(3)
+                            self.守门人全属强.setEnabled(True)
+                            self.守门人全属强.setChecked(True)
+                            self.守门人全属强.setStyleSheet(复选框样式)
+                        else:
+                            self.守门人全属强.setEnabled(False)
+                            self.守门人全属强.setChecked(False)
+                            self.守门人全属强.setStyleSheet(不可勾选复选框样式)
+            else:
+                self.守门人全属强.setEnabled(False)
+                self.守门人全属强.setChecked(False)
+                self.守门人全属强.setStyleSheet(不可勾选复选框样式)
             count = 0
             for i in range(序号 * 3, 序号 * 3 + 3):
                 count += self.希洛克选择状态[i]
@@ -719,6 +737,18 @@ class 窗口(QWidget):
                     self.希洛克遮罩透明度[i].setOpacity(0.5)
                     self.希洛克选择状态[i] = 0
         else:
+            if self.初始属性.职业分类 == '输出':
+                if self.角色属性A.职业 not in ('冰结师' , '鬼泣' , '死灵术士' , '气功师' , '忍者' , '暗枪士'):
+                    number = self.希洛克选择状态[9] + self.希洛克选择状态[10] + self.希洛克选择状态[11]
+                    if number == 2 and self.希洛克选择状态[index] == 0 and index in [9,10,11]:
+                        self.守门人属强.setCurrentIndex(3)
+                        self.守门人全属强.setEnabled(True)
+                        self.守门人全属强.setChecked(True)
+                        self.守门人全属强.setStyleSheet(复选框样式)
+                    else:
+                        self.守门人全属强.setEnabled(False)
+                        self.守门人全属强.setChecked(False)
+                        self.守门人全属强.setStyleSheet(不可勾选复选框样式)
             if self.希洛克选择状态[index] == 0:
                 for i in range(5):
                     序号 = i * 3 + index % 3
@@ -833,7 +863,7 @@ class 窗口(QWidget):
             self.图片列表[index].start()
         except:
             pass
-
+        
         if self.初始属性.职业分类 == '输出':
             if self.当前页面 == 5 and self.计算标识 == 1:
                 self.自选计算(1)

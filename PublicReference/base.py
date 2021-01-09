@@ -2161,7 +2161,7 @@ class 角色窗口(窗口):
         self.计算按钮3.move(990, 610)
         self.计算按钮3.resize(100, 30)
         self.计算按钮3.setStyleSheet(按钮样式)
-    
+        
     def 细节增伤选项颜色更新(self,index):
         if index.currentIndex() <= 0:
             index.setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(197,34,70,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(225,5,65,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
@@ -2531,10 +2531,22 @@ class 角色窗口(窗口):
         self.武器择优模式.resize(150,20)
         self.武器择优模式.move(横坐标,纵坐标-20+25*(4+15))
         # self.武器择优模式.setStyleSheet(复选框样式)
-        # self.武器择优模式.setChecked(False)      
+        # self.武器择优模式.setChecked(False)
+
+        self.守门人全属强 = QCheckBox('  守门人全属强\n  自动补正', self.main_frame6)
+        self.守门人全属强.resize(120, 30)
+        self.守门人全属强.move(横坐标 + 181, 纵坐标 + 291)
+        self.守门人全属强.setStyleSheet(复选框样式)
+        self.守门人全属强.setChecked(False)
+        self.守门人全属强.setEnabled(False)
+        self.守门人全属强.setStyleSheet(不可勾选复选框样式)
+        self.守门人全属强.setToolTip('<font size="3" face="宋体">计算时自动替换细节页的附魔勋章为全属强方案<br>'
+                                                              '自带单属强职业不可使用<br>'
+                                                              '守门人属强：全属强+30*3<br>'
+                                                              '武器：全属强+10（若原附魔为（小）龙珠时不替换）<br>首饰：全属强+25*3<br>'
+                                                              '辅助装备：全属强+12<br>魔法石：全属强+20<br>勋章：全属强+7<br>宠物附魔：三攻+60</font>')
 
         self.智慧产物升级=QCheckBox(' 智慧产物升级',self.main_frame6)
-        
         self.智慧产物升级.resize(140,20)
         self.智慧产物升级.move(横坐标 + 161,纵坐标-20+25*(4+15))
         self.智慧产物升级.setStyleSheet(复选框样式)
@@ -2585,6 +2597,7 @@ class 角色窗口(窗口):
         self.守门人属强.resize(120,20)
         self.守门人属强.setCurrentIndex(3)
         self.守门人属强.move(横坐标-139, 纵坐标 + 93 + 3 + count * 32)
+        self.守门人属强.activated.connect(lambda state, index=序号: self.守门人属强选项(index))
     
         self.希洛克武器词条 = []
         count += 1
@@ -2664,7 +2677,19 @@ class 角色窗口(窗口):
             b.setStyleSheet(不可选择下拉框样式)
         else:
             b.setEnabled(True)
-            b.setStyleSheet(下拉框样式)            
+            b.setStyleSheet(下拉框样式)
+
+    def 守门人属强选项(self,x):
+        if self.守门人属强.currentIndex() != 3:
+            self.守门人全属强.setEnabled(False)
+            self.守门人全属强.setChecked(False)
+            self.守门人全属强.setStyleSheet(不可勾选复选框样式)
+        else:
+            number = self.希洛克选择状态[9] + self.希洛克选择状态[10] + self.希洛克选择状态[11]
+            if number == 3:
+                self.守门人全属强.setEnabled(True)
+                self.守门人全属强.setChecked(True)
+                self.守门人全属强.setStyleSheet(复选框样式)
 
     def 希洛克武器词条更新(self):
         if self.希洛克武器词条[0].currentIndex() != 2:
@@ -2686,7 +2711,7 @@ class 角色窗口(窗口):
                 self.黑鸦词条[index][i].setEnabled(True)
                 self.黑鸦词条[index][i].setStyleSheet(下拉框样式)
 
-    # def 黑鸦武器词条更新(self):
+        # def 黑鸦武器词条更新(self):
     #     if self.黑鸦词条[0][1].currentIndex() == 6 :
     #         self.黑鸦词条[0][2].clear()
     #         self.黑鸦词条[0][2].addItem("+ 1")
@@ -2920,7 +2945,12 @@ class 角色窗口(窗口):
                 if setfile[num].replace('\n', '') == '1':
                     self.希洛克选择(i)
                 num += 1
-            self.守门人属强.setCurrentIndex(int(setfile[num].replace('\n', '')));num += 1
+            self.守门人属强.setCurrentIndex(int(setfile[num].replace('\n', '')))
+            if self.守门人属强.currentIndex() != 3:
+                self.守门人全属强.setEnabled(False)
+                self.守门人全属强.setChecked(False)
+                self.守门人全属强.setStyleSheet(不可勾选复选框样式)
+            num += 1
         except:
             pass
 
@@ -4487,11 +4517,11 @@ class 角色窗口(窗口):
 
         i = 3 #守门人属性2
         if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
-            属性.进图属强 += self.守门人属强.currentIndex() * 5 + 15 #下装
+            属性.进图属强 +=  int(属性.所有属性强化增加 * (self.守门人属强.currentIndex() * 5 + 15)) #下装
         if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
-            属性.进图属强 += self.守门人属强.currentIndex() * 5 + 15 #戒指
+            属性.进图属强 += int(属性.所有属性强化增加 * (self.守门人属强.currentIndex() * 5 + 15))  #戒指
         if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
-            属性.进图属强 += self.守门人属强.currentIndex() * 5 + 15 #辅助装备
+            属性.进图属强 += int(属性.所有属性强化增加 * (self.守门人属强.currentIndex() * 5 + 15))  #辅助装备
 
         i = 4 #洛多斯属性2
         if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
@@ -4786,3 +4816,51 @@ class 角色窗口(窗口):
                                 if j.currentText() == k.名称 + 'Lv+1':
                                     k.等级加成(1)
                                     break
+
+        #守门人全属强方案
+        if self.守门人全属强.isChecked():
+            if self.属性设置输入[0][14].text() != '' :
+                属性.力量 -= float(self.属性设置输入[0][14].text())
+            if self.属性设置输入[1][14].text() != '':
+                属性.智力 -= float(self.属性设置输入[1][14].text())
+            if self.属性设置输入[2][14].text() != '':
+                属性.物理攻击力 -= float(self.属性设置输入[2][14].text())
+            if self.属性设置输入[3][14].text() != '':
+                属性.魔法攻击力 -= float(self.属性设置输入[3][14].text())
+            if self.属性设置输入[4][14].text() != '':
+                属性.独立攻击力 -= float(self.属性设置输入[4][14].text())
+            if self.属性设置输入[5][7].text() != '':
+                属性.所有属性强化加成(-(float(self.属性设置输入[5][7].text())))
+            if self.属性设置输入[5][14].text() != '':
+                属性.所有属性强化加成(-(float(self.属性设置输入[5][14].text())))
+
+            for j in range(5,10):
+                if self.属性设置输入[6][j].text() != '':
+                    属性.力量 -= float(self.属性设置输入[6][j].text())
+                    属性.智力 -= float(self.属性设置输入[6][j].text())
+                if self.属性设置输入[7][j].text() != '':
+                    属性.物理攻击力 -= float(self.属性设置输入[7][j].text())
+                    属性.魔法攻击力 -= float(self.属性设置输入[7][j].text())
+                    属性.独立攻击力 -= float(self.属性设置输入[7][j].text())
+                if self.属性设置输入[8][j].text() != '':
+                    属性.所有属性强化加成(-(float(self.属性设置输入[8][j].text())))
+
+            属性.物理攻击力 += 60
+            属性.魔法攻击力 += 60
+            属性.独立攻击力 += 60
+            属性.所有属性强化加成(int(25*3+12+20+7))
+
+            #（小）龙珠时附魔不替换
+            if self.属性设置输入[7][11].text() == '' or self.属性设置输入[8][11].text() == '':
+                if self.属性设置输入[6][11].text() != '':
+                    属性.力量 -= float(self.属性设置输入[6][11].text())
+                    属性.智力 -= float(self.属性设置输入[6][11].text())
+                if self.属性设置输入[7][11].text() != '':
+                    属性.物理攻击力 -= float(self.属性设置输入[7][11].text())
+                    属性.魔法攻击力 -= float(self.属性设置输入[7][11].text())
+                    属性.独立攻击力 -= float(self.属性设置输入[7][11].text())
+                if self.属性设置输入[8][11].text() != '':
+                    属性.所有属性强化加成(-(float(self.属性设置输入[8][11].text())))
+                #武器全属强为12
+                属性.所有属性强化加成(int(12))
+
