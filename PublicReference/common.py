@@ -703,9 +703,9 @@ class 窗口(QWidget):
             return
         if index >= 100:
             序号 = int(index / 100 - 1)
+            if self.初始属性.职业分类 == '输出':
             # 守门人全属强方案
-            if 序号 == 3:
-                if self.初始属性.职业分类 == '输出':
+                if 序号 == 3:
                     if self.角色属性A.职业 not in ('冰结师' , '鬼泣' , '死灵术士' , '气功师' , '忍者' , '暗枪士'):
                         number = self.希洛克选择状态[9] + self.希洛克选择状态[10] + self.希洛克选择状态[11]
                         if number != 3:
@@ -717,10 +717,10 @@ class 窗口(QWidget):
                             self.守门人全属强.setEnabled(False)
                             self.守门人全属强.setChecked(False)
                             self.守门人全属强.setStyleSheet(不可勾选复选框样式)
-            else:
-                self.守门人全属强.setEnabled(False)
-                self.守门人全属强.setChecked(False)
-                self.守门人全属强.setStyleSheet(不可勾选复选框样式)
+                else:
+                    self.守门人全属强.setEnabled(False)
+                    self.守门人全属强.setChecked(False)
+                    self.守门人全属强.setStyleSheet(不可勾选复选框样式)
             count = 0
             for i in range(序号 * 3, 序号 * 3 + 3):
                 count += self.希洛克选择状态[i]
