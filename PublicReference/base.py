@@ -258,7 +258,7 @@ class 角色属性(属性):
 
     def 属性附加加成(self, x):
         if self.装备描述 == 1:
-            return '附加伤害 +{}%<br>'.format(round(x*100))
+            return '属性附加伤害 +{}%<br>'.format(round(x*100))
         else:
             self.属性附加 += self.属性附加伤害增加增幅 * x 
         return ''
