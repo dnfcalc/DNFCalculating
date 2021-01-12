@@ -105,7 +105,7 @@ class 知源·战斗法师技能5(主动技能):
     TP上限 = 5
     演出时间 = 1.1
     def 等效百分比(self, 武器类型):
-        return (self.数据0[self.等级]* self.攻击次数 + self.数据1[self.等级]* self.攻击次数2 + self.数据2[self.等级]* self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率    
+        return (self.数据0[self.等级]* self.攻击次数0 + self.数据1[self.等级]* self.攻击次数1 + self.数据2[self.等级]* self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率    
 
 class 知源·战斗法师技能6(主动技能):
     名称='炫纹爆弹'
@@ -127,7 +127,7 @@ class 知源·战斗法师技能6(主动技能):
     TP上限 = 5
     演出时间 = 0.6
     def 等效百分比(self, 武器类型):
-        return (self.数据0[self.等级]* self.攻击次数 + self.数据1[self.等级]* self.攻击次数2 + self.数据2[self.等级]* self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
+        return (self.数据0[self.等级]* self.攻击次数0 + self.数据1[self.等级]* self.攻击次数1 + self.数据2[self.等级]* self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 class 知源·战斗法师技能7(主动技能):
     名称='碎霸'
