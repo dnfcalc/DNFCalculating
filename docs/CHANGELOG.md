@@ -1,5 +1,27 @@
 ## Newest
 
+### 2021-01-13
+
+#### NewFeatures
+* 修正增幅改版公式 ([24950b](https://github.com/wxh0402/DNFCalculating/commit/24950b1e140f491676e801f51698f6d425afd02f))
+* 添加守门人全属强自动补正选项 ([a6b771](https://github.com/wxh0402/DNFCalculating/commit/a6b7715af1200aa8ce6c8cd2fc32a6fb61691e97))
+* 添加网盘无法解析时的弹窗提示 ([37f11e](https://github.com/wxh0402/DNFCalculating/commit/37f11e5196f89bdabf338555c3660f92b8723bd4))
+* 细节页面添加选项特殊提醒 ([7a1b2c](https://github.com/wxh0402/DNFCalculating/commit/7a1b2c030017631c921a568ba58d3c3c7fc72ed7))
+* 调整全职业默认春节宝珠附魔 ([e419f5](https://github.com/wxh0402/DNFCalculating/commit/e419f5ec6404addcacf4561c238e0bb883d2c34f))
+* 重霄·弹药专家·女：微调/CD算法 ([56cc51](https://github.com/wxh0402/DNFCalculating/commit/56cc51f857741497a59019c3c56b178543cdcca4))
+
+#### BugFixes
+* 修复奶系无法计算的情况 ([df38a1](https://github.com/wxh0402/DNFCalculating/commit/df38a1103c4a0ad9e0798eff823a31df02e48198))
+* 修正自选界面单件选择不计算的情况 ([29db0d](https://github.com/wxh0402/DNFCalculating/commit/29db0de57d52d024b01f3a7eed7e81fcfed7265e))
+* 宠物装备-红添加4%白字 ([24a263](https://github.com/wxh0402/DNFCalculating/commit/24a263ba3d22cc8e16b046fb9f065f904c10c0e1))
+* 巅峰狂徒：修改残香融合后武器图标显示错误 ([24fcc5](https://github.com/wxh0402/DNFCalculating/commit/24fcc5771166b37e1f6cb506da62da449b46c47d))
+* 归元·街霸·女：修正毒龙轰天雷护石CD错误 ([a8e8ba](https://github.com/wxh0402/DNFCalculating/commit/a8e8ba344a39cd88835556b3048304f54712f939))
+* 极诣·阿修罗：修正天雷·降魔杵护石加成错误 ([1482ba](https://github.com/wxh0402/DNFCalculating/commit/1482ba53709e590095887abfe306aecd745ca9ae))
+* 知源·战斗法师：修正双重锤击、炫纹爆弹数据错误 ([d0a7cf](https://github.com/wxh0402/DNFCalculating/commit/d0a7cf327314a5f3373ad123035bc44b2c163de1))
+* 绯红玫瑰、重霄·漫游枪手：修正双鹰护石攻击次数错误 ([e04bfc](https://github.com/wxh0402/DNFCalculating/commit/e04bfcfe2d1e2cead862a5019bde22b191c260d1))
+* 绯红玫瑰、重霄·漫游枪手：修正锁链截击hit数错误 ([66be43](https://github.com/wxh0402/DNFCalculating/commit/66be43c9a1e31beea50d48d1f3fc817a5efed141))
+* 黑暗武士：修正在特定情况下自选界面无法打开的情况 ([0264db](https://github.com/wxh0402/DNFCalculating/commit/0264db56ac99985a19bb07e0c748c1fa018288da))
+
 ### 2021-01-07
 
 #### NewFeatures
@@ -32,6 +54,7 @@
 * 隐夜·刺客：修正旋刃伤害偏低的问题 ([4b5861](https://github.com/wxh0402/DNFCalculating/commit/4b5861ef03928d8a2ae43e883e8684630f416257))
 * 风神、知源·逐风者：修正棍棒精通冷却缩减遗漏的问题 ([eece44](https://github.com/wxh0402/DNFCalculating/commit/eece44cd581b7d2ff9dc3c93dd5a8bb6a0fef56a))
 * 黑暗武士：修正无法计算的问题 ([81e999](https://github.com/wxh0402/DNFCalculating/commit/81e9991b33b9e4d39362bc182ec1554411ed06aa))
+
 
 
 ## History
