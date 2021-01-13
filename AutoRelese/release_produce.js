@@ -38,7 +38,7 @@
   commitsArray.forEach(commit => {
     if (commit.message.startsWith("new")||commit.message.startsWith("newfeature")) {
       features.push(
-        `* ${commit.message.replace(/\n/,"<br>\n").replace("new:", "").replace("newfeature:", "").replace("<br><br>","<br>")} ([${commit.sha.substring(
+        `* ${commit.message.replace(/\n/,"<br>\n").replace("new:", "").replace("new", "").replace("newfeature:", "").replace("<br><br>","<br>")} ([${commit.sha.substring(
           0,
           6
         )}](https://github.com/wxh0402/DNFCalculating/commit/${
@@ -48,7 +48,7 @@
     }
     if (commit.message.startsWith("bug")||commit.message.startsWith("bugfix")) {
       Bugfixes.push(
-        `* ${commit.message.replace(/\n/,"<br>\n").replace("bug:", "").replace("bugfix:", "").replace("<br><br>","<br>")} ([${commit.sha.substring(
+        `* ${commit.message.replace(/\n/,"<br>\n").replace("bug:", "").replace("bugfix:", "").replace("bugfix", "").replace("<br><br>","<br>")} ([${commit.sha.substring(
           0,
           6
         )}](https://github.com/wxh0402/DNFCalculating/commit/${
@@ -92,7 +92,7 @@
   // create a new commit
   child.execSync('git add .');
   child.execSync(`git commit -m "chore: Bump to  ${newVersion}"`);
-  // tag the commit
+  // // tag the commit
   child.execSync(`git tag -a -m "Tag for ${newVersion}" ${newVersion}`);
 
   child.execSync(`git push origin --tags`);
