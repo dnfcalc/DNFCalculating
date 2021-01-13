@@ -111,7 +111,6 @@ class 角色属性(属性):
     武器词条触发 = 0
     产物升级 = 0
 
-
     def 力智固定加成(self, x=0, y=0):
         if self.装备描述 == 1:
             return '力量、智力 +{}<br>'.format(x)
@@ -343,8 +342,9 @@ class 角色属性(属性):
                     else:
                         if i.是否主动 == 1:
                             i.等级加成(lv)
-            # if 可变 > 0:
-            #     self.变换词条[可变-1] = [6,2,14 + (2 if 可变 > 1 else 4), 14 + (9 if 可变 > 1 else 17)]
+            if 可变 > 0:
+                self.变换词条[可变-1] = [6,2,14 + (2 if 可变 > 1 else 4), 14 + (9 if 可变 > 1 else 17)]
+        
         return ''
 
     def 提升率计算(self, 总数据, x = 0):
@@ -681,6 +681,25 @@ class 角色窗口(窗口):
 
     def 界面1(self):
         super().界面1()
+        
+        #region 王座本源
+        counter4 = 0
+        counter5 = 15
+        self.图片 = QLabel(self.main_frame1)
+        self.图片.setMovie(self.装备图片[装备序号['王座本源']])
+        self.装备图片[装备序号['王座本源']].start()
+        self.图片.resize(28, 28)
+        self.图片.move(657 + 55 * counter4, 20 + counter5 * 32)
+        self.按钮 = QPushButton(self.main_frame1)
+        self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
+        self.按钮.resize(28, 28)
+        self.按钮.setToolTip(self.单件描述(装备列表[装备序号['王座本源']]))
+        self.遮罩透明度[装备序号['王座本源']].setOpacity(0.5)
+        self.按钮.setGraphicsEffect(self.遮罩透明度[装备序号['王座本源']])
+        self.按钮.clicked.connect(lambda state, index = 装备序号['王座本源']: self.装备图标点击事件(index, 10))
+        self.装备图片按钮[装备序号['王座本源']] = self.按钮
+        self.装备图片按钮[装备序号['王座本源']].move(657 + 55 * counter4, 20 + counter5 * 32)
+        #endregion
 
         for i in 称号列表:
             self.称号.addItem(i.名称)
@@ -2760,11 +2779,11 @@ class 角色窗口(窗口):
                         tempstr[i]+='<br>'
                     tempstr[i]+='<font color="#FF00FF">+'+str(属性.强化等级[i])+' 增幅: '
                     if '体力' in 属性.类型:
-                        tempstr[i]+='异次元体力 + '+str(增幅计算(100,装备.品质,属性.强化等级[i],属性.增幅版本))+'</font>'
+                        tempstr[i]+='异次元体力 + '+str(增幅计算(装备.等级,装备.品质,属性.强化等级[i],属性.增幅版本))+'</font>'
                     elif '精神' in 属性.类型:
-                        tempstr[i]+='异次元精神 + '+str(增幅计算(100,装备.品质,属性.强化等级[i],属性.增幅版本))+'</font>'
+                        tempstr[i]+='异次元精神 + '+str(增幅计算(装备.等级,装备.品质,属性.强化等级[i],属性.增幅版本))+'</font>'
                     elif '智力' in 属性.类型:
-                        tempstr[i]+='异次元智力 + '+str(增幅计算(100,装备.品质,属性.强化等级[i],属性.增幅版本))+'</font>'
+                        tempstr[i]+='异次元智力 + '+str(增幅计算(装备.等级,装备.品质,属性.强化等级[i],属性.增幅版本))+'</font>'
 
             if tempstr[i] != '':
                 tempstr[i] += '<br>'
