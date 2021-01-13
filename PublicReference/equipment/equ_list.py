@@ -1,31 +1,31 @@
 #装备属性部分
-import json
-import os
+# import json
+# import os
 
 装备版本 = "GF"
 
-with open("ResourceFiles/Config/release_version.json") as fp:
-    versionInfo = json.load(fp)
-    装备版本 = versionInfo['EquipmentVersion']
-fp.close()
+# with open("ResourceFiles/Config/release_version.json") as fp:
+#     versionInfo = json.load(fp)
+#     装备版本 = versionInfo['EquipmentVersion']
+# fp.close()
 
 from PublicReference.utils.config import *
 from .基础函数 import *
 
 
-if 装备版本.upper() == "GF":
-    from .装备_武器 import *
-    from .装备_防具 import *
-    from .装备_首饰 import *
-    from .装备_特殊 import *
-    from .装备_套装 import *
+# if 装备版本.upper() == "GF":
+from .装备_武器 import *
+from .装备_防具 import *
+from .装备_首饰 import *
+from .装备_特殊 import *
+from .装备_套装 import *
     
-else:
-    from .装备_武器_HF import *
-    from .装备_防具_HF import *
-    from .装备_首饰_HF import *
-    from .装备_特殊_HF import *
-    from .装备_套装_HF import *
+# else:
+#     from .装备_武器_HF import *
+#     from .装备_防具_HF import *
+#     from .装备_首饰_HF import *
+#     from .装备_特殊_HF import *
+#     from .装备_套装_HF import *
 
 
 装备列表 = []

@@ -3,11 +3,11 @@ from PublicReference.equipment.equ_list import *
 装备版本 = "GF"
 装备增幅版本 = "GF"
 
-with open("ResourceFiles/Config/release_version.json") as fp:
-    versionInfo = json.load(fp)
-    装备版本 = versionInfo['EquipmentVersion'].upper()
-    装备增幅版本 = versionInfo['ZFVersion'].upper()
-fp.close()
+# with open("ResourceFiles/Config/release_version.json") as fp:
+#     versionInfo = json.load(fp)
+#     装备版本 = versionInfo['EquipmentVersion'].upper()
+#     装备增幅版本 = versionInfo['ZFVersion'].upper()
+# fp.close()
 
 
 class 属性():
@@ -246,7 +246,8 @@ class 窗口(QWidget):
         pass
 
     def 界面(self):
-        self.setWindowTitle(self.角色属性A.实际名称 + "搭配计算器&17173DNF专区 （点击标签栏按钮切换界面）"+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)
+        # self.setWindowTitle(self.角色属性A.实际名称 + "搭配计算器&17173DNF专区 （点击标签栏按钮切换界面）"+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)
+        self.setWindowTitle(self.角色属性A.实际名称 + "搭配计算器&17173DNF专区 （点击标签栏按钮切换界面）")
         self.icon = QIcon('./ResourceFiles/'+self.角色属性A.实际名称 + '/技能/BUFF.png')
         self.setWindowIcon(self.icon)
         self.setStyleSheet('''QToolTip { 
@@ -920,28 +921,31 @@ class 窗口(QWidget):
 
     def 装备图标点击事件(self, index, sign, x = 1):
         if 装备列表[index].模式 == 0:
-            #改变状态
-            if sign == 10:
-                if self.装备选择状态[index] == 0:
+            try:
+                #改变状态
+                if sign == 10:
+                    if self.装备选择状态[index] == 0:
+                        self.遮罩透明度[index].setOpacity(0.0)
+                        self.装备选择状态[index] = 1
+                    else:
+                        self.遮罩透明度[index].setOpacity(0.5)
+                        self.装备选择状态[index] = 0
+                #点亮
+                if sign == 1:
                     self.遮罩透明度[index].setOpacity(0.0)
                     self.装备选择状态[index] = 1
-                else:
+                #熄灭
+                if sign == 0:
                     self.遮罩透明度[index].setOpacity(0.5)
                     self.装备选择状态[index] = 0
-            #点亮
-            if sign == 1:
-                self.遮罩透明度[index].setOpacity(0.0)
-                self.装备选择状态[index] = 1
-            #熄灭
-            if sign == 0:
-                self.遮罩透明度[index].setOpacity(0.5)
-                self.装备选择状态[index] = 0
-            self.装备图片按钮[index].setGraphicsEffect(self.遮罩透明度[index])
+                self.装备图片按钮[index].setGraphicsEffect(self.遮罩透明度[index])
 
-            if x == 1:
-                self.计算模式选择.setItemText(0, '计算模式：极速模式  组合：' + self.组合数量计算(0))
-                self.计算模式选择.setItemText(1, '计算模式：套装模式  组合：' + self.组合数量计算(1))
-                self.计算模式选择.setItemText(2, '计算模式：单件模式  组合：' + self.组合数量计算(2))
+                if x == 1:
+                    self.计算模式选择.setItemText(0, '计算模式：极速模式  组合：' + self.组合数量计算(0))
+                    self.计算模式选择.setItemText(1, '计算模式：套装模式  组合：' + self.组合数量计算(1))
+                    self.计算模式选择.setItemText(2, '计算模式：单件模式  组合：' + self.组合数量计算(2))
+            except Exception as error:
+                pass
 
     def 套装按钮点击事件(self, index):
         count1 = 0
@@ -1451,7 +1455,8 @@ class 窗口(QWidget):
         滚动排行.setMinimumSize(630,530)
         滚动排行.setMaximumSize(630,1230)
         if len(筛选) == 0:
-            滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）'+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)  
+            # 滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）'+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)  
+            滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）')  
         else:
             temp = ''
             for name in 筛选.values():

@@ -342,8 +342,8 @@ class 角色属性(属性):
                     else:
                         if i.是否主动 == 1:
                             i.等级加成(lv)
-            if 可变 > 0:
-                self.变换词条[可变-1] = [6,2,14 + (2 if 可变 > 1 else 4), 14 + (9 if 可变 > 1 else 17)]
+            # if 可变 > 0:
+            #     self.变换词条[可变-1] = [6,2,14 + (2 if 可变 > 1 else 4), 14 + (9 if 可变 > 1 else 17)]
         
         return ''
 
@@ -681,7 +681,7 @@ class 角色窗口(窗口):
 
     def 界面1(self):
         super().界面1()
-        
+
         #region 王座本源
         counter4 = 0
         counter5 = 15

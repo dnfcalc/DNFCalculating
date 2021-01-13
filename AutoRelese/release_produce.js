@@ -85,9 +85,9 @@
   fs.writeFileSync("ResourceFiles/Config/release_version.json", JSON.stringify({ 
     version: String(newVersion) , 
     AutoCheckUpdate:true,
-    EquipmentVersion:"TYF",
+    // EquipmentVersion:"TYF",
     ShowChangeLog : true,
-    ZFVersion: "TYF"
+    // ZFVersion: "TYF"
    }, null, 2));
   // create a new commit
   child.execSync('git add .');
