@@ -2517,11 +2517,11 @@ class 角色窗口(窗口):
             tem[2].resize(60,20)
             tem[2].move(横坐标+241 , 纵坐标-20+25*(i+15))
             if i > 0:
-                for item in range(2,9):
-                    tem[2].addItem("+" + str(item) + '%')
+                for item in range(1,5):
+                    tem[2].addItem("+" + str(item*2) + '%')
             else:
-                for item in range(4,17):
-                    tem[2].addItem("+" + str(item) + '%')
+                for item in range(1,5):
+                    tem[2].addItem("+" + str(item*4) + '%')
             self.黑鸦词条.append(tem)
             self.黑鸦词条更新(i)
             # tem[1].currentIndexChanged.connect(lambda state: self.希洛克武器词条更新())
@@ -4698,7 +4698,7 @@ class 角色窗口(窗口):
             temp = [
                 self.黑鸦词条[i][0].currentIndex(),
                 self.黑鸦词条[i][1].currentIndex(),
-                (((2 if i>0 else 4)+self.黑鸦词条[i][2].currentIndex()) if self.黑鸦词条[i][1].currentIndex()<=5 else (1+self.黑鸦词条[i][2].currentIndex())),
+                ((2 if i>0 else 4))*(self.黑鸦词条[i][2].currentIndex()+1),
                 0
             ]
             属性.黑鸦词条.append(temp)
