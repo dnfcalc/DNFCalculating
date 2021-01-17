@@ -1061,9 +1061,14 @@ class 角色属性(属性):
                     上下限 = self.词条提示上下限计算(self.择优范围[temp-1], 词条数值)
                     下限提升最高 = max([上下限[i][0] for i in range(len(上下限))])
                     index = 0
+                    # tem = []
+                    待排序提升率 = []
                     for i in range(6):
                         if 上下限[i][0] == 下限提升最高:
-                            index = i
+                            # tem.append(i)
+                            待排序提升率.append([i,self.择优极限[i]])
+                    待排序提升率.sort(key=lambda x:round(x[1],2),reverse=False)
+                    index = 待排序提升率[0][0]
                     del 上下限[index]
                     if 下限提升最高 >= max([上下限[i][1] for i in range(len(上下限))]):
                         self.是否择优[temp-1] = 0
