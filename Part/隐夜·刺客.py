@@ -284,6 +284,11 @@ class 技能14(主动技能):
     CD = 145
     def 等效百分比(self,武器类型):
         return self.数据[self.等级] * self.攻击次数 * self.倍率 * 1.179
+    def 等效CD(self, 武器类型,输出类型):
+        if 武器类型 == '双剑':
+            return round(self.CD  / self.恢复, 1)
+        else:
+            return round(self.CD  / self.恢复 * 武器冷却惩罚(武器类型,输出类型,self.版本), 1)
 
 
 class 技能15(主动技能):
