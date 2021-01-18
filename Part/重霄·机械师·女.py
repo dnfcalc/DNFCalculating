@@ -14,6 +14,7 @@ class 技能0(被动技能):
 
 class 技能1(主动技能):
     名称 = 'G1科罗纳'
+    备注='(秒伤)'
     所在等级=20
     等级上限=60
     基础等级=43  
@@ -87,6 +88,7 @@ class 技能4(被动技能):
    
 class 技能5(主动技能):
     名称='G3捕食者'
+    备注='(秒伤)'
     所在等级=30
     等级上限=60
     基础等级=38
@@ -115,6 +117,7 @@ class 技能6(主动技能):
    
 class 技能7(主动技能):
     名称='自爆狂风'
+    备注='(自爆伤害)'
     所在等级=35
     等级上限=60
     基础等级=36  
@@ -137,6 +140,7 @@ class 技能7(主动技能):
 
 class 技能8(主动技能):
     名称='空战机械：狂风'
+    备注='(机枪捣蛋模式/秒伤)'
     所在等级=35
     等级上限=60
     基础等级=36  
@@ -207,6 +211,7 @@ class 技能10(主动技能):
 
 class 技能11(主动技能):
     名称='光反应能量模块'
+    备注 = '(拦截机工厂一击形态)'
     所在等级=45
     等级上限=60
     基础等级=31  
@@ -326,6 +331,7 @@ class 技能16(被动技能):
 
 class 技能17(主动技能):
     名称='GSP猎鹰科罗纳形态'
+    备注='(GSP猎鹰)'
     所在等级=75
     等级上限=40
     基础等级=16
@@ -348,6 +354,7 @@ class 技能17(主动技能):
 
 class 技能18(主动技能):
     名称='GSP猎鹰旋雷者形态'
+    备注='(GSP猎鹰)'
     所在等级=75
     等级上限=40
     基础等级=16
@@ -371,6 +378,7 @@ class 技能18(主动技能):
 
 class 技能19(主动技能):
     名称='GSP猎鹰捕食者形态'
+    备注='(GSP猎鹰)'
     所在等级=75
     等级上限=40
     基础等级=16
@@ -532,13 +540,18 @@ for i in 技能列表:
 
 护石选项 = ['无']
 for i in 技能列表:
-    if i.是否有伤害 == 1 and i.是否有护石 == 1:
+    temp = i
+    if i.是否有伤害 == 1 and i.是否有护石 == 1 and i.所在等级 <= 70:
         护石选项.append(i.名称)
+护石选项.append('GSP猎鹰')
+护石选项.append('高压电磁场')
 
 符文选项 = ['无']
 for i in 技能列表:
-    if i.所在等级 >= 20 and i.所在等级 <= 80 and i.所在等级 != 50 and i.是否有伤害 == 1:
+    if i.所在等级 >= 20 and i.所在等级<= 70 and i.所在等级 != 50 and i.是否有伤害 == 1:
         符文选项.append(i.名称)
+符文选项.append('GSP猎鹰')
+符文选项.append('高压电磁场')
 
 class 职业角色属性(角色属性):
 
@@ -571,6 +584,10 @@ class 职业角色属性(角色属性):
         self.技能栏[self.技能序号['G1磁力弹']].基础 = self.技能栏[self.技能序号['G1科罗纳']].等效百分比(self.武器类型)*0.21*1.72*10
         self.技能栏[self.技能序号['G1磁力弹']].被动倍率 = self.技能栏[self.技能序号['G1科罗纳']].被动倍率
         self.技能栏[self.技能序号['G1磁力弹']].等级 = self.技能栏[self.技能序号['G1科罗纳']].等级
+        #for i in [17, 18, 19]:
+            #self.技能栏[i].等级 = self.技能栏[17].等级
+        #self.技能栏[self.技能序号['GSP猎鹰捕食者形态']].等级 = self.技能栏[self.技能序号['GSP猎鹰旋雷者形态']].等级 = self.技能栏[self.技能序号['GSP猎鹰科罗纳形态']].等级
+            
 
 class 重霄·机械师·女(角色窗口):
     def 窗口属性输入(self):
@@ -582,3 +599,208 @@ class 重霄·机械师·女(角色窗口):
         self.三觉序号 = 三觉序号
         self.护石选项 = deepcopy(护石选项)
         self.符文选项 = deepcopy(符文选项)
+
+    def 护石类型选项更新(self, x):
+        self.护石类型选项[x].clear()
+        if self.护石栏[x].currentText() != '无':
+            if self.护石栏[x].currentText() != 'GSP猎鹰':
+                try:
+                    self.护石类型选项[x].addItems(self.初始属性.技能栏[self.初始属性.技能序号[self.护石栏[x].currentText()]].护石选项)
+                except:
+                    self.护石类型选项[x].addItem('魔界')
+                    self.护石栏[x].setCurrentIndex(0)
+            else:
+                self.护石类型选项[x].addItem('圣痕')
+        else:
+            self.护石类型选项[x].addItem('魔界')
+
+    def 输入属性(self, 属性, x=0):
+
+        i = self.攻击目标.currentIndex()
+        属性.防御输入 = 攻击目标[i][1]
+        属性.火抗输入 = 攻击目标[i][2]
+        属性.冰抗输入 = 攻击目标[i][3]
+        属性.光抗输入 = 攻击目标[i][4]
+        属性.暗抗输入 = 攻击目标[i][5]
+
+        if self.初始属性.远古记忆 != -1:
+            属性.远古记忆 = self.远古记忆.currentIndex()
+        if self.初始属性.刀魂之卡赞 != -1:
+            属性.刀魂之卡赞 = self.刀魂之卡赞.currentIndex()
+
+        属性.自适应选项 = copy([(1 if self.红色宠物装备.isChecked() else 0), (1 if self.光环自适应.isChecked() else 0)])
+
+        if self.转甲选项.isChecked():
+            属性.转甲选项 = 1
+        else:
+            属性.转甲选项 = 0
+
+        for j in [self.等级调整, self.TP输入, self.次数输入, self.宠物次数]:
+            for i in j:
+                if i != '' and i.currentIndex() == -1:
+                    i.setCurrentIndex(0)
+
+        for i in 属性.技能栏:
+            i.等级 = i.基础等级 + int(self.等级调整[self.角色属性A.技能序号[i.名称]].currentText())
+            if i.是否有伤害 == 1:
+                if i.TP上限 != 0:
+                    i.TP等级 = int(self.TP输入[self.角色属性A.技能序号[i.名称]].currentText())
+
+        if x == 0:
+            self.辟邪玉属性计算(属性)
+        elif x >= 100:
+            y = x - 100
+            辟邪玉列表[y].当前值 = 辟邪玉列表[y].最大值
+            辟邪玉列表[y].穿戴属性(属性)
+
+        if sum(self.希洛克选择状态) == 3:
+            属性.武器词条触发 = 1
+
+        if self.希洛克武器词条[0].currentIndex() == 1:
+            属性.希洛克武器词条 = 1
+        elif self.希洛克武器词条[0].currentIndex() == 2:
+            词条属性列表[self.希洛克武器词条[1].currentIndex()].加成属性(属性, (self.希洛克武器词条[3].currentIndex() + 3) * 0.02)
+            if 属性.武器词条触发 == 1:
+                词条属性列表[self.希洛克武器词条[2].currentIndex()].加成属性(属性, (self.希洛克武器词条[4].currentIndex() + 3) * 0.01)
+
+        属性.时间输入 = int(self.时间输入.currentText())
+        属性.次数输入.clear()
+        属性.宠物次数.clear()
+        属性.装备切装.clear()
+        属性.技能切装.clear()
+        for i in self.角色属性A.技能栏:
+            序号 = self.角色属性A.技能序号[i.名称]
+            if i.是否有伤害 == 1:
+                属性.次数输入.append(self.次数输入[序号].currentText())
+                if self.次数输入[序号].currentIndex() != 0:
+                    self.宠物次数[序号].setCurrentIndex(
+                        min(self.宠物次数[序号].currentIndex(), self.次数输入[序号].currentIndex() - 1 + i.基础释放次数))
+                属性.宠物次数.append(self.宠物次数[序号].currentIndex())
+                if 切装模式 == 1:
+                    if self.技能切装[序号].isChecked():
+                        属性.技能切装.append(1)
+                    else:
+                        属性.技能切装.append(0)
+            else:
+                属性.次数输入.append('')
+                属性.宠物次数.append(0)
+                属性.技能切装.append(0)
+        if 切装模式 == 1:
+            for i in range(12):
+                if self.装备切装[i].isChecked():
+                    属性.装备切装.append(self.自选装备[i].currentText())
+                else:
+                    属性.装备切装.append('无')
+
+        for i in range(len(self.复选框列表)):
+            if self.复选框列表[i].isChecked():
+                选项设置列表[i].适用效果(属性)
+
+        count = 0
+        count2 = 0
+        for i in 装备列表:
+            if i.品质 == '神话':
+                i.属性1选择 = self.神话属性选项[count * 4 + 0].currentIndex()
+                i.属性2选择 = self.神话属性选项[count * 4 + 1].currentIndex()
+                i.属性3选择 = self.神话属性选项[count * 4 + 2].currentIndex()
+                i.属性4选择 = self.神话属性选项[count * 4 + 3].currentIndex()
+                count += 1
+            if i.所属套装 == '智慧产物':
+                i.属性1选择 = self.改造产物选项[count2 * 4 + 0].currentIndex()
+                i.属性2选择 = self.改造产物选项[count2 * 4 + 1].currentIndex()
+                i.属性3选择 = self.改造产物选项[count2 * 4 + 2].currentIndex()
+                i.属性4选择 = self.改造产物选项[count2 * 4 + 3].currentIndex()
+                count2 += 1
+
+        属性.攻击属性 = self.攻击属性选项.currentIndex()
+
+        称号列表[self.称号.currentIndex()].城镇属性(属性)
+        if 属性.称号触发:
+            称号列表[self.称号.currentIndex()].触发属性(属性)
+
+        宠物列表[self.宠物.currentIndex()].城镇属性(属性)
+
+        for k in range(3):
+            if self.护石栏[k].currentText() != '无' and self.护石栏[k].currentText()!= 'GSP猎鹰':
+                try:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石()
+                except:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石(self.护石类型选项[k].currentIndex())
+            elif self.护石栏[k].currentText()== 'GSP猎鹰':
+                属性.技能栏[self.角色属性A.技能序号['GSP猎鹰科罗纳形态']].装备护石(0)
+                属性.技能栏[self.角色属性A.技能序号['GSP猎鹰旋雷者形态']].装备护石(0)
+                属性.技能栏[self.角色属性A.技能序号['GSP猎鹰捕食者形态']].装备护石(0)
+
+        属性.护石第一栏 = self.护石栏[0].currentText()
+        属性.护石第二栏 = self.护石栏[1].currentText()
+        属性.护石第三栏 = self.护石栏[2].currentText()
+
+        for i in range(0, 9):
+            if self.符文[i].currentText() != '无' and self.符文效果[i].currentText() != '无' and self.符文[i].currentText() != 'GSP猎鹰':
+                for j in self.符文效果[i].currentText().split(','):
+                    if '攻击' in j:
+                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率 *= 1 + int(
+                            j.replace('攻击', '').replace('%', '')) / 100
+                    if 'CD' in j:
+                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD *= 1 + int(
+                            j.replace('CD', '').replace('%', '')) / 100
+            elif self.符文[i].currentText() == 'GSP猎鹰':
+                for j in self.符文效果[i].currentText().split(','):
+                    if '攻击' in j:
+                        属性.技能栏[self.角色属性A.技能序号['GSP猎鹰捕食者形态']].倍率 *= 1 + int(j.replace('攻击', '').replace('%', '')) / 100
+                        属性.技能栏[self.角色属性A.技能序号['GSP猎鹰旋雷者形态']].倍率 *= 1 + int(j.replace('攻击', '').replace('%', '')) / 100
+                        属性.技能栏[self.角色属性A.技能序号['GSP猎鹰科罗纳形态']].倍率 *= 1 + int(j.replace('攻击', '').replace('%', '')) / 100
+                    if 'CD' in j:
+                        属性.技能栏[self.角色属性A.技能序号['GSP猎鹰捕食者形态']].CD *= 1 + int(j.replace('CD', '').replace('%', '')) / 100
+                        属性.技能栏[self.角色属性A.技能序号['GSP猎鹰旋雷者形态']].CD *= 1 + int(j.replace('CD', '').replace('%', '')) / 100
+                        属性.技能栏[self.角色属性A.技能序号['GSP猎鹰科罗纳形态']].CD *= 1 + int(j.replace('CD', '').replace('%', '')) / 100
+
+
+        for i in range(0, 12):
+            属性.是否增幅[i] = self.装备打造选项[i].currentIndex()
+            属性.强化等级[i] = self.装备打造选项[i + 12].currentIndex()
+            属性.改造等级[i] = self.装备打造选项[i + 24].currentIndex()
+        属性.武器锻造等级 = self.装备打造选项[36].currentIndex()
+        属性.类型 = self.装备打造选项[37].currentText()
+
+        try:
+            属性.主BUFF = float(self.BUFF输入.text()) / 100 + 1
+        except:
+            QMessageBox.information(self, "错误", "BUFF数值输入错误,已设置为默认数值")
+            self.BUFF输入.setText(str('%.1f' % ((self.角色属性A.主BUFF - 1) * 100)))
+
+        if self.角色属性A.技能栏[self.三觉序号].是否有伤害 == 1 and 属性.次数输入[self.三觉序号] == '0':
+            属性.技能栏[self.三觉序号].关联技能 = ['无']
+        else:
+            if self.觉醒选择状态 == 1:
+                属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.一觉序号].名称]
+            if self.觉醒选择状态 == 2:
+                属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.二觉序号].名称]
+
+        属性.角色熟练度 = self.装备条件选择[0].currentIndex()
+        属性.技能栏空位 = self.装备条件选择[1].currentIndex()
+        属性.命运的抉择 = self.装备条件选择[2].currentIndex()
+        属性.天命无常 = self.装备条件选择[3].currentIndex()
+        属性.悲剧的残骸 = self.装备条件选择[4].currentIndex()
+        属性.先知者的预言 = self.装备条件选择[5].currentIndex()
+        属性.贫瘠沙漠的遗产 = self.装备条件选择[6].currentIndex()
+        属性.幸运三角 = self.装备条件选择[7].currentIndex()
+        属性.擎天战甲 = self.装备条件选择[8].currentIndex()
+        属性.持续伤害计算比例 = 1 - 0.01 * self.装备条件选择[9].currentIndex()
+        属性.军神的隐秘遗产 = self.装备条件选择[10].currentIndex()
+        属性.太极天帝剑 = self.装备条件选择[11].currentIndex()
+        属性.绿色生命的面容 = self.装备条件选择[12].currentIndex()
+        属性.产物升级 = 1 if self.智慧产物升级.isChecked() else 0
+        属性.黑鸦武器择优模式 = self.武器择优模式.currentIndex()
+        属性.黑鸦词条 = []
+        for i in range(4):
+            temp = [
+                self.黑鸦词条[i][0].currentIndex(),
+                self.黑鸦词条[i][1].currentIndex(),
+                ((2 if i > 0 else 4)) * (self.黑鸦词条[i][2].currentIndex() + 1),
+                0
+            ]
+            属性.黑鸦词条.append(temp)
+        self.希洛克属性计算(属性)
+        self.基础属性(属性)
+

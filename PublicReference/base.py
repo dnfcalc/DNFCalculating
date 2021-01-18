@@ -961,7 +961,7 @@ class 角色属性(属性):
             [0.07,0.08,0.07,0.08,0,0],
             [0,0.05,0.05,0,0.05,0]
             ]
-        print(self.择优词条)
+        # print(self.择优词条)
         # self.是否择优 = self.词条是否择优()
         # print(self.是否择优)
         self.自适应Sub()
@@ -1705,7 +1705,7 @@ class 角色窗口(窗口):
                 x=QLabel(self.main_frame2)
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
                 x.resize(28,28)
-                tempstr='<font face="宋体"><font color="#FF6666">'+i.名称 +i.备注 +'</font><br>'
+                tempstr='<font face="宋体"><font color="#FF6666">'+i.名称 +("<br>" if i.备注!='' else '')+ i.备注 +'</font><br>'
                 tempstr+='所在等级：'+str(i.所在等级) + '<br>'
                 tempstr+='等级上限：'+str(i.等级上限)
                 if i.是否主动 == 1:
