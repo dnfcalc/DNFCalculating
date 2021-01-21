@@ -579,7 +579,7 @@ class 隐夜·刺客(角色窗口):
         self.打桩展示.setStyleSheet(按钮样式)
         self.打桩展示.resize(100,25)
         self.打桩展示.move(990, self.height() - 100)
-        self.打桩展示.clicked.connect(lambda state, index = 0: QDesktopServices.openUrl(QUrl('https://www.bilibili.com/video/BV1Si4y1g7uS/')))
+        self.打桩展示.clicked.connect(lambda state, index = 0: QDesktopServices.openUrl(QUrl('https://www.bilibili.com/video/BV1454y1t71Y')))
         count = 0
         for i in self.初始属性.技能栏:
             if i.是否有伤害 == 1:
@@ -636,10 +636,3 @@ class 隐夜·刺客(角色窗口):
         属性.技能栏[属性.技能序号['剑刃风暴']].旋转次数 = self.剑刃风暴旋转次数.currentIndex() + 1
         属性.技能栏[属性.技能序号['螺旋穿刺']].旋转次数 = self.螺旋穿刺旋转次数.currentIndex()
         属性.技能栏[属性.技能序号['死亡风暴']].匕首数量 = self.死亡风暴攻击次数.currentIndex() + 1
-        #刺客符文收招额外加成
-        for i in range(0,9):
-            if self.符文[i].currentText()!='无' and self.符文效果[i].currentText() != '无':
-                for j in self.符文效果[i].currentText().split(','):
-                    if '攻击' in j:
-                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].攻击次数2 *= 1 + int(j.replace('攻击','').replace('%',''))/100
-    
