@@ -1,1 +1,5 @@
-{"version": "2021-01-13", "AutoCheckUpdate": true, "EquipmentVersion": "TYF", "ShowChangeLog": false, "ZFVersion": "TYF"}
+{
+  "version": "2021-01-20",
+  "AutoCheckUpdate": true,
+  "ShowChangeLog": true
+}
