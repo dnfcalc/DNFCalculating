@@ -1420,7 +1420,7 @@ class 窗口(QWidget):
             if self.单条排行数据判断(s, l):
                 temp.append(s)
         if len(temp) == 0:
-            QMessageBox.information(self,"计算错误",  "无符合条件组合，请解除第五页装备限定或重新勾选")
+            QMessageBox.information(self,"计算错误",  "无符合条件组合，请解除自选装备页限定或重新勾选")
             return 0
         self.排行数据 = copy(temp)
         return 1

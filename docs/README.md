@@ -4,6 +4,8 @@
 python(3.8)编写，使用 pyqt5图形 GUI 库<br>
 主框架由纸飞机实现，西瓜协助修改，SCUDRT 对算法进行优化修改，风之凌殇添加多进程优化<br>
 
+Eamil Address：wxh_email@yeah.net
+
 ## 依赖安装
 
 安装[Python](https://www.python.org/),计算器开发使用的是3.8版本<br>
