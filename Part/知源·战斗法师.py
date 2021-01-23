@@ -1,11 +1,11 @@
 from PublicReference.base import *
 
-# class 主动技能(主动技能):
-#     def 等效CD(self, 武器类型):
-#         if 武器类型 == '矛':
-#             return round(self.CD / self.恢复 * 1.05, 1)
-#         if 武器类型 == '棍棒':
-#             return round(self.CD / self.恢复 * 0.95, 1)
+class 主动技能(主动技能):
+    def 等效CD(self, 武器类型):
+        if 武器类型 == '矛':
+            return round(self.CD / self.恢复 * 1.05, 1)
+        if 武器类型 == '棍棒':
+            return round(self.CD / self.恢复 * 0.95, 1)
 
 class 知源·战斗法师技能0(被动技能):
     名称 = '尼巫的战斗术'
