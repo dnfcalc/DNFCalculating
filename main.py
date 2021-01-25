@@ -338,7 +338,7 @@ class 选择窗口(QMainWindow):
         if box.clickedButton() == A:
             self.打开链接(['https://www.bilibili.com/read/cv8424945'])
         if box.clickedButton() == B:
-            self.打开链接(['https://jq.qq.com/?_wv=1027&k=9S6c2xIb'])
+            self.打开链接(['https://jq.qq.com/?_wv=1027&k=ekQXpyq0'])
 
     def 检查更新(self):
         self.网盘检查()
