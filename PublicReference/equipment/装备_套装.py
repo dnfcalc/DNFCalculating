@@ -1997,7 +1997,7 @@ class 套装效果77(套装):
     def 进图属性_BUFF(self, 属性):
         pass
     def BUFF属性(self, 属性):
-        self.属性描述 += 属性.被动增加(守护恩赐体精=230)
+        self.属性描述 += 属性.被动增加(守护恩赐体精=205)
         self.属性描述 += 属性.被动增加(转职被动智力=205)
         self.属性描述 += 属性.BUFF增加(BUFFLv=1)
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.04)
