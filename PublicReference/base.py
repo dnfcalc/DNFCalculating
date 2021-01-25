@@ -1823,7 +1823,7 @@ class 角色窗口(窗口):
             self.符文效果[i].addItems(符文效果选项)
         
         横坐标=480;纵坐标=20;行高=18
-        x=QLabel("护石1 (上)", self.main_frame2)
+        x=QLabel("护石Ⅰ", self.main_frame2)
         x.move(横坐标,纵坐标 - 6)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -1851,7 +1851,7 @@ class 角色窗口(窗口):
             纵坐标+=25
         
         横坐标=650;纵坐标=20
-        x=QLabel("护石2 (下)", self.main_frame2)
+        x=QLabel("护石Ⅱ", self.main_frame2)
         x.move(横坐标,纵坐标 - 6)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -1877,7 +1877,7 @@ class 角色窗口(窗口):
             纵坐标+=25
 
         横坐标=820;纵坐标=20
-        x=QLabel("护石3 (韩)", self.main_frame2)
+        x=QLabel("护石Ⅲ", self.main_frame2)
         x.move(横坐标,纵坐标 - 6)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -1904,6 +1904,7 @@ class 角色窗口(窗口):
         
         for i in range(3):
             self.护石类型选项[i].addItem('魔界')
+            self.护石类型选项[i].addItem('圣痕')
             self.护石类型选项[i].currentIndexChanged.connect(lambda state, index = i:self.护石描述更新(index))
 
 
@@ -2740,9 +2741,11 @@ class 角色窗口(窗口):
                 self.护石类型选项[x].addItems(self.初始属性.技能栏[self.初始属性.技能序号[self.护石栏[x].currentText()]].护石选项)
             except:
                 self.护石类型选项[x].addItem('魔界')
+                self.护石类型选项[x].addItem('圣痕')
                 self.护石栏[x].setCurrentIndex(0)
         else:
             self.护石类型选项[x].addItem('魔界')
+            self.护石类型选项[x].addItem('圣痕')
 
     def 符文技能更改(self, i):
         if i == 0:
