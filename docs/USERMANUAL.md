@@ -163,15 +163,6 @@
 
 ## 其余功能
 
-### 切换到韩服装备属性
-
-在ResourceFiles\Config\release_version.json中修改"EquipmentVersion","GF"为国服属性,"HF"为韩服属性,后重启计算器<br>
-```json
-
-  "EquipmentVersion":"GF"
-
-```
-
 ### 输出系切装
 
 如存在需要切换武器/装备的情况，可在选择职业页面点击打开设置，修改以下参数(1为启用0位停用)后重启计算器<br>
