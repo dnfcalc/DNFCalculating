@@ -4,8 +4,6 @@
 python(3.8)编写，使用 pyqt5图形 GUI 库<br>
 主框架由纸飞机实现，西瓜协助修改，SCUDRT 对算法进行优化修改，风之凌殇添加多进程优化<br>
 
-Eamil Address：wxh_email@yeah.net
-
 ## 依赖安装
 
 安装[Python](https://www.python.org/),计算器开发使用的是3.8版本<br>
@@ -47,7 +45,7 @@ Eamil Address：wxh_email@yeah.net
 　　　　|　　　|--　release_produce.js：更新日志自动生成程序</br>
 　　　　|　　　|--　upload_cookie.json：蓝奏云上传cookie文件</br>
 　　　　|　　　|--　upload_lanzouyun.py：自动上传蓝奏云文件</br>
-　　　　|--　Part：职业实现目录</br>
+　　　　|--　Characters：职业实现目录</br>
 　　　　|--　PublicReference：公有引用方法</br>
 　　　　|　　　|--　base.py：输出职业公有实现方法</br>
 　　　　|　　　|--　base_buff.py：奶系职业公有实现方法</br>

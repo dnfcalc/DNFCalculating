@@ -1,5 +1,5 @@
 {
-  "version": "2021-01-20",
-  "AutoCheckUpdate": true,
-  "ShowChangeLog": true
-}
+    "version": "2021-01-20",
+    "AutoCheckUpdate": false,
+    "ShowChangeLog": false
+  }
