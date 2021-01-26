@@ -264,7 +264,7 @@ class 选择窗口(QMainWindow):
     def 打开窗口(self, name):
         if self.char_window != None:
             self.char_window.close()
-        module_name = "Part."+name
+        module_name = "Characters."+name
         职业 = importlib.import_module(module_name)
         self.char_window = eval("职业."+name + '()')
         self.char_window.show()
