@@ -1,7 +1,7 @@
 from PublicReference.base import *
 
 class 主动技能(主动技能):
-    def 等效CD(self, 武器类型):
+    def 等效CD(self, 武器类型,输出类型):
         if 武器类型 == '矛':
             return round(self.CD / self.恢复 * 1.05, 1)
         if 武器类型 == '棍棒':
