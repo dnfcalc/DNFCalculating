@@ -1,5 +1,28 @@
 ## Newest
 
+### 2021-01-28
+
+#### NewFeatures
+* 修改加群链接 ([12ce3e](https://github.com/wxh0402/DNFCalculating/commit/12ce3ebc23736034eb2b44df285c5d144d36b32f))
+* 执行程序添加数字签名，预防第三方修改盗用 ([975df1](https://github.com/wxh0402/DNFCalculating/commit/975df1720338717fdb8c404f9406b5c48a023d98))
+* 添加韩服体验服守护者三觉数据 ([71c5db](https://github.com/wxh0402/DNFCalculating/commit/71c5db6c8aff3bd4501273e80fc1b5b9229d0edd))
+* 缔造者：新增硬直时长百分比 ([175bcc](https://github.com/wxh0402/DNFCalculating/commit/175bcc2e2865ce323a1a5b443d73ef1abd1ac243))
+* 适配国服护石位置描述 ([a9d552](https://github.com/wxh0402/DNFCalculating/commit/a9d552380067fda734549fe1330e83dc4992c672))
+* 重霄·机械师·女：新增一觉减CD开关 ([6ccbb6](https://github.com/wxh0402/DNFCalculating/commit/6ccbb63bc591793b93465c176f69696e2130f782))
+* 隐夜·刺客：同步游戏更新，修复符文对收招的二次加成问题 ([d830ea](https://github.com/wxh0402/DNFCalculating/commit/d830eabfb84757cf14cd11b07487fd723dff81d1))
+* 隐夜·忍者：修正技能数据 ([f9f01b](https://github.com/wxh0402/DNFCalculating/commit/f9f01b9102e3fbc0afd8d7773e406e4fdd9fc48a))
+
+#### BugFixes
+* 修正飘零之花臂铠基础错误 ([49f29e](https://github.com/wxh0402/DNFCalculating/commit/49f29ecceb40d447b6dabf28e2d3ad8046a28f4b))
+* 同步国服正式服军神的隐秘遗产奶系套装属性 ([8eeb8e](https://github.com/wxh0402/DNFCalculating/commit/8eeb8e719887ee225cd0d7761eb709bf77ce18d8))
+* 同步国服正式服天堂舞姬鞋子属性 ([4b6688](https://github.com/wxh0402/DNFCalculating/commit/4b668865d391bcb8aa6d5734450e687342b7a851))
+* 同步国服正式服沙岩幻戟属性 ([2fec14](https://github.com/wxh0402/DNFCalculating/commit/2fec14d89839e2d950157a7005b0dfca389c45c9))
+* 同步灵魂掠夺者正式服奶系属性 ([52ea3a](https://github.com/wxh0402/DNFCalculating/commit/52ea3af76e16cb24010149f727992b2b5733d208))
+* 极诣·驭剑士：修正裂刃天冲hit问题 ([23ab68](https://github.com/wxh0402/DNFCalculating/commit/23ab682eeed7389d3191c4f4648119236bb3304e))
+* 知源·元素爆破师：修正聚魔轰击CD错误 ([1d4174](https://github.com/wxh0402/DNFCalculating/commit/1d4174fec0a483cf6c8cecd0edce634cc554ec1f))
+* 知源·战斗法师：修正武器CD惩罚问题 ([fea8d5](https://github.com/wxh0402/DNFCalculating/commit/fea8d5524d8f5cdf382761c8c2d90c2a7f61a15c))
+* 重霄·机械师·女：修复歧路鞋子对GSP猎鹰的加成错误问题 ([67fc18](https://github.com/wxh0402/DNFCalculating/commit/67fc1871404b714ba29acfe22961b4c9789391bb))
+
 ### 2021-01-20
 
 #### NewFeatures
@@ -84,6 +107,7 @@
 * 隐夜·刺客：修正旋刃伤害偏低的问题 ([4b5861](https://github.com/wxh0402/DNFCalculating/commit/4b5861ef03928d8a2ae43e883e8684630f416257))
 * 风神、知源·逐风者：修正棍棒精通冷却缩减遗漏的问题 ([eece44](https://github.com/wxh0402/DNFCalculating/commit/eece44cd581b7d2ff9dc3c93dd5a8bb6a0fef56a))
 * 黑暗武士：修正无法计算的问题 ([81e999](https://github.com/wxh0402/DNFCalculating/commit/81e9991b33b9e4d39362bc182ec1554411ed06aa))
+
 
 
 
