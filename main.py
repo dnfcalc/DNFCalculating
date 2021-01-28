@@ -217,6 +217,8 @@ class 选择窗口(QMainWindow):
         butten.setStyleSheet(按钮样式3)
         butten.resize(121,90)
 
+        self.版本提示 = QMessageBox(QMessageBox.Question, "提示", "此工具为开源免费软件\n如遇二次售卖获利,请协助反馈举报~")  
+
         if self.自动检查版本:
             try:
                 self.网盘检查()
@@ -444,8 +446,9 @@ if __name__ == '__main__':
             json.dump(versionInfo,fp,ensure_ascii=False)
             fp.truncate()
         fp.close()
-        if 展示信息 :
+        if 展示信息 :        
             QDesktopServices.openUrl(QUrl('http://dnf.17173.com/jsq/changlog.html#/'))
+            instance.版本提示.exec()
     except Exception as error:
         logger.error("error={} \n detail {}".format(error,traceback.print_exc())) 
         pass
