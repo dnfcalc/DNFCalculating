@@ -12,12 +12,14 @@ import traceback
 # from PublicReference.utils.lanzou.api import LanZouCloud
 from lanzou.api import LanZouCloud
 from PublicReference.utils import zipfile
+from PublicReference.utils import img
 from pathlib import Path
 import shutil
 import sys
 import time
 import urllib.request
 import subprocess
+import base64
 
 主进程PID = ''
 
@@ -283,7 +285,9 @@ class 选择窗口(QMainWindow):
         # self.w.icon = QIcon('./ResourceFiles/img/logo.ico')
         self.w.setWindowIcon(self.icon)
         主背景 = QLabel(self.w)
-        主背景.setPixmap(QPixmap('./ResourceFiles/img/二维码.png'))
+        赞赏码 = QPixmap()
+        赞赏码.loadFromData(base64.b64decode(img.二维码))
+        主背景.setPixmap(赞赏码)
         # 主背景.move(0, int((self.w.height() - 1230) / 6))
         # 主背景.setGraphicsEffect(主背景透明度)
 
