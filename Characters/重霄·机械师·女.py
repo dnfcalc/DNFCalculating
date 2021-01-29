@@ -818,7 +818,7 @@ class 重霄·机械师·女(角色窗口):
         属性.持续伤害计算比例 = 1 - 0.01 * self.装备条件选择[9].currentIndex()
         属性.军神的隐秘遗产 = self.装备条件选择[10].currentIndex()
         属性.太极天帝剑 = self.装备条件选择[11].currentIndex()
-        属性.绿色生命的面容 = self.装备条件选择[12].currentIndex()
+        # 属性.绿色生命的面容 = self.装备条件选择[12].currentIndex()
         属性.产物升级 = 1 if self.智慧产物升级.isChecked() else 0
         属性.黑鸦武器择优模式 = self.武器择优模式.currentIndex()
         属性.黑鸦词条 = []
