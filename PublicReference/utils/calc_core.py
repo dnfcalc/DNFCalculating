@@ -86,6 +86,7 @@ class CalcData():
                 i.属性2选择 = self.改造产物选项[count2 * 4 + 1]
                 i.属性3选择 = self.改造产物选项[count2 * 4 + 2]
                 i.属性4选择 = self.改造产物选项[count2 * 4 + 3]
+                count2 +=1
         pass
 
 
