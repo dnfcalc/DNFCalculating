@@ -368,8 +368,9 @@ class 技能15(职业主动技能):
     护石选项 = ['圣痕']
     def 装备护石(self, x):
         if x == 0:
-            攻击次数 = 0
+            self.攻击次数 = 0
             self.data1 = [(i*1.45) for i in self.data1]
+            self.CD *= 0.9
             # self.倍率 *= 1.27049
 
 class 技能16(被动技能):	
