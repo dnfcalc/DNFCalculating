@@ -502,7 +502,7 @@ class 缔造者角色属性(角色属性):
                         技能释放次数.append(round(int(int(i.能量 * (1 + (self.时间输入*(1-i.硬直时长百分比)) / i.等效CD(self.武器类型,self.类型))) / i.最小值)+余数次数,2))
                     
                 elif self.次数输入[self.技能序号[i.名称]] != '0':
-                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
+                    技能释放次数.append(round(self.次数输入[self.技能序号[i.名称]],2))
                 else:
                     技能释放次数.append(0)
             else:

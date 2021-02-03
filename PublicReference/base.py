@@ -1290,7 +1290,7 @@ class 角色属性(属性):
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
                     技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数))
                 elif self.次数输入[self.技能序号[i.名称]] != '0':
-                    技能释放次数.append(int(self.次数输入[self.技能序号[i.名称]]))
+                    技能释放次数.append(round(self.次数输入[self.技能序号[i.名称]],2))
                 else:
                     技能释放次数.append(0)
             else:
@@ -1673,10 +1673,16 @@ class 角色窗口(窗口):
                     self.TP输入[序号].addItem(str(j))
         
             if i.是否有伤害 == 1:
+                self.次数输入[序号].setMaxVisibleItems(15)
                 self.次数输入[序号].addItem('/CD')
-                for j in range(0, 100):
+                self.宠物次数[序号].setMaxVisibleItems(15)
+                for j in range(0, 11):
                     self.次数输入[序号].addItem(str(j))
                     self.宠物次数[序号].addItem(str(j))
+                self.次数输入[序号].addItem('填写')
+                self.次数输入[序号].activated.connect(lambda state, index=序号: self.次数输入填写(index))
+                self.宠物次数[序号].addItem('填写')
+                self.宠物次数[序号].activated.connect(lambda state, index=序号: self.宠物次数填写(index))
         
         #三觉强化选择
         self.一觉遮罩透明度 = QGraphicsOpacityEffect()
@@ -2693,10 +2699,11 @@ class 角色窗口(窗口):
             self.守门人全属强.setStyleSheet(不可勾选复选框样式)
         else:
             number = self.希洛克选择状态[9] + self.希洛克选择状态[10] + self.希洛克选择状态[11]
-            if number == 3:
-                self.守门人全属强.setEnabled(True)
-                self.守门人全属强.setChecked(True)
-                self.守门人全属强.setStyleSheet(复选框样式)
+            if self.角色属性A.职业 not in ('冰结师', '鬼泣', '死灵术士', '气功师', '忍者', '暗枪士'):
+                if number == 3:
+                    self.守门人全属强.setEnabled(True)
+                    self.守门人全属强.setChecked(True)
+                    self.守门人全属强.setStyleSheet(复选框样式)
 
     def 希洛克武器词条更新(self):
         if self.希洛克武器词条[0].currentIndex() != 2:
@@ -2727,6 +2734,39 @@ class 角色窗口(窗口):
     #         self.黑鸦词条[0][2].clear()
     #         for item in range(4,17):
     #             self.黑鸦词条[0][2].addItem("+" + str(item) + '%')
+
+    def 次数输入填写(self, x):
+        if self.次数输入[x].currentIndex() == 12:
+            self.次数输入[x].setEditable(True)
+            self.次数输入[x].clearEditText()
+            self.次数输入[x].setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+        elif self.次数输入[x].currentIndex() == 13:
+            temp = self.次数输入[x].currentText()
+            self.次数输入[x].removeItem(13)
+            self.次数输入[x].setCurrentIndex(12)
+            self.次数输入[x].setEditable(True)
+            self.次数输入[x].clearEditText()
+            self.次数输入[x].setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+            self.次数输入[x].setCurrentText(temp)
+        else:
+            self.次数输入[x].setEditable(False)
+
+    def 宠物次数填写(self, x):
+        if self.宠物次数[x].currentIndex() == 11:
+            self.宠物次数[x].setEditable(True)
+            self.宠物次数[x].clearEditText()
+            self.宠物次数[x].setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+        elif self.宠物次数[x].currentIndex() == 12:
+            temp = self.宠物次数[x].currentText()
+            self.宠物次数[x].removeItem(12)
+            self.宠物次数[x].setCurrentIndex(11)
+            self.宠物次数[x].setEditable(True)
+            self.宠物次数[x].clearEditText()
+            self.宠物次数[x].setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+            self.宠物次数[x].setCurrentText(temp)
+        else:
+            self.宠物次数[x].setEditable(False)
+
 
     def 护石描述更新(self, x):
         try:
@@ -2938,8 +2978,36 @@ class 角色窗口(窗口):
                 if i.是否有伤害 == 1 and i.TP上限 != 0:
                     self.TP输入[序号].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
                 if i.是否有伤害 == 1:
-                    self.次数输入[序号].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
-                    self.宠物次数[序号].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+                    temp1 = (int(setfile[num].replace('\n', '')))
+                    if temp1 < 12:
+                       self.次数输入[序号].setCurrentIndex(int(setfile[num].replace('\n', '')))
+                    elif temp1 == 12:
+                        self.次数输入[序号].setCurrentIndex(12)
+                        self.次数输入[序号].setEditable(True)
+                        self.次数输入[序号].clearEditText()
+                        self.次数输入[序号].setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+                    else:
+                        self.次数输入[序号].setCurrentIndex(12)
+                        self.次数输入[序号].setEditable(True)
+                        self.次数输入[序号].clearEditText()
+                        self.次数输入[序号].setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+                        self.次数输入[序号].setCurrentText(str(temp1 - 1))
+                    num += 1
+                    temp2 = (int(setfile[num].replace('\n', '')))
+                    if temp2 < 11:
+                       self.宠物次数[序号].setCurrentIndex(int(setfile[num].replace('\n', '')))
+                    elif temp2 == 11:
+                        self.宠物次数[序号].setCurrentIndex(11)
+                        self.宠物次数[序号].setEditable(True)
+                        self.宠物次数[序号].clearEditText()
+                        self.宠物次数[序号].setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+                    else:
+                        self.宠物次数[序号].setCurrentIndex(11)
+                        self.宠物次数[序号].setEditable(True)
+                        self.宠物次数[序号].clearEditText()
+                        self.宠物次数[序号].setStyleSheet("QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(65,105,225,0.8)} QComboBox QAbstractItemView::item {height: 18px;}")
+                        self.宠物次数[序号].setCurrentText(str(temp2))
+                    num += 1
         except:
             pass
 
@@ -2960,6 +3028,19 @@ class 角色窗口(窗口):
                 self.守门人全属强.setChecked(False)
                 self.守门人全属强.setStyleSheet(不可勾选复选框样式)
             num += 1
+        except:
+            pass
+
+        try:
+            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill6.ini', 'r', encoding='utf-8').readlines()
+            num = 0
+            for i in self.角色属性A.技能栏:
+                序号 = self.角色属性A.技能序号[i.名称]
+                if i.是否有伤害 == 1:
+                    if self.次数输入[序号].currentIndex() == 12:
+                        self.次数输入[序号].setCurrentText((setfile[num].replace('\n', ''))); num += 1
+                    if self.宠物次数[序号].currentIndex() == 11:
+                        self.宠物次数[序号].setCurrentText((setfile[num].replace('\n', '')));num += 1
         except:
             pass
 
@@ -3112,6 +3193,38 @@ class 角色窗口(窗口):
             for i in range(15):
                 setfile.write(str(self.希洛克选择状态[i]) + '\n')
             setfile.write(str(self.守门人属强.currentIndex()) + '\n')
+        except:
+            pass
+
+        try:
+            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill6.ini', 'w', encoding='utf-8')
+            for i in self.角色属性A.技能栏:
+                序号 = self.角色属性A.技能序号[i.名称]
+                if i.是否有伤害 == 1:
+                   if self.次数输入[序号].currentIndex() == 12:
+                       if self.次数输入[序号].currentText() != '':
+                          try:
+                              temp = int(float(self.次数输入[序号].currentText()))
+                              if temp >= 0 and temp < 1000:
+                                 setfile.write(str(self.次数输入[序号].currentText()) + '\n')
+                              else:
+                                  setfile.write(str('/CD' + '\n'))
+                          except:
+                              setfile.write(str('/CD' + '\n'))
+                       else:
+                           setfile.write(str('/CD' + '\n'))
+                   if self.宠物次数[序号].currentIndex() == 11:
+                       if self.宠物次数[序号].currentText() != '':
+                           try:
+                               temp = int(float(self.宠物次数[序号].currentText()))
+                               if temp >= 0 and temp < 1000:
+                                   setfile.write(str(self.宠物次数[序号].currentText()) + '\n')
+                               else:
+                                   setfile.write(str('/CD' + '\n'))
+                           except:
+                               setfile.write(str('/CD' + '\n'))
+                       else:
+                           setfile.write(str('/CD' + '\n'))
         except:
             pass
 
@@ -3334,6 +3447,47 @@ class 角色窗口(窗口):
 
         修改后 = temp + 修改前
         self.属性设置输入[5][15].setText(str(int(修改后)))
+
+    #计算
+    def 计算(self):
+        self.角色属性A = deepcopy(self.初始属性)
+        self.输入属性(self.角色属性A)
+        self.角色属性A.开启切装 = 切装模式
+        if self.是否计算 != 1:
+            return
+        self.保存配置(self.存档位置)
+        if 调试开关 == 1:
+            self.输出界面(-1)
+            return
+        if self.神话数量判断() and self.神话排名选项.isChecked():
+            QMessageBox.information(self,"错误",  "请勾选神话装备或取消勾选神话排名模式选项")
+            return
+        self.有效部位列表备份 = []
+        if self.组合计算(self.计算模式选择.currentIndex()) == 0:
+            if self.计算模式选择.currentIndex() == 2 and 补全模式 != 0:
+                self.有效部位列表备份 = deepcopy(self.有效部位列表)
+                num = 0
+                for i in self.有效部位列表:
+                    if len(i) == 0 or (补全模式 == 2 and self.自选装备[num].currentText() not in i):
+                        i.append(self.自选装备[num].currentText())
+                    num += 1
+            elif self.计算模式选择.currentIndex() == 0 and self.组合计算(1) != 0:
+                QMessageBox.information(self, "错误", "已更换为套装模式，请再次计算")
+                self.计算模式选择.setCurrentIndex(1)
+                return
+            elif self.计算模式选择.currentIndex() != 2 and self.组合计算(2) != 0:
+                QMessageBox.information(self, "错误", "请更换为单件模式，并再次计算")
+                return
+            else:
+                QMessageBox.information(self,"错误",  "无有效组合，请重新选择装备")
+                return
+        self.计算按钮1.setEnabled(False)
+        self.计算按钮1.setStyleSheet(不可点击按钮样式)
+        self.计算按钮2.setEnabled(False)
+        self.计算按钮2.setStyleSheet(不可点击按钮样式)
+        self.计算按钮3.setEnabled(False)
+        self.计算按钮3.setStyleSheet(不可点击按钮样式)
+        threading.Thread(target=self.计算线程, daemon=True).start()
 
     def 提升率颜色显示(self, 属性, k):
         if k in 属性.词条选择:
@@ -4595,13 +4749,78 @@ class 角色窗口(窗口):
         属性.宠物次数.clear()
         属性.装备切装.clear()
         属性.技能切装.clear()
+        self.是否计算 = 1
         for i in self.角色属性A.技能栏:
             序号 = self.角色属性A.技能序号[i.名称]
             if i.是否有伤害 == 1:
-                属性.次数输入.append(self.次数输入[序号].currentText())
-                if self.次数输入[序号].currentIndex() != 0:
-                    self.宠物次数[序号].setCurrentIndex(min(self.宠物次数[序号].currentIndex(), self.次数输入[序号].currentIndex() - 1 + i.基础释放次数))
-                属性.宠物次数.append(self.宠物次数[序号].currentIndex())
+                if self.次数输入[序号].currentText() != '/CD':
+                    if self.次数输入[序号].currentIndex() == 12:
+                        if self.次数输入[序号].currentText() != '':
+                            try:
+                                temp1 = int(float(self.次数输入[序号].currentText()))
+                                temp2 = (float(self.次数输入[序号].currentText()))
+                                if temp1 >= 0 and temp1 < 1000:
+                                    if temp1 == temp2:
+                                        属性.次数输入.append(int(float(self.次数输入[序号].currentText())))
+                                    else:
+                                        属性.次数输入.append(int((float(self.次数输入[序号].currentText()) + 0.001) * 100) / 100)
+                                        self.次数输入[序号].setCurrentText(
+                                            str(int((float(self.次数输入[序号].currentText()) + 0.001) * 100) / 100))
+                                else:
+                                    QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数超出取值范围，请重新输入")
+                                    self.是否计算 = 0
+                                    break
+                            except:
+                                QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入格式错误，请重新输入")
+                                self.是否计算 = 0
+                                break
+                        else:
+                            QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入为空，请重新输入")
+                            self.是否计算 = 0
+                            break
+                    else:
+                        属性.次数输入.append(int(self.次数输入[序号].currentText()))
+                else:
+                    属性.次数输入.append((self.次数输入[序号].currentText()))
+
+                if self.宠物次数[序号].currentIndex() == 11:
+                    if self.宠物次数[序号].currentText() != '':
+                        try:
+                            temp1 = int(float(self.宠物次数[序号].currentText()))
+                            if temp1 >= 0 and temp1 < 1000:
+                                self.宠物次数[序号].setCurrentText(
+                                    str(int((float(self.宠物次数[序号].currentText()) + 0.001) * 100) / 100))
+                            else:
+                                QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "宠物次数超出取值范围，请重新输入")
+                                self.是否计算 = 0
+                                break
+                        except:
+                            QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "宠物次数输入格式错误，请重新输入")
+                            self.是否计算 = 0
+                            break
+                    else:
+                        QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "宠物次数输入为空，请重新输入")
+                        self.是否计算 = 0
+                        break
+                    if self.次数输入[序号].currentIndex() != 0:
+                        temp3 = (float(self.宠物次数[序号].currentText()))
+                        temp4 = (float(self.次数输入[序号].currentText()) + i.基础释放次数)
+                        temp5 = min(temp3, temp4)
+                        if int(temp5) == temp5:
+                            self.宠物次数[序号].setCurrentText(str(int(temp5)))
+                        else:
+                            self.宠物次数[序号].setCurrentText(str(temp5))
+                    属性.宠物次数.append(float(self.宠物次数[序号].currentText()))
+                else:
+                    if self.次数输入[序号].currentIndex() != 0:
+                        temp3 = (float(self.宠物次数[序号].currentIndex()))
+                        temp4 = (float(self.次数输入[序号].currentText()) + i.基础释放次数)
+                        temp5 = min(temp3, temp4)
+                        if int(temp5) == temp5:
+                            self.宠物次数[序号].setCurrentText(str(int(temp5)))
+                        else:
+                            self.宠物次数[序号].setCurrentText(str(temp5))
+                    属性.宠物次数.append(float(self.宠物次数[序号].currentText()))
                 if 切装模式 == 1:
                     if self.技能切装[序号].isChecked():
                         属性.技能切装.append(1)
@@ -4678,14 +4897,17 @@ class 角色窗口(窗口):
         except: 
             QMessageBox.information(self,"错误",  "BUFF数值输入错误,已设置为默认数值") 
             self.BUFF输入.setText(str('%.1f' % ((self.角色属性A.主BUFF - 1) * 100)))
-        
-        if self.角色属性A.技能栏[self.三觉序号].是否有伤害 == 1 and 属性.次数输入[self.三觉序号] == '0':
-            属性.技能栏[self.三觉序号].关联技能 = ['无']
-        else:
-            if self.觉醒选择状态 == 1:
-                属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.一觉序号].名称]
-            if self.觉醒选择状态 == 2:
-                属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.二觉序号].名称]
+
+        try:
+            if self.角色属性A.技能栏[self.三觉序号].是否有伤害 == 1 and 属性.次数输入[self.三觉序号] == '0':
+                属性.技能栏[self.三觉序号].关联技能 = ['无']
+            else:
+                if self.觉醒选择状态 == 1:
+                    属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.一觉序号].名称]
+                if self.觉醒选择状态 == 2:
+                    属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.二觉序号].名称]
+        except:
+            pass
     
         属性.角色熟练度 = self.装备条件选择[0].currentIndex()
         属性.技能栏空位 = self.装备条件选择[1].currentIndex()
