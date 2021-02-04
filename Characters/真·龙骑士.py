@@ -2,7 +2,7 @@ from math import *
 from PublicReference.base import *
 
 
-class 真·龙骑士技能0(被动技能):
+class 技能0(被动技能):
     名称 = '基础精通'
     所在等级 = 1
     等级上限 = 200
@@ -16,7 +16,7 @@ class 真·龙骑士技能0(被动技能):
             return round(0.463 + 0.089 * self.等级, 5)
 
 
-class 真·龙骑士技能1(主动技能):
+class 技能1(主动技能):
     名称 = '龙人剑术'
     备注 = '(TP为基础精通)'
     所在等级 = 15
@@ -29,7 +29,7 @@ class 真·龙骑士技能1(主动技能):
     TP上限 = 5
 
 
-class 真·龙骑士技能2(主动技能):
+class 技能2(主动技能):
     名称 = '火焰吐息'
     所在等级 = 15
     等级上限 = 60
@@ -47,7 +47,7 @@ class 真·龙骑士技能2(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能3(主动技能):
+class 技能3(主动技能):
     名称 = '龙翼突袭'
     所在等级 = 20
     等级上限 = 60
@@ -73,7 +73,7 @@ class 真·龙骑士技能3(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能4(主动技能):
+class 技能4(主动技能):
     名称 = '龙语召唤：阿斯特拉'
     所在等级 = 20
     等级上限 = 30
@@ -104,7 +104,7 @@ class 真·龙骑士技能4(主动技能):
             return round(0.75 + 0.02 * self.等级, 5)
 
 
-class 真·龙骑士技能5(主动技能):
+class 技能5(主动技能):
     名称 = '爆破龙角'
     所在等级 = 25
     等级上限 = 60
@@ -128,7 +128,7 @@ class 真·龙骑士技能5(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能6(主动技能):
+class 技能6(主动技能):
     名称 = '龙拳(地面释放)'
     所在等级 = 30
     等级上限 = 60
@@ -151,7 +151,7 @@ class 真·龙骑士技能6(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能7(主动技能):
+class 技能7(主动技能):
     名称 = '龙拳(空中释放)'
     所在等级 = 30
     等级上限 = 60
@@ -174,7 +174,7 @@ class 真·龙骑士技能7(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能8(主动技能):
+class 技能8(主动技能):
     名称 = '龙之撕咬'
     所在等级 = 30
     等级上限 = 60
@@ -192,7 +192,7 @@ class 真·龙骑士技能8(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能9(主动技能):
+class 技能9(主动技能):
     名称 = '龙翼穿刺(2hit+踢击)'
     所在等级 = 35
     等级上限 = 60
@@ -214,7 +214,7 @@ class 真·龙骑士技能9(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能10(主动技能):
+class 技能10(主动技能):
     名称 = '龙翼穿刺(撕咬附着)'
     所在等级 = 35
     等级上限 = 60
@@ -232,7 +232,7 @@ class 真·龙骑士技能10(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能11(主动技能):
+class 技能11(主动技能):
     名称 = '飞龙斩'
     所在等级 = 35
     等级上限 = 60
@@ -266,7 +266,7 @@ class 真·龙骑士技能11(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能12(被动技能):
+class 技能12(被动技能):
     名称 = '大胃王'
     所在等级 = 35
     等级上限 = 20
@@ -281,7 +281,7 @@ class 真·龙骑士技能12(被动技能):
             return round(0.9 + 0.02 * self.等级, 5)
 
 
-class 真·龙骑士技能13(主动技能):
+class 技能13(主动技能):
     名称 = '龙刃无双'
     所在等级 = 40
     等级上限 = 60
@@ -308,15 +308,16 @@ class 真·龙骑士技能13(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能14(主动技能):
+class 技能14(主动技能):
     名称 = '魔龙之息(脱手)'
     所在等级 = 45
     等级上限 = 60
     基础等级 = 31
-    数据1 = [(i*1.113) for i in [0, 1533, 1688, 1844, 1999, 2155, 2310, 2466, 2622, 2777, 2933, 3088, 3244, 3399, 3555, 3710, 3866, 4021,
-           4177, 4333, 4488, 4644, 4799, 4955, 5110, 5266, 5421, 5577, 5733, 5888, 6044, 6199, 6355, 6510, 6666, 6821,
-           6977, 7132, 7288, 7444, 7599, 7755, 7910, 8066, 8221, 8377, 8532, 8688, 8843, 8999, 9155, 9310, 9466, 9621,
-           9777, 9932, 10088, 10243, 10399, 10554, 10710]]
+    数据1 = [(i * 1.113) for i in
+           [0, 1533, 1688, 1844, 1999, 2155, 2310, 2466, 2622, 2777, 2933, 3088, 3244, 3399, 3555, 3710, 3866, 4021,
+            4177, 4333, 4488, 4644, 4799, 4955, 5110, 5266, 5421, 5577, 5733, 5888, 6044, 6199, 6355, 6510, 6666, 6821,
+            6977, 7132, 7288, 7444, 7599, 7755, 7910, 8066, 8221, 8377, 8532, 8688, 8843, 8999, 9155, 9310, 9466, 9621,
+            9777, 9932, 10088, 10243, 10399, 10554, 10710]]
     攻击次数1 = 13
     CD = 40.0
     TP成长 = 0.10
@@ -332,12 +333,45 @@ class 真·龙骑士技能14(主动技能):
         elif x == 1:
             self.倍率 *= 1.30
             self.CD *= 0.9
-        
+
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能15(被动技能):
+
+class 技能15(主动技能):
+    名称 = '魔龙之息(骑乘)'
+    所在等级 = 45
+    等级上限 = 60
+    基础等级 = 31
+    数据1 = [(i*1.113) for i in [0, 1015, 1118, 1221, 1324, 1427, 1530, 1633, 1736, 1839, 1942, 2045, 2148, 2251, 2354, 2457, 2560, 2663, 2766, 2869, 2972, 3075, 3178, 3280, 3383, 3486, 3589, 3692, 3795, 3898, 4001, 4104, 4207, 4310, 4413, 4516, 4619, 4722, 4825, 4928, 5031, 5134, 5237, 5340, 5443, 5546, 5649, 5752, 5855, 5958, 6061, 6164, 6267, 6370, 6473, 6576, 6679, 6782, 6885, 6988, 7091]]
+    攻击次数1 = 23
+    CD = 40.0
+    TP成长 = 0.10
+    TP上限 = 7
+    是否有护石 = 1
+    护石CD缩减 = 0
+
+    护石选项 = ['魔界', '圣痕']
+
+    def 装备护石(self, x):
+        if x == 0:
+            self.CD *= 0.9
+            self.攻击次数1 = 25
+            self.护石CD缩减 = 4
+        elif x == 1:
+            self.倍率 *= 1.07
+            self.CD *= 0.9
+            self.攻击次数1 = 25
+            self.护石CD缩减 = 4
+        
+    def 等效百分比(self, 武器类型):
+        return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
+
+    def 等效CD(self, 武器类型, 输出类型):
+        return round((self.CD * 武器冷却惩罚(武器类型,输出类型,self.版本)-self.护石CD缩减)/ self.恢复, 1)
+
+class 技能16(被动技能):
     名称 = '魔龙之力'
     所在等级 = 48
     等级上限 = 40
@@ -350,7 +384,7 @@ class 真·龙骑士技能15(被动技能):
             return round(1.105 + 0.015 * self.等级, 5)
 
 
-class 真·龙骑士技能16(主动技能):
+class 技能17(主动技能):
     名称 = '魔龙之力(火球)'
     所在等级 = 48
     等级上限 = 40
@@ -368,7 +402,7 @@ class 真·龙骑士技能16(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能17(主动技能):
+class 技能18(主动技能):
     名称 = '雷光嘶吼'
     所在等级 = 50
     等级上限 = 40
@@ -390,7 +424,7 @@ class 真·龙骑士技能17(主动技能):
             return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2 * 1.1) * self.倍率
 
 
-class 真·龙骑士技能18(主动技能):
+class 技能19(主动技能):
     名称 = '龙皇制裁'
     所在等级 = 60
     等级上限 = 40
@@ -418,7 +452,7 @@ class 真·龙骑士技能18(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能19(主动技能):
+class 技能20(主动技能):
     名称 = '魔龙天翔(脱手)'
     所在等级 = 70
     等级上限 = 40
@@ -444,8 +478,8 @@ class 真·龙骑士技能19(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能20(主动技能):
-    名称 = '魔龙天翔(空中释放)'
+class 技能21(主动技能):
+    名称 = '魔龙天翔(骑乘)'
     所在等级 = 70
     等级上限 = 40
     基础等级 = 18
@@ -474,7 +508,7 @@ class 真·龙骑士技能20(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能21(被动技能):
+class 技能22(被动技能):
     名称 = '龙神血脉'
     所在等级 = 75
     等级上限 = 40
@@ -488,7 +522,7 @@ class 真·龙骑士技能21(被动技能):
             return round(1.21 + 0.02 * self.等级, 5)
 
 
-class 真·龙骑士技能22(主动技能):
+class 技能23(主动技能):
     名称 = '魔龙星落'
     所在等级 = 75
     等级上限 = 40
@@ -517,7 +551,7 @@ class 真·龙骑士技能22(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能23(主动技能):
+class 技能24(主动技能):
     名称 = '征战无双'
     所在等级 = 80
     等级上限 = 40
@@ -549,7 +583,7 @@ class 真·龙骑士技能23(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能24(主动技能):
+class 技能25(主动技能):
     名称 = '龙神裁决：终末之光'
     所在等级 = 85
     等级上限 = 40
@@ -567,7 +601,7 @@ class 真·龙骑士技能24(主动技能):
         return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 真·龙骑士技能25(被动技能):
+class 技能26(被动技能):
     名称 = '龙血誓约'
     所在等级 = 95
     等级上限 = 40
@@ -580,7 +614,7 @@ class 真·龙骑士技能25(被动技能):
             return round(1.18 + 0.02 * self.等级, 5)
 
 
-class 真·龙骑士技能26(主动技能):
+class 技能27(主动技能):
     名称 = '雷龙灭尽：咆吼'
     所在等级 = 95
     等级上限 = 40
@@ -592,7 +626,7 @@ class 真·龙骑士技能26(主动技能):
 
 
 
-class 真·龙骑士技能27(主动技能):
+class 技能28(主动技能):
     名称 = '真龙连击：无尽新星'
     所在等级 = 100
     等级上限 = 40
@@ -603,7 +637,7 @@ class 真·龙骑士技能27(主动技能):
     def 加成倍率(self, 武器类型):
          return 0.0
 
-class 真·龙骑士技能28(主动技能):
+class 技能29(主动技能):
     名称 = '普通攻击（一轮）'
     所在等级 = 1
     等级上限 = 1
@@ -612,42 +646,48 @@ class 真·龙骑士技能28(主动技能):
     成长 = 0
     CD = 1
 
-真·龙骑士技能列表 = []
+技能列表 = []
 i = 0
 while i >= 0:
     try:
-        exec('真·龙骑士技能列表.append(真·龙骑士技能' + str(i) + '())')
+        exec('技能列表.append(技能' + str(i) + '())')
         i += 1
     except:
         i = -1
 
-真·龙骑士技能序号 = dict()
-for i in range(len(真·龙骑士技能列表)):
-    真·龙骑士技能序号[真·龙骑士技能列表[i].名称] = i
+技能序号 = dict()
+for i in range(len(技能列表)):
+    技能序号[技能列表[i].名称] = i
 
-真·龙骑士一觉序号 = 0
-真·龙骑士二觉序号 = 0
-真·龙骑士三觉序号 = 0
-for i in 真·龙骑士技能列表:
+一觉序号 = 0
+二觉序号 = 0
+三觉序号 = 0
+for i in 技能列表:
     if i.所在等级 == 50:
-        真·龙骑士一觉序号 = 真·龙骑士技能序号[i.名称]
+        一觉序号 = 技能序号[i.名称]
     if i.所在等级 == 85:
-        真·龙骑士二觉序号 = 真·龙骑士技能序号[i.名称]
+        二觉序号 = 技能序号[i.名称]
     if i.所在等级 == 100:
-        真·龙骑士三觉序号 = 真·龙骑士技能序号[i.名称]
+        三觉序号 = 技能序号[i.名称]
 
-真·龙骑士护石选项 = ['无']
-for i in 真·龙骑士技能列表:
-    if i.是否有伤害 == 1 and i.是否有护石 == 1:
-        真·龙骑士护石选项.append(i.名称)
+护石选项 = ['无']
+for i in 技能列表:
+    temp = i
+    if i.是否有伤害 == 1 and i.是否有护石 == 1 and i.所在等级 != 45 and i.所在等级 != 70:
+        护石选项.append(i.名称)
+护石选项.append('魔龙之息')
+护石选项.append('魔龙天翔')
 
-真·龙骑士符文选项 = ['无']
-for i in 真·龙骑士技能列表:
-    if i.所在等级 >= 20 and i.所在等级 <= 80 and i.所在等级 != 50 and i.所在等级 != 48 and i.是否有伤害 == 1:
-        真·龙骑士符文选项.append(i.名称)
+符文选项 = ['无']
+for i in 技能列表:
+    temp = i
+    if i.所在等级 >= 20 and i.所在等级 <= 80 and i.所在等级 != 50 and i.所在等级 != 48 and i.是否有伤害 == 1 and i.所在等级 != 45 and i.所在等级 != 70:
+        符文选项.append(i.名称)
+符文选项.append('魔龙之息')
+符文选项.append('魔龙天翔')
 
 
-class 真·龙骑士角色属性(角色属性):
+class 职业角色属性(角色属性):
     实际名称 = '真·龙骑士'
     角色 = '守护者'
     职业 = '龙骑士'
@@ -664,20 +704,341 @@ class 真·龙骑士角色属性(角色属性):
 
     def __init__(self):
         基础属性输入(self)
-        self.技能栏 = deepcopy(真·龙骑士技能列表)
-        self.技能序号 = deepcopy(真·龙骑士技能序号)
+        self.技能栏 = deepcopy(技能列表)
+        self.技能序号 = deepcopy(技能序号)
 
     def 被动倍率计算(self):
         super().被动倍率计算()
-        self.技能栏[16].等级 = self.技能栏[15].等级
+        self.技能栏[17].等级 = self.技能栏[16].等级
+
+        if self.装备检查('守护的抉择'):
+            if self.护石第一栏 == '魔龙之息':
+                self.技能栏[self.技能序号['魔龙之息(脱手)']].CD *= 0.7
+                self.技能栏[self.技能序号['魔龙之息(脱手)']].倍率 *= 1.55
+                self.技能栏[self.技能序号['魔龙之息(骑乘)']].CD *= 0.7
+                self.技能栏[self.技能序号['魔龙之息(骑乘)']].倍率 *= 1.55
+            if self.护石第二栏 =='魔龙之息':
+                self.技能栏[self.技能序号['魔龙之息(脱手)']].CD *= 0.75
+                self.技能栏[self.技能序号['魔龙之息(脱手)']].倍率 *= 1.45
+                self.技能栏[self.技能序号['魔龙之息(骑乘)']].CD *= 0.75
+                self.技能栏[self.技能序号['魔龙之息(骑乘)']].倍率 *= 1.45
+            if self.护石第一栏 == '魔龙天翔':
+                self.技能栏[self.技能序号['魔龙天翔(脱手)']].CD *= 0.7
+                self.技能栏[self.技能序号['魔龙天翔(脱手)']].倍率 *= 1.55
+                self.技能栏[self.技能序号['魔龙天翔(脱手)']].CD *= 0.7
+                self.技能栏[self.技能序号['魔龙天翔(脱手)']].倍率 *= 1.55
+            if self.护石第二栏 =='魔龙天翔':
+                self.技能栏[self.技能序号['魔龙天翔(脱手)']].CD *= 0.75
+                self.技能栏[self.技能序号['魔龙天翔(脱手)']].倍率 *= 1.45
+                self.技能栏[self.技能序号['魔龙天翔(脱手)']].CD *= 0.75
+                self.技能栏[self.技能序号['魔龙天翔(脱手)']].倍率 *= 1.45
 
 class 真·龙骑士(角色窗口):
     def 窗口属性输入(self):
-        self.初始属性 = 真·龙骑士角色属性()
-        self.角色属性A = 真·龙骑士角色属性()
-        self.角色属性B = 真·龙骑士角色属性()
-        self.一觉序号 = 真·龙骑士一觉序号
-        self.二觉序号 = 真·龙骑士二觉序号
-        self.三觉序号 = 真·龙骑士三觉序号
-        self.护石选项 = deepcopy(真·龙骑士护石选项)
-        self.符文选项 = deepcopy(真·龙骑士符文选项)
+        self.初始属性 = 职业角色属性()
+        self.角色属性A = 职业角色属性()
+        self.角色属性B = 职业角色属性()
+        self.一觉序号 = 一觉序号
+        self.二觉序号 = 二觉序号
+        self.三觉序号 = 三觉序号
+        self.护石选项 = deepcopy(护石选项)
+        self.符文选项 = deepcopy(符文选项)
+
+    def 护石类型选项更新(self, x):
+        self.护石类型选项[x].clear()
+        if self.护石栏[x].currentText() != '无':
+            if self.护石栏[x].currentText() not in ['魔龙天翔', '魔龙之息']:
+                try:
+                    self.护石类型选项[x].addItems(self.初始属性.技能栏[self.初始属性.技能序号[self.护石栏[x].currentText()]].护石选项)
+                except:
+                    self.护石类型选项[x].addItem('魔界')
+                    self.护石栏[x].setCurrentIndex(0)
+            elif self.护石栏[x].currentText() in ['魔龙天翔', '魔龙之息']:
+                self.护石类型选项[x].addItem('魔界')
+                self.护石类型选项[x].addItem('圣痕')
+        else:
+            self.护石类型选项[x].addItem('魔界')
+
+    def 输入属性(self, 属性, x=0):
+
+        i = self.攻击目标.currentIndex()
+        属性.防御输入 = 攻击目标[i][1]
+        属性.火抗输入 = 攻击目标[i][2]
+        属性.冰抗输入 = 攻击目标[i][3]
+        属性.光抗输入 = 攻击目标[i][4]
+        属性.暗抗输入 = 攻击目标[i][5]
+
+        if self.初始属性.远古记忆 != -1:
+            属性.远古记忆 = self.远古记忆.currentIndex()
+        if self.初始属性.刀魂之卡赞 != -1:
+            属性.刀魂之卡赞 = self.刀魂之卡赞.currentIndex()
+
+        属性.自适应选项 = copy([(1 if self.红色宠物装备.isChecked() else 0), (1 if self.光环自适应.isChecked() else 0)])
+
+        if self.转甲选项.isChecked():
+            属性.转甲选项 = 1
+        else:
+            属性.转甲选项 = 0
+
+        for j in [self.等级调整, self.TP输入, self.次数输入, self.宠物次数]:
+            for i in j:
+                if i != '' and i.currentIndex() == -1:
+                    i.setCurrentIndex(0)
+
+        for i in 属性.技能栏:
+            i.等级 = i.基础等级 + int(self.等级调整[self.角色属性A.技能序号[i.名称]].currentText())
+            if i.是否有伤害 == 1:
+                if i.TP上限 != 0:
+                    i.TP等级 = int(self.TP输入[self.角色属性A.技能序号[i.名称]].currentText())
+
+        if x == 0:
+            self.辟邪玉属性计算(属性)
+        elif x >= 100:
+            y = x - 100
+            辟邪玉列表[y].当前值 = 辟邪玉列表[y].最大值
+            辟邪玉列表[y].穿戴属性(属性)
+
+        if sum(self.希洛克选择状态) == 3:
+            属性.武器词条触发 = 1
+
+        if self.希洛克武器词条[0].currentIndex() == 1:
+            属性.希洛克武器词条 = 1
+        elif self.希洛克武器词条[0].currentIndex() == 2:
+            词条属性列表[self.希洛克武器词条[1].currentIndex()].加成属性(属性, (self.希洛克武器词条[3].currentIndex() + 3) * 0.02)
+            if 属性.武器词条触发 == 1:
+                词条属性列表[self.希洛克武器词条[2].currentIndex()].加成属性(属性, (self.希洛克武器词条[4].currentIndex() + 3) * 0.01)
+
+        属性.时间输入 = int(self.时间输入.currentText())
+        属性.次数输入.clear()
+        属性.宠物次数.clear()
+        属性.装备切装.clear()
+        属性.技能切装.clear()
+        self.是否计算 = 1
+        for i in self.角色属性A.技能栏:
+            序号 = self.角色属性A.技能序号[i.名称]
+            if i.是否有伤害 == 1:
+                if self.次数输入[序号].currentText() != '/CD':
+                    if self.次数输入[序号].currentIndex() == 12:
+                        if self.次数输入[序号].currentText() != '':
+                            try:
+                                temp1 = int(float(self.次数输入[序号].currentText()))
+                                temp2 = (float(self.次数输入[序号].currentText()))
+                                if temp1 >= 0 and temp1 < 1000:
+                                    if temp1 == temp2:
+                                        属性.次数输入.append(int(float(self.次数输入[序号].currentText())))
+                                    else:
+                                        属性.次数输入.append(int((float(self.次数输入[序号].currentText()) + 0.001) * 100) / 100)
+                                        self.次数输入[序号].setCurrentText(
+                                            str(int((float(self.次数输入[序号].currentText()) + 0.001) * 100) / 100))
+                                else:
+                                    QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数超出取值范围，请重新输入")
+                                    self.是否计算 = 0
+                                    break
+                            except:
+                                QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入格式错误，请重新输入")
+                                self.是否计算 = 0
+                                break
+                        else:
+                            QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入为空，请重新输入")
+                            self.是否计算 = 0
+                            break
+                    else:
+                        属性.次数输入.append(int(self.次数输入[序号].currentText()))
+                else:
+                    属性.次数输入.append((self.次数输入[序号].currentText()))
+
+                if self.宠物次数[序号].currentIndex() == 11:
+                    if self.宠物次数[序号].currentText() != '':
+                        try:
+                            temp1 = int(float(self.宠物次数[序号].currentText()))
+                            if temp1 >= 0 and temp1 < 1000:
+                                self.宠物次数[序号].setCurrentText(
+                                    str(int((float(self.宠物次数[序号].currentText()) + 0.001) * 100) / 100))
+                            else:
+                                QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "宠物次数超出取值范围，请重新输入")
+                                self.是否计算 = 0
+                                break
+                        except:
+                            QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "宠物次数输入格式错误，请重新输入")
+                            self.是否计算 = 0
+                            break
+                    else:
+                        QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "宠物次数输入为空，请重新输入")
+                        self.是否计算 = 0
+                        break
+                    if self.次数输入[序号].currentIndex() != 0:
+                        temp3 = (float(self.宠物次数[序号].currentText()))
+                        temp4 = (float(self.次数输入[序号].currentText()) + i.基础释放次数)
+                        temp5 = min(temp3, temp4)
+                        if int(temp5) == temp5:
+                            self.宠物次数[序号].setCurrentText(str(int(temp5)))
+                        else:
+                            self.宠物次数[序号].setCurrentText(str(temp5))
+                    属性.宠物次数.append(float(self.宠物次数[序号].currentText()))
+                else:
+                    if self.次数输入[序号].currentIndex() != 0:
+                        temp3 = (float(self.宠物次数[序号].currentIndex()))
+                        temp4 = (float(self.次数输入[序号].currentText()) + i.基础释放次数)
+                        temp5 = min(temp3, temp4)
+                        if int(temp5) == temp5:
+                            self.宠物次数[序号].setCurrentText(str(int(temp5)))
+                        else:
+                            self.宠物次数[序号].setCurrentText(str(temp5))
+                    属性.宠物次数.append(float(self.宠物次数[序号].currentText()))
+                if 切装模式 == 1:
+                    if self.技能切装[序号].isChecked():
+                        属性.技能切装.append(1)
+                    else:
+                        属性.技能切装.append(0)
+            else:
+                属性.次数输入.append('')
+                属性.宠物次数.append(0)
+                属性.技能切装.append(0)
+        if 切装模式 == 1:
+            for i in range(12):
+                if self.装备切装[i].isChecked():
+                    属性.装备切装.append(self.自选装备[i].currentText())
+                else:
+                    属性.装备切装.append('无')
+
+        for i in range(len(self.复选框列表)):
+            if self.复选框列表[i].isChecked():
+                选项设置列表[i].适用效果(属性)
+
+        count = 0
+        count2 = 0
+        for i in 装备列表:
+            if i.品质 == '神话':
+                i.属性1选择 = self.神话属性选项[count * 4 + 0].currentIndex()
+                i.属性2选择 = self.神话属性选项[count * 4 + 1].currentIndex()
+                i.属性3选择 = self.神话属性选项[count * 4 + 2].currentIndex()
+                i.属性4选择 = self.神话属性选项[count * 4 + 3].currentIndex()
+                count += 1
+            if i.所属套装 == '智慧产物':
+                i.属性1选择 = self.改造产物选项[count2 * 4 + 0].currentIndex()
+                i.属性2选择 = self.改造产物选项[count2 * 4 + 1].currentIndex()
+                i.属性3选择 = self.改造产物选项[count2 * 4 + 2].currentIndex()
+                i.属性4选择 = self.改造产物选项[count2 * 4 + 3].currentIndex()
+                count2 += 1
+
+        属性.攻击属性 = self.攻击属性选项.currentIndex()
+
+        称号列表[self.称号.currentIndex()].城镇属性(属性)
+        if 属性.称号触发:
+            称号列表[self.称号.currentIndex()].触发属性(属性)
+
+        宠物列表[self.宠物.currentIndex()].城镇属性(属性)
+
+        for k in range(3):
+            if self.护石栏[k].currentText() != '无' and self.护石栏[k].currentText()!= '魔龙之息' and self.护石栏[k].currentText()!= '魔龙天翔':
+                try:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石()
+                except:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石(self.护石类型选项[k].currentIndex())
+            elif self.护石栏[k].currentText()== '魔龙之息':
+                if self.护石类型选项[k].currentText() == '魔界':
+                    属性.技能栏[self.角色属性A.技能序号['魔龙之息(脱手)']].装备护石(0)
+                    属性.技能栏[self.角色属性A.技能序号['魔龙之息(骑乘)']].装备护石(0)
+                elif self.护石类型选项[k].currentText() == '圣痕':
+                    属性.技能栏[self.角色属性A.技能序号['魔龙之息(脱手)']].装备护石(1)
+                    属性.技能栏[self.角色属性A.技能序号['魔龙之息(骑乘)']].装备护石(1)
+            elif self.护石栏[k].currentText()== '魔龙天翔':
+                if self.护石类型选项[k].currentText() == '魔界':
+                    属性.技能栏[self.角色属性A.技能序号['魔龙之息(脱手)']].装备护石(0)
+                    属性.技能栏[self.角色属性A.技能序号['魔龙之息(骑乘)']].装备护石(0)
+                elif self.护石类型选项[k].currentText() == '圣痕':
+                    属性.技能栏[self.角色属性A.技能序号['魔龙之息(脱手)']].装备护石(1)
+                    属性.技能栏[self.角色属性A.技能序号['魔龙之息(骑乘)']].装备护石(1)
+        属性.护石第一栏 = self.护石栏[0].currentText()
+        属性.护石第二栏 = self.护石栏[1].currentText()
+        属性.护石第三栏 = self.护石栏[2].currentText()
+
+        for i in range(0, 9):
+            if self.符文[i].currentText() != '无' and self.符文效果[i].currentText() != '无' and self.符文[i].currentText() != '魔龙之息' and self.符文[i].currentText() != '魔龙天翔':
+                for j in self.符文效果[i].currentText().split(','):
+                    if '攻击' in j:
+                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率 *= 1 + int(
+                            j.replace('攻击', '').replace('%', '')) / 100
+                    if 'CD' in j:
+                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD *= 1 + int(
+                            j.replace('CD', '').replace('%', '')) / 100
+            elif self.符文[i].currentText() == '魔龙之息':
+                for j in self.符文效果[i].currentText().split(','):
+                    if '攻击' in j:
+                        属性.技能栏[self.角色属性A.技能序号['魔龙之息(脱手)']].倍率 *= 1 + int(j.replace('攻击', '').replace('%', '')) / 100
+                        属性.技能栏[self.角色属性A.技能序号['魔龙之息(骑乘)']].倍率 *= 1 + int(j.replace('攻击', '').replace('%', '')) / 100
+                    if 'CD' in j:
+                        属性.技能栏[self.角色属性A.技能序号['魔龙之息(脱手)']].CD *= 1 + int(j.replace('CD', '').replace('%', '')) / 100
+                        属性.技能栏[self.角色属性A.技能序号['魔龙之息(骑乘)']].CD *= 1 + int(j.replace('CD', '').replace('%', '')) / 100
+            elif self.符文[i].currentText() == '魔龙天翔':
+                for j in self.符文效果[i].currentText().split(','):
+                    if '攻击' in j:
+                        属性.技能栏[self.角色属性A.技能序号['魔龙天翔(脱手)']].倍率 *= 1 + int(j.replace('攻击', '').replace('%', '')) / 100
+                        属性.技能栏[self.角色属性A.技能序号['魔龙天翔(骑乘)']].倍率 *= 1 + int(j.replace('攻击', '').replace('%', '')) / 100
+                    if 'CD' in j:
+                        属性.技能栏[self.角色属性A.技能序号['魔龙天翔(脱手)']].CD *= 1 + int(j.replace('CD', '').replace('%', '')) / 100
+                        属性.技能栏[self.角色属性A.技能序号['魔龙天翔(骑乘)']].CD *= 1 + int(j.replace('CD', '').replace('%', '')) / 100
+
+
+        for i in range(0, 12):
+            属性.是否增幅[i] = self.装备打造选项[i].currentIndex()
+            属性.强化等级[i] = self.装备打造选项[i + 12].currentIndex()
+            属性.改造等级[i] = self.装备打造选项[i + 24].currentIndex()
+        属性.武器锻造等级 = self.装备打造选项[36].currentIndex()
+        属性.类型 = self.装备打造选项[37].currentText()
+
+        try:
+            属性.主BUFF = float(self.BUFF输入.text()) / 100 + 1
+        except:
+            QMessageBox.information(self, "错误", "BUFF数值输入错误,已设置为默认数值")
+            self.BUFF输入.setText(str('%.1f' % ((self.角色属性A.主BUFF - 1) * 100)))
+
+        try:
+            属性.主BUFF = float(self.BUFF输入.text()) / 100 + 1
+        except: 
+            QMessageBox.information(self,"错误",  "BUFF数值输入错误,已设置为默认数值") 
+            self.BUFF输入.setText(str('%.1f' % ((self.角色属性A.主BUFF - 1) * 100)))
+
+        try:
+            if self.角色属性A.技能栏[self.三觉序号].是否有伤害 == 1 and 属性.次数输入[self.三觉序号] == '0':
+                属性.技能栏[self.三觉序号].关联技能 = ['无']
+            else:
+                if self.觉醒选择状态 == 1:
+                    属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.一觉序号].名称]
+                if self.觉醒选择状态 == 2:
+                    属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.二觉序号].名称]
+        except:
+            pass
+
+        属性.角色熟练度 = self.装备条件选择[0].currentIndex()
+        属性.技能栏空位 = self.装备条件选择[1].currentIndex()
+        属性.命运的抉择 = self.装备条件选择[2].currentIndex()
+        属性.天命无常 = self.装备条件选择[3].currentIndex()
+        属性.悲剧的残骸 = self.装备条件选择[4].currentIndex()
+        属性.先知者的预言 = self.装备条件选择[5].currentIndex()
+        属性.贫瘠沙漠的遗产 = self.装备条件选择[6].currentIndex()
+        属性.幸运三角 = self.装备条件选择[7].currentIndex()
+        属性.擎天战甲 = self.装备条件选择[8].currentIndex()
+        属性.持续伤害计算比例 = 1 - 0.01 * self.装备条件选择[9].currentIndex()
+        属性.军神的隐秘遗产 = self.装备条件选择[10].currentIndex()
+        属性.太极天帝剑 = self.装备条件选择[11].currentIndex()
+        # 属性.绿色生命的面容 = self.装备条件选择[12].currentIndex()
+        属性.产物升级 = 1 if self.智慧产物升级.isChecked() else 0
+        属性.黑鸦武器择优模式 = self.武器择优模式.currentIndex()
+        属性.黑鸦词条 = []
+        for i in range(4):
+            temp = [
+                self.黑鸦词条[i][0].currentIndex(),
+                self.黑鸦词条[i][1].currentIndex(),
+                ((2 if i > 0 else 4)) * (self.黑鸦词条[i][2].currentIndex() + 1),
+                0
+            ]
+            属性.黑鸦词条.append(temp)
+        self.希洛克属性计算(属性)
+        self.基础属性(属性)
+
+
+
+
+
+
