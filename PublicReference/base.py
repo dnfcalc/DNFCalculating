@@ -20,9 +20,15 @@ class 技能:
     关联技能 = ['无']
     关联技能2 = ['无']
     关联技能3 = ['无']
+    非关联技能 = ['无']
+    非关联技能2 = ['无']
+    非关联技能3 = ['无']
     冷却关联技能 = ['无']
     冷却关联技能2 = ['无']
     冷却关联技能3 = ['无']
+    非冷却关联技能 = ['无']
+    非冷却关联技能2 = ['无']
+    非冷却关联技能3 = ['无']
 
     版本 = 装备版本
 
@@ -620,6 +626,14 @@ class 角色属性(属性):
                 else:
                     for k in i.冷却关联技能:
                         self.技能栏[self.技能序号[k]].CD *= i.CD缩减倍率(self.武器类型)
+            if i.非冷却关联技能 !=['无']:
+                if i.非冷却关联技能 == ['所有']:
+                    for j in self.技能栏:
+                        if j.是否有伤害 == 1:
+                            j.CD /= i.CD缩减倍率(self.武器类型)
+                else:
+                    for k in i.非冷却关联技能:
+                        self.技能栏[self.技能序号[k]].CD /= i.CD缩减倍率(self.武器类型)
             if i.冷却关联技能2 !=['无']:
                 if i.冷却关联技能2 == ['所有']:
                     for j in self.技能栏:
@@ -628,6 +642,14 @@ class 角色属性(属性):
                 else:
                     for k in i.冷却关联技能2:
                         self.技能栏[self.技能序号[k]].CD *= i.CD缩减倍率2(self.武器类型)
+            if i.非冷却关联技能2 !=['无']:
+                if i.非冷却关联技能2 == ['所有']:
+                    for j in self.技能栏:
+                        if j.是否有伤害 == 1:
+                            j.CD /= i.CD缩减倍率2(self.武器类型)
+                else:
+                    for k in i.非冷却关联技能2:
+                        self.技能栏[self.技能序号[k]].CD /= i.CD缩减倍率2(self.武器类型)
             if i.冷却关联技能3 !=['无']:
                 if i.冷却关联技能3 == ['所有']:
                     for j in self.技能栏:
@@ -636,6 +658,14 @@ class 角色属性(属性):
                 else:
                     for k in i.冷却关联技能3:
                         self.技能栏[self.技能序号[k]].CD *= i.CD缩减倍率3(self.武器类型)
+            if i.非冷却关联技能3 !=['无']:
+                if i.非冷却关联技能3 == ['所有']:
+                    for j in self.技能栏:
+                        if j.是否有伤害 == 1:
+                            j.CD /= i.CD缩减倍率3(self.武器类型)
+                else:
+                    for k in i.非冷却关联技能3:
+                        self.技能栏[self.技能序号[k]].CD /= i.CD缩减倍率3(self.武器类型)
 
     def 被动倍率计算(self):
         if self.远古记忆 > 0:
@@ -654,6 +684,14 @@ class 角色属性(属性):
                 else :
                     for k in i.关联技能:
                         self.技能栏[self.技能序号[k]].被动倍率 *= i.加成倍率(self.武器类型)
+            if i.非关联技能 != ['无']:
+                if i.非关联技能 == ['所有']:
+                    for j in self.技能栏:
+                        if j.是否有伤害 == 1:
+                            j.被动倍率 /= i.加成倍率(self.武器类型)
+                else :
+                    for k in i.非关联技能:
+                        self.技能栏[self.技能序号[k]].被动倍率 /= i.加成倍率(self.武器类型)
             
             if i.关联技能2 != ['无']:
                 if i.关联技能2 == ['所有']:
@@ -663,6 +701,15 @@ class 角色属性(属性):
                 else :
                     for k in i.关联技能2:
                         self.技能栏[self.技能序号[k]].被动倍率 *= i.加成倍率2(self.武器类型)
+
+            if i.非关联技能2 != ['无']:
+                if i.非关联技能2 == ['所有']:
+                    for j in self.技能栏:
+                        if j.是否有伤害 == 1:
+                            j.被动倍率 /= i.加成倍率2(self.武器类型)
+                else :
+                    for k in i.非关联技能2:
+                        self.技能栏[self.技能序号[k]].被动倍率 /= i.加成倍率2(self.武器类型)
             
             if i.关联技能3 != ['无']:
                 if i.关联技能3 == ['所有']:
@@ -672,6 +719,15 @@ class 角色属性(属性):
                 else :
                     for k in i.关联技能3:
                         self.技能栏[self.技能序号[k]].被动倍率 *= i.加成倍率3(self.武器类型)
+
+            if i.非关联技能3 != ['无']:
+                if i.非关联技能3 == ['所有']:
+                    for j in self.技能栏:
+                        if j.是否有伤害 == 1:
+                            j.被动倍率 /= i.加成倍率3(self.武器类型)
+                else :
+                    for k in i.非关联技能3:
+                        self.技能栏[self.技能序号[k]].被动倍率 /= i.加成倍率3(self.武器类型)
 
     def 面板系数计算(self):
         if self.类型 == '物理百分比':
@@ -1972,7 +2028,8 @@ class 角色窗口(窗口):
         x.move(850, self.height() - 62)
         x.resize(70, 20)
         x.setStyleSheet(标签样式)
-        self.时间输入.addItems(['1', '10', '15', '20', '25', '30', '60'])
+        self.时间输入.addItems(['1', '10', '15', '20', '25', '30','45', '50','60'])
+        self.时间输入.setEditable(True)
         self.时间输入.move(920, self.height() - 63)
         self.时间输入.resize(50, 20)
 
@@ -4456,6 +4513,13 @@ class 角色窗口(窗口):
                                 tempstr+=j
                                 if j != self.角色属性B.技能栏[i].关联技能[-1]:
                                     tempstr+=','
+                            if self.角色属性B.技能栏[i].非关联技能 !=['无']:
+                                tempstr +='<font color=gray>(不适用于:'
+                                for j in self.角色属性B.技能栏[i].非关联技能:
+                                    tempstr+=j
+                                    if j != self.角色属性B.技能栏[i].非关联技能[-1]:
+                                        tempstr+=','
+                                tempstr +=')</font>'
                             if self.角色属性B.技能栏[i].关联技能2 != ['无']:
                                 tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率2(self.角色属性B.武器类型)*100-100,2)) + '%<br>'
                                 tempstr+='关联技能：'
@@ -4463,6 +4527,13 @@ class 角色窗口(窗口):
                                     tempstr+=k
                                     if k != self.角色属性B.技能栏[i].关联技能2[-1]:
                                         tempstr+=','
+                            if self.角色属性B.技能栏[i].非关联技能2 !=['无']:
+                                tempstr +='<font color=gray>(不适用于:'
+                                for j in self.角色属性B.技能栏[i].非关联技能2:
+                                    tempstr+=j
+                                    if j != self.角色属性B.技能栏[i].非关联技能2[-1]:
+                                        tempstr+=','
+                                tempstr +=')</font>'
                             if self.角色属性B.技能栏[i].关联技能3 != ['无']:
                                 tempstr+='<br>加成倍率：'+str(round(self.角色属性B.技能栏[i].加成倍率3(self.角色属性B.武器类型)*100-100,2)) + '%<br>'
                                 tempstr+='关联技能：'
@@ -4470,6 +4541,13 @@ class 角色窗口(窗口):
                                     tempstr+=l
                                     if l != self.角色属性B.技能栏[i].关联技能3[-1]:
                                         tempstr+=','
+                            if self.角色属性B.技能栏[i].非关联技能3 !=['无']:
+                                tempstr +='<font color=gray>(不适用于:'
+                                for j in self.角色属性B.技能栏[i].非关联技能3:
+                                    tempstr+=j
+                                    if j != self.角色属性B.技能栏[i].非关联技能3[-1]:
+                                        tempstr+=','
+                                tempstr +=')</font>'
                         if self.角色属性B.技能栏[i].冷却关联技能 != ['无'] and self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型) != 1:
                             if tempstr == '':
                                 tempstr+='<font face="宋体"><font color="#FF6666">'+self.角色属性B.技能栏[i].名称+'</font><br>'
@@ -4481,6 +4559,13 @@ class 角色窗口(窗口):
                                 tempstr+=j
                                 if j != self.角色属性B.技能栏[i].冷却关联技能[-1]:
                                     tempstr+=','
+                            if self.角色属性B.技能栏[i].非冷却关联技能 !=['无']:
+                                tempstr +='<font color=gray>(不适用于:'
+                                for j in self.角色属性B.技能栏[i].非冷却关联技能:
+                                    tempstr+=j
+                                    if j != self.角色属性B.技能栏[i].非冷却关联技能[-1]:
+                                        tempstr+=','
+                                tempstr +=')</font>'
                             if self.角色属性B.技能栏[i].冷却关联技能2 != ['无']:
                                 tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率2(self.角色属性B.武器类型)*100,2)) + '%<br>'
                                 tempstr+='冷却关联技能：'
@@ -4488,6 +4573,13 @@ class 角色窗口(窗口):
                                     tempstr+=j
                                     if j != self.角色属性B.技能栏[i].冷却关联技能2[-1]:
                                         tempstr+=','
+                            if self.角色属性B.技能栏[i].非冷却关联技能2 !=['无']:
+                                tempstr +='<font color=gray>(不适用于:'
+                                for j in self.角色属性B.技能栏[i].非冷却关联技能2:
+                                    tempstr+=j
+                                    if j != self.角色属性B.技能栏[i].非冷却关联技能2[-1]:
+                                        tempstr+=','
+                                tempstr +=')</font>'
                             if self.角色属性B.技能栏[i].冷却关联技能3 != ['无']:
                                 tempstr+='<br>冷却缩减：'+str(round(100 - self.角色属性B.技能栏[i].CD缩减倍率3(self.角色属性B.武器类型)*100,2)) + '%<br>'
                                 tempstr+='冷却关联技能：'
@@ -4495,6 +4587,15 @@ class 角色窗口(窗口):
                                     tempstr+=j
                                     if j != self.角色属性B.技能栏[i].冷却关联技能3[-1]:
                                         tempstr+=','
+                            if self.角色属性B.技能栏[i].非冷却关联技能3 !=['无']:
+                                tempstr +='<font color=gray>(不适用于:'
+                                for j in self.角色属性B.技能栏[i].非冷却关联技能3:
+                                    tempstr+=j
+                                    if j != self.角色属性B.技能栏[i].非冷却关联技能3[-1]:
+                                        tempstr+=','
+                                tempstr +=')</font>'
+                                
+                            
                 if tempstr != '':
                     tempstr += '</font>'
                     被动数据=QLabel(输出窗口)
