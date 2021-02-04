@@ -697,14 +697,78 @@ class 重霄·机械师·女(角色窗口):
         属性.宠物次数.clear()
         属性.装备切装.clear()
         属性.技能切装.clear()
+        self.是否计算 = 1
         for i in self.角色属性A.技能栏:
             序号 = self.角色属性A.技能序号[i.名称]
             if i.是否有伤害 == 1:
-                属性.次数输入.append(self.次数输入[序号].currentText())
-                if self.次数输入[序号].currentIndex() != 0:
-                    self.宠物次数[序号].setCurrentIndex(
-                        min(self.宠物次数[序号].currentIndex(), self.次数输入[序号].currentIndex() - 1 + i.基础释放次数))
-                属性.宠物次数.append(self.宠物次数[序号].currentIndex())
+                if self.次数输入[序号].currentText() != '/CD':
+                    if self.次数输入[序号].currentIndex() == 12:
+                        if self.次数输入[序号].currentText() != '':
+                            try:
+                                temp1 = int(float(self.次数输入[序号].currentText()))
+                                temp2 = (float(self.次数输入[序号].currentText()))
+                                if temp1 >= 0 and temp1 < 1000:
+                                    if temp1 == temp2:
+                                        属性.次数输入.append(int(float(self.次数输入[序号].currentText())))
+                                    else:
+                                        属性.次数输入.append(int((float(self.次数输入[序号].currentText()) + 0.001) * 100) / 100)
+                                        self.次数输入[序号].setCurrentText(
+                                            str(int((float(self.次数输入[序号].currentText()) + 0.001) * 100) / 100))
+                                else:
+                                    QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数超出取值范围，请重新输入")
+                                    self.是否计算 = 0
+                                    break
+                            except:
+                                QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入格式错误，请重新输入")
+                                self.是否计算 = 0
+                                break
+                        else:
+                            QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入为空，请重新输入")
+                            self.是否计算 = 0
+                            break
+                    else:
+                        属性.次数输入.append(int(self.次数输入[序号].currentText()))
+                else:
+                    属性.次数输入.append((self.次数输入[序号].currentText()))
+
+                if self.宠物次数[序号].currentIndex() == 11:
+                    if self.宠物次数[序号].currentText() != '':
+                        try:
+                            temp1 = int(float(self.宠物次数[序号].currentText()))
+                            if temp1 >= 0 and temp1 < 1000:
+                                self.宠物次数[序号].setCurrentText(
+                                    str(int((float(self.宠物次数[序号].currentText()) + 0.001) * 100) / 100))
+                            else:
+                                QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "宠物次数超出取值范围，请重新输入")
+                                self.是否计算 = 0
+                                break
+                        except:
+                            QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "宠物次数输入格式错误，请重新输入")
+                            self.是否计算 = 0
+                            break
+                    else:
+                        QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "宠物次数输入为空，请重新输入")
+                        self.是否计算 = 0
+                        break
+                    if self.次数输入[序号].currentIndex() != 0:
+                        temp3 = (float(self.宠物次数[序号].currentText()))
+                        temp4 = (float(self.次数输入[序号].currentText()) + i.基础释放次数)
+                        temp5 = min(temp3, temp4)
+                        if int(temp5) == temp5:
+                            self.宠物次数[序号].setCurrentText(str(int(temp5)))
+                        else:
+                            self.宠物次数[序号].setCurrentText(str(temp5))
+                    属性.宠物次数.append(float(self.宠物次数[序号].currentText()))
+                else:
+                    if self.次数输入[序号].currentIndex() != 0:
+                        temp3 = (float(self.宠物次数[序号].currentIndex()))
+                        temp4 = (float(self.次数输入[序号].currentText()) + i.基础释放次数)
+                        temp5 = min(temp3, temp4)
+                        if int(temp5) == temp5:
+                            self.宠物次数[序号].setCurrentText(str(int(temp5)))
+                        else:
+                            self.宠物次数[序号].setCurrentText(str(temp5))
+                    属性.宠物次数.append(float(self.宠物次数[序号].currentText()))
                 if 切装模式 == 1:
                     if self.技能切装[序号].isChecked():
                         属性.技能切装.append(1)
@@ -794,17 +858,20 @@ class 重霄·机械师·女(角色窗口):
 
         try:
             属性.主BUFF = float(self.BUFF输入.text()) / 100 + 1
-        except:
-            QMessageBox.information(self, "错误", "BUFF数值输入错误,已设置为默认数值")
+        except: 
+            QMessageBox.information(self,"错误",  "BUFF数值输入错误,已设置为默认数值") 
             self.BUFF输入.setText(str('%.1f' % ((self.角色属性A.主BUFF - 1) * 100)))
 
-        if self.角色属性A.技能栏[self.三觉序号].是否有伤害 == 1 and 属性.次数输入[self.三觉序号] == '0':
-            属性.技能栏[self.三觉序号].关联技能 = ['无']
-        else:
-            if self.觉醒选择状态 == 1:
-                属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.一觉序号].名称]
-            if self.觉醒选择状态 == 2:
-                属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.二觉序号].名称]
+        try:
+            if self.角色属性A.技能栏[self.三觉序号].是否有伤害 == 1 and 属性.次数输入[self.三觉序号] == '0':
+                属性.技能栏[self.三觉序号].关联技能 = ['无']
+            else:
+                if self.觉醒选择状态 == 1:
+                    属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.一觉序号].名称]
+                if self.觉醒选择状态 == 2:
+                    属性.技能栏[self.三觉序号].关联技能 = [属性.技能栏[self.二觉序号].名称]
+        except:
+            pass
 
         属性.角色熟练度 = self.装备条件选择[0].currentIndex()
         属性.技能栏空位 = self.装备条件选择[1].currentIndex()
