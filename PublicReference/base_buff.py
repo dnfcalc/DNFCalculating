@@ -993,11 +993,12 @@ class 角色窗口(窗口):
         self.排行选项 = []
         for i in range(3):
             self.排行选项.append(MyQComboBox(self.main_frame2))
-
+        self.排行选项[0].setEditable(True)
         for i in [3000,3500,4000,4500,5000,5500,6000,7000,8000,10000,12000,15000,20000]:
             self.排行选项[0].addItem('C力智:' + str(i))
         self.排行选项[0].setCurrentIndex(4)
 
+        self.排行选项[1].setEditable(True)
         for i in [2000,2100,2200,2300,2400,2500,2600,2700,2800,2900,3000,3100,3200,3300,3400,3500,3600,3700,3800,3900,4000,4200,4400,4600,4800,5000]:
             self.排行选项[1].addItem('C三攻:' + str(i))
         self.排行选项[1].setCurrentIndex(10)
@@ -2934,8 +2935,17 @@ class 角色窗口(窗口):
             i.等级 = i.基础等级+int(self.等级调整[self.角色属性A.技能序号[i.名称]].currentText())
         
         属性.排行系数 = self.排行参数.currentIndex()
-        属性.C力智 = int(self.排行选项[0].currentText().split(':')[1])
-        属性.C三攻 = int(self.排行选项[1].currentText().split(':')[1])
+        属性.C力智 = int(''.join(filter(str.isdigit,  self.排行选项[0].currentText() )))
+        属性.C三攻 = int(''.join(filter(str.isdigit,  self.排行选项[1].currentText() )))
+
+        # if ':' in self.排行选项[0].currentText():
+        #     属性.C力智 = int(self.排行选项[0].currentText().split(':')[1])
+        # else:
+        #     属性.C力智 = int(self.排行选项[0].currentText())
+        # if ':' in self.排行选项[1].currentText():
+        #     属性.C三攻 = int(self.排行选项[1].currentText().split(':')[1])
+        # else:
+        #     属性.C三攻 = int(self.排行选项[1].currentText())
         属性.排行类型 = self.排行选项[2].currentText()
 
         if self.初始属性.三觉序号 != 0:
