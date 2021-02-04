@@ -1,5 +1,22 @@
 ## Newest
 
+### 2021-02-05
+
+#### NewFeatures
+* 同步韩服正式服守护者三觉调整 ([fdad8e](https://github.com/wxh0402/DNFCalculating/commit/fdad8e903bef46df2623271a508c53185c7f1b3d))
+* 奶系：输出角色模板力智三攻可手动填写 ([b48418](https://github.com/wxh0402/DNFCalculating/commit/b484187e0a97193b9d7930b0ac26fbc21bfeb4f8))
+* 添加免费提示 ([9f13bb](https://github.com/wxh0402/DNFCalculating/commit/9f13bb91cbb65aa461387c80fbe900aaa7f83f7f))
+* 真·龙骑士：添加骑乘龙息 ([2713f4](https://github.com/wxh0402/DNFCalculating/commit/2713f41b4d3a1a1b6093668cf1356ccbbb9e4f23))
+* 移除绿色生命的面容触发选择 ([4732eb](https://github.com/wxh0402/DNFCalculating/commit/4732ebc16858984c30371038e4ed0903bd8afda3))
+* 输出系：技能释放次数、宠物技能次数新增填写选项，支持小数点输入 ([dfce38](https://github.com/wxh0402/DNFCalculating/commit/dfce3824f9a970762e114bffeb4b82009dd69921))
+* 输出系：输出时间可手动填写 ([db7fb3](https://github.com/wxh0402/DNFCalculating/commit/db7fb3263ca4973755da220aca3ca45c7ac2655b))
+
+#### BugFixes
+* 修复智慧产物升级属性微调在排行界面未能生效得情况 ([a04fa9](https://github.com/wxh0402/DNFCalculating/commit/a04fa947b579f7c57f7521370b108fd3c0150d4c))
+* 圣武枪魂：修正无双突刺护石错误 ([a94970](https://github.com/wxh0402/DNFCalculating/commit/a949704186572c94177da84150543688b222f015))
+* 极诣·狂战士：修正嗜魂之手数据 ([9277f2](https://github.com/wxh0402/DNFCalculating/commit/9277f22751fea255a2e3ed3742ee3d2c5f9f14c8))
+* 真·帕拉丁：95主动添加CD ([daabf1](https://github.com/wxh0402/DNFCalculating/commit/daabf122cbbbad0ece47831ea619a7f6c58b3532))
+
 ### 2021-01-28
 
 #### NewFeatures
@@ -111,8 +128,6 @@
 
 
 
-
-## History
 
 ### 2020-12-31
 
@@ -993,5 +1008,8 @@
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
+
+## History
 
 
