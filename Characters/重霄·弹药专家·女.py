@@ -664,7 +664,7 @@ class 职业属性(角色属性):
                         else:
                             技能消耗时间 += 技能次数 * i.技能施放时间*释放时间系数
                     elif self.次数输入[self.技能序号[i.名称]] != '0':
-                        技能释放次数.append(round(self.次数输入[self.技能序号[i.名称]],2))
+                        技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]),2))
                         if i.脱手 == 1:
                             技能消耗时间 += int(self.次数输入[self.技能序号[i.名称]]) * 0.12 * 释放时间系数
                         else:

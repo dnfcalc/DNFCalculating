@@ -656,7 +656,7 @@ class 芙蕾雅角色属性(角色属性):
                         else:
                             技能消耗时间 += int((self.时间输入 - 反应时间) / (i.等效CD(self.武器类型,self.类型) + i.技能施放时间*释放时间系数 + CD延迟) + 1 + i.基础释放次数) * i.技能施放时间*释放时间系数
                     elif self.次数输入[self.技能序号[i.名称]] != '0':
-                        技能释放次数.append(round(self.次数输入[self.技能序号[i.名称]],2))
+                        技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]),2))
                         if i.脱手 == 1:
                             技能消耗时间 += int(self.次数输入[self.技能序号[i.名称]]) * 0.12 * 释放时间系数
                         else:

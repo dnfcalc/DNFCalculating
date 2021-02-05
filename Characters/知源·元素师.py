@@ -506,7 +506,7 @@ class 知源·元素师角色属性(角色属性):
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
                     技能释放次数.append(i.实际技能次数(self.时间输入,self.武器类型,self.类型))
                 elif self.次数输入[self.技能序号[i.名称]] != '0':
-                    技能释放次数.append(round(self.次数输入[self.技能序号[i.名称]],2))
+                    技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]),2))
                 else:
                     技能释放次数.append(0)
             else:
