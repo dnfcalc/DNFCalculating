@@ -3621,7 +3621,9 @@ class 角色窗口(窗口):
             self.输入属性(self.角色属性A)
         else:
             self.输入属性(self.角色属性A, 1)
-        
+        if self.是否计算 != 1:
+            self.click_window(1)
+            return
         装备 = []
         for i in self.自选装备:
             装备.append(i.currentText())
@@ -4913,7 +4915,7 @@ class 角色窗口(窗口):
                             self.宠物次数[序号].setCurrentText(str(temp5))
                     属性.宠物次数.append(float(self.宠物次数[序号].currentText()))
                 else:
-                    if self.次数输入[序号].currentIndex() != 0:
+                    if self.次数输入[序号].currentText() != '/CD':
                         temp3 = (float(self.宠物次数[序号].currentIndex()))
                         temp4 = (float(self.次数输入[序号].currentText()) + i.基础释放次数)
                         temp5 = min(temp3, temp4)
