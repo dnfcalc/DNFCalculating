@@ -4969,24 +4969,7 @@ class 角色窗口(窗口):
 
         宠物列表[self.宠物.currentIndex()].城镇属性(属性)
         
-        for k in range(3):
-            if self.护石栏[k].currentText()!= '无':
-                try:
-                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石()
-                except:
-                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石(self.护石类型选项[k].currentIndex())
-                    
-        属性.护石第一栏 = self.护石栏[0].currentText()
-        属性.护石第二栏 = self.护石栏[1].currentText()
-        属性.护石第三栏 = self.护石栏[2].currentText()
-    
-        for i in range(0,9):
-            if self.符文[i].currentText()!='无' and self.符文效果[i].currentText() != '无':
-                for j in self.符文效果[i].currentText().split(','):
-                    if '攻击' in j:
-                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率 *= 1 + int(j.replace('攻击','').replace('%',''))/100
-                    if 'CD' in j:
-                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD *= 1 + int(j.replace('CD','').replace('%',''))/100
+        self.加载护石(属性)
 
         for i in range(0,12):
             属性.是否增幅[i] = self.装备打造选项[i].currentIndex()
@@ -5038,6 +5021,26 @@ class 角色窗口(窗口):
             属性.黑鸦词条.append(temp)
         self.希洛克属性计算(属性)
         self.基础属性(属性)
+    
+    def 加载护石(self,属性):
+        for k in range(3):
+            if self.护石栏[k].currentText()!= '无':
+                try:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石()
+                except:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石(self.护石类型选项[k].currentIndex())
+                    
+        属性.护石第一栏 = self.护石栏[0].currentText()
+        属性.护石第二栏 = self.护石栏[1].currentText()
+        属性.护石第三栏 = self.护石栏[2].currentText()
+    
+        for i in range(0,9):
+            if self.符文[i].currentText()!='无' and self.符文效果[i].currentText() != '无':
+                for j in self.符文效果[i].currentText().split(','):
+                    if '攻击' in j:
+                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率 *= 1 + int(j.replace('攻击','').replace('%',''))/100
+                    if 'CD' in j:
+                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD *= 1 + int(j.replace('CD','').replace('%',''))/100        
     
     def 基础属性(self, 属性):
         if 切装模式 == 1:
