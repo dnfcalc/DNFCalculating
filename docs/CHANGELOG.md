@@ -1,5 +1,18 @@
 ## Newest
 
+### 2021-02-17
+
+#### NewFeatures
+* 神枪手·女：同步修正到国服三觉数据 ([8aefbb](https://github.com/wxh0402/DNFCalculating/commit/8aefbbba78b150f835dd5b906b4c8bfa0e2eb569))
+
+#### BugFixes
+* bugdix:风暴骑兵、重霄·枪炮师·女：修正FSC7护石问题 ([c0d52e](https://github.com/wxh0402/DNFCalculating/commit/c0d52ee3110d20be1f6520578373a6b01dc32ed4))
+* 修正部分职业自选页面打开闪退的情况 ([1f419a](https://github.com/wxh0402/DNFCalculating/commit/1f419a424d41885c25f6c930e72b8b3b8808e8fe))
+* 归元·气功师·男：修正念兽：猛虎震地、奔雷螺旋击CD错误 ([9d026f](https://github.com/wxh0402/DNFCalculating/commit/9d026fe40c8542799d6c71f02e4617fffedbd640))
+* 归元·气功师：修正幻影爆碎技能恢复加成错误的情况 ([ccea46](https://github.com/wxh0402/DNFCalculating/commit/ccea46fa06f56387dc4addce08d7b21ab5274fff))
+* 知源·元素爆破师：元素禁域护石CD默认减少4秒 ([8104c6](https://github.com/wxh0402/DNFCalculating/commit/8104c6567e1114a50e001a2b82c7971e20d23dc4))
+* 黑暗武士：武器CD调整 ([cc7714](https://github.com/wxh0402/DNFCalculating/commit/cc77145ba97c1df880edbb9fc70989317a500cd2))
+
 ### 2021-02-05
 
 #### NewFeatures
@@ -1008,6 +1021,7 @@
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
 
 
 ## History
