@@ -1,5 +1,6 @@
 ﻿import multiprocessing
 
+from PyQt5 import QtCore
 from PyQt5.QtCore import QUrl
 from PyQt5.QtWidgets import QApplication
 import importlib
@@ -419,6 +420,7 @@ class 选择窗口(QMainWindow):
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
     主进程PID = os.getpid() 
+    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
     if len(sys.argv) > 1:
         try:
             #杀老进程
