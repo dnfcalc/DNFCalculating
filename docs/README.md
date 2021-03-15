@@ -32,25 +32,17 @@ python(3.8)编写，使用 pyqt5图形 GUI 库<br>
 
 |--　DNFCalculating</br>
 　　　　|--　run_mac.command：macOS下运行脚本</br>
-　　　　|--　build.bat：打包脚本</br>
 　　　　|--　CHANGELOG.md：程序更新记录</br>
 　　　　|--　LICENSE：开源许可</br>
 　　　　|--　main.py：程序主入口</br>
 　　　　|--　README.md：程序说明</br>
 　　　　|--　requirements.txt：项目依赖包</br>
-　　　　|--　AutoRelese：项目自动发布文件包</br>
-　　　　|　　　|--　ark.x64.dll：bz的zip压缩dll</br>
-　　　　|　　　|--　bz.exe：bz压缩程序</br>
-　　　　|　　　|--　Package.spec：pyinstaller打包配置</br>
-　　　　|　　　|--　release_produce.js：更新日志自动生成程序</br>
-　　　　|　　　|--　upload_cookie.json：蓝奏云上传cookie文件</br>
-　　　　|　　　|--　upload_lanzouyun.py：自动上传蓝奏云文件</br>
 　　　　|--　Characters：职业实现目录</br>
 　　　　|--　PublicReference：公有引用方法</br>
 　　　　|　　　|--　base.py：输出职业公有实现方法</br>
 　　　　|　　　|--　base_buff.py：奶系职业公有实现方法</br>
 　　　　|　　　|--　common.py：界面公有实现方法</br>
-　　　　|　　　|--　<u>　</u>init<u>　</u>.py：初始化文件，启用多线程及日志记录</br>
+　　　　|　　　|--　__init__.py：初始化文件，启用多线程及日志记录</br>
 　　　　|　　　|--　choise：选项设置</br>
 　　　　|　　　|　　　|--　细节选项.py</br>
 　　　　|　　　|　　　|--　选项设置.py</br>
@@ -78,31 +70,37 @@ python(3.8)编写，使用 pyqt5图形 GUI 库<br>
 　　　　|　　　　　　　|--　config.py：配置读取</br>
 　　　　|　　　　　　　|--　constant.py：常量</br>
 　　　　|　　　　　　　|--　copy.py：深度拷贝</br>
+　　　　|　　　　　　　|--　img.py：常量图片</br>
+　　　　|　　　　　　　|--　MainWindow.py：自定义窗口</br>
 　　　　|　　　　　　　|--　minheap.py：最小堆排序</br>
 　　　　|　　　　　　　|--　producer_consumer.py：多进程</br>
+　　　　|　　　　　　　|--　TitleBar.py：自定义标题栏</br>
 　　　　|　　　　　　　|--　zipfile.py：压缩文件</br>
 　　　　|--　ResourceFiles：资源文件夹</br>
 　　　　|　　　|--　职业文件夹</br>
 　　　　|　　　|　　　|--　bg.jpg：背景图</br>
 　　　　|　　　|　　　|--　人物.png：详情界面人物图</br>
 　　　　|　　　|　　　|--　reset：默认配置文件夹</br>
-　　　　|　　　|　　　|　　　|--　attr.ini</br>
-　　　　|　　　|　　　|　　　|--　equ.ini</br>
-　　　　|　　　|　　　|　　　|--　equ1.ini</br>
-　　　　|　　　|　　　|　　　|--　equ2.ini</br>
-　　　　|　　　|　　　|　　　|--　equ3.ini</br>
-　　　　|　　　|　　　|　　　|--　equ4.ini</br>
-　　　　|　　　|　　　|　　　|--　equ5.ini</br>
-　　　　|　　　|　　　|　　　|--　skill1.ini</br>
-　　　　|　　　|　　　|　　　|--　skill2.ini</br>
-　　　　|　　　|　　　|　　　|--　skill3.ini</br>
+　　　　|　　　|　　　|　　　|--　attr.ini：细节选项输入</br>
+　　　　|　　　|　　　|　　　|--　equ.ini：装备选择</br>
+　　　　|　　　|　　　|　　　|--　equ1.ini：装备打造选项</br>
+　　　　|　　　|　　　|　　　|--　equ2.ini：装备条件选择</br>
+　　　　|　　　|　　　|　　　|--　equ3.ini：装备页面百变怪、神话排名、显示选项、时装选择</br>
+　　　　|　　　|　　　|　　　|--　equ4.ini：神话属性调整</br>
+　　　　|　　　|　　　|　　　|--　equ5.ini：自选装备锁定</br>
+　　　　|　　　|　　　|　　　|--　skill1.ini：BUFF输入、护石、觉醒状态、时间输入、希洛克武器词条</br>
+　　　　|　　　|　　　|　　　|--　skill2.ini：技能等级、技能TP、技能次数、宠物次数</br>
+　　　　|　　　|　　　|　　　|--　skill3.ini：辟邪玉、希洛克、黑鸦设置</br>
 　　　　|　　　|　　　|　　　|--　skill4.ini</br>
+　　　　|　　　|　　　|　　　|--　skill5.ini：技能页职业个性化选项存档</br>
+　　　　|　　　|　　　|　　　|--　skill5.ini：技能页职业个性化选项存档</br>
 　　　　|　　　|　　　|--　技能：技能图标文件夹</br>
 　　　　|　　　|--　Config：配置文件夹</br>
-　　　　|　　　|　　　|--　adventure_info.json：加载职业配置</br>
-　　　　|　　　|　　　|--　release_version.json：计算器版本</br>
 　　　　|　　　|　　　|--　基础设置.ini</br>
 　　　　|　　　|　　　|--　攻击目标.ini</br>
+　　　　|　　　|　　　|--　adventure_info.json：加载职业配置</br>
+　　　　|　　　|　　　|--　config.json：配置选项文件</br>
+　　　　|　　　|　　　|--　release_version.json：计算器版本</br>
 　　　　|　　　|--　img：公有图片</br>
 　　　　|　　　|　　　|--　logo.ico</br>
 　　　　|　　　|　　　|--　刀魂之卡赞.png</br>
@@ -114,6 +112,7 @@ python(3.8)编写，使用 pyqt5图形 GUI 库<br>
 　　　　|　　　|　　　|--　头像</br>
 　　　　|　　　|　　　|--　希洛克</br>
 　　　　|　　　|　　　|--　装备</br>
+　　　　|　　　|--　Config：计算器皮肤包</br>
 　　　　|--　Tools</br>
 　　　　　　　　|--　图标去白点.py</br>
 　　　　　　　　|--　神话融合图标拼接.py</br>
