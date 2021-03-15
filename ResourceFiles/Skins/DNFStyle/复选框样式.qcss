@@ -1,0 +1,19 @@
+QCheckBox{font-size:12px;color:#af8f4c;background-color:transparent}
+QCheckBox:hover{color:#ebd771}
+QCheckBox::indicator:unchecked{
+    image:url(ResourceFiles/Skins/DNFStyle/img/checkbox_uncheck.png);
+}
+QCheckBox::indicator:unchecked:hover,QCheckBox::indicator:unchecked:pressed{
+    image:url(ResourceFiles/Skins/DNFStyle/img/checkbox_hover.png);
+}
+QCheckBox::indicator:checked{
+    image:url(ResourceFiles/Skins/DNFStyle/img/checkbox_checked.png);
+}
+
+QCheckBox:disabled{font-size:12px;color:#696969;background-color:transparent}
+QCheckBox::indicator:unchecked:disabled{
+    image:url(ResourceFiles/Skins/DNFStyle/img/checkbox_disable.png);
+}
+QCheckBox::indicator:checked:disabled{
+    image:url(ResourceFiles/Skins/DNFStyle/img/checkbox_checked.png);
+}

@@ -1,0 +1,11 @@
+QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} 
+QComboBox:disabled{font-size:12px;color:white;background-color:grey;border:1px;border-radius:5px;}  QComboBox QAbstractItemView::item {height: 18px;}
+QComboBox:hover{background-color:rgba(65,105,225,0.8)} 
+QComboBox QAbstractItemView::item {height: 18px;background-color:white} 
+QComboBox QAbstractItemView::item:hover,QComboBox QAbstractItemView::item:focus {background-color:rgba(179,206,255,1);color:black}
+QComboBox QScrollBar{
+    background: white !important
+}
+QComboBox QScrollBar::handle{
+    background: rgb(220,220,220) !important
+}

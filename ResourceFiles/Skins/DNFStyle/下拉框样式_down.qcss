@@ -1,0 +1,93 @@
+QComboBox{min-height:20px;font-size:12px;font-weight:bolder;color:rgb(34,157,70);background-color:rgba(0,0,0,0.8);border:1px solid #a98156;border-radius:2px;} 
+QComboBox:hover{color:#d4bd5b} 
+QComboBox QAbstractItemView{outline:0px;border:0px}
+QComboBox QAbstractItemView::item {font-size:12px;height: 18px;background-color:black;color:#937639;border:0px} 
+QComboBox QAbstractItemView::item:hover,QComboBox QAbstractItemView::item:focus {font-size:12px;background-color:#002947;color:#d4bd5b;outline: none;border:0px}
+QComboBox::drop-down {
+subcontrol-origin: padding;
+subcontrol-position: top right;
+width: 20px;
+}
+QComboBox::down-arrow {
+image: url(ResourceFiles/Skins/DNFStyle/img/select_down.png)
+}
+QScrollBar {
+    background: transparent; /*背景透明*/
+    width: 12px; /*宽度*/
+    margin: 0px 0px 0px 0px; /**/
+    padding-top: 16px; /*距离上面12px*/
+    padding-bottom: 16px; /*距离底部12px*/
+    padding-right:1px;
+}
+/*纵向滚动条上面的滑块*/
+QScrollBar::handle {
+    background: rgb(36,36,36);
+    width: 12px;
+    border: 1px inset rgb(76,61,39);
+}
+/*纵向滚动条下部分块*/
+QScrollBar::add-page:vertical {
+    width: 11px;
+    background: transparent;
+}
+/*横向滚动条后面部分块*/
+QScrollBar::add-page:horizontal {
+    height: 11px;
+    background: transparent;
+}
+/*纵向滚动条上面部分块*/
+QScrollBar::sub-page:vertical {
+    width: 11px;
+    background: transparent;
+}
+/*横向滚动条左部分块*/
+QScrollBar::sub-page:horizontal {
+    height: 11px;
+    background: transparent;
+}
+/*纵向滚动条顶部三角形位置*/
+QScrollBar::sub-line:vertical {
+    height: 12px;
+    width: 11px;
+    background: transparent;
+    subcontrol-position: top;
+}
+/*横向滚动条左侧三角形位置*/
+QScrollBar::sub-line:horizontal {
+    height: 12px;
+    width: 11px;
+    background: transparent;
+    subcontrol-position: left;
+}
+/*纵向滚动条下面三角形部分*/
+QScrollBar::add-line:vertical {
+    height: 12px;
+    width: 11px;
+    background: transparent;
+    subcontrol-position: bottom;
+}
+/*横向滚动条右边的三角形部分*/
+QScrollBar::add-line:horizontal {
+    height: 12px;
+    width: 11px;
+    background: transparent;
+    subcontrol-position: right;
+}
+/*纵向滚动条向上的三角形小图标*/
+QScrollBar::up-arrow:vertical {
+    image: url(ResourceFiles/Skins/DNFStyle/img/up.png);
+    padding-top:3px;
+    padding-right:2px;
+}
+QScrollBar::down-arrow:vertical {
+    image: url(ResourceFiles/Skins/DNFStyle/img/down.png);
+    padding-bottom:4px;
+    padding-right:2px;
+}
+QComboBox::down-arrow {
+image: url(ResourceFiles/Skins/DNFStyle/img/select_down.png)
+    padding-top:3px;
+    padding-right:3px;
+    width:15px;
+    height:14px;
+}

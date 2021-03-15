@@ -1,0 +1,10 @@
+__pycache__
+logs
+set*
+AutoRelease
+main.exe
+docs/web.config
+.vscode/launch.json
+debug.log
+build.bat
+详细数据
