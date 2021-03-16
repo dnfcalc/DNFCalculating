@@ -33,7 +33,7 @@
 	{
 		"名称": "皮肤版本",
 		"选项": ["DNFStyle", "LightStyle","None"],
-        "说明": "切换皮肤版本,LightStyle:浅色样式,LightStyle:浅色样式,None:无任何样式",
+        "说明": "切换皮肤版本,DNFStyle:深色DNF样式,LightStyle:浅色样式,None:无任何样式",
 		"default":0
 	},
 	{
