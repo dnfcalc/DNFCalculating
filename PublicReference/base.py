@@ -6,8 +6,8 @@ from PublicReference.equipment.武器融合 import *
 from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
-
-
+from numpy import transpose,prod,argmax,amax,delete,zeros
+ 
 class 技能:
     名称 = ''
     备注 = ''
@@ -227,6 +227,8 @@ class 角色属性(属性):
         [0,0,0,0]
     ]
     计算自适应 = 1
+    是否单套 = 0
+    计算自适应方式 = 0
 
     def 附加伤害加成(self, x,可变 = 0,辟邪玉加成 = 1):
         if self.装备描述 == 1:
@@ -848,6 +850,42 @@ class 角色属性(属性):
 
         return 词条提升率
 
+    def 基础提升率计算(self):
+        词条数值 = [0.01]*6
+        词条提升率 = [0] * 6
+        #百分比力智
+        x = self.面板系数计算()
+        self.百分比力智加成(词条数值[0])
+        词条提升率[0] = round(self.面板系数计算() / x - 1,9)*100
+        self.百分比力智加成(-词条数值[0])
+        #百分比三攻
+        x = 1 + self.百分比三攻
+        self.百分比三攻加成(词条数值[1])
+        词条提升率[1] = round((1 + self.百分比三攻) / x - 1,9)*100
+        self.百分比三攻加成(-词条数值[1])
+        #伤害增加
+        x = 1 + int(self.伤害增加 * 100) / 100
+        self.伤害增加加成(词条数值[2])
+        词条提升率[2] = round((1 + int(self.伤害增加 * 100) / 100) / x - 1,10)*100
+        self.伤害增加加成(-词条数值[2])  
+        #附加伤害
+        x = 1 + self.附加伤害 + self.属性附加 * self.属性倍率
+        self.附加伤害加成(词条数值[3])
+        词条提升率[3] = round((1 + self.附加伤害 + self.属性附加 * self.属性倍率) / x - 1,10)*100
+        self.附加伤害加成(-词条数值[3])
+        #暴击伤害
+        x = 1 + self.暴击伤害
+        self.暴击伤害加成(词条数值[4])
+        词条提升率[4] = round((1 + self.暴击伤害) / x - 1,10)*100
+        self.暴击伤害加成(-词条数值[4]) 
+        #最终伤害
+        x = 1 + self.最终伤害
+        self.最终伤害加成(词条数值[5])
+        词条提升率[5] = round((1 + self.最终伤害) / x - 1,10)*100
+        self.最终伤害加成(-词条数值[5])  
+        # print(词条提升率)
+        return 词条提升率
+
 
     def 词条提升率计算(self, 词条范围, 词条数值, y = 0):
 
@@ -998,7 +1036,8 @@ class 角色属性(属性):
         # 序号,洗的最大值,可洗词条数
         # print(self.变换词条)
 
-    def 自适应计算(self):
+    def 自适应计算(self,x=0):
+        # print(self.计算自适应方式)
         if self.黑鸦武器择优模式 == 0:
             self.择优词条 = [
             [round(self.变换词条[0][3]/100,2)]*6,
@@ -1021,10 +1060,17 @@ class 角色属性(属性):
             [0.07,0.08,0.07,0.08,0,0],
             [0,0.05,0.05,0,0.05,0]
             ]
+        self.是否择优 =  self.词条是否择优()
+        self.择优结果 = [[0,0]]*len(self.择优词条)
         # print(self.择优词条)
         # self.是否择优 = self.词条是否择优()
         # print(self.是否择优)
-        self.自适应Sub()
+        # print(self.计算自适应方式)
+        # print(self.是否单套)
+        if self.计算自适应方式 ==0 or self.是否单套 == 0:
+            self.贪心自适应()
+        else:
+            self.全局自适应()
         for i in range(len(self.择优结果)):
             # 词条属性列表[self.择优结果[i][0]].加成属性(self,self.择优结果[i][1])
             if i < 4:
@@ -1045,9 +1091,112 @@ class 角色属性(属性):
             if i==7:
                 self.自适应描述[1] = '{}%{}'.format(int(self.择优结果[i][1] * 100), 词条属性列表[self.择优结果[i][0]].描述)
         
+    def 全局自适应(self):
+        # 得到择优词条
+        for i in range(0,len(self.是否择优)):
+            if self.是否择优[i] ==0:
+                self.择优词条[i] = [0]*6
+        
+        a1 = self.择优词条[0]
+        a2 = self.择优词条[1]
+        a3 = self.择优词条[2]
+        a4 = self.择优词条[3]
+        a5 = self.择优词条[4]
+        a6 = self.择优词条[5]
+        a7 = self.择优词条[6]
+        a8 = self.择优词条[7]
+
+        tem1=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),8))
+        tem2=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),6))
+        a2tem=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),6))
+        a3tem=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),6))
+        a4tem=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),6))
+
+        counter=-1
+
+        for index1 in range(0,len(a1)):
+            for index2 in range(0,len(a2)):
+                for index3 in range(0,len(a3)):
+                    for index4 in range(0,len(a4)):
+                        for index5 in range(0,len(a5)):
+                            for index6 in range(0,len(a6)):
+                                for index7 in range(0,len(a7)):
+                                    for index8 in range(0,len(a8)):
+                                        # if a7[index7]!=0 and a8[index8]!=0 :
+                                            counter+=1
+                                            
+                                            tem1[counter,0]=index1
+                                            tem1[counter,1]=index2
+                                            tem1[counter,2]=index3
+                                            tem1[counter,3]=index4
+                                            tem1[counter,4]=index5
+                                            tem1[counter,5]=index6
+                                            tem1[counter,6]=index7
+                                            tem1[counter,7]=index8
+                                            
+                                            tem2[counter,index1]+=a1[index1]
+                                            tem2[counter,index2]+=a2[index2]
+                                            tem2[counter,index3]+=a3[index3]
+                                            tem2[counter,index4]+=a4[index4]
+                                            tem2[counter,index5]+=a5[index5]
+                                            tem2[counter,index6]+=a6[index6]
+                                            tem2[counter,index7]+=a7[index7]
+                                            tem2[counter,index8]+=a8[index8]
+                                            
+                                            a2tem[counter,index2]=1
+                                            a3tem[counter,index3]=1
+                                            a4tem[counter,index4]=1
+
+        tem1=delete(tem1,[range(counter+1,len(tem1))],axis=0)
+        tem2=delete(tem2,[range(counter+1,len(tem2))],axis=0)
+        a2tem=delete(a2tem,[range(counter+1,len(a2tem))],axis=0)
+        a3tem=delete(a3tem,[range(counter+1,len(a3tem))],axis=0)
+        a4tem=delete(a4tem,[range(counter+1,len(a4tem))],axis=0)
+
+        #固定组合为6残香1*6残香2*6黑鸭武器*6黑鸭裤子*6黑鸭戒指*6黑鸭左曹*3光环*3宠物装备，6列指6个词条，分别累加
+        fixednumsum=deepcopy(tem2) #基础数据连加矩阵，写在硬盘加载,这里用随机矩阵代替
+        #索引矩阵，每一行代表内容可优化内容的数值1-6，分别代表6个属性,有8个优化词条，则有8列
+        fixedindex=deepcopy(tem1) #索引矩阵，每一行代表内容可优化内容的数值1-6，分别代表6个属性,有
+        #变形矩阵
+        # deformation_kz=deepcopy(a2tem) 
+        # deformation_jz=deepcopy(a3tem) 
+        # deformation_zc=deepcopy(a4tem) 
+
+        # newfixednumsum=deepcopy(fixednumsum)
+        # newfixedindex=deepcopy(fixedindex)
+
+        peroneup = self.基础提升率计算()
+
+        # equipment_difference=[0,0,0] 
+
+        # new2fixednumsum=newfixednumsum+equipment_difference[0]*deformation_kz+equipment_difference[1]*deformation_jz+equipment_difference[2]*deformation_zc
+
+        new2fixednumsum=transpose(peroneup)*fixednumsum
+
+        new2fixednumsum+=1
+
+        profit=prod(new2fixednumsum,axis = 1) #连乘
+
+        idx = argmax(profit, axis=0) #最大值所在列
+        maxpro = amax(profit, axis=0) #最大值
+        # b=datetime.datetime.now()
 
 
-    def 自适应Sub(self):
+        bestzc=list(int(x) for x in fixedindex[idx,:])
+        for i in range(0,len(bestzc)):
+            self.择优结果[i]=[bestzc[i],self.择优词条[i][bestzc[i]]]
+            词条属性列表[self.择优结果[i][0]].加成属性(self, self.择优结果[i][1])
+        # print(bestzc)
+        # print(self.择优结果)
+
+        # print(bestzc)
+        # jc2=jc+fixednumsum[idx,:]
+
+        # print(jc2)
+        
+        pass
+
+    def 贪心自适应(self):
         # self.择优词条 = [
         #     [round(self.变换词条[0][3]/100,2)]*6,
         #     [round(self.变换词条[1][3]/100,2)]*6,
@@ -1066,8 +1215,6 @@ class 角色属性(属性):
                 if 词条数值[i] != 0:
                     计算范围.append(i)
             self.择优范围.append(计算范围)       
-        self.是否择优 =  self.词条是否择优()
-        self.择优结果 = [[0,0]]*len(self.择优词条)
         贪心排序 = []
         自由择优 = []
         条件择优 = []
@@ -1334,7 +1481,7 @@ class 角色属性(属性):
             #     self.择优拷贝 = deepcopy(self)
             #     self.择优拷贝.计算自适应 = 0
             return self.数据计算(x)
-
+            
     def 三觉屏蔽1(self):
         if self.屏蔽三觉 == True:
             for i in self.技能栏:
@@ -1630,6 +1777,12 @@ class 角色窗口(窗口):
         一键修正按钮.move(940, 450)
         一键修正按钮.resize(166, 25)
         一键修正按钮.setStyleSheet(按钮样式)
+
+        self.单件择优方式选项 = MyQComboBox(self.main_frame1)
+        self.单件择优方式选项.move(940, 30 + 28 * 12)
+        self.单件择优方式选项.resize(170,20)
+        self.单件择优方式选项.addItem('单件择优方式：贪心')
+        self.单件择优方式选项.addItem('单件择优方式：全局')
         
         x = 1006; y = 485; 宽度 = 100; 高度 = 20; 间隔 = 4
         self.红色宠物装备 = QCheckBox('宠物装备择优', self.main_frame1)
@@ -1698,7 +1851,7 @@ class 角色窗口(窗口):
         self.攻击属性选项.addItem('攻击属性:冰')
         self.攻击属性选项.addItem('攻击属性:光')
         self.攻击属性选项.addItem('攻击属性:暗')
-    
+
     def 输出时间变化(self):
         输出时间变化提示 = QMessageBox(QMessageBox.Question, "提示", "切换输出时间请检查技能次数是否为/CD,否则计算结果不发生变化")  
         输出时间变化提示.setWindowIcon(self.icon)
@@ -1711,7 +1864,7 @@ class 角色窗口(窗口):
         #技能等级、TP、次数输入、宠物次数
         self.BUFF输入 = QLineEdit(self.main_frame2)
         self.时间输入 = MyQComboBox(self.main_frame2)
-        
+
         self.护石栏 = []
         for i in range(3):
             self.护石栏.append(MyQComboBox(self.main_frame2))
@@ -2260,7 +2413,7 @@ class 角色窗口(窗口):
             名称.resize(50, 25)
             名称.move(520 + count*55, 570)
             self.时装选项.append(MyQComboBox(self.main_frame3))
-            self.时装选项[count].setStyleSheet(下拉框样式_detail)     
+            self.时装选项[count].setStyleSheet(下拉框样式_detail)
             self.时装选项[count].addItems(['高级', '节日', '稀有', '神器'])
             self.时装选项[count].resize(50, 22)
             self.时装选项[count].move(520 + count*55, 610)
@@ -2949,7 +3102,7 @@ class 角色窗口(窗口):
             if x < 10:
                 self.刀魂之卡赞.setStyleSheet(下拉框样式_down)
             if x == 10:
-                self.刀魂之卡赞.setStyleSheet(下拉框样式)      
+                self.刀魂之卡赞.setStyleSheet(下拉框样式)    
             
     def 时装选项更新(self, index):
         if index == 8:
@@ -3315,7 +3468,7 @@ class 角色窗口(窗口):
                 setfile.write(str(self.辟邪玉数值[i].currentIndex()) + '\n')
             for i in range(15):
                 setfile.write(str(self.希洛克选择状态[i]) + '\n')
-            setfile.write(str(self.守门人属强.currentIndex()) + '\n')
+            setfile.write(str(self.守门人属强.currentIndex()) + '\n')            
             for i in range(4):
                 for j in range(3):
                     setfile.write(str(self.黑鸦词条[i][j].currentIndex()) + '\n')
@@ -3740,8 +3893,9 @@ class 角色窗口(窗口):
             B = deepcopy(self.角色属性A)
             B.穿戴装备(装备,套装)
             B.其它属性计算()
-
+            B.是否单套 = 0
             总伤害数值 = B.伤害计算(0)
+            # self.B.计算自适应方式 = 0
             if len(self.基准值) != 0:
                 self.总伤害.setText(self.百分比输出(总伤害数值, self.基准值[0]))
             else:
@@ -4147,7 +4301,7 @@ class 角色窗口(窗口):
                     武器名称 = i.名称
                     break
             self.排行数据.append(['撒旦：沸腾之怒', '贝利亚尔：毁灭之种', '亚蒙：谎言之力', '亚巴顿：绝望地狱', '巴尔：堕落之魂', '白象之庇护', '四叶草之初心', '红兔之祝福', '军神的心之所念', '军神的遗书', '军神的庇护宝石', 武器名称, 0, '噩梦：地狱之路[2]', '噩梦：地狱之路[3]', '噩梦：地狱之路[5]', '幸运三角[2]', '幸运三角[3]', '军神的隐秘遗产[2]', '军神的隐秘遗产[3]', '无'])
-        
+
         pdata = {}
         装备名称 = []
         套装名称 = []
@@ -4166,8 +4320,9 @@ class 角色窗口(窗口):
             C = deepcopy(self.角色属性A)
             C.穿戴装备(装备名称,套装名称)
             C.被动倍率计算()
-
+        self.角色属性B.是否单套 = 1
         统计详情 = self.角色属性B.伤害计算(1)
+        # self.角色属性B.计算自适应方式 = 0
 
         #最大输出界面限制
         if len(self.输出窗口列表)>=10:
@@ -4179,7 +4334,7 @@ class 角色窗口(窗口):
            color: white; 
            border: 0px
            }''')
-        
+
         输出窗口.setFixedSize(788, 546)
         pox_y = 18
         pox_y2 = 11
@@ -4189,7 +4344,7 @@ class 角色窗口(窗口):
         else:
             temp += name
         # temp += '（最多显示前18个技能）' + "装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本
-        #temp += '（最多显示前18个技能）'
+        # temp += '（最多显示前18个技能）'
         输出窗口.setWindowTitle(temp)
         输出窗口.setWindowIcon(self.icon)  
         QLabel(输出窗口).setPixmap(self.输出背景图片)
@@ -4501,8 +4656,8 @@ class 角色窗口(窗口):
         for i in range(0,len(self.角色属性B.技能栏)):
             if 统计详情[i*4 + 1] != 0:
                 count += 1
-
-        self.行高 = 32    
+                
+        self.行高 = 32         
         
         伤害列表 = []
         for i in range(0,len(self.角色属性B.技能栏)):
@@ -4518,7 +4673,7 @@ class 角色窗口(窗口):
         main = 技能详情(输出窗口, self, 统计详情, excel, 实际技能等级, 技能等效CD, 显示模式, count)
         pdata['技能'] = main.data
         main.setGeometry(277, 36 - pox_y, 498, 455)
-
+    
         #被动详情
         num=0
         for i in range(0,len(self.角色属性B.技能栏)):
@@ -4620,7 +4775,7 @@ class 角色窗口(窗口):
                                         tempstr+=','
                                 tempstr +=')</font>'
                                 
-                            
+                                                            
                 if tempstr != '':
                     tempstr += '</font>'
                     被动数据=QLabel(输出窗口)
@@ -4729,7 +4884,7 @@ class 角色窗口(窗口):
                 图标遮罩.setToolTip(tempstr[i])
             else:
                 装备图标.setToolTip(tempstr[i])
-        
+
         temp = []
         for i in range(0,12):
             装备 =  装备列表[装备序号[self.角色属性B.装备栏[i]]]
@@ -4802,7 +4957,7 @@ class 角色窗口(窗口):
             os.startfile(result_path)
         except:
             pass
-            
+
 
     def 希洛克属性计算(self, 属性):
         数量 = [0] * 3
@@ -4885,6 +5040,7 @@ class 角色窗口(窗口):
             属性.刀魂之卡赞 = self.刀魂之卡赞.currentIndex()
 
         属性.自适应选项 = copy([(1 if self.红色宠物装备.isChecked() else 0), (1 if self.光环自适应.isChecked() else 0)])
+        属性.计算自适应方式 = self.单件择优方式选项.currentIndex()
 
         if self.转甲选项.isChecked():
             属性.转甲选项 = 1
@@ -5057,7 +5213,7 @@ class 角色窗口(窗口):
         except: 
             QMessageBox.information(self,"错误",  "BUFF数值输入错误,已设置为默认数值") 
             self.BUFF输入.setText(str('%.1f' % ((self.角色属性A.主BUFF - 1) * 100)))
-
+        
         try:
             if self.觉醒选择状态 == 1:
                 属性.觉醒之抉择技能 = 属性.技能栏[self.一觉序号].名称
@@ -5099,7 +5255,7 @@ class 角色窗口(窗口):
             属性.黑鸦词条.append(temp)
         self.希洛克属性计算(属性)
         self.基础属性(属性)
-    
+
     def 加载护石(self,属性):
         for k in range(3):
             if self.护石栏[k].currentText()!= '无':
