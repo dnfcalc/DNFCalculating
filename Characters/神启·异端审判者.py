@@ -512,8 +512,12 @@ class 神启·异端审判者角色属性(角色属性):
             if i.是否有伤害 == 1:
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
                     技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数))
-                elif self.次数输入[self.技能序号[i.名称]] != '0':
-                    技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]),2))
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 != 1:
+                    技能释放次数.append(self.次数输入[self.技能序号[i.名称]])
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 == 1:
+                    temp1 = int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型, self.类型) + 1 + i.基础释放次数)
+                    temp2 = self.次数输入[self.技能序号[i.名称]]
+                    技能释放次数.append(min(temp1, temp2))
                 else:
                     技能释放次数.append(0)
             else:

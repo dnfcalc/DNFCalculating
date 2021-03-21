@@ -451,26 +451,47 @@ class 弑心镇魂者角色属性(角色属性):
             if i.名称 == '毁灭狂欢':
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
                     i.歼灭次数 += (int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数))
-                else:
+                elif self.限制技能次数 != 1:
                     i.歼灭次数 += (round(self.次数输入[self.技能序号[i.名称]],2)+i.基础释放次数)
+                elif self.限制技能次数 == 1:
+                    temp1 = (int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数))
+                    temp2 = (round(self.次数输入[self.技能序号[i.名称]],2)+i.基础释放次数)
+                    i.歼灭次数 +=(min(temp1,temp2))
         for i in self.技能栏:
             if i.是否有伤害==1 and i.名称 != '月影秘步' and i.名称 != '锁定射击':
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
                     技能释放次数.append(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数))
-                else:
-                    技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]),2))
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 != 1:
+                    技能释放次数.append(self.次数输入[self.技能序号[i.名称]])
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 == 1:
+                    temp1 = (int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数))
+                    temp2 = self.次数输入[self.技能序号[i.名称]]
+                    技能释放次数.append(min(temp1, temp2))
             elif i.名称 == '月影秘步':
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
                     技能释放次数.append(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数)*3)
-                else:
-                    技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]),2))
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 != 1:
+                    技能释放次数.append(self.次数输入[self.技能序号[i.名称]])
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 == 1:
+                    temp1 = (int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数)*3)
+                    temp2 = self.次数输入[self.技能序号[i.名称]]
+                    技能释放次数.append(min(temp1, temp2))
             elif i.名称 == '锁定射击':
                 if self.次数输入[self.技能序号[i.名称]] == '/CD' and self.技能栏[self.技能序号['锁定射击']].锁定护石 == 1:
                     技能释放次数.append(int(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型,self.类型) + 1 +i.基础释放次数) * 12)+(int(self.技能栏[self.技能序号['毁灭狂欢']].歼灭次数 *6)))
                 elif self.次数输入[self.技能序号[i.名称]] == '/CD' and self.技能栏[self.技能序号['锁定射击']].锁定护石 == 0:
                     技能释放次数.append(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数) * 12)
-                else:
-                    技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]),2))
+                elif self.限制技能次数 != 1:
+                    技能释放次数.append(self.次数输入[self.技能序号[i.名称]])
+                elif self.限制技能次数 == 1 and self.技能栏[self.技能序号['锁定射击']].锁定护石 == 1:
+                    temp1 = (int(int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型,self.类型) + 1 +i.基础释放次数) * 12)+(int(self.技能栏[self.技能序号['毁灭狂欢']].歼灭次数 *6)))
+                    temp2 = self.次数输入[self.技能序号[i.名称]]
+                    技能释放次数.append(min(temp1, temp2))
+                elif self.限制技能次数 == 1 and self.技能栏[self.技能序号['锁定射击']].锁定护石 == 0:
+                    temp1 = (int((self.时间输入 - i.演出时间)/i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数) * 12)
+                    temp2 = self.次数输入[self.技能序号[i.名称]]
+                    技能释放次数.append(min(temp1, temp2))
+
             else:
                 技能释放次数.append(0)
         return 技能释放次数

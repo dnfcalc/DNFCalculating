@@ -121,6 +121,7 @@ class 角色属性(属性):
     #红阵，远古记忆 -1表示没有该技能
     远古记忆 = -1
     刀魂之卡赞 = -1
+    限制技能次数 = 0
 
     百分比力智 = 0.0
     百分比三攻 = 0.0
@@ -1517,8 +1518,12 @@ class 角色属性(属性):
             if i.是否有伤害 == 1:
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
                     技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数))
-                elif self.次数输入[self.技能序号[i.名称]] != '0':
-                    技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]),2))
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 != 1:
+                    技能释放次数.append(self.次数输入[self.技能序号[i.名称]])
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 == 1:
+                    temp1 = int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数)
+                    temp2 = self.次数输入[self.技能序号[i.名称]]
+                    技能释放次数.append(min(temp1,temp2))
                 else:
                     技能释放次数.append(0)
             else:
@@ -2204,7 +2209,13 @@ class 角色窗口(窗口):
                 self.刀魂之卡赞.addItem(str(i))
             self.刀魂之卡赞.resize(50,20)
             self.刀魂之卡赞.move(1035, 19 + sign + counter * 24)
-        
+
+        self.限制技能次数=QCheckBox('固定技能次数为限制技能次数',self.main_frame2)
+        self.限制技能次数.resize(200,20)
+        self.限制技能次数.move(325,self.height() - 63)
+        self.限制技能次数.setStyleSheet(复选框样式)
+        self.限制技能次数.setChecked(False)
+
         x=QLabel("攻击目标：", self.main_frame2)
         x.move(660, self.height() - 62)
         x.resize(70, 20)
@@ -5255,6 +5266,8 @@ class 角色窗口(窗口):
             属性.黑鸦词条.append(temp)
         self.希洛克属性计算(属性)
         self.基础属性(属性)
+        if self.限制技能次数.isChecked():
+            属性.限制技能次数 = 1
 
     def 加载护石(self,属性):
         for k in range(3):

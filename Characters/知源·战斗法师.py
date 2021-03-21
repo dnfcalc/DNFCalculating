@@ -573,7 +573,7 @@ class 知源·战斗法师角色属性(角色属性):
             self.技能栏[self.技能序号['矛精通']].关联技能 = ['无']
         for i in [16, 17, 18]:
             self.技能栏[i].等级 = self.技能栏[15].等级
-        if self.装备栏[11] == '歼灵灭魂矛':
+        if 装备列表[装备序号[self.装备栏[11]]].名称 == '歼灭灵魂矛':
             self.技能栏[self.技能序号['碎霸']].触发概率 = self.碎霸触发概率
         super().被动倍率计算()
         self.技能栏[self.技能序号['炫纹之源：太古神光']].炫纹倍率 = self.技能栏[self.技能序号['炫纹发射']].等效百分比(self.武器类型)
@@ -596,8 +596,12 @@ class 知源·战斗法师角色属性(角色属性):
             if i.是否有伤害 == 1:
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
                     技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数))
-                elif self.次数输入[self.技能序号[i.名称]] != '0':
-                    技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]),2))
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 != 1:
+                    技能释放次数.append(self.次数输入[self.技能序号[i.名称]])
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 == 1:
+                    temp1 = int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型, self.类型) + 1 + i.基础释放次数)
+                    temp2 = self.次数输入[self.技能序号[i.名称]]
+                    技能释放次数.append(min(temp1, temp2))
                 else:
                     技能释放次数.append(0)
             else:
@@ -663,5 +667,4 @@ class 知源·战斗法师(角色窗口):
     def 输入属性(self, 属性, x = 0):
         super().输入属性(属性, x)
         属性.碎霸触发概率 = round(self.碎霸概率.currentIndex() / 10, 2)
-        print(属性.碎霸触发概率)
 

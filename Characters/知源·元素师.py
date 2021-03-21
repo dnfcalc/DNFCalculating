@@ -537,8 +537,12 @@ class 知源·元素师角色属性(角色属性):
                 if self.次数输入[self.技能序号[i.名称]] == '/CD':
                     空转时间 = self.空转时间(不脱手时间,i.等效CD(self.武器类型,self.类型))
                     技能释放次数.append(i.实际技能次数(self.时间输入-空转时间,self.武器类型,self.类型))
-                elif self.次数输入[self.技能序号[i.名称]] != '0':
-                    技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]),2))
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 != 1:
+                    技能释放次数.append(self.次数输入[self.技能序号[i.名称]])
+                elif self.次数输入[self.技能序号[i.名称]] != '0' and self.限制技能次数 == 1:
+                    temp1 = int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型, self.类型) + 1 + i.基础释放次数)
+                    temp2 = self.次数输入[self.技能序号[i.名称]]
+                    技能释放次数.append(min(temp1, temp2))
                 else:
                     技能释放次数.append(0)
             else:
