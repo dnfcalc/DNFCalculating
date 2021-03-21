@@ -6,7 +6,7 @@ from PublicReference.equipment.武器融合 import *
 from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
-from numpy import transpose,prod,argmax,amax,delete,zeros
+from numpy import transpose,prod,argmax,amax,delete,zeros,vstack
  
 class 技能:
     名称 = ''
@@ -1112,46 +1112,84 @@ class 角色属性(属性):
         a3tem=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),6))
         a4tem=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),6))
 
+        index1=0
         counter=-1
 
-        for index1 in range(0,len(a1)):
-            for index2 in range(0,len(a2)):
-                for index3 in range(0,len(a3)):
-                    for index4 in range(0,len(a4)):
-                        for index5 in range(0,len(a5)):
-                            for index6 in range(0,len(a6)):
-                                for index7 in range(0,len(a7)):
-                                    for index8 in range(0,len(a8)):
-                                        # if a7[index7]!=0 and a8[index8]!=0 :
-                                            counter+=1
-                                            
-                                            tem1[counter,0]=index1
-                                            tem1[counter,1]=index2
-                                            tem1[counter,2]=index3
-                                            tem1[counter,3]=index4
-                                            tem1[counter,4]=index5
-                                            tem1[counter,5]=index6
-                                            tem1[counter,6]=index7
-                                            tem1[counter,7]=index8
-                                            
-                                            tem2[counter,index1]+=a1[index1]
-                                            tem2[counter,index2]+=a2[index2]
-                                            tem2[counter,index3]+=a3[index3]
-                                            tem2[counter,index4]+=a4[index4]
-                                            tem2[counter,index5]+=a5[index5]
-                                            tem2[counter,index6]+=a6[index6]
-                                            tem2[counter,index7]+=a7[index7]
-                                            tem2[counter,index8]+=a8[index8]
-                                            
-                                            a2tem[counter,index2]=1
-                                            a3tem[counter,index3]=1
-                                            a4tem[counter,index4]=1
-
+        for index2 in range(0,len(a2)):
+            for index3 in range(0,len(a3)):
+                for index4 in range(0,len(a4)):
+                    for index5 in range(0,len(a5)):
+                        for index6 in range(0,len(a6)):
+                            for index7 in range(0,len(a7)):
+                                for index8 in range(0,len(a8)):
+                                    # if a7[index7]!=0 and a8[index8]!=0 :
+                                        counter+=1
+                                        
+                                        tem1[counter,0]=index1
+                                        tem1[counter,1]=index2
+                                        tem1[counter,2]=index3
+                                        tem1[counter,3]=index4
+                                        tem1[counter,4]=index5
+                                        tem1[counter,5]=index6
+                                        tem1[counter,6]=index7
+                                        tem1[counter,7]=index8
+                                        
+                                        tem2[counter,index1]+=a1[index1]
+                                        tem2[counter,index2]+=a2[index2]
+                                        tem2[counter,index3]+=a3[index3]
+                                        tem2[counter,index4]+=a4[index4]
+                                        tem2[counter,index5]+=a5[index5]
+                                        tem2[counter,index6]+=a6[index6]
+                                        tem2[counter,index7]+=a7[index7]
+                                        tem2[counter,index8]+=a8[index8]
+                                        
+                                        
+        #                                    a1tem[counter,index2]=1
+                                        a2tem[counter,index2]=1
+                                        a3tem[counter,index3]=1
+                                        a4tem[counter,index4]=1
+        
         tem1=delete(tem1,[range(counter+1,len(tem1))],axis=0)
         tem2=delete(tem2,[range(counter+1,len(tem2))],axis=0)
         a2tem=delete(a2tem,[range(counter+1,len(a2tem))],axis=0)
         a3tem=delete(a3tem,[range(counter+1,len(a3tem))],axis=0)
         a4tem=delete(a4tem,[range(counter+1,len(a4tem))],axis=0)
+        
+         
+        lscounter=counter+1                             
+        for index1 in range(1,len(a1)):
+            lstem1=tem1+0
+            lstem2=tem2+0
+            lsa2tem=a2tem+0
+            lsa3tem=a3tem+0
+            lsa4tem=a4tem+0
+            
+            lstem1[:,0]=index1
+            lstem2[:,0]-=a1[0]     
+            lstem2[:,index1]+=a1[index1]
+            
+            counter+=lscounter
+            if index1==1:
+                realtem1=vstack((tem1,lstem1))
+                realtem2=vstack((tem2,lstem2))
+                reala2tem=vstack((a2tem,lsa2tem))
+                reala3tem=vstack((a3tem,lsa3tem))
+                reala4tem=vstack((a4tem,lsa4tem))
+                
+            else:
+                realtem1=vstack((realtem1,lstem1))
+                realtem2=vstack((realtem2,lstem2))
+                reala2tem=vstack((reala2tem,lsa2tem))
+                reala3tem=vstack((reala3tem,lsa3tem))
+                reala4tem=vstack((reala4tem,lsa4tem))
+                
+        
+            
+        tem1=delete(realtem1,[range(counter+1,len(tem1))],axis=0)
+        tem2=delete(realtem2,[range(counter+1,len(tem2))],axis=0)
+        a2tem=delete(reala2tem,[range(counter+1,len(a2tem))],axis=0)
+        a3tem=delete(reala3tem,[range(counter+1,len(a3tem))],axis=0)
+        a4tem=delete(reala4tem,[range(counter+1,len(a4tem))],axis=0)    
 
         #固定组合为6残香1*6残香2*6黑鸭武器*6黑鸭裤子*6黑鸭戒指*6黑鸭左曹*3光环*3宠物装备，6列指6个词条，分别累加
         fixednumsum=deepcopy(tem2) #基础数据连加矩阵，写在硬盘加载,这里用随机矩阵代替
