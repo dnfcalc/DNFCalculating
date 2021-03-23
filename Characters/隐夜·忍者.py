@@ -690,18 +690,18 @@ class 职业属性(角色属性):
         if self.技能栏[self.技能序号['忍法：六道轮回']].等级 != 0 and 技能释放次数[self.技能序号['忍法：六道轮回']] !=0 :
            self.技能栏[self.技能序号['忍法：六道轮回']].六道技能显示 = []
            默认宠物技能 = ['火遁·炎天道', '火遁·蟾蜍油炎弹', '火遁·炎舞天璇', '八岐大蛇', '火遁·风魔手里剑', '天照']
-           if self.宠物次数[self.技能序号['忍法：六道轮回']] == 0 :
-               self.宠物次数[self.技能序号['忍法：六道轮回']] = 0
-           else:
-               self.宠物次数[self.技能序号['忍法：六道轮回']] = 1
+#           if self.宠物次数[self.技能序号['忍法：六道轮回']] == 0 :
+#               self.宠物次数[self.技能序号['忍法：六道轮回']] = 0
+#           else:
+#               self.宠物次数[self.技能序号['忍法：六道轮回']] = 1
            for i in self.六道绑定技能:
                if 技能释放次数[self.技能序号[i]] != 0 and self.技能栏[self.技能序号[i]].等级 != 0:
                    if i in 默认宠物技能:
-                       技能总伤害[self.技能序号[i]] += 0.8 * 技能单次伤害[self.技能序号[i]]  * (1+self.白兔子技能*0.20+self.年宠技能*0.10*self.宠物次数[self.技能序号['忍法：六道轮回']]+self.斗神之吼秘药*0.12)
+                       技能总伤害[self.技能序号[i]] += 0.8 * 技能单次伤害[self.技能序号[i]]  * (1+self.白兔子技能*0.20+self.年宠技能*0.10*self.宠物次数[self.技能序号['忍法：六道轮回']]+self.斗神之吼秘药*0.12) * 技能释放次数[self.技能序号['忍法：六道轮回']]
                        默认宠物技能.remove(i)
                        self.技能栏[self.技能序号['忍法：六道轮回']].六道技能显示.append(i)
                    else:
-                       技能总伤害[self.技能序号[i]] += 0.8 * 技能单次伤害[self.技能序号[i]]  * (1+self.白兔子技能*0.20 + self.斗神之吼秘药*0.12)
+                       技能总伤害[self.技能序号[i]] += 0.8 * 技能单次伤害[self.技能序号[i]]  * (1+self.白兔子技能*0.20 + self.斗神之吼秘药*0.12) * 技能释放次数[self.技能序号['忍法：六道轮回']]
                        self.技能栏[self.技能序号['忍法：六道轮回']].六道技能显示.append(i)
         else:
             self.技能栏[self.技能序号['忍法：六道轮回']].自定义描述 = 0
@@ -762,6 +762,7 @@ class 隐夜·忍者(角色窗口):
             self.绑定技能次数[i].addItem('0')
             self.绑定技能次数[i].addItem('1')
             self.绑定技能次数[i].addItem('2')
+            self.绑定技能次数[i].addItem('3')
 
     def 载入配置(self, path='set'):
         super().载入配置(path)
@@ -787,14 +788,18 @@ class 隐夜·忍者(角色窗口):
 
     def 输入属性(self, 属性, x = 0):
         super().输入属性(属性, x)
-        for i in range(len(self.可绑定技能)):
-            if self.次数输入[self.角色属性A.技能序号[self.可绑定技能[i]]].currentIndex() != 0:
-                self.绑定技能次数[i].setCurrentIndex(min(self.绑定技能次数[i].currentIndex(), self.次数输入[self.角色属性A.技能序号[self.可绑定技能[i]]].currentIndex() - 1))
+#        for i in range(len(self.可绑定技能)):
+#            if self.次数输入[self.角色属性A.技能序号[self.可绑定技能[i]]].currentIndex() != 0:
+#                self.绑定技能次数[i].setCurrentIndex(min(self.绑定技能次数[i].currentIndex(), self.次数输入[self.角色属性A.技能序号[self.可绑定技能[i]]].currentIndex() - 1))
         temp = []
         for i in range(len(self.可绑定技能)):
             if self.绑定技能次数[i].currentIndex() == 1:
                 temp.append(self.可绑定技能[i])
             elif self.绑定技能次数[i].currentIndex() == 2:
+                temp.append(self.可绑定技能[i])
+                temp.append(self.可绑定技能[i])
+            elif self.绑定技能次数[i].currentIndex() == 3:
+                temp.append(self.可绑定技能[i])
                 temp.append(self.可绑定技能[i])
                 temp.append(self.可绑定技能[i])
         属性.六道绑定技能 = deepcopy(temp)
