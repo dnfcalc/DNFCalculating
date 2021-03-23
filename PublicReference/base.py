@@ -7,7 +7,6 @@ from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
 from numpy import transpose,prod,argmax,amax,delete,zeros,vstack
-import datetime
  
 class 技能:
     名称 = ''
@@ -909,7 +908,6 @@ class 角色属性(属性):
         self.最终伤害加成(词条数值[5])
         词条提升率[5] = round((1 + self.最终伤害) / x - 1,10)*100
         self.最终伤害加成(-词条数值[5])  
-        print(词条提升率)
         return 词条提升率
 
 
@@ -1096,10 +1094,7 @@ class 角色属性(属性):
         if self.计算自适应方式 ==0 or self.是否单套 == 0:
             self.贪心自适应()
         else:
-            a=datetime.datetime.now()
             self.全局自适应()
-            b=datetime.datetime.now()
-            print(b-a)
         for i in range(len(self.择优结果)):
             # 词条属性列表[self.择优结果[i][0]].加成属性(self,self.择优结果[i][1])
             if i < 4:
@@ -1134,15 +1129,6 @@ class 角色属性(属性):
         a6 = self.择优词条[5]
         a7 = self.择优词条[6]
         a8 = self.择优词条[7]
-
-        print(a1)
-        print(a2)
-        print(a3)
-        print(a4)
-        print(a5)
-        print(a6)
-        print(a7)
-        print(a8)
 
         tem1=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),8))
         tem2=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),6))
@@ -1714,15 +1700,14 @@ class 角色属性(属性):
             self.技能攻击力加成(0.10)
 
     def 黑鸦词条扣除(self):
-        # print(self.黑鸦武器择优模式)
         for i in range(4):
             self.黑鸦词条[i].append("")
             if self.黑鸦词条[i][0]!=0 and self.变换词条[i][1] != 0:
                 self.黑鸦词条变更(self.变换词条[i],-1)
                 if self.黑鸦词条[i][0]==2 and self.变换词条[i][1]:
-                    temp = [self.黑鸦词条[i][1],(0 if self.黑鸦词条[i][1]==6 else self.变换词条[i][1]) + self.黑鸦词条[i][2],0,0]
+                    temp = [self.黑鸦词条[i][1],(14 if self.变换词条[i][0]==6 else self.变换词条[i][1]) + self.黑鸦词条[i][2],0,0]
                     self.黑鸦词条变更(temp,1)
-                    self.黑鸦词条[i][4] = 黑鸦武器属性列表[temp[0]].描述 +'+'+ str((0 if temp[0]==6 else self.变换词条[i][1]) + self.黑鸦词条[i][2])+('' if temp[0]==6 else '%')
+                    self.黑鸦词条[i][4] = 黑鸦武器属性列表[temp[0]].描述 +'+'+ str((14 if self.变换词条[i][0]==6 else self.变换词条[i][1]) + self.黑鸦词条[i][2])+('' if temp[0]==6 else '%')
                 if self.黑鸦词条[i][0]==3 and self.变换词条[i][1]:
                     self.黑鸦词条[i][4] = ""
                     temp = [6,2,0,0]
@@ -1736,6 +1721,7 @@ class 角色属性(属性):
             self.技能等级加成('所有',50,50,2) 
             self.技能等级加成('所有',85,85,2)
             self.技能等级加成('所有',100,100,2)  
+        
     def 装备属性计算(self):
         self.装备基础()
         self.装备词条计算()
