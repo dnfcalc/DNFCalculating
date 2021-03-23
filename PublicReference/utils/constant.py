@@ -60,7 +60,8 @@ def getQCSS(FileName):
 套装按钮样式 = getQCSS('套装按钮样式')
 # if 套装按钮样式 == '' :套装按钮样式 = '''QPushButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} QPushButton:hover{background-color:rgba(65,105,225,0.8)}'''
 按钮样式2 = 'QPushButton{background-color:rgba(0,0,0,0);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(252,224,0,0.2)}'
-按钮样式3 = 'QPushButton{font-size:13px;color:white;background-color:rgba(255,255,255,0.1);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(65,105,225,0.5)}'
+按钮样式3 = '''QPushButton{font-size:13px;color:white;background-color:rgba(255,255,255,0.1);border:1px;border-radius:5px} QPushButton:hover{background-color:rgba(65,105,225,0.5)}
+QPushButton::menu-indicator {image:none}'''
 
 按钮样式 = getQCSS('按钮样式')
 # if 按钮样式 == '' :按钮样式 = 'QPushButton{font-size:12px;color:white;background-color:grey;border:1px;border-radius:10px}'
