@@ -35,16 +35,15 @@ class 极诣·剑影技能1(主动技能):
     #攻击次数2 = 1
     数据3 = [0, 929, 1024, 1118, 1212, 1307, 1401, 1495, 1589, 1684, 1778, 1872, 1967, 2061, 2155, 2250, 2344, 2438, 2533, 2627, 2721, 2816, 2910, 3004, 3099, 3193, 3287, 3382, 3476, 3570, 3664, 3759, 3853, 3947, 4042, 4136, 4230, 4325, 4419, 4513, 4608, 4702, 4796, 4891, 4985, 5079, 5174, 5268, 5362, 5457, 5551, 5645, 5740, 5834, 5928, 6022, 6117, 6211, 6305, 6400, 6494, 6588, 6683, 6777, 6871, 6966, 7060, 7154, 7249, 7343, 7437]
     #攻击次数3 = 1
+    数据4 = [0, 790, 869, 949, 1030, 1110, 1190, 1269, 1350, 1430, 1510, 1591, 1671, 1750, 1831, 1911, 1991, 2071, 2151, 2231, 2311, 2392, 2472, 2552, 2632, 2712, 2792, 2872, 2953, 3032, 3112, 3193, 3273, 3353, 3434, 3513, 3593, 3673, 3754, 3834, 3913, 3994, 4074, 4154, 4235, 4314, 4394, 4474, 4555, 4635, 4715, 4795, 4875, 4955, 5036, 5116, 5195, 5275, 5356, 5436, 5516, 5597, 5676, 5756, 5837, 5917, 5997, 6076, 6157, 6237, 6317]
+    攻击次数4 = 3
     CD = 5.0
     TP成长 = 0.1
     TP上限 = 5
-    
-    def TP倍率(self,武器类型):
-        return 1 + self.TP成长 * self.TP等级
+    被动开关 = 0
 
     def 等效百分比(self, 武器类型):
-        # return (self.数据1[self.等级] + self.数据2[self.等级] + self.数据3[self.等级] + self.数据4[self.等级] * self.攻击次数4) * (1 + self.TP成长 * self.TP等级) * self.倍率
-        return (self.数据1[self.等级] + self.数据2[self.等级] + self.数据3[self.等级]) * (1 + self.TP成长 * self.TP等级) * self.倍率
+        return (self.数据1[self.等级] + self.数据2[self.等级] + self.数据3[self.等级] + self.数据4[self.等级] * self.攻击次数4 * self.被动开关) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 class 极诣·剑影技能2(被动技能):
     名称 = '剑影太刀精通'
@@ -412,20 +411,18 @@ class 极诣·剑影技能22(主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] + self.数据2[self.等级] * self.攻击次数2 + self.数据3[self.等级] + self.数据4[self.等级] * self.攻击次数4 + self.数据5[self.等级] + self.数据6[self.等级] + self.数据7[self.等级]) * self.倍率
 
-class 极诣·剑影技能23(主动技能):
-    名称 = '鬼连斩·极'
-    关联技能 = ['无']
+class 极诣·剑影技能23(被动技能):
+    名称 = '鬼连斩：极'
     所在等级 = 30
     等级上限 = 60
-    基础等级 = 46
-    数据1 = [0, 790, 869, 949, 1030, 1110, 1190, 1269, 1350, 1430, 1510, 1591, 1671, 1750, 1831, 1911, 1991, 2071, 2151, 2231, 2311, 2392, 2472, 2552, 2632, 2712, 2792, 2872, 2953, 3032, 3112, 3193, 3273, 3353, 3434, 3513, 3593, 3673, 3754, 3834, 3913, 3994, 4074, 4154, 4235, 4314, 4394, 4474, 4555, 4635, 4715, 4795, 4875, 4955, 5036, 5116, 5195, 5275, 5356, 5436, 5516, 5597, 5676, 5756, 5837, 5917, 5997, 6076, 6157, 6237, 6317]
-    攻击次数1 = 3
-    TP上限 = 0
-    CD = 5
-    倍率 = 1.0
+    基础等级 = 1
+    技能图标顺序 = 7
+    关联技能 = ['鬼连斩']
 
-    def 等效百分比(self, 武器类型):
-        return (self.数据1[self.等级]*self.攻击次数1)*self.倍率
+    def 加成倍率(self, 武器类型):
+        return 1.0
+    
+
 
 极诣·剑影技能列表 = []
 i = 0
@@ -458,7 +455,7 @@ for i in 极诣·剑影技能列表:
 
 极诣·剑影符文选项 = ['无']
 for i in 极诣·剑影技能列表:
-    if i.所在等级 >= 15 and i.所在等级 <= 80 and i.所在等级 != 50 and i.是否有伤害 == 1 and i.名称!='鬼连斩·极':
+    if i.所在等级 >= 15 and i.所在等级 <= 80 and i.所在等级 != 50 and i.是否有伤害 == 1:
         极诣·剑影符文选项.append(i.名称)
 
 class 极诣·剑影角色属性(角色属性):
@@ -478,6 +475,8 @@ class 极诣·剑影角色属性(角色属性):
     主BUFF = 2.00
    
     无式极影剑形态 = 0
+    符文鬼连斩倍率 = 1
+    鬼连斩极显示开关 = 0
   
     def __init__(self):
         基础属性输入(self)
@@ -498,9 +497,46 @@ class 极诣·剑影角色属性(角色属性):
             self.魔法攻击力 += 武器计算(temp.等级,temp.品质,self.强化等级[11],self.武器类型,'魔法')
             self.独立攻击力 += 锻造计算(temp.等级,temp.品质,self.武器锻造等级)
 
+    def 技能等级加成(self, 加成类型, minLv, maxLv, lv, 可变=0):
+        lv = int(lv)
+        if self.装备描述 == 1:
+            if 加成类型 == "所有":
+                if minLv == maxLv:
+                    return "Lv{} 技能等级+{}<br>".format(minLv, lv)
+                else:
+                    return "Lv{}-{} 技能等级+{}<br>".format(minLv, maxLv, lv)
+            else:
+                if minLv == maxLv:
+                    return "Lv{} 主动技能等级+{}<br>".format(minLv, lv)
+                else:
+                    return "Lv{}-{} 主动技能等级+{}<br>".format(minLv, maxLv, lv)
+        else:
+            if self.远古记忆 > 0:
+                if minLv <= 15 and maxLv >= 15:
+                    self.远古记忆 = min(20, self.远古记忆 + lv)
+
+            if self.刀魂之卡赞 > 0:
+                if minLv <= 5 and maxLv >= 5:
+                    self.刀魂之卡赞 = min(20, self.刀魂之卡赞 + lv)
+
+            for i in self.技能栏:
+                if i.所在等级 >= minLv and i.所在等级 <= maxLv:
+                    if 加成类型 == '所有':
+                        #鬼连斩极的等级加成非常特别，装备同时加成鬼连斩和鬼连斩极时，两者等级都+1,，只加成鬼连斩时，两者等级+1，只加成鬼连斩极时，只有鬼连斩等级+1
+                        if minLv > 15 and maxLv >= 30:
+                            i.等级加成(lv)
+                        elif i.名称 != '鬼连斩极':
+                            i.等级加成(lv)
+                    else:
+                        if i.是否主动 == 1:
+                            i.等级加成(lv)
+            if 可变 > 0:
+                self.变换词条[可变 - 1] = [6, 2, 14 + (2 if 可变 > 1 else 4), 14 + (8 if 可变 > 1 else 16)]
+        return ''
+
     def 被动倍率计算(self):
         super().被动倍率计算()
-        self.技能栏[12].被动倍率 *= 1.1
+        self.技能栏[self.技能序号['冥夜鬼天杀']].被动倍率 *= 1.1
 
         if self.无式极影剑形态 == 0:
             self.技能栏[self.技能序号['无式·极影剑']].攻击次数1 = 5
@@ -516,14 +552,33 @@ class 极诣·剑影角色属性(角色属性):
             self.技能栏[self.技能序号['无式·极影剑']].攻击次数4 = 0
             self.技能栏[self.技能序号['无式·极影剑']].攻击次数5 = 5
             self.技能栏[self.技能序号['无式·极影剑']].攻击次数6 = 1
-        
-        self.技能栏[self.技能序号['鬼连斩·极']].等级 = self.技能栏[self.技能序号['鬼连斩']].等级
-        self.技能栏[self.技能序号['鬼连斩·极']].倍率 *= self.技能栏[self.技能序号['鬼连斩']].TP倍率(self.武器类型)
-        self.技能栏[self.技能序号['鬼连斩·极']].CD = self.技能栏[self.技能序号['鬼连斩']].CD
-        self.技能栏[self.技能序号['鬼连斩·极']].恢复 = self.技能栏[self.技能序号['鬼连斩']].恢复
-        self.次数输入[self.技能序号['鬼连斩·极']] = self.次数输入[self.技能序号['鬼连斩']]
-        self.宠物次数[self.技能序号['鬼连斩·极']] = self.宠物次数[self.技能序号['鬼连斩']]
-        
+
+    def 数据计算(self, x = 0, y = -1):
+        self.预处理()
+        #初步计算
+        技能释放次数 = self.技能释放次数计算()
+        技能单次伤害 = self.技能单次伤害计算(y)
+        技能总伤害 = self.技能总伤害计算(技能释放次数, 技能单次伤害)
+
+        if self.技能栏[self.技能序号['鬼连斩极']].等级 != 0:
+           a = self.技能栏[self.技能序号['鬼连斩极']]
+           b = self.技能栏[self.技能序号['鬼连斩']]
+           技能释放次数[self.技能序号['鬼连斩极']] = 技能释放次数[self.技能序号['鬼连斩']]
+           a.等级 = a.等级 + b.等级 - 1
+           等效百分比a = (b.数据4[a.等级] * b.攻击次数4) * (1 + b.TP成长 * b.TP等级) * b.倍率/ self.符文鬼连斩倍率
+           技能总伤害[self.技能序号['鬼连斩极']] = (等效百分比a * self.伤害指数 * b.被动倍率) * 技能释放次数[self.技能序号['鬼连斩极']] * \
+                                      (1 + self.白兔子技能 * 0.20 + self.年宠技能 * 0.10 * self.宠物次数[self.技能序号['鬼连斩']] / 技能释放次数[self.技能序号['鬼连斩']]+ self.斗神之吼秘药 * 0.12)
+           if self.装备检查('奔流不息之狂风'):
+               技能总伤害[self.技能序号['鬼连斩极']] *= 0.7
+           if self.鬼连斩极显示开关 == 0:
+               技能总伤害[self.技能序号['鬼连斩']] += 技能总伤害[self.技能序号['鬼连斩极']]
+               技能总伤害[self.技能序号['鬼连斩极']] = 0
+               b.被动开关 = 1
+
+               #返回结果
+        return self.数据返回(x, 技能释放次数, 技能总伤害)
+
+
 class 极诣·剑影(角色窗口):
     def 窗口属性输入(self):
         self.初始属性 = 极诣·剑影角色属性()
@@ -542,13 +597,20 @@ class 极诣·剑影(角色窗口):
         self.无式极影剑形态选择.addItem('无式极影剑(幻鬼)')
         self.无式极影剑形态选择.setCurrentIndex(0)
         self.无式极影剑形态选择.resize(130,20)
-        self.无式极影剑形态选择.move(325,300)
+        self.无式极影剑形态选择.move(325,330)
+
+        self.鬼连斩极显示开关=QCheckBox('鬼连斩极伤害独立显示',self.main_frame2)
+        self.鬼连斩极显示开关.resize(140,20)
+        self.鬼连斩极显示开关.move(325,360)
+        self.鬼连斩极显示开关.setStyleSheet(复选框样式)
+        self.鬼连斩极显示开关.setChecked(False)
 
     def 载入配置(self, path='set'):
         super().载入配置(path)
         try:
            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'r',encoding='utf-8').readlines()
            self.无式极影剑形态选择.setCurrentIndex(int(setfile[0].replace('\n', '')))
+           self.鬼连斩极显示开关.setChecked(True if int(setfile[1].replace('\n', '')) == 1 else False)
         except:
             pass
 
@@ -559,6 +621,7 @@ class 极诣·剑影(角色窗口):
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'w', encoding='utf-8')
             setfile.write(str(self.无式极影剑形态选择.currentIndex())+'\n')
+            setfile.write('1\n' if self.鬼连斩极显示开关.isChecked() else '0\n')
         except:
             pass
 
@@ -566,4 +629,31 @@ class 极诣·剑影(角色窗口):
         super().输入属性(属性,x)
 
         属性.无式极影剑形态 = self.无式极影剑形态选择.currentIndex()
+        if self.鬼连斩极显示开关.isChecked():
+            属性.鬼连斩极显示开关 = 1
+
+    def 加载护石(self, 属性):
+        for k in range(3):
+            if self.护石栏[k].currentText() != '无':
+                try:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石()
+                except:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石(self.护石类型选项[k].currentIndex())
+
+        属性.护石第一栏 = self.护石栏[0].currentText()
+        属性.护石第二栏 = self.护石栏[1].currentText()
+        属性.护石第三栏 = self.护石栏[2].currentText()
+
+        属性.符文鬼连斩倍率 = 1
+        for i in range(0, 9):
+            if self.符文[i].currentText() != '无' and self.符文效果[i].currentText() != '无':
+                for j in self.符文效果[i].currentText().split(','):
+                    if '攻击' in j:
+                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].倍率 *= 1 + int(
+                            j.replace('攻击', '').replace('%', '')) / 100
+                        if self.符文[i].currentText() == '鬼连斩':
+                            属性.符文鬼连斩倍率 *= 1 + int(j.replace('攻击', '').replace('%', '')) / 100
+                    if 'CD' in j:
+                        属性.技能栏[self.角色属性A.技能序号[self.符文[i].currentText()]].CD *= 1 + int(
+                            j.replace('CD', '').replace('%', '')) / 100
 
