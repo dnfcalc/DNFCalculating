@@ -1,7 +1,8 @@
-﻿import multiprocessing
+import multiprocessing
 
 from PyQt5.QtCore import QUrl,QThread
 from PyQt5.QtWidgets import QApplication
+from PyQt5 import QtCore
 import importlib
 from PublicReference.common import *
 from PublicReference.utils.MainWindow import *
@@ -323,9 +324,19 @@ class 选择窗口(QWidget):
         self.setLayout(self.vbox)
 
     def openSet(self):
-        setWindow = SetWindows()
-        win = MainWindow(setWindow)
-        win.show()
+        self.processpid = []
+        for p in self.worker:
+            if p.is_alive:
+                self.processpid.append(int(p.pid))
+        self.setWindow = SetWindows(self.processpid)
+        self.setWindow._signal.connect(self.closeSet)
+        self.win = MainWindow(self.setWindow)
+        self.win.show()
+
+    def closeSet(self, parameter):
+        if parameter == 1:
+            self.win.close()
+
 
     def 打开窗口(self, name):
         if self.char_window != None:
@@ -466,19 +477,21 @@ class 选择窗口(QWidget):
 
 
 class SetWindows(QWidget):
-
-    def __init__(self):
+    _signal = QtCore.pyqtSignal(int)
+    def __init__(self,processpid):
         super().__init__()
+        self.processpid = processpid
         self.ui()
         self.read()
     
     def closeEvent(self, event):
-        set_data = {}
-        for i in self.ComboBoxList.keys():
-            set_data[i] = self.ComboBoxList[i].currentIndex()
-        with open("ResourceFiles/Config/set.json", "w",encoding='utf-8') as fp:
-            json.dump(set_data, fp)
-        fp.close()
+        if self.是否保存 != 1:
+            set_data = {}
+            for i in self.ComboBoxList.keys():
+                set_data[i] = self.ComboBoxList[i].currentIndex()
+            with open("ResourceFiles/Config/set.json", "w",encoding='utf-8') as fp:
+                json.dump(set_data, fp)
+            fp.close()
         box = QMessageBox.information(self,"提示","修改配置文件需重启计算器后生效")
         super().closeEvent(event)
     
@@ -536,6 +549,19 @@ class SetWindows(QWidget):
 
             num += 1            
 
+        self.保存按钮 = QPushButton('保存', self.topFiller)
+        self.保存按钮.clicked.connect(lambda state: self.保存设置())
+        self.保存按钮.move(230,120 + 50 * num+5)
+        self.保存按钮.resize(100, 25)
+        self.保存按钮.setStyleSheet(按钮样式)
+
+        self.返回按钮 = QPushButton('返回', self.topFiller)
+        self.返回按钮.clicked.connect(lambda state: self.返回原页())
+        self.返回按钮.move(430,120 + 50 * num+5)
+        self.返回按钮.resize(100, 25)
+        self.返回按钮.setStyleSheet(按钮样式)
+        self.是否保存 = 1
+
         self.scroll = QScrollArea()
         self.scroll.setFrameShape(QFrame.NoFrame)
         self.scroll.setStyleSheet("QScrollArea {background-color:transparent}")
@@ -545,6 +571,36 @@ class SetWindows(QWidget):
         self.vbox = QVBoxLayout()
         self.vbox.addWidget(self.scroll)
         self.setLayout(self.vbox)
+
+    def 保存设置(self):
+        set_data = {}
+        for i in self.ComboBoxList.keys():
+            set_data[i] = self.ComboBoxList[i].currentIndex()
+        with open("ResourceFiles/Config/set.json", "w",encoding='utf-8') as fp:
+            json.dump(set_data, fp)
+        fp.close()
+        box = QMessageBox(QMessageBox.Warning, "提示", "保存完毕，重启计算器才能生效，是否重启")
+        box.setWindowIcon(self.icon)
+        yes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
+        no = box.addButton(self.tr("取消"), QMessageBox.NoRole)
+        box.exec_()
+        if box.clickedButton() == yes:
+            self.立即重启()
+
+    def 返回原页(self):
+        #用self.close()无法关闭，所以用发射信号的方法在父窗口关闭页面
+        self.是否保存 = 0
+        data_int = 1
+        # 发送信号
+        self._signal.emit(data_int)
+
+    def 立即重启(self):
+        #用的是杀死进程的方法，有机会改改
+        for i in self.processpid:
+            os.system("taskkill /pid {} -f".format(int(i)))
+        python = sys.executable
+        os.execl(python, python, *sys.argv)
+
 
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
