@@ -1,5 +1,31 @@
 ## Newest
 
+### 2021-03-24
+
+#### NewFeatures
+* 优化全局择优速度 ([c21266](https://gitee.com/i_melon/DNFCalculating/commit/c2126686ad3cb98c59b796f0b20686afb062e88a))
+* 修改残香择优结果显示方式，添加对应文字显示 ([462efc](https://gitee.com/i_melon/DNFCalculating/commit/462efcd7f4613c5d7ba4e27cab1b1a864af55406))
+* 守护者：同步国服登陆三觉 ([70782b](https://gitee.com/i_melon/DNFCalculating/commit/70782b894589a9e99ab70aa29f7d18f26e2b9211))
+* 守门人全属强首饰附魔同步黑鸦新28附魔，25附魔可站街修正属强自行-9 ([694b06](https://gitee.com/i_melon/DNFCalculating/commit/694b066b3380b2ee86c84b4a7dac8a57b4257eca))
+* 感谢🐎提供的算法，查看详情新增全局择优选项<br>
+排行榜仍然采用贪心算法计算，查看详情在全局择优下打开需几秒时间，后续可能会进行优化🕊🕊🕊<br>
+绝大多数择优情况与贪心算法无差异，少数差异在千分之一内 ([219af1](https://gitee.com/i_melon/DNFCalculating/commit/219af1a506c3eb10f1b46da4957fccb04f0c130d))
+* 极诣·剑影：鬼连斩、鬼连斩·极伤害计算及显示拆分 ([3997fd](https://gitee.com/i_melon/DNFCalculating/commit/3997fdc84de91ff123156ecf479c3b6d624ddb24))
+* 添加配置设置可视化界面 ([dd588f](https://gitee.com/i_melon/DNFCalculating/commit/dd588fc19fc27cd9890cb4624d172ea871d3f428))
+* 重霄·机械师·女：新增RX78、EZ8自爆者、机械引爆 ([74eccd](https://gitee.com/i_melon/DNFCalculating/commit/74eccd541ab958338422660fce878238fe4b9c10))
+* 隐夜·刺客：合并双剑精通与匕首精通，重新调整set ([42464a](https://gitee.com/i_melon/DNFCalculating/commit/42464a0aa15d08a47065801b937818d9153c7211))
+
+#### BugFixes
+* 修正装备名称错误 ([bea973](https://gitee.com/i_melon/DNFCalculating/commit/bea9733d047abea2b880c5ad49e72f3259172ac1))
+* 修正觉醒系武器自选遴选数值时错误的情况 ([f641f7](https://gitee.com/i_melon/DNFCalculating/commit/f641f7bd6526490361bbc2c96742374200fa16b6))
+* 修正辟邪玉因浮点类型计算导致的部分情况下计算伤害不一致的情况 ([6682ad](https://gitee.com/i_melon/DNFCalculating/commit/6682ad5d7dd25dd01dacdfe9dd0cb18091a996ed))
+* 奶系：修正狂乱之逆转宿命神话属性调整的错误 ([9da4ba](https://gitee.com/i_melon/DNFCalculating/commit/9da4ba834d56641bb49695140956a74b53f1426d))
+* 奶系：修正相对提升公式 ([cbbfe5](https://gitee.com/i_melon/DNFCalculating/commit/cbbfe5198a46eeae47f214514e64dda08dc62db1))
+* 归元·柔道家·女：修正末日摇篮护石未减少CD的情况 ([0ca1af](https://gitee.com/i_melon/DNFCalculating/commit/0ca1af0fb0c306509439350e82ce49d9f137031e))
+* 知源·召唤师：调整传说召唤：月蚀之影护石穿戴后演出时间 ([7d6a9a](https://gitee.com/i_melon/DNFCalculating/commit/7d6a9a3780ee41de9dffbe9a227d62fed07f0b7e))
+* 重霄·机械师·女：修正高达护石CD ([a5ebef](https://gitee.com/i_melon/DNFCalculating/commit/a5ebef3b01a47d6f9118f1349cc7b1291a789848))
+* 黑暗武士：修复一键修正闪退的情况 ([2cf0c2](https://gitee.com/i_melon/DNFCalculating/commit/2cf0c2d3d2ea2aec34eff298ef7d674ee053c60a))
+
 ### 2021-03-10
 
 #### NewFeatures
@@ -1098,6 +1124,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
 
 
 
