@@ -240,7 +240,7 @@ class 窗口(QWidget):
 
     def closeEvent(self, event):
         self.保存配置(self.存档位置)
-        self.排行窗口列表.clear()
+        self.关闭排行窗口()
         super().closeEvent(event)
 
     def 窗口属性输入(self):
@@ -712,7 +712,7 @@ class 窗口(QWidget):
             self.输入属性(A)
             A.穿戴装备计算套装(装备)
             B = deepcopy(A)
-            self.排行窗口列表.clear()
+            self.关闭排行窗口()
             self.排行数据.clear()
             self.排行数据.append(装备 + [0] + A.套装栏 + ['无'])
             self.输出界面(0, '基准值')
@@ -1394,10 +1394,15 @@ class 窗口(QWidget):
         if len(self.排行数据) == 1:
             self.输出界面(0)
         else:
-            self.排行窗口列表.clear()
+            self.关闭排行窗口()
             if self.装备限定判断():
                 self.其他限定判断()
     
+    def 关闭排行窗口(self):
+        for i in self.排行窗口列表:
+            i.close()
+        self.排行窗口列表.clear()
+
     def 单条排行数据判断(self, s, l):
         for i in l:
             if s[i] != self.自选装备[i].currentText():

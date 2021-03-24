@@ -1980,7 +1980,7 @@ class 角色窗口(窗口):
     def 自选计算(self, x=0):
         if x == 0:
             self.保存配置(self.存档位置)
-            self.排行窗口列表.clear()
+            self.关闭排行窗口()
             self.排行数据.clear()
 
         self.角色属性A = deepcopy(self.初始属性)
