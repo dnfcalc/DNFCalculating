@@ -1,4 +1,4 @@
-import multiprocessing
+﻿import multiprocessing
 
 from PyQt5.QtCore import QUrl,QThread
 from PyQt5.QtWidgets import QApplication
@@ -23,6 +23,7 @@ import base64
 
 主进程PID = ''
 偏移量 = 25
+目录 = ''
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()
@@ -325,10 +326,7 @@ class 选择窗口(QWidget):
 
     def openSet(self):
         self.processpid = []
-        for p in self.worker:
-            if p.is_alive:
-                self.processpid.append(int(p.pid))
-        self.setWindow = SetWindows(self.processpid)
+        self.setWindow = SetWindows(self.worker,self)
         self.setWindow._signal.connect(self.closeSet)
         self.win = MainWindow(self.setWindow)
         self.win.show()
@@ -478,21 +476,15 @@ class 选择窗口(QWidget):
 
 class SetWindows(QWidget):
     _signal = QtCore.pyqtSignal(int)
-    def __init__(self,processpid):
+    def __init__(self,worker,parWin):
         super().__init__()
-        self.processpid = processpid
+        self.worker = worker
+        self.parWin = parWin
         self.ui()
         self.read()
     
     def closeEvent(self, event):
-        if self.是否保存 != 1:
-            set_data = {}
-            for i in self.ComboBoxList.keys():
-                set_data[i] = self.ComboBoxList[i].currentIndex()
-            with open("ResourceFiles/Config/set.json", "w",encoding='utf-8') as fp:
-                json.dump(set_data, fp)
-            fp.close()
-        box = QMessageBox.information(self,"提示","修改配置文件需重启计算器后生效")
+        self.保存设置()
         super().closeEvent(event)
     
     def read(self):
@@ -549,18 +541,18 @@ class SetWindows(QWidget):
 
             num += 1            
 
-        self.保存按钮 = QPushButton('保存', self.topFiller)
-        self.保存按钮.clicked.connect(lambda state: self.保存设置())
-        self.保存按钮.move(230,120 + 50 * num+5)
-        self.保存按钮.resize(100, 25)
-        self.保存按钮.setStyleSheet(按钮样式)
+        # self.保存按钮 = QPushButton('保存', self.topFiller)
+        # self.保存按钮.clicked.connect(lambda state: self.保存设置())
+        # self.保存按钮.move(230,120 + 50 * num+5)
+        # self.保存按钮.resize(100, 25)
+        # self.保存按钮.setStyleSheet(按钮样式)
 
-        self.返回按钮 = QPushButton('返回', self.topFiller)
-        self.返回按钮.clicked.connect(lambda state: self.返回原页())
-        self.返回按钮.move(430,120 + 50 * num+5)
-        self.返回按钮.resize(100, 25)
-        self.返回按钮.setStyleSheet(按钮样式)
-        self.是否保存 = 1
+        # self.返回按钮 = QPushButton('返回', self.topFiller)
+        # self.返回按钮.clicked.connect(lambda state: self.返回原页())
+        # self.返回按钮.move(430,120 + 50 * num+5)
+        # self.返回按钮.resize(100, 25)
+        # self.返回按钮.setStyleSheet(按钮样式)
+        # self.是否保存 = 1
 
         self.scroll = QScrollArea()
         self.scroll.setFrameShape(QFrame.NoFrame)
@@ -595,16 +587,25 @@ class SetWindows(QWidget):
         self._signal.emit(data_int)
 
     def 立即重启(self):
+        for p in self.worker:
+            if p.is_alive:
+                p.terminate()
+                p.join()
+        # self.close()
+        self.parWin.close()
+        if 目录.endswith('py'):
+            python = sys.executable
+            os.execl(python, python, *sys.argv)
+        else:
+            os.startfile(目录)
         #用的是杀死进程的方法，有机会改改
-        for i in self.processpid:
-            os.system("taskkill /pid {} -f".format(int(i)))
-        python = sys.executable
-        os.execl(python, python, *sys.argv)
-
-
+        os.system("taskkill /pid {} -f".format(主进程PID))
+        # self.close()
+        
 import PyQt5.QtCore as qtc
 if __name__ == '__main__':
     主进程PID = os.getpid() 
+    目录 = sys.argv[0]
     if len(sys.argv) > 1:
         try:
             #杀老进程
