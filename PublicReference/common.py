@@ -1499,7 +1499,7 @@ class 窗口(QWidget):
             排行背景.resize(630,1230)
             排行背景.setPixmap(self.主背景图片)
             排行背景.setGraphicsEffect(排行背景透明度)
-        排行背景.setAlignment(Qt.AlignCenter)
+            排行背景.setAlignment(Qt.AlignCenter)
         
     
         #wrapper = QWidget()
