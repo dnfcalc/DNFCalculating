@@ -6,7 +6,6 @@ from PublicReference.equipment.武器融合 import *
 from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
-from numpy import transpose,prod,argmax,amax,delete,zeros,vstack
  
 class 技能:
     名称 = ''
@@ -1094,7 +1093,11 @@ class 角色属性(属性):
         if self.计算自适应方式 ==0 or self.是否单套 == 0:
             self.贪心自适应()
         else:
-            self.全局自适应()
+            try:
+                self.全局自适应()
+            except Exception as error:
+                logger.error("error={} \n detail {}".format(error,traceback.print_exc()))
+                self.贪心自适应()
         for i in range(len(self.择优结果)):
             # 词条属性列表[self.择优结果[i][0]].加成属性(self,self.择优结果[i][1])
             if i < 4:
@@ -1116,6 +1119,7 @@ class 角色属性(属性):
                 self.自适应描述[1] = '{}%{}'.format(int(self.择优结果[i][1] * 100), 词条属性列表[self.择优结果[i][0]].描述)
         
     def 全局自适应(self):
+        from numpy import transpose,prod,argmax,amax,delete,zeros,vstack
         # 得到择优词条
         for i in range(0,len(self.是否择优)):
             if self.是否择优[i] ==0:
