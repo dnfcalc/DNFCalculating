@@ -1,5 +1,16 @@
 ## Newest
 
+### 2021-03-25
+
+#### NewFeatures
+* 归元·散打·男：同步国服修复卢克西对二档加成 ([8b5940](https://gitee.com/i_melon/DNFCalculating/commit/8b5940d25fc6e3cce58fec28409af97fe3055bb8))
+
+#### BugFixes
+* 修复部分操作未能关闭排行界面导致报错 ([797a72](https://gitee.com/i_melon/DNFCalculating/commit/797a72477d4f2e34edc8f880ebea582edd3d6912))
+* 修正切换为无皮肤时详情界面闪退的情况 ([3d6533](https://gitee.com/i_melon/DNFCalculating/commit/3d65334196c313cf05a49e4cf05290fb51ab3735))
+* 极诣·剑影：修正无法计算的情况 ([d5edf3](https://gitee.com/i_melon/DNFCalculating/commit/d5edf392538f8393407ea101cd26c1dd1d138782))
+* 极诣·驭剑士：修复血影之太刀精通对帝国剑术、魔剑降临加成错误的情况 ([dab2a3](https://gitee.com/i_melon/DNFCalculating/commit/dab2a3321084f1584540fa633e8a8094277f12e0))
+
 ### 2021-03-24
 
 #### NewFeatures
@@ -1124,6 +1135,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
 
 
 
