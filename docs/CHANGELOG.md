@@ -1,5 +1,10 @@
 ## Newest
 
+### 2021-03-26
+
+#### BugFixes
+* 修正部分用户出现的计算排行无进度的情况 ([a8775a](https://gitee.com/i_melon/DNFCalculating/commit/a8775a031d0688681bb01d70e157e91a12aca833))
+
 ### 2021-03-25
 
 #### NewFeatures
@@ -1135,6 +1140,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
 
 
 
