@@ -3924,31 +3924,31 @@ class 角色窗口(窗口):
         return tempstr
 
     def 词条显示计算(self, 属性):
-        词条提升率 = self.希洛克武器词条提升率显示(属性)
+        # 词条提升率 = self.希洛克武器词条提升率显示(属性)
 
         属白换算 = 属性.属性倍率 * 属性.属性附加
 
         tempstr = []
 
-        tempstr.append(词条提升率[0] + '力智:' + str(int(round(属性.百分比力智 * 100, 0))) + '%') 
-        tempstr.append(词条提升率[1] + '三攻:' + str(int(round(属性.百分比三攻 * 100, 0))) + '%') 
-        tempstr.append(词条提升率[2] + '黄字:' + str(int(round(属性.伤害增加 * 100, 0))) + '%')
+        tempstr.append(' 力智:' + str(round(属性.百分比力智 * 100, 1)) + '%') 
+        tempstr.append(' 三攻:' + str(round(属性.百分比三攻 * 100, 1)) + '%') 
+        tempstr.append(' 黄字:' + str(round(属性.伤害增加 * 100, 0)) + '%')
 
-        temp = 词条提升率[3] + '白字:' + str(int(round(属性.附加伤害 * 100, 0))) + '%'
-        if 属白换算 != 0: temp += ' (' + str(int(round(属白换算 * 100 + 属性.附加伤害 * 100, 0))) + '%)'
+        temp = ' 白字:' + str(round(属性.附加伤害 * 100, 1)) + '%'
+        if 属白换算 != 0: temp += ' (' + str(round(属白换算 * 100 + 属性.附加伤害 * 100, 1)) + '%)'
         tempstr.append(temp)
 
-        temp = 词条提升率[4] + '属白:'+str(int(round(属性.属性附加 * 100, 0))) + '%'
-        if 属白换算 != 0: temp += ' (' + str(int(round(属白换算*100,0))) + '%)'
+        temp = ' 属白:'+str(round(属性.属性附加 * 100, 1)) + '%'
+        if 属白换算 != 0: temp += ' (' + str(round(属白换算*100,1)) + '%)'
         tempstr.append(temp)
 
-        tempstr.append(词条提升率[5] + '爆伤:'+str(int(round(属性.暴击伤害 * 100, 0))) + '%')
-        tempstr.append(词条提升率[6] + '终伤:'+str(int(round(属性.最终伤害 * 100, 0))) + '%')
-        tempstr.append(词条提升率[7] + '技攻:'+str(int(round(属性.技能攻击力 * 100 - 100, 0))) + '%')
-        tempstr.append(词条提升率[8] + '持续:'+str(int(round(属性.持续伤害 * 100, 0))) + '%') 
-        tempstr.append(词条提升率[9] + '攻速:'+str(int(round(属性.攻击速度 * 100, 0))) + '%') 
-        tempstr.append(词条提升率[10] + '释放:'+str(int(round(属性.释放速度 * 100, 0))) + '%') 
-        tempstr.append(词条提升率[11] + '移速:'+str(int(round(属性.移动速度 * 100, 0))) + '%')
+        tempstr.append(' 爆伤:'+str(round(属性.暴击伤害 * 100, 1)) + '%')
+        tempstr.append(' 终伤:'+str(round(属性.最终伤害 * 100, 1)) + '%')
+        tempstr.append(' 技攻:'+str(round(属性.技能攻击力 * 100 - 100, 1)) + '%')
+        tempstr.append(' 持续:'+str(round(属性.持续伤害 * 100, 1)) + '%') 
+        tempstr.append(' 攻速:'+str(round(属性.攻击速度 * 100, 0)) + '%') 
+        tempstr.append(' 释放:'+str(round(属性.释放速度 * 100, 0)) + '%') 
+        tempstr.append(' 移速:'+str(round(属性.移动速度 * 100, 0)) + '%')
 
         return tempstr
         
