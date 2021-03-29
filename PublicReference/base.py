@@ -3930,25 +3930,27 @@ class 角色窗口(窗口):
 
         tempstr = []
 
-        tempstr.append(' 力智:' + str(round(属性.百分比力智 * 100, 1)) + '%') 
-        tempstr.append(' 三攻:' + str(round(属性.百分比三攻 * 100, 1)) + '%') 
         tempstr.append(' 黄字:' + str(round(属性.伤害增加 * 100, 0)) + '%')
+        tempstr.append(' 爆伤:'+str(round(属性.暴击伤害 * 100, 1)) + '%')
 
         temp = ' 白字:' + str(round(属性.附加伤害 * 100, 1)) + '%'
-        if 属白换算 != 0: temp += ' (' + str(round(属白换算 * 100 + 属性.附加伤害 * 100, 1)) + '%)'
+        if 属白换算 != 0: temp += '[' + str(round(属白换算 * 100 + 属性.附加伤害 * 100, 1)) + '%]'
         tempstr.append(temp)
 
         temp = ' 属白:'+str(round(属性.属性附加 * 100, 1)) + '%'
-        if 属白换算 != 0: temp += ' (' + str(round(属白换算*100,1)) + '%)'
+        if 属白换算 != 0: temp += '[' + str(round(属白换算*100,1)) + '%]'
         tempstr.append(temp)
 
-        tempstr.append(' 爆伤:'+str(round(属性.暴击伤害 * 100, 1)) + '%')
         tempstr.append(' 终伤:'+str(round(属性.最终伤害 * 100, 1)) + '%')
         tempstr.append(' 技攻:'+str(round(属性.技能攻击力 * 100 - 100, 1)) + '%')
+        tempstr.append(' 三攻:' + str(round(属性.百分比三攻 * 100, 1)) + '%') 
+
+        tempstr.append(' 力智:' + str(round(属性.百分比力智 * 100, 1)) + '%') 
+        
         tempstr.append(' 持续:'+str(round(属性.持续伤害 * 100, 1)) + '%') 
-        tempstr.append(' 攻速:'+str(round(属性.攻击速度 * 100, 0)) + '%') 
-        tempstr.append(' 释放:'+str(round(属性.释放速度 * 100, 0)) + '%') 
-        tempstr.append(' 移速:'+str(round(属性.移动速度 * 100, 0)) + '%')
+        tempstr.append(' 攻速:'+str(int(round(属性.攻击速度 * 100, 0))) + '%') 
+        tempstr.append(' 释放:'+str(int(round(属性.释放速度 * 100, 0))) + '%') 
+        tempstr.append(' 移速:'+str(int(round(属性.移动速度 * 100, 0))) + '%')
 
         return tempstr
         
@@ -4553,7 +4555,7 @@ class 角色窗口(窗口):
             templab=QLabel(输出窗口)
             templab.setText(i)
             templab.setStyleSheet("QLabel{font-size:12px;color:rgb(104,213,237)}")
-            templab.move(5,j - pox_y2)
+            templab.move(2,j - pox_y2)
             templab.resize(180,17)
             templab.setAlignment(Qt.AlignLeft)
             j+=17
