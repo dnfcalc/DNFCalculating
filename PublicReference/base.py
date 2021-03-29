@@ -1847,8 +1847,9 @@ class 角色窗口(窗口):
         self.单套择优方式选项 = MyQComboBox(self.main_frame1)
         self.单套择优方式选项.move(940, 30 + 28 * 12)
         self.单套择优方式选项.resize(170,20)
-        self.单套择优方式选项.addItem('单套择优方式：贪心')
-        self.单套择优方式选项.addItem('单套择优方式：全局')
+        self.单套择优方式选项.addItem('单套择优方式：局部择优')
+        self.单套择优方式选项.addItem('单套择优方式：全局择优')
+        self.单套择优方式选项.setToolTip('排行榜及自选采用局部择优方式\n该选项仅适用于查看详情\n局部择优与全局择优大多数情况下一致\n少数情况下会有0.1%b不到的差距')
         
         x = 1006; y = 485; 宽度 = 100; 高度 = 20; 间隔 = 4
         self.红色宠物装备 = QCheckBox('宠物装备择优', self.main_frame1)
@@ -4470,6 +4471,10 @@ class 角色窗口(窗口):
         temp = ''
         if name == '':
             temp += '详细数据'
+            if self.角色属性A.计算自适应方式 == 1:
+                temp+= ' - 全局择优'
+            else:
+                temp+= ' - 局部择优'
         else:
             temp += name
         # temp += '（最多显示前18个技能）' + "装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本

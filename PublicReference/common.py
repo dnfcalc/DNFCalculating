@@ -1487,7 +1487,7 @@ class 窗口(QWidget):
         滚动排行.setMaximumSize(630,1230)
         if len(筛选) == 0:
             # 滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）'+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)  
-            滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）')  
+            滚动排行.setWindowTitle('当前模板配装排行 - 局部择优 (点击数字查看详情)')  
         else:
             temp = ''
             for name in 筛选.values():
