@@ -1602,6 +1602,10 @@ class 角色窗口(窗口):
             for i in range(1, 4):
                 self.黑鸦词条[index][i].setEnabled(False)
                 self.黑鸦词条[index][i].setStyleSheet(下拉框样式)
+        elif index == 0 and self.黑鸦词条[index][0].currentIndex() == 3:
+            for i in range(1, 4):
+                 self.黑鸦词条[0][i].setEnabled(False)
+                 self.黑鸦词条[0][i].setStyleSheet(下拉框样式)
         else:
             for i in range(1, 4):
                 self.黑鸦词条[index][i].setEnabled(True)
@@ -2900,33 +2904,34 @@ class 角色窗口(窗口):
 
             if tempstr[i] != '':
                 tempstr[i] += '<br>'
-            if i == 2 and 属性.黑鸦词条[3][0]!=0:
-                tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
-                tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[3][1], 属性.黑鸦词条[3][2], 1)
-                # 下装
-            elif i == 7 and 属性.黑鸦词条[1][0]!=0:
-                tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
-                tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[1][1], 属性.黑鸦词条[1][2], 1)
-                # 戒指
-            elif i == 9 and 属性.黑鸦词条[2][0]!=0:
-                tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
-                tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[2][1], 属性.黑鸦词条[2][2], 1)
-                # 辅助
-            elif i == 11 and 属性.黑鸦词条[0][0]!=0:
-                tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
-                if 属性.黑鸦词条[0][0] == 3 and not 装备.名称 == '世界树之精灵':
-                    tempstr[i] += 'Lv50 技能等级+2<br>'
-                    tempstr[i] += 'Lv85 技能等级+2<br>'
-                    tempstr[i] += 'Lv100 技能等级+2<br>'
-                elif 属性.黑鸦词条[0][0] == 2:
-                    tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[0][1], 属性.黑鸦词条[0][2])
-                    if 装备.名称 == '世界树之精灵':
-                        tempstr[i] = tempstr[i].replace('Lv50 技能等级+2<br>','')
-                        tempstr[i] = tempstr[i].replace('Lv85 技能等级+2<br>','')
-                        tempstr[i] = tempstr[i].replace('Lv100 技能等级+2<br>','')
-                # 世界树之精灵特殊处理,没考虑择优的时候，针对的是自选
-                if 装备.名称 == '世界树之精灵' and 属性.黑鸦词条[0][0] >1:
-                    tempstr[i] += 'Lv50 技能等级+2<br>'
+            if 装备.所属套装 != '智慧产物':
+                if i == 2 and 属性.黑鸦词条[3][0]!=0:
+                    tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
+                    tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[3][1], 属性.黑鸦词条[3][2], 1)
+                    # 下装
+                elif i == 7 and 属性.黑鸦词条[1][0]!=0:
+                    tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
+                    tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[1][1], 属性.黑鸦词条[1][2], 1)
+                    # 戒指
+                elif i == 9 and 属性.黑鸦词条[2][0]!=0:
+                    tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
+                    tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[2][1], 属性.黑鸦词条[2][2], 1)
+                    # 辅助
+                elif i == 11 and 属性.黑鸦词条[0][0]!=0:
+                    tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
+                    if 属性.黑鸦词条[0][0] == 3 and not 装备.名称 == '世界树之精灵':
+                        tempstr[i] += 'Lv50 技能等级+2<br>'
+                        tempstr[i] += 'Lv85 技能等级+2<br>'
+                        tempstr[i] += 'Lv100 技能等级+2<br>'
+                    elif 属性.黑鸦词条[0][0] == 2:
+                        tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[0][1], 属性.黑鸦词条[0][2])
+                        if 装备.名称 == '世界树之精灵':
+                            tempstr[i] = tempstr[i].replace('Lv50 技能等级+2<br>','')
+                            tempstr[i] = tempstr[i].replace('Lv85 技能等级+2<br>','')
+                            tempstr[i] = tempstr[i].replace('Lv100 技能等级+2<br>','')
+                    # 世界树之精灵特殊处理,没考虑择优的时候，针对的是自选
+                    if 装备.名称 == '世界树之精灵' and 属性.黑鸦词条[0][0] >1:
+                        tempstr[i] += 'Lv50 技能等级+2<br>'
                 # 武器
             else:
                 tempstr[i] += 装备.装备描述_BUFF(属性)
