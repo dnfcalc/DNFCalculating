@@ -940,32 +940,32 @@ class 角色窗口(窗口):
         self.武器融合属性A = MyQComboBox(self.main_frame2) 
         for j in 武器属性A列表:
             self.武器融合属性A.addItem(j.固定属性描述)
-        self.武器融合属性A.resize(105,20)
+        self.武器融合属性A.resize(60,20)
         self.武器融合属性A.move(横坐标,纵坐标 + 25)
 
         self.武器融合属性A1 = MyQComboBox(self.main_frame2)
-        self.武器融合属性A1.resize(90,20)
-        self.武器融合属性A1.move(横坐标 + 110,纵坐标 + 25)
+        self.武器融合属性A1.resize(90+75,20)
+        self.武器融合属性A1.move(横坐标 + 110-50+5,纵坐标 + 25)
 
         self.武器融合属性A2 = MyQComboBox(self.main_frame2) 
         self.武器融合属性A2.resize(50,20)
-        self.武器融合属性A2.move(横坐标 + 205,纵坐标 + 25)
+        self.武器融合属性A2.move(横坐标 + 205+20+10,纵坐标 + 25)
         self.武器融合属性A.currentIndexChanged.connect(lambda:self.希洛克武器随机词条更新(self.武器融合属性A.currentIndex()))
 
         纵坐标 = 纵坐标 + 30
         self.武器融合属性B = MyQComboBox(self.main_frame2) 
         for j in 武器属性B列表:
             self.武器融合属性B.addItem(j.固定属性描述)
-        self.武器融合属性B.resize(105,20)
+        self.武器融合属性B.resize(60,20)
         self.武器融合属性B.move(横坐标,纵坐标 + 25)
 
         self.武器融合属性B1 = MyQComboBox(self.main_frame2)
-        self.武器融合属性B1.resize(90,20)
-        self.武器融合属性B1.move(横坐标 + 110,纵坐标 + 25)
+        self.武器融合属性B1.resize(90+75,20)
+        self.武器融合属性B1.move(横坐标 + 110-50+5,纵坐标 + 25)
 
         self.武器融合属性B2 = MyQComboBox(self.main_frame2) 
         self.武器融合属性B2.resize(50,20)
-        self.武器融合属性B2.move(横坐标 + 205,纵坐标 + 25)
+        self.武器融合属性B2.move(横坐标 + 205+20+10,纵坐标 + 25)
         self.武器融合属性B.currentIndexChanged.connect(lambda:self.希洛克武器随机词条更新(self.武器融合属性B.currentIndex(), 1))
         
         纵坐标 = 纵坐标 + 60
@@ -998,16 +998,16 @@ class 角色窗口(窗口):
                 tem[0].move(横坐标+60, 纵坐标+25*i)
                 tem[0].currentIndexChanged.connect(lambda state,index = i : self.黑鸦词条更新(index))
             tem.append(MyQComboBox(self.main_frame2))
-            tem[1].resize(105,20)
+            tem[1].resize(60,20)
             tem[1].move(横坐标+156, 纵坐标+25*i)
 
             tem.append(MyQComboBox(self.main_frame2))
-            tem[2].resize(90,20)
-            tem[2].move(横坐标+266, 纵坐标+25*i)
+            tem[2].resize(90+75,20)
+            tem[2].move(横坐标+266-50+5, 纵坐标+25*i)
 
             tem.append(MyQComboBox(self.main_frame2))
             tem[3].resize(50,20)
-            tem[3].move(横坐标+361, 纵坐标+25*i)    
+            tem[3].move(横坐标+361+20+10, 纵坐标+25*i)    
             if i > 0:
                 for item in 装备变换属性列表:
                     tem[1].addItem(item.固定属性描述)
@@ -2125,9 +2125,9 @@ class 角色窗口(窗口):
                 武器词条最高值 = self.角色属性B.自适应最高值
                 武器属性A = 武器属性A列表[武器词条最高值[0]]
                 武器属性B = 武器属性B列表[武器词条最高值[1]]
-                tempstr.append("属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>，' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else ''))
+                tempstr.append("属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else ''))
                 if self.角色属性B.武器词条触发 == 1:
-                    tempstr.append("属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>，' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else ''))
+                    tempstr.append("属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else ''))
 
             count = 0
             for i in tempstr:
@@ -2748,9 +2748,9 @@ class 角色窗口(窗口):
             武器词条最高值 = self.角色属性B.自适应最高值
             武器属性A = 武器属性A列表[武器词条最高值[0]]
             武器属性B = 武器属性B列表[武器词条最高值[1]]
-            tempstr += '<br><br>' + "属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>，' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else '')
+            tempstr += '<br><br>' + "属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else '')
             if self.角色属性B.武器词条触发 == 1:
-                tempstr += '<br><br>' + "属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>，' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else '')
+                tempstr += '<br><br>' + "属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else '')
         
         合计=QLabel(输出窗口)
         合计.setStyleSheet("QLabel{color:rgb(104,213,237);font-size:15px}")
@@ -2956,17 +2956,17 @@ class 角色窗口(窗口):
                 武器词条最高值 = self.角色属性B.自适应最高值
                 武器属性A = 武器属性A列表[武器词条最高值[0]]
                 武器属性B = 武器属性B列表[武器词条最高值[1]]
-                tempstr[i] += "属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>，' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else '')+'<br>'
+                tempstr[i] += "属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else '')+'<br>'
                 if self.角色属性B.武器词条触发 == 1:
-                    tempstr[i] += "属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>，' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else '')+'<br>'
+                    tempstr[i] += "属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else '')+'<br>'
             elif self.角色属性B.希洛克武器词条 == 2 and i == 11:
                 # tempstr[i]+='<br>'
                 tempstr[i]+='<font color="#00A2E8">希洛克融合属性：</font><br>'
                 武器属性A = 武器属性A列表[self.武器融合属性A.currentIndex()]
                 武器属性B = 武器属性B列表[self.武器融合属性B.currentIndex()]
-                tempstr[i] += "属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>，' + 武器属性A.随机属性描述 + self.武器融合属性A2.currentText()+'<br>'
+                tempstr[i] += "属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + self.武器融合属性A2.currentText()+'<br>'
                 if self.角色属性B.武器词条触发 == 1:
-                    tempstr[i] += "属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>，' + 武器属性B.随机属性描述 + self.武器融合属性B2.currentText()+'<br>'
+                    tempstr[i] += "属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + self.武器融合属性B2.currentText()+'<br>'
             # elif self.希洛克武器词条[0].currentIndex() > 0 and i == 11:
             #     tempstr[i]+='<br>'
             #     tempstr[i]+='<font color="#00A2E8">希洛克融合属性：</font><br>'
@@ -2985,10 +2985,10 @@ class 角色窗口(窗口):
         tempstr = ''
         if x == 0:
             武器属性 = 武器变换属性列表[index]
-            tempstr += "<font style='color:gray'>"+ 武器属性.固定属性描述 + '</font>，' + 武器属性.随机属性描述 + str(value) +'<br>'
+            tempstr += "<font style='color:gray'>"+ 武器属性.固定属性描述 + '</font>,' + 武器属性.随机属性描述 + str(value) +'<br>'
         else:
             装备属性 = 装备变换属性列表[index]
-            tempstr += "<font style='color:gray'>"+ 装备属性.固定属性描述 + '</font>，'+ 装备属性.随机属性描述 + str(value) +'<br>'
+            tempstr += "<font style='color:gray'>"+ 装备属性.固定属性描述 + '</font>,'+ 装备属性.随机属性描述 + str(value) +'<br>'
         return tempstr
 
     def 武器融合属性计算(self, 属性):
