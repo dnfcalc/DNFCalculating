@@ -504,16 +504,20 @@ class SetWindows(QWidget):
                    color: white; 
                    border: 0px
                    }''')
+        self.height = 625
+        with open("ResourceFiles/Config/config.json",encoding='utf-8') as fp:
+            self.height = len(json.load(fp)) * 50 + 20
+        fp.close()
+ 
         self.setMinimumSize(805,625)
-        self.setMaximumSize(805,1520)
         self.setWindowTitle('全局设置选项(需重启计算器生效)')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
         
         self.topFiller = QWidget()
-        self.topFiller.setMinimumSize(750, 1520)
+        self.topFiller.setMinimumSize(750, self.height)
         bgcolor = QLabel(self)
-        bgcolor.resize(805,1520)
+        bgcolor.resize(805, 625)
         bgcolor.setStyleSheet("QLabel{background:url('ResourceFiles/img/分类/bg.png')}")
            
         with open("ResourceFiles/Config/Config.json",encoding='utf-8') as fp:
@@ -526,33 +530,19 @@ class SetWindows(QWidget):
             txt_box = QLabel(self.topFiller)
             txt_box.setText('{}. {}'.format(num + 1, i['说明']))
             txt_box.resize(700, 20)
-            txt_box.move(50, 40 + 50 * num)
+            txt_box.move(50, 10 + 50 * num)
             txt_box.setStyleSheet('QLabel{font-size:13px;color:rgb(175,148,89)}')
             txt2_box = QLabel(self.topFiller)
             txt2_box.setText(i['名称'])
             txt2_box.resize(70, 20)
-            txt2_box.move(60, 60 + 50 * num+5)
+            txt2_box.move(60, 30 + 50 * num+5)
             txt2_box.setStyleSheet('QLabel{font-size:13px;color:rgb(175,148,89)}')
             self.ComboBoxList[num] = MyQComboBox(self.topFiller)
             self.ComboBoxList[num].addItems(i['选项'])
             self.ComboBoxList[num].resize(100, 20)
-            self.ComboBoxList[num].move(50 + 80, 60 + 50 * num+5)
+            self.ComboBoxList[num].move(50 + 80, 30 + 50 * num+5)
             self.ComboBoxList[num].setCurrentIndex(i['default'])
-
             num += 1            
-
-        # self.保存按钮 = QPushButton('保存', self.topFiller)
-        # self.保存按钮.clicked.connect(lambda state: self.保存设置())
-        # self.保存按钮.move(230,120 + 50 * num+5)
-        # self.保存按钮.resize(100, 25)
-        # self.保存按钮.setStyleSheet(按钮样式)
-
-        # self.返回按钮 = QPushButton('返回', self.topFiller)
-        # self.返回按钮.clicked.connect(lambda state: self.返回原页())
-        # self.返回按钮.move(430,120 + 50 * num+5)
-        # self.返回按钮.resize(100, 25)
-        # self.返回按钮.setStyleSheet(按钮样式)
-        # self.是否保存 = 1
 
         self.scroll = QScrollArea()
         self.scroll.setFrameShape(QFrame.NoFrame)

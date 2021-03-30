@@ -1658,35 +1658,20 @@ class 角色属性(属性):
             [0,0,0,0]
         ]
         if 调试开关 == 0:
-            for i in range(11):
+            for i in range(12):
                 装备列表[装备序号[self.装备栏[i]]].城镇属性(self)
                 装备列表[装备序号[self.装备栏[i]]].变换属性(self)
                 if 装备列表[装备序号[self.装备栏[i]]].所属套装 == '智慧产物' and self.产物升级 == 1:
                     装备列表[装备序号[self.装备栏[i]]].产物升级(self)
                 # 添加可洗属性
-            if 武器序号 == -1:
-                装备列表[装备序号[self.装备栏[11]]].城镇属性(self)
-                装备列表[装备序号[self.装备栏[11]]].变换属性(self)
-                if 装备列表[装备序号[self.装备栏[11]]].所属套装 == '智慧产物' and self.产物升级 == 1:
-                    装备列表[装备序号[self.装备栏[11]]].产物升级(self)
-            else:
-                装备列表[武器序号].城镇属性(self)
-                装备列表[武器序号].变换属性(self)
-                if 装备列表[武器序号].所属套装 == '智慧产物' and self.产物升级 == 1:
-                    装备列表[武器序号].产物升级(self)
 
             for i in self.套装栏:
                 套装列表[套装序号[i]].城镇属性(self)
             # print(self.变换词条)
             #进图触发属强向下取整
             self.状态 = 1
-            for i in range(11):
+            for i in range(12):
                 装备列表[装备序号[self.装备栏[i]]].进图属性(self)
-
-            if 武器序号 == -1:
-                装备列表[装备序号[self.装备栏[11]]].进图属性(self)
-            else:
-                装备列表[武器序号].进图属性(self)
 
             for i in self.套装栏:
                 套装列表[套装序号[i]].进图属性(self)
@@ -1738,13 +1723,8 @@ class 角色属性(属性):
             黑鸦武器属性列表[变换词条[0]].加成属性(self,增减*变换词条[1]/100)
     
     def 其它属性计算(self):
-        for i in range(11):
+        for i in range(12):
             装备列表[装备序号[self.装备栏[i]]].其它属性(self)
-
-        if 武器序号 == -1:
-            装备列表[装备序号[self.装备栏[11]]].其它属性(self)
-        else:
-            装备列表[武器序号].其它属性(self)
 
         for i in self.套装栏:
             套装列表[套装序号[i]].其它属性(self)
@@ -3862,14 +3842,7 @@ class 角色窗口(窗口):
             return
         self.有效部位列表备份 = []
         if self.组合计算(self.计算模式选择.currentIndex()) == 0:
-            if self.计算模式选择.currentIndex() == 2 and 补全模式 != 0:
-                self.有效部位列表备份 = deepcopy(self.有效部位列表)
-                num = 0
-                for i in self.有效部位列表:
-                    if len(i) == 0 or (补全模式 == 2 and self.自选装备[num].currentText() not in i):
-                        i.append(self.自选装备[num].currentText())
-                    num += 1
-            elif self.计算模式选择.currentIndex() == 0 and self.组合计算(1) != 0:
+            if self.计算模式选择.currentIndex() == 0 and self.组合计算(1) != 0:
                 QMessageBox.information(self, "错误", "已更换为套装模式，请再次计算")
                 self.计算模式选择.setCurrentIndex(1)
                 return

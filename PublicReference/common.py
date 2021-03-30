@@ -1199,14 +1199,7 @@ class 窗口(QWidget):
             return
         self.有效部位列表备份 = []
         if self.组合计算(self.计算模式选择.currentIndex()) == 0:
-            if self.计算模式选择.currentIndex() == 2 and 补全模式 != 0:
-                self.有效部位列表备份 = deepcopy(self.有效部位列表)
-                num = 0
-                for i in self.有效部位列表:
-                    if len(i) == 0 or (补全模式 == 2 and self.自选装备[num].currentText() not in i):
-                        i.append(self.自选装备[num].currentText())
-                    num += 1
-            elif self.计算模式选择.currentIndex() == 0 and self.组合计算(1) != 0:
+            if self.计算模式选择.currentIndex() == 0 and self.组合计算(1) != 0:
                 QMessageBox.information(self, "错误", "已更换为套装模式，请再次计算")
                 self.计算模式选择.setCurrentIndex(1)
                 return
