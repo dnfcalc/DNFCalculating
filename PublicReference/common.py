@@ -789,6 +789,21 @@ class 窗口(QWidget):
                 self.希洛克选择状态[index] = 0
 
     def 存档更换(self):
+        if self.存档选择.currentText() == '新建存档':
+            num = 1
+            while True:
+                path = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称, 'set{}'.format(num))
+                if os.path.exists(path):
+                    num += 1
+                else:
+                    os.makedirs(path) 
+                    break
+            self.存档位置 = 'set{}'.format(num)
+            self.保存配置(self.存档位置)
+            self.存档选择.setItemText(self.存档选择.count() - 1, 'set{}'.format(num))
+            self.存档选择.addItem('新建存档')
+            return 
+
         if self.存档位置 == self.存档选择.currentText():
             return
         box = QMessageBox(QMessageBox.Warning, "提示", "即将载入<font color='#FF0000'>{}</font>存档，是否保存当前配置到<font color='#FF0000'>{}</font>存档？".format(self.存档选择.currentText(), self.存档位置))
@@ -812,6 +827,7 @@ class 窗口(QWidget):
         self.存档选择.clear()
         for k in setfile:
             self.存档选择.addItem(k)
+        self.存档选择.addItem('新建存档')
         self.存档位置 = self.存档选择.currentText()
 
     def 全局重置(self):
