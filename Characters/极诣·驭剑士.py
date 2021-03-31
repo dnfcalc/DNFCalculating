@@ -918,10 +918,23 @@ class 极诣·驭剑士(角色窗口):
         self.三觉序号 = 极诣·驭剑士三觉序号
         self.护石选项 = deepcopy(极诣·驭剑士护石选项)
         self.符文选项 = deepcopy(极诣·驭剑士符文选项)
+    
+    def 护石判断(self):
+        sign = 0
+        for x in range(3):
+            if self.护石栏[x].currentText() == '飓风魔剑':
+                sign = 1
+        if sign == 1:
+            self.钻头蓄力开关.setChecked(False)
+            self.钻头蓄力开关.setDisabled(True)
+        else:
+            self.钻头蓄力开关.setChecked(True)
+            self.钻头蓄力开关.setDisabled(False)
 
     def 界面(self):
         super().界面()
-
+        for i in range(3):
+            self.护石栏[i].currentIndexChanged.connect(lambda state: self.护石判断())       
         self.魔剑降临选择=MyQComboBox(self.main_frame2)
         self.魔剑降临选择.addItem('魔剑降临：火')
         self.魔剑降临选择.addItem('魔剑降临：冰')
