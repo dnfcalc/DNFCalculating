@@ -3826,40 +3826,6 @@ class 角色窗口(窗口):
         修改后 = temp + 修改前
         self.属性设置输入[5][15].setText(str(int(修改后)))
 
-    #计算
-    def 计算(self):
-        self.角色属性A = deepcopy(self.初始属性)
-        self.输入属性(self.角色属性A)
-        self.角色属性A.开启切装 = 切装模式
-        if self.是否计算 != 1:
-            return
-        self.保存配置(self.存档位置)
-        if 调试开关 == 1:
-            self.输出界面(-1)
-            return
-        if self.神话数量判断() and self.神话排名选项.isChecked():
-            QMessageBox.information(self,"错误",  "请勾选神话装备或取消勾选神话排名模式选项")
-            return
-        self.有效部位列表备份 = []
-        if self.组合计算(self.计算模式选择.currentIndex()) == 0:
-            if self.计算模式选择.currentIndex() == 0 and self.组合计算(1) != 0:
-                QMessageBox.information(self, "错误", "已更换为套装模式，请再次计算")
-                self.计算模式选择.setCurrentIndex(1)
-                return
-            elif self.计算模式选择.currentIndex() != 2 and self.组合计算(2) != 0:
-                QMessageBox.information(self, "错误", "请更换为单件模式，并再次计算")
-                return
-            else:
-                QMessageBox.information(self,"错误",  "无有效组合，请重新选择装备")
-                return
-        self.计算按钮1.setEnabled(False)
-        self.计算按钮1.setStyleSheet(按钮样式)
-        self.计算按钮2.setEnabled(False)
-        self.计算按钮2.setStyleSheet(按钮样式)
-        self.计算按钮3.setEnabled(False)
-        self.计算按钮3.setStyleSheet(按钮样式)
-        threading.Thread(target=self.计算线程, daemon=True).start()
-
     def 提升率颜色显示(self, 属性, k):
         if k in 属性.词条选择:
             if len(属性.词条选择) == 1:

@@ -1203,10 +1203,12 @@ class 窗口(QWidget):
 
     #计算
     def 计算(self):
-        self.保存配置(self.存档位置)
         self.角色属性A = deepcopy(self.初始属性)
         self.输入属性(self.角色属性A)
         self.角色属性A.开启切装 = 切装模式
+        if self.是否计算 != 1:
+            return
+        self.保存配置(self.存档位置)
         if 调试开关 == 1:
             self.输出界面(-1)
             return

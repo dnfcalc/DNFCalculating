@@ -376,7 +376,7 @@ class 角色属性(属性):
     def 适用数值计算(self):
         self.专属词条计算()
         for i in range(len(self.技能栏)):
-            if  self.次数输入[i] == '1':
+            if  self.次数输入[i] != 0:
                 self.智力 += self.技能栏[i].结算统计()[0]
                 self.体力 += self.技能栏[i].结算统计()[1]
                 self.精神 += self.技能栏[i].结算统计()[2]
@@ -501,7 +501,7 @@ class 角色属性(属性):
 
     def 数据计算(self):        
         总数据 = []
-        if self.双装备模式 == 1 and self.次数输入[self.一觉序号] == '1':
+        if self.双装备模式 == 1 and self.次数输入[self.一觉序号] != 0:
             #用于计算一觉
             temp = deepcopy(self)
 
@@ -516,7 +516,7 @@ class 角色属性(属性):
                 替换属性_temp.append(deepcopy(一觉计算属性))
                 一觉计算属性.适用数值计算()
                 一觉计算属性_temp.append(一觉计算属性)
-                数据列表.append(一觉计算属性.技能栏[self.一觉序号].结算统计()[3] * (一觉计算属性.技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0 and self.次数输入[self.三觉序号] == '1' else 1)) #3是力量属性  一觉力智都是相等的
+                数据列表.append(一觉计算属性.技能栏[self.一觉序号].结算统计()[3] * (一觉计算属性.技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0 and self.次数输入[self.三觉序号] != 0 else 1)) #3是力量属性  一觉力智都是相等的
                 切换列表.append(一觉计算属性.切换详情)
             
             #取一觉最大值，并修改数据
@@ -541,7 +541,7 @@ class 角色属性(属性):
             self.技能栏[self.一觉序号].适用数值 = 一觉计算属性_temp[序号].技能栏[self.一觉序号].适用数值 
             self.切换详情 = 切换列表[序号] + temp
             for i in range(len(self.技能栏)):
-                if  self.次数输入[i] == '1':
+                if  self.次数输入[i] != 0:
                     总数据.append(self.技能栏[i].结算统计())
                 else:
                     总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
@@ -550,10 +550,14 @@ class 角色属性(属性):
             self.自适应计算()
             self.适用数值计算()
             for i in range(len(self.技能栏)):
-                if self.次数输入[i] == '1':
+                if self.次数输入[i] != 0:
                     总数据.append(self.技能栏[i].结算统计())
                 else:
                     总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
+            self.一觉数据 = 总数据[self.一觉序号]
+        self.一觉数据 = []
+        self.一觉数据.append(int(总数据[self.一觉序号][3]))
+        self.一觉数据.append(int(总数据[self.一觉序号][4]))
         return 总数据
 
     def 自适应计算(self):
@@ -569,10 +573,10 @@ class 角色属性(属性):
                 武器属性B = 武器属性组合[i][1]
                 temp.武器属性输入(武器属性A, 武器属性B)
                 temp.适用数值计算()
-                if temp.双装备模式 == 1 and temp.次数输入[temp.一觉序号] == '1':
+                if temp.双装备模式 == 1 and temp.次数输入[temp.一觉序号] != 0:
                     temp.技能栏[temp.一觉序号].适用数值 = temp.一觉适用数值
                 for i in range(len(temp.技能栏)):
-                    if temp.次数输入[i] == '1':
+                    if temp.次数输入[i] != 0:
                         总数据.append(temp.技能栏[i].结算统计())
                     else:
                         总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
@@ -595,6 +599,17 @@ class 角色属性(属性):
             武器属性B.融合属性(self)
 
     def 结果返回(self, x, 总数据):
+        if self.次数输入[self.一觉序号] != 0:
+            if 总数据[self.一觉序号][3] != 0:
+                总数据[self.一觉序号][3] = int(总数据[self.一觉序号][3]*self.次数输入[self.一觉序号])
+                总数据[self.一觉序号][4] = int(总数据[self.一觉序号][4]*self.次数输入[self.一觉序号])
+            #三觉CD大于一觉CD，因而增加一觉次数多于三觉次数的情况
+            elif round(self.次数输入[self.一觉序号],2) > round(self.次数输入[self.三觉序号],2):
+                总数据[self.一觉序号][3] = int(self.一觉数据[0] * (round(self.次数输入[self.一觉序号],2)-round(self.次数输入[self.三觉序号],2)))
+                总数据[self.一觉序号][3] = int(self.一觉数据[1] * (round(self.次数输入[self.一觉序号],2)-round(self.次数输入[self.三觉序号],2)))
+        if self.次数输入[self.三觉序号] != 0:
+            总数据[self.三觉序号][3] = int(总数据[self.三觉序号][3]*self.次数输入[self.三觉序号])
+            总数据[self.三觉序号][4] = int(总数据[self.三觉序号][4]*self.次数输入[self.三觉序号])
         if x == 0:
             return self.提升率计算(总数据)
         elif x == 1:
@@ -826,6 +841,9 @@ class 角色窗口(窗口):
                     self.等级调整[序号].addItem(str(j))
             for j in range(0, 2):
                 self.次数输入[序号].addItem(str(j))
+            if 序号 == self.一觉序号 or 序号 == self.三觉序号:
+                self.次数输入[序号].addItem('填写')
+                self.次数输入[序号].activated.connect(lambda state, index=序号: self.BUFF次数输入填写(index))
         
         横坐标=30
         纵坐标=0
@@ -1637,6 +1655,21 @@ class 角色窗口(窗口):
                 temp -= 装备属性.间隔
             self.黑鸦词条[i][2].addItem(装备属性.随机属性描述)
 
+    def BUFF次数输入填写(self, x):
+        if self.次数输入[x].currentIndex() == 2:
+            self.次数输入[x].setEditable(True)
+            self.次数输入[x].clearEditText()
+            self.次数输入[x].setStyleSheet(下拉框样式)
+        elif self.次数输入[x].currentIndex() == 2:
+            temp = self.次数输入[x].currentText()
+            self.次数输入[x].removeItem(3)
+            self.次数输入[x].setCurrentIndex(2)
+            self.次数输入[x].setEditable(True)
+            self.次数输入[x].clearEditText()
+            self.次数输入[x].setStyleSheet(下拉框样式)
+            self.次数输入[x].setCurrentText(temp)
+        else:
+            self.次数输入[x].setEditable(False)
 
     def 批量选择(self, index):
         if index == 1:
@@ -1724,7 +1757,15 @@ class 角色窗口(窗口):
             for i in self.角色属性A.技能栏:
                 序号 = self.角色属性A.技能序号[i.名称]
                 self.等级调整[序号].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
-                self.次数输入[序号].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+                temp1 = (int(setfile[num].replace('\n', '')))
+                if temp1 < 2:
+                    self.次数输入[序号].setCurrentIndex(int(setfile[num].replace('\n', '')))
+                elif temp1 == 2:
+                    self.次数输入[序号].setCurrentIndex(2)
+                    self.次数输入[序号].setEditable(True)
+                    self.次数输入[序号].clearEditText()
+                    self.次数输入[序号].setStyleSheet(下拉框样式)
+                num += 1
         except:
             pass
 
@@ -1755,6 +1796,17 @@ class 角色窗口(窗口):
                 self.黑鸦词条[i][1].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
                 self.黑鸦词条[i][2].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
                 self.黑鸦词条[i][3].setCurrentIndex(int(setfile[num].replace('\n', ''))); num += 1
+        except:
+            pass
+
+        try:
+            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill6.ini', 'r', encoding='utf-8').readlines()
+            num = 0
+            for i in self.角色属性A.技能栏:
+                序号 = self.角色属性A.技能序号[i.名称]
+                if 序号 == self.一觉序号 or 序号 == self.三觉序号:
+                    if self.次数输入[序号].currentIndex() == 2:
+                        self.次数输入[序号].setCurrentText((setfile[num].replace('\n', ''))); num += 1
         except:
             pass
 
@@ -1870,6 +1922,26 @@ class 角色窗口(窗口):
                 setfile.write(str(self.黑鸦词条[i][1].currentIndex())+'\n')
                 setfile.write(str(self.黑鸦词条[i][2].currentIndex())+'\n')
                 setfile.write(str(self.黑鸦词条[i][3].currentIndex())+'\n')
+        except:
+            pass
+
+        try:
+            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill6.ini', 'w', encoding='utf-8')
+            for i in self.角色属性A.技能栏:
+                序号 = self.角色属性A.技能序号[i.名称]
+                if 序号 == self.一觉序号 or self.三觉序号 :
+                   if self.次数输入[序号].currentIndex() == 2:
+                       if self.次数输入[序号].currentText() != '':
+                          try:
+                              temp = int(float(self.次数输入[序号].currentText()))
+                              if temp >= 0 and temp < 1000:
+                                 setfile.write(str(self.次数输入[序号].currentText()) + '\n')
+                              else:
+                                  setfile.write(str('1' + '\n'))
+                          except:
+                              setfile.write(str('1' + '\n'))
+                       else:
+                           setfile.write(str('1' + '\n'))
         except:
             pass
 
@@ -1992,6 +2064,10 @@ class 角色窗口(窗口):
             self.输入属性(self.角色属性A)
         else:
             self.输入属性(self.角色属性A, 1)
+
+        if self.是否计算 != 1:
+            self.click_window(1)
+            return
 
         装备 = []
         for i in self.自选装备:
@@ -3173,9 +3249,39 @@ class 角色窗口(窗口):
         属性.武器锻造等级 = self.装备打造选项[36].currentIndex()
         属性.类型 = self.装备打造选项[37].currentText()
         属性.次数输入.clear()
+        self.是否计算 = 1
         for i in self.角色属性A.技能栏:
             序号 = self.角色属性A.技能序号[i.名称]
-            属性.次数输入.append(self.次数输入[序号].currentText())
+            temp = self.角色属性A.一觉序号
+            if 序号 == self.角色属性A.一觉序号 or 序号 == self.角色属性A.三觉序号:
+                if self.次数输入[序号].currentIndex() == 2:
+                    if self.次数输入[序号].currentText() != '':
+                        try:
+                            temp1 = int(float(self.次数输入[序号].currentText()))
+                            temp2 = (float(self.次数输入[序号].currentText()))
+                            if temp1 >= 0 and temp1 < 1000:
+                                if temp1 == temp2:
+                                    属性.次数输入.append(int(float(self.次数输入[序号].currentText())))
+                                else:
+                                    属性.次数输入.append(int((float(self.次数输入[序号].currentText()) + 0.001) * 100) / 100)
+                                    self.次数输入[序号].setCurrentText(
+                                        str(int((float(self.次数输入[序号].currentText()) + 0.001) * 100) / 100))
+                            else:
+                                QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数超出取值范围，请重新输入")
+                                self.是否计算 = 0
+                                break
+                        except:
+                            QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入格式错误，请重新输入")
+                            self.是否计算 = 0
+                            break
+                    else:
+                        QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入为空，请重新输入")
+                        self.是否计算 = 0
+                        break
+                else:
+                    属性.次数输入.append(int(self.次数输入[序号].currentText()))
+            else:
+                属性.次数输入.append(int(self.次数输入[序号].currentText()))
         self.黑鸦属性计算(属性)
         self.希洛克属性计算(属性)
         self.基础属性(属性)
