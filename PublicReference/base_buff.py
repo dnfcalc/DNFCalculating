@@ -505,7 +505,7 @@ class 角色属性(属性):
             #用于计算一觉
             temp = deepcopy(self)
 
-            #拷贝数据，并修改装备，返回可能的组合
+            #拷贝数据,并修改装备,返回可能的组合
             数据列表 = []
             切换列表 = []
             一觉计算属性_temp = []
@@ -519,7 +519,7 @@ class 角色属性(属性):
                 数据列表.append(一觉计算属性.技能栏[self.一觉序号].结算统计()[3] * (一觉计算属性.技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0 and self.次数输入[self.三觉序号] != 0 else 1)) #3是力量属性  一觉力智都是相等的
                 切换列表.append(一觉计算属性.切换详情)
             
-            #取一觉最大值，并修改数据
+            #取一觉最大值,并修改数据
             a = max(数据列表)
             序号 = 数据列表.index(a)
             if 序号 != 0:
@@ -545,6 +545,7 @@ class 角色属性(属性):
                     总数据.append(self.技能栏[i].结算统计())
                 else:
                     总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
+            总数据[self.一觉序号] = [int(x*self.次数输入[self.一觉序号]) for x in 总数据[self.一觉序号]] 
         else:
             self.装备属性计算()
             self.自适应计算()
@@ -554,6 +555,7 @@ class 角色属性(属性):
                     总数据.append(self.技能栏[i].结算统计())
                 else:
                     总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
+            总数据[self.一觉序号] = [int(x*self.次数输入[self.一觉序号]) for x in 总数据[self.一觉序号]] 
             self.一觉数据 = 总数据[self.一觉序号]
         self.一觉数据 = []
         self.一觉数据.append(int(总数据[self.一觉序号][3]))
@@ -580,6 +582,7 @@ class 角色属性(属性):
                         总数据.append(temp.技能栏[i].结算统计())
                     else:
                         总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
+                总数据[temp.一觉序号] = [int(x*temp.次数输入[temp.一觉序号]) for x in 总数据[temp.一觉序号]] 
                 三觉属性 = temp.技能栏[temp.一觉序号].结算统计()[3] * (temp.技能栏[temp.三觉序号].加成倍率() - 1)
                 总数据[temp.三觉序号] = [0, 0, 0, 三觉属性, 三觉属性, 0, 0, 0]
                 提升率 = temp.提升率计算(总数据)
@@ -599,17 +602,17 @@ class 角色属性(属性):
             武器属性B.融合属性(self)
 
     def 结果返回(self, x, 总数据):
-        if self.次数输入[self.一觉序号] != 0:
-            if 总数据[self.一觉序号][3] != 0:
-                总数据[self.一觉序号][3] = int(总数据[self.一觉序号][3]*self.次数输入[self.一觉序号])
-                总数据[self.一觉序号][4] = int(总数据[self.一觉序号][4]*self.次数输入[self.一觉序号])
-            #三觉CD大于一觉CD，因而增加一觉次数多于三觉次数的情况
-            elif round(self.次数输入[self.一觉序号],2) > round(self.次数输入[self.三觉序号],2):
-                总数据[self.一觉序号][3] = int(self.一觉数据[0] * (round(self.次数输入[self.一觉序号],2)-round(self.次数输入[self.三觉序号],2)))
-                总数据[self.一觉序号][3] = int(self.一觉数据[1] * (round(self.次数输入[self.一觉序号],2)-round(self.次数输入[self.三觉序号],2)))
-        if self.次数输入[self.三觉序号] != 0:
-            总数据[self.三觉序号][3] = int(总数据[self.三觉序号][3]*self.次数输入[self.三觉序号])
-            总数据[self.三觉序号][4] = int(总数据[self.三觉序号][4]*self.次数输入[self.三觉序号])
+        # if self.次数输入[self.一觉序号] != 0:
+        #     if 总数据[self.一觉序号][3] != 0:
+        #         总数据[self.一觉序号][3] = int(总数据[self.一觉序号][3]*self.次数输入[self.一觉序号])
+        #         总数据[self.一觉序号][4] = int(总数据[self.一觉序号][4]*self.次数输入[self.一觉序号])
+        #     #三觉CD大于一觉CD,因而增加一觉次数多于三觉次数的情况
+        #     elif round(self.次数输入[self.一觉序号],2) > round(self.次数输入[self.三觉序号],2):
+        #         总数据[self.一觉序号][3] = int(self.一觉数据[0] * (round(self.次数输入[self.一觉序号],2)-round(self.次数输入[self.三觉序号],2)))
+        #         总数据[self.一觉序号][3] = int(self.一觉数据[1] * (round(self.次数输入[self.一觉序号],2)-round(self.次数输入[self.三觉序号],2)))
+        # if self.次数输入[self.三觉序号] != 0:
+        #     总数据[self.三觉序号][3] = int(总数据[self.三觉序号][3]*self.次数输入[self.三觉序号])
+        #     总数据[self.三觉序号][4] = int(总数据[self.三觉序号][4]*self.次数输入[self.三觉序号])
         if x == 0:
             return self.提升率计算(总数据)
         elif x == 1:
@@ -636,7 +639,7 @@ class 角色属性(属性):
                 self.技能等级加成('所有',50,50,2) 
                 self.技能等级加成('所有',85,85,2)
                 self.技能等级加成('所有',100,100,2)
-            # 世界树之精灵洗词条的特殊处理，没考虑择优的时候，针对的是自选
+            # 世界树之精灵洗词条的特殊处理,没考虑择优的时候,针对的是自选
             if self.黑鸦词条[0][0]>1 and 装备列表[装备序号[i]].名称 == '世界树之精灵':
                 self.技能等级加成('所有',50,50,2) 
             # elif 装备列表[装备序号[i]].名称 != '世界树之精灵':
@@ -766,7 +769,7 @@ class 角色窗口(窗口):
         self.神话排名选项 = QCheckBox('神话排名模式', self.main_frame1)
         self.神话排名选项.move(990, 580)
         self.神话排名选项.resize(100, 24)
-        self.神话排名选项.setToolTip('<font size="3" face="宋体">仅显示有神话的组合，且每件神话装备只会出现一次</font>')
+        self.神话排名选项.setToolTip('<font size="3" face="宋体">仅显示有神话的组合,且每件神话装备只会出现一次</font>')
         self.神话排名选项.setStyleSheet(复选框样式)
         
         self.最大使用线程数 = thread_num
@@ -841,7 +844,7 @@ class 角色窗口(窗口):
                     self.等级调整[序号].addItem(str(j))
             for j in range(0, 2):
                 self.次数输入[序号].addItem(str(j))
-            if 序号 == self.一觉序号 or 序号 == self.三觉序号:
+            if 序号 == self.一觉序号:
                 self.次数输入[序号].addItem('填写')
                 self.次数输入[序号].activated.connect(lambda state, index=序号: self.BUFF次数输入填写(index))
         
@@ -2006,7 +2009,7 @@ class 角色窗口(窗口):
                 else:
                     数据.append(0)
             except:
-                QMessageBox.information(self, "错误", 名称[i] + "输入格式错误，已重置为空")
+                QMessageBox.information(self, "错误", 名称[i] + "输入格式错误,已重置为空")
                 self.一键站街设置输入[i + x].setText('')
                 数据.append(0)
 
@@ -2022,7 +2025,7 @@ class 角色窗口(窗口):
 
         self.站街面板修正(类型, 数据, 原始数据)
         self.click_window(2)
-        QMessageBox.information(self, "自动修正计算完毕", "仅对站街修正进行了修改，使面板与输入一致<br>请自行核对其它页面 非智力/体力/精神条目")
+        QMessageBox.information(self, "自动修正计算完毕", "仅对站街修正进行了修改,使面板与输入一致<br>请自行核对其它页面 非智力/体力/精神条目")
 
     def 神话数量判断(self, x = 0):
         count = 0
@@ -2153,14 +2156,14 @@ class 角色窗口(窗口):
                 总奶量 += '力智+' + str(合计力量)
             else:
                 总奶量 += '力量+' + str(合计力量)
-                总奶量 += '，智力+' + str(合计智力)
+                总奶量 += ',智力+' + str(合计智力)
 
             if 合计物攻 == 合计魔攻 and 合计魔攻 == 合计独立:
-                总奶量 += '，三攻+' + str(合计物攻)
+                总奶量 += ',三攻+' + str(合计物攻)
             else:
-                总奶量 += '，物攻+' + str(合计物攻)
-                总奶量 += '，魔攻+' + str(合计魔攻)
-                总奶量 += '，独立+' + str(合计独立)
+                总奶量 += ',物攻+' + str(合计物攻)
+                总奶量 += ',魔攻+' + str(合计魔攻)
+                总奶量 += ',独立+' + str(合计独立)
             # self.总伤害.setText(str(tempstr))
             x = B.BUFF面板()
             y = B.一觉面板()
@@ -2201,9 +2204,9 @@ class 角色窗口(窗口):
                 武器词条最高值 = self.角色属性B.自适应最高值
                 武器属性A = 武器属性A列表[武器词条最高值[0]]
                 武器属性B = 武器属性B列表[武器词条最高值[1]]
-                tempstr.append("属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else ''))
+                tempstr.append("属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>')
                 if self.角色属性B.武器词条触发 == 1:
-                    tempstr.append("属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else ''))
+                    tempstr.append("属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>')
 
             count = 0
             for i in tempstr:
@@ -2796,27 +2799,27 @@ class 角色窗口(窗口):
                 tempstr += '力智' + 对比力量
             else:
                 tempstr += '力量' + 对比力量
-                tempstr += '，智力' + 对比智力
+                tempstr += ',智力' + 对比智力
 
             if 对比物攻 == 对比魔攻 and 对比魔攻 == 对比独立:
-                tempstr += '，三攻' + 对比物攻
+                tempstr += ',三攻' + 对比物攻
             else:
-                tempstr += '，物攻' + 对比物攻
-                tempstr += '，魔攻' + 对比魔攻
-                tempstr += '，独立' + 对比独立
+                tempstr += ',物攻' + 对比物攻
+                tempstr += ',魔攻' + 对比魔攻
+                tempstr += ',独立' + 对比独立
         else:
             if 合计力量 == 合计智力:
                 tempstr += '力智+' + str(合计力量)
             else:
                 tempstr += '力量+' + str(合计力量)
-                tempstr += '，智力+' + str(合计智力)
+                tempstr += ',智力+' + str(合计智力)
 
             if 合计物攻 == 合计魔攻 and 合计魔攻 == 合计独立:
-                tempstr += '，三攻+' + str(合计物攻)
+                tempstr += ',三攻+' + str(合计物攻)
             else:
-                tempstr += '，物攻+' + str(合计物攻)
-                tempstr += '，魔攻+' + str(合计魔攻)
-                tempstr += '，独立+' + str(合计独立)
+                tempstr += ',物攻+' + str(合计物攻)
+                tempstr += ',魔攻+' + str(合计魔攻)
+                tempstr += ',独立+' + str(合计独立)
             if self.角色属性B.切换详情 != '无':
                 tempstr += '<br><br>' + self.角色属性B.切换详情 
 
@@ -3005,7 +3008,7 @@ class 角色窗口(窗口):
                             tempstr[i] = tempstr[i].replace('Lv50 技能等级+2<br>','')
                             tempstr[i] = tempstr[i].replace('Lv85 技能等级+2<br>','')
                             tempstr[i] = tempstr[i].replace('Lv100 技能等级+2<br>','')
-                    # 世界树之精灵特殊处理,没考虑择优的时候，针对的是自选
+                    # 世界树之精灵特殊处理,没考虑择优的时候,针对的是自选
                     if 装备.名称 == '世界树之精灵' and 属性.黑鸦词条[0][0] >1:
                         tempstr[i] += 'Lv50 技能等级+2<br>'
                 # 武器
@@ -3267,15 +3270,15 @@ class 角色窗口(窗口):
                                     self.次数输入[序号].setCurrentText(
                                         str(int((float(self.次数输入[序号].currentText()) + 0.001) * 100) / 100))
                             else:
-                                QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数超出取值范围，请重新输入")
+                                QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数超出取值范围,请重新输入")
                                 self.是否计算 = 0
                                 break
                         except:
-                            QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入格式错误，请重新输入")
+                            QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入格式错误,请重新输入")
                             self.是否计算 = 0
                             break
                     else:
-                        QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入为空，请重新输入")
+                        QMessageBox.information(self, "错误", "“" + i.名称 + "”" + "技能次数输入为空,请重新输入")
                         self.是否计算 = 0
                         break
                 else:
@@ -3354,7 +3357,7 @@ class 角色窗口(窗口):
                         float(self.属性设置输入[i][j].text())
                     except:
                         QMessageBox.information(self, "错误",
-                                                self.行名称[j + 17 if i > 2 else j] + "：" + self.列名称[i] + "  输入格式错误，已重置为空")
+                                                self.行名称[j + 17 if i > 2 else j] + "：" + self.列名称[i] + "  输入格式错误,已重置为空")
                         self.属性设置输入[i][j].setText('')
         for i in range(3, 9):
             for j in range(0, 17):
@@ -3363,7 +3366,7 @@ class 角色窗口(窗口):
                         float(self.属性设置输入[i][j].text())
                     except:
                         QMessageBox.information(self, "错误",
-                                                self.行名称[j + 17 if i > 2 else j] + "：" + self.列名称[i] + "  输入格式错误，已重置为空")
+                                                self.行名称[j + 17 if i > 2 else j] + "：" + self.列名称[i] + "  输入格式错误,已重置为空")
                         self.属性设置输入[i][j].setText('')
 
         temp = []
@@ -3374,19 +3377,19 @@ class 角色窗口(窗口):
                     temp.append(float(self.属性设置输入[9][j].text()) / 100)
 
                     if temp[-1] > 1 or temp[-1] < -.2:
-                        QMessageBox.information(self, "错误", self.修正列表名称[j] + " 输入数值超出[-20,100]，已重置为空")
+                        QMessageBox.information(self, "错误", self.修正列表名称[j] + " 输入数值超出[-20,100],已重置为空")
                         temp[-1] = 0.0
                         self.属性设置输入[9][j].setText('')
                 except:
                     temp.append(0.0)
-                    QMessageBox.information(self, "错误", self.修正列表名称[j] + " 输入格式错误，已重置为空")
+                    QMessageBox.information(self, "错误", self.修正列表名称[j] + " 输入格式错误,已重置为空")
                     self.属性设置输入[9][j].setText('')
             elif self.属性设置输入[9][j].text() != '' and j in [0,3,4,6]:
                 try:
                     temp.append(int(self.属性设置输入[9][j].text()))
                 except:
                     temp.append(0.0)
-                    QMessageBox.information(self, "错误", self.修正列表名称[j] + " 输入格式错误，已重置为空")
+                    QMessageBox.information(self, "错误", self.修正列表名称[j] + " 输入格式错误,已重置为空")
                     self.属性设置输入[9][j].setText('')
             else:
                 temp.append(0.0)
