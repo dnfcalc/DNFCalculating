@@ -161,3 +161,10 @@ for i in range(len(武器变换属性列表)):
     武器变换属性序号[武器变换属性列表[i].固定属性描述] = i
 for i in range(len(装备变换属性列表)):
     装备变换属性序号[装备变换属性列表[i].固定属性描述] = i
+
+防具变换属性组合 = []
+# for i in range(0, 7):
+for j in range(1, 7):
+    for k in range(1, 7):
+        for l in range(1, 7):
+            防具变换属性组合.append([j,k,l])

@@ -189,11 +189,11 @@ class 角色属性(属性):
         if self.装备描述 == 1:
             tem = ''
             if 守护恩赐Lv > 0 or 转职被动Lv > 0:
-                tem += '[守护恩赐]、[启示：圣歌]、[人偶操纵者]技能Lv +{}<br>'.format(int(守护恩赐Lv if 守护恩赐Lv else 转职被动Lv))
+                tem += '[守护恩赐]、[启示:圣歌]、[人偶操纵者]技能Lv +{}<br>'.format(int(守护恩赐Lv if 守护恩赐Lv else 转职被动Lv))
             elif 守护恩赐体精 > 0 and self.角色 == '圣职者(男)':
                 tem += '[守护恩赐]体力、精神 +{}<br>'.format(int(守护恩赐体精))
             elif 转职被动智力 > 0 and self.角色 == '圣职者(女)':
-                tem += '[启示：圣歌]智力 +{}<br>'.format(int(转职被动智力))
+                tem += '[启示:圣歌]智力 +{}<br>'.format(int(转职被动智力))
             elif 转职被动智力 > 0 and self.角色 == '魔法师(女)':
                 tem += '[人偶操纵者]智力 +{}<br>'.format(int(转职被动智力))
             elif 信念光环Lv > 0:
@@ -453,7 +453,7 @@ class 角色属性(属性):
             for i in [x2, x3, x4]:
                 i.装备栏[num * 2] = 装备列表[套装映射[装备列表[装备序号[i.装备栏[1]]].所属套装 + '-' + '史诗' + '-' + 装备列表[装备序号[i.装备栏[num * 2]]].部位]].名称
                 i.套装栏[2 * num + 2] = i.套装栏[2 * num + 2].replace(装备列表[装备序号[i.装备栏[index[num]]]].所属套装, 装备列表[装备序号[i.装备栏[1]]].所属套装)
-                i.切换详情 = 装备列表[装备序号[i.装备栏[num * 2]]].部位 + '：' + x1.装备栏[num * 2] + ' → ' + i.装备栏[num * 2]
+                i.切换详情 = 装备列表[装备序号[i.装备栏[num * 2]]].部位 + ':' + x1.装备栏[num * 2] + ' → ' + i.装备栏[num * 2]
                 num += 1
             return [x1, x2, x3, x4]
         elif sumcount == 6:
@@ -463,7 +463,7 @@ class 角色属性(属性):
             x2 = deepcopy(属性)
             x2.装备栏[index - 2] = 装备列表[套装映射[装备列表[装备序号[x2.装备栏[部位[index]]]].所属套装 + '-' + '史诗' + '-' + 装备列表[装备序号[x2.装备栏[index - 2]]].部位]].名称
             x2.套装栏[index] = x2.套装栏[index].replace(装备列表[装备序号[x2.装备栏[1]]].所属套装, 装备列表[装备序号[x2.装备栏[部位[index]]]].所属套装)
-            x2.切换详情 = 装备列表[装备序号[x2.装备栏[index - 2]]].部位 + '：' + x1.装备栏[index - 2] + ' → ' + x2.装备栏[index - 2]
+            x2.切换详情 = 装备列表[装备序号[x2.装备栏[index - 2]]].部位 + ':' + x1.装备栏[index - 2] + ' → ' + x2.装备栏[index - 2]
             return [x1, x2]
         elif count2 == 7 and 套装栏[1] != 套装栏[2]:
             x1 = deepcopy(属性)
@@ -491,9 +491,9 @@ class 角色属性(属性):
             x5.装备栏[不可更换部位[0]] = 装备列表[套装映射[三件套名称 + '-' + '史诗' + '-' + 部位列表[不可更换部位[0]]]].名称
             x5.装备栏[不可更换部位[1]] = 装备列表[套装映射[三件套名称 + '-' + '史诗' + '-' + 部位列表[不可更换部位[1]]]].名称
             
-            x2.切换详情 = 部位列表[可更换部位[0]] + '：' + 属性.装备栏[可更换部位[0]] + ' → ' + x2.装备栏[可更换部位[0]]
-            x3.切换详情 = 部位列表[可更换部位[1]] + '：' + 属性.装备栏[可更换部位[1]] + ' → ' + x3.装备栏[可更换部位[1]]
-            x4.切换详情 = 部位列表[可更换部位[2]] + '：' + 属性.装备栏[可更换部位[2]] + ' → ' + x4.装备栏[可更换部位[2]]
+            x2.切换详情 = 部位列表[可更换部位[0]] + ':' + 属性.装备栏[可更换部位[0]] + ' → ' + x2.装备栏[可更换部位[0]]
+            x3.切换详情 = 部位列表[可更换部位[1]] + ':' + 属性.装备栏[可更换部位[1]] + ' → ' + x3.装备栏[可更换部位[1]]
+            x4.切换详情 = 部位列表[可更换部位[2]] + ':' + 属性.装备栏[可更换部位[2]] + ' → ' + x4.装备栏[可更换部位[2]]
             x5.切换详情 = 属性.套装栏[2] + ' → ' + x5.套装栏[2]
             return [x1, x2, x3, x4, x5]
         else:
@@ -523,7 +523,7 @@ class 角色属性(属性):
             a = max(数据列表)
             序号 = 数据列表.index(a)
             if 序号 != 0:
-                temp = '<br><br>' + ((self.技能栏[self.一觉序号].名称 + '+' + self.技能栏[self.三觉序号].名称 + '：') if self.三觉序号 != 0 else (self.技能栏[self.一觉序号].名称 + '：')) + str(int(数据列表[0])) + '→' + str(int(a)) + ' (+' + str(int(a) - int(数据列表[0])) + ')'
+                temp = '<br><br>' + ((self.技能栏[self.一觉序号].名称 + '+' + self.技能栏[self.三觉序号].名称 + ':') if self.三觉序号 != 0 else (self.技能栏[self.一觉序号].名称 + ':')) + str(int(数据列表[0])) + '→' + str(int(a)) + ' (+' + str(int(a) - int(数据列表[0])) + ')'
             else:
                 temp = ''
             #计算现有装备BUFF
@@ -563,34 +563,124 @@ class 角色属性(属性):
         return 总数据
 
     def 自适应计算(self):
-        # 黑鸦词条计算
-
+        
         # 武器词条自适应计算
         if self.希洛克武器词条 == 1:
             词条提升率 = []
             for i in range(len(武器属性组合)):
                 temp = deepcopy(self)
-                总数据 = []
+                # 总数据 = []
                 武器属性A = 武器属性组合[i][0]
                 武器属性B = 武器属性组合[i][1]
                 temp.武器属性输入(武器属性A, 武器属性B)
-                temp.适用数值计算()
-                if temp.双装备模式 == 1 and temp.次数输入[temp.一觉序号] != 0:
-                    temp.技能栏[temp.一觉序号].适用数值 = temp.一觉适用数值
-                for i in range(len(temp.技能栏)):
-                    if temp.次数输入[i] != 0:
-                        总数据.append(temp.技能栏[i].结算统计())
-                    else:
-                        总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
-                总数据[temp.一觉序号] = [int(x*temp.次数输入[temp.一觉序号]) for x in 总数据[temp.一觉序号]] 
-                三觉属性 = temp.技能栏[temp.一觉序号].结算统计()[3] * (temp.技能栏[temp.三觉序号].加成倍率() - 1)
-                总数据[temp.三觉序号] = [0, 0, 0, 三觉属性, 三觉属性, 0, 0, 0]
-                提升率 = temp.提升率计算(总数据)
-                词条提升率.append(提升率)     
+                # temp.适用数值计算()
+                # if temp.双装备模式 == 1 and temp.次数输入[temp.一觉序号] != 0:
+                #     temp.技能栏[temp.一觉序号].适用数值 = temp.一觉适用数值
+                # for i in range(len(temp.技能栏)):
+                #     if temp.次数输入[i] != 0:
+                #         总数据.append(temp.技能栏[i].结算统计())
+                #     else:
+                #         总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
+                # for i in range(len(temp.技能栏)):
+                #     if i.名称 == '勇气圣歌':
+                #         if self.次数输入[self.技能序号['勇气圣歌']] != 0:
+                #             总数据[self.技能序号['勇气圣歌']][j] = int(总数据[self.技能序号['勇气祝福']][j] * self.技能栏[self.技能序号['勇气圣歌']].增幅倍率)
+                #     if i.名称 == '死命召唤':
+                #         if self.次数输入[self.技能序号['死命召唤']] != 0:
+                #             总数据[self.技能序号['死命召唤']][j] = int(总数据[self.技能序号['禁忌诅咒']][j] * self.技能栏[self.技能序号['死命召唤']].增幅倍率)
+                #     if i.名称 == '小魔女的偏爱':
+                #         if self.次数输入[self.技能序号['小魔女的偏爱']] != 0:
+                #             总数据[self.技能序号['禁忌诅咒']][j] = int(总数据[self.技能序号['禁忌诅咒']][j] * (1 + self.技能栏[self.技能序号['小魔女的偏爱']].增幅倍率))                
+                # 总数据[temp.一觉序号] = [int(x*temp.次数输入[temp.一觉序号]) for x in 总数据[temp.一觉序号]] 
+                # 三觉属性 = 总数据[temp.一觉序号][3] * (temp.技能栏[temp.三觉序号].加成倍率() - 1)
+                # 总数据[temp.三觉序号] = [0, 0, 0, 三觉属性, 三觉属性, 0, 0, 0]
+                # 提升率 = temp.提升率计算(总数据)
+                提升率 = self.择优提升率计算(temp)
+                词条提升率.append(提升率)   
             a = max(词条提升率)
             序号 = 词条提升率.index(a)
             self.自适应最高值 = 武器属性组合[序号]
             self.武器属性输入(self.自适应最高值[0], self.自适应最高值[1])
+
+        # 黑鸦词条计算
+        黑鸦选择 = [0,0,0,0]
+        for i in range(4):
+            if self.黑鸦词条[i][0] == 1:
+                黑鸦选择[i] = 1
+        # 先择优黑鸦防具部分
+        if 黑鸦选择[1]+黑鸦选择[2]+黑鸦选择[3]>0:
+            词条提升率 = []
+            for i in range(len(防具变换属性组合)):
+                temp = deepcopy(self)
+                # 总数据 = []
+                黑鸦戒指 = 防具变换属性组合[i][0]
+                黑鸦辅助 = 防具变换属性组合[i][1]
+                黑鸦下装 = 防具变换属性组合[i][2]
+                temp.黑鸦属性输入(黑鸦戒指, 黑鸦辅助,黑鸦下装)
+                # temp.适用数值计算()
+                # if temp.双装备模式 == 1 and temp.次数输入[temp.一觉序号] != 0:
+                #     temp.技能栏[temp.一觉序号].适用数值 = temp.一觉适用数值
+                # for i in range(len(temp.技能栏)):
+                #     if temp.次数输入[i] != 0:
+                #         总数据.append(temp.技能栏[i].结算统计())
+                #     else:
+                #         总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
+                # for i in range(len(temp.技能栏)):
+                #     if i.名称 == '勇气圣歌':
+                #         if self.次数输入[self.技能序号['勇气圣歌']] != 0:
+                #             总数据[self.技能序号['勇气圣歌']][j] = int(总数据[self.技能序号['勇气祝福']][j] * self.技能栏[self.技能序号['勇气圣歌']].增幅倍率)
+                #     if i.名称 == '死命召唤':
+                #         if self.次数输入[self.技能序号['死命召唤']] != 0:
+                #             总数据[self.技能序号['死命召唤']][j] = int(总数据[self.技能序号['禁忌诅咒']][j] * self.技能栏[self.技能序号['死命召唤']].增幅倍率)
+                #     if i.名称 == '小魔女的偏爱':
+                #         if self.次数输入[self.技能序号['小魔女的偏爱']] != 0:
+                #             总数据[self.技能序号['禁忌诅咒']][j] = int(总数据[self.技能序号['禁忌诅咒']][j] * (1 + self.技能栏[self.技能序号['小魔女的偏爱']].增幅倍率))     
+                # 总数据[temp.一觉序号] = [int(x*temp.次数输入[temp.一觉序号]) for x in 总数据[temp.一觉序号]] 
+                # 三觉属性 = 总数据[temp.一觉序号][3] * (temp.技能栏[temp.三觉序号].加成倍率() - 1)
+                # 总数据[temp.三觉序号] = [0, 0, 0, 三觉属性, 三觉属性, 0, 0, 0]
+                # 提升率 = temp.提升率计算(总数据)
+                提升率 = self.择优提升率计算(temp)
+                词条提升率.append(提升率)     
+            a = max(词条提升率)
+            序号 = 词条提升率.index(a)
+            self.防具变换属性自适应 = 防具变换属性组合[序号]
+            self.黑鸦属性输入(self.防具变换属性自适应[0],self.防具变换属性自适应[1],self.防具变换属性自适应[2])
+        # 再择优武器部分
+        if 黑鸦选择[0]>0:
+            词条提升率 = []
+            for i in range(0,7):
+                temp = deepcopy(self)
+                # 总数据 = []
+                temp.黑鸦武器输入(i)
+                # temp.适用数值计算()
+                # if temp.双装备模式 == 1 and temp.次数输入[temp.一觉序号] != 0:
+                #     temp.技能栏[temp.一觉序号].适用数值 = temp.一觉适用数值
+                # for i in range(len(temp.技能栏)):
+                #     if temp.次数输入[i] != 0:
+                #         总数据.append(temp.技能栏[i].结算统计())
+                #     else:
+                #         总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
+                # for i in range(len(temp.技能栏)):
+                #     if i.名称 == '勇气圣歌':
+                #         if self.次数输入[self.技能序号['勇气圣歌']] != 0:
+                #             总数据[self.技能序号['勇气圣歌']][j] = int(总数据[self.技能序号['勇气祝福']][j] * self.技能栏[self.技能序号['勇气圣歌']].增幅倍率)
+                #     if i.名称 == '死命召唤':
+                #         if self.次数输入[self.技能序号['死命召唤']] != 0:
+                #             总数据[self.技能序号['死命召唤']][j] = int(总数据[self.技能序号['禁忌诅咒']][j] * self.技能栏[self.技能序号['死命召唤']].增幅倍率)
+                #     if i.名称 == '小魔女的偏爱':
+                #         if self.次数输入[self.技能序号['小魔女的偏爱']] != 0:
+                #             总数据[self.技能序号['禁忌诅咒']][j] = int(总数据[self.技能序号['禁忌诅咒']][j] * (1 + self.技能栏[self.技能序号['小魔女的偏爱']].增幅倍率))     
+                # 总数据[temp.一觉序号] = [int(x*temp.次数输入[temp.一觉序号]) for x in 总数据[temp.一觉序号]] 
+                # 三觉属性 = 总数据[temp.一觉序号][3] * (temp.技能栏[temp.三觉序号].加成倍率() - 1)
+                # 总数据[temp.三觉序号] = [0, 0, 0, 三觉属性, 三觉属性, 0, 0, 0]
+                提升率 = self.择优提升率计算(temp)
+                词条提升率.append(提升率)     
+            a = max(词条提升率)
+            序号 = 词条提升率.index(a)
+            self.武器变换属性自适应 = 序号
+            self.黑鸦武器输入(序号)
+            # print(self.武器变换属性自适应)
+
     
     def 武器属性输入(self, 武器属性A, 武器属性B):
         武器属性A = 武器属性A列表[武器属性A]
@@ -600,6 +690,61 @@ class 角色属性(属性):
         武器属性A.融合属性(self)
         if self.武器词条触发 == 1:
             武器属性B.融合属性(self)
+
+    def 黑鸦属性输入(self, 黑鸦戒指, 黑鸦辅助,黑鸦下装):
+        黑鸦戒指 = 装备变换属性列表[黑鸦戒指]
+        黑鸦辅助 = 装备变换属性列表[黑鸦辅助]
+        黑鸦下装 = 装备变换属性列表[黑鸦下装]
+        黑鸦戒指.当前值 = int(黑鸦戒指.最大值)
+        黑鸦辅助.当前值 = int(黑鸦辅助.最大值)
+        黑鸦下装.当前值 = int(黑鸦下装.最大值)
+        if self.黑鸦词条[1][0] == 1:
+            黑鸦戒指.变换属性(self)
+        if self.黑鸦词条[2][0] == 1:
+            黑鸦辅助.变换属性(self)
+        if self.黑鸦词条[3][0] == 1:
+            黑鸦下装.变换属性(self)  
+
+    def 黑鸦武器输入(self,黑鸦武器):
+        if 黑鸦武器 > 0:
+            黑鸦武器 = 武器变换属性列表[黑鸦武器]
+            黑鸦武器.当前值 = int(黑鸦武器.最大值)
+            黑鸦武器.变换属性(self)
+        else:
+            self.技能等级加成('所有',50,50,2) 
+            self.技能等级加成('所有',85,85,2)
+            self.技能等级加成('所有',100,100,2)
+        if self.装备检查('世界树之精灵'):
+            self.技能等级加成('所有',50,50,2) 
+
+
+    def 择优提升率计算(self,temp):
+        总数据 = []
+        temp.适用数值计算()
+        if temp.双装备模式 == 1 and temp.次数输入[temp.一觉序号] != 0:
+            temp.技能栏[temp.一觉序号].适用数值 = temp.一觉适用数值
+        for i in range(len(temp.技能栏)):
+            if temp.次数输入[i] != 0:
+                总数据.append(temp.技能栏[i].结算统计())
+            else:
+                总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
+        for i in range(len(temp.技能栏)):
+            if temp.技能栏[i].名称 == '勇气圣歌':
+                if temp.次数输入[temp.技能序号['勇气圣歌']] != 0:
+                    for j in range(8):
+                        总数据[temp.技能序号['勇气圣歌']][j] = int(总数据[temp.技能序号['勇气祝福']][j] * temp.技能栏[temp.技能序号['勇气圣歌']].增幅倍率)
+            if temp.技能栏[i].名称 == '死命召唤':
+                if temp.次数输入[temp.技能序号['死命召唤']] != 0:
+                    for j in range(8):
+                        总数据[temp.技能序号['死命召唤']][j] = int(总数据[temp.技能序号['禁忌诅咒']][j] * temp.技能栏[temp.技能序号['死命召唤']].增幅倍率)
+            if temp.技能栏[i].名称 == '小魔女的偏爱':
+                if temp.次数输入[temp.技能序号['小魔女的偏爱']] != 0:
+                    for j in range(8):
+                        总数据[temp.技能序号['禁忌诅咒']][j] = int(总数据[temp.技能序号['禁忌诅咒']][j] * (1 + temp.技能栏[temp.技能序号['小魔女的偏爱']].增幅倍率))   
+        总数据[temp.一觉序号] = [int(x*temp.次数输入[temp.一觉序号]) for x in 总数据[temp.一觉序号]] 
+        三觉属性 = 总数据[temp.一觉序号][3] * (temp.技能栏[temp.三觉序号].加成倍率() - 1)
+        总数据[temp.三觉序号] = [0, 0, 0, 三觉属性, 三觉属性, 0, 0, 0]
+        return temp.提升率计算(总数据)        
 
     def 结果返回(self, x, 总数据):
         # if self.次数输入[self.一觉序号] != 0:
@@ -754,11 +899,11 @@ class 角色窗口(窗口):
         self.百变怪选项.setStyleSheet(复选框样式)
 
         self.计算模式选择 = MyQComboBox(self.main_frame1)
-        self.计算模式选择.addItems(['计算模式：极速模式', '计算模式：套装模式', '计算模式：单件模式'])
+        self.计算模式选择.addItems(['计算模式:极速模式', '计算模式:套装模式', '计算模式:单件模式'])
         self.计算模式选择.move(750, 613)
         self.计算模式选择.resize(235, 24)
         self.计算模式选择.setStyleSheet(下拉框样式)
-        self.计算模式选择.setToolTip('<font size="3" face="宋体">极速模式：533和3332(散搭) (不含智慧产物)<br><br>套装模式：533、3332(散搭)和3233(双防具) (不含智慧产物)<br><br>单件模式：所有组合 (不含百变怪)</font>')
+        self.计算模式选择.setToolTip('<font size="3" face="宋体">极速模式:533和3332(散搭) (不含智慧产物)<br><br>套装模式:533、3332(散搭)和3233(双防具) (不含智慧产物)<br><br>单件模式:所有组合 (不含百变怪)</font>')
         
         self.切装模式选项 = QCheckBox('一觉切1件装备', self.main_frame1)
         self.切装模式选项.move(875, 580)
@@ -869,8 +1014,8 @@ class 角色窗口(窗口):
             x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
             x.resize(28,28)
             tempstr='<font size="3" face="宋体"><font color="#FF6666">'+i.名称 +i.备注 +'</font><br>'
-            tempstr+='所在等级：'+str(i.所在等级)+'<br>'
-            tempstr+='等级上限：'+str(i.等级上限)+'</font>'
+            tempstr+='所在等级:'+str(i.所在等级)+'<br>'
+            tempstr+='等级上限:'+str(i.等级上限)+'</font>'
             x.setToolTip(tempstr)
             x.move(横坐标,纵坐标+7)
             横坐标+=40
@@ -898,7 +1043,7 @@ class 角色窗口(窗口):
 
        
         横坐标=395;纵坐标=20;行高=18
-        x=QLabel("护石Ⅰ：", self.main_frame2)
+        x=QLabel("护石Ⅰ:", self.main_frame2)
         x.move(横坐标,纵坐标-5)
         x.setStyleSheet(标签样式)
         纵坐标+=21
@@ -906,7 +1051,7 @@ class 角色窗口(窗口):
         self.护石第一栏.resize(130, 行高)
         
         横坐标=565;纵坐标=20
-        x=QLabel("护石Ⅱ：", self.main_frame2)
+        x=QLabel("护石Ⅱ:", self.main_frame2)
         x.move(横坐标,纵坐标-5)
         x.setStyleSheet(标签样式)
         纵坐标+=21
@@ -914,7 +1059,7 @@ class 角色窗口(窗口):
         self.护石第二栏.resize(130, 行高)
 
         横坐标=395;纵坐标=70;行高=18
-        x=QLabel("护石Ⅲ：", self.main_frame2)
+        x=QLabel("护石Ⅲ:", self.main_frame2)
         x.move(横坐标,纵坐标-5)
         x.setStyleSheet(标签样式)
         纵坐标+=21
@@ -923,7 +1068,7 @@ class 角色窗口(窗口):
 
         self.辟邪玉选择 = []
         self.辟邪玉数值 = []
-        x=QLabel("辟邪玉选择：", self.main_frame2)
+        x=QLabel("辟邪玉选择:", self.main_frame2)
         x.move(395,115)
         x.setStyleSheet(标签样式)
         for i in range(4):
@@ -947,13 +1092,13 @@ class 角色窗口(窗口):
         横坐标 = 395
         纵坐标 = 240
 
-        x=QLabel("武器融合：", self.main_frame2)
+        x=QLabel("武器融合:", self.main_frame2)
         x.move(横坐标,纵坐标 + 5)
         x.resize(300,20)
         x.setStyleSheet(标签样式)
 
         self.希洛克武器选择 = MyQComboBox(self.main_frame2)
-        self.希洛克武器选择.addItems(['武器词条：无', '自适应最高值', '自选词条数值'])
+        self.希洛克武器选择.addItems(['武器词条:无', '自适应最高值', '自选词条数值'])
         self.希洛克武器选择.resize(120,20)
         self.希洛克武器选择.move(横坐标 + 60, 纵坐标 + 5)
         self.希洛克武器选择.currentIndexChanged.connect(lambda state: self.希洛克武器选择更新())
@@ -1009,12 +1154,12 @@ class 角色窗口(窗口):
             tem=[]
             tem.append(MyQComboBox(self.main_frame2))
             if i ==0:
-                tem[0].addItems(['无', '暂未实现择优', '自选数值','自选数值-觉醒'])
+                tem[0].addItems(['无', '计算最高', '自选数值','自选数值-觉醒'])
                 tem[0].resize(91,20)
                 tem[0].move(横坐标+60, 纵坐标+25*i)
                 tem[0].currentIndexChanged.connect(lambda state,index = i : self.黑鸦词条更新(index))
             else:
-                tem[0].addItems(['无', '暂未实现择优', '自选数值'])
+                tem[0].addItems(['无', '计算最高', '自选数值'])
                 tem[0].resize(91,20)
                 tem[0].move(横坐标+60, 纵坐标+25*i)
                 tem[0].currentIndexChanged.connect(lambda state,index = i : self.黑鸦词条更新(index))
@@ -1360,7 +1505,7 @@ class 角色窗口(窗口):
             count += 1
         
         self.神话部位选项 = MyQComboBox(self.main_frame5)
-        self.神话部位选项.addItems(['神话部位：无', '神话部位：上衣', '神话部位：手镯', '神话部位：耳环'])
+        self.神话部位选项.addItems(['神话部位:无', '神话部位:上衣', '神话部位:手镯', '神话部位:耳环'])
         self.神话部位选项.resize(160, 22)
         self.神话部位选项.move(330, 50 + 30 * count)
         self.神话部位选项.activated.connect(lambda state: self.神话部位更改())
@@ -1472,8 +1617,8 @@ class 角色窗口(窗口):
         j = 315 + 初始y
         for i in self.词条显示:
             i.setStyleSheet("QLabel{font-size:12px;color:rgb(104,213,237)}")
-            i.move(20 + 初始x, j)
-            i.resize(180, 18)
+            i.move(8 + 初始x, j)
+            i.resize(300, 18)
             i.setAlignment(Qt.AlignLeft)
             j += 18
 
@@ -2172,41 +2317,75 @@ class 角色窗口(窗口):
             for l in range(12):
                 self.图片显示[l].setToolTip(tempstr[l])
 
-            self.面板显示[0].setText('站街：' + str(int(C.系数数值站街())))
-            self.面板显示[1].setText('适用：' + str(int(B.系数数值进图())))
+            self.面板显示[0].setText('站街:' + str(int(C.系数数值站街())))
+            self.面板显示[1].setText('适用:' + str(int(B.系数数值进图())))
 
             self.面板显示[2].setText(' ' + x[0])
-            self.面板显示[3].setText('力量：' + str(x[1]))
-            self.面板显示[4].setText('智力：' + str(x[2]))
-            self.面板显示[5].setText('物攻：' + str(x[3]))
-            self.面板显示[6].setText('魔攻：' + str(x[4]))
-            self.面板显示[7].setText('独立：' + str(x[5]))
+            self.面板显示[3].setText('力量:' + str(x[1]))
+            self.面板显示[4].setText('智力:' + str(x[2]))
+            self.面板显示[5].setText('物攻:' + str(x[3]))
+            self.面板显示[6].setText('魔攻:' + str(x[4]))
+            self.面板显示[7].setText('独立:' + str(x[5]))
 
             self.面板显示[8].setText(' ' + y[0])
-            self.面板显示[9].setText('力量：' + str(y[1]))
-            self.面板显示[10].setText('智力：' + str(y[2]))
+            self.面板显示[9].setText('力量:' + str(y[1]))
+            self.面板显示[10].setText('智力:' + str(y[2]))
 
             tempstr = []
-            tempstr.append('BUFF力量% ：' + str(int(round(B.BUFF力量per * 100, 0))) + '%')
-            tempstr.append('BUFF智力% ：' + str(int(round(B.BUFF智力per * 100, 0))) + '%')
-            tempstr.append('BUFF物攻% ：' + str(int(round(B.BUFF物攻per * 100, 0))) + '%')
-            tempstr.append('BUFF魔攻% ：' + str(int(round(B.BUFF魔攻per * 100, 0))) + '%')
-            tempstr.append('BUFF独立% ：' + str(int(round(B.BUFF独立per * 100, 0))) + '%')
-            tempstr.append('一觉力智  ：' + str(int(round(B.一觉力智, 0))))
-            tempstr.append('一觉力智% ：' + str(int(round(B.一觉力智per * 100, 0))) + '%')
+            tempstr.append('BUFF力量% :' + str(int(round(B.BUFF力量per * 100, 0))) + '%')
+            tempstr.append('BUFF智力% :' + str(int(round(B.BUFF智力per * 100, 0))) + '%')
+            tempstr.append('BUFF物攻% :' + str(int(round(B.BUFF物攻per * 100, 0))) + '%')
+            tempstr.append('BUFF魔攻% :' + str(int(round(B.BUFF魔攻per * 100, 0))) + '%')
+            tempstr.append('BUFF独立% :' + str(int(round(B.BUFF独立per * 100, 0))) + '%')
+            tempstr.append('一觉力智  :' + str(int(round(B.一觉力智, 0))))
+            tempstr.append('一觉力智% :' + str(int(round(B.一觉力智per * 100, 0))) + '%')
             if B.角色 == '圣职者(男)':
-                tempstr.append('守护徽章% ：' + str(int(round(B.守护徽章per * 100, 0))) + '%')
+                tempstr.append('守护徽章% :' + str(int(round(B.守护徽章per * 100, 0))) + '%')
             elif B.角色 == '圣职者(女)' or B.角色 == '圣职者(女)':
-                tempstr.append('BUFF增幅率：' + str(int(round(B.BUFF额外增幅率 * 100, 0))) + '%')
+                tempstr.append('BUFF增幅率:' + str(int(round(B.BUFF额外增幅率 * 100, 0))) + '%')
             tempstr.append(str(总奶量))
             
+            # if self.角色属性B.希洛克武器词条 == 1:
+            #     武器词条最高值 = self.角色属性B.自适应最高值
+            #     武器属性A = 武器属性A列表[武器词条最高值[0]]
+            #     武器属性B = 武器属性B列表[武器词条最高值[1]]
+            #     tempstr.append("属性1:" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>')
+            #     if self.角色属性B.武器词条触发 == 1:
+            #         tempstr.append("属性2:" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>')
+
             if self.角色属性B.希洛克武器词条 == 1:
+                temp=""
                 武器词条最高值 = self.角色属性B.自适应最高值
                 武器属性A = 武器属性A列表[武器词条最高值[0]]
                 武器属性B = 武器属性B列表[武器词条最高值[1]]
-                tempstr.append("属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>')
+                # tempstr += '<br><br>' + "属性1:" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else '')
+                temp +="残香 属性1:" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>'
                 if self.角色属性B.武器词条触发 == 1:
-                    tempstr.append("属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>')
+                    # tempstr += "| 属性2:" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else '')
+                    temp += " | 属性2:" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>'
+                tempstr.append(temp)
+
+            if self.角色属性B.黑鸦词条[0][0]==1 or self.角色属性B.黑鸦词条[1][0] == 1 or self.角色属性B.黑鸦词条[2][0] == 1 or self.角色属性B.黑鸦词条[3][0] == 1:
+                temp = ""
+                temp += "遴选"
+                if self.角色属性B.黑鸦词条[0][0] == 1:
+                    if self.角色属性B.武器变换属性自适应 > 0:
+                        黑鸦武器 = 武器变换属性列表[self.角色属性B.武器变换属性自适应]
+                        temp += " 武器:" +"<font style='color:gray'>"+黑鸦武器.固定属性描述 + '</font>'
+                    else:
+                        temp += " 武器:" +"<font style='color:gray'>"+'觉醒' + '</font>'
+                if self.角色属性B.黑鸦词条[1][0] == 1:
+                    黑鸦 = 装备变换属性列表[self.角色属性B.防具变换属性自适应[0]]
+                    temp += " 戒指:" +"<font style='color:gray'>"+黑鸦.固定属性描述 + '</font>'
+                if self.角色属性B.黑鸦词条[2][0] == 1:
+                    黑鸦 = 装备变换属性列表[self.角色属性B.防具变换属性自适应[1]]
+                    temp += " 辅助:" +"<font style='color:gray'>"+黑鸦.固定属性描述 + '</font>'
+                if self.角色属性B.黑鸦词条[3][0] == 1:
+                    黑鸦 = 装备变换属性列表[self.角色属性B.防具变换属性自适应[2]]
+                    temp += " 下装:" +"<font style='color:gray'>"+黑鸦.固定属性描述 + '</font>'
+
+                tempstr.append(temp)
+
 
             count = 0
             for i in tempstr:
@@ -2433,7 +2612,7 @@ class 角色窗口(窗口):
             temp += '详细数据'
         else:
             temp += name
-        # temp += '（最多显示前18个技能）'+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本
+        # temp += '（最多显示前18个技能）'+"装备版本:"+self.角色属性A.版本 + " 增幅版本:" + self.角色属性A.增幅版本
         输出窗口.setWindowTitle(temp)
         输出窗口.setWindowIcon(self.icon)  
         QLabel(输出窗口).setPixmap(self.输出背景图片)
@@ -2449,19 +2628,19 @@ class 角色窗口(窗口):
         面板显示=[]
         for i in range(0,11):
             面板显示.append(QLabel(输出窗口))     
-        面板显示[0].setText('站街：' + str(int(C.系数数值站街())))
-        面板显示[1].setText('适用：' + str(int(self.角色属性B.系数数值进图())))
+        面板显示[0].setText('站街:' + str(int(C.系数数值站街())))
+        面板显示[1].setText('适用:' + str(int(self.角色属性B.系数数值进图())))
 
         面板显示[2].setText(' ' + x[0])
-        面板显示[3].setText('力量：' + str(x[1]))
-        面板显示[4].setText('智力：' + str(x[2]))
-        面板显示[5].setText('物攻：' + str(x[3]))
-        面板显示[6].setText('魔攻：' + str(x[4]))
-        面板显示[7].setText('独立：' + str(x[5]))
+        面板显示[3].setText('力量:' + str(x[1]))
+        面板显示[4].setText('智力:' + str(x[2]))
+        面板显示[5].setText('物攻:' + str(x[3]))
+        面板显示[6].setText('魔攻:' + str(x[4]))
+        面板显示[7].setText('独立:' + str(x[5]))
 
         面板显示[8].setText(' ' + y[0])
-        面板显示[9].setText('力量：' + str(y[1]))
-        面板显示[10].setText('智力：' + str(y[2]))
+        面板显示[9].setText('力量:' + str(y[1]))
+        面板显示[10].setText('智力:' + str(y[2]))
 
         const = 139
         面板显示[0].move(35,const - pox_y2)
@@ -2487,18 +2666,18 @@ class 角色窗口(窗口):
             面板显示[i].setAlignment(Qt.AlignLeft)
 
         tempstr=[]
-        tempstr.append('BUFF力量% ：'+str(int(round(self.角色属性B.BUFF力量per * 100, 0))) + '%') 
-        tempstr.append('BUFF智力% ：'+str(int(round(self.角色属性B.BUFF智力per * 100, 0))) + '%') 
-        tempstr.append('BUFF物攻% ：'+str(int(round(self.角色属性B.BUFF物攻per * 100, 0))) + '%')
-        tempstr.append('BUFF魔攻% ：'+str(int(round(self.角色属性B.BUFF魔攻per * 100, 0))) + '%')
-        tempstr.append('BUFF独立% ：'+str(int(round(self.角色属性B.BUFF独立per * 100, 0))) + '%')
-        tempstr.append('一觉力智  ：'+str(int(round(self.角色属性B.一觉力智, 0))))
-        tempstr.append('一觉力智% ：'+str(int(round(self.角色属性B.一觉力智per * 100, 0))) + '%')
-        tempstr.append('守护徽章% ：'+str(int(round(self.角色属性B.守护徽章per * 100, 0))) + '%')
+        tempstr.append('BUFF力量% :'+str(int(round(self.角色属性B.BUFF力量per * 100, 0))) + '%') 
+        tempstr.append('BUFF智力% :'+str(int(round(self.角色属性B.BUFF智力per * 100, 0))) + '%') 
+        tempstr.append('BUFF物攻% :'+str(int(round(self.角色属性B.BUFF物攻per * 100, 0))) + '%')
+        tempstr.append('BUFF魔攻% :'+str(int(round(self.角色属性B.BUFF魔攻per * 100, 0))) + '%')
+        tempstr.append('BUFF独立% :'+str(int(round(self.角色属性B.BUFF独立per * 100, 0))) + '%')
+        tempstr.append('一觉力智  :'+str(int(round(self.角色属性B.一觉力智, 0))))
+        tempstr.append('一觉力智% :'+str(int(round(self.角色属性B.一觉力智per * 100, 0))) + '%')
+        tempstr.append('守护徽章% :'+str(int(round(self.角色属性B.守护徽章per * 100, 0))) + '%')
         if self.角色属性B.角色 == '圣职者(男)':
-            tempstr.append('守护徽章% ：' + str(int(round(self.角色属性B.守护徽章per * 100, 0))) + '%')
+            tempstr.append('守护徽章% :' + str(int(round(self.角色属性B.守护徽章per * 100, 0))) + '%')
         elif self.角色属性B.角色 == '圣职者(女)' or self.角色属性B.角色 == '魔法师(女)':
-            tempstr.append('BUFF增幅率：' + str(int(round(self.角色属性B.BUFF额外增幅率 * 100, 0))) + '%')
+            tempstr.append('BUFF增幅率:' + str(int(round(self.角色属性B.BUFF额外增幅率 * 100, 0))) + '%')
     
         j=318
         for i in tempstr:
@@ -2827,15 +3006,35 @@ class 角色窗口(窗口):
             武器词条最高值 = self.角色属性B.自适应最高值
             武器属性A = 武器属性A列表[武器词条最高值[0]]
             武器属性B = 武器属性B列表[武器词条最高值[1]]
-            tempstr += '<br><br>' + "属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else '')
+            # tempstr += '<br><br>' + "属性1:" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else '')
+            tempstr +="<br><br>"+ "残香 属性1:" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>'
             if self.角色属性B.武器词条触发 == 1:
-                tempstr += '<br><br>' + "属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else '')
+                # tempstr += "| 属性2:" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else '')
+                tempstr += " | 属性2:" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>'
         
+        if self.角色属性B.黑鸦词条[0][0]==1 or self.角色属性B.黑鸦词条[1][0] == 1 or self.角色属性B.黑鸦词条[2][0] == 1 or self.角色属性B.黑鸦词条[3][0] == 1:
+            tempstr += "<br><br>" + "遴选"
+            if self.角色属性B.黑鸦词条[0][0] == 1:
+                if self.角色属性B.武器变换属性自适应 > 0:
+                    黑鸦武器 = 武器变换属性列表[self.角色属性B.武器变换属性自适应]
+                    tempstr += " 武器:" +"<font style='color:gray'>"+黑鸦武器.固定属性描述 + '</font>'
+                else:
+                    tempstr += " 武器:" +"<font style='color:gray'>"+'觉醒' + '</font>'
+            if self.角色属性B.黑鸦词条[1][0] == 1:
+                黑鸦 = 装备变换属性列表[self.角色属性B.防具变换属性自适应[0]]
+                tempstr += " 戒指:" +"<font style='color:gray'>"+黑鸦.固定属性描述 + '</font>'
+            if self.角色属性B.黑鸦词条[2][0] == 1:
+                黑鸦 = 装备变换属性列表[self.角色属性B.防具变换属性自适应[1]]
+                tempstr += " 辅助:" +"<font style='color:gray'>"+黑鸦.固定属性描述 + '</font>'
+            if self.角色属性B.黑鸦词条[3][0] == 1:
+                黑鸦 = 装备变换属性列表[self.角色属性B.防具变换属性自适应[2]]
+                tempstr += " 下装:" +"<font style='color:gray'>"+黑鸦.固定属性描述 + '</font>'
+
         合计=QLabel(输出窗口)
         合计.setStyleSheet("QLabel{color:rgb(104,213,237);font-size:15px}")
         合计.setText(tempstr)
-        合计.resize(450,150)
-        合计.move(280, 90 + j * self.行高 - pox_y2)
+        合计.resize(450,300)
+        合计.move(280, 30 + j * self.行高 - pox_y2)
         合计.setAlignment(Qt.AlignCenter) 
     
         初始x=10;初始y=31
@@ -2986,15 +3185,24 @@ class 角色窗口(窗口):
             if 装备.所属套装 != '智慧产物':
                 if i == 2 and 属性.黑鸦词条[3][0]!=0:
                     tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
-                    tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[3][1], 属性.黑鸦词条[3][2], 1)
+                    if 属性.黑鸦词条[3][0] == 1:
+                        tempstr[i] += self.黑鸦属性描述(属性.防具变换属性自适应[2], 装备变换属性列表[属性.防具变换属性自适应[2]].最大值, 1)
+                    else:
+                        tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[3][1], 属性.黑鸦词条[3][2], 1)
                     # 下装
                 elif i == 7 and 属性.黑鸦词条[1][0]!=0:
                     tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
-                    tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[1][1], 属性.黑鸦词条[1][2], 1)
+                    if 属性.黑鸦词条[1][0] == 1:
+                        tempstr[i] += self.黑鸦属性描述(属性.防具变换属性自适应[0], 装备变换属性列表[属性.防具变换属性自适应[0]].最大值, 1)
+                    else:
+                        tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[1][1], 属性.黑鸦词条[1][2], 1)
                     # 戒指
                 elif i == 9 and 属性.黑鸦词条[2][0]!=0:
                     tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
-                    tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[2][1], 属性.黑鸦词条[2][2], 1)
+                    if 属性.黑鸦词条[2][0] == 1:
+                        tempstr[i] += self.黑鸦属性描述(属性.防具变换属性自适应[1], 装备变换属性列表[属性.防具变换属性自适应[0]].最大值, 1)
+                    else:
+                        tempstr[i] += self.黑鸦属性描述(属性.黑鸦词条[2][1], 属性.黑鸦词条[2][2], 1)
                     # 辅助
                 elif i == 11 and 属性.黑鸦词条[0][0]!=0:
                     tempstr[i] += 装备.装备描述_变换属性_BUFF(属性)
@@ -3011,52 +3219,61 @@ class 角色窗口(窗口):
                     # 世界树之精灵特殊处理,没考虑择优的时候,针对的是自选
                     if 装备.名称 == '世界树之精灵' and 属性.黑鸦词条[0][0] >1:
                         tempstr[i] += 'Lv50 技能等级+2<br>'
+                    if 属性.黑鸦词条[0][0] == 1:
+                        if 属性.武器变换属性自适应 == 0:
+                            tempstr[i] +='Lv50 技能等级+2<br>'
+                            tempstr[i] +='Lv85 技能等级+2<br>'
+                            tempstr[i] +='Lv100 技能等级+2<br>'
+                        else:
+                            tempstr[i] += self.黑鸦属性描述(属性.武器变换属性自适应, 装备变换属性列表[属性.武器变换属性自适应].最大值, 1)
+                        if 装备.名称 == '世界树之精灵':
+                            tempstr[i] += 'Lv50 技能等级+2<br>'
                 # 武器
             else:
                 tempstr[i] += 装备.装备描述_BUFF(属性)
 
             if 数量[0] == 1 and i == 2:
                 # tempstr[i]+='<br>'
-                tempstr[i]+='<font color="#00A2E8">希洛克融合属性：</font><br>'
+                tempstr[i]+='<font color="#00A2E8">希洛克融合属性:</font><br>'
                 tempstr[i]+='Lv30 Buff技能 力量、智力增加量 +3%'
             elif 数量[1] == 1 and i == 7:
                 # tempstr[i]+='<br>'
-                tempstr[i]+='<font color="#00A2E8">希洛克融合属性：</font><br>'
+                tempstr[i]+='<font color="#00A2E8">希洛克融合属性:</font><br>'
                 tempstr[i]+='Lv50主动技能力量、智力增加量 +3%'
             elif 数量[2] == 1 and i == 9:
                 # tempstr[i]+='<br>'
-                tempstr[i]+='<font color="#00A2E8">希洛克融合属性：</font><br>'
+                tempstr[i]+='<font color="#00A2E8">希洛克融合属性:</font><br>'
                 tempstr[i]+='[守护恩赐]体力、精神 +80<br>'
-                tempstr[i]+='[启示：圣歌]、[人偶操纵者]智力 +80'
+                tempstr[i]+='[启示:圣歌]、[人偶操纵者]智力 +80'
 
             elif self.角色属性B.希洛克武器词条 == 1 and i == 11:
                 # tempstr[i]+='<br>'
-                tempstr[i]+='<font color="#00A2E8">希洛克融合属性：</font><br>'
+                tempstr[i]+='<font color="#00A2E8">希洛克融合属性:</font><br>'
                 武器词条最高值 = self.角色属性B.自适应最高值
                 武器属性A = 武器属性A列表[武器词条最高值[0]]
                 武器属性B = 武器属性B列表[武器词条最高值[1]]
-                tempstr[i] += "属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else '')+'<br>'
+                tempstr[i] += "属性1:" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else '')+'<br>'
                 if self.角色属性B.武器词条触发 == 1:
-                    tempstr[i] += "属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else '')+'<br>'
+                    tempstr[i] += "属性2:" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else '')+'<br>'
             elif self.角色属性B.希洛克武器词条 == 2 and i == 11:
                 # tempstr[i]+='<br>'
-                tempstr[i]+='<font color="#00A2E8">希洛克融合属性：</font><br>'
+                tempstr[i]+='<font color="#00A2E8">希洛克融合属性:</font><br>'
                 武器属性A = 武器属性A列表[self.武器融合属性A.currentIndex()]
                 武器属性B = 武器属性B列表[self.武器融合属性B.currentIndex()]
-                tempstr[i] += "属性1：" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + self.武器融合属性A2.currentText()+'<br>'
+                tempstr[i] += "属性1:" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + self.武器融合属性A2.currentText()+'<br>'
                 if self.角色属性B.武器词条触发 == 1:
-                    tempstr[i] += "属性2：" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + self.武器融合属性B2.currentText()+'<br>'
+                    tempstr[i] += "属性2:" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + self.武器融合属性B2.currentText()+'<br>'
             # elif self.希洛克武器词条[0].currentIndex() > 0 and i == 11:
             #     tempstr[i]+='<br>'
-            #     tempstr[i]+='<font color="#00A2E8">希洛克融合属性：</font><br>'
+            #     tempstr[i]+='<font color="#00A2E8">希洛克融合属性:</font><br>'
             #     if self.希洛克武器词条[0].currentIndex() == 1:
-            #         tempstr[i]+="属性1：{} +10%<br>".format(武器词条属性[属性.词条选择[0]])
+            #         tempstr[i]+="属性1:{} +10%<br>".format(武器词条属性[属性.词条选择[0]])
             #         if sum(数量)==3:
-            #             tempstr[i]+="属性2：{} +5%<br>".format(武器词条属性[属性.词条选择[1]])
+            #             tempstr[i]+="属性2:{} +5%<br>".format(武器词条属性[属性.词条选择[1]])
             #     else:
-            #         tempstr[i]+="属性1：{} +{}%<br>".format(武器词条属性[self.希洛克武器词条[1].currentIndex()],(self.希洛克武器词条[3].currentIndex() + 3) * 2)
+            #         tempstr[i]+="属性1:{} +{}%<br>".format(武器词条属性[self.希洛克武器词条[1].currentIndex()],(self.希洛克武器词条[3].currentIndex() + 3) * 2)
             #         if sum(数量)==3:
-            #             tempstr[i]+="属性2：{} +{}%<br>".format(武器词条属性[self.希洛克武器词条[2].currentIndex()],(self.希洛克武器词条[4].currentIndex() + 3) * 1) 
+            #             tempstr[i]+="属性2:{} +{}%<br>".format(武器词条属性[self.希洛克武器词条[2].currentIndex()],(self.希洛克武器词条[4].currentIndex() + 3) * 1) 
             if tempstr[i].endswith('<br>'): tempstr[i] = tempstr[i][:-4]
             tempstr[i] += '</font>'
         return tempstr
@@ -3064,10 +3281,10 @@ class 角色窗口(窗口):
         tempstr = ''
         if x == 0:
             武器属性 = 武器变换属性列表[index]
-            tempstr += "<font style='color:gray'>"+ 武器属性.固定属性描述 + '</font>,' + 武器属性.随机属性描述 + str(value) +'<br>'
+            tempstr += "<font style='color:gray'>"+ 武器属性.固定属性描述 + '</font>,' + 武器属性.随机属性描述 + str(value) +('%' if 武器属性.间隔 / 10 < 1 else '')+'<br>'
         else:
             装备属性 = 装备变换属性列表[index]
-            tempstr += "<font style='color:gray'>"+ 装备属性.固定属性描述 + '</font>,'+ 装备属性.随机属性描述 + str(value) +'<br>'
+            tempstr += "<font style='color:gray'>"+ 装备属性.固定属性描述 + '</font>,'+ 装备属性.随机属性描述 + str(value) +('%' if 装备属性.间隔 / 10 < 1 else '')+'<br>'
         return tempstr
 
     def 武器融合属性计算(self, 属性):
@@ -3357,7 +3574,7 @@ class 角色窗口(窗口):
                         float(self.属性设置输入[i][j].text())
                     except:
                         QMessageBox.information(self, "错误",
-                                                self.行名称[j + 17 if i > 2 else j] + "：" + self.列名称[i] + "  输入格式错误,已重置为空")
+                                                self.行名称[j + 17 if i > 2 else j] + ":" + self.列名称[i] + "  输入格式错误,已重置为空")
                         self.属性设置输入[i][j].setText('')
         for i in range(3, 9):
             for j in range(0, 17):
@@ -3366,7 +3583,7 @@ class 角色窗口(窗口):
                         float(self.属性设置输入[i][j].text())
                     except:
                         QMessageBox.information(self, "错误",
-                                                self.行名称[j + 17 if i > 2 else j] + "：" + self.列名称[i] + "  输入格式错误,已重置为空")
+                                                self.行名称[j + 17 if i > 2 else j] + ":" + self.列名称[i] + "  输入格式错误,已重置为空")
                         self.属性设置输入[i][j].setText('')
 
         temp = []
