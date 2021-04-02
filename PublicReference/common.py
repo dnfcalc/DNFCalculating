@@ -1209,7 +1209,7 @@ class 窗口(QWidget):
         if self.是否计算 != 1:
             return
         self.保存配置(self.存档位置)
-        if 调试开关 == 1:
+        if 调试开关 == 1 and self.角色属性A.职业分类 == '输出':
             self.输出界面(-1)
             return
         if self.神话数量判断() and self.神话排名选项.isChecked():
