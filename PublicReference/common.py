@@ -410,12 +410,19 @@ class 窗口(QWidget):
         return temp[:-4] +'</font>'
 
     def 单件装备判断(self, i):
-        if (i.所属套装 == '智慧产物' and i.部位 != '武器' and i.模式 == 0) or i.名称  == '王座本源':
+        if i.所属套装 == '智慧产物' and i.部位 != '武器' and i.模式 == 0:
+            return True
+        elif i.名称  == '王座本源' and self.角色属性A.职业分类 == 'BUFF':
             return True
         else:
             return False
-        
 
+    def 描述更新(self, index, i):
+        if index == '称号':
+            i.setToolTip(self.称号描述())
+        else:
+            i.setToolTip(self.宠物描述())
+        
     def 界面1(self):
         self.一键站街设置输入 = []
         水平间距 = [0, 350, 640]
@@ -619,6 +626,9 @@ class 窗口(QWidget):
 
         self.称号 = MyQComboBox(self.main_frame1)
         self.宠物 = MyQComboBox(self.main_frame1)
+
+        self.称号.currentIndexChanged.connect(lambda state, index = '称号':self.描述更新(index, self.称号))
+        self.宠物.currentIndexChanged.connect(lambda state, index = '宠物':self.描述更新(index, self.宠物))
 
         x = QLabel('称号&宠物选择：', self.main_frame1)
         x.resize(130,20)

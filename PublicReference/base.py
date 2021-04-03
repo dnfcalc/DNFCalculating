@@ -1733,6 +1733,20 @@ class 角色窗口(窗口):
     def __init__(self):
         super().__init__()
 
+    def 称号描述(self):
+        temp = '<font size="3" face="宋体">' 
+        temp += '<font color="#78FF1E">' + self.称号.currentText() + '</font><br>'
+        temp += 称号列表[self.称号.currentIndex()].装备描述(self.角色属性B)[:-4]
+        temp += '</font>'
+        return temp
+
+    def 宠物描述(self):
+        temp = '<font size="3" face="宋体">' 
+        temp += '<font color="#78FF1E">' + self.宠物.currentText() + '</font><br>'
+        temp += 宠物列表[self.宠物.currentIndex()].装备描述(self.角色属性B)[:-4]
+        temp += '</font>'
+        return temp
+
     def 界面(self):
         count = 0
         for i in self.角色属性A.技能栏:
@@ -3999,12 +4013,12 @@ class 角色窗口(窗口):
 
             self.套装名称显示[count].setText(self.称号.currentText())
             self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
-            self.套装名称显示[count].setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.称号.currentText() + '</font><br>' + 称号列表[self.称号.currentIndex()].装备描述(B)[:-4] + '</font>')
+            self.套装名称显示[count].setToolTip(self.称号描述())
             count += 1
 
             self.套装名称显示[count].setText(self.宠物.currentText())
             self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
-            self.套装名称显示[count].setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.宠物.currentText() + '</font><br>' + 宠物列表[self.宠物.currentIndex()].装备描述(B)[:-4] + '</font>')
+            self.套装名称显示[count].setToolTip(self.宠物描述())
             count += 1
 
             # 位置不够，移除武器
@@ -4513,7 +4527,7 @@ class 角色窗口(窗口):
         适用称号名称.resize(150,18)
         适用称号名称.setAlignment(Qt.AlignCenter)
         位置 += 间隔
-        适用称号名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.称号.currentText() + '</font><br>'+称号列表[self.称号.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
+        适用称号名称.setToolTip(self.称号描述())
 
         适用宠物名称=QLabel(self.宠物.currentText(),输出窗口)
         适用宠物名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
@@ -4521,7 +4535,7 @@ class 角色窗口(窗口):
         适用宠物名称.resize(150,18)
         适用宠物名称.setAlignment(Qt.AlignCenter)
         位置 += 间隔
-        适用宠物名称.setToolTip('<font size="3" face="宋体"><font color="#78FF1E">' + self.宠物.currentText() + '</font><br>'+宠物列表[self.宠物.currentIndex()].装备描述(self.角色属性B)[:-4]+'</font>')
+        适用宠物名称.setToolTip(self.宠物描述())
 
         # 位置不够 先移除武器
         # 适用武器名称=QLabel(装备名称[11],输出窗口)
