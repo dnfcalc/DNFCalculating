@@ -862,24 +862,8 @@ class 角色窗口(窗口):
     def 界面1(self):
         super().界面1()
 
-        #region 王座本源
         counter4 = 0
         counter5 = 15
-        self.图片 = QLabel(self.main_frame1)
-        self.图片.setMovie(self.装备图片[装备序号['王座本源']])
-        self.装备图片[装备序号['王座本源']].start()
-        self.图片.resize(28, 28)
-        self.图片.move(657 + 55 * counter4, 20 + counter5 * 32)
-        self.按钮 = QPushButton(self.main_frame1)
-        self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
-        self.按钮.resize(28, 28)
-        self.按钮.setToolTip(self.单件描述(装备列表[装备序号['王座本源']]))
-        self.遮罩透明度[装备序号['王座本源']].setOpacity(0.5)
-        self.按钮.setGraphicsEffect(self.遮罩透明度[装备序号['王座本源']])
-        self.按钮.clicked.connect(lambda state, index = 装备序号['王座本源']: self.装备图标点击事件(index, 10))
-        self.装备图片按钮[装备序号['王座本源']] = self.按钮
-        self.装备图片按钮[装备序号['王座本源']].move(657 + 55 * counter4, 20 + counter5 * 32)
-        #endregion
 
         for i in 称号列表:
             self.称号.addItem(i.名称)

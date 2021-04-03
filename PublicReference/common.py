@@ -409,6 +409,13 @@ class 窗口(QWidget):
             temp += i.装备描述(self.角色属性A)
         return temp[:-4] +'</font>'
 
+    def 单件装备判断(self, i):
+        if (i.所属套装 == '智慧产物' and i.部位 != '武器' and i.模式 == 0) or i.名称  == '王座本源':
+            return True
+        else:
+            return False
+        
+
     def 界面1(self):
         self.一键站街设置输入 = []
         水平间距 = [0, 350, 640]
@@ -452,7 +459,7 @@ class 窗口(QWidget):
         self.按钮.move(650, 15 + counter5 * 32)
         self.按钮.resize(265,28)
         self.按钮.setStyleSheet(套装按钮样式)
-        self.按钮.clicked.connect(lambda state, index = '无': self.套装按钮点击事件(index))
+        self.按钮.clicked.connect(lambda state, index = '武器': self.套装按钮点击事件(index))
         
         counter4 = 0
         counter5 += 1
@@ -488,7 +495,7 @@ class 窗口(QWidget):
         counter4 = 0
         counter5 += 1
         for i in 装备列表:
-            if i.所属套装 == '智慧产物' and i.部位 != '武器' and i.模式 == 0:
+            if self.单件装备判断(i):
                 self.图片 = QLabel(self.main_frame1)
                 self.图片.setMovie(self.装备图片[装备序号[i.名称]])
                 self.装备图片[装备序号[i.名称]].start()
@@ -988,21 +995,31 @@ class 窗口(QWidget):
                     self.计算模式选择.setItemText(2, '计算模式：单件模式  组合：' + self.组合数量计算(2))
             except Exception as error:
                 pass
-
+    
     def 套装按钮点击事件(self, index):
-        count1 = 0
-        count2 = 0
-        for i in 装备列表:
-            if i.所属套装 == index and index != '无' and i.部位 != '武器':
-                count1 += self.装备选择状态[装备序号[i.名称]] 
-            if i.类型 in self.角色属性A.武器选项 and index == '无':
-                count2 += self.装备选择状态[装备序号[i.名称]]
-        for i in 装备列表:
-            if i.所属套装 == index and index != '无' and i.部位 != '武器':
-                self.装备图标点击事件(装备序号[i.名称], 0 if count1 > 0 else 1)
-            if i.类型 in self.角色属性A.武器选项 and index == '无':
-                self.装备图标点击事件(装备序号[i.名称], 0 if count2 > 0 else 1)
-
+        count = 0
+        if index == '武器':
+            for i in 装备列表:
+                if i.类型 in self.角色属性A.武器选项:
+                    count += self.装备选择状态[装备序号[i.名称]]
+            for i in 装备列表:
+                if i.类型 in self.角色属性A.武器选项:
+                    self.装备图标点击事件(装备序号[i.名称], 0 if count > 0 else 1)
+        elif index == '智慧产物':
+            for i in 装备列表:
+                if self.单件装备判断(i):
+                    count += self.装备选择状态[装备序号[i.名称]]
+            for i in 装备列表:
+                if self.单件装备判断(i):
+                    self.装备图标点击事件(装备序号[i.名称], 0 if count > 0 else 1)
+        else:
+            for i in 装备列表:
+                if i.所属套装 == index:
+                    count += self.装备选择状态[装备序号[i.名称]]  
+            for i in 装备列表:
+                if i.所属套装 == index:
+                    self.装备图标点击事件(装备序号[i.名称], 0 if count > 0 else 1)
+                  
     def 组合数量计算(self, sign, x = 0):
         if sign == 0 or sign == 1:
             self.有效武器列表.clear()
