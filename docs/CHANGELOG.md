@@ -1,5 +1,24 @@
 ## Newest
 
+### 2021-04-08
+
+#### NewFeatures
+* 千魂·决战者：同步韩服正式服螺旋波动枪调整 ([e2b7bb](https://gitee.com/i_melon/DNFCalculating/commit/e2b7bb6b1fbd2fe317b9a0fabd7fe80fe482a20c))
+* 奶系一觉及三觉添加填写输入技能次数功能 ([* new:](https://gitee.com/i_melon/DNFCalculating/commit/* new:奶系一觉及三觉添加填写输入技能次数功能4a6382d2b2fb0cb407e3ec9fcab110e35c7ef6dd))
+* 奶系：新增黑鸦遴选择优，择优步骤：残香->黑鸦下装、戒指、辅助->黑鸦武器<br>
+当计算量较大的时候，较为影响效率，后续再考虑优化，暂时计算效率较差<br>
+使用时，如和V神表差异较大，可将一觉的适用修改为0.75后进行对比 ([0c544b](https://gitee.com/i_melon/DNFCalculating/commit/0c544b59e991fafeae67ce5a57d5053a593998b6))
+* 奶系：残香及黑鸦属性选择易用性改善 ([4b0e0c](https://gitee.com/i_melon/DNFCalculating/commit/4b0e0c79d327b63b7fc807887459cebd0b78c93a))
+* 奶系：调整择优顺序为黑鸦下装、戒指、辅助->残香->黑鸦武器 ([03a1ad](https://gitee.com/i_melon/DNFCalculating/commit/03a1adad0e4ed17278b5b229c146c032113e0ff6))
+* 添加韩服体验服枪剑士三觉数据(特工小技能暂时采用双服择优数据) ([7f5b59](https://gitee.com/i_melon/DNFCalculating/commit/7f5b59600b38994ee4cd80c974ce0a5b25769385))
+* 调整详情页面词条显示顺序及小数点 ([30f87f](https://gitee.com/i_melon/DNFCalculating/commit/30f87fdefc757276eed93e31787495b3b8efaeee))
+
+#### BugFixes
+* 修复奶系改造受黑鸦选项影响的bug<br>
+* :修复奶系改造受黑鸦选项影响的bug ([* bugf](https://gitee.com/i_melon/DNFCalculating/commit/* bugfix:修复奶系武器黑鸦自选觉醒后，次级框依然可以选择的问题4f33b2b47345fad6887adb62387af86ab48ab242))
+* 极诣·契魔者：修正唤魔逆天之普诺造成排行与详情数据存在差异的情况 ([4a36f1](https://gitee.com/i_melon/DNFCalculating/commit/4a36f1e08929188d632c698f700e44e181fd4d7b))
+* 极诣·驭剑士：修正飓风魔剑护石额外享受蓄力加成的问题 ([f595b9](https://gitee.com/i_melon/DNFCalculating/commit/f595b92349952f5c9a7c6bf95490d53f03ff87fb))
+
 ### 2021-03-26
 
 #### BugFixes
@@ -1140,6 +1159,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
 
 
 
