@@ -999,7 +999,7 @@ class 角色窗口(窗口):
         counter=0
         for i in ['契约满级','等级调整','是否适用']:
             x=QLabel(i, self.main_frame2)
-            x.move(横坐标+横坐标偏移量-30+50*counter,纵坐标)
+            x.move(横坐标+横坐标偏移量-30+50*counter,纵坐标+5)
             x.setStyleSheet(标签样式)
             counter+=1
         
@@ -1040,7 +1040,7 @@ class 角色窗口(窗口):
        
         横坐标=395;纵坐标=20;行高=18
         x=QLabel("护石Ⅰ:", self.main_frame2)
-        x.move(横坐标,纵坐标-5)
+        x.move(横坐标,纵坐标)
         x.setStyleSheet(标签样式)
         纵坐标+=21
         self.护石第一栏.move(横坐标,纵坐标)
@@ -1048,7 +1048,7 @@ class 角色窗口(窗口):
         
         横坐标=565;纵坐标=20
         x=QLabel("护石Ⅱ:", self.main_frame2)
-        x.move(横坐标,纵坐标-5)
+        x.move(横坐标,纵坐标)
         x.setStyleSheet(标签样式)
         纵坐标+=21
         self.护石第二栏.move(横坐标,纵坐标)
@@ -1056,7 +1056,7 @@ class 角色窗口(窗口):
 
         横坐标=395;纵坐标=70;行高=18
         x=QLabel("护石Ⅲ:", self.main_frame2)
-        x.move(横坐标,纵坐标-5)
+        x.move(横坐标,纵坐标)
         x.setStyleSheet(标签样式)
         纵坐标+=21
         self.护石第三栏.move(横坐标,纵坐标)
@@ -1065,7 +1065,7 @@ class 角色窗口(窗口):
         self.辟邪玉选择 = []
         self.辟邪玉数值 = []
         x=QLabel("辟邪玉选择:", self.main_frame2)
-        x.move(395,115)
+        x.move(395,115+5)
         x.setStyleSheet(标签样式)
         for i in range(4):
             x = MyQComboBox(self.main_frame2) 
@@ -1114,6 +1114,20 @@ class 角色窗口(窗口):
         self.武器融合属性A2.move(横坐标 + 205+20+10,纵坐标 + 25)
         self.武器融合属性A.currentIndexChanged.connect(lambda:self.希洛克武器随机词条更新(self.武器融合属性A.currentIndex()))
 
+        x=QLabel("择优方向", self.main_frame2)
+        x.move(横坐标+335,纵坐标 + 15)
+        x.resize(300,20)
+        x.setStyleSheet(标签样式)
+
+        择优方向 = MyQComboBox(self.main_frame2)
+        择优方向.addItem('觉醒自适应数值')
+        择优方向.addItem('续航向:觉醒0.7系数')
+        择优方向.addItem('爆发向:觉醒1.0系数')
+        择优方向.resize(138,20)
+        择优方向.move(横坐标+300,纵坐标 + 40)
+        择优方向.currentIndexChanged.connect(lambda:self.调整太阳系数(择优方向.currentIndex()))
+
+
         纵坐标 = 纵坐标 + 30
         self.武器融合属性B = MyQComboBox(self.main_frame2) 
         for j in 武器属性B列表:
@@ -1129,7 +1143,7 @@ class 角色窗口(窗口):
         self.武器融合属性B2.resize(50,20)
         self.武器融合属性B2.move(横坐标 + 205+20+10,纵坐标 + 25)
         self.武器融合属性B.currentIndexChanged.connect(lambda:self.希洛克武器随机词条更新(self.武器融合属性B.currentIndex(), 1))
-        
+
         纵坐标 = 纵坐标 + 60
         标签 = QLabel('黑鸦遴选词条',self.main_frame2)
         标签.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
@@ -1731,6 +1745,17 @@ class 角色窗口(窗口):
             self.武器融合属性B.setStyleSheet(下拉框样式)
             self.武器融合属性B1.setStyleSheet(下拉框样式)
             self.武器融合属性B2.setStyleSheet(下拉框样式)
+
+    def 调整太阳系数(self,index):
+        if index>0:
+            self.次数输入[self.一觉序号].setEditable(True)
+            self.次数输入[self.一觉序号].setCurrentIndex(2)
+            self.次数输入[self.一觉序号].setCurrentText('0.7' if index == 1 else '1')
+            self.次数输入[self.一觉序号].setStyleSheet(下拉框样式)
+        else:
+            self.次数输入[self.一觉序号].setEditable(False)
+            self.次数输入[self.一觉序号].setCurrentIndex(1)
+            self.次数输入[self.一觉序号].setStyleSheet(下拉框样式)
 
     def 希洛克武器随机词条更新(self, index, x = 0):
         if x == 0:
