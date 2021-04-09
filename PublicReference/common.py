@@ -417,6 +417,18 @@ class 窗口(QWidget):
         else:
             return False
 
+    def 武器装备判断(self, i):
+        if i.部位 == '武器' and i.类型 in self.角色属性A.武器选项 and i.模式 == 0:
+            return True
+        else:
+            return False
+
+    def 其他装备判断(self, i):
+        if i.所属套装 in 所有套装列表:
+            return True
+        else:
+            return False
+
     def 描述更新(self, index, i):
         if index == '称号':
             i.setToolTip(self.称号描述())
@@ -471,7 +483,7 @@ class 窗口(QWidget):
         counter4 = 0
         counter5 += 1
         for i in 装备列表:
-            if i.部位 == '武器' and i.类型 in self.角色属性A.武器选项 and i.模式 == 0:
+            if self.武器装备判断(i):
                 self.图片 = QLabel(self.main_frame1)
                 self.图片.setMovie(self.装备图片[装备序号[i.名称]])
                 self.装备图片[装备序号[i.名称]].start()
@@ -1103,11 +1115,11 @@ class 窗口(QWidget):
                 self.批量选择(0)
 
         for i in 装备列表:
-            if i.部位 != '武器':
-                if i.品质 != '神话' or index == 0 or self.全选状态 == 0:
-                    self.装备图标点击事件(装备序号[i.名称], index, x = 0)
-            else:
-                if i.类型 in self.角色属性A.武器选项:
+            if self.武器装备判断(i) or self.单件装备判断(i) or self.其他装备判断(i):
+                if i.品质 == '神话' and index == 1:
+                    if self.全选状态 == 0:
+                        self.装备图标点击事件(装备序号[i.名称], index, x = 0)
+                else:
                     self.装备图标点击事件(装备序号[i.名称], index, x = 0)
 
         self.装备图标点击事件(74, index)
