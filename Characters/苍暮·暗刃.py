@@ -152,11 +152,16 @@ class 技能7(主动技能):
 
     #下劈攻击力：<data2>%
     数据2 = [int(i*1.0) for i in [0, 1887, 2080, 2271, 2463, 2654, 2846, 3037, 3229, 3421, 3613, 3803, 3995, 4187, 4379, 4570, 4762, 4953, 5145, 5336, 5529, 5719, 5911, 6103, 6295, 6486, 6677, 6869, 7061, 7252, 7444, 7636, 7827, 8018, 8211, 8402, 8594, 8784, 8977, 9168, 9360, 9552, 9743, 9934, 10126, 10318, 10510, 10700, 10892, 11084, 11276, 11467, 11659, 11850, 12042, 12233, 12426, 12618, 12808, 13000, 13192, 13383, 13575, 13766, 13958, 14149, 14342, 14534, 14724, 14915]]
-    攻击次数2 = 1
+    # 攻击次数2 = 1
+    # 三觉被动变更
+    # 攻击次数3 = 10
+    攻击次数2 = 0
 
     #射击攻击力：<data1>%
     数据3 = [int(i*1.0) for i in [0, 222, 244, 267, 289, 313, 335, 358, 380, 403, 425, 448, 470, 493, 515, 539, 560, 584, 606, 629, 651, 673, 696, 718, 742, 763, 787, 808, 832, 853, 877, 900, 922, 945, 967, 990, 1012, 1035, 1057, 1080, 1103, 1125, 1147, 1170, 1194, 1215, 1239, 1261, 1284, 1306, 1329, 1351, 1373, 1396, 1418, 1441, 1464, 1487, 1509, 1532, 1554, 1577, 1599, 1622, 1644, 1668, 1689, 1713, 1734, 1758]]
-    攻击次数3 = 0
+    # 三觉被动变更
+    # 攻击次数3 = 10
+    攻击次数3 = 3.72*3
 
     # 基础 = 1332.874675
     # 成长 = 150.5275803
@@ -777,12 +782,12 @@ class 苍暮·暗刃(角色窗口):
         self.大回旋护石跳跃选项.setToolTip('跳跃释放大回旋坠斩，仅佩戴护石时生效')
 
 
-        self.轮盘连射类型选项=MyQComboBox(self.main_frame2)
-        self.轮盘连射类型选项.addItem('轮盘连射：非抓取')
-        self.轮盘连射类型选项.addItem('轮盘连射：抓取')
-        self.轮盘连射类型选项.resize(135,20)
-        self.轮盘连射类型选项.move(320,360)
-        self.轮盘连射类型选项.setToolTip('选择轮盘连射的形态')
+        # self.轮盘连射类型选项=MyQComboBox(self.main_frame2)
+        # self.轮盘连射类型选项.addItem('轮盘连射：非抓取')
+        # self.轮盘连射类型选项.addItem('轮盘连射：抓取')
+        # self.轮盘连射类型选项.resize(135,20)
+        # self.轮盘连射类型选项.move(320,360)
+        # self.轮盘连射类型选项.setToolTip('选择轮盘连射的形态')
         
         self.致命焰火方向选项=MyQComboBox(self.main_frame2)
         self.致命焰火方向选项.addItem('致命焰火方向：向后')
@@ -803,9 +808,9 @@ class 苍暮·暗刃(角色窗口):
         try:
            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'r',encoding='utf-8').readlines()
            self.大回旋护石跳跃选项.setChecked(True if int(setfile[0].replace('\n', '')) == 1 else False)
-           self.轮盘连射类型选项.setCurrentIndex(int(setfile[1].replace('\n', '')))
-           self.致命焰火方向选项.setCurrentIndex(int(setfile[2].replace('\n', '')))
-           self.战术协作方向选项.setCurrentIndex(int(setfile[3].replace('\n', '')))
+        #    self.轮盘连射类型选项.setCurrentIndex(int(setfile[1].replace('\n', '')))
+           self.致命焰火方向选项.setCurrentIndex(int(setfile[1].replace('\n', '')))
+           self.战术协作方向选项.setCurrentIndex(int(setfile[2].replace('\n', '')))
 
         except:
             pass
@@ -817,7 +822,7 @@ class 苍暮·暗刃(角色窗口):
         try:
             setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'w', encoding='utf-8')
             setfile.write('1\n' if self.大回旋护石跳跃选项.isChecked() else '0\n')
-            setfile.write(str(self.轮盘连射类型选项.currentIndex())+'\n')
+            # setfile.write(str(self.轮盘连射类型选项.currentIndex())+'\n')
             setfile.write(str(self.致命焰火方向选项.currentIndex())+'\n')
             setfile.write(str(self.战术协作方向选项.currentIndex())+'\n')
 
@@ -831,9 +836,9 @@ class 苍暮·暗刃(角色窗口):
             属性.技能栏[属性.技能序号['大回旋坠斩']].攻击次数 = 0
             属性.技能栏[属性.技能序号['大回旋坠斩']].攻击次数2 = 3*1.07
         
-        if self.轮盘连射类型选项.currentIndex() == 1:
-            属性.技能栏[属性.技能序号['轮盘连射']].攻击次数2 = 0
-            属性.技能栏[属性.技能序号['轮盘连射']].攻击次数3 = 10
+        # if self.轮盘连射类型选项.currentIndex() == 1:
+        #     属性.技能栏[属性.技能序号['轮盘连射']].攻击次数2 = 0
+        #     属性.技能栏[属性.技能序号['轮盘连射']].攻击次数3 = 10
 
         if self.致命焰火方向选项.currentIndex() == 1:
             属性.技能栏[属性.技能序号['致命焰火']].攻击次数2 = 0
