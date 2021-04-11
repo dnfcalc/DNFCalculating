@@ -4,6 +4,9 @@ import threading
 import time
 import os
 import math
+from ctypes import *
+import ctypes
+
 
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt, pyqtSignal
@@ -19,10 +22,19 @@ from .producer_consumer import producer, producer_data, thread_num, thread_task
 from .copy import *
 # from .MainWindow import *
 import chardet
+import sys
 
 from PublicReference.utils.config import *
 
 
+def resource_path(relative_path):
+    if getattr(sys, 'frozen', False): #是否Bundle Resource
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+dllPath = resource_path(os.path.join("DLL","Preferred.dll"))
 
 #100级史诗套数据
 防具套装 = ["古代祭祀的神圣仪式", "遗忘魔法师的馈赠", "天堂舞姬", "死亡阴影", "皇家裁决者宣言", "龙血玄黄", "贫瘠沙漠的遗产", "炙炎之盛宴", "擎天战甲", "噩梦：地狱之路", "传奇铁匠-封神", "荆棘漫天", "永恒不息之路", "命运歧路", "大自然的呼吸"]

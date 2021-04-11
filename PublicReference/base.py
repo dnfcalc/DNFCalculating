@@ -229,8 +229,7 @@ class 角色属性(属性):
         [0,0,0,0]
     ]
     计算自适应 = 1
-    是否单套 = 0
-    计算自适应方式 = 0
+    # 计算自适应方式 = 0
 
     def 附加伤害加成(self, x,可变 = 0,辟邪玉加成 = 1):
         if self.装备描述 == 1:
@@ -759,15 +758,16 @@ class 角色属性(属性):
         elif self.类型 == '魔法固伤':
             return int((self.面板智力() / 250 + 1) * (self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻))
     
-    def 力智系数计算(self):
-        if self.类型 == '物理百分比':
-            return self.面板力量(取整=0) / 250 + 1
-        elif self.类型 == '魔法百分比':
-            return self.面板智力(取整=0) / 250 + 1
-        elif self.类型 == '物理固伤':
-            return self.面板力量(取整=0) / 250 + 1
-        elif self.类型 == '魔法固伤':
-            return self.面板智力(取整=0) / 250 + 1
+    def 力智计算(self):
+        return max(self.面板力量(取整=0), self.面板智力(取整=0))
+        #if self.类型 == '物理百分比':
+        #    return  / 250 + 1
+        #elif self.类型 == '魔法百分比':
+        #    return self.面板智力(取整=0) / 250 + 1
+        #elif self.类型 == '物理固伤':
+        #    return self.面板力量(取整=0) / 250 + 1
+        #elif self.类型 == '魔法固伤':
+        #    return  / 250 + 1
 
     def 词条提示上下限计算(self,词条范围,词条数值):
         词条提升率 = [[0,0]] * 6
@@ -873,41 +873,36 @@ class 角色属性(属性):
             词条提升率[5]=[最低提升,最高提升]
 
         return 词条提升率
+    
+    def 词条修改(self, x):
+        self.百分比力智加成(x)
+        self.百分比三攻加成(x)
+        self.伤害增加加成(x)
+        self.附加伤害加成(x)
+        self.暴击伤害加成(x)
+        self.最终伤害加成(x)
 
     def 基础提升率计算(self):
-        词条数值 = [0.01]*6
-        词条提升率 = [0] * 6
-        #百分比力智,只取9位，降低一点力智的系数
-        x = self.力智系数计算()
-        self.百分比力智加成(词条数值[0])
-        词条提升率[0] = round(self.力智系数计算() / x - 1,10)*100
-        self.百分比力智加成(-词条数值[0])
-        #百分比三攻
-        x = 1 + self.百分比三攻
-        self.百分比三攻加成(词条数值[1])
-        词条提升率[1] = round((1 + self.百分比三攻) / x - 1,10)*100
-        self.百分比三攻加成(-词条数值[1])
-        #伤害增加
-        x = 1 + int(self.伤害增加 * 100) / 100
-        self.伤害增加加成(词条数值[2])
-        词条提升率[2] = round((1 + int(self.伤害增加 * 100) / 100) / x - 1,10)*100
-        self.伤害增加加成(-词条数值[2])  
-        #附加伤害
-        x = 1 + self.附加伤害 + self.属性附加 * self.属性倍率
-        self.附加伤害加成(词条数值[3])
-        词条提升率[3] = round((1 + self.附加伤害 + self.属性附加 * self.属性倍率) / x - 1,10)*100
-        self.附加伤害加成(-词条数值[3])
-        #暴击伤害
-        x = 1 + self.暴击伤害
-        self.暴击伤害加成(词条数值[4])
-        词条提升率[4] = round((1 + self.暴击伤害) / x - 1,10)*100
-        self.暴击伤害加成(-词条数值[4]) 
-        #最终伤害
-        x = 1 + self.最终伤害
-        self.最终伤害加成(词条数值[5])
-        词条提升率[5] = round((1 + self.最终伤害) / x - 1,10)*100
-        self.最终伤害加成(-词条数值[5])  
-        return 词条提升率
+        词条基数 = [
+            250 + self.力智计算(),
+            1 + self.百分比三攻,
+            100 * (1 + self.伤害增加),
+            1 + self.附加伤害 + self.属性附加 * self.属性倍率,
+            1 + self.暴击伤害,
+            1 + self.最终伤害,
+        ]
+        self.词条修改(0.01)
+        词条提升后数值 = [
+            250 + self.力智计算(),
+            1 + self.百分比三攻,
+            100 * (1 + self.伤害增加),
+            1 + self.附加伤害 + self.属性附加 * self.属性倍率,
+            1 + self.暴击伤害,
+            1 + self.最终伤害,
+        ]
+        self.词条修改(-0.01)
+        
+        return [词条基数, 词条提升后数值]
 
 
     def 词条提升率计算(self, 词条范围, 词条数值, y = 0):
@@ -1089,15 +1084,15 @@ class 角色属性(属性):
         # self.是否择优 = self.词条是否择优()
         # print(self.是否择优)
         # print(self.计算自适应方式)
-        # print(self.是否单套)
-        if self.计算自适应方式 ==0 or self.是否单套 == 0:
+        # if self.计算自适应方式 == 0:
+        #     self.贪心自适应()
+        # else:
+            # self.全局自适应()
+        try:
+            self.全局自适应()
+        except Exception as error:
+            # logger.error("error={} \n detail {}".format(error,traceback.print_exc()))
             self.贪心自适应()
-        else:
-            try:
-                self.全局自适应()
-            except Exception as error:
-                logger.error("error={} \n detail {}".format(error,traceback.print_exc()))
-                self.贪心自适应()
         for i in range(len(self.择优结果)):
             # 词条属性列表[self.择优结果[i][0]].加成属性(self,self.择优结果[i][1])
             if i < 4:
@@ -1119,150 +1114,36 @@ class 角色属性(属性):
                 self.自适应描述[1] = '{}%{}'.format(int(self.择优结果[i][1] * 100), 词条属性列表[self.择优结果[i][0]].描述)
         
     def 全局自适应(self):
-        from numpy import transpose,prod,argmax,amax,delete,zeros,vstack
-        # 得到择优词条
-        for i in range(0,len(self.是否择优)):
-            if self.是否择优[i] ==0:
-                self.择优词条[i] = [0]*6
+        x = 6
+        y = 8
+        data_array = ((ctypes.c_double * x) * y )()#提升值数组
+        base = (ctypes.c_double * x)()#基础值数组
+        index = (ctypes.c_int * y)()#索引
+        m = (ctypes.c_double * 1)()#最大值
         
-        a1 = self.择优词条[0]
-        a2 = self.择优词条[1]
-        a3 = self.择优词条[2]
-        a4 = self.择优词条[3]
-        a5 = self.择优词条[4]
-        a6 = self.择优词条[5]
-        a7 = self.择优词条[6]
-        a8 = self.择优词条[7]
-
-        tem1=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),8))
-        tem2=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),6))
-        a2tem=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),6))
-        a3tem=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),6))
-        a4tem=zeros((len(a1)*len(a2)*len(a3)*len(a4)*len(a5)*len(a6)*len(a7)*len(a8),6))
-
-        index1=0
-        counter=-1
-
-        for index2 in range(0,len(a2)):
-            for index3 in range(0,len(a3)):
-                for index4 in range(0,len(a4)):
-                    for index5 in range(0,len(a5)):
-                        for index6 in range(0,len(a6)):
-                            for index7 in range(0,len(a7)):
-                                for index8 in range(0,len(a8)):
-                                    # if a7[index7]!=0 and a8[index8]!=0 :
-                                        counter+=1
-                                        
-                                        tem1[counter,0]=index1
-                                        tem1[counter,1]=index2
-                                        tem1[counter,2]=index3
-                                        tem1[counter,3]=index4
-                                        tem1[counter,4]=index5
-                                        tem1[counter,5]=index6
-                                        tem1[counter,6]=index7
-                                        tem1[counter,7]=index8
-                                        
-                                        tem2[counter,index1]+=a1[index1]
-                                        tem2[counter,index2]+=a2[index2]
-                                        tem2[counter,index3]+=a3[index3]
-                                        tem2[counter,index4]+=a4[index4]
-                                        tem2[counter,index5]+=a5[index5]
-                                        tem2[counter,index6]+=a6[index6]
-                                        tem2[counter,index7]+=a7[index7]
-                                        tem2[counter,index8]+=a8[index8]
-                                        
-                                        
-        #                                    a1tem[counter,index2]=1
-                                        a2tem[counter,index2]=1
-                                        a3tem[counter,index3]=1
-                                        a4tem[counter,index4]=1
+        up = self.基础提升率计算()
+        for i in range(y):
+            for j in range(x):
+                data_array[i][j] = self.择优词条[i][j] * (up[1][j] - up[0][j]) * self.是否择优[i] * 100
         
-        tem1=delete(tem1,[range(counter+1,len(tem1))],axis=0)
-        tem2=delete(tem2,[range(counter+1,len(tem2))],axis=0)
-        a2tem=delete(a2tem,[range(counter+1,len(a2tem))],axis=0)
-        a3tem=delete(a3tem,[range(counter+1,len(a3tem))],axis=0)
-        a4tem=delete(a4tem,[range(counter+1,len(a4tem))],axis=0)
-        
-         
-        lscounter=counter+1                             
-        for index1 in range(1,len(a1)):
-            lstem1=tem1+0
-            lstem2=tem2+0
-            lsa2tem=a2tem+0
-            lsa3tem=a3tem+0
-            lsa4tem=a4tem+0
-            
-            lstem1[:,0]=index1
-            lstem2[:,0]-=a1[0]     
-            lstem2[:,index1]+=a1[index1]
-            
-            counter+=lscounter
-            if index1==1:
-                realtem1=vstack((tem1,lstem1))
-                realtem2=vstack((tem2,lstem2))
-                reala2tem=vstack((a2tem,lsa2tem))
-                reala3tem=vstack((a3tem,lsa3tem))
-                reala4tem=vstack((a4tem,lsa4tem))
-                
-            else:
-                realtem1=vstack((realtem1,lstem1))
-                realtem2=vstack((realtem2,lstem2))
-                reala2tem=vstack((reala2tem,lsa2tem))
-                reala3tem=vstack((reala3tem,lsa3tem))
-                reala4tem=vstack((reala4tem,lsa4tem))
-                
-        
-            
-        tem1=delete(realtem1,[range(counter+1,len(tem1))],axis=0)
-        tem2=delete(realtem2,[range(counter+1,len(tem2))],axis=0)
-        a2tem=delete(reala2tem,[range(counter+1,len(a2tem))],axis=0)
-        a3tem=delete(reala3tem,[range(counter+1,len(a3tem))],axis=0)
-        a4tem=delete(reala4tem,[range(counter+1,len(a4tem))],axis=0)    
+        for j in range(x):
+            base[j] = up[0][j]
 
-        #固定组合为6残香1*6残香2*6黑鸭武器*6黑鸭裤子*6黑鸭戒指*6黑鸭左曹*3光环*3宠物装备，6列指6个词条，分别累加
-        fixednumsum=deepcopy(tem2) #基础数据连加矩阵，写在硬盘加载,这里用随机矩阵代替
-        #索引矩阵，每一行代表内容可优化内容的数值1-6，分别代表6个属性,有8个优化词条，则有8列
-        fixedindex=deepcopy(tem1) #索引矩阵，每一行代表内容可优化内容的数值1-6，分别代表6个属性,有
-        #变形矩阵
-        # deformation_kz=deepcopy(a2tem) 
-        # deformation_jz=deepcopy(a3tem) 
-        # deformation_zc=deepcopy(a4tem) 
+        dll = ctypes.WinDLL(dllPath)
 
-        # newfixednumsum=deepcopy(fixednumsum)
-        # newfixedindex=deepcopy(fixedindex)
+        #m[0]为最大值
+        #self.dll.cal_max(data_array, byref(m))
+        #index为索引数组
+        dll.cal_index(data_array, base, byref(index))
 
-        peroneup = self.基础提升率计算()
-
-        # equipment_difference=[0,0,0] 
-
-        # new2fixednumsum=newfixednumsum+equipment_difference[0]*deformation_kz+equipment_difference[1]*deformation_jz+equipment_difference[2]*deformation_zc
-
-        new2fixednumsum=transpose(peroneup)*fixednumsum
-
-        new2fixednumsum+=1
-
-        profit=prod(new2fixednumsum,axis = 1) #连乘
-
-        idx = argmax(profit, axis=0) #最大值所在列
-        maxpro = amax(profit, axis=0) #最大值
-        # b=datetime.datetime.now()
-
-
-        bestzc=list(int(x) for x in fixedindex[idx,:])
-        for i in range(0,len(bestzc)):
-            self.择优结果[i]=[bestzc[i],self.择优词条[i][bestzc[i]]]
-            词条属性列表[self.择优结果[i][0]].加成属性(self, self.择优结果[i][1])
-        # print(bestzc)
-        # print(self.择优结果)
-
-        # print(bestzc)
-        # jc2=jc+fixednumsum[idx,:]
-
-        # print(jc2)
-        
-        pass
+        for i in range(y):
+            if self.是否择优[i] != 0:
+                self.择优结果[i] = [index[i], self.择优词条[i][index[i]]]
+                词条属性列表[self.择优结果[i][0]].加成属性(self, self.择优结果[i][1])
 
     def 贪心自适应(self):
+        #self.全局自适应()
+        #return
         # self.择优词条 = [
         #     [round(self.变换词条[0][3]/100,2)]*6,
         #     [round(self.变换词条[1][3]/100,2)]*6,
@@ -1838,12 +1719,12 @@ class 角色窗口(窗口):
         一键修正按钮.resize(166, 25)
         一键修正按钮.setStyleSheet(按钮样式)
 
-        self.单套择优方式选项 = MyQComboBox(self.main_frame1)
-        self.单套择优方式选项.move(940, 30 + 28 * 12)
-        self.单套择优方式选项.resize(170,20)
-        self.单套择优方式选项.addItem('单套择优方式：局部择优')
-        self.单套择优方式选项.addItem('单套择优方式：全局择优')
-        self.单套择优方式选项.setToolTip('排行榜及自选采用局部择优方式\n该选项仅适用于查看详情\n局部择优与全局择优大多数情况下一致\n少数情况下会有0.1%不到的差距')
+        # self.单套择优方式选项 = MyQComboBox(self.main_frame1)
+        # self.单套择优方式选项.move(940, 30 + 28 * 12)
+        # self.单套择优方式选项.resize(170,20)
+        # self.单套择优方式选项.addItem('单套择优方式：局部择优')
+        # self.单套择优方式选项.addItem('单套择优方式：全局择优')
+        # self.单套择优方式选项.setToolTip('排行榜及自选采用局部择优方式\n该选项仅适用于查看详情\n局部择优与全局择优大多数情况下一致\n少数情况下会有0.1%不到的差距')
         
         x = 1006; y = 485; 宽度 = 100; 高度 = 20; 间隔 = 4
         self.红色宠物装备 = QCheckBox('宠物装备择优', self.main_frame1)
@@ -3277,8 +3158,8 @@ class 角色窗口(窗口):
                 self.红色宠物装备.setChecked(True)
             if int(setfile[len(self.时装选项)+7].replace('\n', '')):
                 self.光环自适应.setChecked(True)
-            if int(setfile[len(self.时装选项)+8].replace('\n', '')):
-                self.单套择优方式选项.setCurrentIndex(int(setfile[len(self.时装选项)+8].replace('\n', '')))
+            # if int(setfile[len(self.时装选项)+8].replace('\n', '')):
+            #     self.单套择优方式选项.setCurrentIndex(int(setfile[len(self.时装选项)+8].replace('\n', '')))
         except:
             pass
 
@@ -3494,7 +3375,7 @@ class 角色窗口(窗口):
                 setfile.write(str(self.时装选项[i].currentIndex()) + '\n')
             setfile.write(str(int(self.红色宠物装备.isChecked())) + '\n')
             setfile.write(str(int(self.光环自适应.isChecked())) + '\n')
-            setfile.write(str(int(self.单套择优方式选项.currentIndex())) + '\n')
+            # setfile.write(str(int(self.单套择优方式选项.currentIndex())) + '\n')
 
         except:
             pass
@@ -3966,7 +3847,6 @@ class 角色窗口(窗口):
             B = deepcopy(self.角色属性A)
             B.穿戴装备(装备,套装)
             B.其它属性计算()
-            B.是否单套 = 0
             总伤害数值 = B.伤害计算(0)
             # self.B.计算自适应方式 = 0
             if len(self.基准值) != 0:
@@ -4403,7 +4283,6 @@ class 角色窗口(窗口):
             C = deepcopy(self.角色属性A)
             C.穿戴装备(装备名称,套装名称)
             C.被动倍率计算()
-        self.角色属性B.是否单套 = 1
         统计详情 = self.角色属性B.伤害计算(1)
         # self.角色属性B.计算自适应方式 = 0
 
@@ -4424,10 +4303,10 @@ class 角色窗口(窗口):
         temp = ''
         if name == '':
             temp += '详细数据'
-            if self.角色属性A.计算自适应方式 == 1:
-                temp+= ' - 全局择优'
-            else:
-                temp+= ' - 局部择优'
+            # if self.角色属性A.计算自适应方式 == 1:
+            #     temp+= ' - 全局择优'
+            # else:
+            #     temp+= ' - 局部择优'
         else:
             temp += name
         # temp += '（最多显示前18个技能）' + "装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本
@@ -5137,7 +5016,7 @@ class 角色窗口(窗口):
             属性.刀魂之卡赞 = self.刀魂之卡赞.currentIndex()
 
         属性.自适应选项 = copy([(1 if self.红色宠物装备.isChecked() else 0), (1 if self.光环自适应.isChecked() else 0)])
-        属性.计算自适应方式 = self.单套择优方式选项.currentIndex()
+        # 属性.计算自适应方式 = self.单套择优方式选项.currentIndex()
 
         if self.转甲选项.isChecked():
             属性.转甲选项 = 1
