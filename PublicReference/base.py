@@ -759,15 +759,15 @@ class 角色属性(属性):
             return int((self.面板智力() / 250 + 1) * (self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻))
     
     def 力智计算(self):
-        #return max(self.面板力量(取整=0), self.面板智力(取整=0))
-        if self.类型 == '物理百分比':
-            return self.面板力量(取整=0) / 250 + 1
-        elif self.类型 == '魔法百分比':
-            return self.面板智力(取整=0) / 250 + 1
-        elif self.类型 == '物理固伤':
-            return self.面板力量(取整=0) / 250 + 1
-        elif self.类型 == '魔法固伤':
-            return self.面板智力(取整=0) / 250 + 1
+        return max(self.面板力量(取整=0), self.面板智力(取整=0))
+        #if self.类型 == '物理百分比':
+        #    return self.面板力量(取整=0) / 250 + 1
+        #elif self.类型 == '魔法百分比':
+        #    return self.面板智力(取整=0) / 250 + 1
+        #elif self.类型 == '物理固伤':
+        #    return self.面板力量(取整=0) / 250 + 1
+        #elif self.类型 == '魔法固伤':
+        #    return self.面板智力(取整=0) / 250 + 1
 
     def 词条提示上下限计算(self,词条范围,词条数值):
         词条提升率 = [[0,0]] * 6
@@ -884,7 +884,7 @@ class 角色属性(属性):
 
     def 基础提升率计算(self):
         词条基数 = [
-            self.力智计算(),
+            250 + self.力智计算(),
             1 + self.百分比三攻,
             100 * (1 + self.伤害增加),
             1 + self.附加伤害 + self.属性附加 * self.属性倍率,
@@ -893,7 +893,7 @@ class 角色属性(属性):
         ]
         self.词条修改(0.01)
         词条提升后数值 = [
-            self.力智计算(),
+            250 + self.力智计算(),
             1 + self.百分比三攻,
             100 * (1 + self.伤害增加),
             1 + self.附加伤害 + self.属性附加 * self.属性倍率,
@@ -1116,25 +1116,23 @@ class 角色属性(属性):
     def 全局自适应(self):
         x = 6
         y = 8
-        data_array = ((ctypes.c_double * x) * y )()#提升值数组
-        base = (ctypes.c_double * x)()#基础值数组
+        data_array = ((ctypes.c_double * x) * (y + 1) )()#提升值数组
         index = (ctypes.c_int * y)()#索引
-        m = (ctypes.c_double * 1)()#最大值
         
         up = self.基础提升率计算()
+
+        #第一行为词条基础
+        for j in range(x):
+            data_array[0][j] = up[0][j]
+        
+        #后续8行为可选词条
         for i in range(y):
             for j in range(x):
-                data_array[i][j] = self.择优词条[i][j] * (up[1][j] - up[0][j]) * self.是否择优[i] * 100
+                data_array[i + 1][j] = self.择优词条[i][j] * (up[1][j] - up[0][j]) * self.是否择优[i] * 100
         
-        for j in range(x):
-            base[j] = up[0][j]
-
         dll = ctypes.WinDLL(dllPath)
 
-        #m[0]为最大值
-        #self.dll.cal_max(data_array, byref(m))
-        #index为索引数组
-        dll.cal_index(data_array, base, byref(index))
+        dll.cal_index(data_array, byref(index))
 
         for i in range(y):
             if self.是否择优[i] != 0:
