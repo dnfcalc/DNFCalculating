@@ -759,15 +759,15 @@ class 角色属性(属性):
             return int((self.面板智力() / 250 + 1) * (self.独立攻击力 + self.进图独立攻击力) * (1 + self.百分比三攻))
     
     def 力智计算(self):
-        return max(self.面板力量(取整=0), self.面板智力(取整=0))
-        #if self.类型 == '物理百分比':
-        #    return  / 250 + 1
-        #elif self.类型 == '魔法百分比':
-        #    return self.面板智力(取整=0) / 250 + 1
-        #elif self.类型 == '物理固伤':
-        #    return self.面板力量(取整=0) / 250 + 1
-        #elif self.类型 == '魔法固伤':
-        #    return  / 250 + 1
+        #return max(self.面板力量(取整=0), self.面板智力(取整=0))
+        if self.类型 == '物理百分比':
+            return self.面板力量(取整=0) / 250 + 1
+        elif self.类型 == '魔法百分比':
+            return self.面板智力(取整=0) / 250 + 1
+        elif self.类型 == '物理固伤':
+            return self.面板力量(取整=0) / 250 + 1
+        elif self.类型 == '魔法固伤':
+            return self.面板智力(取整=0) / 250 + 1
 
     def 词条提示上下限计算(self,词条范围,词条数值):
         词条提升率 = [[0,0]] * 6
@@ -884,7 +884,7 @@ class 角色属性(属性):
 
     def 基础提升率计算(self):
         词条基数 = [
-            250 + self.力智计算(),
+            self.力智计算(),
             1 + self.百分比三攻,
             100 * (1 + self.伤害增加),
             1 + self.附加伤害 + self.属性附加 * self.属性倍率,
@@ -893,7 +893,7 @@ class 角色属性(属性):
         ]
         self.词条修改(0.01)
         词条提升后数值 = [
-            250 + self.力智计算(),
+            self.力智计算(),
             1 + self.百分比三攻,
             100 * (1 + self.伤害增加),
             1 + self.附加伤害 + self.属性附加 * self.属性倍率,
