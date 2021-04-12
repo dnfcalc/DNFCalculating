@@ -44,6 +44,7 @@ class Worker(QThread):
     def run(self):
         path  = os.getcwd()+"/download"
         try:
+            # os.rename(sys.argv[0],sys.argv[0]+'.del')
             lzy = LanZouCloud()
             lzy.down_file_by_url(self.fileURL,'', path , callback=self.show_progress, downloaded_handler=self.after_downloaded)
         except Exception as error:
@@ -53,6 +54,12 @@ class Worker(QThread):
         self.sinOut.emit(int(now_size / total_size*100))
 
     def after_downloaded(self,file_path):
+        try:
+            os.rename(sys.argv[0],sys.argv[0]+'.del')
+            sys.argv[0] = sys.argv[0]+'.del'
+        except Exception as error:
+            logger.error("error={} \n detail {}".format(error,traceback.print_exc()))
+            pass
         path = os.getcwd()
         zip_file = zipfile.ZipFile(file_path)
         zip_list = zip_file.namelist() # 得到压缩包里所有文件
@@ -439,6 +446,7 @@ class 选择窗口(QWidget):
                         p.join()
                 self.close()
                 newpath = os.path.join(os.getcwd(),self.云端版本)
+                # print(sys.argv[0])
                 oldpath = sys.argv[0]
                 p = subprocess.Popen([
                     newpath,str(主进程PID), str(oldpath)
