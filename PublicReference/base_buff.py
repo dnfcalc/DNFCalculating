@@ -96,6 +96,9 @@ class 角色属性(属性):
     信念光环体精 = 0
 
     BUFF适用面板 = 0
+    BUFF补正力智 = 0
+    BUFF补正体力 = 0
+    BUFF补正精神 = 0
     
     一觉序号 = 0
     三觉序号 = 0
@@ -389,7 +392,7 @@ class 角色属性(属性):
         self.进图精神 *= 1 + self.百分比体精
 
         if self.类型 == '智力':
-            self.BUFF适用面板 += self.进图智力
+            self.BUFF适用面板 += self.进图智力+self.BUFF补正力智
             for i in self.技能栏:
                 if i.是否主动 == 1:
                     if i.所在等级 == 30:
@@ -398,7 +401,7 @@ class 角色属性(属性):
                         i.适用数值 = self.进图智力
 
         elif self.类型 == '体力':
-            self.BUFF适用面板 += self.进图体力
+            self.BUFF适用面板 += self.进图体力+self.BUFF补正体力
             for i in self.技能栏:
                 if i.是否主动 == 1:
                     if i.所在等级 == 30:
@@ -407,7 +410,7 @@ class 角色属性(属性):
                         i.适用数值 = self.进图体力
 
         elif self.类型 == '精神':
-            self.BUFF适用面板 += self.进图精神
+            self.BUFF适用面板 += self.进图精神+self.BUFF补正精神
             for i in self.技能栏:
                 if i.是否主动 == 1:
                     if i.所在等级 == 30:
@@ -1366,16 +1369,19 @@ class 角色窗口(窗口):
 
         for i in range(0, 3):
             Linelist = []
-            for j in range(0, 17):
+            for j in range(0, 19):
                 Linelist.append(QLineEdit(self.main_frame3))
                 Linelist[j].setAlignment(Qt.AlignCenter)
                 Linelist[j].setStyleSheet(输入框样式)
-                Linelist[j].resize(宽度, 22)
-                Linelist[j].move(95 + i * (宽度 + 5), 35 + j * 30)
+                if j < 17:
+                    Linelist[j].resize(宽度, 22)
+                    Linelist[j].move(95 + i * (宽度 + 5), 35 + j * 30)
+                else:
+                    Linelist[j].resize(0, 0)
             self.属性设置输入.append(Linelist)
 
-        列名称2 = ["智力", "体力", "精神","徽章智","徽章体","徽章精","技能等级"]
-        行名称2 = ["上衣", "下装", "头肩", "腰带", "鞋", "手镯", "项链", "戒指", "左槽", "右槽", "耳环", "武器", "登记补正","穿戴称号", "光环", "武器装扮", "时装"]
+        列名称2 = ["智力", "体力", "精神","徽章智","徽章体","徽章精","技能等级及选项"]
+        行名称2 = ["上衣", "下装", "头肩", "腰带", "鞋", "手镯", "项链", "戒指", "左槽", "右槽", "耳环", "武器", "BUFF等级补正","穿戴称号", "光环", "武器装扮", "时装","宠物登记补正","光环登记补正"]
 
         self.列名称 = 列名称1 + 列名称2
         self.行名称 = 行名称1 + 行名称2
@@ -1395,7 +1401,7 @@ class 角色窗口(窗口):
                 名称.resize(宽度, 25)
             名称.move(90 + 7 * 宽度 + i * (宽度 + 5), 5)
 
-        for j in range(0, 17):
+        for j in range(0, 19):
             名称 = QLabel(行名称2[j], self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             名称.setStyleSheet(标签样式)
@@ -1404,7 +1410,7 @@ class 角色窗口(窗口):
 
         for i in range(0, 6):
             Linelist = []
-            for j in range(0, 17):
+            for j in range(0, 19):
                 Linelist.append(QLineEdit(self.main_frame3))
                 Linelist[j].setAlignment(Qt.AlignCenter)
                 Linelist[j].setStyleSheet(输入框样式)
@@ -1412,7 +1418,7 @@ class 角色窗口(窗口):
                 Linelist[j].move(90 + 7 * 宽度 + i * (宽度 + 5), 35 + j * 30)
             self.属性设置输入.append(Linelist)
 
-        for j in range(0, 17):
+        for j in range(0, 19):
             self.技能设置输入.append(MyQComboBox(self.main_frame3))
             self.技能设置输入[j].addItem('无')
             self.技能设置输入[j].setStyleSheet(下拉框样式)
@@ -1430,6 +1436,9 @@ class 角色窗口(窗口):
         self.技能设置输入[12].addItems(['BUFFLv+1', 'BUFFLv+2','BUFFLv+3','BUFFLv+4'])
         self.技能设置输入[13].addItems(['Lv1-50(主动)Lv+1', '一觉Lv+1', '一觉Lv+2'])
         self.技能设置输入[14].addItems(['Lv1-30(所有)Lv+1', 'Lv1-50(所有)Lv+1', 'Lv1-20(所有)Lv+1', 'Lv20-30(所有)Lv+1', 'Lv1-80(所有)Lv+1'])
+        
+        self.技能设置输入[17].addItems(['BUFF力智+3%', 'BUFF三攻+3%', 'BUFF力智、三攻+3%'])
+        self.技能设置输入[18].addItems(['BUFF力智+3%'])
 
         if '智力' in self.角色属性A.类型选择:
             self.修正列表名称 = ['转职被动智力', 'BUFF力智%', 'BUFF三攻%', '转职被动等级', '一觉被动力智', '一觉力智%', '一觉力智']
@@ -1908,7 +1917,7 @@ class 角色窗口(窗口):
                 for j in range(0, len(self.属性设置输入[i])):
                     self.属性设置输入[i][j].setText(setfile[i].replace('\n', '').split(',')[j])
         
-            for j in range(0, 17):
+            for j in range(0, 19):
                 self.技能设置输入[j].setCurrentIndex(int(setfile[10].replace('\n', '').split(',')[j]))
         except:
             pass
@@ -2050,7 +2059,7 @@ class 角色窗口(窗口):
                 for j in range(0, len(self.属性设置输入[i])):
                     setfile.write(self.属性设置输入[i][j].text()+',')
                 setfile.write('\n')
-            for j in range(0, 17):
+            for j in range(0, 19):
                 setfile.write(str(self.技能设置输入[j].currentIndex())+',')
             setfile.write('\n')
         except:
@@ -3611,6 +3620,13 @@ class 角色窗口(窗口):
             if name == i.名称+'Lv+1':
                 i.等级加成(1)
                 return
+        if name == 'BUFF力智+3%':
+            属性.BUFF增加(BUFF力量per=1.03,BUFF智力per=1.03)
+        if name == 'BUFF三攻+3%':
+            属性.BUFF增加(BUFF物攻per=1.03,BUFF魔攻per=1.03)
+        if name == 'BUFF力智、三攻+3%':
+            属性.BUFF增加(BUFF力量per=1.03,BUFF智力per=1.03,BUFF物攻per=1.03,BUFF魔攻per=1.03)
+
     
     def 基础属性(self, 属性):
         for i in range(0, 3):
@@ -3679,7 +3695,6 @@ class 角色窗口(窗口):
             属性.信念光环体精 += int(temp[4])
             属性.一觉力智per *= 1 + temp[5]
             属性.一觉力智 += int(temp[6])
-
         for i in [0, 3, 6]:
             for j in range(0, 17):
                 if self.属性设置输入[i][j].text() != '':
@@ -3690,6 +3705,9 @@ class 角色窗口(窗口):
                         属性.进图智力 += int(self.属性设置输入[i][j].text())
                     else:
                         属性.智力 += int(self.属性设置输入[i][j].text())
+            for j in range(17,19):
+                if self.属性设置输入[i][j].text() != '':
+                    属性.BUFF补正力智 +=int(self.属性设置输入[i][j].text())
         for i in [1, 4, 7]:
             for j in range(0, 17):
                 if self.属性设置输入[i][j].text() != '':
@@ -3700,6 +3718,9 @@ class 角色窗口(窗口):
                         属性.进图体力 += int(self.属性设置输入[i][j].text())
                     else:
                         属性.体力 += int(self.属性设置输入[i][j].text())
+            for j in range(17,19):
+                if self.属性设置输入[i][j].text() != '':
+                    属性.BUFF补正体力 +=int(self.属性设置输入[i][j].text())        
         for i in [2, 5, 8]:
             for j in range(0, 17):
                 if self.属性设置输入[i][j].text() != '':
@@ -3710,7 +3731,9 @@ class 角色窗口(窗口):
                         属性.进图精神 += int(self.属性设置输入[i][j].text())
                     else:
                         属性.精神 += int(self.属性设置输入[i][j].text())
-
+            for j in range(17,19):
+                if self.属性设置输入[i][j].text() != '':
+                    属性.BUFF补正精神 +=int(self.属性设置输入[i][j].text())
         for i in self.技能设置输入:
             self.技能加成判断(i.currentText(), 属性)
 
