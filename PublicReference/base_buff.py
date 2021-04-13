@@ -3625,7 +3625,7 @@ class 角色窗口(窗口):
         if name == 'BUFF三攻+3%':
             属性.BUFF增加(BUFF物攻per=1.03,BUFF魔攻per=1.03)
         if name == 'BUFF力智、三攻+3%':
-            属性.BUFF增加(BUFF力量per=1.03,BUFF智力per=1.03,BUFF物攻per=1.03,BUFF魔攻per=1.03)
+            属性.BUFF增加(BUFF力量per=1.03,BUFF智力per=1.03,BUFF物攻per=1.03,BUFF魔攻per=1.03,BUFF独立per=1.03)
 
     
     def 基础属性(self, 属性):
