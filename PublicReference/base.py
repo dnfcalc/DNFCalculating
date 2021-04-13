@@ -230,6 +230,7 @@ class 角色属性(属性):
     ]
     计算自适应 = 1
     # 计算自适应方式 = 0
+    输出提升率 = 0
 
     def 附加伤害加成(self, x,可变 = 0,辟邪玉加成 = 1):
         if self.装备描述 == 1:
@@ -1088,11 +1089,14 @@ class 角色属性(属性):
         #     self.贪心自适应()
         # else:
             # self.全局自适应()
-        try:
-            self.全局自适应()
-        except Exception as error:
-            # logger.error("error={} \n detail {}".format(error,traceback.print_exc()))
-            self.贪心自适应()
+        if self.输出提升率 != 0:
+            self.择优提升率计算()
+        else:
+            try:
+                self.全局自适应()
+            except Exception as error:
+                # logger.error("error={} \n detail {}".format(error,traceback.print_exc()))
+                self.贪心自适应()
         for i in range(len(self.择优结果)):
             # 词条属性列表[self.择优结果[i][0]].加成属性(self,self.择优结果[i][1])
             if i < 4:
@@ -1112,6 +1116,81 @@ class 角色属性(属性):
                 self.自适应描述[0] = '{}%{}'.format(int(self.择优结果[i][1] * 100), 词条属性列表[self.择优结果[i][0]].描述)
             if i==7:
                 self.自适应描述[1] = '{}%{}'.format(int(self.择优结果[i][1] * 100), 词条属性列表[self.择优结果[i][0]].描述)
+
+    def 计算择优范围(self, d):
+        index = []
+        for i in range(6):
+            if d[i] != 0:
+                index.append(i)
+        if len(index) == 0:
+            index.append(0)
+        return index
+
+
+    def 择优提升率计算(self):
+
+        up = self.基础提升率计算()
+
+        data_array = [[0 for i in range(6)] for i in range(8)]
+
+        for i in range(8):
+            for j in range(6):
+                data_array[i][j] = self.择优词条[i][j] * (up[1][j] - up[0][j]) * self.是否择优[i] * 100
+        try:
+            self.全局自适应()
+        except:
+            self.贪心自适应()
+        k = [up[0][0], up[0][1], up[0][2], up[0][3], up[0][4], up[0][5]]
+        k[self.择优结果[0][0]] += data_array[0][self.择优结果[0][0]]
+        k[self.择优结果[1][0]] += data_array[1][self.择优结果[1][0]]
+        k[self.择优结果[2][0]] += data_array[2][self.择优结果[2][0]]
+        k[self.择优结果[3][0]] += data_array[3][self.择优结果[3][0]]
+        k[self.择优结果[4][0]] += data_array[4][self.择优结果[4][0]]
+        k[self.择优结果[5][0]] += data_array[5][self.择优结果[5][0]]
+        k[self.择优结果[6][0]] += data_array[6][self.择优结果[6][0]]
+        k[self.择优结果[7][0]] += data_array[7][self.择优结果[7][0]]
+        max_data = k[0] * k[1] * int(k[2]) * k[3] * k[4] * k[5]
+
+        rangelist = [self.计算择优范围(i) for i in data_array]
+
+        path = './详细数据'
+        if not os.path.exists(path):
+            os.makedirs(path)
+        result_path = os.path.join(path, '{}-{}.csv'.format(self.实际名称, time.strftime('%m-%d-%H-%M-%S')))
+        wf = open(result_path, 'w', encoding='gbk')
+        wf.write('黑鸦武器,黑鸦戒指,黑鸦左槽,黑鸦下装,残香10%,残香5%,宠物装备,光环,系数,伤害\n')
+        for a1 in rangelist[0]:
+            for a2 in rangelist[1]:
+                for a3 in rangelist[2]:
+                    for a4 in rangelist[3]:
+                        for a5 in rangelist[4]:
+                            for a6 in rangelist[5]:
+                                for a7 in rangelist[6]:
+                                    for a8 in rangelist[7]:
+                                        k = [up[0][0], up[0][1], up[0][2], up[0][3], up[0][4], up[0][5]]
+                                        k[a1] += data_array[0][a1]
+                                        k[a2] += data_array[1][a2]
+                                        k[a3] += data_array[2][a3]
+                                        k[a4] += data_array[3][a4]
+                                        k[a5] += data_array[4][a5]
+                                        k[a6] += data_array[5][a6]
+                                        k[a7] += data_array[6][a7]
+                                        k[a8] += data_array[7][a8]
+                                        rate = k[0] * k[1] * int(k[2]) * k[3] * k[4] * k[5] / max_data
+                                        damage = int(rate * self.输出提升率)
+                                        wf.write('{},{},{},{},{},{},{},{},{:.8},{}\n'.format(
+                                            '无' if len(rangelist[0]) == 1 else 词条属性列表[a1].描述,
+                                            '无' if len(rangelist[1]) == 1 else 词条属性列表[a2].描述,
+                                            '无' if len(rangelist[2]) == 1 else 词条属性列表[a3].描述,
+                                            '无' if len(rangelist[3]) == 1 else 词条属性列表[a4].描述,
+                                            '无' if len(rangelist[4]) == 1 else 词条属性列表[a5].描述,
+                                            '无' if len(rangelist[5]) == 1 else 词条属性列表[a6].描述,
+                                            '无' if len(rangelist[6]) == 1 else 词条属性列表[a7].描述,
+                                            '无' if len(rangelist[7]) == 1 else 词条属性列表[a8].描述,
+                                            rate,
+                                            damage))
+        os.startfile(result_path)
+
         
     def 全局自适应(self):
         x = 6
@@ -4281,6 +4360,8 @@ class 角色窗口(窗口):
             C = deepcopy(self.角色属性A)
             C.穿戴装备(装备名称,套装名称)
             C.被动倍率计算()
+
+        词条提升率计算 = deepcopy(self.角色属性B)
         统计详情 = self.角色属性B.伤害计算(1)
         # self.角色属性B.计算自适应方式 = 0
 
@@ -4890,11 +4971,18 @@ class 角色窗口(窗口):
         pdata['名称'] = self.角色属性A.实际名称
         pdata['装备'] = temp
 
-        butten=QtWidgets.QPushButton('输出Excel', 输出窗口)
+        butten=QtWidgets.QPushButton('输出技能数据', 输出窗口)
         butten.clicked.connect(lambda state, d = deepcopy(pdata): self.输出数据(d))
-        butten.move(686, 540 - pox_y)    
+        butten.move(676, 540 - pox_y)    
         butten.setStyleSheet(按钮样式)
-        butten.resize(80, 21)
+        butten.resize(90, 21)
+        
+        词条提升率计算.输出提升率 = 总伤害数值
+        butten=QtWidgets.QPushButton('输出择优数据', 输出窗口)
+        butten.clicked.connect(lambda state : 词条提升率计算.伤害计算(0))
+        butten.move(575, 540 - pox_y)    
+        butten.setStyleSheet(按钮样式)
+        butten.resize(90, 21)
 
         输出显示 = MainWindow(输出窗口)
         self.输出窗口列表.append(输出显示)
