@@ -72,4 +72,5 @@ class MinHeapWithQueue:
         self.start_time = time.time()
 
     def process_results_per_second(self) -> float:
-        return float(self.minheap.processed_result_count) / (time.time() - self.start_time + 1e-6)
+        return float(self.minheap.processed_result_count) / (
+            time.time() - self.start_time + 1e-6)

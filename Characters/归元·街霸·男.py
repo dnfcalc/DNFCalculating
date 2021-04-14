@@ -24,8 +24,8 @@ class 归元·街霸·男主动技能(主动技能):
             return int((self.攻击次数 * (self.基础 + self.成长 * self.等级)
                  + self.攻击次数2 * (self.基础2 + self.成长2 * self.等级)
                  + self.中毒倍率 * (self.中毒基础 + self.中毒成长 * self.等级)
-                 + self.出血倍率 * (self.出血基础 + self.出血成长 * self.等级) 
-                 + self.灼伤倍率 * (self.灼伤基础 + self.灼伤成长 * self.等级) 
+                 + self.出血倍率 * (self.出血基础 + self.出血成长 * self.等级)
+                 + self.灼伤倍率 * (self.灼伤基础 + self.灼伤成长 * self.等级)
                  + self.感电倍率 * (self.感电基础 + self.感电成长 * self.等级))
                  * (1 + self.TP成长 * self.TP等级) * self.倍率)
 

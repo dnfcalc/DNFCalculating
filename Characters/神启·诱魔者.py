@@ -173,7 +173,7 @@ class 神启·诱魔者技能10(主动技能):
         elif x == 1:
             self.攻击次数 *= 22/9*0.533
             self.CD *= 0.85
-        
+
     def 等效百分比(self, 武器类型):
             return (self.数据[self.等级] * self.攻击次数) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
@@ -221,7 +221,7 @@ class 神启·诱魔者技能12(主动技能):
             self.攻击次数 *= 1.23
         elif x == 1:
             self.攻击次数 *= 1.31
-        
+
     def 等效百分比(self, 武器类型):
         return (self.数据[self.等级] * self.攻击次数) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
@@ -299,7 +299,7 @@ class 神启·诱魔者技能16(主动技能):
         elif x == 1:
             self.攻击次数1 = 12
             self.攻击次数2 = 4.72
-            
+
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
@@ -472,9 +472,9 @@ class 神启·诱魔者角色属性(角色属性):
     职业 = '诱魔者'
 
     武器选项 = ['镰刀']
-    
+
     类型选择 = ['魔法百分比']
-    
+
     类型 = '魔法百分比'
     防具类型 = '重甲'
     防具精通属性 = ['智力']
@@ -588,7 +588,7 @@ class 神启·诱魔者(角色窗口):
             setfile.write('1\n' if self.净化之花冷却Buff.isChecked() else '0\n')
             setfile.write(str(self.凈化之花多段段数选择.currentIndex())+'\n')
             setfile.write(str(self.暴食段数选择.currentIndex())+'\n')
-            
+
 
         except:
             pass
@@ -603,7 +603,7 @@ class 神启·诱魔者(角色窗口):
         if self.净化之花冷却Buff.isChecked():
             属性.技能冷却缩减(1, 48, 0.10)
             属性.技能冷却缩减(55, 100, 0.10)
-        
+
         属性.技能栏[属性.技能序号['净化之花']].攻击次数1 = self.凈化之花多段段数选择.currentIndex()
 
         if self.暴食段数选择.isEnabled():

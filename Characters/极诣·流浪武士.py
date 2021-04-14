@@ -204,7 +204,7 @@ class 极诣·流浪武士技能10(主动技能):
             temp += "- 多段攻击次数 +67%<br>"
             temp += "- 多段攻击间隔 -40%<br>"
             temp += "攻击力 +7%"
-        return temp  
+        return temp
 
 class 极诣·流浪武士技能11(主动技能):
     名称 = '回天璇鸣剑'
@@ -241,7 +241,7 @@ class 极诣·流浪武士技能12(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
     护石选项 = ['魔界', '圣痕']
@@ -277,7 +277,7 @@ class 极诣·流浪武士技能12(主动技能):
             temp += "<br>-护石附加效果：<br>"
             temp += "蓄气时间 -40%<br>"
             temp += "内劲释放攻击力 +27%"
-        return temp  
+        return temp
 
 class 极诣·流浪武士技能13(主动技能):
     名称 = '花舞千魂杀'
@@ -296,7 +296,7 @@ class 极诣·流浪武士技能13(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
     护石选项 = ['魔界', '圣痕']
@@ -328,7 +328,7 @@ class 极诣·流浪武士技能13(主动技能):
             temp += "一闪攻击后僵直时间 -30%<br>"
             temp += "一闪攻击后转换角色朝向<br>"
             temp += "一闪攻击力 +33%"
-        return temp  
+        return temp
 
 class 极诣·流浪武士技能14(主动技能):
     名称 = '花开寒影'
@@ -345,7 +345,7 @@ class 极诣·流浪武士技能14(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * self.倍率 
+        return sum * self.倍率
 
 class 极诣·流浪武士技能15(主动技能):
     名称 = '啸空十字斩'
@@ -364,7 +364,7 @@ class 极诣·流浪武士技能15(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
     护石选项 = ['魔界', '圣痕']
@@ -400,7 +400,7 @@ class 极诣·流浪武士技能15(主动技能):
             temp += "水平斩击持续时间 +1.5秒<br>"
             temp += "再次按技能键时， 立即引发爆炸<br>"
             temp += "攻击力 +9%"
-        return temp  
+        return temp
 
 class 极诣·流浪武士技能16(主动技能):
     名称 = '如来神掌'
@@ -418,7 +418,7 @@ class 极诣·流浪武士技能16(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
     护石选项 = ['魔界', '圣痕']
@@ -458,8 +458,8 @@ class 极诣·流浪武士技能16(主动技能):
             temp += "在地面施放时， 减少角色跳跃高度<br>"
             temp += "施放掌风后的僵直时间 -30%<br>"
             temp += "命中敌人时攻击力 +45%"
-        return temp  
-            
+        return temp
+
 class 极诣·流浪武士技能17(主动技能):
     名称 = '莲花剑舞'
     所在等级 = 75
@@ -476,7 +476,7 @@ class 极诣·流浪武士技能17(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * self.倍率 
+        return sum * self.倍率
 
     是否有护石 = 1
     护石选项 = ['圣痕']
@@ -515,7 +515,7 @@ class 极诣·流浪武士技能19(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * self.倍率    
+        return sum * self.倍率
 
 class 极诣·流浪武士技能20(主动技能):
     名称 = '落英惊鸿掌'
@@ -532,7 +532,7 @@ class 极诣·流浪武士技能20(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * self.倍率 
+        return sum * self.倍率
 
 class 极诣·流浪武士技能21(主动技能):
     名称 = '轻云出月风静夜'
@@ -589,15 +589,15 @@ class 极诣·流浪武士角色属性(角色属性):
     职业 = '流浪武士'
 
     武器选项 = ['光剑','巨剑','钝器','太刀','短剑']
-    
+
     类型选择 = ['物理百分比']
-    
+
     类型 = '物理百分比'
     防具类型 = '皮甲'
     防具精通属性 = ['力量']
 
     主BUFF = 2.25
-   
+
     def __init__(self):
         基础属性输入(self)
         self.技能栏= deepcopy(极诣·流浪武士技能列表)

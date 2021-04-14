@@ -2,6 +2,7 @@ import types
 import weakref
 from copyreg import dispatch_table
 
+
 def copy(x):
     cls = type(x)
     copier = _copy_dispatch.get(cls)
@@ -30,12 +31,15 @@ def copy(x):
 
 _copy_dispatch = d = {}
 
+
 def _copy_immutable(x):
     return x
-for t in (type(None), int, float, bool, complex, str, tuple,
-          bytes, frozenset, type, range, slice, property,
-          types.BuiltinFunctionType, type(Ellipsis), type(NotImplemented),
-          types.FunctionType, weakref.ref):
+
+
+for t in (type(None), int, float, bool, complex, str, tuple, bytes, frozenset,
+          type, range, slice, property, types.BuiltinFunctionType,
+          type(Ellipsis), type(NotImplemented), types.FunctionType,
+          weakref.ref):
     d[t] = _copy_immutable
 t = getattr(types, "CodeType", None)
 if t is not None:
@@ -45,6 +49,7 @@ d[list] = list.copy
 d[dict] = dict.copy
 d[set] = set.copy
 d[bytearray] = bytearray.copy
+
 
 def deepcopy(x):
     cls = type(x)
@@ -73,11 +78,14 @@ def deepcopy(x):
                 y = _reconstruct(x, *rv)
     return y
 
+
 _deepcopy_dispatch = d = {}
+
 
 def _deepcopy_atomic(x):
     return x
-    
+
+
 d[type(None)] = _deepcopy_atomic
 d[type(Ellipsis)] = _deepcopy_atomic
 d[type(NotImplemented)] = _deepcopy_atomic
@@ -95,6 +103,7 @@ d[types.FunctionType] = _deepcopy_atomic
 d[weakref.ref] = _deepcopy_atomic
 d[property] = _deepcopy_atomic
 
+
 def _deepcopy_list(x, deepcopy=deepcopy):
     y = []
     append = y.append
@@ -102,17 +111,26 @@ def _deepcopy_list(x, deepcopy=deepcopy):
         append(deepcopy(a))
     return y
 
+
 d[list] = _deepcopy_list
+
 
 def _deepcopy_dict(x, deepcopy=deepcopy):
     y = {}
     for key, value in x.items():
         y[deepcopy(key)] = deepcopy(value)
     return y
+
+
 d[dict] = _deepcopy_dict
 
-def _reconstruct(x, func, args,
-                 state=None, listiter=None, dictiter=None,
+
+def _reconstruct(x,
+                 func,
+                 args,
+                 state=None,
+                 listiter=None,
+                 dictiter=None,
                  deepcopy=deepcopy):
     y = func(*args)
     if state is not None:

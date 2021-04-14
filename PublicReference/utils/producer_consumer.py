@@ -11,9 +11,9 @@ import traceback
 
 from PublicReference import logger
 
-
 thread_num = multiprocessing.cpu_count()
 thread_task = 4
+
 
 class ProducerData:
     def __init__(self):
@@ -54,10 +54,14 @@ def consumer(work_queue, work_func):
             work_func(*args)
         except BrokenPipeError as error:
             # 这个一般是程序退出的时候发生的，这种情况直接退出
-            logger.warning("work thread={} BrokenPipeError quit job".format(current_process))
+            logger.warning("work thread={} BrokenPipeError quit job".format(
+                current_process))
             continue_wrok = False
         except Exception as error:
-            logger.error("work thread {} error={} processed count={}\n detail {}".format(current_process, error, processed_count,traceback.print_exc()))
+            logger.error(
+                "work thread {} error={} processed count={}\n detail {}".
+                format(current_process, error, processed_count,
+                       traceback.print_exc()))
             # logger.error("work thread {} error={} processed count={}\n".format(current_process, error, processed_count))
         finally:
             work_queue.task_done()

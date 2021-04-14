@@ -348,7 +348,7 @@ class 黑暗武士技能20(黑暗武士主动技能):
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    
+
 
 class 黑暗武士技能21(黑暗武士主动技能):
     名称 = '破魂之刃'
@@ -443,7 +443,7 @@ class 黑暗武士技能25(黑暗武士主动技能):
     def 等效百分比(self, 武器类型):
         return self.数据1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    
+
 class 黑暗武士技能26(黑暗武士主动技能):
     名称 = '魔狱裂魂斩'
     所在等级 = 45
@@ -521,11 +521,11 @@ class 黑暗武士技能28(黑暗武士主动技能):
             self.护石升龙斩 = 1.63
 
     def 等效百分比(self, 武器类型):
-        return (self.数据1[self.等级] * self.攻击次数1 * self.护石斩击攻击力 + 
-        self.数据2[self.等级] * self.攻击次数2 + 
-        self.数据2[self.等级] * self.护石锤击 + 
-        self.数据2[self.等级] * self.护石冲击波 + 
-        self.数据2[self.等级] * self.护石黑暗气息 + 
+        return (self.数据1[self.等级] * self.攻击次数1 * self.护石斩击攻击力 +
+        self.数据2[self.等级] * self.攻击次数2 +
+        self.数据2[self.等级] * self.护石锤击 +
+        self.数据2[self.等级] * self.护石冲击波 +
+        self.数据2[self.等级] * self.护石黑暗气息 +
         self.数据2[self.等级] * self.护石升龙斩 ) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
@@ -605,7 +605,7 @@ class 黑暗武士技能31(黑暗武士主动技能):
             self.数据3 = [int(i*0.29) for i in self.数据3]
             self.攻击次数3 = 6
             self.CD *= 0.9
-    
+
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2  + self.数据3[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
@@ -989,18 +989,18 @@ class 黑暗武士角色属性(角色属性):
     职业 = '黑暗武士'
 
     武器选项 = ['光剑','太刀','巨剑','短剑','钝器']
-    
+
     类型选择 = ['物理百分比','魔法百分比']
-    
+
     #默认
     类型 = '物理百分比'
     防具类型 = '轻甲'
     防具精通属性 = ['力量','智力']
 
     主BUFF = 1.54
-   
+
     远古记忆 = 0
-    
+
     #计算CD
     排列技能 = ['无', '无', '无', '无', '无'] * 6
 
@@ -1010,7 +1010,7 @@ class 黑暗武士角色属性(角色属性):
         self.技能序号= deepcopy(黑暗武士技能序号)
 
     def 被动倍率计算(self):
-        
+
         self.排列CD计算()
 
         if self.远古记忆 > 0:
@@ -1039,13 +1039,13 @@ class 黑暗武士角色属性(角色属性):
                         self.技能栏[self.技能序号[k]].被动倍率 *= i.加成倍率(self.武器类型)
 
     def 伤害指数计算(self):
-        
+
         防御 = max(self.防御输入 - self.固定减防, 0) * (1 - self.百分比减防)
         基准倍率 = 1.5 * self.主BUFF * (1 - 防御 / (防御+ 20000))
 
         #避免出现浮点数取整BUG
         self.伤害增加 += 0.00000001
-        
+
         self.属性倍率计算()
 
         if self.计算自适应 == 1:
@@ -1127,7 +1127,7 @@ class 黑暗武士角色属性(角色属性):
                 intelligence = (self.智力 + int((self.智力 - self.基础智力) * 1.35 + 7664) +self.进图智力) * (1 + self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率()
                 return max(power,intelligence)
 
-           
+
     def 面板智力(self,取整=1):
         return self.面板力量(取整)
 
@@ -1145,7 +1145,7 @@ class 黑暗武士(角色窗口):
 
     def 界面(self):
         super().界面()
-        
+
         # for i in ([self.守门人属强] + self.希洛克套装按钮 + self.希洛克单件按钮 + self.希洛克装备图标 + self.希洛克武器词条):
         #     i.move(i.x() - 85, i.y() + 380)
 
@@ -1158,7 +1158,7 @@ class 黑暗武士(角色窗口):
                 self.等级调整[序号].clear()
                 for j in range(- i.基础等级, i.等级上限 - i.基础等级 + 1):
                     self.等级调整[序号].addItem(str(j))
-        
+
         初始x = 310; 初始y = 640
         self.技能排列=QLabel(self.main_frame2)
         self.技能排列.setPixmap(QPixmap('./ResourceFiles/'+self.角色属性A.实际名称 + "/技能/skill.png"))
@@ -1186,7 +1186,7 @@ class 黑暗武士(角色窗口):
                     temp[j].move(310 + 110 * j, 450 + 28 * i)
                 temp2.append(QLabel(self.main_frame2))
                 temp2[j].resize(26, 26)
-                temp2[j].setAlignment(Qt.AlignCenter) 
+                temp2[j].setAlignment(Qt.AlignCenter)
                 if i == 0:
                     temp2[j].move(初始x + 10 + 39 * j, 初始y + 24 + 44 * i)
                 else:
@@ -1219,7 +1219,7 @@ class 黑暗武士(角色窗口):
             for i in self.技能排列:
                 for j in i:
                     j.setCurrentIndex(0)
-        
+
     def 排列图片更改(self, x, y):
         技能字典 = {}
         for i in self.技能排列:
@@ -1236,7 +1236,7 @@ class 黑暗武士(角色窗口):
         else:
             self.排列图片[x][y].setPixmap(QPixmap('无'))
             self.技能排列[x][y].setStyleSheet(下拉框样式)
-    
+
     def 输入属性(self, 属性, x = 0):
         super().输入属性(属性, x)
 
@@ -1253,7 +1253,7 @@ class 黑暗武士(角色窗口):
             for i in range(1, 6):
                 temp.append(self.技能排列[i][j].currentText())
             排列技能.append(temp)
-            
+
         属性.排列技能 = deepcopy(排列技能)
 
         for i in 属性.技能栏:

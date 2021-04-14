@@ -261,7 +261,7 @@ class 技能11(主动技能):
         elif x == 1:
             self.攻击次数1 = 3.7
             self.CD *= 0.9
-    
+
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1 + self.数据2[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
@@ -364,7 +364,7 @@ class 技能15(主动技能):
             self.CD *= 0.9
             self.攻击次数1 = 25
             self.护石CD缩减 = 4
-        
+
     def 等效百分比(self, 武器类型):
         return (self.数据1[self.等级] * self.攻击次数1) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
@@ -540,7 +540,7 @@ class 技能23(主动技能):
     攻击次数2 = 1
     CD = 40.0
     是否有护石 = 1
-    
+
     护石选项 = ['圣痕']
 
     def 装备护石(self, x):
@@ -570,7 +570,7 @@ class 技能24(主动技能):
     攻击次数2 = 1
     CD = 50.0
     是否有护石 = 1
-    
+
     护石选项 = ['圣痕']
 
     def 装备护石(self, x):
@@ -807,7 +807,7 @@ class 皓曦·龙骑士(角色窗口):
                         属性.技能栏[self.角色属性A.技能序号['魔龙天翔(骑乘)']].倍率 *= 1 + int(j.replace('攻击', '').replace('%', '')) / 100
                     if 'CD' in j:
                         属性.技能栏[self.角色属性A.技能序号['魔龙天翔(脱手)']].CD *= 1 + int(j.replace('CD', '').replace('%', '')) / 100
-                        属性.技能栏[self.角色属性A.技能序号['魔龙天翔(骑乘)']].CD *= 1 + int(j.replace('CD', '').replace('%', '')) / 100       
+                        属性.技能栏[self.角色属性A.技能序号['魔龙天翔(骑乘)']].CD *= 1 + int(j.replace('CD', '').replace('%', '')) / 100
 
 
 

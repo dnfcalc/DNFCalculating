@@ -125,7 +125,7 @@ class 技能4(职业主动技能):
     def 等效百分比(self, 武器类型):
         if self.等级 == 0:
             return 0
-        else:  
+        else:
             return int((self.攻击次数 * (self.基础 + self.成长 * self.等级)* (1 + self.TP成长 * self.TP等级) + self.攻击次数2 * self.喷涌数据)  * self.倍率)
 
 # 神光冲击
@@ -481,7 +481,7 @@ class 技能23(职业主动技能):
 
     def 加成倍率(self, 武器类型):
         return 0.0
-    
+
     def 等效百分比(self, 武器类型):
         if self.等级 == 0:
             return 0
@@ -582,7 +582,7 @@ class 皓曦·帕拉丁(角色窗口):
             self.蓄力神圣信约.setChecked(False)
             self.蓄力神圣信约.setEnabled(False)
             self.蓄力神圣信约.setStyleSheet(复选框样式)
-    
+
     def 界面(self):
         super().界面()
         for i in range(3):
@@ -598,7 +598,7 @@ class 皓曦·帕拉丁(角色窗口):
         super().输入属性(属性, x)
         if self.蓄力神圣信约.isChecked():
             属性.蓄力神圣信约 = 1
-    
+
     def 载入配置(self, path = 'set'):
         super().载入配置(path)
         try:

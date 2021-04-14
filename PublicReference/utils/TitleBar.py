@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from .constant import 标题背景,标题字体
+from .constant import 标题背景, 标题字体
 
 RES_PATH = './ResourceFiles/img/UI/'
 
@@ -47,18 +47,18 @@ class TitleBar(QWidget):
         self.restoreButton = QPushButton(self)
         self.closeButton = QPushButton(self)
 
-        self.minButton.setFixedSize(TITLE_BUTTON_SIZE, TITLE_BUTTON_SIZE);
+        self.minButton.setFixedSize(TITLE_BUTTON_SIZE, TITLE_BUTTON_SIZE)
         # self.restoreButton.setFixedSize(TITLE_BUTTON_SIZE, TITLE_BUTTON_SIZE);
-        self.closeButton.setFixedSize(TITLE_BUTTON_SIZE, TITLE_BUTTON_SIZE);
+        self.closeButton.setFixedSize(TITLE_BUTTON_SIZE, TITLE_BUTTON_SIZE)
 
-        self.iconLabel.setFixedSize(TITLE_LABEL_SIZE, TITLE_LABEL_SIZE);
-        self.titleLabel.setFixedHeight(TITLE_LABEL_SIZE);
+        self.iconLabel.setFixedSize(TITLE_LABEL_SIZE, TITLE_LABEL_SIZE)
+        self.titleLabel.setFixedHeight(TITLE_LABEL_SIZE)
 
-        self.iconLabel.setAlignment(Qt.AlignCenter);
-        self.titleLabel.setAlignment(Qt.AlignCenter);
+        self.iconLabel.setAlignment(Qt.AlignCenter)
+        self.titleLabel.setAlignment(Qt.AlignCenter)
 
-        self.minButton.setIcon(QIcon(TITLE_MIN_ICON));
-        self.closeButton.setIcon(QIcon(TITLE_CLS_ICON));
+        self.minButton.setIcon(QIcon(TITLE_MIN_ICON))
+        self.closeButton.setIcon(QIcon(TITLE_CLS_ICON))
 
         self.minButton.clicked.connect(self.ShowMininizedWindow)
         # self.restoreButton.clicked.connect(self.ShowRestoreWindow)
@@ -81,8 +81,8 @@ class TitleBar(QWidget):
     def ShowMininizedWindow(self):
         self.win.showMinimized()
 
-    def SetWidth(self,width):
-        self.label.resize(width,TITLE_BAR_HEIGHT)
+    def SetWidth(self, width):
+        self.label.resize(width, TITLE_BAR_HEIGHT)
 
     def ShowMaximizedWindow(self):
         self.win.showMaximized()
@@ -98,12 +98,14 @@ class TitleBar(QWidget):
 
     def SetTitle(self, str):
         self.titleLabel.setText(str)
-    
-    def SetTitleStyle(self,str):
+
+    def SetTitleStyle(self, str):
         self.titleLabel.setStyleSheet(str)
 
     def SetIcon(self, pix):
-        self.iconLabel.setPixmap(pix.scaled(self.iconLabel.size() - QSize(TITLE_ICON_MAG, TITLE_ICON_MAG)))
+        self.iconLabel.setPixmap(
+            pix.scaled(self.iconLabel.size() -
+                       QSize(TITLE_ICON_MAG, TITLE_ICON_MAG)))
 
     # def mouseDoubleClickEvent(self, event):
     #     self.ShowRestoreWindow()

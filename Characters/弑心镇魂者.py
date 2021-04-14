@@ -3,7 +3,7 @@ from PublicReference.base import *
 class 弑心镇魂者主动技能(主动技能):
     锁定护石 = 0
     歼灭次数 = 0
-    
+
 class 弑心镇魂者技能0(弑心镇魂者主动技能):
     名称 = '连续射击'
     所在等级 = 15
@@ -93,7 +93,7 @@ class 弑心镇魂者技能5(弑心镇魂者主动技能):
     def 等效百分比(self, 武器类型):
         return ((self.数据1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.数据2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率
 
-    
+
 
 
 class 弑心镇魂者技能6(弑心镇魂者主动技能):
@@ -243,7 +243,7 @@ class 弑心镇魂者技能12(弑心镇魂者主动技能):
         return self.数据[self.等级] * self.暗杀目标加成 * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
     def CD缩减倍率(self, 武器类型):
         return round(1 - self.一觉减CD , 3)
-        
+
 class 弑心镇魂者技能13(弑心镇魂者主动技能):
     名称 = '月相轮舞'
     所在等级 = 70
@@ -350,7 +350,7 @@ class 弑心镇魂者技能18(弑心镇魂者主动技能):
     def 等效百分比(self, 武器类型):
         return ((self.数据1[self.等级] * self.攻击次数1)+(self.数据2[self.等级] * self.攻击次数2 )) * self.倍率
 
-    
+
 
 class 弑心镇魂者技能19(被动技能):
     名称 = '卓越之力'
@@ -430,15 +430,15 @@ class 弑心镇魂者角色属性(角色属性):
     职业 = '特工'
 
     武器选项 = ['小太刀']
-    
+
     类型选择 = ['物理百分比']
-    
+
     类型 = '物理百分比'
     防具类型 = '皮甲'
     防具精通属性 = ['力量']
 
     主BUFF = 2.00
-   
+
     def __init__(self):
         基础属性输入(self)
         self.技能栏= deepcopy(弑心镇魂者技能列表)

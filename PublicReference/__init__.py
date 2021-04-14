@@ -17,7 +17,9 @@ from .utils.common import *
 ###########################################################
 #                         logging                         #
 ###########################################################
-logFormatter = logging.Formatter("%(asctime)s %(levelname)-5.5s [%(name)s] %(funcName)s:%(lineno)d: %(message)s")
+logFormatter = logging.Formatter(
+    "%(asctime)s %(levelname)-5.5s [%(name)s] %(funcName)s:%(lineno)d: %(message)s"
+)
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 logger.name = "DNFCalculating"
@@ -33,7 +35,9 @@ process_name = multiprocessing.current_process().name
 time_str = datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
 only_need_main_process_log = True
 if not only_need_main_process_log or "MainProcess" in process_name:
-    fileHandler = logging.FileHandler("{0}/{1}_{2}_{3}.log".format(log_directory, logger.name, process_name, time_str), encoding="utf-8")
+    fileHandler = logging.FileHandler("{0}/{1}_{2}_{3}.log".format(
+        log_directory, logger.name, process_name, time_str),
+                                      encoding="utf-8")
     fileHandler.setFormatter(logFormatter)
     fileHandler.setLevel(logging.DEBUG)
     logger.addHandler(fileHandler)

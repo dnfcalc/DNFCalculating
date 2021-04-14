@@ -20,6 +20,7 @@ global 战术白字
 
 conf = configparser.ConfigParser()
 
+
 def readConfig(filePath):
     #基础设置##################################################################
     try:
@@ -31,9 +32,10 @@ def readConfig(filePath):
             配置格式有误 = True
             pass
 
+
 def readDefault():
     data = {}
-    with open("ResourceFiles/Config/config.json",encoding='utf-8') as fp:
+    with open("ResourceFiles/Config/config.json", encoding='utf-8') as fp:
         setJson = json.load(fp)
         num = 0
         for i in setJson:
@@ -41,6 +43,7 @@ def readDefault():
             num += 1
     fp.close()
     return data
+
 
 def readSet(filePath):
     data = readDefault()
@@ -50,14 +53,15 @@ def readSet(filePath):
             data.update(setJson)
         fp.close()
     return data
-        
+
+
 setJson = readSet("ResourceFiles/Config/set.json")
 窗口显示模式 = setJson['0']
 普雷武器显示 = setJson['1']
 切装模式 = setJson['2']
 输出数据 = setJson['3']
 调试开关 = setJson['4']
-SkinVersion = ["DNFStyle", "LightStyle","None"][setJson['5']]
+SkinVersion = ["DNFStyle", "LightStyle", "None"][setJson['5']]
 觉醒开关 = setJson['6']
 武器排名 = setJson['7']
 天劫光环 = setJson['8']
@@ -65,8 +69,8 @@ SkinVersion = ["DNFStyle", "LightStyle","None"][setJson['5']]
 天御套装 = setJson['10']
 千蛛减防 = setJson['11']
 
-if 输出数据 == 1: 
-    if not os.path.exists('./数据记录'): os.makedirs('./数据记录') 
+if 输出数据 == 1:
+    if not os.path.exists('./数据记录'): os.makedirs('./数据记录')
 
 #攻击目标##################################################################
 
@@ -75,7 +79,7 @@ readConfig('./ResourceFiles/Config/攻击目标.ini')
 #怪物属性
 攻击目标 = []
 for i in range(100):
-    try: 
+    try:
         temp = []
         item = 'item' + str(i)
         temp.append(conf.get(item, '名称'))
@@ -85,7 +89,7 @@ for i in range(100):
         temp.append(conf.getint(item, '光抗'))
         temp.append(conf.getint(item, '暗抗'))
         攻击目标.append(temp)
-    except: 
+    except:
         break
 
 if len(攻击目标) == 0:

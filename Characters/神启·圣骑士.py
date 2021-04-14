@@ -11,7 +11,7 @@ class 神启·圣骑士技能0(被动技能):
     def 智力加成(self):
         return self.智力[self.等级] + self.额外智力 + self.进图加成
 
-    def 结算统计(self): 
+    def 结算统计(self):
         return [self.智力加成(), 0, 0, 0, 0, 0, 0, 0]
         #智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -37,7 +37,7 @@ class 神启·圣骑士技能1(主动技能):
         temp = []
         temp.append(0) #智力
         temp.append(0) #体力
-        temp.append(0) #精神 
+        temp.append(0) #精神
         temp.append(int(round((round(self.力智[self.等级] * 1.131) + self.BUFF力量) * self.BUFF力量per, 3) * 倍率)) #力量
         temp.append(int(round((round(self.力智[self.等级] * 1.131) + self.BUFF智力) * self.BUFF智力per, 3) * 倍率)) #智力
         temp.append(int(round((round(self.三攻[self.等级] * 1.131) + self.BUFF物攻) * self.BUFF物攻per, 3) * 倍率)) #物攻
@@ -61,7 +61,7 @@ class 神启·圣骑士技能2(主动技能):
     等级上限 = 60
     基础等级 = 24
     增幅倍率 = 0.15
-    def 结算统计(self): 
+    def 结算统计(self):
         return [0, 0, 0, 0, 0, 0, 0, 0]
 
 class 神启·圣骑士技能3(主动技能):
@@ -94,7 +94,7 @@ class 神启·圣骑士技能4(被动技能):
         else:
             return 0
 
-    def 结算统计(self): 
+    def 结算统计(self):
         return [self.力智加成(), 0, 0, self.力智加成(), self.力智加成(), 0, 0, 0]
         #智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -130,7 +130,7 @@ class 神启·圣骑士技能6(被动技能):
     def 智力加成(self):
         return self.智力[self.等级]
 
-    def 结算统计(self): 
+    def 结算统计(self):
         return [self.智力加成(), 0, 0, 0, 0, 0, 0, 0]
         #智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -151,7 +151,7 @@ class 神启·圣骑士技能8(被动技能):
     智力 = [0, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550]
     def 智力加成(self):
         return self.智力[self.等级]
-    def 结算统计(self): 
+    def 结算统计(self):
         return [self.智力加成(), 0, 0, 0, 0, 0, 0, 0]
         #智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -186,7 +186,7 @@ while i >= 0:
 神启·圣骑士技能序号 = dict()
 for i in range(len(神启·圣骑士技能列表)):
     神启·圣骑士技能序号[神启·圣骑士技能列表[i].名称] = i
-    
+
 神启·圣骑士一觉序号 = 0
 神启·圣骑士二觉序号 = 0
 神启·圣骑士三觉序号 = 0
@@ -219,7 +219,7 @@ class 神启·圣骑士角色属性(角色属性):
         self.技能序号 = deepcopy(神启·圣骑士技能序号)
 
     def 专属词条计算(self):
-        
+
         self.技能栏[self.技能序号['启示圣歌']].等级加成(self.转职被动Lv)
         self.技能栏[self.技能序号['启示圣歌']].额外智力 += self.转职被动智力
         self.技能栏[self.技能序号['启示圣歌']].进图加成 += self.被动进图加成
@@ -259,7 +259,7 @@ class 神启·圣骑士角色属性(角色属性):
             else:
                 总数据[self.技能序号['祈愿·天使赞歌']][j] = 0
         return self.结果返回(x, 总数据)
-        
+
 class 神启·圣骑士(角色窗口):
     def 窗口属性输入(self):
         self.初始属性 = 神启·圣骑士角色属性()

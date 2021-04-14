@@ -32,13 +32,13 @@ class MainWindow(QMainWindow):
         self.titleBar.SetTitle(client.windowTitle())
         self.titleBar.SetWidth(client.width())
 
-        self.titleBar.SetIcon(self.icon.pixmap(self.icon.actualSize(QSize(32, 32))))
-    
+        self.titleBar.SetIcon(
+            self.icon.pixmap(self.icon.actualSize(QSize(32, 32))))
+
     def closeEvent(self, event):
         self.client.close()
         super().close()
 
-    
     # def LoadStyleFromQss(self, f):
     #     file = open(f)
     #     lines = file.readlines()

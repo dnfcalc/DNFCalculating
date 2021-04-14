@@ -68,7 +68,7 @@ class 极诣·鬼泣技能4(被动技能):
     基础等级 = 30
     关联技能 = ['所有']
     data = [0, 13, 28, 41, 54, 68, 82, 96, 109, 123, 137, 150, 164, 177, 191, 205, 219, 233, 245, 259, 273, 287, 301, 314, 328, 341, 355, 369, 382, 396, 410, 424, 437, 450, 464, 478, 492, 506, 520, 532, 546, 560, 574, 588, 601, 615, 628, 642, 656, 669, 683, 697, 711, 724, 737, 751, 765, 779, 793, 806, 819, 833, 847, 861, 874, 888, 902, 915, 929, 942, 956]
-    
+
     def 加成倍率(self, 武器类型):
         if 武器类型 == '太刀':
             return self.data[self.等级] / 1000 + 1
@@ -87,7 +87,7 @@ class 极诣·鬼泣技能5(被动技能):
     关联技能 = ['所有']
 
     data = [0, 12, 26, 39, 51, 64, 77, 90, 103, 116, 129, 141, 154, 167, 180, 193, 206, 219, 231, 244, 257, 270, 283, 296, 309, 321, 334, 347, 360, 373, 386, 399, 411, 424, 437, 450, 463, 476, 489, 501, 514, 527, 540, 553, 566, 579, 591, 604, 617, 630, 643, 656, 669, 681, 694, 707, 720, 733, 746, 759, 771, 784, 797, 810, 823, 836, 849, 861, 874, 887, 900]
-    
+
     def 加成倍率(self, 武器类型):
         if 武器类型 == '短剑':
             return self.data[self.等级] / 1000 + 1
@@ -135,7 +135,7 @@ class 极诣·鬼泣技能7(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率      
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 class 极诣·鬼泣技能8(主动技能):
     名称 = '鬼影步'
@@ -178,7 +178,7 @@ class 极诣·鬼泣技能10(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 class 极诣·鬼泣技能11(主动技能):
     名称 = '冰霜之萨亚'
@@ -207,7 +207,7 @@ class 极诣·鬼泣技能12(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 class 极诣·鬼泣技能13(主动技能):
     名称 = '瘟疫之罗刹'
@@ -225,8 +225,8 @@ class 极诣·鬼泣技能13(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
-    
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
+
     是否有护石 = 1
     护石选项 = ['魔界', '圣痕']
     def 装备护石(self, x):
@@ -261,7 +261,7 @@ class 极诣·鬼泣技能13(主动技能):
             temp += "<br>-护石附加效果：<br>"
             temp += "寻敌范围 +30%<br>"
             temp += "爆炸攻击力 +24%"
-        return temp  
+        return temp
 
 class 极诣·鬼泣技能14(主动技能):
     名称 = '鬼斩：狂怒'
@@ -280,7 +280,7 @@ class 极诣·鬼泣技能14(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
     护石选项 = ['魔界', '圣痕']
@@ -311,8 +311,8 @@ class 极诣·鬼泣技能14(主动技能):
             temp += "灵魂旋风命中时将敌人聚到中心<br>"
             temp += "灵魂旋风范围 +30%<br>"
             temp += "灵魂旋风攻击力 +15%"
-        return temp  
-        
+        return temp
+
 
 class 极诣·鬼泣技能15(主动技能):
     名称 = '鬼影闪'
@@ -330,7 +330,7 @@ class 极诣·鬼泣技能15(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 class 极诣·鬼泣技能16(主动技能):
     名称 = '冥炎之卡洛'
@@ -348,7 +348,7 @@ class 极诣·鬼泣技能16(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 class 极诣·鬼泣技能17(主动技能):
     名称 = '冥炎之卡洛(灼烧)'
@@ -365,7 +365,7 @@ class 极诣·鬼泣技能17(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 class 极诣·鬼泣技能18(主动技能):
     名称 = '冥炎剑'
@@ -384,7 +384,7 @@ class 极诣·鬼泣技能18(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
     护石选项 = ['魔界', '圣痕']
@@ -414,7 +414,7 @@ class 极诣·鬼泣技能18(主动技能):
             temp += "<br>-护石附加效果：<br>"
             temp += "按向前方向键时增加移动距离<br>"
             temp += "斩击攻击力 +17%"
-        return temp  
+        return temp
 
 class 极诣·鬼泣技能19(被动技能):
     名称 = '恐惧光环'
@@ -443,7 +443,7 @@ class 极诣·鬼泣技能20(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率  
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 class 极诣·鬼泣技能21(主动技能):
     名称 = '鬼斩：炼狱'
@@ -462,7 +462,7 @@ class 极诣·鬼泣技能21(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率     
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
     护石选项 = ['魔界', '圣痕']
@@ -498,7 +498,7 @@ class 极诣·鬼泣技能21(主动技能):
             temp += "<br>-护石附加效果：<br>"
             temp += "冥炎爆炸攻击力 +43%<br>"
             temp += "冷却时间 -10%"
-        return temp  
+        return temp
 
 class 极诣·鬼泣技能22(主动技能):
     名称 = '冥祭之沼'
@@ -515,7 +515,7 @@ class 极诣·鬼泣技能22(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率    
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
     护石选项 = ['魔界', '圣痕']
@@ -543,7 +543,7 @@ class 极诣·鬼泣技能22(主动技能):
             temp += "<br>-护石附加效果：<br>"
             temp += "队友攻击速度 +5%<br>"
             temp += "爆炸攻击力 +17%"
-        return temp  
+        return temp
 
 class 极诣·鬼泣技能23(被动技能):
     名称 = '御鬼之极'
@@ -572,7 +572,7 @@ class 极诣·鬼泣技能24(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i] * (self.解放 if i == 0 else 1)
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率      
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
     护石选项 = ['圣痕']
@@ -594,7 +594,7 @@ class 极诣·鬼泣技能25(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率     
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     是否有护石 = 1
     护石选项 = ['圣痕']
@@ -618,7 +618,7 @@ class 极诣·鬼泣技能26(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率   
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 class 极诣·鬼泣技能27(被动技能):
     名称 = '鬼神冠冕'
@@ -647,7 +647,7 @@ class 极诣·鬼泣技能28(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率       
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 class 极诣·鬼泣技能29(主动技能):
     名称 = '黄泉之门：万鬼渡灵'
@@ -665,7 +665,7 @@ class 极诣·鬼泣技能29(主动技能):
         sum = 0
         for i in range(len(self.次数)):
             sum += self.数据[i][self.等级] * self.次数[i]
-        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率    
+        return sum * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     关联技能 = ['无']
     def 加成倍率(self, 武器类型):
@@ -712,22 +712,22 @@ class 极诣·鬼泣角色属性(角色属性):
     职业 = '鬼泣'
 
     武器选项 = ['太刀','短剑']
-    
+
     类型选择 = ['魔法百分比']
-    
+
     类型 = '魔法百分比'
     防具类型 = '布甲'
     防具精通属性 = ['智力']
 
     主BUFF = 1.69
-   
+
     远古记忆 = 0
 
     def __init__(self):
         基础属性输入(self)
         self.技能栏= deepcopy(极诣·鬼泣技能列表)
         self.技能序号= deepcopy(极诣·鬼泣技能序号)
-    
+
     def 被动倍率计算(self):
         super().被动倍率计算()
         self.暗属性强化 += self.技能栏[self.技能序号['暗月降临']].属强加成()

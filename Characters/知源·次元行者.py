@@ -910,7 +910,7 @@ class 知源·次元行者(角色窗口):
 
     def 界面(self):
         super().界面()
-        
+
         for i in range(3):
             self.护石栏[i].currentIndexChanged.connect(lambda state: self.护石判断())
 

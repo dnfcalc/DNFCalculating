@@ -1,17 +1,15 @@
 from PublicReference.base import *
 
-# 2020.6.25 数据有待修正 
+# 2020.6.25 数据有待修正
 # 2020.8.14 添加韩服新护石
 #           爆弹罗网添加跳跃释放选项
 # 2020.8.20 修正覆灭之枪护石提升
-
 
 # 武器重剑
 # class 主动技能(主动技能):
 #     def 等效CD(self, 武器类型):
 #         if 武器类型 == '重剑':
 #             return round(self.CD / self.恢复 * 1.1, 1)
-            
 
 
 # 重剑精通
@@ -20,7 +18,7 @@ class 巅峰狂徒技能0(被动技能):
     所在等级 = 20
     等级上限 = 30
     基础等级 = 20
-    
+
     def 加成倍率(self, 武器类型):
         if self.等级 == 0:
             return 1.0
@@ -31,8 +29,6 @@ class 巅峰狂徒技能0(被动技能):
 
     def 物理攻击力倍率(self, 武器类型):
         return self.加成倍率(武器类型)
-        
-
 
 
 # 火药改良
@@ -116,6 +112,7 @@ class 巅峰狂徒技能6(被动技能):
         else:
             return round(1.10 + 0.05 * self.等级, 5)
 
+
 # 双重散射
 class 巅峰狂徒技能7(主动技能):
     名称 = '双重散射'
@@ -157,6 +154,7 @@ class 巅峰狂徒技能9(主动技能):
     TP成长 = 0.10
     TP上限 = 5
 
+
 #广域散射
 class 巅峰狂徒技能10(主动技能):
     名称 = '广域散射'
@@ -169,7 +167,8 @@ class 巅峰狂徒技能10(主动技能):
     CD = 7
     TP成长 = 0.10
     TP上限 = 5
-    
+
+
 # G型火焰爆弹
 class 巅峰狂徒技能11(主动技能):
     名称 = 'G型火焰爆弹'
@@ -204,15 +203,14 @@ class 巅峰狂徒技能13(主动技能):
     所在等级 = 35
     等级上限 = 60
     基础等级 = 36
-    
+
     基础 = 425.8333333 + 57.33333333 * 7 - 0.5 * 8
     成长 = 48.5 + 7 * 7
     攻击次数 = 1
-    
-    基础2 = 1278.833333  - 0.5
+
+    基础2 = 1278.833333 - 0.5
     成长2 = 145.5
     攻击次数2 = 6
-   
 
     CD = 30
     TP成长 = 0.10
@@ -221,11 +219,13 @@ class 巅峰狂徒技能13(主动技能):
     技能施放时间 = 1
 
     护石选项 = ['魔界', '圣痕']
+
     def 装备护石(self, x):
         if x == 0:
-            self.攻击次数2 = 2 * 3.5 #描述错误
+            self.攻击次数2 = 2 * 3.5  #描述错误
         elif x == 1:
-            self.攻击次数2 = 2 * 3.8 #描述错误，改动位置
+            self.攻击次数2 = 2 * 3.8  #描述错误，改动位置
+
 
 # 裂地爆刃
 class 巅峰狂徒技能14(主动技能):
@@ -239,19 +239,19 @@ class 巅峰狂徒技能14(主动技能):
     TP上限 = 5
     是否有护石 = 1
 
-
     基础 = 9551 - 攻击段数 * 0.5
     成长 = 1076
 
-
     护石选项 = ['魔界', '圣痕']
+
     def 装备护石(self, x):
         if x == 0:
             self.CD *= 0.92
             self.倍率 *= 1.24
         elif x == 1:
             self.CD *= 0.92
-            self.倍率 *= 1.24*1.07#改动位置，待测试
+            self.倍率 *= 1.24 * 1.07  #改动位置，待测试
+
 
 # 惊喜大礼
 class 巅峰狂徒技能15(主动技能):
@@ -268,13 +268,14 @@ class 巅峰狂徒技能15(主动技能):
     是否有护石 = 1
 
     护石选项 = ['魔界', '圣痕']
+
     def 装备护石(self, x):
         if x == 0:
             self.CD *= 0.89
             self.倍率 *= 1.07
         elif x == 1:
             self.CD *= 0.89
-            self.倍率 *= 1.15#改动位置
+            self.倍率 *= 1.15  #改动位置
 
 
 # 一觉
@@ -285,7 +286,7 @@ class 巅峰狂徒技能16(主动技能):
     基础等级 = 12
     攻击段数 = 13
     基础 = (34765.84762 - 攻击段数 * 0.5) * 1.1
-    成长 = 10495.17143  * 1.1#三级效果，忘了补上
+    成长 = 10495.17143 * 1.1  #三级效果，忘了补上
     CD = 145
 
 
@@ -301,7 +302,6 @@ class 巅峰狂徒技能17(主动技能):
     TP上限 = 5
     是否有护石 = 1
 
-
     基础 = 3581 - 0.5
     成长 = 403
     攻击次数 = 1
@@ -312,8 +312,8 @@ class 巅峰狂徒技能17(主动技能):
 
     护石状态 = 0
 
-
     护石选项 = ['魔界', '圣痕']
+
     def 装备护石(self, x):
         if x == 0:
             self.攻击次数2 = 0
@@ -321,23 +321,25 @@ class 巅峰狂徒技能17(主动技能):
             self.护石状态 = 1
         elif x == 1:
             self.攻击次数2 = 0
-            self.倍率 *= 1.34#改动位置，具体待测试
+            self.倍率 *= 1.34  #改动位置，具体待测试
             self.护石状态 = 1
 
-    def 等效CD(self, 武器类型,输出类型):
+    def 等效CD(self, 武器类型, 输出类型):
         if self.护石状态 == 0:
-            return round(self.CD  / self.恢复, 1)
+            return round(self.CD / self.恢复, 1)
         else:
             return round(8.3 * 0.88, 1)
-        
+
+
 # 夺命焰火
+
 
 class 巅峰狂徒技能18(主动技能):
     名称 = '夺命焰火'
     所在等级 = 70
     等级上限 = 40
     基础等级 = 18
-    
+
     基础 = 5074.6 + 7612.2 - 1
     成长 = 573 + 859.5
     攻击次数 = 1
@@ -352,14 +354,16 @@ class 巅峰狂徒技能18(主动技能):
     是否有护石 = 1
 
     护石选项 = ['魔界', '圣痕']
+
     def 装备护石(self, x):
         if x == 0:
             self.攻击次数 *= 1.1
             self.攻击次数2 *= 1.23
         elif x == 1:
             self.攻击次数 *= 1.1
-            self.攻击次数2 *= 1.39#改动位置，具体待测试
- 
+            self.攻击次数2 *= 1.39  #改动位置，具体待测试
+
+
 # 爆弹华尔兹
 class 巅峰狂徒技能19(主动技能):
     名称 = '爆弹华尔兹'
@@ -375,15 +379,18 @@ class 巅峰狂徒技能19(主动技能):
     攻击次数2 = 5
 
     CD = 40
-    
+
     是否有护石 = 1
     护石选项 = ['圣痕']
+
     def 装备护石(self, x):
         if x == 0:
             self.攻击次数 = 0
             self.攻击次数2 += 3
             self.倍率 *= 1.38
-            self.CD *=0.9
+            self.CD *= 0.9
+
+
 # 覆灭之枪
 class 巅峰狂徒技能20(主动技能):
     名称 = '覆灭之枪'
@@ -397,9 +404,12 @@ class 巅峰狂徒技能20(主动技能):
 
     是否有护石 = 1
     护石选项 = ['圣痕']
+
     def 装备护石(self, x):
         if x == 0:
             self.倍率 *= 1.40
+
+
 # 二觉
 class 巅峰狂徒技能21(主动技能):
     名称 = '终焉：硝烟狂欢'
@@ -461,11 +471,12 @@ class 巅峰狂徒角色属性(角色属性):
     防具精通属性 = ['力量']
 
     主BUFF = 2.0
-    
+
     def __init__(self):
         基础属性输入(self)
         self.技能栏 = deepcopy(巅峰狂徒技能列表)
         self.技能序号 = deepcopy(巅峰狂徒技能序号)
+
 
 class 巅峰狂徒(角色窗口):
     def 窗口属性输入(self):
@@ -495,20 +506,23 @@ class 巅峰狂徒(角色窗口):
         super().界面()
         for i in range(3):
             self.护石栏[i].currentIndexChanged.connect(lambda state: self.护石判断())
-        self.爆弹罗网护石跳跃选项=QCheckBox('爆弹罗网护石跳跃释放',self.main_frame2)
-        self.爆弹罗网护石跳跃选项.resize(140,20)
-        self.爆弹罗网护石跳跃选项.move(320,360)
+        self.爆弹罗网护石跳跃选项 = QCheckBox('爆弹罗网护石跳跃释放', self.main_frame2)
+        self.爆弹罗网护石跳跃选项.resize(140, 20)
+        self.爆弹罗网护石跳跃选项.move(320, 360)
         self.爆弹罗网护石跳跃选项.setStyleSheet(复选框样式)
         self.爆弹罗网护石跳跃选项.setToolTip('跳跃释放爆弹罗网，仅佩戴护石时生效')
 
     def 载入配置(self, path='set'):
         super().载入配置(path)
         try:
-           setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'r',encoding='utf-8').readlines()
-           if int(setfile[0].replace('\n', '')) == 1:
-              self.爆弹罗网护石跳跃选项.setChecked(True)
-           else:
-              self.爆弹罗网护石跳跃选项.setChecked(False)
+            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
+                           '/skill5.ini',
+                           'r',
+                           encoding='utf-8').readlines()
+            if int(setfile[0].replace('\n', '')) == 1:
+                self.爆弹罗网护石跳跃选项.setChecked(True)
+            else:
+                self.爆弹罗网护石跳跃选项.setChecked(False)
         except:
             pass
 
@@ -517,18 +531,18 @@ class 巅峰狂徒(角色窗口):
             return
         super().保存配置(path)
         try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'w', encoding='utf-8')
+            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
+                           '/skill5.ini',
+                           'w',
+                           encoding='utf-8')
             if self.爆弹罗网护石跳跃选项.isChecked():
-               setfile.write('1\n')
+                setfile.write('1\n')
             else:
-               setfile.write('0\n')
+                setfile.write('0\n')
         except:
             pass
 
-
-    def 输入属性(self, 属性, x = 0):
+    def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)
         if self.爆弹罗网护石跳跃选项.isChecked():
             属性.技能栏[属性.技能序号['爆弹罗网']].攻击次数 = 0
-        
-

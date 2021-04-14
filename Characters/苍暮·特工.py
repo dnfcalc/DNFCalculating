@@ -5,7 +5,7 @@ from PublicReference.base import *
 class 苍暮·特工主动技能(主动技能):
     锁定护石 = 0
     歼灭次数 = 0
-    
+
 class 苍暮·特工技能0(苍暮·特工主动技能):
     名称 = '连续射击'
     所在等级 = 15
@@ -98,7 +98,7 @@ class 苍暮·特工技能5(苍暮·特工主动技能):
     def 等效百分比(self, 武器类型):
         return ((self.数据1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.数据2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率
 
-    
+
 
 
 class 苍暮·特工技能6(苍暮·特工主动技能):
@@ -251,7 +251,7 @@ class 苍暮·特工技能12(苍暮·特工主动技能):
         return self.数据[self.等级] * self.暗杀目标加成 * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
     def CD缩减倍率(self, 武器类型):
         return round(1 - self.一觉减CD , 3)
-        
+
 class 苍暮·特工技能13(苍暮·特工主动技能):
     名称 = '月相轮舞'
     所在等级 = 70
@@ -361,7 +361,7 @@ class 苍暮·特工技能18(苍暮·特工主动技能):
     def 等效百分比(self, 武器类型):
         return ((self.数据1[self.等级] * self.攻击次数1)+(self.数据2[self.等级] * self.攻击次数2 )) * self.倍率
 
-    
+
 
 class 苍暮·特工技能19(被动技能):
     名称 = '无缺'
@@ -406,7 +406,7 @@ class 苍暮·特工技能21(苍暮·特工主动技能):
         return ((self.数据1[self.等级] * self.攻击次数1)+(self.数据2[self.等级] * self.攻击次数2 )) * self.倍率
     def 加成倍率(self, 武器类型):
         return 0.0
-    
+
 苍暮·特工技能列表 = []
 i = 0
 while i >= 0:
@@ -448,15 +448,15 @@ class 苍暮·特工角色属性(角色属性):
     职业 = '特工'
 
     武器选项 = ['小太刀']
-    
+
     类型选择 = ['物理百分比']
-    
+
     类型 = '物理百分比'
     防具类型 = '皮甲'
     防具精通属性 = ['力量']
 
     主BUFF = 2.00
-   
+
     def __init__(self):
         基础属性输入(self)
         self.技能栏= deepcopy(苍暮·特工技能列表)
@@ -503,7 +503,7 @@ class 苍暮·特工(角色窗口):
         self.三觉序号 = 苍暮·特工三觉序号
         self.护石选项 = deepcopy(苍暮·特工护石选项)
         self.符文选项 = deepcopy(苍暮·特工符文选项)
-        QMessageBox.information(self,"提示",  "4.7日测试服数据，仅供参考，技能数据取中韩服中高值") 
+        QMessageBox.information(self,"提示",  "4.7日测试服数据，仅供参考，技能数据取中韩服中高值")
     def 界面(self):
         super().界面()
         self.一觉减CD开关=QCheckBox('一觉减CD Buff',self.main_frame2)

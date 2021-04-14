@@ -7,7 +7,6 @@ import math
 from ctypes import *
 import ctypes
 
-
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import *
@@ -28,40 +27,63 @@ from PublicReference.utils.config import *
 
 
 def resource_path(relative_path):
-    if getattr(sys, 'frozen', False): #是否Bundle Resource
+    if getattr(sys, 'frozen', False):  #是否Bundle Resource
         base_path = sys._MEIPASS
     else:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
-dllPath = resource_path(os.path.join("DLL","Preferred.dll"))
+
+dllPath = resource_path(os.path.join("DLL", "Preferred.dll"))
 
 #100级史诗套数据
-防具套装 = ["古代祭祀的神圣仪式", "遗忘魔法师的馈赠", "天堂舞姬", "死亡阴影", "皇家裁决者宣言", "龙血玄黄", "贫瘠沙漠的遗产", "炙炎之盛宴", "擎天战甲", "噩梦：地狱之路", "传奇铁匠-封神", "荆棘漫天", "永恒不息之路", "命运歧路", "大自然的呼吸"]
+防具套装 = [
+    "古代祭祀的神圣仪式", "遗忘魔法师的馈赠", "天堂舞姬", "死亡阴影", "皇家裁决者宣言", "龙血玄黄", "贫瘠沙漠的遗产",
+    "炙炎之盛宴", "擎天战甲", "噩梦：地狱之路", "传奇铁匠-封神", "荆棘漫天", "永恒不息之路", "命运歧路", "大自然的呼吸"
+]
 首饰套装 = ["上古尘封术式", "破晓曦光", "幸运三角", "精灵使的权能"]
 特殊套装 = ["军神的隐秘遗产", "灵宝：世间真理", "时间战争的残骸", "能量主宰"]
 上链左套装 = ["深渊窥视者", "圣者的黄昏", "坎坷命运", "吞噬愤怒"]
 镯下右套装 = ["黑魔法探求者", "时空旅行者", "穿透命运的呐喊", "狂乱追随者"]
 环鞋指套装 = ["地狱求道者", "次元旅行者", "天命无常", "悲剧的残骸"]
 
-部位列表 = ["上衣", "头肩", "下装", "腰带", "鞋", "手镯", "项链", "戒指", "耳环", "辅助装备", "魔法石", "武器"]
-部位字典 = {"上衣":0, "头肩":1, "下装":2, "腰带":3, "鞋":4, "手镯":5, "项链":6, "戒指":7, "耳环":8, "辅助装备":9, "魔法石":10, "武器":11}
+部位列表 = [
+    "上衣", "头肩", "下装", "腰带", "鞋", "手镯", "项链", "戒指", "耳环", "辅助装备", "魔法石", "武器"
+]
+部位字典 = {
+    "上衣": 0,
+    "头肩": 1,
+    "下装": 2,
+    "腰带": 3,
+    "鞋": 4,
+    "手镯": 5,
+    "项链": 6,
+    "戒指": 7,
+    "耳环": 8,
+    "辅助装备": 9,
+    "魔法石": 10,
+    "武器": 11
+}
 
-颜色 = {'神话':'#E0502F', '史诗':'#FFB400', '传说':'#FF7800'}
+颜色 = {'神话': '#E0502F', '史诗': '#FFB400', '传说': '#FF7800'}
 
 总套装列表 = [防具套装, 首饰套装, 特殊套装, 上链左套装, 镯下右套装, 环鞋指套装]
 所有套装列表 = 防具套装 + 首饰套装 + 特殊套装 + 上链左套装 + 镯下右套装 + 环鞋指套装
 
+
 def getQCSS(FileName):
     try:
-        with open("./ResourceFiles/Skins/"+SkinVersion+"/"+FileName+".qcss", "rb") as fp:
+        with open(
+                "./ResourceFiles/Skins/" + SkinVersion + "/" + FileName +
+                ".qcss", "rb") as fp:
             content = fp.read()
             encoding = chardet.detect(content) or {}
             content = content.decode(encoding.get("encoding") or "utf-8")
         return content
     except Exception as error:
         return ''
-        
+
+
 #部分控件样式
 按钮样式 = getQCSS('按钮样式')
 # if 按钮样式 == '' : 按钮样式 = 'QPushButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:10px} QPushButton:hover{background-color:rgba(65,105,225,0.8)}'
@@ -93,10 +115,10 @@ QPushButton::menu-indicator {image:none}'''
 # if 页签样式_选中 == '' :页签样式_选中 = '''QToolButton{font-size:13px;color:white;background-color:rgba(200,30,30,0.8)} QToolButton:hover{background-color:rgba(235,0,0,0.8)}'''
 
 下拉框样式 = getQCSS('下拉框样式')
-# if 下拉框样式 == '' :下拉框样式 = '''QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;} 
+# if 下拉框样式 == '' :下拉框样式 = '''QComboBox{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:5px;}
 # QComboBox:disabled{font-size:12px;color:white;background-color:grey;border:1px;border-radius:5px;}  QComboBox QAbstractItemView::item {height: 18px;}
-# QComboBox:hover{background-color:rgba(65,105,225,0.8)} 
-# QComboBox QAbstractItemView::item {height: 18px;background-color:white} 
+# QComboBox:hover{background-color:rgba(65,105,225,0.8)}
+# QComboBox QAbstractItemView::item {height: 18px;background-color:white}
 # QComboBox QAbstractItemView::item:hover,QComboBox QAbstractItemView::item:focus {background-color:rgba(179,206,255,1);color:black}
 # QComboBox QScrollBar{
 #     background: white !important
@@ -108,8 +130,8 @@ QPushButton::menu-indicator {image:none}'''
 # 下拉框样式 = getQCSS('下拉框样式')
 # if 下拉框样式 == '' :下拉框样式 = "QComboBox{font-size:12px;color:white;background-color:grey;border:1px;border-radius:5px;}  QComboBox QAbstractItemView::item {height: 18px;}"
 下拉框样式_down = getQCSS('下拉框样式_down')
-# if 下拉框样式_down == '' :下拉框样式_down = '''QComboBox{font-size:12px;color:white;background-color:rgba(34,157,70,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(5,185,65,0.8)} 
-# QComboBox QAbstractItemView::item {height: 18px;background-color:white} 
+# if 下拉框样式_down == '' :下拉框样式_down = '''QComboBox{font-size:12px;color:white;background-color:rgba(34,157,70,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(5,185,65,0.8)}
+# QComboBox QAbstractItemView::item {height: 18px;background-color:white}
 # QComboBox QAbstractItemView::item:hover,QComboBox QAbstractItemView::item:focus {background-color:rgba(179,206,255,1) !important;color:black}
 # QComboBox QScrollBar{
 #     background: white !important
@@ -120,7 +142,7 @@ QPushButton::menu-indicator {image:none}'''
 # '''
 下拉框样式_warn = getQCSS('下拉框样式_warn')
 # if 下拉框样式_warn == '' :下拉框样式_warn = '''QComboBox{font-size:12px;color:white;background-color:rgba(197,34,70,0.8);border:1px;border-radius:5px;} QComboBox:hover{background-color:rgba(225,5,65,0.8)}
-# QComboBox QAbstractItemView::item {height: 18px;background-color:white} 
+# QComboBox QAbstractItemView::item {height: 18px;background-color:white}
 # QComboBox QAbstractItemView::item:hover,QComboBox QAbstractItemView::item:focus {background-color:rgba(179,206,255,1)!important; color:black}
 # QComboBox QScrollBar{
 #     background: white !important
@@ -289,9 +311,9 @@ QScrollBar::down-arrow:vertical {
 }
 '''
 
+
 class MyQComboBox(QComboBox):
     def __init__(self, win):
         super().__init__(win)
         self.setView(QListView())
         self.setStyleSheet(下拉框样式)
-
