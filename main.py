@@ -61,7 +61,7 @@ class Worker(QThread):
     def after_downloaded(self, file_path):
         try:
             os.rename(sys.argv[0], sys.argv[0] + '.del')
-            sys.argv[0] = sys.argv[0] + '.del'
+            # sys.argv[0] = sys.argv[0] + '.del'
         except Exception as error:
             logger.error("error={} \n detail {}".format(
                 error, traceback.print_exc()))
@@ -401,8 +401,6 @@ class 选择窗口(QWidget):
         赞赏码.loadFromData(base64.b64decode(img.二维码))
         主背景.setPixmap(赞赏码)
         self.w.show()
-        data_int = 1
-        self._signal.emit(data_int)
 
 
     def 职业版本判断(self, index):
@@ -488,10 +486,10 @@ class 选择窗口(QWidget):
                     if p.is_alive:
                         p.terminate()
                         p.join()
-                self.close()
+                self._signal.emit(1)
                 newpath = os.path.join(os.getcwd(), self.云端版本)
                 # print(sys.argv[0])
-                oldpath = sys.argv[0]
+                oldpath = sys.argv[0]+'.del'
                 p = subprocess.Popen(
                     [
                         newpath,
