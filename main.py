@@ -60,7 +60,8 @@ class Worker(QThread):
 
     def after_downloaded(self, file_path):
         try:
-            os.rename(sys.argv[0], sys.argv[0] + '.del')
+            if "main.py" not in sys.argv[0]:
+                os.rename(sys.argv[0], sys.argv[0] + '.del')
             # sys.argv[0] = sys.argv[0] + '.del'
         except Exception as error:
             logger.error("error={} \n detail {}".format(
@@ -486,9 +487,7 @@ class 选择窗口(QWidget):
                     if p.is_alive:
                         p.terminate()
                         p.join()
-                self._signal.emit(1)
-                newpath = os.path.join(os.getcwd(), self.云端版本)
-                # print(sys.argv[0])
+                newpath = os.path.join(os.getcwd(), "DNF计算器 17173DNF.exe")
                 oldpath = sys.argv[0]+'.del'
                 p = subprocess.Popen(
                     [
@@ -505,6 +504,7 @@ class 选择窗口(QWidget):
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE)
                 p.wait()
+                self._signal.emit(1)
 
     def update(self):
         self.遮罩 = QLabel(self)
