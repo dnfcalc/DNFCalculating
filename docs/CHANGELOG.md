@@ -1,5 +1,22 @@
 ## Newest
 
+### 2021-04-14
+
+#### NewFeatures
+* 固定计算器名称,方便创建快捷方式用户 ([b623bc](https://gitee.com/i_melon/DNFCalculating/commit/b623bcd485e5920d589c3a981a43daeba2a71039))
+* 奶系：添加择优方向选择:爆发(太阳系数1)、续航(太阳系数0.7) ([ff0497](https://gitee.com/i_melon/DNFCalculating/commit/ff0497748d0f7f06dadf6fad3d54c07c807287c7))
+* 奶系：细节页面添加宠物登记补正、光环登记补正及五一礼包等相关选项<br>
+由于结构发生变化，细节页面需要重置调整 ([ef9235](https://gitee.com/i_melon/DNFCalculating/commit/ef9235cbff38973408377a020a4f3d479797d877))
+* 输出系：优化全局择优速度及打开速度，排行采用全局择优 ([07b82a](https://gitee.com/i_melon/DNFCalculating/commit/07b82a063377993fdb75c1c1d3cf16596391b7f9))
+* 魔枪士：同步国服体验服相关数据 ([da663e](https://gitee.com/i_melon/DNFCalculating/commit/da663ef6c11241cde921548a6434b071d8ba9b55))
+
+#### BugFixes
+* 修复内测BUG ([6b058e](https://gitee.com/i_melon/DNFCalculating/commit/6b058e456ae546953a37201454f87b364a19e06b))
+* 修复奶爸选择一觉切装且黑鸦计算最高选觉醒时，一觉数值对不上的问题 ([bf1d5f](https://gitee.com/i_melon/DNFCalculating/commit/bf1d5ff5b92196134d7853995555dc6f04a318a0))
+* 同步游戏，宠物伤害词条能享受辟邪玉加成 ([4f6dd4](https://gitee.com/i_melon/DNFCalculating/commit/4f6dd45de6439c6fd0bf30f6c8119f39fc2389f9))
+* 极诣·剑魂：修复极神剑术瞬斩、幻影剑舞数据错误 ([a436c4](https://gitee.com/i_melon/DNFCalculating/commit/a436c4c01e557e764a6d25b5c940604245cfc910))
+* 苍暮·暗刃：修复轮盘连射数据错误 ([0e0146](https://gitee.com/i_melon/DNFCalculating/commit/0e01466feaabea0d72e4379333267d92f64ac1c1))
+
 ### 2021-04-08
 
 #### NewFeatures
@@ -1159,6 +1176,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
 
 
 
