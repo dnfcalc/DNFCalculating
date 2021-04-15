@@ -60,8 +60,9 @@ class Worker(QThread):
 
     def after_downloaded(self, file_path):
         try:
-            os.rename(sys.argv[0], sys.argv[0] + '.del')
-            sys.argv[0] = sys.argv[0] + '.del'
+            if "main.py" not in sys.argv[0]:
+                os.rename(sys.argv[0], sys.argv[0] + '.del')
+            # sys.argv[0] = sys.argv[0] + '.del'
         except Exception as error:
             logger.error("error={} \n detail {}".format(
                 error, traceback.print_exc()))
@@ -93,6 +94,7 @@ class 选择窗口(QWidget):
     网盘链接 = ''
     网盘报错 = 0
 
+    _signal = QtCore.pyqtSignal(int)
     def __init__(self):
         super().__init__()
         self.thread_init()
@@ -371,14 +373,15 @@ class 选择窗口(QWidget):
 
     def openSet(self):
         self.processpid = []
-        self.setWindow = SetWindows(self.worker, self)
-        self.setWindow._signal.connect(self.closeSet)
+        self.setWindow = SetWindows(self.worker,self)
+        # self.setWindow._signal.connect(self.closeSet)
         self.win = MainWindow(self.setWindow)
         self.win.show()
 
     def closeSet(self, parameter):
         if parameter == 1:
-            self.win.close()
+            win.close()
+
 
     def 打开窗口(self, name):
         if self.char_window != None:
@@ -399,6 +402,7 @@ class 选择窗口(QWidget):
         赞赏码.loadFromData(base64.b64decode(img.二维码))
         主背景.setPixmap(赞赏码)
         self.w.show()
+
 
     def 职业版本判断(self, index):
         try:
@@ -483,10 +487,8 @@ class 选择窗口(QWidget):
                     if p.is_alive:
                         p.terminate()
                         p.join()
-                self.close()
-                newpath = os.path.join(os.getcwd(), self.云端版本)
-                # print(sys.argv[0])
-                oldpath = sys.argv[0]
+                newpath = os.path.join(os.getcwd(), "DNF计算器 17173DNF.exe")
+                oldpath = sys.argv[0]+'.del'
                 p = subprocess.Popen(
                     [
                         newpath,
@@ -502,6 +504,7 @@ class 选择窗口(QWidget):
                     stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE)
                 p.wait()
+                self._signal.emit(1)
 
     def update(self):
         self.遮罩 = QLabel(self)
@@ -531,9 +534,9 @@ class 选择窗口(QWidget):
 
 
 class SetWindows(QWidget):
-    _signal = QtCore.pyqtSignal(int)
+    # _signal = QtCore.pyqtSignal(int)
 
-    def __init__(self, worker, parWin):
+    def __init__(self,worker,parWin):
         super().__init__()
         self.worker = worker
         self.parWin = parWin
@@ -630,12 +633,12 @@ class SetWindows(QWidget):
         if box.clickedButton() == yes:
             self.立即重启()
 
-    def 返回原页(self):
-        #用self.close()无法关闭，所以用发射信号的方法在父窗口关闭页面
-        self.是否保存 = 0
-        data_int = 1
-        # 发送信号
-        self._signal.emit(data_int)
+    # def 返回原页(self):
+    #     #用self.close()无法关闭，所以用发射信号的方法在父窗口关闭页面
+    #     self.是否保存 = 0
+    #     data_int = 1
+    #     # 发送信号
+    #     self._signal.emit(data_int)
 
     def 立即重启(self):
         for p in self.worker:
@@ -680,6 +683,7 @@ if __name__ == '__main__':
     app = QApplication([])
 
     instance = 选择窗口()
+    instance._signal.connect(instance.closeSet)
     win = MainWindow(instance)
     win.show()
 
