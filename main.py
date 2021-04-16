@@ -43,7 +43,7 @@ class Worker(QThread):
         self.wait()
 
     def run(self):
-        path = os.getcwd() + "/download"
+        path = os.getcwd() + "/__ZFJtemp"
         try:
             # os.rename(sys.argv[0],sys.argv[0]+'.del')
             lzy = LanZouCloud()
@@ -71,14 +71,14 @@ class Worker(QThread):
         zip_file = zipfile.ZipFile(file_path)
         zip_list = zip_file.namelist()  # 得到压缩包里所有文件
         for f in zip_list:
-            if not f.endswith('desktop.ini'):
-                zip_file.extract(f, path)
+            # if not f.endswith('desktop.ini'):
+            zip_file.extract(f, path)
                 # extracted_path.rename(newName)
                 # 循环解压文件到指定目录
         zip_file.close()
         # print(path+'\download')
         try:
-            downpath = os.path.join(os.getcwd(), 'download')
+            downpath = os.path.join(os.getcwd(), '__ZFJtemp')
             os.system('RMDIR /Q /S ' + downpath)
         except Exception as error:
             logger.error("error={} \n detail {}".format(
