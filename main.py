@@ -1,9 +1,4 @@
-﻿#配置PyQt5环境变量
-import PyQt5
-dirname = os.path.dirname(PyQt5.__file__)
-plugin_path = os.path.join(dirname, 'Qt5', 'plugins')
-os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
-
+﻿
 import multiprocessing
 from PyQt5.QtCore import QUrl, QThread
 from PyQt5.QtWidgets import QApplication
@@ -24,6 +19,12 @@ import time
 import urllib.request
 import subprocess
 import base64
+
+#配置PyQt5环境变量
+import PyQt5
+dirname = os.path.dirname(PyQt5.__file__)
+plugin_path = os.path.join(dirname, 'Qt5', 'plugins')
+os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
 
 主进程PID = ''
 偏移量 = 25
