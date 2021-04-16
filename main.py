@@ -1,5 +1,10 @@
-﻿import multiprocessing
+﻿#配置PyQt5环境变量
+import PyQt5
+dirname = os.path.dirname(PyQt5.__file__)
+plugin_path = os.path.join(dirname, 'Qt5', 'plugins')
+os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
 
+import multiprocessing
 from PyQt5.QtCore import QUrl, QThread
 from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtCore
@@ -9,7 +14,6 @@ from PublicReference.utils.MainWindow import *
 from PublicReference.utils.calc_core import calc_core
 from PublicReference.utils.producer_consumer import producer_data, consumer, thread_num
 import traceback
-# from PublicReference.utils.lanzou.api import LanZouCloud
 from lanzou.api import LanZouCloud
 from PublicReference.utils import zipfile
 from PublicReference.utils import img
