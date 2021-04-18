@@ -3188,7 +3188,7 @@ class 角色窗口(窗口):
                             for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
                                 if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
                                     temp = 描述列表[j] + str(k)
-                                    if 范围列表[j][2] == 1:
+                                    if 描述列表[j] != '所有属性强化:':
                                         temp += '%'
                                     self.改造产物选项[count * 4 + j].addItem(temp)
                         else:
