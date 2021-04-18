@@ -1,5 +1,6 @@
 from PublicReference.base import *
 
+
 class 归元·街霸·男主动技能(主动技能):
     中毒基础 = 0
     中毒成长 = 0
@@ -22,15 +23,16 @@ class 归元·街霸·男主动技能(主动技能):
             return 0
         else:
             return int((self.攻击次数 * (self.基础 + self.成长 * self.等级)
-                 + self.攻击次数2 * (self.基础2 + self.成长2 * self.等级)
-                 + self.中毒倍率 * (self.中毒基础 + self.中毒成长 * self.等级)
-                 + self.出血倍率 * (self.出血基础 + self.出血成长 * self.等级)
-                 + self.灼伤倍率 * (self.灼伤基础 + self.灼伤成长 * self.等级)
-                 + self.感电倍率 * (self.感电基础 + self.感电成长 * self.等级))
-                 * (1 + self.TP成长 * self.TP等级) * self.倍率)
+                        + self.攻击次数2 * (self.基础2 + self.成长2 * self.等级)
+                        + self.中毒倍率 * (self.中毒基础 + self.中毒成长 * self.等级)
+                        + self.出血倍率 * (self.出血基础 + self.出血成长 * self.等级)
+                        + self.灼伤倍率 * (self.灼伤基础 + self.灼伤成长 * self.等级)
+                        + self.感电倍率 * (self.感电基础 + self.感电成长 * self.等级))
+                       * (1 + self.TP成长 * self.TP等级) * self.倍率)
 
-    def 等效CD(self, 武器类型,输出类型):
-        return round(self.CD  / self.恢复, 1)
+    def 等效CD(self, 武器类型, 输出类型):
+        return round(self.CD / self.恢复, 1)
+
 
 class 归元·街霸·男技能0(被动技能):
     名称 = '基础精通'
@@ -39,11 +41,13 @@ class 归元·街霸·男技能0(被动技能):
     等级上限 = 200
     基础等级 = 100
     关联技能 = ['罗网投掷']
+
     def 加成倍率(self, 武器类型):
         if self.等级 == 0:
             return 1.0
         else:
             return round(self.倍率 * (0.463 + 0.089 * self.等级), 5)
+
 
 class 归元·街霸·男技能1(归元·街霸·男主动技能):
     名称 = '抛沙'
@@ -52,10 +56,11 @@ class 归元·街霸·男技能1(归元·街霸·男主动技能):
     基础等级 = 46
     基础 = 751
     成长 = 108
-    倍率 = 1.5 #后街战术
+    倍率 = 1.5  # 后街战术
     CD = 3.1
     TP成长 = 0.08
     TP上限 = 5
+
 
 class 归元·街霸·男技能2(归元·街霸·男主动技能):
     名称 = '毒瓶投掷'
@@ -72,6 +77,7 @@ class 归元·街霸·男技能2(归元·街霸·男主动技能):
     TP成长 = 0.10
     TP上限 = 5
 
+
 class 归元·街霸·男技能3(归元·街霸·男主动技能):
     名称 = '擒月炎'
     所在等级 = 20
@@ -82,6 +88,7 @@ class 归元·街霸·男技能3(归元·街霸·男主动技能):
     CD = 5.8
     TP成长 = 0.10
     TP上限 = 5
+
 
 class 归元·街霸·男技能4(被动技能):
     名称 = '爪精通'
@@ -97,6 +104,7 @@ class 归元·街霸·男技能4(被动技能):
 
     def 魔法攻击力倍率(self, 武器类型):
         return (1.31 + (self.等级 - 20) * 0.02) if self.等级 >= 20 else (1.11 + self.等级 * 0.01)
+
 
 class 归元·街霸·男技能5(归元·街霸·男主动技能):
     名称 = '毒针投掷'
@@ -121,7 +129,7 @@ class 归元·街霸·男技能6(归元·街霸·男主动技能):
     成长 = 126
     基础2 = 1972
     成长2 = 228
-    倍率 = 1.6 #后街战术
+    倍率 = 1.6  # 后街战术
     CD = 4.0
     TP成长 = 0.10
     TP上限 = 5
@@ -134,10 +142,11 @@ class 归元·街霸·男技能7(归元·街霸·男主动技能):
     基础等级 = 38
     基础 = 1200
     成长 = 128
-    倍率 = 1.6 #异常状态
+    倍率 = 1.6  # 异常状态
     CD = 15.7
     TP成长 = 0.10
     TP上限 = 5
+
 
 class 归元·街霸·男技能8(归元·街霸·男主动技能):
     名称 = '挑衅'
@@ -153,12 +162,13 @@ class 归元·街霸·男技能8(归元·街霸·男主动技能):
         else:
             return round(1.05 + 0.02 * self.等级, 5)
 
+
 class 归元·街霸·男技能9(归元·街霸·男主动技能):
     名称 = '螺旋滑铲'
     所在等级 = 35
     等级上限 = 60
     基础等级 = 36
-    倍率 = 1.2 #无法抓取
+    倍率 = 1.2  # 无法抓取
     基础 = 2758
     成长 = 318
     攻击次数 = 3
@@ -238,9 +248,11 @@ class 归元·街霸·男技能12(被动技能):
     基础等级 = 1
     关联技能 = ['伏虎霸王拳']
     自定义描述 = 1
+
     def 技能描述(self, 武器类型):
         temp = ''
-        temp += '加成倍率：'+str(round(round(6.18 + 0.12 * self.等级, 5)*100-100,2)) + '%<br>'
+        temp += '加成倍率：' + \
+            str(round(round(6.18 + 0.12 * self.等级, 5)*100-100, 2)) + '%<br>'
         temp += '关联技能:伏虎霸王拳'
         return temp
 
@@ -249,7 +261,6 @@ class 归元·街霸·男技能12(被动技能):
 
     def 技能加成倍率(self, 武器类型):
         return round(5.18 + 0.12 * self.等级, 5)
-
 
 
 class 归元·街霸·男技能13(归元·街霸·男主动技能):
@@ -280,8 +291,9 @@ class 归元·街霸·男技能14(被动技能):
     所在等级 = 48
     等级上限 = 40
     基础等级 = 20
-    关联技能 = ['血色风暴','天崩地裂','爆破污桶','千锁乱舞']
-    关联技能2 = ['抛沙','毒瓶投掷','毒针投掷','擒月炎','砖块投掷','罗网投掷','螺旋滑铲','伏虎霸王拳','毒雷引爆','暗街夺命锁','飞沙走石','燃火轰天炮','逆道·爆狱','逆道·幽链之界']
+    关联技能 = ['血色风暴', '天崩地裂', '爆破污桶', '千锁乱舞']
+    关联技能2 = ['抛沙', '毒瓶投掷', '毒针投掷', '擒月炎', '砖块投掷', '罗网投掷', '螺旋滑铲',
+             '伏虎霸王拳', '毒雷引爆', '暗街夺命锁', '飞沙走石', '燃火轰天炮', '逆道·爆狱', '逆道·幽链之界']
 
     def 加成倍率(self, 武器类型):
         if self.等级 == 0:
@@ -358,6 +370,7 @@ class 归元·街霸·男技能17(归元·街霸·男主动技能):
             self.倍率 *= 1.2*1.07
             self.CD *= 0.91
 
+
 class 归元·街霸·男技能18(被动技能):
     名称 = '诡诈之道'
     所在等级 = 75
@@ -370,6 +383,7 @@ class 归元·街霸·男技能18(被动技能):
             return 1.0
         else:
             return round(1.18 + 0.02 * self.等级, 5)
+
 
 class 归元·街霸·男技能19(归元·街霸·男主动技能):
     名称 = '暗街夺命锁'
@@ -386,6 +400,7 @@ class 归元·街霸·男技能19(归元·街霸·男主动技能):
 
     def 装备护石(self, x):
         self.倍率 *= 1.32
+
 
 class 归元·街霸·男技能20(归元·街霸·男主动技能):
     名称 = '飞沙走石'
@@ -509,11 +524,11 @@ class 归元·街霸·男角色属性(角色属性):
 
     武器选项 = ['爪']
 
-    类型选择 = ['物理百分比','魔法百分比']
+    类型选择 = ['物理百分比', '魔法百分比']
 
     类型 = '魔法百分比'
     防具类型 = '重甲'
-    防具精通属性 = ['力量','智力']
+    防具精通属性 = ['力量', '智力']
 
     主BUFF = 1.79
 
@@ -524,9 +539,9 @@ class 归元·街霸·男角色属性(角色属性):
         self.技能栏 = deepcopy(归元·街霸·男技能列表)
         self.技能序号 = deepcopy(归元·街霸·男技能序号)
 
-    def 数据计算(self, x = 0, y = -1):
+    def 数据计算(self, x=0, y=-1):
         self.预处理()
-        #初步计算
+        # 初步计算
         技能释放次数 = self.技能释放次数计算()
         技能单次伤害 = self.技能单次伤害计算(y)
         技能总伤害 = self.技能总伤害计算(技能释放次数, 技能单次伤害)
@@ -534,14 +549,15 @@ class 归元·街霸·男角色属性(角色属性):
         # 霸王拳
         if self.技能栏[self.技能序号['狂·霸王拳']].等级 != 0:
             if 技能总伤害[self.技能序号['伏虎霸王拳']] != 0:
-                temp = 技能总伤害[self.技能序号['伏虎霸王拳']] * self.技能栏[self.技能序号['狂·霸王拳']].技能加成倍率(self.武器类型)
+                temp = 技能总伤害[self.技能序号['伏虎霸王拳']] * \
+                    self.技能栏[self.技能序号['狂·霸王拳']].技能加成倍率(self.武器类型)
                 if self.装备检查('奔流不息之狂风'):
                     temp = temp / 0.7
                 if self.装备检查('奔流不息之伽蓝'):
                     temp *= 0.7
                 技能总伤害[self.技能序号['伏虎霸王拳']] += temp
 
-        #返回结果
+        # 返回结果
         return self.数据返回(x, 技能释放次数, 技能总伤害)
 
 
@@ -591,13 +607,20 @@ class 归元·街霸·男(角色窗口):
     def 载入配置(self, path='set'):
         super().载入配置(path)
         try:
-           setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'r',encoding='utf-8').readlines()
-           self.毒瓶强化.setChecked(True if int(setfile[0].replace('\n', '')) == 1 else False)
-           self.毒针强化.setChecked(True if int(setfile[1].replace('\n', '')) == 1 else False)
-           self.砖块强化.setChecked(True if int(setfile[2].replace('\n', '')) == 1 else False)
-           self.污桶强化.setChecked(True if int(setfile[3].replace('\n', '')) == 1 else False)
-           self.爆狱强化.setChecked(True if int(setfile[4].replace('\n', '')) == 1 else False)
-           self.毒瓶强化.setChecked(True if int(setfile[0].replace('\n', '')) == 1 else False)
+            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
+                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
+            self.毒瓶强化.setChecked(True if int(
+                setfile[0].replace('\n', '')) == 1 else False)
+            self.毒针强化.setChecked(True if int(
+                setfile[1].replace('\n', '')) == 1 else False)
+            self.砖块强化.setChecked(True if int(
+                setfile[2].replace('\n', '')) == 1 else False)
+            self.污桶强化.setChecked(True if int(
+                setfile[3].replace('\n', '')) == 1 else False)
+            self.爆狱强化.setChecked(True if int(
+                setfile[4].replace('\n', '')) == 1 else False)
+            self.毒瓶强化.setChecked(True if int(
+                setfile[0].replace('\n', '')) == 1 else False)
         except:
             pass
 
@@ -606,7 +629,8 @@ class 归元·街霸·男(角色窗口):
             return
         super().保存配置(path)
         try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' + path + '/skill5.ini', 'w', encoding='utf-8')
+            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
+                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
             setfile.write('1\n' if self.毒瓶强化.isChecked() else '0\n')
             setfile.write('1\n' if self.毒针强化.isChecked() else '0\n')
             setfile.write('1\n' if self.砖块强化.isChecked() else '0\n')
@@ -643,5 +667,3 @@ class 归元·街霸·男(角色窗口):
             属性.技能栏[属性.技能序号['逆道·爆狱']].攻击次数2 = 1
             属性.技能栏[属性.技能序号['逆道·爆狱']].灼伤基础 = 1889 * 5
             属性.技能栏[属性.技能序号['逆道·爆狱']].灼伤成长 = 214 * 5
-
-

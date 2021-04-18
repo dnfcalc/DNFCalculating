@@ -1,7 +1,7 @@
 from .basic_equ import *
 
 
-#region  防具套装
+# region  防具套装
 class 套装效果0(套装):
     名称 = '遗忘魔法师的馈赠'
     件数 = 2
@@ -1389,10 +1389,10 @@ class 套装效果44(套装):
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.04)
 
 
-#endregion
+# endregion
 
 
-#region  散搭套装
+# region  散搭套装
 class 套装效果45(套装):
     名称 = '深渊窥视者'
     件数 = 2
@@ -2159,10 +2159,10 @@ class 套装效果68(套装):
         self.属性描述 += 属性.觉醒增加(一觉力智=110)
 
 
-#endregion
+# endregion
 
 
-#region  首饰套装
+# region  首饰套装
 class 套装效果69(套装):
     名称 = '上古尘封术式'
     件数 = 2
@@ -2418,10 +2418,10 @@ class 套装效果76(套装):
         self.属性描述 += 属性.觉醒增加(一觉力智=26)
 
 
-#endregion
+# endregion
 
 
-#region  特殊套装
+# region  特殊套装
 class 套装效果77(套装):
     名称 = '军神的隐秘遗产'
     件数 = 2
@@ -2694,10 +2694,10 @@ class 套装效果84(套装):
         self.属性描述 += 属性.觉醒增加(一觉Lv=2)
 
 
-#endregion
+# endregion
 
 
-#region  其它套装
+# region  其它套装
 class 套装效果85(套装):
     名称 = '超界·苍穹之云'
     件数 = 3
@@ -4345,10 +4345,10 @@ class 套装效果118(套装):
         return temp
 
 
-#endregion
+# endregion
 
 
-#region 新增传说两件套 &光环套
+# region 新增传说两件套 &光环套
 class 套装效果119(套装):
     名称 = '维度崩坏'
     件数 = 2
@@ -4815,4 +4815,4 @@ class 套装效果126(套装):
             self.属性描述 += 属性.被动增加(转职被动智力=120)
 
 
-#endregion
+# endregion

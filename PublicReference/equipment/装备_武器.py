@@ -1,5 +1,5 @@
 from .basic_equ import *
-#region  100SS武器
+# region  100SS武器
 
 
 class 飘零之花武器(装备):
@@ -2773,7 +2773,7 @@ class 装备73(装备):
         pass
 
 
-#endregion
+# endregion
 
 # region 智慧产物武器
 
@@ -3284,7 +3284,7 @@ class 装备389(飘零之花武器):
 
 # endregion
 
-#region  夜语黑瞳武器
+# region  夜语黑瞳武器
 
 
 class 夜语黑瞳武器(装备):
@@ -3708,10 +3708,10 @@ class 装备310(夜语黑瞳武器):
     独立攻击力 = 723
 
 
-#endregion
+# endregion
 
 
-#region  暗黑圣战之溯回武器
+# region  暗黑圣战之溯回武器
 class 暗黑圣战之溯回武器(装备):
     模式 = 1
     所属套装 = '无'
@@ -4123,4 +4123,4 @@ class 装备527(暗黑圣战之溯回武器):
     独立攻击力 = 719
 
 
-#endregion
+# endregion

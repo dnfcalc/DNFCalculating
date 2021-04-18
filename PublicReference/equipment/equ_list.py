@@ -1,6 +1,14 @@
-#装备属性部分
+# 装备属性部分
 # import json
 # import os
+
+from PublicReference.utils.constant import *
+from .装备_套装 import *
+from .装备_特殊 import *
+from .装备_首饰 import *
+from .装备_防具 import *
+from .装备_武器 import *
+from .基础函数 import *
 
 装备版本 = "GF"
 
@@ -9,15 +17,8 @@
 #     装备版本 = versionInfo['EquipmentVersion']
 # fp.close()
 
-from PublicReference.utils.constant import *
-from .基础函数 import *
 
 # if 装备版本.upper() == "GF":
-from .装备_武器 import *
-from .装备_防具 import *
-from .装备_首饰 import *
-from .装备_特殊 import *
-from .装备_套装 import *
 
 # else:
 #     from .装备_武器_HF import *

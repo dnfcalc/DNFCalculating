@@ -1,7 +1,7 @@
 from .basic_equ import *
 
 
-#region  100SS首饰
+# region  100SS首饰
 class 装备180(装备):
     名称 = '莱多：变幻的规律'
     模式 = 0
@@ -1696,7 +1696,7 @@ class 装备211(装备):
         self.属性描述 += 属性.BUFF增加(BUFF智力per=1.08)
 
 
-#endregion
+# endregion
 
 
 # region 智慧产物
@@ -2236,7 +2236,7 @@ class 装备530(装备):
             self.属性描述 += 属性.被动增加(守护恩赐体精=30)
 
 
-#endregion
+# endregion
 
 
 # region 普雷
@@ -4019,7 +4019,7 @@ class 装备476(装备):
 # endregion
 
 
-#region 100光环传说
+# region 100光环传说
 class 装备479(装备):
     名称 = '轮回·先贤的馈赠手镯'
     模式 = 1

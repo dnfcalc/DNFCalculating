@@ -23,7 +23,8 @@ class CalcData():
 
         # 被分配的计算范围
         self.mode_index = 0  # 0-极速模式，1-套装模式，2-散件模式
-        self.start_index = 0  # 在并发搜索任务组中分配到的开始序号：极速模式和套装模式时，任务组定义为按照原搜索组合算法得到的有效穿戴组合等；散件模式时，定义为0-level层串行搜索形成的所有子树
+        # 在并发搜索任务组中分配到的开始序号：极速模式和套装模式时，任务组定义为按照原搜索组合算法得到的有效穿戴组合等；散件模式时，定义为0-level层串行搜索形成的所有子树
+        self.start_index = 0
         self.end_index = 0  # 在并发搜索任务组中分配到的结束序号，描述同上
 
         # 原始数据
@@ -221,11 +222,11 @@ def calc_speed_and_set_mode(data):
                     calc_damage(temp1 + [i], 套装适用[count], sign2, data)
                     # logger.warning("consumer {} {} {} - {}".format(
                     #     data.mode_index, data.start_index, data.end_index, current_index
-                    #))
+                    # ))
     pass
 
 
-#11层循环顺序
+# 11层循环顺序
 顺序 = [5, 8, 1, 3, 2, 4, 6, 9, 7, 10]
 顺序字典 = {0: 0, 5: 1, 8: 2, 1: 3, 3: 4, 2: 5, 4: 6, 6: 7, 9: 8, 7: 9, 10: 10}
 
@@ -252,12 +253,15 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
     for j in 套装:
         if j == '智慧产物':
             num += 1
-            if num > 种类[1]: return 1
+            if num > 种类[1]:
+                return 1
         elif (j != '无') and (j not in count):
             count.append(j)
 
-    if len(count) > 种类[0]: return 1
-    elif x == 10 and 种类[0] > 4: 种类[0] = max(min(种类[0], len(count)), 4)
+    if len(count) > 种类[0]:
+        return 1
+    elif x == 10 and 种类[0] > 4:
+        种类[0] = max(min(种类[0], len(count)), 4)
 
     if x == 0:
         神话[5] = 0
@@ -267,7 +271,8 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
 
     if 装备列表[i].品质 == '神话':
         神话[x] = 1
-        if sum(神话) > 1: return 1
+        if sum(神话) > 1:
+            return 1
     else:
         神话[x] = 0
 
@@ -283,24 +288,31 @@ def calc_single_mode(data):
     种类 = [11, data.智慧产物限制]
 
     for a1 in data.有效部位列表[0]:
-        if 筛选(a1, 0, 装备, 套装, 神话, 种类, data): continue
+        if 筛选(a1, 0, 装备, 套装, 神话, 种类, data):
+            continue
         for a2 in data.有效部位列表[5]:
-            if 筛选(a2, 5, 装备, 套装, 神话, 种类, data): continue
+            if 筛选(a2, 5, 装备, 套装, 神话, 种类, data):
+                continue
             for a3 in data.有效部位列表[8]:
-                if 筛选(a3, 8, 装备, 套装, 神话, 种类, data): continue
+                if 筛选(a3, 8, 装备, 套装, 神话, 种类, data):
+                    continue
                 for a4 in data.有效部位列表[1]:
-                    if 筛选(a4, 1, 装备, 套装, 神话, 种类, data): continue
+                    if 筛选(a4, 1, 装备, 套装, 神话, 种类, data):
+                        continue
                     current_index += 1
                     if current_index < data.start_index:
                         continue  # 尚未到本工作线程需要计算的范围
                     if current_index > data.end_index:
                         return  # 本工作线程需要计算的范围已全部完成，直接退出
                     for a5 in data.有效部位列表[3]:
-                        if 筛选(a5, 3, 装备, 套装, 神话, 种类, data): continue
+                        if 筛选(a5, 3, 装备, 套装, 神话, 种类, data):
+                            continue
                         for a6 in data.有效部位列表[2]:
-                            if 筛选(a6, 2, 装备, 套装, 神话, 种类, data): continue
+                            if 筛选(a6, 2, 装备, 套装, 神话, 种类, data):
+                                continue
                             for a7 in data.有效部位列表[4]:
-                                if 筛选(a7, 4, 装备, 套装, 神话, 种类, data): continue
+                                if 筛选(a7, 4, 装备, 套装, 神话, 种类, data):
+                                    continue
                                 for a8 in data.有效部位列表[6]:
                                     if 筛选(a8, 6, 装备, 套装, 神话, 种类, data):
                                         continue

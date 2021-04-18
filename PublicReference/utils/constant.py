@@ -27,7 +27,7 @@ from PublicReference.utils.config import *
 
 
 def resource_path(relative_path):
-    if getattr(sys, 'frozen', False):  #是否Bundle Resource
+    if getattr(sys, 'frozen', False):  # 是否Bundle Resource
         base_path = sys._MEIPASS
     else:
         base_path = os.path.abspath(".")
@@ -36,7 +36,7 @@ def resource_path(relative_path):
 
 dllPath = resource_path(os.path.join("DLL", "Preferred.dll"))
 
-#100级史诗套数据
+# 100级史诗套数据
 防具套装 = [
     "古代祭祀的神圣仪式", "遗忘魔法师的馈赠", "天堂舞姬", "死亡阴影", "皇家裁决者宣言", "龙血玄黄", "贫瘠沙漠的遗产",
     "炙炎之盛宴", "擎天战甲", "噩梦：地狱之路", "传奇铁匠-封神", "荆棘漫天", "永恒不息之路", "命运歧路", "大自然的呼吸"
@@ -84,7 +84,7 @@ def getQCSS(FileName):
         return ''
 
 
-#部分控件样式
+# 部分控件样式
 按钮样式 = getQCSS('按钮样式')
 # if 按钮样式 == '' : 按钮样式 = 'QPushButton{font-size:12px;color:white;background-color:rgba(70,134,197,0.8);border:1px;border-radius:10px} QPushButton:hover{background-color:rgba(65,105,225,0.8)}'
 

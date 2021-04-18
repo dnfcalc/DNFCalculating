@@ -1,4 +1,5 @@
 ﻿
+import PyQt5.QtCore as qtc
 import multiprocessing
 from PyQt5.QtCore import QUrl, QThread
 from PyQt5.QtWidgets import QApplication
@@ -20,7 +21,7 @@ import urllib.request
 import subprocess
 import base64
 
-#配置PyQt5环境变量
+# 配置PyQt5环境变量
 import PyQt5
 dirname = os.path.dirname(PyQt5.__file__)
 plugin_path = os.path.join(dirname, 'Qt5', 'plugins')
@@ -43,7 +44,7 @@ class Worker(QThread):
         self.fileURL = fileURL
 
     def __del__(self):
-        #线程状态改变与线程终止
+        # 线程状态改变与线程终止
         self.working = False
         self.wait()
 
@@ -78,8 +79,8 @@ class Worker(QThread):
         for f in zip_list:
             # if not f.endswith('desktop.ini'):
             zip_file.extract(f, path)
-                # extracted_path.rename(newName)
-                # 循环解压文件到指定目录
+            # extracted_path.rename(newName)
+            # 循环解压文件到指定目录
         zip_file.close()
         # print(path+'\download')
         try:
@@ -100,6 +101,7 @@ class 选择窗口(QWidget):
     网盘报错 = 0
 
     _signal = QtCore.pyqtSignal(int)
+
     def __init__(self):
         super().__init__()
         self.thread_init()
@@ -201,7 +203,7 @@ class 选择窗口(QWidget):
                 QPixmap("ResourceFiles/img/分类/" + str(i) + ".png"))
 
         #wrapper = QWidget()
-        #self.setCentralWidget(wrapper)
+        # self.setCentralWidget(wrapper)
         self.topFiller = QWidget()
         self.topFiller.setMinimumSize(750, 1520)
 
@@ -378,7 +380,7 @@ class 选择窗口(QWidget):
 
     def openSet(self):
         self.processpid = []
-        self.setWindow = SetWindows(self.worker,self)
+        self.setWindow = SetWindows(self.worker, self)
         # self.setWindow._signal.connect(self.closeSet)
         self.win = MainWindow(self.setWindow)
         self.win.show()
@@ -386,7 +388,6 @@ class 选择窗口(QWidget):
     def closeSet(self, parameter):
         if parameter == 1:
             win.close()
-
 
     def 打开窗口(self, name):
         if self.char_window != None:
@@ -407,7 +408,6 @@ class 选择窗口(QWidget):
         赞赏码.loadFromData(base64.b64decode(img.二维码))
         主背景.setPixmap(赞赏码)
         self.w.show()
-
 
     def 职业版本判断(self, index):
         try:
@@ -541,7 +541,7 @@ class 选择窗口(QWidget):
 class SetWindows(QWidget):
     # _signal = QtCore.pyqtSignal(int)
 
-    def __init__(self,worker,parWin):
+    def __init__(self, worker, parWin):
         super().__init__()
         self.worker = worker
         self.parWin = parWin
@@ -553,7 +553,8 @@ class SetWindows(QWidget):
         super().closeEvent(event)
 
     def read(self):
-        if not os.path.exists("ResourceFiles/Config/set.json"): return
+        if not os.path.exists("ResourceFiles/Config/set.json"):
+            return
         with open("ResourceFiles/Config/set.json", encoding='utf-8') as fp:
             set_info = json.load(fp)
         fp.close()
@@ -657,18 +658,17 @@ class SetWindows(QWidget):
             os.execl(python, python, *sys.argv)
         else:
             os.startfile(目录)
-        #用的是杀死进程的方法，有机会改改
+        # 用的是杀死进程的方法，有机会改改
         os.system("taskkill /pid {} -f".format(主进程PID))
         # self.close()
 
 
-import PyQt5.QtCore as qtc
 if __name__ == '__main__':
     主进程PID = os.getpid()
     目录 = sys.argv[0]
     if len(sys.argv) > 1:
         try:
-            #杀老进程
+            # 杀老进程
             os.system("taskkill /pid {} -f".format(sys.argv[1]))
             time.sleep(2)
             if "main.py" not in sys.argv[2]:

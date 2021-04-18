@@ -30,7 +30,7 @@ class 技能:
 
     def 结算统计(self):
         return [0, 0, 0, 0, 0, 0, 0, 0]
-        #智力 体力 精神  力量  智力  物攻  魔攻 独立
+        # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
 
 class 被动技能(技能):
@@ -301,7 +301,7 @@ class 角色属性(属性):
             self.体力 += 神话上衣额外体力
             self.精神 += 神话上衣额外精神
         for i in [0, 1, 2, 3, 4]:
-            #精通
+            # 精通
             temp = 装备列表[装备序号[self.装备栏[i]]]
             x = self.防具精通计算(i)
             if '智力' in self.防具精通属性:
@@ -310,7 +310,7 @@ class 角色属性(属性):
                 self.体力 += x
             if '精神' in self.防具精通属性:
                 self.精神 += x * 2
-            #装备属性
+            # 装备属性
             if temp.等级 == 100 and temp.品质 in ['史诗', '神话']:
                 self.智力 += 史诗防具智力Lv100[temp.部位]
                 self.体力 += 史诗防具体力Lv100[temp.部位]
@@ -452,7 +452,7 @@ class 角色属性(属性):
                     else:
                         i.适用数值 = self.进图精神
 
-    #返回可能的组合列表
+    # 返回可能的组合列表
     def 装备替换(self, 属性):
         套装栏 = []
         for i in 属性.套装栏:
@@ -468,14 +468,14 @@ class 角色属性(属性):
         count2 = 0
 
         for i in range(7):
-            #3332散搭
+            # 3332散搭
             if 套装栏[i] in 匹配1[i]:
                 count.append(1)
             elif 套装栏[i] in 匹配0[i]:
                 count.append(0)
             else:
                 count.append(-9)
-            #3233双防具
+            # 3233双防具
             if 套装栏[i] in 匹配[i]:
                 count2 += 1
 
@@ -556,10 +556,10 @@ class 角色属性(属性):
     def 数据计算(self):
         总数据 = []
         if self.双装备模式 == 1 and self.次数输入[self.一觉序号] != 0:
-            #用于计算一觉
+            # 用于计算一觉
             temp = deepcopy(self)
 
-            #拷贝数据,并修改装备,返回可能的组合
+            # 拷贝数据,并修改装备,返回可能的组合
             数据列表 = []
             切换列表 = []
             一觉计算属性_temp = []
@@ -573,10 +573,10 @@ class 角色属性(属性):
                 数据列表.append(
                     一觉计算属性.技能栏[self.一觉序号].结算统计()[3] *
                     (一觉计算属性.技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0
-                     and self.次数输入[self.三觉序号] != 0 else 1))  #3是力量属性  一觉力智都是相等的
+                     and self.次数输入[self.三觉序号] != 0 else 1))  # 3是力量属性  一觉力智都是相等的
                 切换列表.append(一觉计算属性.切换详情)
 
-            #取一觉最大值,并修改数据
+            # 取一觉最大值,并修改数据
             a = max(数据列表)
             序号 = 数据列表.index(a)
             if 序号 != 0:
@@ -588,9 +588,9 @@ class 角色属性(属性):
                             int(a)) + ' (+' + str(int(a) - int(数据列表[0])) + ')'
             else:
                 temp = ''
-            #计算现有装备BUFF
+            # 计算现有装备BUFF
             self.装备属性计算()
-            #一觉属性替换
+            # 一觉属性替换
             替换属性 = 替换属性_temp[序号]
             self.一觉Lv = 替换属性.一觉Lv
             self.一觉力智 = 替换属性.一觉力智
@@ -1056,7 +1056,7 @@ class 角色窗口(窗口):
         self.存档选择.resize(90, 24)
         self.存档选择.currentIndexChanged.connect(lambda state: self.存档更换())
 
-        #一键修正按钮添加
+        # 一键修正按钮添加
         self.一键站街设置输入.append(QLineEdit(self.main_frame1))
         self.一键站街设置输入[0].setAlignment(Qt.AlignCenter)
         self.一键站街设置输入[0].setStyleSheet(输入框样式)
@@ -1073,7 +1073,7 @@ class 角色窗口(窗口):
         # 第二个布局界面
         self.main_frame2 = QWidget()
 
-        #技能等级、次数输入
+        # 技能等级、次数输入
 
         self.护石第一栏 = MyQComboBox(self.main_frame2)
         self.护石第二栏 = MyQComboBox(self.main_frame2)
@@ -1121,7 +1121,8 @@ class 角色窗口(窗口):
             x = QLabel(self.main_frame2)
             x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
             x.resize(28, 28)
-            tempstr = '<font size="3" face="宋体"><font color="#FF6666">' + i.名称 + i.备注 + '</font><br>'
+            tempstr = '<font size="3" face="宋体"><font color="#FF6666">' + \
+                i.名称 + i.备注 + '</font><br>'
             tempstr += '所在等级:' + str(i.所在等级) + '<br>'
             tempstr += '等级上限:' + str(i.等级上限) + '</font>'
             x.setToolTip(tempstr)
@@ -1186,7 +1187,7 @@ class 角色窗口(窗口):
         for i in range(4):
             x = MyQComboBox(self.main_frame2)
             for j in 辟邪玉列表:
-                #'[' + str(j.编号) + ']' +
+                # '[' + str(j.编号) + ']' +
                 x.addItem(j.名称)
             x.resize(200, 20)
             x.move(395, 140 + i * 25)
@@ -1691,7 +1692,7 @@ class 角色窗口(窗口):
         self.神话部位选项.activated.connect(lambda state: self.神话部位更改())
 
         count += 1
-        #一键修正按钮添加
+        # 一键修正按钮添加
         self.一键站街设置输入.append(QLineEdit(self.main_frame5))
         self.一键站街设置输入[1].setAlignment(Qt.AlignCenter)
         self.一键站街设置输入[1].setStyleSheet(输入框样式)
@@ -1854,7 +1855,7 @@ class 角色窗口(窗口):
             for i in range(8):
                 套装字典[self.时装选项[i].currentText()] = 套装字典.get(
                     self.时装选项[i].currentText(), 0) + 1
-            #套装属性
+            # 套装属性
             神器 = 套装字典['神器']
             稀有 = 套装字典['稀有'] + 神器
             if 套装字典['高级'] >= 3:
@@ -1886,10 +1887,10 @@ class 角色窗口(窗口):
                 体力 += 50
                 精神 += 50
             数据 = [45, 45, 55, 65]
-            智力 += 数据[self.时装选项[0].currentIndex()]  #头部
-            精神 += 数据[self.时装选项[0].currentIndex()]  #头部
-            智力 += 数据[self.时装选项[1].currentIndex()]  #帽子
-            精神 += 数据[self.时装选项[1].currentIndex()]  #帽子
+            智力 += 数据[self.时装选项[0].currentIndex()]  # 头部
+            精神 += 数据[self.时装选项[0].currentIndex()]  # 头部
+            智力 += 数据[self.时装选项[1].currentIndex()]  # 帽子
+            精神 += 数据[self.时装选项[1].currentIndex()]  # 帽子
             数据 = [0, 0, 55, 65]
             体力 += 数据[self.时装选项[5].currentIndex()]  # 腰带
             数据 = [45, 45, 55, 65]
@@ -2088,7 +2089,7 @@ class 角色窗口(窗口):
             pass
 
         try:
-            self.批量选择(0)  #先清空
+            self.批量选择(0)  # 先清空
             setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
                            '/equ.ini',
                            'r',
@@ -2954,7 +2955,7 @@ class 角色窗口(窗口):
         统计详情 = self.角色属性B.BUFF计算(1)
         提升率 = temp.BUFF计算(0)
 
-        #最大输出界面限制
+        # 最大输出界面限制
         if len(self.输出窗口列表) >= 10:
             del self.输出窗口列表[0]
 
@@ -3297,64 +3298,64 @@ class 角色窗口(窗口):
                 每行详情 = []
                 for k in range(0, 10):
                     每行详情.append(QLabel(输出窗口))
-                #图片
+                # 图片
                 每行详情[0].setPixmap(self.技能图片[i])
                 每行详情[0].move(302, 50 + j * self.行高 - pox_y)
                 每行详情[0].resize(28, min(28, self.行高 - 2))
-                #等级
+                # 等级
                 每行详情[1].setText('Lv.' + str(实际技能等级[i]))
                 每行详情[1].move(337, 50 + j * self.行高 - pox_y)
                 每行详情[1].resize(30, min(28, self.行高))
-                #智力
+                # 智力
                 if 显示模式 == 1:
                     每行详情[2].setText(self.对比输出(统计详情[i][0], self.基准值[1][i][0]))
                 else:
                     每行详情[2].setText(str(统计详情[i][0]))
                 每行详情[2].move(370, 50 + j * self.行高 - pox_y)
                 每行详情[2].resize(50, min(28, self.行高))
-                #体力
+                # 体力
                 if 显示模式 == 1:
                     每行详情[3].setText(self.对比输出(统计详情[i][1], self.基准值[1][i][1]))
                 else:
                     每行详情[3].setText(str(统计详情[i][1]))
                 每行详情[3].move(410, 50 + j * self.行高 - pox_y)
                 每行详情[3].resize(50, min(28, self.行高))
-                #精神
+                # 精神
                 if 显示模式 == 1:
                     每行详情[4].setText(self.对比输出(统计详情[i][2], self.基准值[1][i][2]))
                 else:
                     每行详情[4].setText(str(统计详情[i][2]))
                 每行详情[4].move(450, 50 + j * self.行高 - pox_y)
                 每行详情[4].resize(50, min(28, self.行高))
-                #力量
+                # 力量
                 if 显示模式 == 1:
                     每行详情[5].setText(self.对比输出(统计详情[i][3], self.基准值[1][i][3]))
                 else:
                     每行详情[5].setText(str(统计详情[i][3]))
                 每行详情[5].move(490, 50 + j * self.行高 - pox_y)
                 每行详情[5].resize(50, min(28, self.行高))
-                #智力
+                # 智力
                 if 显示模式 == 1:
                     每行详情[6].setText(self.对比输出(统计详情[i][4], self.基准值[1][i][4]))
                 else:
                     每行详情[6].setText(str(统计详情[i][4]))
                 每行详情[6].move(530, 50 + j * self.行高 - pox_y)
                 每行详情[6].resize(50, min(28, self.行高))
-                #物攻
+                # 物攻
                 if 显示模式 == 1:
                     每行详情[7].setText(self.对比输出(统计详情[i][5], self.基准值[1][i][5]))
                 else:
                     每行详情[7].setText(str(统计详情[i][5]))
                 每行详情[7].move(570, 50 + j * self.行高 - pox_y)
                 每行详情[7].resize(50, min(28, self.行高))
-                #魔攻
+                # 魔攻
                 if 显示模式 == 1:
                     每行详情[8].setText(self.对比输出(统计详情[i][6], self.基准值[1][i][6]))
                 else:
                     每行详情[8].setText(str(统计详情[i][6]))
                 每行详情[8].move(610, 50 + j * self.行高 - pox_y)
                 每行详情[8].resize(50, min(28, self.行高))
-                #独立
+                # 独立
                 if 显示模式 == 1:
                     每行详情[9].setText(self.对比输出(统计详情[i][7], self.基准值[1][i][7]))
                 else:
@@ -3407,7 +3408,8 @@ class 角色窗口(窗口):
             武器属性A = 武器属性A列表[武器词条最高值[0]]
             武器属性B = 武器属性B列表[武器词条最高值[1]]
             # tempstr += '<br><br>' + "属性1:" +"<font style='color:gray'>"+武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + str(武器属性A.最大值)+ ('%' if 武器属性A.间隔 / 10 < 1 else '')
-            tempstr += "<br><br>" + "残香 属性1:" + "<font style='color:gray'>" + 武器属性A.固定属性描述 + '</font>'
+            tempstr += "<br><br>" + "残香 属性1:" + \
+                "<font style='color:gray'>" + 武器属性A.固定属性描述 + '</font>'
             if self.角色属性B.武器词条触发 == 1:
                 # tempstr += "| 属性2:" +"<font style='color:gray'>"+武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(武器属性B.最大值)+ ('%' if 武器属性B.间隔 / 10 < 1 else '')
                 tempstr += " | 属性2:" + "<font style='color:gray'>" + 武器属性B.固定属性描述 + '</font>'
@@ -3712,11 +3714,11 @@ class 角色窗口(窗口):
                 武器属性B = 武器属性B列表[self.武器融合属性B.currentIndex()]
                 tempstr[
                     i] += "属性1:" + "<font style='color:gray'>" + 武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + self.武器融合属性A2.currentText(
-                    ) + '<br>'
+                ) + '<br>'
                 if self.角色属性B.武器词条触发 == 1:
                     tempstr[
                         i] += "属性2:" + "<font style='color:gray'>" + 武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + self.武器融合属性B2.currentText(
-                        ) + '<br>'
+                    ) + '<br>'
             # elif self.希洛克武器词条[0].currentIndex() > 0 and i == 11:
             #     tempstr[i]+='<br>'
             #     tempstr[i]+='<font color="#00A2E8">希洛克融合属性:</font><br>'
@@ -3728,7 +3730,8 @@ class 角色窗口(窗口):
             #         tempstr[i]+="属性1:{} +{}%<br>".format(武器词条属性[self.希洛克武器词条[1].currentIndex()],(self.希洛克武器词条[3].currentIndex() + 3) * 2)
             #         if sum(数量)==3:
             #             tempstr[i]+="属性2:{} +{}%<br>".format(武器词条属性[self.希洛克武器词条[2].currentIndex()],(self.希洛克武器词条[4].currentIndex() + 3) * 1)
-            if tempstr[i].endswith('<br>'): tempstr[i] = tempstr[i][:-4]
+            if tempstr[i].endswith('<br>'):
+                tempstr[i] = tempstr[i][:-4]
             tempstr[i] += '</font>'
         return tempstr
 
@@ -3948,7 +3951,7 @@ class 角色窗口(窗口):
                                         str(
                                             int((float(
                                                 self.次数输入[序号].currentText()) +
-                                                 0.001) * 100) / 100))
+                                                0.001) * 100) / 100))
                             else:
                                 QMessageBox.information(
                                     self, "错误",
@@ -4094,7 +4097,7 @@ class 角色窗口(窗口):
                     self.属性设置输入[9][j].setText('')
             else:
                 temp.append(0.0)
-        #神话补正
+        # 神话补正
         if 属性.类型 == '智力':
             属性.转职被动智力 += int(temp[0])
             属性.BUFF力量per *= 1 + temp[1]

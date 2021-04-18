@@ -134,7 +134,7 @@ class 属性():
             self.魔法攻击力 += temp.魔法攻击力
             self.独立攻击力 += temp.独立攻击力
 
-        #耳环
+        # 耳环
         temp = 装备列表[装备序号[self.装备栏[8]]]
         if temp.所属套装 != '智慧产物':
             x = 耳环计算(temp.等级, temp.品质, self.强化等级[8])
@@ -142,7 +142,7 @@ class 属性():
             self.魔法攻击力 += x
             self.独立攻击力 += x
 
-        #辅助装备、魔法石
+        # 辅助装备、魔法石
         for i in [9, 10]:
             temp = 装备列表[装备序号[self.装备栏[i]]]
             if temp.所属套装 != '智慧产物':
@@ -222,14 +222,14 @@ class 窗口(QWidget):
         self.界面()
         self.布局界面()
 
-        #创建配置文件夹
+        # 创建配置文件夹
         path = './ResourceFiles/{}/set'.format(self.角色属性A.实际名称)
         if not os.path.exists(path):
             os.makedirs(path)
 
         self.存档列表读取()
 
-        #判断从哪读取数据
+        # 判断从哪读取数据
         if os.path.exists(path + '/attr.ini'):
             self.载入配置('set')
         else:
@@ -704,7 +704,7 @@ class 窗口(QWidget):
 
     def 界面4(self):
 
-        #第四个布局
+        # 第四个布局
         self.main_frame4 = QWidget()
 
         self.神话属性选项 = []
@@ -1047,7 +1047,7 @@ class 窗口(QWidget):
     def 装备图标点击事件(self, index, sign, x=1):
         if 装备列表[index].模式 == 0:
             try:
-                #改变状态
+                # 改变状态
                 if sign == 10:
                     if self.装备选择状态[index] == 0:
                         self.遮罩透明度[index].setOpacity(0.0)
@@ -1055,11 +1055,11 @@ class 窗口(QWidget):
                     else:
                         self.遮罩透明度[index].setOpacity(0.5)
                         self.装备选择状态[index] = 0
-                #点亮
+                # 点亮
                 if sign == 1:
                     self.遮罩透明度[index].setOpacity(0.0)
                     self.装备选择状态[index] = 1
-                #熄灭
+                # 熄灭
                 if sign == 0:
                     self.遮罩透明度[index].setOpacity(0.5)
                     self.装备选择状态[index] = 0
@@ -1317,7 +1317,7 @@ class 窗口(QWidget):
                         count += 1
         return count * len(self.有效部位列表[1])
 
-    #计算
+    # 计算
     def 计算(self):
         self.角色属性A = deepcopy(self.初始属性)
         self.输入属性(self.角色属性A)
@@ -1646,7 +1646,7 @@ class 窗口(QWidget):
             排行背景.setAlignment(Qt.AlignCenter)
 
         #wrapper = QWidget()
-        #滚动排行.setCentralWidget(wrapper)
+        # 滚动排行.setCentralWidget(wrapper)
         滚动排行.topFiller = QWidget()
         滚动排行.topFiller.setMinimumSize(570, 50 * len(显示序号) + 30)
 
@@ -1671,8 +1671,8 @@ class 窗口(QWidget):
         if 输出数据 == 1 and len(筛选) == 0:
             setfile = open('./数据记录/{}-{}.csv'.format(
                 self.角色属性A.实际名称, time.strftime('%m-%d-%H-%M-%S')),
-                           'w',
-                           encoding='gbk')
+                'w',
+                encoding='gbk')
             for i in range(len(显示序号)):
                 temp = ''
                 for j in range(13):
@@ -1826,7 +1826,7 @@ class 窗口(QWidget):
                             if sign2 == '空' and 装备列表[index].品质 != '神话' and 装备列表[
                                     index].所属套装 not in [
                                         '精灵使的权能', '大自然的呼吸', '能量主宰'
-                                    ]:
+                            ]:
                                 sign += 1
                     if sign == 11:
                         count += len(self.有效武器列表)
@@ -1855,7 +1855,7 @@ class 技能详情(QFrame):
                 # self.data.append([])
                 for k in range(0, 7):
                     每行详情.append(QLabel(self.topFiller))
-                #图片
+                # 图片
                 每行详情[0].setPixmap(data.技能图片[i])
                 每行详情[0].resize(28, min(28, data.行高 - 2))
                 百分比 = ''
@@ -1888,22 +1888,22 @@ class 技能详情(QFrame):
 
                 每行详情[0].move(302 - pox_x, pox_y + j * data.行高)
                 self.data[j].append(data.角色属性B.技能栏[i].名称)
-                #等级
+                # 等级
                 每行详情[1].setText('Lv.' + str(实际技能等级[i]))
                 每行详情[1].move(337 - pox_x, pox_y + j * data.行高)
                 每行详情[1].resize(30, min(28, data.行高))
                 self.data[j].append(实际技能等级[i])
-                #CD
+                # CD
                 每行详情[2].setText('{:0.1f}s'.format(技能等效CD[i]))
                 每行详情[2].move(380 - pox_x, pox_y + j * data.行高)
                 每行详情[2].resize(36, min(28, data.行高))
                 self.data[j].append(round(技能等效CD[i], 1))
-                #次数
+                # 次数
                 每行详情[3].setText(str(round(统计详情[i * 4], 1)).replace('.0', ''))
                 每行详情[3].move(418 - pox_x, pox_y + j * data.行高)
                 每行详情[3].resize(30, min(28, data.行高))
                 self.data[j].append(round(统计详情[i * 4], 1))
-                #总伤害
+                # 总伤害
                 if 显示模式 == 1:
                     每行详情[4].setText(
                         data.百分比输出(统计详情[i * 4 + 1], data.基准值[1][i * 4 + 1]))
@@ -1912,7 +1912,7 @@ class 技能详情(QFrame):
                 每行详情[4].move(448 - pox_x, pox_y + j * data.行高)
                 每行详情[4].resize(108, min(28, data.行高))
                 self.data[j].append(int(统计详情[i * 4 + 1]))
-                #平均伤害
+                # 平均伤害
                 if 显示模式 == 1:
                     每行详情[5].setText(
                         data.百分比输出(统计详情[i * 4 + 2], data.基准值[1][i * 4 + 2]))
@@ -1921,7 +1921,7 @@ class 技能详情(QFrame):
                 每行详情[5].move(555 - pox_x, pox_y + j * data.行高)
                 每行详情[5].resize(108, min(28, data.行高))
                 self.data[j].append(int(统计详情[i * 4 + 2]))
-                #占比
+                # 占比
                 每行详情[6].setText(str(round(统计详情[i * 4 + 3], 1)) + '%')
                 每行详情[6].move(660 - pox_x, pox_y + j * data.行高)
                 每行详情[6].resize(108, min(28, data.行高))

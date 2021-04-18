@@ -1,7 +1,7 @@
 from .basic_equ import *
 
 
-#region  100SS防具
+# region  100SS防具
 class 装备74(装备):
     名称 = '魔法师[???]的长袍'
     模式 = 0
@@ -4309,7 +4309,7 @@ class 装备179(装备):
         self.属性描述 += 属性.BUFF增加(BUFF独立per=1.25)
 
 
-#endregion
+# endregion
 
 
 # region 智慧产物
@@ -4826,7 +4826,7 @@ class 装备256(装备):
 # endregion
 
 
-#region  超界
+# region  超界
 class 装备311(装备):
     名称 = '超界·苍天之幕：卷层云'
     所属套装 = '超界·苍穹之云'
@@ -5784,10 +5784,10 @@ class 装备335(装备):
         self.属性描述 += 属性.被动增加(转职被动智力=200)
 
 
-#endregion
+# endregion
 
 
-#region  100改造&传说
+# region  100改造&传说
 class 装备362(装备):
     名称 = '轮回·黑暗幽灵紫杉胸甲'
     模式 = 1
@@ -6155,10 +6155,10 @@ class 装备370(装备):
         self.属性描述 += 属性.被动增加(转职被动智力=285)
 
 
-#endregion
+# endregion
 
 
-#region 改造低级SS
+# region 改造低级SS
 class 装备398(装备):
     名称 = '刻印：文韬妙策上衣'
     所属套装 = '兵法之神'
@@ -6979,7 +6979,7 @@ class 装备430(装备):
         属性.独立攻击力 += 138
         pass
 
-    def 进图属性(self, 属性):  #mp<85%
+    def 进图属性(self, 属性):  # mp<85%
         self.属性描述 += 属性.物理暴击率增加(0.15)
         self.属性描述 += 属性.魔法暴击率增加(0.15)
         pass
@@ -8212,10 +8212,10 @@ class 装备468(装备):
         return temp
 
 
-#endregion
+# endregion
 
 
-#region 100光环传说
+# region 100光环传说
 class 装备483(装备):
     名称 = '轮回·鲜红血纹皮甲胸铠'
     模式 = 1
@@ -8528,4 +8528,4 @@ class 装备490(装备):
         return temp
 
 
-#endregion
+# endregion

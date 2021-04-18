@@ -6,7 +6,7 @@ from .constant import 标题背景, 标题字体
 
 RES_PATH = './ResourceFiles/img/UI/'
 
-#title bar
+# title bar
 TITLE_BAR_HEIGHT = 25
 TITLE_BUTTON_SIZE = 25
 TITLE_LABEL_SIZE = 25

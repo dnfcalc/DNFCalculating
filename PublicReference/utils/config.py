@@ -70,13 +70,14 @@ SkinVersion = ["DNFStyle", "LightStyle", "None"][setJson['5']]
 千蛛减防 = setJson['11']
 
 if 输出数据 == 1:
-    if not os.path.exists('./数据记录'): os.makedirs('./数据记录')
+    if not os.path.exists('./数据记录'):
+        os.makedirs('./数据记录')
 
 #攻击目标##################################################################
 
 readConfig('./ResourceFiles/Config/攻击目标.ini')
 
-#怪物属性
+# 怪物属性
 攻击目标 = []
 for i in range(100):
     try:
