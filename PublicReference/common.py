@@ -1671,8 +1671,8 @@ class 窗口(QWidget):
         if 输出数据 == 1 and len(筛选) == 0:
             setfile = open('./数据记录/{}-{}.csv'.format(
                 self.角色属性A.实际名称, time.strftime('%m-%d-%H-%M-%S')),
-                'w',
-                encoding='gbk')
+                           'w',
+                           encoding='gbk')
             for i in range(len(显示序号)):
                 temp = ''
                 for j in range(13):
@@ -1826,7 +1826,7 @@ class 窗口(QWidget):
                             if sign2 == '空' and 装备列表[index].品质 != '神话' and 装备列表[
                                     index].所属套装 not in [
                                         '精灵使的权能', '大自然的呼吸', '能量主宰'
-                            ]:
+                                    ]:
                                 sign += 1
                     if sign == 11:
                         count += len(self.有效武器列表)

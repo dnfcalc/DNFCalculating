@@ -17,7 +17,6 @@ from .基础函数 import *
 #     装备版本 = versionInfo['EquipmentVersion']
 # fp.close()
 
-
 # if 装备版本.upper() == "GF":
 
 # else:

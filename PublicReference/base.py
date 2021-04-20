@@ -5627,7 +5627,7 @@ class 角色窗口(窗口):
                                         属性.次数输入.append(
                                             int((float(
                                                 self.次数输入[序号].currentText()) +
-                                                0.001) * 100) / 100)
+                                                 0.001) * 100) / 100)
                                         self.次数输入[序号].setCurrentText(
                                             str(
                                                 int((float(self.次数输入[序号].

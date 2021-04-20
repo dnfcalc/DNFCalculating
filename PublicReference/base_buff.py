@@ -572,8 +572,8 @@ class 角色属性(属性):
                 一觉计算属性_temp.append(一觉计算属性)
                 数据列表.append(
                     一觉计算属性.技能栏[self.一觉序号].结算统计()[3] *
-                    (一觉计算属性.技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0
-                     and self.次数输入[self.三觉序号] != 0 else 1))  # 3是力量属性  一觉力智都是相等的
+                    (一觉计算属性.技能栏[self.三觉序号].加成倍率() if self.三觉序号 != 0 and
+                     self.次数输入[self.三觉序号] != 0 else 1))  # 3是力量属性  一觉力智都是相等的
                 切换列表.append(一觉计算属性.切换详情)
 
             # 取一觉最大值,并修改数据
@@ -3714,11 +3714,11 @@ class 角色窗口(窗口):
                 武器属性B = 武器属性B列表[self.武器融合属性B.currentIndex()]
                 tempstr[
                     i] += "属性1:" + "<font style='color:gray'>" + 武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + self.武器融合属性A2.currentText(
-                ) + '<br>'
+                    ) + '<br>'
                 if self.角色属性B.武器词条触发 == 1:
                     tempstr[
                         i] += "属性2:" + "<font style='color:gray'>" + 武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + self.武器融合属性B2.currentText(
-                    ) + '<br>'
+                        ) + '<br>'
             # elif self.希洛克武器词条[0].currentIndex() > 0 and i == 11:
             #     tempstr[i]+='<br>'
             #     tempstr[i]+='<font color="#00A2E8">希洛克融合属性:</font><br>'
@@ -3951,7 +3951,7 @@ class 角色窗口(窗口):
                                         str(
                                             int((float(
                                                 self.次数输入[序号].currentText()) +
-                                                0.001) * 100) / 100))
+                                                 0.001) * 100) / 100))
                             else:
                                 QMessageBox.information(
                                     self, "错误",

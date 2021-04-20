@@ -1,5 +1,4 @@
-﻿
-import PyQt5.QtCore as qtc
+﻿import PyQt5.QtCore as qtc
 import multiprocessing
 from PyQt5.QtCore import QUrl, QThread
 from PyQt5.QtWidgets import QApplication
@@ -23,6 +22,7 @@ import base64
 
 # 配置PyQt5环境变量
 import PyQt5
+
 dirname = os.path.dirname(PyQt5.__file__)
 plugin_path = os.path.join(dirname, 'Qt5', 'plugins')
 os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
@@ -493,7 +493,7 @@ class 选择窗口(QWidget):
                         p.terminate()
                         p.join()
                 newpath = os.path.join(os.getcwd(), "DNF计算器 17173DNF.exe")
-                oldpath = sys.argv[0]+'.del'
+                oldpath = sys.argv[0] + '.del'
                 p = subprocess.Popen(
                     [
                         newpath,
