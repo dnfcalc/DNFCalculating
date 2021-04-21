@@ -96,7 +96,7 @@ class Worker(QThread):
 class 选择窗口(QWidget):
     计算器版本 = ''
     云端版本 = ''
-    自动检查版本 = False
+    # 自动检查版本 = False
     网盘链接 = ''
     网盘报错 = 0
 
@@ -178,7 +178,7 @@ class 选择窗口(QWidget):
         with open("ResourceFiles/Config/release_version.json") as fp:
             versionInfo = json.load(fp)
             self.计算器版本 += versionInfo['version'].replace('-', '.')
-            self.自动检查版本 = versionInfo['AutoCheckUpdate']
+            # self.自动检查版本 = versionInfo['AutoCheckUpdate']
         fp.close()
         self.setWindowTitle('DNF搭配计算器&17173DNF专区')
         self.icon = QIcon('ResourceFiles/img/logo.ico')
@@ -306,7 +306,7 @@ class 选择窗口(QWidget):
         self.版本提示.setWindowIcon(self.icon)
         self.配置错误.setWindowIcon(self.icon)
 
-        if self.自动检查版本:
+        if 自动检查更新 == 0:
             try:
                 self.网盘检查()
                 if self.网盘报错 == 1:

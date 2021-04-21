@@ -64,10 +64,11 @@ setJson = readSet("ResourceFiles/Config/set.json")
 SkinVersion = ["DNFStyle", "LightStyle", "None"][setJson['5']]
 觉醒开关 = setJson['6']
 武器排名 = setJson['7']
-天劫光环 = setJson['8']
-战术白字 = 0.40 + 0.05 * setJson['9']
-天御套装 = setJson['10']
-千蛛减防 = setJson['11']
+自动检查更新 = setJson['8']
+天劫光环 = setJson['9']
+战术白字 = 0.40 + 0.05 * setJson['10']
+天御套装 = setJson['11']
+千蛛减防 = setJson['12']
 
 if 输出数据 == 1:
     if not os.path.exists('./数据记录'):
