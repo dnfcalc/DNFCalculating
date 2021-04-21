@@ -1,5 +1,20 @@
 ## Newest
 
+### 2021-04-21
+
+#### NewFeatures
+* 皓曦·混沌魔灵：修正魔灵召唤相关数据 ([99cf2f](https://gitee.com/i_melon/DNFCalculating/commit/99cf2fc7ffb25c5e244945d771549fd46bd2e896))
+* 神启·驱魔师：区分[式神合击：灭]双脉轮形态数据差异 ([42a9b0](https://gitee.com/i_melon/DNFCalculating/commit/42a9b04baa95b4eb5e86b0d20150d69332f27295))
+* 重霄·弹药专家·男：修正爆裂弹数据及/CD算法 ([02e25a](https://gitee.com/i_melon/DNFCalculating/commit/02e25ae5e9e44aef4ab2fd4a05f329ec534ad04b))
+* 魔枪士：同步国服登陆三觉 ([de22bc](https://gitee.com/i_melon/DNFCalculating/commit/de22bcad101f4cc28c06bf8979507b7e81af7946))
+
+#### BugFixes
+* 修复未能正常关闭 ([a9c6a7](https://gitee.com/i_melon/DNFCalculating/commit/a9c6a73fd06737da65ad78822cb58f452a1e7087))
+* 修正改造武器升级词条的间隔 ([dd59dc](https://gitee.com/i_melon/DNFCalculating/commit/dd59dce21f322337fec4bc4a351de41f8d2c5883))
+* 修正黑暗幽灵紫杉长靴属性错误 ([6f889e](https://gitee.com/i_melon/DNFCalculating/commit/6f889ea5720a4694fd5716106afdfdfe9f58e227))
+* 归元·散打·女：修正部分技能数据错误 ([ac8699](https://gitee.com/i_melon/DNFCalculating/commit/ac8699c3c3db9ab76e0e8ec719837c46bcd25db1))
+* 苍暮·特工：修正[最后的任务]6级后数据错误 ([81dad6](https://gitee.com/i_melon/DNFCalculating/commit/81dad6bb64f727a81255f6be9a14a341c91b7b62))
+
 ### 2021-04-14
 
 #### NewFeatures
@@ -1175,6 +1190,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
 
 
 
