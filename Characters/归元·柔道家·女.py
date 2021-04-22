@@ -390,9 +390,11 @@ class 技能18(职业主动技能):
 
     def 装备护石(self, x):
         if x == 0:
-            self.基础 *= 0.56
-            self.成长 *= 0.56
+            self.data0 = [int(x*0.56) for x in self.data0]
             self.攻击次数 = 13
+            # self.基础 *= 0.56
+            # self.成长 *= 0.56
+            # self.攻击次数 = 13
             self.倍率 *= 1.19
     # 多段攻击力减少44% ；次数+7；攻击力+19%
 
