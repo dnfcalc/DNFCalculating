@@ -20,11 +20,11 @@ class 职业主动技能(主动技能):
             等效倍率 += self.data3[self.等级] * self.攻击次数4
         return 等效倍率 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
-    def 等效CD(self, 武器类型, 输出类型):
-        # 长枪+5%,长枪精通-13%
-        if self.所在等级 == 100 or self.所在等级 == 85 or self.所在等级 == 50:
-            return round(self.CD / self.恢复 * 武器冷却惩罚(武器类型, 输出类型, self.版本), 1)
-        return round(self.CD * 0.87 / self.恢复 * 武器冷却惩罚(武器类型, 输出类型, self.版本), 1)
+    # def 等效CD(self, 武器类型, 输出类型):
+    #     # 长枪+5%,长枪精通-13%
+    #     if self.所在等级 == 100 or self.所在等级 == 85 or self.所在等级 == 50:
+    #         return round(self.CD / self.恢复 * 武器冷却惩罚(武器类型, 输出类型, self.版本), 1)
+    #     return round(self.CD * 0.87 / self.恢复 * 武器冷却惩罚(武器类型, 输出类型, self.版本), 1)
 
 
 class 技能0(被动技能):
@@ -32,6 +32,8 @@ class 技能0(被动技能):
     所在等级 = 15
     等级上限 = 30
     基础等级 = 20
+    冷却关联技能 = ['所有']
+    非冷却关联技能 = ['流云幻灭','极影无形杀','问鼎·千军破云']
 
     def 加成倍率(self, 武器类型):
         if self.等级 == 0:
@@ -44,6 +46,11 @@ class 技能0(被动技能):
     def 物理攻击力倍率(self, 武器类型):
         return self.加成倍率(武器类型)
 
+    def CD缩减倍率(self, 武器类型):
+        if self.等级 == 0:
+            return 1.0
+        else:
+            return 0.87
 
 class 技能1(职业主动技能):
     名称 = '双重刺击'
