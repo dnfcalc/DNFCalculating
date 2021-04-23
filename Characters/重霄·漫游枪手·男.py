@@ -209,9 +209,9 @@ class 技能8(职业主动技能):
     是否有护石 = 1
 
     def 等效百分比(self, 武器类型):
-        攻击次数 = int((self.攻击次数 + (4 / 5) * self.TP等级) / self.攻击间隔)
-        攻击次数2 = int((self.攻击次数2 + (6 / 5) * self.TP等级) / self.攻击间隔)
-        攻击次数3 = int((self.攻击次数3 + (8 / 5) * self.TP等级) / self.攻击间隔)
+        self.攻击次数 = int((self.攻击次数 + (4 / 5) * self.TP等级) / self.攻击间隔)
+        self.攻击次数2 = int((self.攻击次数2 + (6 / 5) * self.TP等级) / self.攻击间隔)
+        self.攻击次数3 = int((self.攻击次数3 + (8 / 5) * self.TP等级) / self.攻击间隔)
 
         return super().等效百分比(武器类型)
         # if self.等级 == 0:
