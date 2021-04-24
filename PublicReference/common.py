@@ -107,7 +107,7 @@ class 属性():
                 self.智力 += 精通数值
 
     def 增幅基础(self):
-        for i in range(0, 12):
+        for i in range(12):
             temp = 装备列表[装备序号[self.装备栏[i]]]
             if self.是否增幅[i] and temp.所属套装 != '智慧产物':
                 x = 增幅计算(temp.等级, temp.品质, self.强化等级[i], self.增幅版本)
@@ -224,16 +224,15 @@ class 窗口(QWidget):
 
         # 创建配置文件夹
         path = './ResourceFiles/{}/set'.format(self.角色属性A.实际名称)
-        if not os.path.exists(path):
-            os.makedirs(path)
-
-        self.存档列表读取()
 
         # 判断从哪读取数据
-        if os.path.exists(path + '/attr.ini'):
+        if os.path.exists(path):
             self.载入配置('set')
         else:
             self.载入配置('reset')
+            os.makedirs(path)
+
+        self.存档列表读取()
 
         self.click_window(0)
 
@@ -335,7 +334,7 @@ class 窗口(QWidget):
         self.页面数量 = len(self.页面名称)
         self.btn_group = QButtonGroup(self.frame_tool)
         self.window_btn = []
-        for i in range(0, self.页面数量):
+        for i in range(self.页面数量):
             self.window_btn.append(QToolButton(self.frame_tool))
             self.window_btn[-1].setText(self.页面名称[i])
             self.window_btn[-1].resize(int(self.width() / self.页面数量 - 8), 21)
@@ -473,7 +472,7 @@ class 窗口(QWidget):
                                     '上衣', '头肩', '下装', '鞋', '腰带', '项链', '手镯',
                                     '戒指', '辅助装备', '魔法石', '耳环'
                             ]:
-                                for j in range(0, len(装备列表)):
+                                for j in range(len(装备列表)):
                                     if 装备列表[j].所属套装 == i.名称 and 装备列表[
                                             j].品质 == 品质 and 装备列表[j].部位 == 部位:
                                         self.图片 = QLabel(self.main_frame1)
@@ -603,7 +602,7 @@ class 窗口(QWidget):
         counter = 0
         for i in 部位列表:
             x = MyQComboBox(self.main_frame1)
-            for j in range(0, 32):
+            for j in range(32):
                 x.addItem(str(j))
             x.resize(50, 20)
             self.装备打造选项.append(x)
@@ -619,7 +618,7 @@ class 窗口(QWidget):
         counter = 0
         for i in 部位列表:
             x = MyQComboBox(self.main_frame1)
-            for j in range(0, 32):
+            for j in range(32):
                 x.addItem('改造+' + str(j))
             x.resize(75, 20)
             self.装备打造选项.append(x)
@@ -634,7 +633,7 @@ class 窗口(QWidget):
             counter += 1
 
         x = MyQComboBox(self.main_frame1)
-        for j in range(0, 11):
+        for j in range(11):
             x.addItem('锻造+' + str(j))
         x.resize(110, 20)
         x.move(540, 504 + (counter - 9) * 30)
@@ -1102,11 +1101,11 @@ class 窗口(QWidget):
     def 组合数量计算(self, sign, x=0):
         if sign == 0 or sign == 1:
             self.有效武器列表.clear()
-            for j in range(0, 6):
+            for j in range(6):
                 self.有效总套装列表[j].clear()
-            for i in range(0, len(self.装备选择状态)):
+            for i in range(len(self.装备选择状态)):
                 if self.装备选择状态[i] == 1:
-                    for j in range(0, 6):
+                    for j in range(6):
                         if (装备列表[i].所属套装
                                 in 总套装列表[j]) and (装备列表[i].所属套装
                                                   not in self.有效总套装列表[j]):
@@ -1128,9 +1127,9 @@ class 窗口(QWidget):
 
         if sign == 2:
             self.有效部位列表.clear()
-            for i in range(0, 12):
+            for i in range(12):
                 self.有效部位列表.append([])
-            for i in range(0, len(self.装备选择状态)):
+            for i in range(len(self.装备选择状态)):
                 if self.装备选择状态[i] == 1:
                     self.有效部位列表[部位列表.index(装备列表[i].部位)].append(装备列表[i].名称)
 
@@ -1683,10 +1682,10 @@ class 窗口(QWidget):
 
         for i in range(len(显示序号)):
             图片列表 = []
-            for j in range(0, 12):
+            for j in range(12):
                 图片列表.append(self.装备图片[装备序号[self.排行数据[显示序号[i]][j]]])
             水平间距 = [1, 2, 3, 4, 5, 6.5, 7.5, 8.5, 10, 11, 12, 13.5]
-            for j in range(0, 12):
+            for j in range(12):
                 装备 = 装备列表[装备序号[self.排行数据[显示序号[i]][j]]]
                 图标 = QLabel(滚动排行.topFiller)
                 图标.setMovie(图片列表[j])
@@ -1815,7 +1814,7 @@ class 窗口(QWidget):
                     temp1 = []
                     sign = 0
                     sign2 = 初始sign2
-                    for x in range(0, 11):
+                    for x in range(11):
                         品质 = '-史诗-'
                         if k == x:
                             品质 = '-神话-'
@@ -1848,12 +1847,12 @@ class 技能详情(QFrame):
         pox_x = 285
         pox_y = 5
 
-        for i in range(0, len(data.角色属性B.技能栏)):
+        for i in range(len(data.角色属性B.技能栏)):
             j = len(data.角色属性B.技能栏) - 1 - excel.index(统计详情[i * 4 + 1])
             if 统计详情[i * 4 + 1] != 0:
                 每行详情 = []
                 # self.data.append([])
-                for k in range(0, 7):
+                for k in range(7):
                     每行详情.append(QLabel(self.topFiller))
                 # 图片
                 每行详情[0].setPixmap(data.技能图片[i])

@@ -56,18 +56,18 @@ class CalcData():
         from PublicReference.equipment.equ_list import 总套装列表, 部位列表, 装备列表
 
         self.有效武器列表.clear()
-        for j in range(0, 6):
+        for j in range(6):
             self.有效总套装列表[j].clear()
 
         self.有效部位列表.clear()
-        for i in range(0, 12):
+        for i in range(12):
             self.有效部位列表.append([])
 
-        for i in range(0, len(self.装备选择状态)):
+        for i in range(len(self.装备选择状态)):
             if self.装备选择状态[i] == 1:
                 if 装备列表[i].部位 == '武器':
                     self.有效武器列表.append(装备列表[i].名称)
-                for j in range(0, 6):
+                for j in range(6):
                     if (装备列表[i].所属套装 in 总套装列表[j]) and (装备列表[i].所属套装
                                                        not in self.有效总套装列表[j]):
                         self.有效总套装列表[j].append(装备列表[i].所属套装)
@@ -179,7 +179,7 @@ def calc_speed_and_set_mode(data):
                             套装组合.append([a, d, d, a, a, b, b, b, c, c, c])
                             套装组合.append([d, a, d, a, a, b, b, b, c, c, c])
                             套装组合.append([d, d, a, a, a, b, b, b, c, c, c])
-                            for x in range(0, 10):
+                            for x in range(10):
                                 套装适用.append([
                                     a + '[2]', a + '[3]', d + '[2]', b + '[2]',
                                     b + '[3]', c + '[2]', c + '[3]'
@@ -197,7 +197,7 @@ def calc_speed_and_set_mode(data):
                 sign2 = '空'
             else:
                 sign2 = '无'
-            for x in range(0, 11):
+            for x in range(11):
                 品质 = '-史诗-'
                 if k == x:
                     品质 = '-神话-'

@@ -790,7 +790,7 @@ class 皓曦·龙骑士(角色窗口):
         属性.护石第二栏 = self.护石栏[1].currentText()
         属性.护石第三栏 = self.护石栏[2].currentText()
 
-        for i in range(0, 9):
+        for i in range(9):
             if self.符文[i].currentText() != '无' and self.符文效果[i].currentText() != '无' and self.符文[i].currentText() != '魔龙之息' and self.符文[i].currentText() != '魔龙天翔':
                 for j in self.符文效果[i].currentText().split(','):
                     if '攻击' in j:

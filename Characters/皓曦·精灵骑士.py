@@ -793,7 +793,7 @@ class 皓曦·精灵骑士(角色窗口):
             self.护石栏[i].currentIndexChanged.connect(lambda state: self.护石判断())
 
         self.先锋斩倍率 = MyQComboBox(self.main_frame2)
-        for i in range(0, 51):
+        for i in range(51):
             self.先锋斩倍率.addItem('先锋斩：'+str(i * 2)+'%')
         self.先锋斩倍率.setCurrentIndex(0)
         self.先锋斩倍率.resize(105, 20)

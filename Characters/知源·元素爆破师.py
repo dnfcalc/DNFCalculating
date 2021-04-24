@@ -691,7 +691,7 @@ class 知源·元素爆破师(角色窗口):
         self.地火hit.setToolTip('打满为12hit')
 
         self.元素禁域减少CD = MyQComboBox(self.main_frame2)
-        for i in range(0, 9):
+        for i in range(9):
             self.元素禁域减少CD.addItem('元素禁域CD-' + str(i*0.5)+'s')
         self.元素禁域减少CD.setCurrentIndex(8)
         self.元素禁域减少CD.resize(140, 20)

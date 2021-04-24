@@ -1674,7 +1674,7 @@ class 角色属性(属性):
             # 详细数据，用于展示  四个数据一组
             # 0次数 1总伤害 2平均伤害 3占比
             data = []
-            for i in range(0, len(self.技能栏)):
+            for i in range(len(self.技能栏)):
                 data.append(a[i])
                 data.append(b[i])
                 if a[i] != 0:
@@ -1871,7 +1871,7 @@ class 角色窗口(窗口):
         self.装备条件选择[-1].addItems(['太极天帝剑：阳', '太极天帝剑：阴'])
         # self.装备条件选择.append(MyQComboBox(self.main_frame1))
         # self.装备条件选择[-1].addItems(['绿色生命的面容：无', '绿色生命的面容：阴暗面'])
-        for i in range(0, len(self.装备条件选择)):
+        for i in range(len(self.装备条件选择)):
             self.装备条件选择[i].resize(170, 20)
             self.装备条件选择[i].move(940, 30 + 28 * i)
 
@@ -1894,7 +1894,7 @@ class 角色窗口(窗口):
 
         # 一键修正按钮添加
         一键站街修正名称 = ['站街力智', '站街三攻', '站街属强']
-        for i in range(0, len(一键站街修正名称)):
+        for i in range(len(一键站街修正名称)):
             名称 = QLabel(一键站街修正名称[i], self.main_frame1)
             名称.setAlignment(Qt.AlignCenter)
             名称.move(940 + i * 57, 394)
@@ -2061,21 +2061,21 @@ class 角色窗口(窗口):
         for i in self.角色属性A.技能栏:
             序号 = self.角色属性A.技能序号[i.名称]
             if i.所在等级 == 50 or i.所在等级 == 85:
-                for j in range(0, i.等级上限 - i.基础等级 + 1):
+                for j in range(i.等级上限 - i.基础等级 + 1):
                     self.等级调整[序号].addItem(str(j))
             else:
                 for j in range(-i.基础等级, i.等级上限 - i.基础等级 + 1):
                     self.等级调整[序号].addItem(str(j))
 
             if i.是否有伤害 == 1 and i.TP上限 != 0:
-                for j in range(0, i.TP上限 + 1):
+                for j in range(i.TP上限 + 1):
                     self.TP输入[序号].addItem(str(j))
 
             if i.是否有伤害 == 1:
                 self.次数输入[序号].setMaxVisibleItems(15)
                 self.次数输入[序号].addItem('/CD')
                 self.宠物次数[序号].setMaxVisibleItems(15)
-                for j in range(0, 11):
+                for j in range(11):
                     self.次数输入[序号].addItem(str(j))
                     self.宠物次数[序号].addItem(str(j))
                 self.次数输入[序号].addItem('填写')
@@ -2126,7 +2126,7 @@ class 角色窗口(窗口):
                         技能显示顺序[count] = self.角色属性A.技能序号[i.名称]
                         count += 1
                     else:
-                        for k in range(0, len(self.角色属性A.技能栏) - count - 1):
+                        for k in range(len(self.角色属性A.技能栏) - count - 1):
                             count += 1
                             if count not in 技能插队顺序:
                                 技能显示顺序[count] = self.角色属性A.技能序号[i.名称]
@@ -2136,7 +2136,7 @@ class 角色窗口(窗口):
                     技能显示顺序[插队技能序号[self.角色属性A.技能序号[i.名称]]] = self.角色属性A.技能序号[
                         i.名称]
 
-        for l in range(0, len(self.角色属性A.技能栏)):
+        for l in range(len(self.角色属性A.技能栏)):
             if len(技能插队顺序) != 0:
                 i = self.角色属性A.技能栏[技能显示顺序[l]]
             else:
@@ -2172,7 +2172,7 @@ class 角色窗口(窗口):
         横坐标 = 横坐标 + 80 + 50
         纵坐标 = 30
 
-        for l in range(0, len(self.角色属性A.技能栏)):
+        for l in range(len(self.角色属性A.技能栏)):
             if len(技能插队顺序) != 0:
                 i = self.角色属性A.技能栏[技能显示顺序[l]]
             else:
@@ -2186,7 +2186,7 @@ class 角色窗口(窗口):
         横坐标 = 横坐标 + 50
         纵坐标 = 30
 
-        for l in range(0, len(self.角色属性A.技能栏)):
+        for l in range(len(self.角色属性A.技能栏)):
             if len(技能插队顺序) != 0:
                 i = self.角色属性A.技能栏[技能显示顺序[l]]
             else:
@@ -2204,7 +2204,7 @@ class 角色窗口(窗口):
         横坐标 = 横坐标 + 130
         纵坐标 = 20
 
-        for l in range(0, len(self.角色属性A.技能栏)):
+        for l in range(len(self.角色属性A.技能栏)):
             if len(技能插队顺序) != 0:
                 i = self.角色属性A.技能栏[技能显示顺序[l]]
             else:
@@ -2281,7 +2281,7 @@ class 角色窗口(窗口):
             self.护石栏[i].addItems(self.护石选项)
         self.护石类型选项 = []
 
-        for i in range(0, 9):
+        for i in range(9):
             self.符文.append(MyQComboBox(self.main_frame2))
             self.符文[i].addItems(self.符文选项)
             self.符文效果.append(MyQComboBox(self.main_frame2))
@@ -2303,7 +2303,7 @@ class 角色窗口(窗口):
         self.护石栏[0].currentIndexChanged.connect(
             lambda state, index=0: self.护石类型选项更新(index))
         纵坐标 += 25
-        for i in range(0, 3):
+        for i in range(3):
             tempstr = '符文' + str(i + 1) + '选择: '
             x = QLabel(tempstr, self.main_frame2)
             x.move(横坐标, 纵坐标)
@@ -2620,7 +2620,7 @@ class 角色窗口(窗口):
         距离 = 30
         templist = []
 
-        for i in range(0, len(self.修正列表名称)):
+        for i in range(len(self.修正列表名称)):
             名称 = QLabel(self.修正列表名称[i], self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             名称.setStyleSheet(标签样式)
@@ -2787,7 +2787,7 @@ class 角色窗口(窗口):
         count += 1
         # 一键修正按钮添加
         一键站街修正名称 = ['站街力智', '站街三攻', '站街属强']
-        for i in range(0, len(一键站街修正名称)):
+        for i in range(len(一键站街修正名称)):
             名称 = QLabel(一键站街修正名称[i], self.main_frame5)
             名称.setAlignment(Qt.AlignCenter)
             名称.move(横坐标 - 5 + i * 57, 50 + 30 * count)
@@ -2863,7 +2863,7 @@ class 角色窗口(窗口):
             self.图片显示[i].setAlignment(Qt.AlignCenter)
 
         self.面板显示 = []
-        for i in range(0, 17):
+        for i in range(17):
             self.面板显示.append(QLabel(self.main_frame5))
 
         const = 139 + 初始y
@@ -2884,7 +2884,7 @@ class 角色窗口(窗口):
         for i in [13, 14, 15, 16]:
             self.面板显示[i].move(20 + 初始x, const + count * 18)
             count += 1
-        for i in range(0, len(self.面板显示)):
+        for i in range(len(self.面板显示)):
             if i >= 9:
                 self.面板显示[i].setStyleSheet(
                     "QLabel{font-size:12px;color:rgb(255,255,255)}")
@@ -2895,7 +2895,7 @@ class 角色窗口(窗口):
             self.面板显示[i].setAlignment(Qt.AlignRight)
 
         self.词条显示 = []
-        for i in range(0, 12):
+        for i in range(12):
             self.词条显示.append(QLabel(self.main_frame5))
 
         j = 312 + 初始y
@@ -2913,7 +2913,7 @@ class 角色窗口(窗口):
         self.总伤害.setAlignment(Qt.AlignCenter)
 
         self.套装名称显示 = []
-        for i in range(0, 20):
+        for i in range(20):
             self.套装名称显示.append(QLabel(self.main_frame5))
             self.套装名称显示[i].move(114 + 初始x, 128 + 180 + 17 * i + 初始y)
             self.套装名称显示[i].resize(150, 18)
@@ -3412,8 +3412,225 @@ class 角色窗口(窗口):
 
             self.属性设置输入[6][16].setText(str(max(力量, 智力)))
             self.属性设置输入[8][16].setText(str(属强 if 属强 != 0 else ''))
+    
+    def 载入json(self, path='set', page=[0, 1, 2, 3, 4, 5]):
+        filepath = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称, path)
+        
+        if 0 in page:
+            # 第一页(装备/选择/打造)
+            try:
+                filename = 'page_1.json'
+                set_data = {}
+                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                    set_data = json.load(fp)
+                fp.close()
+
+                self.称号.setCurrentIndex(set_data['称号'])
+                self.宠物.setCurrentIndex(set_data['宠物'])
+                self.计算模式选择.setCurrentIndex(set_data['计算模式'])
+                self.百变怪选项.setChecked(set_data['百变怪'])
+
+                self.红色宠物装备.setChecked(set_data['宠物装备择优'])
+                self.光环自适应.setChecked(set_data['光环词条择优'])
+                self.神话排名选项.setChecked(set_data['神话排名勾选'])
+                self.显示选项.setChecked(set_data['亿为单位显示'])
+
+                self.线程数选择.setCurrentIndex(set_data['线程数量'])
+                self.攻击属性选项.setCurrentIndex(set_data['攻击属性'])
+                self.智慧产物限制.setCurrentIndex(set_data['改造数量'])
+                
+                self.批量选择(0)
+                num = 0
+                for i in set_data['装备勾选']:
+                    if i == 1:
+                        self.装备图标点击事件(num, 1)
+                    num += 1
+      
+                num = 0
+                for i in set_data['装备打造']:
+                    self.装备打造选项[num].setCurrentIndex(i)
+                    num += 1
+    
+                num = 0
+                for i in set_data['装备条件']:
+                    self.装备条件选择[num].setCurrentIndex(i)
+                    num += 1    
+
+            except Exception as error:
+                logger.error(error)
+
+        if 1 in page:
+            # 第二页(技能/符文/药剂)
+            try:
+                filename = 'page_2.json'
+                set_data = {}
+                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                    set_data = json.load(fp)
+                fp.close()
+
+                self.BUFF输入.setText(set_data['BUFF输入'])
+                self.时间输入.setCurrentIndex(set_data['时间输入'])
+                self.强化觉醒选择(set_data['觉醒选择'])
+
+                if self.初始属性.远古记忆 != -1:
+                    self.远古记忆.setCurrentIndex(set_data['远古记忆'])
+                if self.初始属性.刀魂之卡赞 != -1:
+                    self.刀魂之卡赞.setCurrentIndex(set_data['刀魂之卡赞'])
+
+                num = 0
+                for i in set_data['护石栏']:
+                    self.护石栏[num].setCurrentIndex(i)
+                    num += 1
+
+                num = 0
+                for i in set_data['护石类型']:
+                    self.护石类型选项[num].setCurrentIndex(i)
+                    num += 1
+                
+                num = 0
+                for i in set_data['符文技能']:
+                    self.符文[num].setCurrentIndex(i)
+                    num += 1
+
+                num = 0
+                for i in set_data['符文效果']:
+                    self.符文效果[num].setCurrentIndex(i)
+                    num += 1
+
+                num = 0
+                for i in set_data['药剂勾选']:
+                    self.复选框列表[num].setChecked(i)
+                    num += 1
+
+                skill = set_data['技能选项']
+                for i in self.角色属性A.技能栏:
+                    序号 = self.角色属性A.技能序号[i.名称]
+                    self.设置技能选项(序号, skill[str(序号)])
+
+            except Exception as error:
+                logger.error(error)
+
+        if 2 in page:
+            # 第三页(基础/细节/修正)
+            try:
+                filename = 'page_3.json'
+                set_data = {}
+                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                    set_data = json.load(fp)
+                fp.close()
+
+                num = 0
+                for i in set_data['时装选项']:
+                    self.时装选项[num].setCurrentIndex(i)
+                    num += 1
+    
+                x = 0
+                for i in set_data['细节数值']:
+                    y = 0
+                    for j in i:
+                        self.属性设置输入[x][y].setText(j)
+                        y += 1
+                    x += 1
+
+                x = 0
+                for i in set_data['细节选项']:
+                    y = 0
+                    for j in i:
+                        self.细节选项输入[x][y].setCurrentIndex(j)
+                        y += 1
+                    x += 1
+
+            except Exception as error:
+                logger.error(error)
+
+        if 3 in page:
+            # 第四页(神话属性修正)
+            try:
+                filename = 'page_4.json'
+                set_data = {}
+                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                    set_data = json.load(fp)
+                fp.close()
+
+                num = 0
+                for i in set_data['神话属性修正']:
+                    self.神话属性选项[num].setCurrentIndex(i)
+                    num += 1
+                
+            except Exception as error:
+                logger.error(error)
+
+        if 4 in page:
+            # 第五页(辟邪玉/希洛克/黑鸦)
+            try:
+                filename = 'page_5.json'
+                set_data = {}
+                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                    set_data = json.load(fp)
+                fp.close()
+
+                self.智慧产物升级.setChecked(set_data['智慧产物升级'])
+                self.武器择优模式.setCurrentIndex(set_data['武器择优模式'])
+                self.守门人属强.setCurrentIndex(set_data['守门人属强'])
+
+                num = 0
+                for i in set_data['希洛克武器']:
+                    self.希洛克武器词条[num].setCurrentIndex(i)
+                    num += 1
+
+                num = 0
+                for i in set_data['辟邪玉效果']:
+                    self.辟邪玉选择[num].setCurrentIndex(i)
+                    num += 1
+
+                num = 0
+                for i in set_data['辟邪玉数值']:
+                    self.辟邪玉数值[num].setCurrentIndex(i)
+                    num += 1
+
+                x = 0
+                for i in set_data['黑鸦选择']:
+                    y = 0
+                    for j in i:
+                        self.黑鸦词条[x][y].setCurrentIndex(j)
+                        y += 1
+                    x += 1
+
+                num = 0
+                for i in set_data['希洛克选择']:
+                    if i == 1:
+                        self.希洛克选择(num)
+                    num += 1
+                
+            except Exception as error:
+                logger.error(error)
+
+        if 5 in page:
+            # 第六页(自选装备计算)
+            try:
+                filename = 'page_6.json'
+                set_data = {}
+                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                    set_data = json.load(fp)
+                fp.close()
+
+                num = 0
+                for i in set_data['自选装备']:
+                    self.自选装备[num].setCurrentIndex(i)
+                    num += 1
+
+                num = 0
+                for i in set_data['装备锁定']:
+                    self.装备锁定[num].setChecked(i)
+                    num += 1            
+
+            except Exception as error:
+                logger.error(error)
 
     def 载入配置(self, path='set'):
+        if os.path.exists('./ResourceFiles/{}/{}/page_1.json'.format(self.角色属性A.实际名称, path)):
+            self.载入json(path)
+            return
         try:
             setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
                            '/equ3.ini',
@@ -3429,7 +3646,7 @@ class 角色窗口(窗口):
                 self.神话排名选项.setChecked(True)
             if int(setfile[5].replace('\n', '')):
                 self.显示选项.setChecked(True)
-            for i in range(0, len(self.时装选项)):
+            for i in range(len(self.时装选项)):
                 self.时装选项[i].setCurrentIndex(
                     int(setfile[i + 6].replace('\n', '')))
             if int(setfile[len(self.时装选项) + 6].replace('\n', '')):
@@ -3446,12 +3663,12 @@ class 角色窗口(窗口):
                            '/attr.ini',
                            'r',
                            encoding='utf-8').readlines()
-            for i in range(0, len(self.列名称) - 2):
-                for j in range(0, len(self.属性设置输入[i])):
+            for i in range(len(self.列名称) - 2):
+                for j in range(len(self.属性设置输入[i])):
                     self.属性设置输入[i][j].setText(setfile[i].replace(
                         '\n', '').split(',')[j])
             for i in range(3):
-                for j in range(0, 17):
+                for j in range(17):
                     self.细节选项输入[i][j].setCurrentIndex(
                         int(setfile[len(self.列名称) - 2 + i].replace(
                             '\n', '').split(',')[j]))
@@ -3464,7 +3681,7 @@ class 角色窗口(窗口):
                            '/equ.ini',
                            'r',
                            encoding='utf-8').readlines()
-            for i in range(0, len(装备列表)):
+            for i in range(len(装备列表)):
                 if setfile[i].replace('\n', '') == '1':
                     self.装备图标点击事件(i, 1)
         except:
@@ -3475,7 +3692,7 @@ class 角色窗口(窗口):
                            '/equ1.ini',
                            'r',
                            encoding='utf-8').readlines()
-            for i in range(0, len(self.装备打造选项)):
+            for i in range(len(self.装备打造选项)):
                 self.装备打造选项[i].setCurrentIndex(
                     int(setfile[i].replace('\n', '')))
         except:
@@ -3486,7 +3703,7 @@ class 角色窗口(窗口):
                            '/equ2.ini',
                            'r',
                            encoding='utf-8').readlines()
-            for i in range(0, len(self.装备条件选择)):
+            for i in range(len(self.装备条件选择)):
                 self.装备条件选择[i].setCurrentIndex(
                     int(setfile[i].replace('\n', '')))
         except:
@@ -3507,7 +3724,7 @@ class 角色窗口(窗口):
             num += 1
             self.护石栏[1].setCurrentIndex(int(setfile[num].replace('\n', '')))
             num += 1
-            for i in range(0, 6):
+            for i in range(6):
                 self.符文[i].setCurrentIndex(int(setfile[num].replace('\n', '')))
                 num += 1
                 self.符文效果[i].setCurrentIndex(
@@ -3716,235 +3933,229 @@ class 角色窗口(窗口):
             except:
                 pass
 
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
+    def 设置技能选项(self, 序号, info):
         try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ3.ini',
-                           'w',
-                           encoding='utf-8')
-            setfile.write(str(self.称号.currentIndex()) + '\n')
-            setfile.write(str(self.宠物.currentIndex()) + '\n')
-            setfile.write(str(self.计算模式选择.currentIndex()) + '\n')
-            # 百变怪 && 神话排名 && 显示选项 && 时装选择
-            setfile.write(str(int(self.百变怪选项.isChecked())) + '\n')
-            setfile.write(str(int(self.神话排名选项.isChecked())) + '\n')
-            setfile.write(str(int(self.显示选项.isChecked())) + '\n')
-            for i in range(0, len(self.时装选项)):
-                setfile.write(str(self.时装选项[i].currentIndex()) + '\n')
-            setfile.write(str(int(self.红色宠物装备.isChecked())) + '\n')
-            setfile.write(str(int(self.光环自适应.isChecked())) + '\n')
-            # setfile.write(str(int(self.单套择优方式选项.currentIndex())) + '\n')
-
+            self.等级调整[序号].setCurrentIndex(info['等级'])
+        except:
+            pass
+        try:
+            self.TP输入[序号].setCurrentIndex(info['TP'])
         except:
             pass
 
         try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/attr.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(0, len(self.列名称) - 2):
-                for j in range(0, len(self.属性设置输入[i])):
-                    setfile.write(self.属性设置输入[i][j].text() + ',')
-                setfile.write('\n')
-            for i in range(3):
-                for j in range(0, 17):
-                    setfile.write(str(self.细节选项输入[i][j].currentIndex()) + ',')
-                setfile.write('\n')
+            if type(info['次数']) == type('str'):
+                self.次数输入[序号].setCurrentIndex(12)
+                self.次数输入[序号].setEditable(True)
+                self.次数输入[序号].clearEditText()
+                self.次数输入[序号].setCurrentText(info['次数'])
+            else:
+                self.次数输入[序号].setCurrentIndex(info['次数'])
         except:
             pass
 
         try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(0, len(装备列表)):
-                setfile.write(str(self.装备选择状态[i]) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ1.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(0, len(self.装备打造选项)):
-                setfile.write(str(self.装备打造选项[i].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ2.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(0, len(self.装备条件选择)):
-                setfile.write(str(self.装备条件选择[i].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill1.ini',
-                           'w',
-                           encoding='utf-8')
-            setfile.write(self.BUFF输入.text() + '\n')
-            setfile.write(str(self.时间输入.currentIndex()) + '\n')
-            setfile.write(str(self.护石栏[0].currentIndex()) + '\n')
-            setfile.write(str(self.护石栏[1].currentIndex()) + '\n')
-            for i in range(0, 6):
-                setfile.write(str(self.符文[i].currentIndex()) + '\n')
-                setfile.write(str(self.符文效果[i].currentIndex()) + '\n')
-            setfile.write(str(self.觉醒选择状态) + '\n')
-            if self.初始属性.远古记忆 != -1:
-                setfile.write(str(self.远古记忆.currentIndex()) + '\n')
-            if self.初始属性.刀魂之卡赞 != -1:
-                setfile.write(str(self.刀魂之卡赞.currentIndex()) + '\n')
-            setfile.write(str(self.护石栏[2].currentIndex()) + '\n')
-            for i in range(6, 9):
-                setfile.write(str(self.符文[i].currentIndex()) + '\n')
-                setfile.write(str(self.符文效果[i].currentIndex()) + '\n')
-            for i in range(3):
-                setfile.write(str(self.护石类型选项[i].currentIndex()) + '\n')
-            for i in range(5):
-                setfile.write(str(self.希洛克武器词条[i].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill2.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in self.角色属性A.技能栏:
-                序号 = self.角色属性A.技能序号[i.名称]
-                setfile.write(str(self.等级调整[序号].currentIndex()) + '\n')
-                if i.是否有伤害 == 1 and i.TP上限 != 0:
-                    setfile.write(str(self.TP输入[序号].currentIndex()) + '\n')
-                if i.是否有伤害 == 1:
-                    setfile.write(str(self.次数输入[序号].currentIndex()) + '\n')
-                    setfile.write(str(self.宠物次数[序号].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill3.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(4):
-                setfile.write(str(self.辟邪玉选择[i].currentIndex()) + '\n')
-                setfile.write(str(self.辟邪玉数值[i].currentIndex()) + '\n')
-            for i in range(15):
-                setfile.write(str(self.希洛克选择状态[i]) + '\n')
-            setfile.write(str(self.守门人属强.currentIndex()) + '\n')
-            for i in range(4):
-                for j in range(3):
-                    setfile.write(str(self.黑鸦词条[i][j].currentIndex()) + '\n')
-            setfile.write(str(self.武器择优模式.currentIndex()) + '\n')
-            setfile.write('1\n' if self.智慧产物升级.isChecked() else '0\n')
-
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill6.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in self.角色属性A.技能栏:
-                序号 = self.角色属性A.技能序号[i.名称]
-                if i.是否有伤害 == 1:
-                    if self.次数输入[序号].currentIndex() == 12:
-                        if self.次数输入[序号].currentText() != '':
-                            try:
-                                temp = int(float(self.次数输入[序号].currentText()))
-                                if temp >= 0 and temp < 1000:
-                                    setfile.write(
-                                        str(self.次数输入[序号].currentText()) +
-                                        '\n')
-                                else:
-                                    setfile.write(str('/CD' + '\n'))
-                            except:
-                                setfile.write(str('/CD' + '\n'))
-                        else:
-                            setfile.write(str('/CD' + '\n'))
-                    if self.宠物次数[序号].currentIndex() == 11:
-                        if self.宠物次数[序号].currentText() != '':
-                            try:
-                                temp = int(float(self.宠物次数[序号].currentText()))
-                                if temp >= 0 and temp < 1000:
-                                    setfile.write(
-                                        str(self.宠物次数[序号].currentText()) +
-                                        '\n')
-                                else:
-                                    setfile.write(str('/CD' + '\n'))
-                            except:
-                                setfile.write(str('/CD' + '\n'))
-                        else:
-                            setfile.write(str('/CD' + '\n'))
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill0.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(len(self.复选框列表)):
-                if self.复选框列表[i].isChecked():
-                    setfile.write('1\n')
-                else:
-                    setfile.write('0\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ4.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(4 * 35):
-                setfile.write(str(self.神话属性选项[i].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ5.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(12):
-                setfile.write(str(self.自选装备[i].currentIndex()) + '\n')
-            for i in range(12):
-                setfile.write(str(1 if self.装备锁定[i].isChecked() else 0) + '\n')
+            if type(info['宠物']) == type('str'):
+                self.宠物次数[序号].setCurrentIndex(11)
+                self.宠物次数[序号].setEditable(True)
+                self.宠物次数[序号].clearEditText()
+                self.宠物次数[序号].setCurrentText(info['宠物'])
+            else:
+                self.宠物次数[序号].setCurrentIndex(info['宠物'])
         except:
             pass
 
         if 切装模式 == 1:
             try:
-                setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                               path + '/equ6.ini',
-                               'w',
-                               encoding='utf-8')
-                for i in self.装备切装:
-                    if i.isChecked():
-                        setfile.write('1\n')
-                    else:
-                        setfile.write('0\n')
-
-                for i in self.角色属性A.技能栏:
-                    序号 = self.角色属性A.技能序号[i.名称]
-                    if i.是否有伤害 == 1:
-                        if self.技能切装[序号].isChecked():
-                            setfile.write('1\n')
-                        else:
-                            setfile.write('0\n')
+                self.技能切装[序号].setChecked(info['切装'])
             except:
                 pass
+
+    def 获取技能选项(self, 序号):
+        info = {}
+        try:
+            info['等级'] = self.等级调整[序号].currentIndex()
+        except:
+            info['等级'] = 0
+        try:
+            info['TP'] = self.TP输入[序号].currentIndex()
+        except:
+            info['TP'] = 0
+
+        try:
+            info['次数'] = self.次数输入[序号].currentIndex()
+        except:
+            info['次数'] = 0
+        if info['次数'] == 12 and self.次数输入[序号].currentText() != '':
+            try:
+                info['次数'] = str(round(max(0, float(self.次数输入[序号].currentText())), 3))
+            except:
+                info['次数'] = 0
+
+        try:
+            info['宠物'] = self.宠物次数[序号].currentIndex()
+        except:
+            info['宠物'] = 0
+        if info['宠物'] == 11 and self.宠物次数[序号].currentText() != '':
+            try:
+                info['宠物'] = str(round(max(0, float(self.宠物次数[序号].currentText())), 3))
+            except:
+                info['宠物'] = 0
+
+        if 切装模式 == 1:
+            try:
+                info['切装'] = self.技能切装[序号].isChecked()
+            except:
+                info['切装'] = False
+        return info
+
+    def 保存json(self, path='set', page=[0, 1, 2, 3, 4, 5]):
+
+        filepath = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称, path)
+        
+        if 0 in page:
+            # 第一页(装备/选择/打造)
+            try:
+                filename = 'page_1.json'
+                set_data = {}
+    
+                set_data['称号'] = self.称号.currentIndex()
+                set_data['宠物'] = self.宠物.currentIndex()
+                set_data['计算模式'] = self.计算模式选择.currentIndex()
+                set_data['百变怪'] = self.百变怪选项.isChecked()
+    
+                set_data['宠物装备择优'] = self.红色宠物装备.isChecked()
+                set_data['光环词条择优'] = self.光环自适应.isChecked()
+                set_data['神话排名勾选'] = self.神话排名选项.isChecked()
+                set_data['亿为单位显示'] = self.显示选项.isChecked()
+    
+                set_data['线程数量'] = self.线程数选择.currentIndex()
+                set_data['攻击属性'] = self.攻击属性选项.currentIndex()
+                set_data['改造数量'] = self.智慧产物限制.currentIndex()
+
+                set_data['装备勾选'] = self.装备选择状态
+
+                set_data['装备打造'] = [i.currentIndex() for i in self.装备打造选项]
+
+                set_data['装备条件'] = [i.currentIndex() for i in self.装备条件选择]
+
+                with open(os.path.join(filepath, filename), "w",
+                          encoding='utf-8') as fp:
+                    json.dump(set_data, fp, ensure_ascii=False, indent=4)
+                fp.close()
+            except Exception as error:
+                logger.error(error)
+
+        if 1 in page:
+            # 第二页(技能/符文/药剂)
+            try:
+                filename = 'page_2.json'
+                set_data = {}
+
+                set_data['BUFF输入'] = self.BUFF输入.text()
+                set_data['时间输入'] = self.时间输入.currentIndex()
+                set_data['觉醒选择'] = self.觉醒选择状态
+
+                if self.初始属性.远古记忆 != -1:
+                    set_data['远古记忆'] = self.远古记忆.currentIndex()
+                if self.初始属性.刀魂之卡赞 != -1:
+                    set_data['刀魂之卡赞'] = self.刀魂之卡赞.currentIndex()
+
+                set_data['护石栏'] = [i.currentIndex() for i in self.护石栏]
+                set_data['护石类型'] = [i.currentIndex() for i in self.护石类型选项]
+                set_data['符文技能'] = [i.currentIndex() for i in self.符文]
+                set_data['符文效果'] = [i.currentIndex() for i in self.符文效果]
+                set_data['药剂勾选'] = [i.isChecked() for i in self.复选框列表]
+
+                skill = {}
+                for i in self.角色属性A.技能栏:
+                    序号 = self.角色属性A.技能序号[i.名称]
+                    skill[序号] =  self.获取技能选项(序号)
+                set_data['技能选项'] = skill
+
+                with open(os.path.join(filepath, filename), "w",
+                          encoding='utf-8') as fp:
+                    json.dump(set_data, fp, ensure_ascii=False, indent=4)
+                fp.close()
+            except Exception as error:
+                logger.error(error)
+
+        if 2 in page:
+            # 第三页(基础/细节/修正)
+            try:
+                filename = 'page_3.json'
+                set_data = {}
+    
+                set_data['时装选项'] = [i.currentIndex() for i in self.时装选项]
+
+                set_data['细节数值'] = [[j.text() for j in i] for i in self.属性设置输入]
+
+                set_data['细节选项'] = [[j.currentIndex() for j in i] for i in self.细节选项输入]
+
+                with open(os.path.join(filepath, filename), "w",
+                          encoding='utf-8') as fp:
+                    json.dump(set_data, fp, ensure_ascii=False, indent=4)
+                fp.close()
+            except Exception as error:
+                logger.error(error)
+
+        if 3 in page:
+            # 第四页(神话属性修正)
+            try:
+                filename = 'page_4.json'
+                set_data = {}
+                
+                set_data['神话属性修正'] = [i.currentIndex() for i in self.神话属性选项]
+
+                with open(os.path.join(filepath, filename), "w",
+                          encoding='utf-8') as fp:
+                    json.dump(set_data, fp, ensure_ascii=False, indent=4)
+                fp.close()
+            except Exception as error:
+                logger.error(error)
+
+        if 4 in page:
+            # 第五页(辟邪玉/希洛克/黑鸦)
+            try:
+                filename = 'page_5.json'
+                set_data = {}
+                
+                set_data['智慧产物升级'] = self.智慧产物升级.isChecked()
+                set_data['武器择优模式'] = self.武器择优模式.currentIndex()
+                set_data['守门人属强'] = self.守门人属强.currentIndex()
+                set_data['希洛克武器'] = [i.currentIndex() for i in self.希洛克武器词条]
+                set_data['辟邪玉效果'] = [i.currentIndex() for i in self.辟邪玉选择]
+                set_data['辟邪玉数值'] = [i.currentIndex() for i in self.辟邪玉数值]
+                set_data['希洛克选择'] = self.希洛克选择状态
+                set_data['黑鸦选择'] = [[j.currentIndex() for j in i] for i in self.黑鸦词条]
+
+                with open(os.path.join(filepath, filename), "w",
+                          encoding='utf-8') as fp:
+                    json.dump(set_data, fp, ensure_ascii=False, indent=4)
+                fp.close()
+            except Exception as error:
+                logger.error(error)
+
+        if 5 in page:
+            # 第六页(自选装备计算)
+            try:
+                filename = 'page_6.json'
+                set_data = {}
+                
+                set_data['自选装备'] = [i.currentIndex() for i in self.自选装备]
+                set_data['装备锁定'] = [i.isChecked() for i in self.装备锁定]
+                
+                with open(os.path.join(filepath, filename), "w",
+                          encoding='utf-8') as fp:
+                    json.dump(set_data, fp, ensure_ascii=False, indent=4)
+                fp.close()
+            except Exception as error:
+                logger.error(error)
+
+    def 保存配置(self, path='set'):
+        if self.禁用存档.isChecked():
+            return
+        self.保存json(path)
 
     # 一键修正计算
     def 一键修正(self, x=0):
@@ -4245,7 +4456,7 @@ class 角色窗口(窗口):
             提升率排序 = copy(提升率)
             提升率排序.sort(reverse=True)
 
-            for i in range(0, len(提升率)):
+            for i in range(len(提升率)):
                 temp = str('%.2f' % (提升率[i] * 100)) + '%'
                 self.辟邪玉提升率2[i].setText(temp)
                 x = 提升率排序.index(提升率[i]) / len(提升率) * 10 - 2
@@ -4333,7 +4544,7 @@ class 角色窗口(窗口):
             套装名称.extend(套装)
 
             神话所在套装 = []
-            for i in range(0, 11):
+            for i in range(11):
                 if 装备列表[装备序号[装备[i]]].品质 == '神话':
                     神话所在套装.append(装备列表[装备序号[装备[i]]].所属套装)
 
@@ -4341,7 +4552,7 @@ class 角色窗口(窗口):
             套装 = []
             套装件数 = []
             套装属性 = []
-            for i in range(0, len(套装名称)):
+            for i in range(len(套装名称)):
                 temp = 套装名称[i].split('[')[0]
                 if temp not in 套装:
                     套装.append(temp)
@@ -4499,7 +4710,7 @@ class 角色窗口(窗口):
                 套装属性.append('')
 
             # 显示套装
-            for i in range(0, len(套装)):
+            for i in range(len(套装)):
                 if len(套装件数[i]) > 0:
                     self.套装名称显示[count].setText(套装[i] + '[' +
                                                str(max(套装件数[i])) + ']')
@@ -4534,7 +4745,7 @@ class 角色窗口(窗口):
             返回值 = str('%.2f' % round(int(数字文本) / 100000000, 2)) + '亿'
         else:
             返回值 = ''
-            for i in range(0, len(数字文本)):
+            for i in range(len(数字文本)):
                 if len(数字文本) % 3 == 2 and i % 3 == 2:
                     返回值 += ','
                 if len(数字文本) % 3 == 1 and i % 3 == 1:
@@ -4564,7 +4775,7 @@ class 角色窗口(窗口):
         武器词条属性 = ['力智', '三攻', '黄字', '白字', '爆伤', '最终伤害']
         for i in range(15):
             数量[i % 3] += self.希洛克选择状态[i]
-        for i in range(0, 12):
+        for i in range(12):
             装备 = 装备列表[装备序号[属性.装备栏[i]]]
             tempstr.append('<font size="3" face="宋体"><font color="' +
                            颜色[装备.品质] + '">' + 装备.名称 + '</font><br>')
@@ -4736,7 +4947,7 @@ class 角色窗口(窗口):
         装备名称 = []
         套装名称 = []
         百变怪 = self.排行数据[index][-1]
-        for i in range(0, 12):
+        for i in range(12):
             装备名称.append(self.排行数据[index][i])
         for i in range(13, len(self.排行数据[index]) - 1):
             套装名称.append(self.排行数据[index][i])
@@ -4791,12 +5002,12 @@ class 角色窗口(窗口):
         人物.setAlignment(Qt.AlignTop)
 
         excel = []
-        for i in range(0, len(self.角色属性B.技能栏)):
+        for i in range(len(self.角色属性B.技能栏)):
             excel.append(统计详情[i * 4 + 1])
         excel.sort()
 
         面板显示 = []
-        for i in range(0, 17):
+        for i in range(17):
             面板显示.append(QLabel(输出窗口))
 
         面板显示[0].setText(str(int(self.角色属性B.面板力量())))
@@ -4848,7 +5059,7 @@ class 角色窗口(窗口):
             面板显示[i].move(20, const + count * 18 - pox_y2)
             count += 1
 
-        for i in range(0, len(面板显示)):
+        for i in range(len(面板显示)):
             if i >= 9:
                 面板显示[i].setStyleSheet(
                     "QLabel{font-size:12px;color:rgb(255,255,255)}")
@@ -4898,14 +5109,14 @@ class 角色窗口(窗口):
         # 位置 += 间隔
 
         神话所在套装 = []
-        for i in range(0, 11):
+        for i in range(11):
             if 装备列表[装备序号[装备名称[i]]].品质 == '神话':
                 神话所在套装.append(装备列表[装备序号[装备名称[i]]].所属套装)
 
         套装 = []
         套装件数 = []
         套装属性 = []
-        for i in range(0, len(套装名称)):
+        for i in range(len(套装名称)):
             temp = 套装名称[i].split('[')[0]
             if temp not in 套装:
                 套装.append(temp)
@@ -5062,7 +5273,7 @@ class 角色窗口(窗口):
             套装件数.append([])
             套装属性.append('')
 
-        for i in range(0, len(套装)):
+        for i in range(len(套装)):
             适用套装名称 = QLabel(输出窗口)
             if len(套装件数[i]) > 0:
                 适用套装名称.setText(套装[i] + '[' + str(max(套装件数[i])) + ']')
@@ -5111,14 +5322,14 @@ class 角色窗口(窗口):
         总伤害数值 = 0
 
         count = 0
-        for i in range(0, len(self.角色属性B.技能栏)):
+        for i in range(len(self.角色属性B.技能栏)):
             if 统计详情[i * 4 + 1] != 0:
                 count += 1
 
         self.行高 = 32
 
         伤害列表 = []
-        for i in range(0, len(self.角色属性B.技能栏)):
+        for i in range(len(self.角色属性B.技能栏)):
             伤害列表.append(统计详情[i * 4 + 1])
             总伤害数值 += 统计详情[i * 4 + 1]
         伤害列表.sort(reverse=True)
@@ -5134,7 +5345,7 @@ class 角色窗口(窗口):
 
         # 被动详情
         num = 0
-        for i in range(0, len(self.角色属性B.技能栏)):
+        for i in range(len(self.角色属性B.技能栏)):
             # Will修改
             tempstr = ''
             if self.角色属性B.技能栏[i].所在等级 != 100 or self.角色属性B.技能栏[i].是否主动 == 0:
@@ -5331,7 +5542,7 @@ class 角色窗口(窗口):
             数量[i % 3] += self.希洛克选择状态[i]
 
         # 0 上衣 1护肩 2护腿 3腰带 4鞋子 5 手镯 6 项链 7 戒指 8 耳环 9辅助 10魔法石 11 武器
-        for i in range(0, 12):
+        for i in range(12):
             # 下装
             if 数量[0] == 1 and i == 2:
                 for item in range(5):
@@ -5367,7 +5578,7 @@ class 角色窗口(窗口):
 
         tempstr = self.装备描述计算(self.角色属性B)
 
-        for i in range(0, 12):
+        for i in range(12):
             装备图标 = QLabel(输出窗口)
             装备图标.setMovie(图片列表[i])
             图片列表[i].start()
@@ -5385,7 +5596,7 @@ class 角色窗口(窗口):
                 装备图标.setToolTip(tempstr[i])
 
         temp = []
-        for i in range(0, 12):
+        for i in range(12):
             装备 = 装备列表[装备序号[self.角色属性B.装备栏[i]]]
             打造状态 = QLabel(输出窗口)
             if 装备.所属套装 != '智慧产物':
@@ -5448,7 +5659,7 @@ class 角色窗口(窗口):
 
             count = max(len(d['装备']), len(d['词条']), len(d['技能']))
             rows = []
-            for i in range(0, count):
+            for i in range(count):
                 t = d['词条'][i].split(':') if i < len(d['词条']) else []
                 rows.append([
                     (str(d['装备'][i]) if i < len(d['装备']) else ''),
@@ -5627,7 +5838,7 @@ class 角色窗口(窗口):
                                         属性.次数输入.append(
                                             int((float(
                                                 self.次数输入[序号].currentText()) +
-                                                 0.001) * 100) / 100)
+                                                0.001) * 100) / 100)
                                         self.次数输入[序号].setCurrentText(
                                             str(
                                                 int((float(self.次数输入[序号].
@@ -5747,7 +5958,7 @@ class 角色窗口(窗口):
 
         self.加载护石(属性)
 
-        for i in range(0, 12):
+        for i in range(12):
             属性.是否增幅[i] = self.装备打造选项[i].currentIndex()
             属性.强化等级[i] = self.装备打造选项[i + 12].currentIndex()
             属性.改造等级[i] = self.装备打造选项[i + 24].currentIndex()
@@ -5814,7 +6025,7 @@ class 角色窗口(窗口):
         属性.护石第二栏 = self.护石栏[1].currentText()
         属性.护石第三栏 = self.护石栏[2].currentText()
 
-        for i in range(0, 9):
+        for i in range(9):
             if self.符文[i].currentText() != '无' and self.符文效果[i].currentText(
             ) != '无':
                 for j in self.符文效果[i].currentText().split(','):
@@ -5859,7 +6070,7 @@ class 角色窗口(窗口):
 
         temp = []
         num = len(self.列名称) - 3
-        for j in range(0, len(self.属性设置输入[num])):
+        for j in range(len(self.属性设置输入[num])):
             if self.属性设置输入[num][j].text() != '':
                 try:
                     temp.append(float(self.属性设置输入[num][j].text()) / 100)
@@ -5887,14 +6098,14 @@ class 角色窗口(窗口):
         属性.技能攻击力加成(temp[7])
 
         for i in [0, 6, 9]:
-            for j in range(0, 17):
+            for j in range(17):
                 if self.属性设置输入[i][j].text() != '':
                     if i == 0 and j in [1, 5, 10, 16]:
                         属性.进图力量 += float(self.属性设置输入[i][j].text())
                     else:
                         属性.力量 += float(self.属性设置输入[i][j].text())
         for i in [1, 6, 9]:
-            for j in range(0, 17):
+            for j in range(17):
                 if self.属性设置输入[i][j].text() != '':
                     if i == 1 and j in [1, 5, 10, 16]:
                         属性.进图智力 += float(self.属性设置输入[i][j].text())
@@ -5902,7 +6113,7 @@ class 角色窗口(窗口):
                         属性.智力 += float(self.属性设置输入[i][j].text())
 
         for i in [2, 7, 10]:
-            for j in range(0, 17):
+            for j in range(17):
                 if self.属性设置输入[i][j].text() != '':
                     if i == 2 and j in [1, 5, 10, 16]:
                         属性.进图物理攻击力 += float(self.属性设置输入[i][j].text())
@@ -5910,7 +6121,7 @@ class 角色窗口(窗口):
                         属性.物理攻击力 += float(self.属性设置输入[i][j].text())
 
         for i in [3, 7, 10]:
-            for j in range(0, 17):
+            for j in range(17):
                 if self.属性设置输入[i][j].text() != '':
                     if i == 3 and j in [1, 5, 10, 16]:
                         属性.进图魔法攻击力 += float(self.属性设置输入[i][j].text())
@@ -5918,7 +6129,7 @@ class 角色窗口(窗口):
                         属性.魔法攻击力 += float(self.属性设置输入[i][j].text())
 
         for i in [4, 7, 10]:
-            for j in range(0, 17):
+            for j in range(17):
                 if self.属性设置输入[i][j].text() != '':
                     if i == 4 and j in [1, 5, 10, 16]:
                         属性.进图独立攻击力 += float(self.属性设置输入[i][j].text())
@@ -5926,7 +6137,7 @@ class 角色窗口(窗口):
                         属性.独立攻击力 += float(self.属性设置输入[i][j].text())
 
         for i in [5, 8]:
-            for j in range(0, 17):
+            for j in range(17):
                 if self.属性设置输入[i][j].text() != '':
                     if i == 5 and j in [1, 5, 10, 16]:
                         属性.进图属强 += float(self.属性设置输入[i][j].text())

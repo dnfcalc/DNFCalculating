@@ -1093,7 +1093,7 @@ class 极诣·驭剑士(角色窗口):
         self.一觉CD.setStyleSheet(复选框样式)
 
         self.冰刀三绝斩倍率 = MyQComboBox(self.main_frame2)
-        for i in range(0, 61):
+        for i in range(61):
             self.冰刀三绝斩倍率.addItem('冰三绝斩：'+str(i * 2)+'%')
         self.冰刀三绝斩倍率.setCurrentIndex(7)
         self.冰刀三绝斩倍率.resize(120, 20)
