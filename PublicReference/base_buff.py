@@ -1149,6 +1149,7 @@ class 角色窗口(窗口):
         self.护石第一栏.addItems(self.护石选项)
         self.护石第二栏.addItems(self.护石选项)
         self.护石第三栏.addItems(self.护石选项)
+        self.护石栏 = [self.护石第一栏, self.护石第二栏, self.护石第三栏]
 
         横坐标 = 395
         纵坐标 = 20
@@ -2051,6 +2052,9 @@ class 角色窗口(窗口):
         self.装备图标点击事件(74, index)
 
     def 载入配置(self, path='set'):
+        if os.path.exists('./ResourceFiles/{}/{}/page_1.json'.format(self.角色属性A.实际名称, path)):
+            self.载入json(path)
+            return
         try:
             setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
                            '/equ3.ini',
@@ -2262,171 +2266,334 @@ class 角色窗口(窗口):
         except:
             pass
 
+    def 设置技能选项(self, 序号, info):
+        try:
+            self.等级调整[序号].setCurrentIndex(info['等级'])
+        except:
+            pass
+
+        try:
+            if type(info['次数']) == type('str'):
+                self.次数输入[序号].setCurrentIndex(12)
+                self.次数输入[序号].setEditable(True)
+                self.次数输入[序号].clearEditText()
+                self.次数输入[序号].setCurrentText(info['次数'])
+            else:
+                self.次数输入[序号].setCurrentIndex(info['次数'])
+        except:
+            pass
+
+    def 获取技能选项(self, 序号):
+        info = {}
+        try:
+            info['等级'] = self.等级调整[序号].currentIndex()
+        except:
+            info['等级'] = 0
+
+        try:
+            info['次数'] = self.次数输入[序号].currentIndex()
+        except:
+            info['次数'] = 0
+        if info['次数'] == 12 and self.次数输入[序号].currentText() != '':
+            try:
+                info['次数'] = str(
+                    round(max(0, float(self.次数输入[序号].currentText())), 3))
+            except:
+                info['次数'] = 0
+
+    def 载入json(self, path='set', page=[0, 1, 2, 3, 4]):
+        filepath = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称, path)
+
+        if 0 in page:
+            # 第一页(装备/选择/打造)
+            try:
+                filename = 'page_1.json'
+                set_data = {}
+                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                    set_data = json.load(fp)
+                fp.close()
+
+                self.称号.setCurrentIndex(set_data['称号'])
+                self.宠物.setCurrentIndex(set_data['宠物'])
+                self.计算模式选择.setCurrentIndex(set_data['计算模式'])
+                self.百变怪选项.setChecked(set_data['百变怪'])
+
+                self.神话排名选项.setChecked(set_data['神话排名勾选'])
+                self.切装模式选项.setChecked(set_data['切装模式选项'])
+
+                self.线程数选择.setCurrentIndex(set_data['线程数量'])
+
+                self.批量选择(0)
+                num = 0
+                for i in set_data['装备勾选']:
+                    if i == 1:
+                        self.装备图标点击事件(num, 1)
+                    num += 1
+
+                num = 0
+                for i in set_data['装备打造']:
+                    self.装备打造选项[num].setCurrentIndex(i)
+                    num += 1
+
+                num = 0
+                for i in set_data['装备条件']:
+                    self.装备条件选择[num].setCurrentIndex(i)
+                    num += 1
+
+            except Exception as error:
+                logger.error(error)
+
+        if 1 in page:
+            # 第二页(技能/符文/药剂)
+            try:
+                filename = 'page_2.json'
+                set_data = {}
+                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                    set_data = json.load(fp)
+                fp.close()
+
+                self.强化觉醒选择(set_data['觉醒选择'])
+
+                num = 0
+                for i in set_data['护石栏']:
+                    self.护石栏[num].setCurrentIndex(i)
+                    num += 1
+
+                num = 0
+                for i in set_data['药剂勾选']:
+                    self.复选框列表[num].setChecked(i)
+                    num += 1
+
+                skill = set_data['技能选项']
+                for i in self.角色属性A.技能栏:
+                    序号 = self.角色属性A.技能序号[i.名称]
+                    self.设置技能选项(序号, skill[str(序号)])
+
+                self.武器融合属性A.setCurrentIndex(set_data['武器融合属性A'])
+                self.武器融合属性A2.setCurrentIndex(set_data['武器融合属性A2'])
+                self.武器融合属性B.setCurrentIndex(set_data['武器融合属性B'])
+                self.武器融合属性B2.setCurrentIndex(set_data['武器融合属性B2'])
+                self.希洛克武器选择.setCurrentIndex(set_data['希洛克武器选择'])
+
+                num = 0
+                for i in set_data['辟邪玉效果']:
+                    self.辟邪玉选择[num].setCurrentIndex(i)
+                    num += 1
+
+                num = 0
+                for i in set_data['辟邪玉数值']:
+                    self.辟邪玉数值[num].setCurrentIndex(i)
+                    num += 1
+
+                x = 0
+                for i in set_data['黑鸦选择']:
+                    y = 0
+                    for j in i:
+                        self.黑鸦词条[x][y].setCurrentIndex(j)
+                        y += 1
+                    x += 1
+
+                num = 0
+                for i in set_data['希洛克选择']:
+                    if i == 1:
+                        self.希洛克选择(num)
+                    num += 1
+
+            except Exception as error:
+                logger.error(error)
+
+        if 2 in page:
+            # 第三页(基础/细节/修正)
+            try:
+                filename = 'page_3.json'
+                set_data = {}
+                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                    set_data = json.load(fp)
+                fp.close()
+
+                num = 0
+                for i in set_data['时装选项']:
+                    self.时装选项[num].setCurrentIndex(i)
+                    num += 1
+
+                x = 0
+                for i in set_data['细节数值']:
+                    y = 0
+                    for j in i:
+                        self.属性设置输入[x][y].setText(j)
+                        y += 1
+                    x += 1
+
+                num = 0
+                for i in set_data['细节选项']:
+                    self.技能设置输入[num].setCurrentIndex(i)
+                    num += 1
+
+            except Exception as error:
+                logger.error(error)
+
+        if 3 in page:
+            # 第四页(神话属性修正)
+            try:
+                filename = 'page_4.json'
+                set_data = {}
+                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                    set_data = json.load(fp)
+                fp.close()
+
+                num = 0
+                for i in set_data['神话属性修正']:
+                    self.神话属性选项[num].setCurrentIndex(i)
+                    num += 1
+
+            except Exception as error:
+                logger.error(error)
+
+        if 4 in page:
+            # 第五页(自选装备计算)
+            try:
+                filename = 'page_5.json'
+                set_data = {}
+                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                    set_data = json.load(fp)
+                fp.close()
+
+                num = 0
+                for i in set_data['自选装备']:
+                    self.自选装备[num].setCurrentIndex(i)
+                    num += 1
+
+                num = 0
+                for i in set_data['装备锁定']:
+                    self.装备锁定[num].setChecked(i)
+                    num += 1
+
+            except Exception as error:
+                logger.error(error)
+
+    def 保存json(self, path='set', page=[0, 1, 2, 3, 4]):
+        filepath = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称, path)
+
+        if 0 in page:
+            # 第一页(装备/选择/打造)
+            try:
+                filename = 'page_1.json'
+                set_data = {}
+
+                set_data['称号'] = self.称号.currentIndex()
+                set_data['宠物'] = self.宠物.currentIndex()
+                set_data['计算模式'] = self.计算模式选择.currentIndex()
+                set_data['百变怪'] = self.百变怪选项.isChecked()
+
+                set_data['神话排名勾选'] = self.神话排名选项.isChecked()
+                set_data['切装模式选项'] = self.切装模式选项.isChecked()
+
+                set_data['线程数量'] = self.线程数选择.currentIndex()
+
+                set_data['装备勾选'] = self.装备选择状态
+
+                set_data['装备打造'] = [i.currentIndex() for i in self.装备打造选项]
+
+                set_data['装备条件'] = [i.currentIndex() for i in self.装备条件选择]
+
+                with open(os.path.join(filepath, filename), "w",
+                          encoding='utf-8') as fp:
+                    json.dump(set_data, fp, ensure_ascii=False, indent=4)
+                fp.close()
+            except Exception as error:
+                logger.error(error)
+
+        if 1 in page:
+            # 第二页(技能/符文/药剂)
+            try:
+                filename = 'page_2.json'
+                set_data = {}
+
+                set_data['觉醒选择'] = self.觉醒选择状态
+
+                set_data['护石栏'] = [i.currentIndex() for i in self.护石栏]
+                set_data['药剂勾选'] = [i.isChecked() for i in self.复选框列表]
+
+                skill = {}
+                for i in self.角色属性A.技能栏:
+                    序号 = self.角色属性A.技能序号[i.名称]
+                    skill[序号] = self.获取技能选项(序号)
+                set_data['技能选项'] = skill
+
+                set_data['武器融合属性A'] = self.武器融合属性A.currentIndex()
+                set_data['武器融合属性A2'] = self.武器融合属性A2.currentIndex()
+                set_data['武器融合属性B'] = self.武器融合属性B.currentIndex()
+                set_data['武器融合属性B2'] = self.武器融合属性B2.currentIndex()
+                set_data['希洛克武器选择'] = self.希洛克武器选择.currentIndex()
+
+                set_data['辟邪玉效果'] = [i.currentIndex() for i in self.辟邪玉选择]
+                set_data['辟邪玉数值'] = [i.currentIndex() for i in self.辟邪玉数值]
+
+                set_data['希洛克选择'] = self.希洛克选择状态
+                set_data['黑鸦选择'] = [[j.currentIndex() for j in i]
+                                    for i in self.黑鸦词条]
+
+                with open(os.path.join(filepath, filename), "w",
+                          encoding='utf-8') as fp:
+                    json.dump(set_data, fp, ensure_ascii=False, indent=4)
+                fp.close()
+            except Exception as error:
+                logger.error(error)
+
+        if 2 in page:
+            # 第三页(基础/细节/修正)
+            try:
+                filename = 'page_3.json'
+                set_data = {}
+
+                set_data['时装选项'] = [i.currentIndex() for i in self.时装选项]
+
+                set_data['细节数值'] = [[j.text() for j in i] for i in self.属性设置输入]
+
+                set_data['细节选项'] = [i.currentIndex() for i in self.技能设置输入]
+
+                with open(os.path.join(filepath, filename), "w",
+                          encoding='utf-8') as fp:
+                    json.dump(set_data, fp, ensure_ascii=False, indent=4)
+                fp.close()
+            except Exception as error:
+                logger.error(error)
+
+        if 3 in page:
+            # 第四页(神话属性修正)
+            try:
+                filename = 'page_4.json'
+                set_data = {}
+
+                set_data['神话属性修正'] = [i.currentIndex() for i in self.神话属性选项]
+
+                with open(os.path.join(filepath, filename), "w",
+                          encoding='utf-8') as fp:
+                    json.dump(set_data, fp, ensure_ascii=False, indent=4)
+                fp.close()
+            except Exception as error:
+                logger.error(error)
+
+        if 4 in page:
+            # 第五页(自选装备计算)
+            try:
+                filename = 'page_5.json'
+                set_data = {}
+
+                set_data['自选装备'] = [i.currentIndex() for i in self.自选装备]
+                set_data['装备锁定'] = [i.isChecked() for i in self.装备锁定]
+
+                with open(os.path.join(filepath, filename), "w",
+                          encoding='utf-8') as fp:
+                    json.dump(set_data, fp, ensure_ascii=False, indent=4)
+                fp.close()
+            except Exception as error:
+                logger.error(error)
+
     def 保存配置(self, path='set'):
         if self.禁用存档.isChecked():
             return
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ3.ini',
-                           'w',
-                           encoding='utf-8')
-            setfile.write(str(self.称号.currentIndex()) + '\n')
-            setfile.write(str(self.宠物.currentIndex()) + '\n')
-            setfile.write(str(self.计算模式选择.currentIndex()) + '\n')
-            # 百变怪 && 神话排名 && 一觉切装备 && 时装选择
-            setfile.write(str(int(self.百变怪选项.isChecked())) + '\n')
-            setfile.write(str(int(self.神话排名选项.isChecked())) + '\n')
-            setfile.write(str(int(self.切装模式选项.isChecked())) + '\n')
-            for i in range(len(self.时装选项)):
-                setfile.write(str(self.时装选项[i].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/attr.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(10):
-                for j in range(len(self.属性设置输入[i])):
-                    setfile.write(self.属性设置输入[i][j].text() + ',')
-                setfile.write('\n')
-            for j in range(19):
-                setfile.write(str(self.技能设置输入[j].currentIndex()) + ',')
-            setfile.write('\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(len(装备列表)):
-                setfile.write(str(self.装备选择状态[i]) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ1.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(len(self.装备打造选项)):
-                setfile.write(str(self.装备打造选项[i].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ2.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(len(self.装备条件选择)):
-                setfile.write(str(self.装备条件选择[i].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill1.ini',
-                           'w',
-                           encoding='utf-8')
-            setfile.write(str(self.护石第一栏.currentIndex()) + '\n')
-            setfile.write(str(self.护石第二栏.currentIndex()) + '\n')
-            setfile.write(str(self.护石第三栏.currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill2.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in self.角色属性A.技能栏:
-                序号 = self.角色属性A.技能序号[i.名称]
-                setfile.write(str(self.等级调整[序号].currentIndex()) + '\n')
-                setfile.write(str(self.次数输入[序号].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill3.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(4):
-                setfile.write(str(self.辟邪玉选择[i].currentIndex()) + '\n')
-                setfile.write(str(self.辟邪玉数值[i].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill4.ini',
-                           'w',
-                           encoding='utf-8')
-            setfile.write(str(self.武器融合属性A.currentIndex()) + '\n')
-            setfile.write(str(self.武器融合属性A2.currentIndex()) + '\n')
-            setfile.write(str(self.武器融合属性B.currentIndex()) + '\n')
-            setfile.write(str(self.武器融合属性B2.currentIndex()) + '\n')
-            setfile.write(str(self.希洛克武器选择.currentIndex()) + '\n')
-            for i in range(15):
-                setfile.write(str(self.希洛克选择状态[i]) + '\n')
-            for i in range(4):
-                setfile.write(str(self.黑鸦词条[i][0].currentIndex()) + '\n')
-                setfile.write(str(self.黑鸦词条[i][1].currentIndex()) + '\n')
-                setfile.write(str(self.黑鸦词条[i][2].currentIndex()) + '\n')
-                setfile.write(str(self.黑鸦词条[i][3].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill6.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in self.角色属性A.技能栏:
-                序号 = self.角色属性A.技能序号[i.名称]
-                if 序号 == self.一觉序号 or self.三觉序号:
-                    if self.次数输入[序号].currentIndex() == 2:
-                        if self.次数输入[序号].currentText() != '':
-                            try:
-                                temp = int(float(self.次数输入[序号].currentText()))
-                                if temp >= 0 and temp < 1000:
-                                    setfile.write(
-                                        str(self.次数输入[序号].currentText()) +
-                                        '\n')
-                                else:
-                                    setfile.write(str('1' + '\n'))
-                            except:
-                                setfile.write(str('1' + '\n'))
-                        else:
-                            setfile.write(str('1' + '\n'))
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ4.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(4 * 35):
-                setfile.write(str(self.神话属性选项[i].currentIndex()) + '\n')
-        except:
-            pass
-
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/equ5.ini',
-                           'w',
-                           encoding='utf-8')
-            for i in range(12):
-                setfile.write(str(self.自选装备[i].currentIndex()) + '\n')
-            for i in range(12):
-                setfile.write(str(1 if self.装备锁定[i].isChecked() else 0) + '\n')
-        except:
-            pass
+        #self.保存json(path)
 
     # 一键修正计算
     def 一键修正(self, x=0):
@@ -3714,11 +3881,11 @@ class 角色窗口(窗口):
                 武器属性B = 武器属性B列表[self.武器融合属性B.currentIndex()]
                 tempstr[
                     i] += "属性1:" + "<font style='color:gray'>" + 武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + self.武器融合属性A2.currentText(
-                    ) + '<br>'
+                ) + '<br>'
                 if self.角色属性B.武器词条触发 == 1:
                     tempstr[
                         i] += "属性2:" + "<font style='color:gray'>" + 武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + self.武器融合属性B2.currentText(
-                        ) + '<br>'
+                    ) + '<br>'
             # elif self.希洛克武器词条[0].currentIndex() > 0 and i == 11:
             #     tempstr[i]+='<br>'
             #     tempstr[i]+='<font color="#00A2E8">希洛克融合属性:</font><br>'
@@ -3951,7 +4118,7 @@ class 角色窗口(窗口):
                                         str(
                                             int((float(
                                                 self.次数输入[序号].currentText()) +
-                                                 0.001) * 100) / 100))
+                                                0.001) * 100) / 100))
                             else:
                                 QMessageBox.information(
                                     self, "错误",

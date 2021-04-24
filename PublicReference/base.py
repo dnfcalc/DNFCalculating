@@ -4009,6 +4009,7 @@ class 角色窗口(窗口):
                 info['切装'] = False
         return info
 
+
     def 保存json(self, path='set', page=[0, 1, 2, 3, 4, 5]):
 
         filepath = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称, path)
