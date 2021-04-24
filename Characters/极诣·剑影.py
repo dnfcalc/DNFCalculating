@@ -684,28 +684,8 @@ class 极诣·剑影(角色窗口):
         self.鬼连斩极显示开关.setStyleSheet(复选框样式)
         self.鬼连斩极显示开关.setChecked(False)
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.无式极影剑形态选择.setCurrentIndex(int(setfile[0].replace('\n', '')))
-            self.鬼连斩极显示开关.setChecked(True if int(
-                setfile[1].replace('\n', '')) == 1 else False)
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.无式极影剑形态选择.currentIndex())+'\n')
-            setfile.write('1\n' if self.鬼连斩极显示开关.isChecked() else '0\n')
-        except:
-            pass
+        self.职业存档.append(('鬼连斩极显示开关', self.鬼连斩极显示开关, 0))
+        self.职业存档.append(('无式极影剑形态选择', self.无式极影剑形态选择, 1))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

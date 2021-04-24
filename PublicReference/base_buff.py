@@ -2335,11 +2335,6 @@ class 角色窗口(窗口):
                     self.装备打造选项[num].setCurrentIndex(i)
                     num += 1
 
-                num = 0
-                for i in set_data['装备条件']:
-                    self.装备条件选择[num].setCurrentIndex(i)
-                    num += 1
-
             except Exception as error:
                 logger.error(error)
 
@@ -2367,7 +2362,7 @@ class 角色窗口(窗口):
                 skill = set_data['技能选项']
                 for i in self.角色属性A.技能栏:
                     序号 = self.角色属性A.技能序号[i.名称]
-                    self.设置技能选项(序号, skill[str(序号)])
+                    self.设置技能选项(序号, skill[i.名称])
 
                 self.武器融合属性A.setCurrentIndex(set_data['武器融合属性A'])
                 self.武器融合属性A2.setCurrentIndex(set_data['武器融合属性A2'])
@@ -2494,8 +2489,6 @@ class 角色窗口(窗口):
 
                 set_data['装备打造'] = [i.currentIndex() for i in self.装备打造选项]
 
-                set_data['装备条件'] = [i.currentIndex() for i in self.装备条件选择]
-
                 with open(os.path.join(filepath, filename), "w",
                           encoding='utf-8') as fp:
                     json.dump(set_data, fp, ensure_ascii=False, indent=4)
@@ -2517,7 +2510,7 @@ class 角色窗口(窗口):
                 skill = {}
                 for i in self.角色属性A.技能栏:
                     序号 = self.角色属性A.技能序号[i.名称]
-                    skill[序号] = self.获取技能选项(序号)
+                    skill[i.名称] = self.获取技能选项(序号)
                 set_data['技能选项'] = skill
 
                 set_data['武器融合属性A'] = self.武器融合属性A.currentIndex()

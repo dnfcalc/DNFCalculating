@@ -698,42 +698,14 @@ class 隐夜·刺客(角色窗口):
         self.死亡风暴攻击次数.setToolTip('最高30次')
         self.死亡风暴攻击次数.setCurrentIndex(27)
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            count = 0
-            for item in self.收招选择:
-                item.setChecked(True if int(
-                    setfile[count].replace('\n', '')) == 1 else False)
-                count += 1
-            self.旋舞斩收招次数.setCurrentIndex(int(setfile[count].replace('\n', '')))
-            self.剑刃风暴旋转次数.setCurrentIndex(
-                int(setfile[count+1].replace('\n', '')))
-            self.螺旋穿刺旋转次数.setCurrentIndex(
-                int(setfile[count+2].replace('\n', '')))
-            self.死亡风暴攻击次数.setCurrentIndex(
-                int(setfile[count+3].replace('\n', '')))
-
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            for item in self.收招选择:
-                setfile.write('1\n' if item.isChecked() else '0\n')
-            setfile.write(str(self.旋舞斩收招次数.currentIndex())+'\n')
-            setfile.write(str(self.剑刃风暴旋转次数.currentIndex())+'\n')
-            setfile.write(str(self.螺旋穿刺旋转次数.currentIndex())+'\n')
-            setfile.write(str(self.死亡风暴攻击次数.currentIndex())+'\n')
-        except:
-            pass
+        self.职业存档.append(('旋舞斩收招次数', self.旋舞斩收招次数, 1))
+        self.职业存档.append(('剑刃风暴旋转次数', self.剑刃风暴旋转次数, 1))
+        self.职业存档.append(('螺旋穿刺旋转次数', self.螺旋穿刺旋转次数, 1))
+        self.职业存档.append(('死亡风暴攻击次数', self.死亡风暴攻击次数, 1))
+        num = 0
+        for item in self.收招选择:
+            self.职业存档.append(('收招选择-{}'.format(num), item, 0))
+            num += 1
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

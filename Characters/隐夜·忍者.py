@@ -819,16 +819,6 @@ class 隐夜·忍者(角色窗口):
         except:
             pass
 
-    def 保存配置(self, path='set'):
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            for i in range(len(self.可绑定技能)):
-                setfile.write(str(self.绑定技能次数[i].currentIndex()) + '\n')
-        except:
-            pass
-
     def 界面(self):
         super().界面()
 
@@ -853,30 +843,7 @@ class 隐夜·忍者(角色窗口):
             self.绑定技能次数[i].addItem('1')
             self.绑定技能次数[i].addItem('2')
             self.绑定技能次数[i].addItem('3')
-
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            count = 0
-            for item in self.绑定技能次数:
-                item.setCurrentIndex(int(setfile[count].replace('\n', '')))
-                count = count+1
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            for item in self.绑定技能次数:
-                setfile.write(str(item.currentIndex())+'\n')
-        except:
-            pass
+            self.职业存档.append((self.可绑定技能[i], self.绑定技能次数[i], 1))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

@@ -604,40 +604,11 @@ class 归元·街霸·男(角色窗口):
         self.爆狱强化.setStyleSheet(复选框样式)
         self.爆狱强化.setChecked(True)
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.毒瓶强化.setChecked(True if int(
-                setfile[0].replace('\n', '')) == 1 else False)
-            self.毒针强化.setChecked(True if int(
-                setfile[1].replace('\n', '')) == 1 else False)
-            self.砖块强化.setChecked(True if int(
-                setfile[2].replace('\n', '')) == 1 else False)
-            self.污桶强化.setChecked(True if int(
-                setfile[3].replace('\n', '')) == 1 else False)
-            self.爆狱强化.setChecked(True if int(
-                setfile[4].replace('\n', '')) == 1 else False)
-            self.毒瓶强化.setChecked(True if int(
-                setfile[0].replace('\n', '')) == 1 else False)
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write('1\n' if self.毒瓶强化.isChecked() else '0\n')
-            setfile.write('1\n' if self.毒针强化.isChecked() else '0\n')
-            setfile.write('1\n' if self.砖块强化.isChecked() else '0\n')
-            setfile.write('1\n' if self.污桶强化.isChecked() else '0\n')
-            setfile.write('1\n' if self.爆狱强化.isChecked() else '0\n')
-        except:
-            pass
+        self.职业存档.append(('毒瓶强化', self.毒瓶强化, 0))
+        self.职业存档.append(('毒针强化', self.毒针强化, 0))
+        self.职业存档.append(('砖块强化', self.砖块强化, 0))
+        self.职业存档.append(('污桶强化', self.污桶强化, 0))
+        self.职业存档.append(('爆狱强化', self.爆狱强化, 0))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

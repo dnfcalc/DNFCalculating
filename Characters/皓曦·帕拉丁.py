@@ -658,31 +658,10 @@ class 皓曦·帕拉丁(角色窗口):
         self.蓄力神圣信约.resize(120, 20)
         self.蓄力神圣信约.move(325, 380)
 
+        self.职业存档.append(('蓄力神圣信约', self.蓄力神圣信约, 1))
+
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)
         if self.蓄力神圣信约.isChecked():
             属性.蓄力神圣信约 = 1
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            num = 0
-            for i in [self.蓄力神圣信约]:
-                if setfile[num].replace('\n', '') == 'True':
-                    i.setChecked(True)
-                else:
-                    i.setChecked(False)
-                num += 1
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.蓄力神圣信约.isChecked()) + '\n')
-        except:
-            pass

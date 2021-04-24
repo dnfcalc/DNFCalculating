@@ -1009,6 +1009,15 @@ class 知源·次元行者(角色窗口):
         self.二觉形态选择.resize(120, 20)
         self.二觉形态选择.move(325, 555)
 
+        self.职业存档.append(('坠落触发箱子', self.坠落触发箱子, 0))
+        self.职业存档.append(('离子束强化', self.离子束强化, 0))
+        self.职业存档.append(('强化万花镜', self.强化万花镜, 0))
+        self.职业存档.append(('强化粒子风暴', self.强化粒子风暴, 0))
+        self.职业存档.append(('强化粒子波', self.强化粒子波, 0))
+        self.职业存档.append(('聚爆是否瞬爆', self.聚爆是否瞬爆, 0))
+        self.职业存档.append(('强化奇点', self.强化奇点, 0))
+        self.职业存档.append(('二觉形态选择', self.二觉形态选择, 1))
+
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)
 
@@ -1028,36 +1037,3 @@ class 知源·次元行者(角色窗口):
             属性.聚爆形态 = 1
         属性.二觉形态 = self.二觉形态选择.currentIndex()
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            num = 0
-            for i in [self.坠落触发箱子, self.离子束强化, self.强化万花镜, self.强化粒子风暴,
-                      self.强化粒子波, self.聚爆是否瞬爆, self.强化奇点]:
-                if setfile[num].replace('\n', '') == 'True':
-                    i.setChecked(True)
-                else:
-                    i.setChecked(False)
-                num += 1
-            self.二觉形态选择.setCurrentIndex(int(setfile[num].replace('\n', '')))
-            num += 1
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.坠落触发箱子.isChecked()) + '\n')
-            setfile.write(str(self.离子束强化.isChecked()) + '\n')
-            setfile.write(str(self.强化万花镜.isChecked()) + '\n')
-            setfile.write(str(self.强化粒子风暴.isChecked()) + '\n')
-            setfile.write(str(self.强化粒子波.isChecked()) + '\n')
-            setfile.write(str(self.聚爆是否瞬爆.isChecked()) + '\n')
-            setfile.write(str(self.强化奇点.isChecked()) + '\n')
-            setfile.write(str(self.二觉形态选择.currentIndex()) + '\n')
-        except:
-            pass

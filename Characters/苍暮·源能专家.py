@@ -902,30 +902,9 @@ class 苍暮·源能专家(角色窗口):
         self.裂变黑核蓄力选项.setToolTip('蓄力释放裂变黑核')
         self.裂变黑核蓄力选项.setChecked(True)
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.引力源光弹护石选项.setCurrentIndex(int(setfile[0].replace('\n', '')))
-            self.能量禁锢护石选项.setCurrentIndex(int(setfile[1].replace('\n', '')))
-            self.裂变黑核蓄力选项.setChecked(True if int(
-                setfile[2].replace('\n', '')) == 1 else False)
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.引力源光弹护石选项.currentIndex())+'\n')
-            setfile.write(str(self.能量禁锢护石选项.currentIndex())+'\n')
-            setfile.write('1\n' if self.裂变黑核蓄力选项.isChecked() else '0\n')
-        except:
-            pass
+        self.职业存档.append(('引力源光弹护石选项', self.引力源光弹护石选项, 1))
+        self.职业存档.append(('能量禁锢护石选项', self.能量禁锢护石选项, 1))
+        self.职业存档.append(('裂变黑核蓄力选项', self.裂变黑核蓄力选项, 0))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

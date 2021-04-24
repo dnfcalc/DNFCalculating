@@ -902,6 +902,9 @@ class 神启·驱魔师(角色窗口):
         self.反身空斩打.setStyleSheet(复选框样式)
         self.反身空斩打.setToolTip('触发潜龙冲击波')
 
+        self.职业存档.append(('力法及精通选择', self.力法及精通选择, 1))
+        self.职业存档.append(('反身空斩打', self.反身空斩打, 0))
+
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)
         if self.反身空斩打.isChecked():
@@ -919,31 +922,3 @@ class 神启·驱魔师(角色窗口):
             属性.防具类型 = '布甲'
             属性.类型 = '魔法百分比'
             属性.防具精通属性 = '智力'
-
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.力法及精通选择.setCurrentIndex(int(setfile[0].replace('\n', '')))
-            if int(setfile[1].replace('\n', '')) == 1:
-                self.反身空斩打.setChecked(True)
-            else:
-                self.反身空斩打.setChecked(False)
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.力法及精通选择.currentIndex())+'\n')
-            if self.反身空斩打.isChecked():
-                setfile.write('1\n')
-            else:
-                setfile.write('0\n')
-        except:
-            pass

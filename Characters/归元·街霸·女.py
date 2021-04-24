@@ -890,33 +890,10 @@ class 归元·街霸·女(角色窗口):
         self.毒雾中毒次数选择.resize(120, 20)
         self.毒雾中毒次数选择.move(325, 510)
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.死亡毒雾力智开关.setChecked(True if int(
-                setfile[0].replace('\n', '')) == 1 else False)
-            self.毒伤结算丢失开关.setChecked(True if int(
-                setfile[1].replace('\n', '')) == 1 else False)
-            self.毒雷个数数选择.setCurrentIndex(int(setfile[2].replace('\n', '')))
-            self.毒雾中毒次数选择.setCurrentIndex(int(setfile[3].replace('\n', '')))
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write('1\n' if self.死亡毒雾力智开关.isChecked() else '0\n')
-            setfile.write('1\n' if self.毒伤结算丢失开关.isChecked() else '0\n')
-            setfile.write(str(self.毒雷个数数选择.currentIndex())+'\n')
-            setfile.write(str(self.毒雾中毒次数选择.currentIndex())+'\n')
-        except:
-            pass
+        self.职业存档.append(('死亡毒雾力智开关', self.死亡毒雾力智开关, 0))
+        self.职业存档.append(('毒伤结算丢失开关', self.毒伤结算丢失开关, 0))
+        self.职业存档.append(('毒雷个数数选择', self.毒雷个数数选择, 1))
+        self.职业存档.append(('毒雾中毒次数选择', self.毒雾中毒次数选则, 1))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

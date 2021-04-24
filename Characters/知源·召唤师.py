@@ -663,27 +663,7 @@ class 知源·召唤师(角色窗口):
         self.秒伤比率.setToolTip(
             'AI期望为各召唤兽各技能百分比/CD总和\n\n各召唤兽AI输出时间单独计算\n\n时间输入 - 附灵演出时间 * 附灵次数')
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.秒伤比率.setCurrentIndex(int(setfile[0].replace('\n', '')))
-
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.秒伤比率.currentIndex())+'\n')
-
-        except:
-            pass
+        self.职业存档.append(('秒伤比率', self.秒伤比率, 1))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

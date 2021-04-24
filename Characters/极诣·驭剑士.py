@@ -1100,38 +1100,12 @@ class 极诣·驭剑士(角色窗口):
         self.冰刀三绝斩倍率.move(325, 580)
         self.冰刀三绝斩倍率.setToolTip('请根据自己实测选择')
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.魔剑降临选择.setCurrentIndex(int(setfile[0].replace('\n', '')))
-            self.魔剑堆层数选择.setCurrentIndex(int(setfile[1].replace('\n', '')))
-            self.破剑阵开关.setChecked(True if int(
-                setfile[2].replace('\n', '')) == 1 else False)
-            self.钻头蓄力开关.setChecked(True if int(
-                setfile[3].replace('\n', '')) == 1 else False)
-            self.一觉CD.setChecked(True if int(
-                setfile[4].replace('\n', '')) == 1 else False)
-            self.冰刀三绝斩倍率.setCurrentIndex(int(setfile[5].replace('\n', '')))
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.魔剑降临选择.currentIndex())+'\n')
-            setfile.write(str(self.魔剑堆层数选择.currentIndex())+'\n')
-            setfile.write('1\n' if self.破剑阵开关.isChecked() else '0\n')
-            setfile.write('1\n' if self.钻头蓄力开关.isChecked() else '0\n')
-            setfile.write('1\n' if self.一觉CD.isChecked() else '0\n')
-            setfile.write(str(self.冰刀三绝斩倍率.currentIndex())+'\n')
-        except:
-            pass
+        self.职业存档.append(('破剑阵开关', self.破剑阵开关, 0))
+        self.职业存档.append(('钻头蓄力开关', self.钻头蓄力开关, 0))
+        self.职业存档.append(('一觉CD', self.一觉CD, 0))
+        self.职业存档.append(('魔剑降临选择', self.魔剑降临选择, 1))
+        self.职业存档.append(('魔剑堆层数选择', self.魔剑堆层数选择, 1))
+        self.职业存档.append(('冰刀三绝斩倍率', self.冰刀三绝斩倍率, 1))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

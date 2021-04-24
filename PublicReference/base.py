@@ -1785,7 +1785,6 @@ class 角色属性(属性):
         for i in self.套装栏:
             套装列表[套装序号[i]].其它属性(self)
 
-
 class 角色窗口(窗口):
     def __init__(self):
         super().__init__()
@@ -1814,6 +1813,7 @@ class 角色窗口(窗口):
         self.窗口高度 = max(55 + 30 * count, 680)
         self.setFixedSize(1120, 680)
         self.输出背景图片 = QPixmap('./ResourceFiles/img/输出背景.png')
+        self.职业存档 = []
         super().界面()
 
     def 界面1(self):
@@ -3505,7 +3505,7 @@ class 角色窗口(窗口):
                 skill = set_data['技能选项']
                 for i in self.角色属性A.技能栏:
                     序号 = self.角色属性A.技能序号[i.名称]
-                    self.设置技能选项(序号, skill[str(序号)])
+                    self.设置技能选项(序号, skill[i.名称])
 
             except Exception as error:
                 logger.error(error)
@@ -3626,6 +3626,29 @@ class 角色窗口(窗口):
 
             except Exception as error:
                 logger.error(error)
+
+        # 职业存档
+        try:
+            filename = 'char.json'
+            set_data = {}
+            with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                set_data = json.load(fp)
+            fp.close()
+
+            for i in self.职业存档:
+                # 复选框
+                if i[2] == 0:
+                    i[1].setChecked(set_data[i[0]])
+                # 下拉框
+                elif i[2] == 1:
+                    i[1].setCurrentIndex(set_data[i[0]])
+                # 文本框
+                elif i[2] == 2:
+                    i[1].setText(set_data[i[0]])
+
+        except Exception as error:
+            logger.error(error)
+
 
     def 载入配置(self, path='set'):
         if os.path.exists('./ResourceFiles/{}/{}/page_1.json'.format(self.角色属性A.实际名称, path)):
@@ -4009,7 +4032,6 @@ class 角色窗口(窗口):
                 info['切装'] = False
         return info
 
-
     def 保存json(self, path='set', page=[0, 1, 2, 3, 4, 5]):
 
         filepath = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称, path)
@@ -4071,7 +4093,7 @@ class 角色窗口(窗口):
                 skill = {}
                 for i in self.角色属性A.技能栏:
                     序号 = self.角色属性A.技能序号[i.名称]
-                    skill[序号] =  self.获取技能选项(序号)
+                    skill[i.名称] =  self.获取技能选项(序号)
                 set_data['技能选项'] = skill
 
                 with open(os.path.join(filepath, filename), "w",
@@ -4152,6 +4174,29 @@ class 角色窗口(窗口):
                 fp.close()
             except Exception as error:
                 logger.error(error)
+        
+        # 职业存档
+        try:
+            filename = 'char.json'
+            set_data = {}
+
+            for i in self.职业存档:
+                # 复选框
+                if i[2] == 0:
+                    set_data[i[0]] = i[1].isChecked()
+                # 下拉框
+                elif i[2] == 1:
+                    set_data[i[0]] = i[1].currentIndex()
+                # 文本框
+                elif i[2] == 2:
+                    set_data[i[0]] = i[1].text()
+
+            with open(os.path.join(filepath, filename), "w",
+                      encoding='utf-8') as fp:
+                json.dump(set_data, fp, ensure_ascii=False, indent=4)
+            fp.close()
+        except Exception as error:
+            logger.error(error)                
 
     def 保存配置(self, path='set'):
         if self.禁用存档.isChecked():

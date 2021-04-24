@@ -525,29 +525,8 @@ class 归元·气功师·女(角色窗口):
         self.雷龙开关.setStyleSheet(复选框样式)
         self.雷龙开关.setChecked(True)
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.BUFF输入2.setText(str(setfile[0].replace('\n', '')))
-            self.雷龙开关.setChecked(True if int(
-                setfile[1].replace('\n', '')) == 1 else False)
-
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(self.BUFF输入2.text()+'\n')
-            setfile.write('1\n' if self.雷龙开关.isChecked() else '0\n')
-        except:
-            pass
+        self.职业存档.append(('BUFF输入2', self.BUFF输入2, 2))
+        self.职业存档.append(('雷龙开关', self.雷龙开关, 0))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

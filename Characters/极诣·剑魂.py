@@ -1613,32 +1613,9 @@ class 极诣·剑魂(角色窗口):
         self.太刀刺伤浮动.move(150, 620)
         self.太刀刺伤浮动.setToolTip('默认刺伤为期望值')
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.流心刺状态.setChecked(True if int(
-                setfile[0].replace('\n', '')) == 1 else False)
-            self.流心跃状态.setChecked(True if int(
-                setfile[1].replace('\n', '')) == 1 else False)
-            self.太刀刺伤浮动.setCurrentIndex(int(setfile[2].replace('\n', '')))
-
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write('1\n' if self.流心刺状态.isChecked() else '0\n')
-            setfile.write('1\n' if self.流心跃状态.isChecked() else '0\n')
-            setfile.write(str(self.太刀刺伤浮动.currentIndex())+'\n')
-        except:
-            pass
+        self.职业存档.append(('流心刺状态', self.流心刺状态, 0))
+        self.职业存档.append(('流心跃状态', self.流心跃状态, 0))
+        self.职业存档.append(('太刀刺伤浮动', self.太刀刺伤浮动, 1))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

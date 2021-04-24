@@ -511,36 +511,7 @@ class 巅峰狂徒(角色窗口):
         self.爆弹罗网护石跳跃选项.move(320, 360)
         self.爆弹罗网护石跳跃选项.setStyleSheet(复选框样式)
         self.爆弹罗网护石跳跃选项.setToolTip('跳跃释放爆弹罗网，仅佩戴护石时生效')
-
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill5.ini',
-                           'r',
-                           encoding='utf-8').readlines()
-            if int(setfile[0].replace('\n', '')) == 1:
-                self.爆弹罗网护石跳跃选项.setChecked(True)
-            else:
-                self.爆弹罗网护石跳跃选项.setChecked(False)
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill5.ini',
-                           'w',
-                           encoding='utf-8')
-            if self.爆弹罗网护石跳跃选项.isChecked():
-                setfile.write('1\n')
-            else:
-                setfile.write('0\n')
-        except:
-            pass
+        self.职业存档.append(('爆弹罗网护石跳跃选项', self.爆弹罗网护石跳跃选项, 1))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

@@ -697,27 +697,8 @@ class 知源·元素爆破师(角色窗口):
         self.元素禁域减少CD.resize(140, 20)
         self.元素禁域减少CD.move(325, 480)
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.地火hit.setCurrentIndex(int(setfile[0].replace('\n', '')))
-            self.元素禁域减少CD.setCurrentIndex(int(setfile[1].replace('\n', '')))
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.地火hit.currentIndex())+'\n')
-            setfile.write(str(self.元素禁域减少CD.currentIndex())+'\n')
-        except:
-            pass
+        self.职业存档.append(('地火hit', self.地火hit, 1))
+        self.职业存档.append(('元素禁域减少CD', self.元素禁域减少CD, 1))
 
     def 护石判断(self, index):
         if '元素禁域' in [self.护石栏[0].currentText(), self.护石栏[1].currentText(), self.护石栏[2].currentText()]:

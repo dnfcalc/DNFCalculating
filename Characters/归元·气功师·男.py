@@ -737,25 +737,7 @@ class 归元·气功师·男(角色窗口):
         self.BUFF输入2.setStyleSheet(输入框样式)
         self.BUFF输入2.setAlignment(Qt.AlignCenter)
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.BUFF输入2.setText(str(setfile[0].replace('\n', '')))
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(self.BUFF输入2.text()+'\n')
-        except:
-            pass
+        self.职业存档.append(('BUFF输入2', self.BUFF输入2, 2))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

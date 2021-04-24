@@ -862,34 +862,9 @@ class 苍暮·暗刃(角色窗口):
         self.战术协作方向选项.move(320, 540)
         self.战术协作方向选项.setToolTip('选择战术协作：穿插包围的形态')
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.大回旋护石跳跃选项.setChecked(True if int(
-                setfile[0].replace('\n', '')) == 1 else False)
-        #    self.轮盘连射类型选项.setCurrentIndex(int(setfile[1].replace('\n', '')))
-            self.致命焰火方向选项.setCurrentIndex(int(setfile[1].replace('\n', '')))
-            self.战术协作方向选项.setCurrentIndex(int(setfile[2].replace('\n', '')))
-
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write('1\n' if self.大回旋护石跳跃选项.isChecked() else '0\n')
-            # setfile.write(str(self.轮盘连射类型选项.currentIndex())+'\n')
-            setfile.write(str(self.致命焰火方向选项.currentIndex())+'\n')
-            setfile.write(str(self.战术协作方向选项.currentIndex())+'\n')
-
-        except:
-            pass
+        self.职业存档.append(('致命焰火方向选项', self.致命焰火方向选项, 1))
+        self.职业存档.append(('战术协作方向选项', self.战术协作方向选项, 1))
+        self.职业存档.append(('大回旋护石跳跃选项', self.大回旋护石跳跃选项, 0))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

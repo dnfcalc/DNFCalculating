@@ -1494,6 +1494,11 @@ class 黑暗武士(角色窗口):
         self.护甲精通选择.resize(120, 20)
         self.护甲精通选择.move(720, 400)
 
+        self.职业存档.append(('护甲精通选择', self.护甲精通选择, 1))
+        for i in range(6):
+            for j in range(6):
+                self.职业存档.append(('技能-{}-{}'.format(i, j), self.self.技能排列[i][j], 1))
+      
     def 清空排列(self):
 
         box = QMessageBox(QMessageBox.Warning, "提示", "是否清空排列？")
@@ -1565,32 +1570,3 @@ class 黑暗武士(角色窗口):
         elif 属性.护甲精通 == 3:
             属性.防具类型 = '板甲'
             属性.防具精通属性 = ['智力']
-
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            num = 0
-            for i in range(6):
-                for j in range(6):
-                    self.技能排列[i][j].setCurrentIndex(
-                        int(setfile[num].replace('\n', '')))
-                    num += 1
-
-            self.护甲精通选择.setCurrentIndex(int(setfile[num].replace('\n', '')))
-            num += 1
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            for i in range(6):
-                for j in range(6):
-                    setfile.write(str(self.技能排列[i][j].currentIndex())+'\n')
-            setfile.write(str(self.护甲精通选择.currentIndex())+'\n')
-        except:
-            pass

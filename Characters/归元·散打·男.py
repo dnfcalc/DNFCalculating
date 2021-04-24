@@ -580,25 +580,7 @@ class 归元·散打·男(角色窗口):
         self.二挡关联选择.resize(150, 20)
         self.二挡关联选择.move(320, 270)
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.二挡关联选择.setCurrentIndex(int(setfile[0].replace('\n', '')))
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.二挡关联选择.currentIndex())+'\n')
-        except:
-            pass
+        self.职业存档.append(('二挡关联选择', self.二挡关联选择, 1))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

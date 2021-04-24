@@ -532,25 +532,7 @@ class 归元·柔道家·女(角色窗口):
         self.死亡风暴次数选择.resize(120, 20)
         self.死亡风暴次数选择.move(325, 390)
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' +
-                           path + '/skill5.ini', 'r', encoding='utf-8').readlines()
-            self.死亡风暴次数选择.setCurrentIndex(int(setfile[0].replace('\n', '')))
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/'+self.角色属性A.实际名称 +
-                           '/' + path + '/skill5.ini', 'w', encoding='utf-8')
-            setfile.write(str(self.死亡风暴次数选择.currentIndex())+'\n')
-        except:
-            pass
+        self.职业存档.append(('死亡风暴次数选择', self.死亡风暴次数选择, 1))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)

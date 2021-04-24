@@ -747,31 +747,8 @@ class 未来开拓者(角色窗口):
         self.次数输入[9].currentIndexChanged.connect(
             lambda state: self.能量禁锢爆炸次数判断(警告=False))
 
-    def 载入配置(self, path='set'):
-        super().载入配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill5.ini',
-                           'r',
-                           encoding='utf-8').readlines()
-            self.引力源光弹护石选项.setCurrentIndex(int(setfile[0].replace('\n', '')))
-            self.能量禁锢护石选项.setCurrentIndex(int(setfile[1].replace('\n', '')))
-        except:
-            pass
-
-    def 保存配置(self, path='set'):
-        if self.禁用存档.isChecked():
-            return
-        super().保存配置(path)
-        try:
-            setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
-                           '/skill5.ini',
-                           'w',
-                           encoding='utf-8')
-            setfile.write(str(self.引力源光弹护石选项.currentIndex()) + '\n')
-            setfile.write(str(self.能量禁锢护石选项.currentIndex()) + '\n')
-        except:
-            pass
+        self.职业存档.append(('引力源光弹护石选项', self.引力源光弹护石选项, 1))
+        self.职业存档.append(('能量禁锢护石选项', self.能量禁锢护石选项, 1))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)
