@@ -133,6 +133,8 @@ class 选择窗口(QWidget):
             return error
 
     def 网盘检查(self):
+        if 目录.endswith('py'):
+            return
         try:
             lzy = LanZouCloud()
             fileURL = ''
