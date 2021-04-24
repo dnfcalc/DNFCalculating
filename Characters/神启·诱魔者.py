@@ -672,7 +672,7 @@ class 神启·诱魔者(角色窗口):
         self.暴食段数选择.resize(120, 20)
         self.暴食段数选择.move(320, 430)
 
-        self.职业存档.append(('BUFF输入2', BUFF输入2, 2))
+        self.职业存档.append(('BUFF输入2', self.BUFF输入2, 2))
         self.职业存档.append(('手搓冷却', self.手搓冷却, 0))
         self.职业存档.append(('净化之花冷却Buff', self.净化之花冷却Buff, 0))
         self.职业存档.append(('凈化之花多段段数选择', self.凈化之花多段段数选择, 1))

@@ -1497,7 +1497,7 @@ class 黑暗武士(角色窗口):
         self.职业存档.append(('护甲精通选择', self.护甲精通选择, 1))
         for i in range(6):
             for j in range(6):
-                self.职业存档.append(('技能-{}-{}'.format(i, j), self.self.技能排列[i][j], 1))
+                self.职业存档.append(('技能-{}-{}'.format(i, j), self.技能排列[i][j], 1))
       
     def 清空排列(self):
 

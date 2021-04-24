@@ -2586,7 +2586,7 @@ class 角色窗口(窗口):
     def 保存配置(self, path='set'):
         if self.禁用存档.isChecked():
             return
-        #self.保存json(path)
+        self.保存json(path)
 
     # 一键修正计算
     def 一键修正(self, x=0):

@@ -874,7 +874,7 @@ class 极诣·鬼泣(角色窗口):
         self.布雷德开关.resize(120, 20)
         self.布雷德开关.move(325, 450)
         self.布雷德开关.setStyleSheet(复选框样式)
-        self.职业存档.append(('布雷德开关', self.蓄力神圣信约, 0))
+        self.职业存档.append(('布雷德开关', self.布雷德开关, 0))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)
