@@ -4,7 +4,7 @@
 
 #### NewFeatures
 * 皓曦·混沌魔灵：修正魔灵召唤相关数据 ([99cf2f](https://gitee.com/i_melon/DNFCalculating/commit/99cf2fc7ffb25c5e244945d771549fd46bd2e896))
-* 神启·驱魔师：区分[式神合击：灭]双脉轮形态数据差异 ([42a9b0](https://gitee.com/i_melon/DNFCalculating/commit/42a9b04baa95b4eb5e86b0d20150d69332f27295))
+* 神启·驱魔师：区分[式神灭却·合]双脉轮形态数据差异 ([42a9b0](https://gitee.com/i_melon/DNFCalculating/commit/42a9b04baa95b4eb5e86b0d20150d69332f27295))
 * 重霄·弹药专家·男：修正爆裂弹数据及/CD算法 ([02e25a](https://gitee.com/i_melon/DNFCalculating/commit/02e25ae5e9e44aef4ab2fd4a05f329ec534ad04b))
 * 魔枪士：同步国服登陆三觉 ([de22bc](https://gitee.com/i_melon/DNFCalculating/commit/de22bcad101f4cc28c06bf8979507b7e81af7946))
 
