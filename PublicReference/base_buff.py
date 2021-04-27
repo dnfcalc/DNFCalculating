@@ -2279,7 +2279,7 @@ class 角色窗口(窗口):
 
         try:
             if type(info['次数']) == type('str'):
-                self.次数输入[序号].setCurrentIndex(12)
+                self.次数输入[序号].setCurrentIndex(2)
                 self.次数输入[序号].setEditable(True)
                 self.次数输入[序号].clearEditText()
                 self.次数输入[序号].setCurrentText(info['次数'])
@@ -2299,12 +2299,13 @@ class 角色窗口(窗口):
             info['次数'] = self.次数输入[序号].currentIndex()
         except:
             info['次数'] = 0
-        if info['次数'] == 12 and self.次数输入[序号].currentText() != '':
+        if info['次数'] == 2 and self.次数输入[序号].currentText() != '':
             try:
                 info['次数'] = str(
                     round(max(0, float(self.次数输入[序号].currentText())), 3))
             except:
                 info['次数'] = 0
+        return info
 
     def 载入json(self, path='set', page=[0, 1, 2, 3, 4]):
         filepath = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称, path)
