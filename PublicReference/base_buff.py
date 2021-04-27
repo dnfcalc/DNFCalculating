@@ -2318,28 +2318,50 @@ class 角色窗口(窗口):
                     set_data = json.load(fp)
                 fp.close()
 
-                self.称号.setCurrentIndex(set_data['称号'])
-                self.宠物.setCurrentIndex(set_data['宠物'])
-                self.计算模式选择.setCurrentIndex(set_data['计算模式'])
-                self.百变怪选项.setChecked(set_data['百变怪'])
-
-                self.神话排名选项.setChecked(set_data['神话排名勾选'])
-                self.切装模式选项.setChecked(set_data['切装模式选项'])
-
-                self.线程数选择.setCurrentIndex(set_data['线程数量'])
-
-                self.批量选择(0)
-                num = 0
-                for i in set_data['装备勾选']:
-                    if i == 1:
-                        self.装备图标点击事件(num, 1)
-                    num += 1
-
-                num = 0
-                for i in set_data['装备打造']:
-                    self.装备打造选项[num].setCurrentIndex(i)
-                    num += 1
-
+                try:
+                    self.称号.setCurrentIndex(set_data['称号'])
+                except Exception as error:
+                    logger.error(error) 
+                try:
+                    self.宠物.setCurrentIndex(set_data['宠物'])
+                except Exception as error:
+                    logger.error(error) 
+                try:
+                    self.计算模式选择.setCurrentIndex(set_data['计算模式'])
+                except Exception as error:
+                    logger.error(error) 
+                try:
+                    self.百变怪选项.setChecked(set_data['百变怪'])
+                except Exception as error:
+                    logger.error(error) 
+                try:  
+                    self.神话排名选项.setChecked(set_data['神话排名勾选'])
+                except Exception as error:
+                    logger.error(error) 
+                try:
+                    self.切装模式选项.setChecked(set_data['切装模式选项'])
+                except Exception as error:
+                    logger.error(error) 
+                try:
+                    self.线程数选择.setCurrentIndex(set_data['线程数量'])
+                except Exception as error:
+                    logger.error(error) 
+                try:
+                    self.批量选择(0)
+                    num = 0
+                    for i in set_data['装备勾选']:
+                        if i == 1:
+                            self.装备图标点击事件(num, 1)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
+                try:
+                    num = 0
+                    for i in set_data['装备打造']:
+                        self.装备打造选项[num].setCurrentIndex(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
             except Exception as error:
                 logger.error(error)
 
@@ -2352,53 +2374,90 @@ class 角色窗口(窗口):
                     set_data = json.load(fp)
                 fp.close()
 
-                self.强化觉醒选择(set_data['觉醒选择'])
-
-                num = 0
-                for i in set_data['护石栏']:
-                    self.护石栏[num].setCurrentIndex(i)
-                    num += 1
-
-                num = 0
-                for i in set_data['药剂勾选']:
-                    self.复选框列表[num].setChecked(i)
-                    num += 1
-
-                skill = set_data['技能选项']
-                for i in self.角色属性A.技能栏:
-                    序号 = self.角色属性A.技能序号[i.名称]
-                    self.设置技能选项(序号, skill[i.名称])
-
-                self.武器融合属性A.setCurrentIndex(set_data['武器融合属性A'])
-                self.武器融合属性A2.setCurrentIndex(set_data['武器融合属性A2'])
-                self.武器融合属性B.setCurrentIndex(set_data['武器融合属性B'])
-                self.武器融合属性B2.setCurrentIndex(set_data['武器融合属性B2'])
-                self.希洛克武器选择.setCurrentIndex(set_data['希洛克武器选择'])
-
-                num = 0
-                for i in set_data['辟邪玉效果']:
-                    self.辟邪玉选择[num].setCurrentIndex(i)
-                    num += 1
-
-                num = 0
-                for i in set_data['辟邪玉数值']:
-                    self.辟邪玉数值[num].setCurrentIndex(i)
-                    num += 1
-
-                x = 0
-                for i in set_data['黑鸦选择']:
-                    y = 0
-                    for j in i:
-                        self.黑鸦词条[x][y].setCurrentIndex(j)
-                        y += 1
-                    x += 1
-
-                num = 0
-                for i in set_data['希洛克选择']:
-                    if i == 1:
-                        self.希洛克选择(num)
-                    num += 1
-
+                try:    
+                    self.强化觉醒选择(set_data['觉醒选择'])
+                except Exception as error:
+                    logger.error(error) 
+                try:
+                    num = 0
+                    for i in set_data['护石栏']:
+                        self.护石栏[num].setCurrentIndex(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    num = 0
+                    for i in set_data['药剂勾选']:
+                        self.复选框列表[num].setChecked(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    skill = set_data['技能选项']
+                    for i in self.角色属性A.技能栏:
+                        序号 = self.角色属性A.技能序号[i.名称]
+                        self.设置技能选项(序号, skill[i.名称])
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    self.武器融合属性A.setCurrentIndex(set_data['武器融合属性A'])
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    self.武器融合属性A2.setCurrentIndex(set_data['武器融合属性A2'])
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    self.武器融合属性B.setCurrentIndex(set_data['武器融合属性B'])
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    self.武器融合属性B2.setCurrentIndex(set_data['武器融合属性B2'])
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    self.希洛克武器选择.setCurrentIndex(set_data['希洛克武器选择'])
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    num = 0
+                    for i in set_data['辟邪玉效果']:
+                        self.辟邪玉选择[num].setCurrentIndex(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    num = 0
+                    for i in set_data['辟邪玉数值']:
+                        self.辟邪玉数值[num].setCurrentIndex(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    num = 0
+                    for i in set_data['排行选项']:
+                        self.排行选项[num].setCurrentIndex(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
+                try:       
+                    x = 0
+                    for i in set_data['黑鸦选择']:
+                        y = 0
+                        for j in i:
+                            self.黑鸦词条[x][y].setCurrentIndex(j)
+                            y += 1
+                        x += 1
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    num = 0
+                    for i in set_data['希洛克选择']:
+                        if i == 1:
+                            self.希洛克选择(num)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
             except Exception as error:
                 logger.error(error)
 
@@ -2410,25 +2469,30 @@ class 角色窗口(窗口):
                 with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
                     set_data = json.load(fp)
                 fp.close()
-
-                num = 0
-                for i in set_data['时装选项']:
-                    self.时装选项[num].setCurrentIndex(i)
-                    num += 1
-
-                x = 0
-                for i in set_data['细节数值']:
-                    y = 0
-                    for j in i:
-                        self.属性设置输入[x][y].setText(j)
-                        y += 1
-                    x += 1
-
-                num = 0
-                for i in set_data['细节选项']:
-                    self.技能设置输入[num].setCurrentIndex(i)
-                    num += 1
-
+                try:    
+                    num = 0
+                    for i in set_data['时装选项']:
+                        self.时装选项[num].setCurrentIndex(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    x = 0
+                    for i in set_data['细节数值']:
+                        y = 0
+                        for j in i:
+                            self.属性设置输入[x][y].setText(j)
+                            y += 1
+                        x += 1
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    num = 0
+                    for i in set_data['细节选项']:
+                        self.技能设置输入[num].setCurrentIndex(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
             except Exception as error:
                 logger.error(error)
 
@@ -2440,12 +2504,13 @@ class 角色窗口(窗口):
                 with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
                     set_data = json.load(fp)
                 fp.close()
-
-                num = 0
-                for i in set_data['神话属性修正']:
-                    self.神话属性选项[num].setCurrentIndex(i)
-                    num += 1
-
+                try:    
+                    num = 0
+                    for i in set_data['神话属性修正']:
+                        self.神话属性选项[num].setCurrentIndex(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
             except Exception as error:
                 logger.error(error)
 
@@ -2458,16 +2523,20 @@ class 角色窗口(窗口):
                     set_data = json.load(fp)
                 fp.close()
 
-                num = 0
-                for i in set_data['自选装备']:
-                    self.自选装备[num].setCurrentIndex(i)
-                    num += 1
-
-                num = 0
-                for i in set_data['装备锁定']:
-                    self.装备锁定[num].setChecked(i)
-                    num += 1
-
+                try:    
+                    num = 0
+                    for i in set_data['自选装备']:
+                        self.自选装备[num].setCurrentIndex(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
+                try:    
+                    num = 0
+                    for i in set_data['装备锁定']:
+                        self.装备锁定[num].setChecked(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error) 
             except Exception as error:
                 logger.error(error)
 
@@ -2530,6 +2599,8 @@ class 角色窗口(窗口):
                 set_data['希洛克选择'] = self.希洛克选择状态
                 set_data['黑鸦选择'] = [[j.currentIndex() for j in i]
                                     for i in self.黑鸦词条]
+
+                set_data['排行选项'] = [i.currentIndex() for i in self.排行选项]
 
                 with open(os.path.join(filepath, filename), "w",
                           encoding='utf-8') as fp:
