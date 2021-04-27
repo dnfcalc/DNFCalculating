@@ -606,35 +606,19 @@ class 角色属性(属性):
     def 站街智力(self):
         return int(self.智力)
 
-    def 面板力量(self, 取整=1):
+    def 面板力量(self):
         if self.系统奶 == False:
-            if 取整 == 1:
-                return int(int((self.力量 + self.进图力量)) * (1 + self.百分比力智))
-            else:
-                return (self.力量 + self.进图力量) * (1 + self.百分比力智)
+            return (self.力量 + self.进图力量) * (1 + self.百分比力智)
         else:
-            if 取整 == 1:
-                return int(
-                    int((self.力量 + int((self.力量 - self.基础力量) * 1.35 + 7664) +
-                         self.进图力量)) * (1 + self.百分比力智))
-            else:
-                return (self.力量 + int((self.力量 - self.基础力量) * 1.35 + 7664) +
-                        self.进图力量) * (1 + self.百分比力智)
+            return (self.力量 + int((self.力量 - self.基础力量) * 1.35 + 7664) +
+                    self.进图力量) * (1 + self.百分比力智)
 
-    def 面板智力(self, 取整=1):
+    def 面板智力(self):
         if self.系统奶 == False:
-            if 取整 == 1:
-                return int(int((self.智力 + self.进图智力)) * (1 + self.百分比力智))
-            else:
-                return (self.智力 + self.进图智力) * (1 + self.百分比力智)
+            return (self.智力 + self.进图智力) * (1 + self.百分比力智)
         else:
-            if 取整 == 1:
-                return int(
-                    int((self.智力 + int((self.智力 - self.基础智力) * 1.35 + 7664) +
-                         self.进图智力)) * (1 + self.百分比力智))
-            else:
-                return (self.智力 + int((self.智力 - self.基础智力) * 1.35 + 7664) +
-                        self.进图智力) * (1 + self.百分比力智)
+            return (self.智力 + int((self.智力 - self.基础智力) * 1.35 + 7664) +
+                    self.进图智力) * (1 + self.百分比力智)
 
     def 站街物理攻击力倍率(self):
         站街物理攻击倍率 = 1.0
@@ -834,15 +818,7 @@ class 角色属性(属性):
                        (1 + self.百分比三攻))
 
     def 力智计算(self):
-        return max(self.面板力量(取整=0), self.面板智力(取整=0))
-        # if self.类型 == '物理百分比':
-        #    return self.面板力量(取整=0) / 250 + 1
-        # elif self.类型 == '魔法百分比':
-        #    return self.面板智力(取整=0) / 250 + 1
-        # elif self.类型 == '物理固伤':
-        #    return self.面板力量(取整=0) / 250 + 1
-        # elif self.类型 == '魔法固伤':
-        #    return self.面板智力(取整=0) / 250 + 1
+        return max(self.面板力量(), self.面板智力())
 
     def 词条提示上下限计算(self, 词条范围, 词条数值):
         词条提升率 = [[0, 0]] * 6
