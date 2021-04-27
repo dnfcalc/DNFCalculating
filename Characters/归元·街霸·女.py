@@ -754,11 +754,11 @@ class 归元·街霸·女角色属性(角色属性):
     def 站街智力(self):
         return self.站街力量()
 
-    def 面板力量(self, 取整=1):
-        return max(super().面板力量(取整), super().面板智力(取整))
+    def 面板力量(self):
+        return max(super().面板力量(), super().面板智力())
 
-    def 面板智力(self, 取整=1):
-        return self.面板力量(取整)
+    def 面板智力(self):
+        return self.面板力量()
 
     def 被动倍率计算(self):
         super().被动倍率计算()
