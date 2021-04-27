@@ -245,7 +245,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 归元·街霸：修复奔流不息对伏虎霸王拳的加成错误 ([3597ab](https://github.com/wxh0402/DNFCalculating/commit/3597ab4a77b4195f67f6b9bd4658412baaa9610e))
 * 极诣·狂战士：修正崩山击及魔狱血刹数据错误 ([1ec097](https://github.com/wxh0402/DNFCalculating/commit/1ec097d4e0774e7812083946612ec2b82f90f4e8))
 * 神启·复仇者：修正部分技能CD错误 ([c1a1ec](https://github.com/wxh0402/DNFCalculating/commit/c1a1ecd643547db83af5ee3f004da4973f98c83f))
-* 神启·复仇者：修正魔流光杀及魔流光杀CD错误 ([ed080f](https://github.com/wxh0402/DNFCalculating/commit/ed080febd9e04e40a6dfaa7ee1abc5a0837ace87))
+* 神启·复仇者：修正极恶洪流及极恶洪流CD错误 ([ed080f](https://github.com/wxh0402/DNFCalculating/commit/ed080febd9e04e40a6dfaa7ee1abc5a0837ace87))
 * 调整黑鸦武器词条自选跨度 ([db4c4f](https://github.com/wxh0402/DNFCalculating/commit/db4c4f88b2ec40ca95ebaf838af7d77f65c03043))
 * 重霄·弹药专家·女：调整/CD算法错误 ([561578](https://github.com/wxh0402/DNFCalculating/commit/5615784bc88a706301649d8da5859f43ea4d07f4))
 * 重霄·机械师·男：修正HS1全息机械猎手技能数据错误 ([e30a36](https://github.com/wxh0402/DNFCalculating/commit/e30a36f58b6999deb85372618d1ffdc200b460fc))
