@@ -1383,18 +1383,11 @@ class 黑暗武士角色属性(角色属性):
         return self.站街力量()
 
     def 面板力量(self):
-        if self.系统奶 == False:
-            power = (self.力量 + self.进图力量) * (1 + self.百分比力智) * \
-                self.技能栏[self.技能序号['次元融合']].力智倍率()
-            intelligence = (self.智力 + self.进图智力) * (1 +
-                                                    self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率()
-            return max(power, intelligence)
-        else:
-            power = (self.力量 + int((self.力量 - self.基础力量) * 1.35 + 7664) +
-                     self.进图力量) * (1 + self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率()
-            intelligence = (self.智力 + int((self.智力 - self.基础智力) * 1.35 + 7664) +
-                            self.进图智力) * (1 + self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率()
-            return max(power, intelligence)
+        power = (self.力量 + int((self.力量 - self.基础力量) * self.系统奶系数 + self.系统奶基数) +
+                 self.进图力量) * (1 + self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率()
+        intelligence = (self.智力 + int((self.智力 - self.基础智力) * self.系统奶系数 + self.系统奶基数) +
+                        self.进图智力) * (1 + self.百分比力智) * self.技能栏[self.技能序号['次元融合']].力智倍率()
+        return max(power, intelligence)
 
     def 面板智力(self):
         return self.面板力量()

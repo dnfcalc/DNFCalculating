@@ -109,15 +109,15 @@ class 角色属性(属性):
 
     职业分类 = '输出'
     主BUFF = 1.0
-    系统奶 = False
+    系统奶系数 = 0
+    系统奶基数 = 0
     年宠技能 = False
     白兔子技能 = False
     斗神之吼秘药 = False
     称号触发 = False
-    战术技能BUFF = False
-    兵法技攻BUFF = False
-    希洛克BUFF = False
+
     屏蔽三觉 = False
+
     超卓之心等级 = 1
     觉醒之抉择技能 = ''
 
@@ -607,18 +607,12 @@ class 角色属性(属性):
         return int(self.智力)
 
     def 面板力量(self):
-        if self.系统奶 == False:
-            return (self.力量 + self.进图力量) * (1 + self.百分比力智)
-        else:
-            return (self.力量 + int((self.力量 - self.基础力量) * 1.35 + 7664) +
-                    self.进图力量) * (1 + self.百分比力智)
+        return (self.力量 + int((self.力量 - self.基础力量) * self.系统奶系数 + self.系统奶基数) +
+                self.进图力量) * (1 + self.百分比力智)
 
     def 面板智力(self):
-        if self.系统奶 == False:
-            return (self.智力 + self.进图智力) * (1 + self.百分比力智)
-        else:
-            return (self.智力 + int((self.智力 - self.基础智力) * 1.35 + 7664) +
-                    self.进图智力) * (1 + self.百分比力智)
+        return (self.智力 + int((self.智力 - self.基础智力) * self.系统奶系数 + self.系统奶基数) +
+                self.进图智力) * (1 + self.百分比力智)
 
     def 站街物理攻击力倍率(self):
         站街物理攻击倍率 = 1.0
@@ -1511,9 +1505,8 @@ class 角色属性(属性):
         增伤倍率 *= self.技能攻击力
         增伤倍率 *= 1 + self.持续伤害 * self.持续伤害计算比例
         增伤倍率 *= 1 + self.附加伤害 + self.属性附加 * self.属性倍率
-        # 添加希洛克BUFF
-        self.伤害指数 = 面板 * self.属性倍率 * 增伤倍率 * 基准倍率 / 100 * self.队友增幅系数 * (
-            1 + self.希洛克BUFF * 0.15)
+
+        self.伤害指数 = 面板 * self.属性倍率 * 增伤倍率 * 基准倍率 / 100 * self.队友增幅系数
 
     def 切装判断(self):
         for i in self.装备切装:
@@ -1706,12 +1699,6 @@ class 角色属性(属性):
         # 冲突属性计算
         self.伤害增加加成(self.黄字)
         self.暴击伤害加成(self.爆伤)
-
-        # 光环属性计算
-        if self.战术技能BUFF:
-            self.技能等级加成('所有', 60, 80, 3)
-        if self.兵法技攻BUFF:
-            self.技能攻击力加成(0.10)
 
     def 黑鸦词条扣除(self):
         for i in range(4):
@@ -2361,9 +2348,6 @@ class 角色窗口(窗口):
         self.复选框列表 = []
 
         for i in 选项设置列表:
-            # 已三觉职业移除希洛克未三觉buff属性
-            if "·" in self.初始属性.实际名称 and i.名称 == '未三觉希洛克buff':
-                continue
             if (觉醒开关 == 0 or "·" not in self.初始属性.实际名称) and i.名称 == '屏蔽三觉':
                 continue
             self.复选框列表.append(QCheckBox(i.名称, self.main_frame2))
@@ -3472,7 +3456,7 @@ class 角色窗口(窗口):
                 for i in set_data['符文效果']:
                     self.符文效果[num].setCurrentIndex(i)
                     num += 1
-
+                
                 num = 0
                 for i in set_data['药剂勾选']:
                     self.复选框列表[num].setChecked(i)
@@ -5778,7 +5762,7 @@ class 角色窗口(窗口):
             属性.暴击伤害加成(0.04)  # 戒指
         if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
             属性.百分比力智加成(0.04)  # 辅助装备
-
+    
     def 输入属性(self, 属性, x=0):
 
         i = self.攻击目标.currentIndex()

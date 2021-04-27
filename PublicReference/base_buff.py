@@ -63,6 +63,8 @@ class 角色属性(属性):
     职业分类 = 'BUFF'
     C力智 = 5000
     C三攻 = 3000
+    系统奶系数 = 0
+    系统奶基数 = 0
     排行类型 = '物理百分比'
     称号触发 = False
 
@@ -393,19 +395,19 @@ class 角色属性(属性):
             魔攻合计 += i[6]
             独立合计 += i[7]
 
-        x1 = ((self.C力智 + (self.C力智 - 950) * 1.35 + 7664) / 250 + 1) * self.C三攻
+        x1 = ((self.C力智 + (self.C力智 - 950) * self.系统奶系数 + self.系统奶基数) / 250 + 1) * self.C三攻
 
         if self.排行类型 == '物理百分比':
-            x2 = ((self.C力智 + (self.C力智 - 950) * 1.35 + 7664 + 力量合计) / 250 +
+            x2 = ((self.C力智 + (self.C力智 - 950) * self.系统奶系数 + self.系统奶基数 + 力量合计) / 250 +
                   1) * (self.C三攻 + 物攻合计)
         elif self.排行类型 == '魔法百分比':
-            x2 = ((self.C力智 + (self.C力智 - 950) * 1.35 + 7664 + 智力合计) / 250 +
+            x2 = ((self.C力智 + (self.C力智 - 950) * self.系统奶系数 + self.系统奶基数 + 智力合计) / 250 +
                   1) * (self.C三攻 + 魔攻合计)
         elif self.排行类型 == '物理固伤':
-            x2 = ((self.C力智 + (self.C力智 - 950) * 1.35 + 7664 + 力量合计) / 250 +
+            x2 = ((self.C力智 + (self.C力智 - 950) * self.系统奶系数 + self.系统奶基数 + 力量合计) / 250 +
                   1) * (self.C三攻 + 独立合计)
         elif self.排行类型 == '魔法固伤':
-            x2 = ((self.C力智 + (self.C力智 - 950) * 1.35 + 7664 + 智力合计) / 250 +
+            x2 = ((self.C力智 + (self.C力智 - 950) * self.系统奶系数 + self.系统奶基数 + 智力合计) / 250 +
                   1) * (self.C三攻 + 独立合计)
 
         return [x2 / x1 * 100, int(self.站街系数), 力量合计, 智力合计, 物攻合计, 魔攻合计, 独立合计][x]
@@ -1366,7 +1368,7 @@ class 角色窗口(窗口):
             counter += 1
 
         self.排行选项 = []
-        for i in range(3):
+        for i in range(4):
             self.排行选项.append(MyQComboBox(self.main_frame2))
         self.排行选项[0].setEditable(True)
         for i in [
@@ -1388,10 +1390,13 @@ class 角色窗口(窗口):
         for i in ['物理百分比', '魔法百分比', '物理固伤', '魔法固伤']:
             self.排行选项[2].addItem(i)
 
+        for i in ['无系统奶', '希洛克系统奶', '黑鸦系统奶']:
+            self.排行选项[3].addItem(i)
+
         counter = 0
         for i in self.排行选项:
             i.resize(100, 20)
-            i.move(990, 520 + counter * 28)
+            i.move(990, 490 + counter * 28)
             counter += 1
 
         self.计算按钮2 = QPushButton('开始计算', self.main_frame2)
@@ -4031,6 +4036,15 @@ class 角色窗口(窗口):
         # else:
         #     属性.C三攻 = int(self.排行选项[1].currentText())
         属性.排行类型 = self.排行选项[2].currentText()
+
+        if self.排行选项[3].currentIndex() == 0:
+            pass
+        elif self.排行选项[3].currentIndex() == 1:
+            属性.系统奶系数 = 1.35
+            属性.系统奶基数 = 7664
+        elif self.排行选项[3].currentIndex() == 2:
+            属性.系统奶系数 = 2.31
+            属性.系统奶基数 = 4581
 
         if self.初始属性.三觉序号 != 0:
             if self.觉醒选择状态 == 1:
