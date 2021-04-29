@@ -6,7 +6,7 @@ from PublicReference.equipment.武器融合 import *
 from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
-
+import operator
 
 class 技能:
     名称 = ''
@@ -1971,19 +1971,9 @@ class 角色窗口(窗口):
         pass
 
     def 技能列表显示排序(self, skill):
-        lv_list = []
-        skill_sort = []
-        for i in skill:
-            if i.所在等级 not in lv_list:
-                lv_list.append(i.所在等级)
-        lv_list.sort()
-
-        for i in lv_list:
-            for k in skill:
-                if k.所在等级 == i:
-                    skill_sort.append(k)
-
-        return skill_sort
+        temp = deepcopy(skill)
+        temp.sort(key=operator.attrgetter('所在等级'))
+        return temp
 
     def 界面2(self):
         # 第二个布局界面
@@ -3991,6 +3981,7 @@ class 角色窗口(窗口):
                 self.次数输入[序号].setEditable(True)
                 self.次数输入[序号].clearEditText()
                 self.次数输入[序号].setCurrentText(info['次数'])
+                self.次数输入[序号].setStyleSheet(下拉框样式)
             else:
                 self.次数输入[序号].setCurrentIndex(info['次数'])
         except:
@@ -4002,6 +3993,7 @@ class 角色窗口(窗口):
                 self.宠物次数[序号].setEditable(True)
                 self.宠物次数[序号].clearEditText()
                 self.宠物次数[序号].setCurrentText(info['宠物'])
+                self.宠物次数[序号].setStyleSheet(下拉框样式)
             else:
                 self.宠物次数[序号].setCurrentIndex(info['宠物'])
         except:

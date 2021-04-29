@@ -2283,6 +2283,7 @@ class 角色窗口(窗口):
                 self.次数输入[序号].setEditable(True)
                 self.次数输入[序号].clearEditText()
                 self.次数输入[序号].setCurrentText(info['次数'])
+                self.次数输入[序号].setStyleSheet(下拉框样式)
             else:
                 self.次数输入[序号].setCurrentIndex(info['次数'])
         except:
