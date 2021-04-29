@@ -13,7 +13,7 @@
 * 修正改造武器升级词条的间隔 ([dd59dc](https://gitee.com/i_melon/DNFCalculating/commit/dd59dce21f322337fec4bc4a351de41f8d2c5883))
 * 修正黑暗幽灵紫杉长靴属性错误 ([6f889e](https://gitee.com/i_melon/DNFCalculating/commit/6f889ea5720a4694fd5716106afdfdfe9f58e227))
 * 归元·散打·女：修正部分技能数据错误 ([ac8699](https://gitee.com/i_melon/DNFCalculating/commit/ac8699c3c3db9ab76e0e8ec719837c46bcd25db1))
-* 苍暮·特工：修正[最后的任务]6级后数据错误 ([81dad6](https://gitee.com/i_melon/DNFCalculating/commit/81dad6bb64f727a81255f6be9a14a341c91b7b62))
+* 苍暮·特工：修正[月夜：终极行动]6级后数据错误 ([81dad6](https://gitee.com/i_melon/DNFCalculating/commit/81dad6bb64f727a81255f6be9a14a341c91b7b62))
 
 ### 2021-04-14
 
