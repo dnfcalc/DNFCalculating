@@ -18,9 +18,6 @@ class 技能:
     等级溢出 = 0
     自定义描述 = 0
 
-    # 默认为0，新加入的技能数值为该技能插入的技能栏技能序号，比如技能图标顺序 = 7，则第二页显示时该技能在技能7前面
-    技能图标顺序 = 0
-
     关联技能 = ['无']
     关联技能2 = ['无']
     关联技能3 = ['无']
@@ -1973,6 +1970,21 @@ class 角色窗口(窗口):
         输出时间变化提示.exec_()
         pass
 
+    def 技能列表显示排序(self, skill):
+        lv_list = []
+        skill_sort = []
+        for i in skill:
+            if i.所在等级 not in lv_list:
+                lv_list.append(i.所在等级)
+        lv_list.sort()
+
+        for i in lv_list:
+            for k in skill:
+                if k.所在等级 == i:
+                    skill_sort.append(k)
+
+        return skill_sort
+
     def 界面2(self):
         # 第二个布局界面
 
@@ -2070,40 +2082,9 @@ class 角色窗口(窗口):
 
         纵坐标 += 20
 
-        # 给定一个新的顺序，然后将技能按此顺序显示
-        技能插队顺序 = []
-        插队技能 = []
-        插队技能序号 = dict()
-        for i in self.角色属性A.技能栏:
-            if int(i.技能图标顺序) != 0 and (int(i.技能图标顺序) not in 技能插队顺序):
-                技能插队顺序.append(int(i.技能图标顺序))
-                插队技能.append(self.角色属性A.技能序号[i.名称])
-                插队技能序号[self.角色属性A.技能序号[i.名称]] = int(i.技能图标顺序)
-        # 判断没有新加入的技能省略下面的步骤，目的是为了运行时能快一些（可能也快不了多少）
-        if len(技能插队顺序) != 0:
-            技能显示顺序 = dict()
-            count = 0
-            for i in self.角色属性A.技能栏:
-                if self.角色属性A.技能序号[i.名称] not in 插队技能:
-                    if count not in 技能插队顺序:
-                        技能显示顺序[count] = self.角色属性A.技能序号[i.名称]
-                        count += 1
-                    else:
-                        for k in range(len(self.角色属性A.技能栏) - count - 1):
-                            count += 1
-                            if count not in 技能插队顺序:
-                                技能显示顺序[count] = self.角色属性A.技能序号[i.名称]
-                                count += 1
-                                break
-                else:
-                    技能显示顺序[插队技能序号[self.角色属性A.技能序号[i.名称]]] = self.角色属性A.技能序号[
-                        i.名称]
+        skill_sort = self.技能列表显示排序(self.角色属性A.技能栏)
 
-        for l in range(len(self.角色属性A.技能栏)):
-            if len(技能插队顺序) != 0:
-                i = self.角色属性A.技能栏[技能显示顺序[l]]
-            else:
-                i = self.角色属性A.技能栏[l]
+        for i in skill_sort:
             if i.是否有伤害 == 1:
                 x = QLabel(self.main_frame2)
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
@@ -2135,11 +2116,7 @@ class 角色窗口(窗口):
         横坐标 = 横坐标 + 80 + 50
         纵坐标 = 30
 
-        for l in range(len(self.角色属性A.技能栏)):
-            if len(技能插队顺序) != 0:
-                i = self.角色属性A.技能栏[技能显示顺序[l]]
-            else:
-                i = self.角色属性A.技能栏[l]
+        for i in skill_sort:
             if i.是否有伤害 == 1:
                 if i.TP上限 != 0:
                     self.TP输入[self.角色属性A.技能序号[i.名称]].resize(词条框宽度, 行高)
@@ -2149,11 +2126,7 @@ class 角色窗口(窗口):
         横坐标 = 横坐标 + 50
         纵坐标 = 30
 
-        for l in range(len(self.角色属性A.技能栏)):
-            if len(技能插队顺序) != 0:
-                i = self.角色属性A.技能栏[技能显示顺序[l]]
-            else:
-                i = self.角色属性A.技能栏[l]
+        for i in skill_sort:
             if i.是否有伤害 == 1:
                 self.次数输入[self.角色属性A.技能序号[i.名称]].resize(词条框宽度, 行高)
                 self.次数输入[self.角色属性A.技能序号[i.名称]].move(横坐标, 纵坐标)
@@ -2167,11 +2140,7 @@ class 角色窗口(窗口):
         横坐标 = 横坐标 + 130
         纵坐标 = 20
 
-        for l in range(len(self.角色属性A.技能栏)):
-            if len(技能插队顺序) != 0:
-                i = self.角色属性A.技能栏[技能显示顺序[l]]
-            else:
-                i = self.角色属性A.技能栏[l]
+        for i in skill_sort:
             if i.是否有伤害 == 0:
                 x = QLabel(self.main_frame2)
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
