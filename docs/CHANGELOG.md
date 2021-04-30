@@ -1,5 +1,18 @@
 ## Newest
 
+### 2021-04-30
+
+#### NewFeatures
+* 枪剑士：同步国服体验服三觉数据 ([2df702](https://gitee.com/i_melon/DNFCalculating/commit/2df702b573d58f4c3889576a900068504b0c3570))
+* 设置中添加自动检查更新开关 ([7ef4a7](https://gitee.com/i_melon/DNFCalculating/commit/7ef4a79bd383f879740fcb4c7e58522d016f6bda))
+
+#### BugFixes
+* 千魂·征战者：修正长虹贯日护石CD错误 ([fe3ccf](https://gitee.com/i_melon/DNFCalculating/commit/fe3ccf82464b554c2175ff3d868ac1908d2e011e))
+* 归元·柔道家·女：修正风暴之舞护石加成错误 ([564ee3](https://gitee.com/i_melon/DNFCalculating/commit/564ee3d0d634baa8bf8f2c19595386e85273ed21))
+* 神启·蓝拳圣使：修正超重拳CD错误 ([fa45e2](https://gitee.com/i_melon/DNFCalculating/commit/fa45e24297e271e7598315b7ec73a0fd0554919c))
+* 重霄·弹药专家·男：修正轻火力速射/CD无法计算的情况 ([4fe9f9](https://gitee.com/i_melon/DNFCalculating/commit/4fe9f958e564344a49f703704be16b5257e01231))
+* 重霄·漫游枪手·男：修正双鹰回旋、疯狂屠戮数据 ([7a4334](https://gitee.com/i_melon/DNFCalculating/commit/7a4334d9d0d2942aee4051f91a38017f173ec6f8))
+
 ### 2021-04-21
 
 #### NewFeatures
@@ -1190,6 +1203,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
 
 
 
