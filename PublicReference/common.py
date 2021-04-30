@@ -1864,7 +1864,7 @@ class 技能详情(QFrame):
                 CD恢复 = ''
                 try:
                     tempstr = '<font face="宋体"><font color="#FF6666">' + data.角色属性B.技能栏[
-                        i].名称 + data.角色属性B.技能栏[i].备注 + '</font><br>'
+                        i].名称 +("<br>" if data.角色属性B.技能栏[i].备注 != '' else '')+ data.角色属性B.技能栏[i].备注 + '</font><br>'
                     百分比 = int(data.角色属性B.技能栏[i].等效百分比(data.角色属性B.武器类型) /
                               data.角色属性B.技能栏[i].倍率)
                     被动倍率 = round(data.角色属性B.技能栏[i].被动倍率 * 100, 1)
