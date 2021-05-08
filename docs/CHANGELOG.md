@@ -1,5 +1,14 @@
 ## Newest
 
+### 2021-05-09
+
+#### NewFeatures
+* 添加韩服体验服外传三觉数据 ([10cf3a](https://gitee.com/i_melon/DNFCalculating/commit/10cf3abd0e8c71cefcbc37b01f60d3e39e7cee52))
+
+#### BugFixes
+* 奶系：修正BUFF三攻+3%遗漏独立加成的情况 ([94f6f1](https://gitee.com/i_melon/DNFCalculating/commit/94f6f1d34494df4e3801a0e7c21e47dc18603160))
+* 皓曦·帕拉丁：修正圣盾裁决圣痕护石CD计算错误 ([80355f](https://gitee.com/i_melon/DNFCalculating/commit/80355ff3ee8e7aa06af37726ba87985435aa8f4d))
+
 ### 2021-04-30
 
 #### NewFeatures
@@ -1203,6 +1212,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
 
 
 
