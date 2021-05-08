@@ -395,7 +395,8 @@ class 角色属性(属性):
             魔攻合计 += i[6]
             独立合计 += i[7]
 
-        x1 = ((self.C力智 + (self.C力智 - 950) * self.系统奶系数 + self.系统奶基数) / 250 + 1) * self.C三攻
+        x1 = ((self.C力智 + (self.C力智 - 950) * self.系统奶系数 +
+               self.系统奶基数) / 250 + 1) * self.C三攻
 
         if self.排行类型 == '物理百分比':
             x2 = ((self.C力智 + (self.C力智 - 950) * self.系统奶系数 + self.系统奶基数 + 力量合计) / 250 +
@@ -2323,31 +2324,31 @@ class 角色窗口(窗口):
                 try:
                     self.称号.setCurrentIndex(set_data['称号'])
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
                 try:
                     self.宠物.setCurrentIndex(set_data['宠物'])
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
                 try:
                     self.计算模式选择.setCurrentIndex(set_data['计算模式'])
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
                 try:
                     self.百变怪选项.setChecked(set_data['百变怪'])
                 except Exception as error:
-                    logger.error(error) 
-                try:  
+                    logger.error(error)
+                try:
                     self.神话排名选项.setChecked(set_data['神话排名勾选'])
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
                 try:
                     self.切装模式选项.setChecked(set_data['切装模式选项'])
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
                 try:
                     self.线程数选择.setCurrentIndex(set_data['线程数量'])
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
                 try:
                     self.批量选择(0)
                     num = 0
@@ -2356,14 +2357,14 @@ class 角色窗口(窗口):
                             self.装备图标点击事件(num, 1)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
                 try:
                     num = 0
                     for i in set_data['装备打造']:
                         self.装备打造选项[num].setCurrentIndex(i)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
             except Exception as error:
                 logger.error(error)
 
@@ -2376,73 +2377,73 @@ class 角色窗口(窗口):
                     set_data = json.load(fp)
                 fp.close()
 
-                try:    
+                try:
                     self.强化觉醒选择(set_data['觉醒选择'])
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
                 try:
                     num = 0
                     for i in set_data['护石栏']:
                         self.护石栏[num].setCurrentIndex(i)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     num = 0
                     for i in set_data['药剂勾选']:
                         self.复选框列表[num].setChecked(i)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     skill = set_data['技能选项']
                     for i in self.角色属性A.技能栏:
                         序号 = self.角色属性A.技能序号[i.名称]
                         self.设置技能选项(序号, skill[i.名称])
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     self.武器融合属性A.setCurrentIndex(set_data['武器融合属性A'])
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     self.武器融合属性A2.setCurrentIndex(set_data['武器融合属性A2'])
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     self.武器融合属性B.setCurrentIndex(set_data['武器融合属性B'])
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     self.武器融合属性B2.setCurrentIndex(set_data['武器融合属性B2'])
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     self.希洛克武器选择.setCurrentIndex(set_data['希洛克武器选择'])
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     num = 0
                     for i in set_data['辟邪玉效果']:
                         self.辟邪玉选择[num].setCurrentIndex(i)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     num = 0
                     for i in set_data['辟邪玉数值']:
                         self.辟邪玉数值[num].setCurrentIndex(i)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     num = 0
                     for i in set_data['排行选项']:
                         self.排行选项[num].setCurrentIndex(i)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
-                try:       
+                    logger.error(error)
+                try:
                     x = 0
                     for i in set_data['黑鸦选择']:
                         y = 0
@@ -2451,15 +2452,15 @@ class 角色窗口(窗口):
                             y += 1
                         x += 1
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     num = 0
                     for i in set_data['希洛克选择']:
                         if i == 1:
                             self.希洛克选择(num)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
             except Exception as error:
                 logger.error(error)
 
@@ -2471,14 +2472,14 @@ class 角色窗口(窗口):
                 with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
                     set_data = json.load(fp)
                 fp.close()
-                try:    
+                try:
                     num = 0
                     for i in set_data['时装选项']:
                         self.时装选项[num].setCurrentIndex(i)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     x = 0
                     for i in set_data['细节数值']:
                         y = 0
@@ -2487,14 +2488,14 @@ class 角色窗口(窗口):
                             y += 1
                         x += 1
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     num = 0
                     for i in set_data['细节选项']:
                         self.技能设置输入[num].setCurrentIndex(i)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
             except Exception as error:
                 logger.error(error)
 
@@ -2506,13 +2507,13 @@ class 角色窗口(窗口):
                 with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
                     set_data = json.load(fp)
                 fp.close()
-                try:    
+                try:
                     num = 0
                     for i in set_data['神话属性修正']:
                         self.神话属性选项[num].setCurrentIndex(i)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
             except Exception as error:
                 logger.error(error)
 
@@ -2525,20 +2526,20 @@ class 角色窗口(窗口):
                     set_data = json.load(fp)
                 fp.close()
 
-                try:    
+                try:
                     num = 0
                     for i in set_data['自选装备']:
                         self.自选装备[num].setCurrentIndex(i)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
-                try:    
+                    logger.error(error)
+                try:
                     num = 0
                     for i in set_data['装备锁定']:
                         self.装备锁定[num].setChecked(i)
                         num += 1
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
             except Exception as error:
                 logger.error(error)
 
@@ -4286,7 +4287,7 @@ class 角色窗口(窗口):
         if name == 'BUFF力智+3%':
             属性.BUFF增加(BUFF力量per=1.03, BUFF智力per=1.03)
         if name == 'BUFF三攻+3%':
-            属性.BUFF增加(BUFF物攻per=1.03, BUFF魔攻per=1.03)
+            属性.BUFF增加(BUFF物攻per=1.03, BUFF魔攻per=1.03, BUFF独立per=1.03)
         if name == 'BUFF力智、三攻+3%':
             属性.BUFF增加(BUFF力量per=1.03,
                       BUFF智力per=1.03,
