@@ -182,9 +182,9 @@ class 辟邪玉18(辟邪玉):
         pass
 
 
-辟邪玉列表 = []
+辟邪玉列表 = ()
 for i in range(19):
-    exec('辟邪玉列表.append(辟邪玉' + str(i) + '())')
+    exec('辟邪玉列表 += (辟邪玉' + str(i) + '(),)')
 
 辟邪玉序号 = dict()
 for i in range(len(辟邪玉列表)):

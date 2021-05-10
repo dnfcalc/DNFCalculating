@@ -136,9 +136,9 @@ class 选项设置17():
     def 适用效果(self, 属性):
         属性.屏蔽三觉 = True
 
-选项设置列表 = []
+选项设置列表 = ()
 for i in range(18):
-    exec('选项设置列表.append(选项设置' + str(i) + '())')
+    exec('选项设置列表 += (选项设置' + str(i) + '(),)')
 
 选项设置序号 = dict()
 for i in range(len(选项设置列表)):

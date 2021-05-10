@@ -66,11 +66,11 @@ class 词条属性6(词条属性):
         pass
 
 
-词条属性列表 = []
+词条属性列表 = ()
 
 for i in range(6):
-    exec('词条属性列表.append(词条属性{}())'.format(i))
+    exec('词条属性列表 += (词条属性{}(),)'.format(i))
 
-黑鸦武器属性列表 = []
+黑鸦武器属性列表 = ()
 for i in range(7):
-    exec('黑鸦武器属性列表.append(词条属性{}())'.format(i))
+    exec('黑鸦武器属性列表 += (词条属性{}(),)'.format(i))
