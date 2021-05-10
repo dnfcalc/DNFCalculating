@@ -557,7 +557,7 @@ class 极诣·剑影角色属性(角色属性):
         self.技能序号 = deepcopy(极诣·剑影技能序号)
 
     def 武器基础(self):
-        temp = 装备列表[装备序号[self.装备栏[11]]]
+        temp = equ.get_equ_by_name(self.装备栏[11])
 
         self.力量 += temp.力量
         self.智力 += temp.智力

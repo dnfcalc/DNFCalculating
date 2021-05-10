@@ -469,7 +469,7 @@ class 角色属性(属性):
         return ''
 
     def 防具精通计算(self, i):
-        temp = 装备列表[装备序号[self.装备栏[i]]]
+        temp = equ.get_equ_by_name(self.装备栏[i])
         if temp.等级 == 100:
             if temp.所属套装 != '智慧产物':
                 return 精通计算(temp.等级, temp.品质, self.强化等级[i], 部位列表[i])
@@ -1521,7 +1521,7 @@ class 角色属性(属性):
 
         P.适用套装计算()
 
-        P.武器类型 = 装备列表[装备序号[P.装备栏[11]]].类型
+        P.武器类型 = equ.get_equ_by_name(P.装备栏[11]).类型
         P.力量 += P.切装修正[0]
         P.智力 += P.切装修正[1]
         P.物理攻击力 += P.切装修正[2]
@@ -1674,22 +1674,23 @@ class 角色属性(属性):
         ]
         if 调试开关 == 0:
             for i in range(12):
-                装备列表[装备序号[self.装备栏[i]]].城镇属性(self)
-                装备列表[装备序号[self.装备栏[i]]].变换属性(self)
-                if 装备列表[装备序号[self.装备栏[i]]].所属套装 == '智慧产物' and self.产物升级 == 1:
-                    装备列表[装备序号[self.装备栏[i]]].产物升级(self)
+                temp = equ.get_equ_by_name(self.装备栏[i])
+                temp.城镇属性(self)
+                temp.变换属性(self)
+                if temp.所属套装 == '智慧产物' and self.产物升级 == 1:
+                    temp.产物升级(self)
                 # 添加可洗属性
 
             for i in self.套装栏:
-                套装列表[套装序号[i]].城镇属性(self)
+                equ.get_suit_by_name(i).城镇属性(self)
             # print(self.变换词条)
             # 进图触发属强向下取整
             self.状态 = 1
             for i in range(12):
-                装备列表[装备序号[self.装备栏[i]]].进图属性(self)
+                equ.get_equ_by_name(self.装备栏[i]).进图属性(self)
 
             for i in self.套装栏:
-                套装列表[套装序号[i]].进图属性(self)
+                equ.get_suit_by_name(i).进图属性(self)
             self.状态 = 0
         self.黑鸦词条扣除()
         # print(self.黑鸦词条)
@@ -1740,10 +1741,10 @@ class 角色属性(属性):
 
     def 其它属性计算(self):
         for i in range(12):
-            装备列表[装备序号[self.装备栏[i]]].其它属性(self)
+            equ.get_equ_by_name(self.装备栏[i]).其它属性(self)
 
         for i in self.套装栏:
-            套装列表[套装序号[i]].其它属性(self)
+            equ.get_suit_by_name(i).其它属性(self)
 
 class 角色窗口(窗口):
     def __init__(self):
@@ -2606,7 +2607,6 @@ class 角色窗口(窗口):
         标签.move(10, 20)
 
         self.图片显示 = []
-        self.图片列表 = []
 
         count = 0
         self.自选装备 = []
@@ -2630,7 +2630,7 @@ class 角色窗口(窗口):
                 temp.setStyleSheet(复选框样式)
                 self.装备切装.append(temp)
                 self.装备切装[count].move(320, 55 + 30 * count)
-            for j in 装备列表:
+            for j in equ.get_equ_list():
                 if j.部位 == i:
                     if i == '武器':
                         if j.类型 in self.角色属性A.武器选项:
@@ -2669,7 +2669,7 @@ class 角色窗口(窗口):
         for i in 套装类型:
             self.自选套装.append(MyQComboBox(self.main_frame5))
             套装名称 = []
-            for j in 套装列表:
+            for j in equ.get_suit_list():
                 if j.名称 not in 套装名称 and j.类型 == i:
                     套装名称.append(j.名称)
             self.自选套装[count].addItems(套装名称)
@@ -2687,7 +2687,7 @@ class 角色窗口(窗口):
 
         count += 1
         self.改造套装 = MyQComboBox(self.main_frame5)
-        for n in 装备列表:
+        for n in equ.get_equ_list():
             try:
                 self.改造套装.addItem(n.关联套装)
             except:
@@ -2774,10 +2774,8 @@ class 角色窗口(窗口):
         y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
 
         for i in range(12):
-            self.图片列表.append(self.装备图片[装备序号[self.自选装备[i].currentText()]])
             self.图片显示.append(QLabel(self.main_frame5))
-            self.图片显示[i].setMovie(self.图片列表[i])
-            self.图片列表[i].start()
+            self.图片显示[i].setMovie(equ.get_img_by_name(self.自选装备[i].currentText()))
             self.图片显示[i].resize(26, 26)
             self.图片显示[i].move(初始x + 10 + x坐标[i], 初始y + 31 + y坐标[i])
             self.图片显示[i].setAlignment(Qt.AlignCenter)
@@ -3078,17 +3076,16 @@ class 角色窗口(窗口):
         self.改造产物选项 = []
         self.改造产物图片 = []
 
-        for j in range(len(装备列表)):
-            if 装备列表[j].所属套装 == '智慧产物':
-                # print(装备列表[j].名称)
+        for j in equ.get_equ_id_list():
+            temp = equ.get_equ_by_id(j)
+            if temp.所属套装 == '智慧产物':
                 self.改造产物图片.append(QLabel(self.main_frame6))
-                self.改造产物图片[-1].setMovie(self.装备图片[j])
+                self.改造产物图片[-1].setMovie(equ.get_img_by_id(j))
                 self.改造产物图片[-1].setToolTip('<font size="3" face="宋体">' +
-                                           装备列表[j].名称 + '<br>' + 装备列表[j].类型 +
-                                           '-' + 装备列表[j].部位 + '</font>')
+                                           temp.名称 + '<br>' + temp.类型 +
+                                           '-' + temp.部位 + '</font>')
                 self.改造产物图片[-1].resize(28, 28)
                 self.改造产物图片[-1].move(-1000, -1000)
-                self.装备图片[j].start()
 
         for i in range(4 * 100):
             self.改造产物选项.append(MyQComboBox(self.main_frame6))
@@ -3099,7 +3096,7 @@ class 角色窗口(窗口):
 
         if self.初始属性.职业分类 == '输出':
             count = 0
-            for i in 装备列表:
+            for i in equ.get_equ_list():
                 if i.所属套装 == '智慧产物':
                     描述列表 = [i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述]
                     范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
@@ -3714,7 +3711,7 @@ class 角色窗口(窗口):
                            '/equ.ini',
                            'r',
                            encoding='utf-8').readlines()
-            for i in range(len(装备列表)):
+            for i in equ.get_equ_id_list():
                 if setfile[i].replace('\n', '') == '1':
                     self.装备图标点击事件(i, 1)
         except:
@@ -4230,9 +4227,9 @@ class 角色窗口(窗口):
         self.输入属性(self.角色属性B)
         self.角色属性B.穿戴装备计算套装(self.有效穿戴组合[0])
         for i in self.角色属性B.装备栏:
-            装备列表[装备序号[i]].城镇属性(self.角色属性B)
+            equ.get_equ_by_name(i).城镇属性(self.角色属性B)
         for i in self.角色属性B.套装栏:
-            套装列表[套装序号[i]].城镇属性(self.角色属性B)
+            equ.get_suit_by_name(i).城镇属性(self.角色属性B)
         self.角色属性B.装备基础()
         self.角色属性B.被动倍率计算()
         self.面板修正(self.角色属性B.类型, x * 3)
@@ -4603,8 +4600,9 @@ class 角色窗口(窗口):
 
             神话所在套装 = []
             for i in range(11):
-                if 装备列表[装备序号[装备[i]]].品质 == '神话':
-                    神话所在套装.append(装备列表[装备序号[装备[i]]].所属套装)
+                temp = equ.get_equ_by_name(装备[i])
+                if temp.品质 == '神话':
+                    神话所在套装.append(temp.所属套装)
 
             # 套装属性合并
             套装 = []
@@ -4622,7 +4620,7 @@ class 角色窗口(窗口):
                     套装属性[套装.index(
                         temp
                     )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
-                        i] + '</font><br>' + 套装列表[套装序号[套装名称[i]]].装备描述(
+                        i] + '</font><br>' + equ.get_suit_by_name(套装名称[i]).装备描述(
                             self.角色属性B)[:-4] + '</font><br>'
 
             # region 希洛克套装属性
@@ -4819,9 +4817,9 @@ class 角色窗口(窗口):
         C.穿戴装备(装备名称, 套装名称)
         if 调试开关 == 0:
             for i in C.装备栏:
-                装备列表[装备序号[i]].城镇属性(C)
+                equ.get_equ_by_name(i).城镇属性(C)
             for i in C.套装栏:
-                套装列表[套装序号[i]].城镇属性(C)
+                equ.get_suit_by_name(i).城镇属性(C)
             C.装备基础()
         C.被动倍率计算()
 
@@ -4834,7 +4832,7 @@ class 角色窗口(窗口):
         for i in range(15):
             数量[i % 3] += self.希洛克选择状态[i]
         for i in range(12):
-            装备 = 装备列表[装备序号[属性.装备栏[i]]]
+            装备 = equ.get_equ_by_name(属性.装备栏[i])
             tempstr.append('<font size="3" face="宋体"><font color="' +
                            颜色[装备.品质] + '">' + 装备.名称 + '</font><br>')
             if 装备.所属套装 != '无':
@@ -4990,7 +4988,7 @@ class 角色窗口(窗口):
             flag = 0
             index = 0
             武器名称 = ''
-            for i in 装备列表:
+            for i in equ.get_equ_list():
                 if i.类型 == self.角色属性A.武器选项[0]:
                     武器名称 = i.名称
                     break
@@ -5168,8 +5166,9 @@ class 角色窗口(窗口):
 
         神话所在套装 = []
         for i in range(11):
-            if 装备列表[装备序号[装备名称[i]]].品质 == '神话':
-                神话所在套装.append(装备列表[装备序号[装备名称[i]]].所属套装)
+            temp = equ.get_equ_by_name(装备名称[i])
+            if temp.品质 == '神话':
+                神话所在套装.append(temp.所属套装)
 
         套装 = []
         套装件数 = []
@@ -5186,7 +5185,7 @@ class 角色窗口(窗口):
                 套装属性[套装.index(
                     temp
                 )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
-                    i] + '</font><br>' + 套装列表[套装序号[套装名称[i]]].装备描述(
+                    i] + '</font><br>' + equ.get_suit_by_name(套装名称[i]).装备描述(
                         self.角色属性B)[:-4] + '</font><br>'
 
         # region 希洛克套装属性
@@ -5624,9 +5623,9 @@ class 角色窗口(窗口):
                 # 图片列表.append(QMovie('./ResourceFiles/img/希洛克/融-7.gif'))
                 图片列表.append(
                     QMovie('./ResourceFiles/img/希洛克/武器/' +
-                           str(装备序号[self.排行数据[index][i]]) + '.gif'))
+                           str(equ.get_id_by_name(self.排行数据[index][i])) + '.gif'))
             else:
-                图片列表.append(self.装备图片[装备序号[self.排行数据[index][i]]])
+                图片列表.append(equ.get_img_by_name(self.排行数据[index][i]))
 
         偏移量 = 187
         x坐标 = [
@@ -5643,7 +5642,7 @@ class 角色窗口(窗口):
             装备图标.resize(26, 26)
             装备图标.move(初始x + x坐标[i], 初始y + y坐标[i] - pox_y2)
             装备图标.setAlignment(Qt.AlignCenter)
-            装备 = 装备列表[装备序号[self.角色属性B.装备栏[i]]]
+            装备 = equ.get_equ_by_name(self.角色属性B.装备栏[i])
             if self.角色属性B.装备栏[i] == 百变怪:
                 图标遮罩 = QLabel(输出窗口)
                 图标遮罩.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.5)}")
@@ -5655,7 +5654,7 @@ class 角色窗口(窗口):
 
         temp = []
         for i in range(12):
-            装备 = 装备列表[装备序号[self.角色属性B.装备栏[i]]]
+            装备 = equ.get_equ_by_name(self.角色属性B.装备栏[i])
             打造状态 = QLabel(输出窗口)
             if 装备.所属套装 != '智慧产物':
                 打造状态.setText('+' + str(self.角色属性B.强化等级[i]))
@@ -5679,7 +5678,7 @@ class 角色窗口(窗口):
 
             打造状态.move(初始x + x坐标[i] + 13, 初始y + y坐标[i] - 8 - pox_y2)
 
-        装备 = 装备列表[装备序号[self.角色属性B.装备栏[11]]]
+        装备 = equ.get_equ_by_name(self.角色属性B.装备栏[11])
         if 装备.所属套装 != '智慧产物' and self.角色属性B.武器锻造等级 != 0:
             打造状态 = QLabel(输出窗口)
             打造状态.setText('+' + str(self.角色属性B.武器锻造等级))
@@ -5992,7 +5991,7 @@ class 角色窗口(窗口):
 
         count = 0
         count2 = 0
-        for i in 装备列表:
+        for i in equ.get_equ_list():
             if i.品质 == '神话':
                 i.属性1选择 = self.神话属性选项[count * 4 + 0].currentIndex()
                 i.属性2选择 = self.神话属性选项[count * 4 + 1].currentIndex()

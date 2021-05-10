@@ -291,20 +291,20 @@ class 角色属性(属性):
             return self.进图精神
 
     def 防具精通计算(self, i):
-        temp = 装备列表[装备序号[self.装备栏[i]]]
+        temp = equ.get_equ_by_name(self.装备栏[i])
         if temp.所属套装 != '智慧产物':
             return 精通体力(temp.等级, temp.品质, self.强化等级[i], 部位列表[i])
         else:
             return 精通体力(temp.等级, temp.品质, self.改造等级[i], 部位列表[i])
 
     def 装备基础(self):
-        if 装备列表[装备序号[self.装备栏[0]]].品质 == '神话':
+        if equ.get_equ_by_name(self.装备栏[0]).品质 == '神话':
             self.智力 += 神话上衣额外智力
             self.体力 += 神话上衣额外体力
             self.精神 += 神话上衣额外精神
         for i in [0, 1, 2, 3, 4]:
             # 精通
-            temp = 装备列表[装备序号[self.装备栏[i]]]
+            temp = equ.get_equ_by_name(self.装备栏[i])
             x = self.防具精通计算(i)
             if '智力' in self.防具精通属性:
                 self.智力 += x * 2
@@ -327,14 +327,14 @@ class 角色属性(属性):
                 self.精神 += 传说防具精神Lv100[temp.部位]
 
         for i in [9, 10]:
-            temp = 装备列表[装备序号[self.装备栏[i]]]
+            temp = equ.get_equ_by_name(self.装备栏[i])
             if temp.所属套装 != '智慧产物':
                 x = 左右计算(temp.等级, temp.品质, self.强化等级[i])
                 self.智力 += x
                 self.体力 += x
                 self.精神 += x
         for i in range(12):
-            temp = 装备列表[装备序号[self.装备栏[i]]]
+            temp = equ.get_equ_by_name(self.装备栏[i])
             if self.是否增幅[i] and temp.所属套装 != '智慧产物':
                 x = 增幅计算(temp.等级, temp.品质, self.强化等级[i], self.增幅版本)
                 if '智力' in self.类型:
@@ -344,12 +344,12 @@ class 角色属性(属性):
                 if '精神' in self.类型:
                     self.精神 += x
         for i in [5, 6, 7, 8, 9, 10]:
-            temp = 装备列表[装备序号[self.装备栏[i]]]
+            temp = equ.get_equ_by_name(self.装备栏[i])
             self.智力 += temp.智力
             self.体力 += temp.体力
             self.精神 += temp.精神
 
-        temp = 装备列表[装备序号[self.装备栏[11]]]
+        temp = equ.get_equ_by_name(self.装备栏[11])
         if temp.所属套装 != '智慧产物':
             四维 = 锻造四维(temp.等级, temp.品质, self.武器锻造等级)
             self.智力 += temp.智力 + 四维
@@ -491,13 +491,11 @@ class 角色属性(属性):
             num = 0
             index = [6, 5, 7]
             for i in [x2, x3, x4]:
-                i.装备栏[num *
-                      2] = 装备列表[套装映射[装备列表[装备序号[i.装备栏[1]]].所属套装 + '-' + '史诗' +
-                                     '-' + 装备列表[装备序号[i.装备栏[num * 2]]].部位]].名称
+                i.装备栏[num *2] = equ.get_equ_by_index(equ.get_equ_by_name(i.装备栏[1]).所属套装, '史诗', equ.get_equ_by_name(i.装备栏[num * 2]).部位).名称
                 i.套装栏[2 * num + 2] = i.套装栏[2 * num + 2].replace(
-                    装备列表[装备序号[i.装备栏[index[num]]]].所属套装,
-                    装备列表[装备序号[i.装备栏[1]]].所属套装)
-                i.切换详情 = 装备列表[装备序号[i.装备栏[num * 2]]].部位 + ':' + x1.装备栏[
+                    equ.get_equ_by_name(i.装备栏[index[num]]).所属套装,
+                    equ.get_equ_by_name(i.装备栏[1]).所属套装)
+                i.切换详情 = equ.get_equ_by_name(i.装备栏[num * 2]).部位 + ':' + x1.装备栏[
                     num * 2] + ' → ' + i.装备栏[num * 2]
                 num += 1
             return [x1, x2, x3, x4]
@@ -506,12 +504,10 @@ class 角色属性(属性):
             部位 = {2: 6, 4: 5, 6: 7}
             x1 = deepcopy(属性)
             x2 = deepcopy(属性)
-            x2.装备栏[index - 2] = 装备列表[套装映射[装备列表[装备序号[x2.装备栏[部位[index]]]].所属套装 +
-                                          '-' + '史诗' + '-' +
-                                          装备列表[装备序号[x2.装备栏[index - 2]]].部位]].名称
+            x2.装备栏[index - 2] = equ.get_equ_by_index(equ.get_equ_by_name(x2.装备栏[部位[index]]).所属套装, '史诗', equ.get_equ_by_name(x2.装备栏[index - 2]).部位).名称
             x2.套装栏[index] = x2.套装栏[index].replace(
-                装备列表[装备序号[x2.装备栏[1]]].所属套装, 装备列表[装备序号[x2.装备栏[部位[index]]]].所属套装)
-            x2.切换详情 = 装备列表[装备序号[x2.装备栏[index - 2]]].部位 + ':' + x1.装备栏[
+                equ.get_equ_by_name(x2.装备栏[1]).所属套装, equ.get_equ_by_name(x2.装备栏[部位[index]]).所属套装)
+            x2.切换详情 = equ.get_equ_by_name(x2.装备栏[index - 2]).部位 + ':' + x1.装备栏[
                 index - 2] + ' → ' + x2.装备栏[index - 2]
             return [x1, x2]
         elif count2 == 7 and 套装栏[1] != 套装栏[2]:
@@ -529,21 +525,15 @@ class 角色属性(属性):
             可更换部位 = []
             不可更换部位 = []
             for i in range(5):
-                if 装备列表[装备序号[属性.装备栏[i]]].所属套装 == 三件套名称:
+                if equ.get_equ_by_name(属性.装备栏[i]).所属套装 == 三件套名称:
                     可更换部位.append(i)
                 else:
                     不可更换部位.append(i)
-            x2.装备栏[可更换部位[0]] = 装备列表[套装映射[两件套名称 + '-' + '史诗' + '-' +
-                                         部位列表[可更换部位[0]]]].名称
-            x3.装备栏[可更换部位[1]] = 装备列表[套装映射[两件套名称 + '-' + '史诗' + '-' +
-                                         部位列表[可更换部位[1]]]].名称
-            x4.装备栏[可更换部位[2]] = 装备列表[套装映射[两件套名称 + '-' + '史诗' + '-' +
-                                         部位列表[可更换部位[2]]]].名称
-
-            x5.装备栏[不可更换部位[0]] = 装备列表[套装映射[三件套名称 + '-' + '史诗' + '-' +
-                                          部位列表[不可更换部位[0]]]].名称
-            x5.装备栏[不可更换部位[1]] = 装备列表[套装映射[三件套名称 + '-' + '史诗' + '-' +
-                                          部位列表[不可更换部位[1]]]].名称
+            x2.装备栏[可更换部位[0]] =  equ.get_equ_by_index(两件套名称, '史诗', 部位列表[可更换部位[0]]).名称
+            x3.装备栏[可更换部位[1]] =  equ.get_equ_by_index(两件套名称, '史诗', 部位列表[可更换部位[1]]).名称
+            x4.装备栏[可更换部位[2]] =  equ.get_equ_by_index(两件套名称, '史诗', 部位列表[可更换部位[2]]).名称
+            x5.装备栏[不可更换部位[0]] = equ.get_equ_by_index(三件套名称, '史诗', 部位列表[不可更换部位[0]]).名称
+            x5.装备栏[不可更换部位[1]] = equ.get_equ_by_index(三件套名称, '史诗', 部位列表[不可更换部位[1]]).名称
 
             x2.切换详情 = 部位列表[可更换部位[0]] + ':' + 属性.装备栏[可更换部位[0]] + ' → ' + x2.装备栏[
                 可更换部位[0]]
@@ -880,26 +870,25 @@ class 角色属性(属性):
         self.装备基础()
         # self.专属词条计算()
         for i in self.装备栏:
-            装备列表[装备序号[i]].城镇属性_BUFF(self)
-            装备列表[装备序号[i]].BUFF属性(self)
-            if self.黑鸦词条[0][0] > 0 and 装备列表[装备序号[i]].名称 == '世界树之精灵':
+            equ.get_equ_by_name(i).城镇属性_BUFF(self)
+            equ.get_equ_by_name(i).BUFF属性(self)
+            if self.黑鸦词条[0][0] > 0 and equ.get_equ_by_name(i).名称 == '世界树之精灵':
                 self.技能等级加成('所有', 50, 50, -2)
                 self.技能等级加成('所有', 85, 85, -2)
                 self.技能等级加成('所有', 100, 100, -2)
             # 黑鸦武器觉醒词条
-            if self.黑鸦词条[0][0] == 3 and 装备列表[装备序号[i]].部位 == '武器':
+            if self.黑鸦词条[0][0] == 3 and equ.get_equ_by_name(i).部位 == '武器':
                 self.技能等级加成('所有', 50, 50, 2)
                 self.技能等级加成('所有', 85, 85, 2)
                 self.技能等级加成('所有', 100, 100, 2)
             # 世界树之精灵洗词条的特殊处理,没考虑择优的时候,针对的是自选
-            if self.黑鸦词条[0][0] > 1 and 装备列表[装备序号[i]].名称 == '世界树之精灵':
+            if self.黑鸦词条[0][0] > 1 and equ.get_equ_by_name(i).名称 == '世界树之精灵':
                 self.技能等级加成('所有', 50, 50, 2)
-            # elif 装备列表[装备序号[i]].名称 != '世界树之精灵':
-            #    装备列表[装备序号[i]].变换属性_BUFF(self)
+
 
         for i in self.套装栏:
-            套装列表[套装序号[i]].城镇属性_BUFF(self)
-            套装列表[套装序号[i]].BUFF属性(self)
+            equ.get_suit_by_name(i).城镇属性_BUFF(self)
+            equ.get_suit_by_name(i).BUFF属性(self)
 
         if self.排行系数 == 1:
             P = deepcopy(self)
@@ -907,10 +896,10 @@ class 角色属性(属性):
             self.站街系数 = P.系数数值站街()
 
         for i in self.装备栏:
-            装备列表[装备序号[i]].进图属性_BUFF(self)
+            equ.get_equ_by_name(i).进图属性_BUFF(self)
 
         for i in self.套装栏:
-            套装列表[套装序号[i]].进图属性_BUFF(self)
+            equ.get_suit_by_name(i).进图属性_BUFF(self)
 
     def 专属词条计算(self):
         pass
@@ -1644,7 +1633,6 @@ class 角色窗口(窗口):
         标签.move(10, 20)
 
         self.图片显示 = []
-        self.图片列表 = []
 
         count = 0
         self.自选装备 = []
@@ -1660,7 +1648,7 @@ class 角色窗口(窗口):
             self.自选装备[count].move(90, 50 + 30 * count)
             self.自选装备[count].currentIndexChanged.connect(
                 lambda state, index=count: self.自选装备更改(index))
-            for j in 装备列表:
+            for j in equ.get_equ_list():
                 if j.部位 == i:
                     if i == '武器':
                         if j.类型 in self.角色属性A.武器选项:
@@ -1682,7 +1670,7 @@ class 角色窗口(窗口):
         for i in 套装类型:
             self.自选套装.append(MyQComboBox(self.main_frame5))
             套装名称 = []
-            for j in 套装列表:
+            for j in equ.get_suit_list():
                 if j.名称 not in 套装名称 and j.类型 == i:
                     套装名称.append(j.名称)
             self.自选套装[count].addItems(套装名称)
@@ -1767,10 +1755,8 @@ class 角色窗口(窗口):
         y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
 
         for i in range(12):
-            self.图片列表.append(self.装备图片[装备序号[self.自选装备[i].currentText()]])
             self.图片显示.append(QLabel(self.main_frame5))
-            self.图片显示[i].setMovie(self.图片列表[i])
-            self.图片列表[i].start()
+            self.图片显示[i].setMovie(equ.get_img_by_name(self.自选装备[i].currentText()))
             self.图片显示[i].resize(26, 26)
             self.图片显示[i].move(初始x + 10 + x坐标[i], 初始y + 31 + y坐标[i])
             self.图片显示[i].setAlignment(Qt.AlignCenter)
@@ -2047,13 +2033,13 @@ class 角色窗口(窗口):
             if sum(self.装备选择状态[74:244]) == 170:
                 self.批量选择(0)
 
-        for i in 装备列表:
+        for i in equ.get_equ_list():
             if i.部位 != '武器':
                 if i.品质 != '神话' or index == 0 or self.全选状态 == 0:
-                    self.装备图标点击事件(装备序号[i.名称], index, x=0)
+                    self.装备图标点击事件(equ.get_id_by_name(i.名称), index, x=0)
             else:
                 if i.类型 in self.角色属性A.武器选项:
-                    self.装备图标点击事件(装备序号[i.名称], index, x=0)
+                    self.装备图标点击事件(equ.get_id_by_name(i.名称), index, x=0)
 
         self.装备图标点击事件(74, index)
 
@@ -2104,7 +2090,7 @@ class 角色窗口(窗口):
                            '/equ.ini',
                            'r',
                            encoding='utf-8').readlines()
-            for i in range(len(装备列表)):
+            for i in equ.get_equ_id_list():
                 if setfile[i].replace('\n', '') == '1':
                     self.装备图标点击事件(i, 1)
         except:
@@ -2692,11 +2678,11 @@ class 角色窗口(窗口):
         self.输入属性(self.角色属性B)
         self.角色属性B.穿戴装备计算套装(self.有效穿戴组合[0])
         for i in self.角色属性B.装备栏:
-            装备列表[装备序号[i]].城镇属性_BUFF(self.角色属性B)
-            装备列表[装备序号[i]].BUFF属性(self.角色属性B)
+            equ.get_equ_by_name(i).城镇属性_BUFF(self.角色属性B)
+            equ.get_equ_by_name(i).BUFF属性(self.角色属性B)
         for i in self.角色属性B.套装栏:
-            套装列表[套装序号[i]].城镇属性_BUFF(self.角色属性B)
-            套装列表[套装序号[i]].BUFF属性(self.角色属性B)
+            equ.get_suit_by_name(i).城镇属性_BUFF(self.角色属性B)
+            equ.get_suit_by_name(i).BUFF属性(self.角色属性B)
         self.角色属性B.装备基础()
         self.角色属性B.站街计算()
         self.面板修正(self.角色属性B.类型, x)
@@ -2733,8 +2719,8 @@ class 角色窗口(窗口):
 
     def 神话数量判断(self, x=0):
         count = 0
-        for j in range(len(装备列表)):
-            if 装备列表[j].品质 == '神话':
+        for j in equ.get_equ_id_list():
+            if equ.get_equ_by_id(j).品质 == '神话':
                 if self.装备选择状态[j] == 1:
                     count += 1
         if x == 0:
@@ -2782,10 +2768,10 @@ class 角色窗口(窗口):
         套装 = []
         套装字典 = {}
         for i in 装备:
-            j = 装备列表[装备序号[i]].所属套装
+            j = equ.get_equ_by_name(i).所属套装
             if j == '智慧产物':
                 try:
-                    k = 装备列表[装备序号[i]].所属套装2
+                    k = equ.get_equ_by_name(i).所属套装2
                     套装字典[k] = 套装字典.get(k, 0) + 1
                 except:
                     pass
@@ -2793,11 +2779,11 @@ class 角色窗口(窗口):
                 套装字典[j] = 套装字典.get(j, 0) + 1
 
         for i in 套装字典.keys():
-            if 套装字典[i] >= 2 and (i + '[2]') in 套装序号.keys():
+            if 套装字典[i] >= 2 and (i + '[2]') in equ.get_suit_name():
                 套装.append(i + '[2]')
-            if 套装字典[i] >= 3 and (i + '[3]') in 套装序号.keys():
+            if 套装字典[i] >= 3 and (i + '[3]') in equ.get_suit_name():
                 套装.append(i + '[3]')
-            if 套装字典[i] >= 5 and (i + '[5]') in 套装序号.keys():
+            if 套装字典[i] >= 5 and (i + '[5]') in equ.get_suit_name():
                 套装.append(i + '[5]')
 
         if x != 0:
@@ -2973,8 +2959,8 @@ class 角色窗口(窗口):
 
             神话所在套装 = []
             for i in range(11):
-                if 装备列表[装备序号[装备[i]]].品质 == '神话':
-                    神话所在套装.append(装备列表[装备序号[装备[i]]].所属套装)
+                if equ.get_equ_by_name(装备[i]).品质 == '神话':
+                    神话所在套装.append(equ.get_equ_by_name(装备[i]).所属套装)
 
             套装 = []
             套装件数 = []
@@ -2991,7 +2977,7 @@ class 角色窗口(窗口):
                     套装属性[套装.index(
                         temp
                     )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
-                        i] + '</font><br>' + 套装列表[套装序号[套装名称[i]]].装备描述_BUFF(
+                        i] + '</font><br>' + equ.get_suit_by_name(套装名称[i]).装备描述_BUFF(
                             self.角色属性B)[:-4] + '</font><br>'
 
             数量 = [0] * 3
@@ -3139,11 +3125,11 @@ class 角色窗口(窗口):
         C = deepcopy(self.角色属性A)
         C.穿戴装备(装备名称, 套装名称)
         for i in C.装备栏:
-            装备列表[装备序号[i]].城镇属性_BUFF(C)
-            装备列表[装备序号[i]].BUFF属性(C)
+            equ.get_equ_by_name(i).城镇属性_BUFF(C)
+            equ.get_equ_by_name(i).BUFF属性(C)
         for i in C.套装栏:
-            套装列表[套装序号[i]].城镇属性_BUFF(C)
-            套装列表[套装序号[i]].BUFF属性(C)
+            equ.get_suit_by_name(i).城镇属性_BUFF(C)
+            equ.get_suit_by_name(i).BUFF属性(C)
         C.装备基础()
         C.站街计算()
         return C
@@ -3328,8 +3314,9 @@ class 角色窗口(窗口):
 
         神话所在套装 = '无'
         for i in range(11):
-            if 装备列表[装备序号[装备名称[i]]].品质 == '神话':
-                神话所在套装 = 装备列表[装备序号[装备名称[i]]].所属套装
+            temp = equ.get_equ_by_name(装备名称[i])
+            if temp.品质 == '神话':
+                神话所在套装 = temp.所属套装
 
         套装 = []
         套装件数 = []
@@ -3346,7 +3333,7 @@ class 角色窗口(窗口):
                 套装属性[套装.index(
                     temp
                 )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
-                    i] + '</font><br>' + 套装列表[套装序号[套装名称[i]]].装备描述_BUFF(
+                    i] + '</font><br>' + equ.get_suit_by_name(套装名称[i]).装备描述_BUFF(
                         self.角色属性B)[:-4] + '</font><br>'
 
         数量 = [0] * 3
@@ -3726,9 +3713,9 @@ class 角色窗口(窗口):
                 # 图片列表.append(QMovie('./ResourceFiles/img/希洛克/融-7.gif'))
                 图片列表.append(
                     QMovie('./ResourceFiles/img/希洛克/武器/' +
-                           str(装备序号[self.排行数据[index][i]]) + '.gif'))
+                           str(equ.get_id_by_name(self.排行数据[index][i])) + '.gif'))
             else:
-                图片列表.append(self.装备图片[装备序号[self.排行数据[index][i]]])
+                图片列表.append(equ.get_img_by_name(self.排行数据[index][i]))
 
         偏移量 = 187
         x坐标 = [
@@ -3745,7 +3732,7 @@ class 角色窗口(窗口):
             装备图标.resize(26, 26)
             装备图标.move(初始x + x坐标[i], 初始y + y坐标[i] - pox_y2)
             装备图标.setAlignment(Qt.AlignCenter)
-            装备 = 装备列表[装备序号[self.角色属性B.装备栏[i]]]
+            装备 = equ.get_equ_by_name(self.角色属性B.装备栏[i])
             if self.角色属性B.装备栏[i] == 百变怪:
                 图标遮罩 = QLabel(输出窗口)
                 图标遮罩.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.5)}")
@@ -3756,7 +3743,7 @@ class 角色窗口(窗口):
                 装备图标.setToolTip(tempstr[i])
 
         for i in range(12):
-            装备 = 装备列表[装备序号[self.角色属性B.装备栏[i]]]
+            装备 = equ.get_equ_by_name(self.角色属性B.装备栏[i])
             打造状态 = QLabel(输出窗口)
             if 装备.所属套装 != '智慧产物':
                 打造状态.setText('+' + str(self.角色属性B.强化等级[i]))
@@ -3777,7 +3764,7 @@ class 角色窗口(窗口):
 
             打造状态.move(初始x + x坐标[i] + 13, 初始y + y坐标[i] - 8 - pox_y2)
 
-        装备 = 装备列表[装备序号[self.角色属性B.装备栏[11]]]
+        装备 = equ.get_equ_by_name(self.角色属性B.装备栏[11])
         if 装备.所属套装 != '智慧产物' and self.角色属性B.武器锻造等级 != 0:
             打造状态 = QLabel(输出窗口)
             打造状态.setText('+' + str(self.角色属性B.武器锻造等级))
@@ -3796,7 +3783,7 @@ class 角色窗口(窗口):
         for i in range(15):
             数量[i % 3] += self.希洛克选择状态[i]
         for i in range(12):
-            装备 = 装备列表[装备序号[属性.装备栏[i]]]
+            装备 = equ.get_equ_by_name(属性.装备栏[i])
             tempstr.append('<font size="3" face="宋体"><font color="' +
                            颜色[装备.品质] + '">' + 装备.名称 + '</font><br>')
             if 装备.所属套装 != '无':
@@ -4130,7 +4117,7 @@ class 角色窗口(窗口):
             属性.双装备模式 = 1
 
         count = 0
-        for i in 装备列表:
+        for i in equ.get_equ_list():
             if i.品质 == '神话':
                 i.属性1选择_BUFF = self.神话属性选项[count * 4 + 0].currentIndex()
                 i.属性2选择_BUFF = self.神话属性选项[count * 4 + 1].currentIndex()

@@ -53,7 +53,7 @@ class CalcData():
         self.minheap = None  # type: MinHeap
 
     def pre_calc_needed_data(self):
-        from PublicReference.equipment.equ_list import 总套装列表, 部位列表, 装备列表
+        from PublicReference.equipment.equ_list import 总套装列表, 部位列表, equ
 
         self.有效武器列表.clear()
         for j in range(6):
@@ -65,17 +65,18 @@ class CalcData():
 
         for i in range(len(self.装备选择状态)):
             if self.装备选择状态[i] == 1:
-                if 装备列表[i].部位 == '武器':
-                    self.有效武器列表.append(装备列表[i].名称)
+                temp = equ.get_equ_by_id(i)
+                if temp.部位 == '武器':
+                    self.有效武器列表.append(temp.名称)
                 for j in range(6):
-                    if (装备列表[i].所属套装 in 总套装列表[j]) and (装备列表[i].所属套装
+                    if (temp.所属套装 in 总套装列表[j]) and (temp.所属套装
                                                        not in self.有效总套装列表[j]):
-                        self.有效总套装列表[j].append(装备列表[i].所属套装)
-                self.有效部位列表[部位列表.index(装备列表[i].部位)].append(装备列表[i].名称)
+                        self.有效总套装列表[j].append(temp.所属套装)
+                self.有效部位列表[部位列表.index(temp.部位)].append(temp.名称)
 
         count = 0
         count2 = 0
-        for i in 装备列表:
+        for i in equ.get_equ_list():
             if i.品质 == '神话':
                 if self.是输出职业 == True:
                     i.属性1选择 = self.神话属性选项[count * 4 + 0]
@@ -122,7 +123,7 @@ def calc_core(data: CalcData):
 
 
 def calc_speed_and_set_mode(data):
-    from PublicReference.equipment.equ_list import 套装映射, 部位列表, 装备列表
+    from PublicReference.equipment.equ_list import 部位列表, equ
     套装组合 = []
     套装适用 = []
 
@@ -198,18 +199,17 @@ def calc_speed_and_set_mode(data):
             else:
                 sign2 = '无'
             for x in range(11):
-                品质 = '-史诗-'
+                品质 = '史诗'
                 if k == x:
-                    品质 = '-神话-'
-                index = 套装映射[temp[x] + 品质 + 部位列表[x]]
+                    品质 = '神话'
+                index = equ.get_id_by_index(temp[x], 品质, 部位列表[x])
                 if data.装备选择状态[index] == 1:
                     sign += 1
                 else:
-                    if sign2 == '空' and 装备列表[index].品质 != '神话' and 装备列表[
-                            index].所属套装 not in ['精灵使的权能', '大自然的呼吸', '能量主宰']:
+                    if sign2 == '空' and equ.get_equ_by_id(index).品质 != '神话' and equ.get_equ_by_id(index).所属套装 not in ['精灵使的权能', '大自然的呼吸', '能量主宰']:
                         sign += 1
-                        sign2 = 装备列表[index].名称
-                temp1.append(装备列表[index].名称)
+                        sign2 = equ.get_equ_by_id(index).名称
+                temp1.append(equ.get_equ_by_id(index).名称)
             if sign == 11:
                 for i in data.有效武器列表:
                     current_index += 1
@@ -232,18 +232,18 @@ def calc_speed_and_set_mode(data):
 
 
 def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
-    from PublicReference.equipment.equ_list import 装备序号, 装备列表
+    from PublicReference.equipment.equ_list import equ
 
-    i = 装备序号[名称]
+    i = equ.get_id_by_name(名称)
     装备[x] = 名称
 
     for k in 顺序[顺序字典[x]:]:
         套装[k] = '无'
 
-    temp = 装备列表[i].所属套装
+    temp = equ.get_equ_by_id(i).所属套装
     if temp == '智慧产物':
         try:
-            temp = 装备列表[i].所属套装2
+            temp = equ.get_equ_by_id(i).所属套装2
         except:
             pass
     套装[x] = temp
@@ -269,7 +269,7 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
     elif x == 5:
         神话[8] = 0
 
-    if 装备列表[i].品质 == '神话':
+    if equ.get_equ_by_id(i).品质 == '神话':
         神话[x] = 1
         if sum(神话) > 1:
             return 1
@@ -280,7 +280,7 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
 
 
 def calc_single_mode(data):
-    from PublicReference.equipment.equ_list import 装备序号, 套装序号, 装备列表
+    from PublicReference.equipment.equ_list import equ
     current_index = -1
     装备 = ['无'] * 12
     套装 = ['无'] * 11
@@ -336,15 +336,15 @@ def calc_single_mode(data):
                                                 for i in 套装字典.keys():
                                                     if 套装字典[i] >= 2 and (
                                                             i + '[2]'
-                                                    ) in 套装序号.keys():
+                                                    ) in equ.get_suit_name():
                                                         套装名称.append(i + '[2]')
                                                     if 套装字典[i] >= 3 and (
                                                             i + '[3]'
-                                                    ) in 套装序号.keys():
+                                                    ) in equ.get_suit_name():
                                                         套装名称.append(i + '[3]')
                                                     if 套装字典[i] >= 5 and (
                                                             i + '[5]'
-                                                    ) in 套装序号.keys():
+                                                    ) in equ.get_suit_name():
                                                         套装名称.append(i + '[5]')
                                                 for a12 in data.有效部位列表[11]:
                                                     装备[11] = a12

@@ -59,21 +59,21 @@ class 属性():
     def 穿戴装备(self, 装备, 套装):
         self.装备栏 = 装备
         self.套装栏 = 套装
-        self.武器类型 = 装备列表[装备序号[self.装备栏[11]]].类型
+        self.武器类型 = equ.get_equ_by_name(self.装备栏[11]).类型
 
     def 穿戴装备计算套装(self, 装备):
         self.装备栏 = 装备
         self.适用套装计算()
-        self.武器类型 = 装备列表[装备序号[self.装备栏[11]]].类型
+        self.武器类型 = equ.get_equ_by_name(self.装备栏[11]).类型
 
     def 适用套装计算(self):
         套装 = []
         套装字典 = {}
         for i in self.装备栏:
-            j = 装备列表[装备序号[i]].所属套装
+            j = equ.get_equ_by_name(i).所属套装
             if j == '智慧产物':
                 try:
-                    k = 装备列表[装备序号[i]].所属套装2
+                    k = equ.get_equ_by_name(i).所属套装2
                     套装字典[k] = 套装字典.get(k, 0) + 1
                 except:
                     pass
@@ -81,18 +81,18 @@ class 属性():
                 套装字典[j] = 套装字典.get(j, 0) + 1
 
         for i in 套装字典.keys():
-            if 套装字典[i] >= 2 and (i + '[2]') in 套装序号.keys():
+            if 套装字典[i] >= 2 and (i + '[2]') in equ.get_suit_name():
                 套装.append(i + '[2]')
-            if 套装字典[i] >= 3 and (i + '[3]') in 套装序号.keys():
+            if 套装字典[i] >= 3 and (i + '[3]') in equ.get_suit_name():
                 套装.append(i + '[3]')
-            if 套装字典[i] >= 5 and (i + '[5]') in 套装序号.keys():
+            if 套装字典[i] >= 5 and (i + '[5]') in equ.get_suit_name():
                 套装.append(i + '[5]')
 
         self.套装栏 = copy(套装)
 
     def 防具基础(self):
         for i in [0, 1, 2, 3, 4]:
-            temp = 装备列表[装备序号[self.装备栏[i]]]
+            temp = equ.get_equ_by_name(self.装备栏[i])
             if temp.等级 > 85 or self.转甲选项 == 1:
                 self.力量 += temp.力量[self.防具类型]
                 self.智力 += temp.智力[self.防具类型]
@@ -108,7 +108,7 @@ class 属性():
 
     def 增幅基础(self):
         for i in range(12):
-            temp = 装备列表[装备序号[self.装备栏[i]]]
+            temp = equ.get_equ_by_name(self.装备栏[i])
             if self.是否增幅[i] and temp.所属套装 != '智慧产物':
                 x = 增幅计算(temp.等级, temp.品质, self.强化等级[i], self.增幅版本)
                 if '物理' in self.类型 or '力量' in self.类型:
@@ -118,7 +118,7 @@ class 属性():
 
     def 首饰基础(self):
         for i in [5, 6, 7]:
-            temp = 装备列表[装备序号[self.装备栏[i]]]
+            temp = equ.get_equ_by_name(self.装备栏[i])
             self.力量 += temp.力量
             self.智力 += temp.智力
             self.物理攻击力 += temp.物理攻击力
@@ -127,7 +127,7 @@ class 属性():
 
     def 特殊基础(self):
         for i in [8, 9, 10]:
-            temp = 装备列表[装备序号[self.装备栏[i]]]
+            temp = equ.get_equ_by_name(self.装备栏[i])
             self.力量 += temp.力量
             self.智力 += temp.智力
             self.物理攻击力 += temp.物理攻击力
@@ -135,7 +135,7 @@ class 属性():
             self.独立攻击力 += temp.独立攻击力
 
         # 耳环
-        temp = 装备列表[装备序号[self.装备栏[8]]]
+        temp = equ.get_equ_by_name(self.装备栏[8])
         if temp.所属套装 != '智慧产物':
             x = 耳环计算(temp.等级, temp.品质, self.强化等级[8])
             self.物理攻击力 += x
@@ -144,14 +144,14 @@ class 属性():
 
         # 辅助装备、魔法石
         for i in [9, 10]:
-            temp = 装备列表[装备序号[self.装备栏[i]]]
+            temp = equ.get_equ_by_name(self.装备栏[i])
             if temp.所属套装 != '智慧产物':
                 x = 左右计算(temp.等级, temp.品质, self.强化等级[i])
                 self.力量 += x
                 self.智力 += x
 
     def 武器基础(self):
-        temp = 装备列表[装备序号[self.装备栏[11]]]
+        temp = equ.get_equ_by_name(self.装备栏[11])
 
         self.力量 += temp.力量
         self.智力 += temp.智力
@@ -286,17 +286,15 @@ class 窗口(QWidget):
         self.当前页面 = 0
         self.全选状态 = 0
 
-        self.装备图片 = []
         self.遮罩透明度 = []
         self.装备图片按钮 = []
-        for i in 装备列表:
+        for i in equ.get_equ_list():
             self.遮罩透明度.append(QGraphicsOpacityEffect())
             self.装备图片按钮.append('')
         self.装备选择状态 = []
         self.装备条件选择 = []
-        for i in 装备列表:
-            path = './ResourceFiles/img/装备/' + str(装备序号[i.名称]) + '.gif'
-            self.装备图片.append(QMovie(path))
+        equ.load_img()
+        for i in equ.get_equ_list():
             self.装备选择状态.append(0)
 
         self.有效防具套装 = []
@@ -401,11 +399,10 @@ class 窗口(QWidget):
             try:
                 描述 = ''
                 if self.角色属性A.职业分类 == 'BUFF':
-                    描述 = 套装列表[套装序号['{}[{}]'.format(i.名称, n)]].装备描述_BUFF(
+                    描述 = equ.get_suit_by_name('{}[{}]'.format(i.名称, n)).装备描述_BUFF(
                         self.角色属性A)[:-4]
                 else:
-                    描述 = 套装列表[套装序号['{}[{}]'.format(i.名称,
-                                                   n)]].装备描述(self.角色属性A)[:-4]
+                    描述 = equ.get_suit_by_name('{}[{}]'.format(i.名称, n)).装备描述(self.角色属性A)[:-4]
                 if 描述 != '':
                     temp += '<font color="#78FF1E">' + i.名称 + '[{}]</font><br>'.format(
                         n)
@@ -457,7 +454,7 @@ class 窗口(QWidget):
         for 布局列表 in [防具套装, 上链左套装 + 镯下右套装 + 环鞋指套装, 首饰套装 + 特殊套装]:
             counter2 = 0
             for 名称 in 布局列表:
-                for i in 套装列表:
+                for i in equ.get_suit_list():
                     if i.名称 == 名称 and i.件数 == 2:
                         self.按钮 = QPushButton(i.名称, self.main_frame1)
                         self.按钮.move(水平间距[counter1] + 10, 10 + counter2 * 32)
@@ -472,12 +469,11 @@ class 窗口(QWidget):
                                     '上衣', '头肩', '下装', '鞋', '腰带', '项链', '手镯',
                                     '戒指', '辅助装备', '魔法石', '耳环'
                             ]:
-                                for j in range(len(装备列表)):
-                                    if 装备列表[j].所属套装 == i.名称 and 装备列表[
-                                            j].品质 == 品质 and 装备列表[j].部位 == 部位:
+                                for j in equ.get_equ_id_list():
+                                    temp = equ.get_equ_by_id(j)
+                                    if temp.所属套装 == i.名称 and temp.品质 == 品质 and temp.部位 == 部位:
                                         self.图片 = QLabel(self.main_frame1)
-                                        self.图片.setMovie(self.装备图片[j])
-                                        self.装备图片[j].start()
+                                        self.图片.setMovie(equ.get_img_by_id(j))
                                         self.图片.resize(28, 28)
                                         self.图片.move(
                                             水平间距[counter1] + 150 +
@@ -486,7 +482,7 @@ class 窗口(QWidget):
                                         self.按钮.setStyleSheet(
                                             "background-color: rgb(0, 0, 0)")
                                         self.按钮.resize(28, 28)
-                                        self.按钮.setToolTip(self.单件描述(装备列表[j]))
+                                        self.按钮.setToolTip(self.单件描述(temp))
                                         self.遮罩透明度[j].setOpacity(0.5)
                                         self.按钮.setGraphicsEffect(
                                             self.遮罩透明度[j])
@@ -510,23 +506,22 @@ class 窗口(QWidget):
 
         counter4 = 0
         counter5 += 1
-        for i in 装备列表:
+        for i in equ.get_equ_list():
             if self.武器装备判断(i):
                 self.图片 = QLabel(self.main_frame1)
-                self.图片.setMovie(self.装备图片[装备序号[i.名称]])
-                self.装备图片[装备序号[i.名称]].start()
+                self.图片.setMovie(equ.get_img_by_name(i.名称))
                 self.图片.resize(28, 28)
                 self.图片.move(657 + 55 * counter4, 15 + counter5 * 32)
                 self.按钮 = QPushButton(self.main_frame1)
                 self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
                 self.按钮.resize(28, 28)
                 self.按钮.setToolTip(self.单件描述(i))
-                self.遮罩透明度[装备序号[i.名称]].setOpacity(0.5)
-                self.按钮.setGraphicsEffect(self.遮罩透明度[装备序号[i.名称]])
+                self.遮罩透明度[equ.get_id_by_name(i.名称)].setOpacity(0.5)
+                self.按钮.setGraphicsEffect(self.遮罩透明度[equ.get_id_by_name(i.名称)])
                 self.按钮.clicked.connect(
-                    lambda state, index=装备序号[i.名称]: self.装备图标点击事件(index, 10))
-                self.装备图片按钮[装备序号[i.名称]] = self.按钮
-                self.装备图片按钮[装备序号[i.名称]].move(657 + 55 * counter4,
+                    lambda state, index=equ.get_id_by_name(i.名称): self.装备图标点击事件(index, 10))
+                self.装备图片按钮[equ.get_id_by_name(i.名称)] = self.按钮
+                self.装备图片按钮[equ.get_id_by_name(i.名称)].move(657 + 55 * counter4,
                                              15 + counter5 * 32)
                 counter4 += 1
                 if counter4 % 5 == 0:
@@ -544,23 +539,22 @@ class 窗口(QWidget):
 
         counter4 = 0
         counter5 += 1
-        for i in 装备列表:
+        for i in equ.get_equ_list():
             if self.单件装备判断(i):
                 self.图片 = QLabel(self.main_frame1)
-                self.图片.setMovie(self.装备图片[装备序号[i.名称]])
-                self.装备图片[装备序号[i.名称]].start()
+                self.图片.setMovie(equ.get_img_by_name(i.名称))
                 self.图片.resize(28, 28)
                 self.图片.move(657 + 55 * counter4, 20 + counter5 * 32)
                 self.按钮 = QPushButton(self.main_frame1)
                 self.按钮.setStyleSheet("background-color: rgb(0, 0, 0)")
                 self.按钮.resize(28, 28)
                 self.按钮.setToolTip(self.单件描述(i))
-                self.遮罩透明度[装备序号[i.名称]].setOpacity(0.5)
-                self.按钮.setGraphicsEffect(self.遮罩透明度[装备序号[i.名称]])
+                self.遮罩透明度[equ.get_id_by_name(i.名称)].setOpacity(0.5)
+                self.按钮.setGraphicsEffect(self.遮罩透明度[equ.get_id_by_name(i.名称)])
                 self.按钮.clicked.connect(
-                    lambda state, index=装备序号[i.名称]: self.装备图标点击事件(index, 10))
-                self.装备图片按钮[装备序号[i.名称]] = self.按钮
-                self.装备图片按钮[装备序号[i.名称]].move(657 + 55 * counter4,
+                    lambda state, index=equ.get_id_by_name(i.名称): self.装备图标点击事件(index, 10))
+                self.装备图片按钮[equ.get_id_by_name(i.名称)] = self.按钮
+                self.装备图片按钮[equ.get_id_by_name(i.名称)].move(657 + 55 * counter4,
                                              20 + counter5 * 32)
                 counter4 += 1
                 if counter4 % 5 == 0:
@@ -709,16 +703,16 @@ class 窗口(QWidget):
         self.神话属性选项 = []
         self.神话属性图片 = []
 
-        for j in range(len(装备列表)):
-            if 装备列表[j].品质 == '神话':
+        for j in equ.get_equ_id_list():
+            temp = equ.get_equ_by_id(j)
+            if temp.品质 == '神话':
                 self.神话属性图片.append(QLabel(self.main_frame4))
-                self.神话属性图片[-1].setMovie(self.装备图片[j])
+                self.神话属性图片[-1].setMovie(equ.get_img_by_id(j))
                 self.神话属性图片[-1].setToolTip('<font size="3" face="宋体">' +
-                                           装备列表[j].名称 + '<br>' + 装备列表[j].类型 +
-                                           '-' + 装备列表[j].部位 + '</font>')
+                                           temp.名称 + '<br>' + temp.类型 +
+                                           '-' + temp.部位 + '</font>')
                 self.神话属性图片[-1].resize(28, 28)
                 self.神话属性图片[-1].move(-1000, -1000)
-                self.装备图片[j].start()
 
         for i in range(4 * 35):
             self.神话属性选项.append(MyQComboBox(self.main_frame4))
@@ -729,7 +723,7 @@ class 窗口(QWidget):
 
         if self.初始属性.职业分类 == '输出':
             count = 0
-            for i in 装备列表:
+            for i in equ.get_equ_list():
                 if i.品质 == '神话':
                     描述列表 = [i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述]
                     范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
@@ -746,7 +740,7 @@ class 窗口(QWidget):
                     count += 1
         else:
             count = 0
-            for i in 装备列表:
+            for i in equ.get_equ_list():
                 if i.品质 == '神话':
                     描述列表 = [
                         i.属性1描述_BUFF, i.属性2描述_BUFF, i.属性3描述_BUFF, i.属性4描述_BUFF
@@ -924,7 +918,7 @@ class 窗口(QWidget):
         self.计算标识 = 0
         名称列表 = []
         部位序号 = []
-        for n in 装备列表:
+        for n in equ.get_equ_list():
             try:
                 if n.关联套装 == self.改造套装.currentText():
                     名称列表.append(n.名称)
@@ -938,7 +932,7 @@ class 窗口(QWidget):
             except:
                 pass
         if self.改造套装.currentText() == '兵法之神[5]':
-            for n in 装备列表:
+            for n in equ.get_equ_list():
                 try:
                     if n.所属套装 in ['无相轮回的希望', '流逝轮回的记忆'] and n.部位 != '辅助装备':
                         名称列表.append(n.名称)
@@ -947,7 +941,7 @@ class 窗口(QWidget):
                     pass
         for n in 部位序号:
             x = -1
-            for i in 装备列表:
+            for i in equ.get_equ_list():
                 if 部位列表[n] == i.部位:
                     x += 1
                     if i.名称 in 名称列表:
@@ -960,19 +954,19 @@ class 窗口(QWidget):
         部位 = [-1, 0, 5, 8]
         序号 = 部位[self.神话部位选项.currentIndex()]
         if 序号 != -1:
-            当前 = 装备列表[装备序号[self.自选装备[序号].currentText()]]
+            当前 = equ.get_equ_by_name(self.自选装备[序号].currentText())
             x = -1
-            for i in 装备列表:
+            for i in equ.get_equ_list():
                 if 当前.部位 == i.部位:
                     x += 1
                     if i.品质 == '神话' and i.所属套装 == 当前.所属套装:
                         self.自选装备[序号].setCurrentIndex(x)
         for k in [0, 5, 8]:
             if k != 序号:
-                当前 = 装备列表[装备序号[self.自选装备[k].currentText()]]
+                当前 = equ.get_equ_by_name(self.自选装备[k].currentText())
                 if 当前.品质 == '神话':
                     x = -1
-                    for i in 装备列表:
+                    for i in equ.get_equ_list():
                         if 当前.部位 == i.部位:
                             x += 1
                             if i.品质 == '史诗' and i.所属套装 == 当前.所属套装:
@@ -982,9 +976,7 @@ class 窗口(QWidget):
 
     def 自选装备更改(self, index=0):
         try:
-            self.图片列表[index] = self.装备图片[装备序号[self.自选装备[index].currentText()]]
-            self.图片显示[index].setMovie(self.图片列表[index])
-            self.图片列表[index].start()
+            self.图片显示[index].setMovie(equ.get_img_by_name(self.自选装备[index].currentText()))
         except:
             pass
 
@@ -1002,7 +994,7 @@ class 窗口(QWidget):
             if self.装备锁定[i].isChecked():
                 continue
             x = -1
-            for j in 装备列表:
+            for j in equ.get_equ_list():
                 if j.部位 == 部位列表[i]:
                     x += 1
                     try:
@@ -1044,7 +1036,7 @@ class 窗口(QWidget):
             辟邪玉列表[x].穿戴属性(属性)
 
     def 装备图标点击事件(self, index, sign, x=1):
-        if 装备列表[index].模式 == 0:
+        if equ.get_equ_by_id(index).模式 == 0:
             try:
                 # 改变状态
                 if sign == 10:
@@ -1077,26 +1069,26 @@ class 窗口(QWidget):
     def 套装按钮点击事件(self, index):
         count = 0
         if index == '武器':
-            for i in 装备列表:
+            for i in equ.get_equ_list():
                 if i.类型 in self.角色属性A.武器选项:
-                    count += self.装备选择状态[装备序号[i.名称]]
-            for i in 装备列表:
+                    count += self.装备选择状态[equ.get_id_by_name(i.名称)]
+            for i in equ.get_equ_list():
                 if i.类型 in self.角色属性A.武器选项:
-                    self.装备图标点击事件(装备序号[i.名称], 0 if count > 0 else 1)
+                    self.装备图标点击事件(equ.get_id_by_name(i.名称), 0 if count > 0 else 1)
         elif index == '智慧产物':
-            for i in 装备列表:
+            for i in equ.get_equ_list():
                 if self.单件装备判断(i):
-                    count += self.装备选择状态[装备序号[i.名称]]
-            for i in 装备列表:
+                    count += self.装备选择状态[equ.get_id_by_name(i.名称)]
+            for i in equ.get_equ_list():
                 if self.单件装备判断(i):
-                    self.装备图标点击事件(装备序号[i.名称], 0 if count > 0 else 1)
+                    self.装备图标点击事件(equ.get_id_by_name(i.名称), 0 if count > 0 else 1)
         else:
-            for i in 装备列表:
+            for i in equ.get_equ_list():
                 if i.所属套装 == index:
-                    count += self.装备选择状态[装备序号[i.名称]]
-            for i in 装备列表:
+                    count += self.装备选择状态[equ.get_id_by_name(i.名称)]
+            for i in equ.get_equ_list():
                 if i.所属套装 == index:
-                    self.装备图标点击事件(装备序号[i.名称], 0 if count > 0 else 1)
+                    self.装备图标点击事件(equ.get_id_by_name(i.名称), 0 if count > 0 else 1)
 
     def 组合数量计算(self, sign, x=0):
         if sign == 0 or sign == 1:
@@ -1105,13 +1097,14 @@ class 窗口(QWidget):
                 self.有效总套装列表[j].clear()
             for i in range(len(self.装备选择状态)):
                 if self.装备选择状态[i] == 1:
+                    temp = equ.get_equ_by_id(i)
                     for j in range(6):
-                        if (装备列表[i].所属套装
-                                in 总套装列表[j]) and (装备列表[i].所属套装
+                        if (temp.所属套装
+                                in 总套装列表[j]) and (temp.所属套装
                                                   not in self.有效总套装列表[j]):
-                            self.有效总套装列表[j].append(装备列表[i].所属套装)
-                    if 装备列表[i].部位 == '武器':
-                        self.有效武器列表.append(装备列表[i].名称)
+                            self.有效总套装列表[j].append(temp.所属套装)
+                    if temp.部位 == '武器':
+                        self.有效武器列表.append(temp.名称)
             if sign == 0:
                 counter = (
                     len(self.有效防具套装) * len(self.有效首饰套装) * len(self.有效特殊套装) +
@@ -1131,7 +1124,8 @@ class 窗口(QWidget):
                 self.有效部位列表.append([])
             for i in range(len(self.装备选择状态)):
                 if self.装备选择状态[i] == 1:
-                    self.有效部位列表[部位列表.index(装备列表[i].部位)].append(装备列表[i].名称)
+                    temp = equ.get_equ_by_id(i)
+                    self.有效部位列表[部位列表.index(temp.部位)].append(temp.名称)
 
             counter = 0
             for a1 in self.有效部位列表[0]:
@@ -1139,7 +1133,7 @@ class 窗口(QWidget):
                     for a3 in self.有效部位列表[8]:
                         神话数量 = 0
                         for i in [a1, a2, a3]:
-                            if 装备列表[装备序号[i]].品质 == '神话':
+                            if equ.get_equ_by_name(i).品质 == '神话':
                                 神话数量 += 1
                         if 神话数量 <= 1:
                             counter += 1
@@ -1180,13 +1174,13 @@ class 窗口(QWidget):
             if sum(self.装备选择状态[74:244]) == 170:
                 self.批量选择(0)
 
-        for i in 装备列表:
+        for i in equ.get_equ_list():
             if self.武器装备判断(i) or self.单件装备判断(i) or self.其他装备判断(i):
                 if i.品质 == '神话' and index == 1:
                     if self.全选状态 == 0:
-                        self.装备图标点击事件(装备序号[i.名称], index, x=0)
+                        self.装备图标点击事件(equ.get_id_by_name(i.名称), index, x=0)
                 else:
-                    self.装备图标点击事件(装备序号[i.名称], index, x=0)
+                    self.装备图标点击事件(equ.get_id_by_name(i.名称), index, x=0)
 
         self.装备图标点击事件(74, index)
 
@@ -1224,9 +1218,10 @@ class 窗口(QWidget):
             自选装备名称 = []
             for i in self.自选装备:
                 自选装备名称.append(i.currentText())
-            for j in range(len(装备列表)):
-                if 装备列表[j].品质 == '神话':
-                    if self.装备选择状态[j] == 1 or 装备列表[j].名称 in 自选装备名称:
+            for j in equ.get_equ_id_list():
+                temp = equ.get_equ_by_id(j)
+                if temp.品质 == '神话':
+                    if self.装备选择状态[j] == 1 or temp.名称 in 自选装备名称:
                         self.神话属性图片[num].move(
                             int(self.width() / 7 * (count1 % 7 + 0.42)),
                             int(self.height() / 5.2 * (count2 + 0.05)) - 3)
@@ -1256,8 +1251,8 @@ class 窗口(QWidget):
         count1 = 0
         count2 = 0
         num = 0
-        for j in range(len(装备列表)):
-            if 装备列表[j].所属套装 == '智慧产物':
+        for j in equ.get_equ_id_list():
+            if equ.get_equ_by_id(j).所属套装 == '智慧产物':
                 if self.装备选择状态[j] == 1 and x == 1:
                     self.改造产物图片[num].move(
                         int(self.width() / 7 * (count1 % 5 + 0.42 + 2)) - 10,
@@ -1291,8 +1286,8 @@ class 窗口(QWidget):
 
     def 神话数量判断(self, x=0):
         count = 0
-        for j in range(len(装备列表)):
-            if 装备列表[j].品质 == '神话':
+        for j in equ.get_equ_id_list():
+            if equ.get_equ_by_id(j).品质 == '神话':
                 if self.装备选择状态[j] == 1:
                     count += 1
         if x == 0:
@@ -1310,7 +1305,7 @@ class 窗口(QWidget):
                 for a3 in self.有效部位列表[8]:
                     神话数量 = 0
                     for i in [a1, a2, a3]:
-                        if 装备列表[装备序号[i]].品质 == '神话':
+                        if equ.get_equ_by_name(i).品质 == '神话':
                             神话数量 += 1
                     if 神话数量 <= 1:
                         count += 1
@@ -1455,7 +1450,7 @@ class 窗口(QWidget):
             calc_data.装备选择状态 = copy(self.装备选择状态)
             for i in self.有效部位列表:
                 for j in i:
-                    calc_data.装备选择状态[装备序号[j]] = 1
+                    calc_data.装备选择状态[equ.get_id_by_name(j)] = 1
             if len(self.有效部位列表备份) != 0:
                 self.有效部位列表 = deepcopy(self.有效部位列表备份)
             calc_data.拥有百变怪 = self.百变怪选项.isChecked()
@@ -1552,8 +1547,8 @@ class 窗口(QWidget):
             for i in range(len(self.排行数据)):
                 tempstr = self.排行数据[i]
                 for j in [0, 5, 8]:
-                    if 装备列表[装备序号[
-                            tempstr[j]]].品质 == '神话' and tempstr[j] not in 神话列表:
+                    if equ.get_equ_by_name(
+                            tempstr[j]).品质 == '神话' and tempstr[j] not in 神话列表:
                         神话列表.append(tempstr[j])
                         对应序号.append(i)
                 if len(神话列表) >= self.神话数量判断(1):
@@ -1567,8 +1562,8 @@ class 窗口(QWidget):
             对应序号 = []
             for i in range(len(self.排行数据)):
                 tempstr = self.排行数据[i]
-                if 装备列表[装备序号[
-                        tempstr[11]]].部位 == '武器' and tempstr[11] not in 武器列表:
+                if equ.get_equ_by_name(
+                        tempstr[11]).部位 == '武器' and tempstr[11] not in 武器列表:
                     武器列表.append(tempstr[11])
                     对应序号.append(i)
                 if len(武器列表) >= len(self.有效武器列表):
@@ -1670,23 +1665,23 @@ class 窗口(QWidget):
         if 输出数据 == 1 and len(筛选) == 0:
             setfile = open('./数据记录/{}-{}.csv'.format(
                 self.角色属性A.实际名称, time.strftime('%m-%d-%H-%M-%S')),
-                           'w',
-                           encoding='gbk')
+                'w',
+                encoding='gbk')
             for i in range(len(显示序号)):
                 temp = ''
                 for j in range(13):
                     temp += str(self.排行数据[显示序号[i]][j]) + ','
                 temp += self.角色属性A.实际名称 + ','
-                temp += 装备列表[装备序号[self.排行数据[显示序号[i]][11]]].类型
+                temp += equ.get_equ_by_name(self.排行数据[显示序号[i]][11]).类型
                 setfile.write(temp + '\n')
 
         for i in range(len(显示序号)):
             图片列表 = []
             for j in range(12):
-                图片列表.append(self.装备图片[装备序号[self.排行数据[显示序号[i]][j]]])
+                图片列表.append(equ.get_img_by_name(self.排行数据[显示序号[i]][j]))
             水平间距 = [1, 2, 3, 4, 5, 6.5, 7.5, 8.5, 10, 11, 12, 13.5]
             for j in range(12):
-                装备 = 装备列表[装备序号[self.排行数据[显示序号[i]][j]]]
+                装备 = equ.get_equ_by_name(self.排行数据[显示序号[i]][j])
                 图标 = QLabel(滚动排行.topFiller)
                 图标.setMovie(图片列表[j])
                 图片列表[j].start()
@@ -1815,17 +1810,16 @@ class 窗口(QWidget):
                     sign = 0
                     sign2 = 初始sign2
                     for x in range(11):
-                        品质 = '-史诗-'
+                        品质 = '史诗'
                         if k == x:
-                            品质 = '-神话-'
-                        index = 套装映射[temp[x] + 品质 + 部位列表[x]]
+                            品质 = '神话'
+                        index = equ.get_id_by_index(temp[x], 品质, 部位列表[x])
                         if self.装备选择状态[index] == 1:
                             sign += 1
                         else:
-                            if sign2 == '空' and 装备列表[index].品质 != '神话' and 装备列表[
-                                    index].所属套装 not in [
+                            if sign2 == '空' and equ.get_equ_by_id(index).品质 != '神话' and equ.get_equ_by_id(index).所属套装 not in [
                                         '精灵使的权能', '大自然的呼吸', '能量主宰'
-                                    ]:
+                            ]:
                                 sign += 1
                     if sign == 11:
                         count += len(self.有效武器列表)
@@ -1864,7 +1858,7 @@ class 技能详情(QFrame):
                 CD恢复 = ''
                 try:
                     tempstr = '<font face="宋体"><font color="#FF6666">' + data.角色属性B.技能栏[
-                        i].名称 +("<br>" if data.角色属性B.技能栏[i].备注 != '' else '')+ data.角色属性B.技能栏[i].备注 + '</font><br>'
+                        i].名称 + ("<br>" if data.角色属性B.技能栏[i].备注 != '' else '') + data.角色属性B.技能栏[i].备注 + '</font><br>'
                     百分比 = int(data.角色属性B.技能栏[i].等效百分比(data.角色属性B.武器类型) /
                               data.角色属性B.技能栏[i].倍率)
                     被动倍率 = round(data.角色属性B.技能栏[i].被动倍率 * 100, 1)
