@@ -9,9 +9,9 @@ from PublicReference.utils.MainWindow import *
 from PublicReference.utils.calc_core import calc_core
 from PublicReference.utils.producer_consumer import producer_data, consumer, thread_num
 import traceback
-from lanzou.api import LanZouCloud
 from PublicReference.utils import zipfile
 from PublicReference.utils import img
+from PublicReference.utils.LZextends import *
 from pathlib import Path
 import shutil
 import sys
@@ -34,7 +34,6 @@ os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
 if __name__ == '__main__':
     multiprocessing.freeze_support()
 
-
 class Worker(QThread):
     sinOut = pyqtSignal(int)
 
@@ -52,7 +51,7 @@ class Worker(QThread):
         path = os.getcwd() + "/__ZFJtemp"
         try:
             # os.rename(sys.argv[0],sys.argv[0]+'.del')
-            lzy = LanZouCloud()
+            lzy = LZextends()
             lzy.down_file_by_url(self.fileURL,
                                  '',
                                  path,
@@ -136,7 +135,7 @@ class 选择窗口(QWidget):
         # if 目录.endswith('py'):
         #     return
         try:
-            lzy = LanZouCloud()
+            lzy = LZextends()
             fileURL = ''
             folder_info = lzy.get_folder_info_by_url(
                 'https://wwx.lanzoui.com/b01bfj76f')
