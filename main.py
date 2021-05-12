@@ -133,13 +133,13 @@ class 选择窗口(QWidget):
             return error
 
     def 网盘检查(self):
-        if 目录.endswith('py'):
-            return
+        # if 目录.endswith('py'):
+        #     return
         try:
             lzy = LanZouCloud()
             fileURL = ''
             folder_info = lzy.get_folder_info_by_url(
-                'https://pan.lanzous.com/b01bfj76f')
+                'https://wwx.lanzoui.com/b01bfj76f')
             if folder_info.code != LanZouCloud.SUCCESS:
                 self.网盘链接 = ''
                 self.网盘报错 = 1
