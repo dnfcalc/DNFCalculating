@@ -1348,6 +1348,40 @@ class 角色窗口(窗口):
                     lambda state, index=序号: self.希洛克选择(index))
             count += 1
 
+        横坐标 = 395
+        纵坐标 = 480
+        名称 = ['阿斯特罗斯', '贝利亚斯', '雷德梅恩', '罗什巴赫', '泰玛特']
+        self.奥兹玛套装按钮 = []
+        self.奥兹玛单件按钮 = []
+        self.奥兹玛遮罩透明度 = []
+        self.奥兹玛选择状态 = [0] * 25
+        count = 0
+        for i in 名称:
+            self.奥兹玛套装按钮.append(QPushButton(i, self.main_frame2))
+            self.奥兹玛套装按钮[count].setStyleSheet(按钮样式)
+            self.奥兹玛套装按钮[count].resize(75, 22)
+            self.奥兹玛套装按钮[count].move(横坐标, 纵坐标 + 3 + count * 32)
+            self.奥兹玛套装按钮[count].clicked.connect(
+                lambda state, index=(count + 1) * 100: self.奥兹玛选择(index))
+            for j in range(5):
+                序号 = count * 5 + j
+                图片 = QLabel(self.main_frame2)
+                图片.setPixmap(
+                    QPixmap('./ResourceFiles/img/奥兹玛/' + str(序号) + '.png'))
+                图片.resize(28, 28)
+                图片.move(横坐标 + 60 + j * 30+20, 纵坐标 + count * 32)
+                self.奥兹玛遮罩透明度.append(QGraphicsOpacityEffect())
+                self.奥兹玛遮罩透明度[序号].setOpacity(0.5)
+                self.奥兹玛单件按钮.append(QPushButton(self.main_frame2))
+                self.奥兹玛单件按钮[序号].setStyleSheet(
+                    "background-color: rgb(0, 0, 0)")
+                self.奥兹玛单件按钮[序号].resize(28, 28)
+                self.奥兹玛单件按钮[序号].move(横坐标 + 60 + j * 30+20, 纵坐标 + count * 32)
+                self.奥兹玛单件按钮[序号].setGraphicsEffect(self.奥兹玛遮罩透明度[序号])
+                self.奥兹玛单件按钮[序号].clicked.connect(
+                    lambda state, index=序号: self.奥兹玛选择(index))
+            count += 1
+
         counter = 0
         for i in self.复选框列表:
             i.setStyleSheet(复选框样式)
@@ -4080,6 +4114,107 @@ class 角色窗口(窗口):
             # 属性.守护恩赐体精 += 30
             # 属性.转职被动智力 += 30  # 辅助装备
 
+
+    def 奥兹玛属性计算(self,属性):
+        pass
+        #region 阿斯特罗斯
+        if self.奥兹玛选择状态[0] == 1:
+            属性.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
+            属性.觉醒增加(一觉力智=22)
+            属性.被动增加(守护恩赐体精=55,转职被动智力=55)
+        if self.奥兹玛选择状态[1] == 1:
+            属性.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
+            属性.觉醒增加(一觉力智=22)
+            属性.被动增加(守护恩赐体精=55,转职被动智力=55)
+        if self.奥兹玛选择状态[2] == 1:
+            属性.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
+            属性.觉醒增加(一觉力智=22)
+            属性.被动增加(守护恩赐体精=55,转职被动智力=55)
+        if self.奥兹玛选择状态[3] == 1:
+            属性.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
+            属性.觉醒增加(一觉力智=22)
+            属性.被动增加(守护恩赐体精=55,转职被动智力=55)
+        if self.奥兹玛选择状态[4] == 1:
+            属性.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
+            属性.觉醒增加(一觉力智=22)
+            属性.被动增加(守护恩赐体精=55,转职被动智力=55)
+        #endregion
+        #region 贝利亚斯
+        if self.奥兹玛选择状态[5] == 1:
+            属性.被动增加(守护恩赐体精=138,转职被动智力=138)
+        if self.奥兹玛选择状态[6] == 1:
+            属性.被动增加(守护恩赐体精=138,转职被动智力=138)
+        if self.奥兹玛选择状态[7] == 1:
+            属性.被动增加(守护恩赐体精=138,转职被动智力=138)
+        if self.奥兹玛选择状态[8] == 1:
+            属性.被动增加(守护恩赐体精=138,转职被动智力=138)
+        if self.奥兹玛选择状态[9] == 1:
+            属性.被动增加(守护恩赐体精=138,转职被动智力=138)
+        #endregion
+        #region 雷德梅恩
+        if self.奥兹玛选择状态[10] == 1:
+            属性.BUFF增加(BUFF力量per=1.02, BUFF智力per=1.02)
+            属性.觉醒增加(一觉力智=25)
+            属性.被动增加(守护恩赐体精=46,转职被动智力=46)
+        if self.奥兹玛选择状态[11] == 1:
+            属性.BUFF增加(BUFF力量per=1.02, BUFF智力per=1.02)
+            属性.觉醒增加(一觉力智=25)
+            属性.被动增加(守护恩赐体精=46,转职被动智力=46)
+        if self.奥兹玛选择状态[12] == 1:
+            属性.BUFF增加(BUFF力量per=1.02, BUFF智力per=1.02)
+            属性.觉醒增加(一觉力智=25)
+            属性.被动增加(守护恩赐体精=46,转职被动智力=46)
+        if self.奥兹玛选择状态[13] == 1:
+            属性.BUFF增加(BUFF力量per=1.02, BUFF智力per=1.02)
+            属性.觉醒增加(一觉力智=25)
+            属性.被动增加(守护恩赐体精=46,转职被动智力=46)
+        if self.奥兹玛选择状态[14] == 1:
+            属性.BUFF增加(BUFF力量per=1.02, BUFF智力per=1.02)
+            属性.觉醒增加(一觉力智=25)
+            属性.被动增加(守护恩赐体精=46,转职被动智力=46)
+        #endregion
+        #region 罗什巴赫
+        if self.奥兹玛选择状态[15] == 1:
+            属性.BUFF增加(BUFF力量per=1.01, BUFF智力per=1.01)
+            属性.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
+            属性.觉醒增加(一觉力智=37)
+        if self.奥兹玛选择状态[16] == 1:
+            属性.BUFF增加(BUFF力量per=1.01, BUFF智力per=1.01)
+            属性.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
+            属性.觉醒增加(一觉力智=37)
+        if self.奥兹玛选择状态[17] == 1:
+            属性.BUFF增加(BUFF力量per=1.01, BUFF智力per=1.01)
+            属性.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
+            属性.觉醒增加(一觉力智=37)
+        if self.奥兹玛选择状态[18] == 1:
+            属性.BUFF增加(BUFF力量per=1.01, BUFF智力per=1.01)
+            属性.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
+            属性.觉醒增加(一觉力智=37)
+        if self.奥兹玛选择状态[19] == 1:
+            属性.BUFF增加(BUFF力量per=1.01, BUFF智力per=1.01)
+            属性.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
+            属性.觉醒增加(一觉力智=37)
+        # endregion
+        #region 泰玛特
+        if self.奥兹玛选择状态[20] == 1:
+            属性.BUFF增加(BUFF力量per=1.03, BUFF智力per=1.03)
+            属性.觉醒增加(一觉力智=21,一觉力智per=1.01)
+        if self.奥兹玛选择状态[21] == 1:
+            属性.BUFF增加(BUFF力量per=1.03, BUFF智力per=1.03)
+            属性.觉醒增加(一觉力智=21,一觉力智per=1.01)
+        if self.奥兹玛选择状态[22] == 1:
+            属性.BUFF增加(BUFF力量per=1.03, BUFF智力per=1.03)
+            属性.觉醒增加(一觉力智=21,一觉力智per=1.01)
+        if self.奥兹玛选择状态[23] == 1:
+            属性.BUFF增加(BUFF力量per=1.03, BUFF智力per=1.03)
+            属性.觉醒增加(一觉力智=21,一觉力智per=1.01)
+        if self.奥兹玛选择状态[24] == 1:
+            属性.BUFF增加(BUFF力量per=1.03, BUFF智力per=1.03)
+            属性.觉醒增加(一觉力智=21,一觉力智per=1.01)
+        #endregion
+
+
+
     def 输入属性(self, 属性, x=0):
         for i in 属性.技能栏:
             i.等级 = i.基础等级 + int(self.等级调整[self.角色属性A.技能序号[i.名称]].currentText())
@@ -4210,6 +4345,7 @@ class 角色窗口(窗口):
                 属性.次数输入.append(int(self.次数输入[序号].currentText()))
         self.黑鸦属性计算(属性)
         self.希洛克属性计算(属性)
+        self.奥兹玛属性计算(属性)
         self.基础属性(属性)
         属性.黑鸦词条 = []
         for i in range(4):
