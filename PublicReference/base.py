@@ -3146,6 +3146,7 @@ class 角色窗口(窗口):
             self.阿斯特罗斯选项[i].resize(60+15, 20)
             self.阿斯特罗斯选项[i].setCurrentIndex(0)
             self.阿斯特罗斯选项[i].move(横坐标 - 139+60-15, 纵坐标 + 160 + 3 - 10+纵向偏移+i*32)
+        self.阿斯特罗斯选项显示(0)
 
         if self.初始属性.职业分类 == '输出':
             count = 0
@@ -3172,7 +3173,7 @@ class 角色窗口(窗口):
 
     def 奥兹玛选择(self,index):
         super().奥兹玛选择(index)
-        if index < 5:
+        if index < 5 or int(index / 100 - 1) == 0:
             self.阿斯特罗斯选项显示(sum(self.奥兹玛选择状态[0:5]))
 
     def 阿斯特罗斯选项显示(self, n):
