@@ -859,6 +859,37 @@ class 窗口(QWidget):
                 self.希洛克遮罩透明度[index].setOpacity(0.5)
                 self.希洛克选择状态[index] = 0
 
+    def 奥兹玛选择(self,index):
+        if index >= 100:
+            序号 = int(index / 100 - 1)
+            count = 0
+            for i in range(序号 * 5, 序号 * 5 + 5):
+                count += self.奥兹玛选择状态[i]
+            if count != 5:
+                for i in range(25):
+                    if i in range(序号 * 5, 序号 * 5 + 5):
+                        self.奥兹玛遮罩透明度[i].setOpacity(0)
+                        self.奥兹玛选择状态[i] = 1
+                    else:
+                        self.奥兹玛遮罩透明度[i].setOpacity(0.5)
+                        self.奥兹玛选择状态[i] = 0
+            else:
+                for i in range(序号 * 5, 序号 * 5 + 5):
+                    self.奥兹玛遮罩透明度[i].setOpacity(0.5)
+                    self.奥兹玛选择状态[i] = 0
+        else:
+            if self.奥兹玛选择状态[index] == 0:
+                for i in range(5):
+                    序号 = i * 5 + index % 5
+                    if self.奥兹玛选择状态[序号] == 1:
+                        self.奥兹玛遮罩透明度[序号].setOpacity(0.5)
+                        self.奥兹玛选择状态[序号] = 0
+                self.奥兹玛遮罩透明度[index].setOpacity(0)
+                self.奥兹玛选择状态[index] = 1
+            else:
+                self.奥兹玛遮罩透明度[index].setOpacity(0.5)
+                self.奥兹玛选择状态[index] = 0
+
     def 存档更换(self):
         if self.存档选择.currentText() == '新建存档':
             num = 1

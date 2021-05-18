@@ -2904,7 +2904,7 @@ class 角色窗口(窗口):
         标签 = QLabel('黑鸦遴选词条', self.main_frame6)
         标签.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
         标签.resize(300, 20)
-        标签.move(横坐标 + 10, 纵坐标 + 330)
+        标签.move(横坐标 + 10, 纵坐标 + 330-20)
         标签.setAlignment(Qt.AlignCenter)
 
         名称 = ['武　　器', '戒　　指', '辅助装备', '下　　装']
@@ -2916,26 +2916,26 @@ class 角色窗口(窗口):
                             'QLabel{font-size:13px;};text-align: justify;')
             # x.setStyleSheet('text-align: justify')
             x.resize(55, 20)
-            x.move(横坐标, 纵坐标 - 145 + (i + 20) * 25)
+            x.move(横坐标, 纵坐标 - 145 + (i + 20) * 25-20)
             tem = []
             tem.append(MyQComboBox(self.main_frame6))
             tem[-1].setStyleSheet(下拉框样式)
             if i == 0:
                 tem[0].addItems(['无', '计算最高', '自选数值', '自选数值-觉醒'])
                 tem[0].resize(91, 20)
-                tem[0].move(横坐标 + 60, 纵坐标 - 20 + 25 * (i + 15))
+                tem[0].move(横坐标 + 60, 纵坐标 - 20 + 25 * (i + 15)-20)
                 tem[0].currentIndexChanged.connect(
                     lambda state, index=i: self.黑鸦词条更新(index))
             else:
                 tem[0].addItems(['无', '计算最高', '自选数值'])
                 tem[0].resize(91, 20)
-                tem[0].move(横坐标 + 60, 纵坐标 - 20 + 25 * (i + 15))
+                tem[0].move(横坐标 + 60, 纵坐标 - 20 + 25 * (i + 15)-20)
                 tem[0].currentIndexChanged.connect(
                     lambda state, index=i: self.黑鸦词条更新(index))
             tem.append(MyQComboBox(self.main_frame6))
             tem[-1].setStyleSheet(下拉框样式)
             tem[1].resize(70, 20)
-            tem[1].move(横坐标 + 161, 纵坐标 - 20 + 25 * (i + 15))
+            tem[1].move(横坐标 + 161, 纵坐标 - 20 + 25 * (i + 15)-20)
             # if i > 0:
             for item in 词条属性列表:
                 tem[1].addItem(item.描述)
@@ -2947,7 +2947,7 @@ class 角色窗口(窗口):
             tem.append(MyQComboBox(self.main_frame6))
             tem[-1].setStyleSheet(下拉框样式)
             tem[2].resize(60, 20)
-            tem[2].move(横坐标 + 241, 纵坐标 - 20 + 25 * (i + 15))
+            tem[2].move(横坐标 + 241, 纵坐标 - 20 + 25 * (i + 15)-20)
             if i > 0:
                 for item in range(1, 5):
                     tem[2].addItem("+" + str(item * 2) + '%')
@@ -2961,13 +2961,13 @@ class 角色窗口(窗口):
         self.武器择优模式 = MyQComboBox(self.main_frame6)
         self.武器择优模式.addItems(['武器默认择优词条', '武器默认择优觉醒'])
         self.武器择优模式.resize(151, 20)
-        self.武器择优模式.move(横坐标, 纵坐标 - 20 + 25 * (4 + 15))
+        self.武器择优模式.move(横坐标, 纵坐标 - 20 + 25 * (4 + 15)-20)
         # self.武器择优模式.setStyleSheet(复选框样式)
         # self.武器择优模式.setChecked(False)
 
         self.守门人全属强 = QCheckBox('  守门人全属强\n  自动补正', self.main_frame6)
         self.守门人全属强.resize(120, 30)
-        self.守门人全属强.move(横坐标 + 181, 纵坐标 + 291)
+        self.守门人全属强.move(横坐标 + 181, 纵坐标 + 291-15)
         self.守门人全属强.setStyleSheet(复选框样式)
         self.守门人全属强.setChecked(False)
         self.守门人全属强.setEnabled(False)
@@ -2981,7 +2981,7 @@ class 角色窗口(窗口):
 
         self.智慧产物升级 = QCheckBox(' 智慧产物升级', self.main_frame6)
         self.智慧产物升级.resize(140, 20)
-        self.智慧产物升级.move(横坐标 + 161, 纵坐标 - 19 + 25 * (4 + 15))
+        self.智慧产物升级.move(横坐标 + 161, 纵坐标 - 19 + 25 * (4 + 15)-20)
         self.智慧产物升级.setStyleSheet(复选框样式)
         self.智慧产物升级.setChecked(False)
         self.智慧产物升级.stateChanged.connect(
@@ -2990,10 +2990,11 @@ class 角色窗口(窗口):
         横坐标 = 横坐标 + 320
         纵坐标 = 0
 
+
         标签 = QLabel('希洛克相关', self.main_frame6)
         标签.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
         标签.resize(300, 20)
-        标签.move(横坐标 - 382, 纵坐标 + 135)
+        标签.move(横坐标 - 310, 纵坐标 + 135-10)
         标签.setAlignment(Qt.AlignCenter)
 
         名称 = ['奈克斯', '暗杀者', '卢克西', '守门人', '洛多斯']
@@ -3007,7 +3008,7 @@ class 角色窗口(窗口):
             self.希洛克套装按钮.append(QPushButton(i, self.main_frame6))
             self.希洛克套装按钮[count].setStyleSheet(按钮样式)
             self.希洛克套装按钮[count].resize(50, 22)
-            self.希洛克套装按钮[count].move(横坐标 - 320, 纵坐标 + 160 + 3 + count * 32)
+            self.希洛克套装按钮[count].move(横坐标 - 320, 纵坐标 + 160 + 3 + count * 32 - 10)
             self.希洛克套装按钮[count].clicked.connect(
                 lambda state, index=(count + 1) * 100: self.希洛克选择(index))
             for j in range(3):
@@ -3016,7 +3017,7 @@ class 角色窗口(窗口):
                 图片.setPixmap(
                     QPixmap('./ResourceFiles/img/希洛克/' + str(序号) + '.png'))
                 图片.resize(28, 28)
-                图片.move(横坐标 - 260 + j * 30, 纵坐标 + 160 + count * 32)
+                图片.move(横坐标 - 260 + j * 30, 纵坐标 + 160 + count * 32 - 10)
                 self.希洛克装备图标.append(图片)
                 self.希洛克遮罩透明度.append(QGraphicsOpacityEffect())
                 self.希洛克遮罩透明度[序号].setOpacity(0.5)
@@ -3025,7 +3026,7 @@ class 角色窗口(窗口):
                     "background-color: rgb(0, 0, 0)")
                 self.希洛克单件按钮[序号].resize(28, 28)
                 self.希洛克单件按钮[序号].move(横坐标 - 260 + j * 30,
-                                      纵坐标 + 160 + count * 32)
+                                      纵坐标 + 160 + count * 32-10)
                 self.希洛克单件按钮[序号].setGraphicsEffect(self.希洛克遮罩透明度[序号])
                 self.希洛克单件按钮[序号].clicked.connect(
                     lambda state, index=序号: self.希洛克选择(index))
@@ -3036,7 +3037,7 @@ class 角色窗口(窗口):
             self.守门人属强.addItem('守门人属强：' + str(15 + i * 5))
         self.守门人属强.resize(120, 20)
         self.守门人属强.setCurrentIndex(3)
-        self.守门人属强.move(横坐标 - 139, 纵坐标 + 93 + 3 + count * 32)
+        self.守门人属强.move(横坐标 - 139, 纵坐标 + 93 + 3 + count * 32-10)
         self.守门人属强.activated.connect(
             lambda state, index=序号: self.守门人属强选项(index))
 
@@ -3045,7 +3046,7 @@ class 角色窗口(窗口):
         self.希洛克武器词条.append(MyQComboBox(self.main_frame6))
         self.希洛克武器词条[0].addItems(['武器词条：无', '自适应最高值', '自选词条数值'])
         self.希洛克武器词条[0].resize(120, 20)
-        self.希洛克武器词条[0].move(横坐标 - 139, 纵坐标 - 32 + count * 32)
+        self.希洛克武器词条[0].move(横坐标 - 139, 纵坐标 - 32 + count * 32 - 10)
         self.希洛克武器词条[0].currentIndexChanged.connect(
             lambda state: self.希洛克武器词条更新())
 
@@ -3056,7 +3057,7 @@ class 角色窗口(窗口):
             for k in 词条属性列表:
                 self.希洛克武器词条[i].addItem(k.描述)
             self.希洛克武器词条[i].resize(72, 20)
-            self.希洛克武器词条[i].move(横坐标 - 139, 纵坐标 - 32 + count * 32)
+            self.希洛克武器词条[i].move(横坐标 - 139, 纵坐标 - 32 + count * 32 - 10)
 
         count -= 2
         for i in range(3, 5):
@@ -3066,7 +3067,7 @@ class 角色窗口(窗口):
             for k in [3, 4, 5]:
                 self.希洛克武器词条[i].addItem(str(k * (5 - i)) + '%')
             self.希洛克武器词条[i].resize(43, 20)
-            self.希洛克武器词条[i].move(横坐标 - 62, 纵坐标 - 32 + count * 32)
+            self.希洛克武器词条[i].move(横坐标 - 62, 纵坐标 - 32 + count * 32 - 10)
 
         for i in range(1, 5):
             self.希洛克武器词条[-1].setStyleSheet(下拉框样式)
@@ -3093,6 +3094,56 @@ class 角色窗口(窗口):
             self.改造产物选项[i].move(-1000, -1000)
             self.改造产物选项[i].currentIndexChanged.connect(
                 lambda state, index=i: self.改造产物选项颜色更新(index))
+
+        纵向偏移 = 335
+        标签 = QLabel('奥兹玛相关', self.main_frame6)
+        标签.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
+        标签.resize(300, 20)
+        标签.move(横坐标 - 310-5, 纵坐标 + 135-10+纵向偏移)
+        标签.setAlignment(Qt.AlignCenter)
+
+        名称 = ['阿斯特罗斯', '贝利亚斯', '雷德梅恩', '罗什巴赫', '泰玛特']
+        self.奥兹玛套装按钮 = []
+        self.奥兹玛单件按钮 = []
+        self.奥兹玛遮罩透明度 = []
+        self.奥兹玛装备图标 = []
+        self.奥兹玛选择状态 = [0] * 25
+        count = 0
+        for i in 名称:
+            self.奥兹玛套装按钮.append(QPushButton(i, self.main_frame6))
+            self.奥兹玛套装按钮[count].setStyleSheet(按钮样式)
+            self.奥兹玛套装按钮[count].resize(75, 22)
+            self.奥兹玛套装按钮[count].move(横坐标 - 320-5, 纵坐标 + 160 + 3 + count * 32 - 10+纵向偏移)
+            self.奥兹玛套装按钮[count].clicked.connect(
+                lambda state, index=(count + 1) * 100: self.奥兹玛选择(index))
+            for j in range(5):
+                序号 = count * 5 + j
+                图片 = QLabel(self.main_frame6)
+                图片.setPixmap(
+                    QPixmap('./ResourceFiles/img/奥兹玛/' + str(序号) + '.png'))
+                图片.resize(28, 28)
+                图片.move(横坐标 - 260 + j * 30+20-5, 纵坐标 + 160 + count * 32 - 10+纵向偏移)
+                self.奥兹玛装备图标.append(图片)
+                self.奥兹玛遮罩透明度.append(QGraphicsOpacityEffect())
+                self.奥兹玛遮罩透明度[序号].setOpacity(0.5)
+                self.奥兹玛单件按钮.append(QPushButton(self.main_frame6))
+                self.奥兹玛单件按钮[序号].setStyleSheet(
+                    "background-color: rgb(0, 0, 0)")
+                self.奥兹玛单件按钮[序号].resize(28, 28)
+                self.奥兹玛单件按钮[序号].move(横坐标 - 260 + j * 30+20-5,
+                                      纵坐标 + 160 + count * 32-10+纵向偏移)
+                self.奥兹玛单件按钮[序号].setGraphicsEffect(self.奥兹玛遮罩透明度[序号])
+                self.奥兹玛单件按钮[序号].clicked.connect(
+                    lambda state, index=序号: self.奥兹玛选择(index))
+            count += 1
+
+        self.阿斯特罗斯选项 = MyQComboBox(self.main_frame6)
+        self.阿斯特罗斯选项.addItem('70.75.80')
+        self.阿斯特罗斯选项.addItem('40.45.60')
+        self.阿斯特罗斯选项.addItem('20.25.35')
+        self.阿斯特罗斯选项.resize(60+15, 20)
+        self.阿斯特罗斯选项.setCurrentIndex(0)
+        self.阿斯特罗斯选项.move(横坐标 - 139+60-15, 纵坐标 + 160 + 3 - 10+纵向偏移)
 
         if self.初始属性.职业分类 == '输出':
             count = 0
@@ -5814,6 +5865,142 @@ class 角色窗口(窗口):
         if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
             属性.百分比力智加成(0.04)  # 辅助装备
 
+    def 奥兹玛属性计算(self,属性):
+        #region 阿斯特罗斯
+        if self.奥兹玛选择状态[0] == 1:
+            属性.伤害增加加成(0.03)
+            属性.暴击伤害加成(0.03)
+            属性.附加伤害加成(0.02)
+            self.阿斯特罗斯等级加成(属性)
+        if self.奥兹玛选择状态[1] == 1:
+            属性.百分比三攻加成(0.02)
+            属性.百分比力智加成(0.03)
+            属性.最终伤害加成(0.02)
+            self.阿斯特罗斯等级加成(属性)
+        if self.奥兹玛选择状态[2] == 1:
+            属性.伤害增加加成(0.03)
+            属性.暴击伤害加成(0.03)
+            属性.附加伤害加成(0.01)
+            self.阿斯特罗斯等级加成(属性)
+        if self.奥兹玛选择状态[3] == 1:
+            属性.百分比三攻加成(0.02)
+            属性.百分比力智加成(0.03)
+            属性.最终伤害加成(0.02)
+            self.阿斯特罗斯等级加成(属性)
+        if self.奥兹玛选择状态[4] == 1:
+            属性.附加伤害加成(0.03)
+            属性.百分比三攻加成(0.02)
+            属性.最终伤害加成(0.02)
+            self.阿斯特罗斯等级加成(属性)
+        #endregion
+        #region 贝利亚斯
+        if self.奥兹玛选择状态[5] == 1:
+            属性.伤害增加加成(0.03)
+            属性.暴击伤害加成(0.03)
+            属性.附加伤害加成(0.02)
+        if self.奥兹玛选择状态[6] == 1:
+            属性.百分比三攻加成(0.02)
+            属性.百分比力智加成(0.03)
+            属性.最终伤害加成(0.02)
+        if self.奥兹玛选择状态[7] == 1:
+            属性.伤害增加加成(0.03)
+            属性.暴击伤害加成(0.03)
+            属性.附加伤害加成(0.01)
+        if self.奥兹玛选择状态[8] == 1:
+            属性.百分比三攻加成(0.02)
+            属性.百分比力智加成(0.03)
+            属性.最终伤害加成(0.02)
+        if self.奥兹玛选择状态[9] == 1:
+            属性.附加伤害加成(0.03)
+            属性.百分比三攻加成(0.02)
+            属性.最终伤害加成(0.02)
+        #endregion
+        #region 雷德梅恩
+        if self.奥兹玛选择状态[10] == 1:
+            属性.伤害增加加成(0.03)
+            属性.暴击伤害加成(0.03)
+            属性.附加伤害加成(0.02)
+            属性.技能冷却缩减(45,45,0.1)
+        if self.奥兹玛选择状态[11] == 1:
+            属性.百分比三攻加成(0.02)
+            属性.百分比力智加成(0.03)
+            属性.最终伤害加成(0.02)
+            属性.技能冷却缩减(75,75,0.1)
+        if self.奥兹玛选择状态[12] == 1:
+            属性.伤害增加加成(0.03)
+            属性.暴击伤害加成(0.03)
+            属性.附加伤害加成(0.01)
+            属性.技能冷却缩减(70,70,0.1)
+        if self.奥兹玛选择状态[13] == 1:
+            属性.百分比三攻加成(0.02)
+            属性.百分比力智加成(0.03)
+            属性.最终伤害加成(0.02)
+            属性.技能冷却缩减(80,80,0.1)
+        if self.奥兹玛选择状态[14] == 1:
+            属性.附加伤害加成(0.03)
+            属性.百分比三攻加成(0.02)
+            属性.最终伤害加成(0.02)
+            属性.技能冷却缩减(60,60,0.1)
+        #endregion
+        #region 罗什巴赫
+        if self.奥兹玛选择状态[15] == 1:
+            属性.伤害增加加成(0.03)
+            属性.暴击伤害加成(0.03)
+            属性.附加伤害加成(0.02)
+        if self.奥兹玛选择状态[16] == 1:
+            属性.百分比三攻加成(0.02)
+            属性.百分比力智加成(0.03)
+            属性.最终伤害加成(0.02)
+        if self.奥兹玛选择状态[17] == 1:
+            属性.伤害增加加成(0.03)
+            属性.暴击伤害加成(0.03)
+            属性.附加伤害加成(0.01)
+        if self.奥兹玛选择状态[18] == 1:
+            属性.百分比三攻加成(0.02)
+            属性.百分比力智加成(0.03)
+            属性.最终伤害加成(0.02)
+        if self.奥兹玛选择状态[19] == 1:
+            属性.附加伤害加成(0.03)
+            属性.百分比三攻加成(0.02)
+            属性.最终伤害加成(0.02)
+        #endregion
+        #region 泰玛特
+        if self.奥兹玛选择状态[20] == 1:
+            属性.伤害增加加成(0.03)
+            属性.暴击伤害加成(0.04)
+            属性.附加伤害加成(0.02)
+        if self.奥兹玛选择状态[21] == 1:
+            属性.百分比三攻加成(0.02)
+            属性.百分比力智加成(0.04)
+            属性.最终伤害加成(0.02)
+        if self.奥兹玛选择状态[22] == 1:
+            属性.伤害增加加成(0.04)
+            属性.暴击伤害加成(0.03)
+            属性.附加伤害加成(0.02)
+        if self.奥兹玛选择状态[23] == 1:
+            属性.百分比三攻加成(0.03)
+            属性.百分比力智加成(0.03)
+            属性.最终伤害加成(0.02)
+        if self.奥兹玛选择状态[24] == 1:
+            属性.附加伤害加成(0.03)
+            属性.百分比三攻加成(0.03)
+            属性.最终伤害加成(0.02)
+        #endregion
+    def 阿斯特罗斯等级加成(self,属性):
+        if self.阿斯特罗斯选项.currentIndex() == 0:
+            属性.技能等级加成('主动',70,70,1)
+            属性.技能等级加成('主动',75,75,1)
+            属性.技能等级加成('主动',80,80,1)
+        if self.阿斯特罗斯选项.currentIndex() == 1:
+            属性.技能等级加成('主动',40,40,1)
+            属性.技能等级加成('主动',45,45,1)
+            属性.技能等级加成('主动',60,60,1)
+        if self.阿斯特罗斯选项.currentIndex() == 2:
+            属性.技能等级加成('主动',20,20,1)
+            属性.技能等级加成('主动',25,25,1)
+            属性.技能等级加成('主动',35,35,1)
+
+
     def 输入属性(self, 属性, x=0):
 
         i = self.攻击目标.currentIndex()
@@ -6067,6 +6254,7 @@ class 角色窗口(窗口):
             ]
             属性.黑鸦词条.append(temp)
         self.希洛克属性计算(属性)
+        self.奥兹玛属性计算(属性)
         self.基础属性(属性)
 
     def 加载护石(self, 属性):
