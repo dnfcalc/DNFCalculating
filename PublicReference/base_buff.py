@@ -2481,6 +2481,14 @@ class 角色窗口(窗口):
                         num += 1
                 except Exception as error:
                     logger.error(error)
+                try:
+                    num = 0
+                    for i in set_data['奥兹玛选择']:
+                        if i == 1:
+                            self.奥兹玛选择(num)
+                        num += 1
+                except Exception as error:
+                    logger.error(error)
             except Exception as error:
                 logger.error(error)
 
@@ -2620,6 +2628,7 @@ class 角色窗口(窗口):
                 set_data['辟邪玉数值'] = [i.currentIndex() for i in self.辟邪玉数值]
 
                 set_data['希洛克选择'] = self.希洛克选择状态
+                set_data['奥兹玛选择'] = self.奥兹玛选择状态
                 set_data['黑鸦选择'] = [[j.currentIndex() for j in i]
                                     for i in self.黑鸦词条]
 

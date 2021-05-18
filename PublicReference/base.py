@@ -3136,14 +3136,16 @@ class 角色窗口(窗口):
                 self.奥兹玛单件按钮[序号].clicked.connect(
                     lambda state, index=序号: self.奥兹玛选择(index))
             count += 1
-
-        self.阿斯特罗斯选项 = MyQComboBox(self.main_frame6)
-        self.阿斯特罗斯选项.addItem('70.75.80')
-        self.阿斯特罗斯选项.addItem('40.45.60')
-        self.阿斯特罗斯选项.addItem('20.25.35')
-        self.阿斯特罗斯选项.resize(60+15, 20)
-        self.阿斯特罗斯选项.setCurrentIndex(0)
-        self.阿斯特罗斯选项.move(横坐标 - 139+60-15, 纵坐标 + 160 + 3 - 10+纵向偏移)
+        
+        self.阿斯特罗斯选项 = []
+        for i in range(5):
+            self.阿斯特罗斯选项.append(MyQComboBox(self.main_frame6))
+            self.阿斯特罗斯选项[i].addItem('70.75.80')
+            self.阿斯特罗斯选项[i].addItem('40.45.60')
+            self.阿斯特罗斯选项[i].addItem('20.25.35')
+            self.阿斯特罗斯选项[i].resize(60+15, 20)
+            self.阿斯特罗斯选项[i].setCurrentIndex(0)
+            self.阿斯特罗斯选项[i].move(横坐标 - 139+60-15, 纵坐标 + 160 + 3 - 10+纵向偏移+i*32)
 
         if self.初始属性.职业分类 == '输出':
             count = 0
@@ -3167,6 +3169,18 @@ class 角色窗口(窗口):
         self.计算按钮3.move(990, self.height() - 70)
         self.计算按钮3.resize(110, 30)
         self.计算按钮3.setStyleSheet(按钮样式)
+
+    def 奥兹玛选择(self,index):
+        super().奥兹玛选择(index)
+        if index < 5:
+            self.阿斯特罗斯选项显示(sum(self.奥兹玛选择状态[0:5]))
+
+    def 阿斯特罗斯选项显示(self, n):
+        for i in range(5):
+            if i < n:
+                self.阿斯特罗斯选项[i].setEnabled(True)
+            else:
+                self.阿斯特罗斯选项[i].setEnabled(False)
 
     def 下拉框禁用(self, a, b, c=下拉框样式):
         if a.isChecked():
@@ -3595,7 +3609,7 @@ class 角色窗口(窗口):
                 logger.error(error)
 
         if 4 in page:
-            # 第五页(辟邪玉/希洛克/黑鸦)
+            # 第五页(辟邪玉/希洛克/黑鸦/奥兹玛)
             try:
                 filename = 'page_5.json'
                 set_data = {}
@@ -3637,6 +3651,13 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
+                    num = 0
+                    for i in set_data['阿斯特罗斯选项']:
+                        self.阿斯特罗斯选项[num].setCurrentIndex(i)
+                        num += 1
+                except Exception as error:
+                    logger.error(error)
+                try:
                     x = 0
                     for i in set_data['黑鸦选择']:
                         y = 0
@@ -3651,6 +3672,14 @@ class 角色窗口(窗口):
                     for i in set_data['希洛克选择']:
                         if i == 1:
                             self.希洛克选择(num)
+                        num += 1
+                except Exception as error:
+                    logger.error(error)
+                try:
+                    num = 0
+                    for i in set_data['奥兹玛选择']:
+                        if i == 1:
+                            self.奥兹玛选择(num)
                         num += 1
                 except Exception as error:
                     logger.error(error)
@@ -4209,7 +4238,9 @@ class 角色窗口(窗口):
                 set_data['希洛克武器'] = [i.currentIndex() for i in self.希洛克武器词条]
                 set_data['辟邪玉效果'] = [i.currentIndex() for i in self.辟邪玉选择]
                 set_data['辟邪玉数值'] = [i.currentIndex() for i in self.辟邪玉数值]
+                set_data['阿斯特罗斯选项'] = [i.currentIndex() for i in self.阿斯特罗斯选项]
                 set_data['希洛克选择'] = self.希洛克选择状态
+                set_data['奥兹玛选择'] = self.奥兹玛选择状态
                 set_data['黑鸦选择'] = [[j.currentIndex() for j in i] for i in self.黑鸦词条]
 
                 with open(os.path.join(filepath, filename), "w",
@@ -5871,27 +5902,24 @@ class 角色窗口(窗口):
             属性.伤害增加加成(0.03)
             属性.暴击伤害加成(0.03)
             属性.附加伤害加成(0.02)
-            self.阿斯特罗斯等级加成(属性)
         if self.奥兹玛选择状态[1] == 1:
             属性.百分比三攻加成(0.02)
             属性.百分比力智加成(0.03)
             属性.最终伤害加成(0.02)
-            self.阿斯特罗斯等级加成(属性)
         if self.奥兹玛选择状态[2] == 1:
             属性.伤害增加加成(0.03)
             属性.暴击伤害加成(0.03)
             属性.附加伤害加成(0.01)
-            self.阿斯特罗斯等级加成(属性)
         if self.奥兹玛选择状态[3] == 1:
             属性.百分比三攻加成(0.02)
             属性.百分比力智加成(0.03)
             属性.最终伤害加成(0.02)
-            self.阿斯特罗斯等级加成(属性)
         if self.奥兹玛选择状态[4] == 1:
             属性.附加伤害加成(0.03)
             属性.百分比三攻加成(0.02)
             属性.最终伤害加成(0.02)
-            self.阿斯特罗斯等级加成(属性)
+        for i in range(sum(self.奥兹玛选择状态[:5])):
+            self.阿斯特罗斯等级加成(属性, i)
         #endregion
         #region 贝利亚斯
         if self.奥兹玛选择状态[5] == 1:
@@ -5986,16 +6014,17 @@ class 角色窗口(窗口):
             属性.百分比三攻加成(0.03)
             属性.最终伤害加成(0.02)
         #endregion
-    def 阿斯特罗斯等级加成(self,属性):
-        if self.阿斯特罗斯选项.currentIndex() == 0:
+    def 阿斯特罗斯等级加成(self,属性,n):
+        k = self.阿斯特罗斯选项[n].currentIndex()
+        if k == 0:
             属性.技能等级加成('主动',70,70,1)
             属性.技能等级加成('主动',75,75,1)
             属性.技能等级加成('主动',80,80,1)
-        if self.阿斯特罗斯选项.currentIndex() == 1:
+        if k == 1:
             属性.技能等级加成('主动',40,40,1)
             属性.技能等级加成('主动',45,45,1)
             属性.技能等级加成('主动',60,60,1)
-        if self.阿斯特罗斯选项.currentIndex() == 2:
+        if k == 2:
             属性.技能等级加成('主动',20,20,1)
             属性.技能等级加成('主动',25,25,1)
             属性.技能等级加成('主动',35,35,1)

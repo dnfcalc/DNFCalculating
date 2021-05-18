@@ -12,11 +12,8 @@ import traceback
 from PublicReference.utils import zipfile
 from PublicReference.utils import img
 from PublicReference.utils.LZextends import *
-from pathlib import Path
-import shutil
 import sys
 import time
-import urllib.request
 import subprocess
 import base64
 
@@ -132,8 +129,8 @@ class 选择窗口(QWidget):
             return error
 
     def 网盘检查(self):
-        # if 目录.endswith('py'):
-        #     return
+        if 目录.endswith('py'):
+            return
         try:
             lzy = LZextends()
             fileURL = ''

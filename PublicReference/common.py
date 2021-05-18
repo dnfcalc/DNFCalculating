@@ -889,6 +889,7 @@ class 窗口(QWidget):
             else:
                 self.奥兹玛遮罩透明度[index].setOpacity(0.5)
                 self.奥兹玛选择状态[index] = 0
+            
 
     def 存档更换(self):
         if self.存档选择.currentText() == '新建存档':
