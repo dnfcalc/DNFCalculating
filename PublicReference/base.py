@@ -2984,8 +2984,6 @@ class 角色窗口(窗口):
         self.智慧产物升级.move(横坐标 + 161, 纵坐标 - 19 + 25 * (4 + 15)-20)
         self.智慧产物升级.setStyleSheet(复选框样式)
         self.智慧产物升级.setChecked(False)
-        self.智慧产物升级.stateChanged.connect(
-            lambda: self.智慧产物升级洗词条(1 if self.智慧产物升级.isChecked() else 0))
 
         横坐标 = 横坐标 + 320
         纵坐标 = 0
@@ -3074,27 +3072,6 @@ class 角色窗口(窗口):
             self.希洛克武器词条[i].setEnabled(False)
             # self.希洛克武器词条[i].setStyleSheet(下拉框样式)
 
-        self.改造产物选项 = []
-        self.改造产物图片 = []
-
-        for j in equ.get_equ_id_list():
-            temp = equ.get_equ_by_id(j)
-            if temp.所属套装 == '智慧产物':
-                self.改造产物图片.append(QLabel(self.main_frame6))
-                self.改造产物图片[-1].setMovie(equ.get_img_by_id(j))
-                self.改造产物图片[-1].setToolTip('<font size="3" face="宋体">' +
-                                           temp.名称 + '<br>' + temp.类型 +
-                                           '-' + temp.部位 + '</font>')
-                self.改造产物图片[-1].resize(28, 28)
-                self.改造产物图片[-1].move(-1000, -1000)
-
-        for i in range(4 * 100):
-            self.改造产物选项.append(MyQComboBox(self.main_frame6))
-            self.改造产物选项[i].resize(150, 18)
-            self.改造产物选项[i].move(-1000, -1000)
-            self.改造产物选项[i].currentIndexChanged.connect(
-                lambda state, index=i: self.改造产物选项颜色更新(index))
-
         纵向偏移 = 335
         标签 = QLabel('奥兹玛相关', self.main_frame6)
         标签.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
@@ -3148,23 +3125,6 @@ class 角色窗口(窗口):
             self.阿斯特罗斯选项[i].move(横坐标 - 139+60-15, 纵坐标 + 160 + 3 - 10+纵向偏移+i*32)
         self.阿斯特罗斯选项显示(0)
 
-        if self.初始属性.职业分类 == '输出':
-            count = 0
-            for i in equ.get_equ_list():
-                if i.所属套装 == '智慧产物':
-                    描述列表 = [i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述]
-                    范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
-                    for j in range(4):
-                        if 描述列表[j] != '无':
-                            for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
-                                if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
-                                    temp = 描述列表[j] + str(k)
-                                    if 描述列表[j] != '所有属性强化:':
-                                        temp += '%'
-                                    self.改造产物选项[count * 4 + j].addItem(temp)
-                        else:
-                            self.改造产物选项[count * 4 + j].addItem('无')
-                    count += 1
         self.计算按钮3 = QPushButton('开始计算', self.main_frame6)
         self.计算按钮3.clicked.connect(lambda state: self.计算())
         self.计算按钮3.move(990, self.height() - 70)
@@ -3173,8 +3133,7 @@ class 角色窗口(窗口):
 
     def 奥兹玛选择(self,index):
         super().奥兹玛选择(index)
-        if index < 5 or int(index / 100 - 1) == 0:
-            self.阿斯特罗斯选项显示(sum(self.奥兹玛选择状态[0:5]))
+        self.阿斯特罗斯选项显示(sum(self.奥兹玛选择状态[0:5]))
 
     def 阿斯特罗斯选项显示(self, n):
         for i in range(5):

@@ -1,3 +1,4 @@
+from math import ceil
 from PublicReference.equipment.equ_list import *
 from PublicReference.utils.MainWindow import *
 
@@ -322,7 +323,7 @@ class 窗口(QWidget):
         self.frame_tool.setFrameShape(1)
         if self.初始属性.职业分类 == '输出':
             self.页面名称 = [
-                "装备/选择/打造", "技能/符文/药剂", "基础/细节/修正", "神话属性修正", "辟邪玉/希洛克/黑鸦/奥兹玛",
+                "装备/选择/打造", "技能/符文/药剂", "基础/细节/修正", "神话/改造属性修正", "辟邪玉/希洛克/黑鸦/奥兹玛",
                 "自选装备计算"
             ]
         else:
@@ -388,7 +389,17 @@ class 窗口(QWidget):
         else:
             self.stacked_layout.addWidget(self.main_frame2)
         self.stacked_layout.addWidget(self.main_frame3)
-        self.stacked_layout.addWidget(self.main_frame4)
+        
+        self.scroll = QScrollArea()
+        self.scroll.setFrameShape(QFrame.NoFrame)
+        self.scroll.setWidget(self.main_frame4)
+        self.scroll.setStyleSheet(
+            "QScrollArea {background-color:transparent}")
+        self.scroll.setStyleSheet(滚动条样式)
+        self.scroll.viewport().setStyleSheet(
+            "background-color:transparent")
+        self.stacked_layout.addWidget(self.scroll)
+
         if self.初始属性.职业分类 == '输出':
             self.stacked_layout.addWidget(self.main_frame6)
         self.stacked_layout.addWidget(self.main_frame5)
@@ -702,7 +713,7 @@ class 窗口(QWidget):
 
         self.神话属性选项 = []
         self.神话属性图片 = []
-
+        num = 0
         for j in equ.get_equ_id_list():
             temp = equ.get_equ_by_id(j)
             if temp.品质 == '神话':
@@ -713,15 +724,36 @@ class 窗口(QWidget):
                                            '-' + temp.部位 + '</font>')
                 self.神话属性图片[-1].resize(28, 28)
                 self.神话属性图片[-1].move(-1000, -1000)
-
-        for i in range(4 * 35):
-            self.神话属性选项.append(MyQComboBox(self.main_frame4))
-            self.神话属性选项[i].resize(150, 18)
-            self.神话属性选项[i].move(-1000, -1000)
-            self.神话属性选项[i].currentIndexChanged.connect(
-                lambda state, index=i: self.神话属性选项颜色更新(index))
-
+                for i in range(4):
+                    self.神话属性选项.append(MyQComboBox(self.main_frame4))
+                    self.神话属性选项[-1].resize(150, 18)
+                    self.神话属性选项[-1].move(-1000, -1000)
+                    self.神话属性选项[-1].currentIndexChanged.connect(
+                        lambda state, index=num * 4 + i: self.神话属性选项颜色更新(index))
+                num += 1
+        
         if self.初始属性.职业分类 == '输出':
+            self.改造产物选项 = []
+            self.改造产物图片 = []
+            num = 0
+            for j in equ.get_equ_id_list():
+                temp = equ.get_equ_by_id(j)
+                if temp.所属套装 == '智慧产物':
+                    self.改造产物图片.append(QLabel(self.main_frame4))
+                    self.改造产物图片[-1].setMovie(equ.get_img_by_id(j))
+                    self.改造产物图片[-1].setToolTip('<font size="3" face="宋体">' +
+                                               temp.名称 + '<br>' + temp.类型 +
+                                               '-' + temp.部位 + '</font>')
+                    self.改造产物图片[-1].resize(28, 28)
+                    self.改造产物图片[-1].move(-1000, -1000)
+                    for i in range(4):
+                        self.改造产物选项.append(MyQComboBox(self.main_frame4))
+                        self.改造产物选项[-1].resize(150, 18)
+                        self.改造产物选项[-1].move(-1000, -1000)
+                        self.改造产物选项[-1].currentIndexChanged.connect(
+                            lambda state, index=num * 4 + i: self.改造产物选项颜色更新(index))
+                    num += 1
+
             count = 0
             for i in equ.get_equ_list():
                 if i.品质 == '神话':
@@ -737,6 +769,23 @@ class 窗口(QWidget):
                                     self.神话属性选项[count * 4 + j].addItem(temp)
                         else:
                             self.神话属性选项[count * 4 + j].addItem('无')
+                    count += 1
+
+            count = 0
+            for i in equ.get_equ_list():
+                if i.所属套装 == '智慧产物':
+                    描述列表 = [i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述]
+                    范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
+                    for j in range(4):
+                        if 描述列表[j] != '无':
+                            for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
+                                if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
+                                    temp = 描述列表[j] + str(k)
+                                    if 描述列表[j] != '所有属性强化:':
+                                        temp += '%'
+                                    self.改造产物选项[count * 4 + j].addItem(temp)
+                        else:
+                            self.改造产物选项[count * 4 + j].addItem('无')
                     count += 1
         else:
             count = 0
@@ -1247,6 +1296,9 @@ class 窗口(QWidget):
             count1 = 0
             count2 = 0
             num = 0
+            width = 1100
+            height = 680
+            page4_height = 0
             自选装备名称 = []
             for i in self.自选装备:
                 自选装备名称.append(i.currentText())
@@ -1255,24 +1307,50 @@ class 窗口(QWidget):
                 if temp.品质 == '神话':
                     if self.装备选择状态[j] == 1 or temp.名称 in 自选装备名称:
                         self.神话属性图片[num].move(
-                            int(self.width() / 7 * (count1 % 7 + 0.42)),
-                            int(self.height() / 5.2 * (count2 + 0.05)) - 3)
+                            int(width / 7 * (count1 % 7 + 0.42)),
+                            int(height / 5.2 * (count2 + 0.05)) - 3)
                         for i in range(4):
                             self.神话属性选项[num * 4 + i].move(
-                                int(self.width() / 7 * (count1 % 7) + 6),
-                                int(self.height() / 5.2 * (count2 + 0.05)) -
+                                int(width / 7 * (count1 % 7) + 6),
+                                int(height / 5.2 * (count2 + 0.05)) -
                                 3 + i * 22 + 32)
                         count1 += 1
                         if count1 % 7 == 0:
                             count2 += 1
+                        page4_height += 1
                     else:
                         self.神话属性图片[num].move(-1000, -1000)
                         for i in range(4):
                             self.神话属性选项[num * 4 + i].move(-1000, -1000)
                     num += 1
+            if self.初始属性.职业分类 == '输出':
+                num = 0
+                for j in equ.get_equ_id_list():
+                    temp = equ.get_equ_by_id(j)
+                    if temp.所属套装 == '智慧产物':
+                        if (self.装备选择状态[j] == 1 or temp.名称 in 自选装备名称) and self.智慧产物升级.isChecked():
+                            self.改造产物图片[num].move(
+                                int(width / 7 * (count1 % 7 + 0.42)),
+                                int(height / 5.2 * (count2 + 0.05)) - 3)
+                            for i in range(4):
+                                self.改造产物选项[num * 4 + i].move(
+                                    int(width / 7 * (count1 % 7) + 6),
+                                    int(height / 5.2 * (count2 + 0.05)) -
+                                    3 + i * 22 + 32)
+                            count1 += 1
+                            if count1 % 7 == 0:
+                                count2 += 1
+                            page4_height += 1
+                        else:
+                            self.改造产物图片[num].move(-1000, -1000)
+                            for i in range(4):
+                                self.改造产物选项[num * 4 + i].move(-1000, -1000)
+                        num += 1
+            page4_height = max(ceil(page4_height / 7) * 130, height)
+            self.main_frame4.setMinimumSize(width, page4_height)
+
+
         if self.初始属性.职业分类 == '输出':
-            if index == 4:
-                self.智慧产物升级洗词条(1 if self.智慧产物升级.isChecked() else 0)
             if index == 5:
                 self.自选计算(1)
         else:
