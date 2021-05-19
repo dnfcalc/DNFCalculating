@@ -1,3 +1,4 @@
+from math import ceil
 from PublicReference.equipment.equ_list import *
 from PublicReference.utils.MainWindow import *
 
@@ -391,7 +392,6 @@ class 窗口(QWidget):
         
         self.scroll = QScrollArea()
         self.scroll.setFrameShape(QFrame.NoFrame)
-        self.main_frame4.setMinimumSize(1100, 1045)
         self.scroll.setWidget(self.main_frame4)
         self.scroll.setStyleSheet(
             "QScrollArea {background-color:transparent}")
@@ -1323,29 +1323,30 @@ class 窗口(QWidget):
                         for i in range(4):
                             self.神话属性选项[num * 4 + i].move(-1000, -1000)
                     num += 1
-            num = 0
-            for j in equ.get_equ_id_list():
-                temp = equ.get_equ_by_id(j)
-                if temp.所属套装 == '智慧产物':
-                    if (self.装备选择状态[j] == 1 or temp.名称 in 自选装备名称) and self.智慧产物升级.isChecked():
-                        self.改造产物图片[num].move(
-                            int(width / 7 * (count1 % 7 + 0.42)),
-                            int(height / 5.2 * (count2 + 0.05)) - 3)
-                        for i in range(4):
-                            self.改造产物选项[num * 4 + i].move(
-                                int(width / 7 * (count1 % 7) + 6),
-                                int(height / 5.2 * (count2 + 0.05)) -
-                                3 + i * 22 + 32)
-                        count1 += 1
-                        if count1 % 7 == 0:
-                            count2 += 1
-                        page4_height += 1
-                    else:
-                        self.改造产物图片[num].move(-1000, -1000)
-                        for i in range(4):
-                            self.改造产物选项[num * 4 + i].move(-1000, -1000)
-                    num += 1
-            page4_height = max((int(page4_height / 7) + 1) * 130, height)
+            if self.初始属性.职业分类 == '输出':
+                num = 0
+                for j in equ.get_equ_id_list():
+                    temp = equ.get_equ_by_id(j)
+                    if temp.所属套装 == '智慧产物':
+                        if (self.装备选择状态[j] == 1 or temp.名称 in 自选装备名称) and self.智慧产物升级.isChecked():
+                            self.改造产物图片[num].move(
+                                int(width / 7 * (count1 % 7 + 0.42)),
+                                int(height / 5.2 * (count2 + 0.05)) - 3)
+                            for i in range(4):
+                                self.改造产物选项[num * 4 + i].move(
+                                    int(width / 7 * (count1 % 7) + 6),
+                                    int(height / 5.2 * (count2 + 0.05)) -
+                                    3 + i * 22 + 32)
+                            count1 += 1
+                            if count1 % 7 == 0:
+                                count2 += 1
+                            page4_height += 1
+                        else:
+                            self.改造产物图片[num].move(-1000, -1000)
+                            for i in range(4):
+                                self.改造产物选项[num * 4 + i].move(-1000, -1000)
+                        num += 1
+            page4_height = max(ceil(page4_height / 7) * 130, height)
             self.main_frame4.setMinimumSize(width, page4_height)
 
 
