@@ -1,5 +1,18 @@
 ## Newest
 
+### 2021-05-19
+
+#### NewFeatures
+* 归元·气功师·男：添加雷霆踏 ([b30ad9](https://gitee.com/i_melon/DNFCalculating/commit/b30ad97cae86b331fdf977c352c9d51b3fbacefb))
+* 枪剑士：同步国服登陆三觉 ([345db6](https://gitee.com/i_melon/DNFCalculating/commit/345db68d8f4692c012af14485a8a5cac2b2b06a1))
+* 添加自动更新备用链接 ([f8c3bb](https://gitee.com/i_melon/DNFCalculating/commit/f8c3bb592c890ac1bd80373755b13a420d558fa6))
+* 输出：添加韩服体验服奥兹玛选项 ([65f766](https://gitee.com/i_melon/DNFCalculating/commit/65f766f5bbbfc5447008db1ac5307f3cbdb9e8bc))
+* 输出：优化阿斯特罗斯选项 ([488545](https://gitee.com/i_melon/DNFCalculating/commit/488545d22c1bcf295f790da6f24d6b0d1338a704))
+* 奶系：添加韩服体验服奥兹玛选项 ([18f88e](https://gitee.com/i_melon/DNFCalculating/commit/18f88e6e3c6e7c77d166c39045aeb4f9ef517603))
+
+#### BugFixes
+* 极诣·暗殿骑士：修正魔镜幻影阵圣痕加成错误 ([b38622](https://gitee.com/i_melon/DNFCalculating/commit/b38622c698fabb36f700e2b5cf30d7692c76d0d6))
+
 ### 2021-05-09
 
 #### NewFeatures
@@ -1212,6 +1225,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
 
 
 
