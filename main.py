@@ -390,9 +390,13 @@ class 选择窗口(QWidget):
     def 打开窗口(self, name):
         if self.char_window != None:
             self.char_window.close()
+        if "." in name:
+            className = name.split(".")[1]
+        else:
+            className = name
         module_name = "Characters." + name
         职业 = importlib.import_module(module_name)
-        char = eval("职业." + name + '()')
+        char = eval("职业." + className + '()')
         self.char_window = MainWindow(char)
         self.char_window.show()
 
@@ -417,23 +421,39 @@ class 选择窗口(QWidget):
             box.setWindowIcon(self.icon)
             box.setStandardButtons(QMessageBox.Yes | QMessageBox.No
                                    | QMessageBox.Cancel)
-            A = box.button(QMessageBox.Yes)
-            B = box.button(QMessageBox.No)
-            C = box.button(QMessageBox.Cancel)
             if index["序号"] == "41":
+                A = box.button(QMessageBox.Yes)
+                B = box.button(QMessageBox.No)
                 A.setText('BUFF')
                 B.setText('战斗')
+                if index["类名3"]!='无':
+                    C = box.button(QMessageBox.Yes)
+                    C.setText('前瞻版本-BUFF')
+                if index["类名4"]!='无':
+                    D = box.button(QMessageBox.Yes)
+                    D.setText('前瞻版本-战斗')
             else:
-                A.setText('二觉')
-                B.setText('三觉')
-            C.setText('取消')
+                A = box.button(QMessageBox.Yes)
+                B = box.button(QMessageBox.No)
+                A.setText('国服版本')
+                B.setText('前瞻版本')
+
+            E = box.button(QMessageBox.Cancel)
+            E.setText('取消')
             box.exec_()
-            if box.clickedButton() == A:
-                self.打开窗口(index["类名"])
-            elif box.clickedButton() == B:
-                self.打开窗口(index["类名2"])
-            else:
-                return
+            try:
+                if box.clickedButton() == A:
+                    self.打开窗口(index["类名"])
+                elif box.clickedButton() == B:
+                    self.打开窗口(index["类名2"])
+                elif box.clickedButton() == C:
+                    self.打开窗口(index["类名3"])
+                elif  box.clickedButton() == D:
+                    self.打开窗口(index["类名4"])
+                else:
+                    return
+            except Exception as error:
+                    pass
         except Exception as error:
             logger.error("error={} \n detail {}".format(
                 error, traceback.print_exc()))
