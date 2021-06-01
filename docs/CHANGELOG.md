@@ -176,7 +176,6 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 重霄·弹药专家·女：修复部分情况下无法打开详情的情况 ([95cea1](https://github.com/wxh0402/DNFCalculating/commit/95cea1918735a7e40afd32a3c7c9c72724914806))
 * 重霄·漫游枪手·女：修正鲜血劫击护石加成错误 ([972afe](https://github.com/wxh0402/DNFCalculating/commit/972afe4f31a7f885afe810c505bd58ef29133964))
 
-#### History
 ### 2021-02-25
 
 #### NewFeatures
@@ -1225,19 +1224,5 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
-
-
-
-
-
-
-
-
-
-
-
-
-
-## History
 
 
