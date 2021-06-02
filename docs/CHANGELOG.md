@@ -1,5 +1,18 @@
 ## Newest
 
+### 2021-06-02
+
+#### NewFeatures
+* 归元·散打·男、隐夜·刺客：调整一觉绑定图标为终结技能图标 ([2d2cda](https://gitee.com/i_melon/DNFCalculating/commit/2d2cdac6a7f09956d938c387344d780deeceefc0))
+* 新增韩服职业平衡数据:鬼泣、枪炮师(男)、散打(男)、逐风者、狩猎者、暗枪、暗刃、战线佣兵、源能专家<br>
+召唤由于存在国服特色数据，等后续国服体验服上线后同步 ([8bf9e6](https://gitee.com/i_melon/DNFCalculating/commit/8bf9e6320852a59706a1dbb3e7f0b6bb06b6c96c))
+
+#### BugFixes
+* 归元·散打·女：修正无影脚、回天连环击护石加成错误 ([0ed834](https://gitee.com/i_melon/DNFCalculating/commit/0ed834c9b3b88584e7249d88b1c50eb9fa31e718))
+
+
+## History
+
 ### 2021-05-19
 
 #### NewFeatures
