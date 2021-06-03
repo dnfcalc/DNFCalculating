@@ -1,5 +1,13 @@
 ## Newest
 
+### 2021-06-03
+
+#### NewFeatures
+* 同步国服体验服职业平衡数据 ([1ea86f](https://gitee.com/i_melon/DNFCalculating/commit/1ea86f67a66c0e88a6db444513cefc2d1ec7ac52))
+
+#### BugFixes
+* 苍暮·战线佣兵：修正二觉数据错误 ([21c01a](https://gitee.com/i_melon/DNFCalculating/commit/21c01a899ff03531cd842da48e2ea49dfc76c3a7))
+
 ### 2021-06-02
 
 #### NewFeatures
@@ -10,8 +18,6 @@
 #### BugFixes
 * 归元·散打·女：修正无影脚、回天连环击护石加成错误 ([0ed834](https://gitee.com/i_melon/DNFCalculating/commit/0ed834c9b3b88584e7249d88b1c50eb9fa31e718))
 
-
-## History
 
 ### 2021-05-19
 
@@ -1237,5 +1243,8 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
+
+## History
 
 
