@@ -1,5 +1,14 @@
 ## Newest
 
+### 2021-06-09
+
+#### NewFeatures
+* 同步国服体验服数据 ([35f1ea](https://gitee.com/i_melon/DNFCalculating/commit/35f1ea8ff8b236a956b82237a1d376e8f2575724))
+
+#### BugFixes
+*  知源·召唤师：修复蚀落段数问题 ([6b3183](https://gitee.com/i_melon/DNFCalculating/commit/6b31838fb55d6bed0a754549f12760d427e584ef))
+* 知源·召唤师：修复蚀落段数问题 ([a4e0fd](https://gitee.com/i_melon/DNFCalculating/commit/a4e0fde7e53df8c5c89eb17378dd6171ee00670e))
+
 ### 2021-06-03
 
 #### NewFeatures
@@ -18,6 +27,9 @@
 #### BugFixes
 * 归元·散打·女：修正无影脚、回天连环击护石加成错误 ([0ed834](https://gitee.com/i_melon/DNFCalculating/commit/0ed834c9b3b88584e7249d88b1c50eb9fa31e718))
 
+
+
+## History
 
 ### 2021-05-19
 
@@ -1244,7 +1256,5 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
 
-
-## History
 
 
