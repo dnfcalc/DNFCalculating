@@ -368,6 +368,7 @@ class 技能14(职业主动技能):
     def 装备护石(self, x):
         if x == 0:
             self.倍率 *= 1.35
+            self.CD *= 0.9
 
 
 class 技能15(职业主动技能):
