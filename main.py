@@ -62,7 +62,7 @@ class Worker(QThread):
 
     def after_downloaded(self, file_path):
         try:
-            if "main.py" not in sys.argv[0]:
+            if ("main.py" not in sys.argv[0]) and ("exe" in sys.argv[0]):
                 os.rename(sys.argv[0], sys.argv[0] + '.del')
             # sys.argv[0] = sys.argv[0] + '.del'
         except Exception as error:
@@ -271,7 +271,8 @@ class 选择窗口(QWidget):
             img_box.move(偏移量, 10 + count * 100)
             count += 1
 
-        count = 0
+        # 为了女鬼调整位置
+        count = 1
 
         butten = QtWidgets.QPushButton('首页\n手册|日志|源码', self.topFiller)
         # menu=QMenu()
@@ -321,7 +322,7 @@ class 选择窗口(QWidget):
                 pass
         count += 1
 
-        butten = QtWidgets.QPushButton(' 设置 | 反馈', self.topFiller)
+        butten = QtWidgets.QPushButton(' 设置|打赏|反馈', self.topFiller)
         menu = QMenu()
         action_0 = QAction('设置', parent=menu)
         action_0.triggered.connect(lambda state: self.openSet())
@@ -337,7 +338,11 @@ class 选择窗口(QWidget):
         action_4 = QAction('联系我们-QQ-3群', parent=menu)
         action_4.triggered.connect(lambda state: self.打开链接(
             ['https://jq.qq.com/?_wv=1027&k=ekQXpyq0']))
+        action_5 = QAction('打赏', parent=menu)
+        action_5.triggered.connect(lambda state,index=count : self.打赏())
         menu.addAction(action_0)
+        menu.addSeparator()
+        menu.addAction(action_5)
         menu.addSeparator()
         menu.addAction(action_1)
         menu.addSeparator()
@@ -351,12 +356,12 @@ class 选择窗口(QWidget):
         butten.resize(121, 90)
         count += 1
 
-        butten = QtWidgets.QPushButton('打   赏', self.topFiller)
-        butten.clicked.connect(lambda state, index=count: self.打赏())
-        butten.move(100 + 偏移量 + 4 * 125, 10 + (count + 1) * 100)
-        butten.setStyleSheet(按钮样式3)
-        butten.resize(121, 90)
-        count += 1
+        # butten = QtWidgets.QPushButton('打   赏', self.topFiller)
+        # butten.clicked.connect(lambda state, index=count: self.打赏())
+        # butten.move(100 + 偏移量 + 4 * 125, 10 + (count + 1) * 100)
+        # butten.setStyleSheet(按钮样式3)
+        # butten.resize(121, 90)
+        # count += 1
 
         butten = QtWidgets.QPushButton('', self.topFiller)
         butten.clicked.connect(lambda state, index=count: self.打开链接(
@@ -689,7 +694,7 @@ if __name__ == '__main__':
             # 杀老进程
             os.system("taskkill /pid {} -f".format(sys.argv[1]))
             time.sleep(2)
-            if "main.py" not in sys.argv[2]:
+            if ("main.py" not in sys.argv[2]) and ("del" in sys.argv[2]):
                 # 删除老版本
                 os.remove(sys.argv[2])
                 # shutil.rmtree('download')
