@@ -1,5 +1,14 @@
 ## Newest
 
+### 2021-06-16
+
+#### NewFeatures
+* 同步国服版本 ([c8af8c](https://gitee.com/i_melon/DNFCalculating/commit/c8af8c6acd67c36bb703361b4c0ad0100a0734d3))
+* 重霄·弹药专家·男：下调黑玫瑰特种战队hit数 ([f9e89a](https://gitee.com/i_melon/DNFCalculating/commit/f9e89a5855f3d175996dca7b30adbc728540cb85))
+
+#### BugFixes
+* 归元·散打·男：修正烈火强踢护石CD错误 ([0fb5bc](https://gitee.com/i_melon/DNFCalculating/commit/0fb5bc56d60a88107b2d4e1593f614c1c97bdfb5))
+
 ### 2021-06-09
 
 #### NewFeatures
@@ -26,6 +35,7 @@
 
 #### BugFixes
 * 归元·散打·女：修正无影脚、回天连环击护石加成错误 ([0ed834](https://gitee.com/i_melon/DNFCalculating/commit/0ed834c9b3b88584e7249d88b1c50eb9fa31e718))
+
 
 
 
