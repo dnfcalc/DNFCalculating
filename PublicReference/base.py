@@ -5095,7 +5095,7 @@ class 角色窗口(窗口):
         人物 = QLabel(输出窗口)
         图片 = QPixmap('./ResourceFiles/' + self.角色属性A.实际名称 + "/人物.png")
         人物.setPixmap(图片)
-        人物.move(90 + int(45 - 图片.width() / 2), 40 - pox_y)
+        人物.move(90 + int(45 - 图片.width() / 2), 40 - pox_y2)
         人物.resize(90, 90)
         人物.setAlignment(Qt.AlignTop)
 
