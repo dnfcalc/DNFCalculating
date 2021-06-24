@@ -1,5 +1,16 @@
 ## Newest
 
+### 2021-06-24
+
+#### NewFeatures
+* 归元·散打·男：同步游戏BUG，无欲之花对双重释放暂无加成 ([23068a](https://gitee.com/i_melon/DNFCalculating/commit/23068a5e9200029d8d4d4a2f83670f0af982dfd1))
+* 新增极诣·刃影 ([34a95e](https://gitee.com/i_melon/DNFCalculating/commit/34a95ed5b22cf5590661f633fd2e788acc8ee7d0))
+
+#### BugFixes
+* 修正奥兹玛图标错误 ([af36e5](https://gitee.com/i_melon/DNFCalculating/commit/af36e5a8c903a1139303add3bdf80519d46b1354))
+* 归元·散打·男：修正极武霸皇踢数据错误 ([2b1557](https://gitee.com/i_melon/DNFCalculating/commit/2b15575265c5d666e9fec6a3a8b250c40810fa6e))
+* 重霄·机械师·男：修复沙雕韩械的若干BUG ([9895d2](https://gitee.com/i_melon/DNFCalculating/commit/9895d2fc866cf089b76f0b29e89a2fdefecacd66))
+
 ### 2021-06-16
 
 #### NewFeatures
@@ -38,8 +49,6 @@
 
 
 
-
-## History
 
 ### 2021-05-19
 
@@ -1266,5 +1275,8 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
 
+
+
+## History
 
 
