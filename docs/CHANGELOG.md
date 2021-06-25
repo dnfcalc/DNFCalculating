@@ -1,5 +1,10 @@
 ## Newest
 
+### 2021-06-25
+
+#### BugFixes
+* 极诣·刃影：修正若干数据错误 ([14a741](https://gitee.com/i_melon/DNFCalculating/commit/14a741715ba900733f82af55bbfb3a172793e668))
+
 ### 2021-06-24
 
 #### NewFeatures
@@ -1274,6 +1279,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 * 武神数据微调校准
 * 奶萝基础和转职被动(人偶操纵者)校准，死命召唤分开显示
 * 增加100级传说防具首饰特殊
+
 
 
 
