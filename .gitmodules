@@ -1,0 +1,6 @@
+[submodule "SkillData"]
+	path = SkillData
+	url = https://gitee.com/i_melon/SkillData.git
+[submodule "InternalFile"]
+	path = InternalFile
+	url = https://gitee.com/i_melon/InternalFile

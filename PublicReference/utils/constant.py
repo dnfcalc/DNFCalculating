@@ -34,7 +34,8 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
-dllPath = resource_path(os.path.join("DLL", "Preferred.dll"))
+dllPath = resource_path(os.path.join("InternalFile","DLL", "Preferred.dll"))
+skillDataPath = resource_path("SkillData")
 
 # 100级史诗套数据
 防具套装 = (
