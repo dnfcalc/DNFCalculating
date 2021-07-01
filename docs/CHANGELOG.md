@@ -1,5 +1,23 @@
 ## Newest
 
+### 2021-07-01
+
+#### NewFeatures
+* 护肩添加2%技攻选项 ([f11ecf](https://gitee.com/i_melon/DNFCalculating/commit/f11ecf643d72d156c7b5abe7ee1021a65e42db51))
+* 极诣·刃影：同步国服体验服二次调整数据 ([b6c2ee](https://gitee.com/i_melon/DNFCalculating/commit/b6c2eeedc1beab74f752c5c823445f6adfab7096))
+* 添加夏日升级宠物 ([7ae3b8](https://gitee.com/i_melon/DNFCalculating/commit/7ae3b830ab1d8f8b289ed98a0a899e04c4e6f727))
+* 添加夏日相关宠物装备及择优 ([9780f6](https://gitee.com/i_melon/DNFCalculating/commit/9780f652005e84c1f4344ba6c6bf57335b4d42c9))
+* 知源·缔造者：适配阿斯特罗斯技能等级范围修改 ([d95183](https://gitee.com/i_melon/DNFCalculating/commit/d95183a1c94348bb9c13a5cdc999be1e794129b2))
+* 预更新伤害压缩，程序将于2021.7.8日自动生效 ([b3db49](https://gitee.com/i_melon/DNFCalculating/commit/b3db498e9016fb451bdeadb00f2ddfe4cbf1abdd))
+
+#### BugFixes
+* 修复泰玛特鞋子属性错误 ([3ab6f5](https://gitee.com/i_melon/DNFCalculating/commit/3ab6f52652daf872df1df41a3993ed87f3874f0c))
+* 归元·街霸·男：修复毒雷引爆护石加成错误 ([8dfe71](https://gitee.com/i_melon/DNFCalculating/commit/8dfe71b3e73018b520f8ebccd0dc312f45378f8d))
+* 极诣·刃影：修正夜之风相关错误 ([9034e7](https://gitee.com/i_melon/DNFCalculating/commit/9034e7df3d687511560cd9d977554f99bf735fe7))
+
+
+## History
+
 ### 2021-06-25
 
 #### BugFixes
@@ -1282,7 +1300,5 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 
 
 
-
-## History
 
 
