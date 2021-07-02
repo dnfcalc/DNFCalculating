@@ -3730,6 +3730,10 @@ class 角色窗口(窗口):
         for i in range(15):
             数量[i % 3] += self.希洛克选择状态[i]
 
+        奥兹玛数量 = [0]*5
+        for i in range(25):
+            奥兹玛数量[i % 5] += self.奥兹玛选择状态[i]
+
         # 0 上衣 1护肩 2护腿 3腰带 4鞋子 5 手镯 6 项链 7 戒指 8 耳环 9辅助 10魔法石 11 武器
         for i in range(12):
             # 下装
@@ -3751,9 +3755,43 @@ class 角色窗口(窗口):
                         图片列表.append(
                             QMovie('./ResourceFiles/img/希洛克/' +
                                    str(item * 3 + 2) + '.gif'))
+            # 护肩
+            elif 奥兹玛数量[0] == 1 and i ==1:
+                for item in range(5):
+                    if self.奥兹玛选择状态[item * 5 + 0] > 0:
+                        图片列表.append(
+                            QMovie('./ResourceFiles/img/奥兹玛/' +
+                                   str(item * 5 + 0) + '.gif'))
+            # 腰带
+            elif 奥兹玛数量[1] == 1 and i ==3:
+                for item in range(5):
+                    if self.奥兹玛选择状态[item * 5 + 1] > 0:
+                        图片列表.append(
+                            QMovie('./ResourceFiles/img/奥兹玛/' +
+                                   str(item * 5 + 1) + '.gif'))
+            # 鞋
+            elif 奥兹玛数量[2] == 1 and i ==4:
+                for item in range(5):
+                    if self.奥兹玛选择状态[item * 5 + 2] > 0:
+                        图片列表.append(
+                            QMovie('./ResourceFiles/img/奥兹玛/' +
+                                   str(item * 5 + 2) + '.gif'))
+            # 项链
+            elif 奥兹玛数量[3] == 1 and i ==6:
+                for item in range(5):
+                    if self.奥兹玛选择状态[item * 5 + 3] > 0:
+                        图片列表.append(
+                            QMovie('./ResourceFiles/img/奥兹玛/' +
+                                   str(item * 5 + 3) + '.gif'))
+            # 魔法石
+            elif 奥兹玛数量[4] == 1 and i ==10:
+                for item in range(5):
+                    if self.奥兹玛选择状态[item * 5 + 4] > 0:
+                        图片列表.append(
+                            QMovie('./ResourceFiles/img/奥兹玛/' +
+                                   str(item * 5 + 4) + '.gif'))
             elif (self.武器融合属性A.currentIndex() + self.武器融合属性B.currentIndex() > 0
                   or self.角色属性B.希洛克武器词条 != 0) and i == 11:
-                # 图片列表.append(QMovie('./ResourceFiles/img/希洛克/融-7.gif'))
                 图片列表.append(
                     QMovie('./ResourceFiles/img/希洛克/武器/' +
                            str(equ.get_id_by_name(self.排行数据[index][i])) + '.gif'))
