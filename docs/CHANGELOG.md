@@ -1,5 +1,16 @@
 ## Newest
 
+### 2021-07-07
+
+#### NewFeatures
+* 极诣·刃影：同步技能名称修改及护石实际效果 ([cf0097](https://gitee.com/i_melon/DNFCalculating/commit/cf009738f1168253f390da6df44df7049026b4e7))
+* 极诣·刃影：调整默认配置 ([adca0f](https://gitee.com/i_melon/DNFCalculating/commit/adca0fb6a55c3c4c080b28a47654a2f3d2a64a6b))
+* 详情界面显示奥兹玛融合图标 ([555f18](https://gitee.com/i_melon/DNFCalculating/commit/555f18a7e8f3063312dbe10999fb3f4ba415281d))
+* 重霄·机械师·女：同步国服超时空光耀加农炮数据，同时优化部分技能的选择 ([eab3f3](https://gitee.com/i_melon/DNFCalculating/commit/eab3f3221a3d73f573cc7d8f831c3313aadcbe17))
+
+#### BugFixes
+* 知源·缔造者：修正阿斯特罗斯技能等级范围不生效的情况 ([80b717](https://gitee.com/i_melon/DNFCalculating/commit/80b7178fd887c961a941eab3332416ae978d797b))
+
 ### 2021-07-01
 
 #### NewFeatures
@@ -14,6 +25,7 @@
 * 修复泰玛特鞋子属性错误 ([3ab6f5](https://gitee.com/i_melon/DNFCalculating/commit/3ab6f52652daf872df1df41a3993ed87f3874f0c))
 * 归元·街霸·男：修复毒雷引爆护石加成错误 ([8dfe71](https://gitee.com/i_melon/DNFCalculating/commit/8dfe71b3e73018b520f8ebccd0dc312f45378f8d))
 * 极诣·刃影：修正夜之风相关错误 ([9034e7](https://gitee.com/i_melon/DNFCalculating/commit/9034e7df3d687511560cd9d977554f99bf735fe7))
+
 
 
 ## History
