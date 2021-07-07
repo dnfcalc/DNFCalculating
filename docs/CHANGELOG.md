@@ -704,7 +704,7 @@ LightStyle:浅色样式，DNFStyle:深色样式，None:无任何样式<br>
 
 #### BugFixes
 * 皓曦·忍者:修正二觉平x苦无爆炸部分的增伤 ([534b5c](https://github.com/wxh0402/DNFCalculating/commit/534b5c6b9b11b9c696b226f2b2a422ce15e7ab3c))
-* 知源·魔道学者:修正魔道酸云雨、糖果大作战-捣蛋杰克HIT攻击次数 ([e25de8](https://github.com/wxh0402/DNFCalculating/commit/e25de867335a99a0141f56f6c04f8f224aa0077b))
+* 知源·魔道学者:修正魔道酸雨云、糖果大作战-捣蛋杰克HIT攻击次数 ([e25de8](https://github.com/wxh0402/DNFCalculating/commit/e25de867335a99a0141f56f6c04f8f224aa0077b))
 * 知源·战斗法师:修正炫纹之源:太古神光漏算的炫纹攻击力 ([5cb50c](https://github.com/wxh0402/DNFCalculating/commit/5cb50c897724b35dc0af681114d0dc6380b604f9))
 
 ### 2020-10-30
