@@ -389,7 +389,7 @@ class 窗口(QWidget):
         else:
             self.stacked_layout.addWidget(self.main_frame2)
         self.stacked_layout.addWidget(self.main_frame3)
-        
+
         self.scroll = QScrollArea()
         self.scroll.setFrameShape(QFrame.NoFrame)
         self.scroll.setWidget(self.main_frame4)
@@ -731,7 +731,7 @@ class 窗口(QWidget):
                     self.神话属性选项[-1].currentIndexChanged.connect(
                         lambda state, index=num * 4 + i: self.神话属性选项颜色更新(index))
                 num += 1
-        
+
         if self.初始属性.职业分类 == '输出':
             self.改造产物选项 = []
             self.改造产物图片 = []
@@ -938,7 +938,7 @@ class 窗口(QWidget):
             else:
                 self.奥兹玛遮罩透明度[index].setOpacity(0.5)
                 self.奥兹玛选择状态[index] = 0
-            
+
 
     def 存档更换(self):
         if self.存档选择.currentText() == '新建存档':
@@ -1818,7 +1818,7 @@ class 窗口(QWidget):
             if 伤害数值 > 100000000:
                 伤害数值 /= 100000000
 
-            伤害量 = str(int(round(伤害数值, 0)))
+            伤害量 = str(round(伤害数值, 3))
 
             if 最高伤害 != 0:
                 百分比 = str(round(伤害数值 / 最高伤害 * 100, 1)) + '%'
