@@ -723,4 +723,3 @@ class 知源·战斗法师(角色窗口):
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)
         属性.碎霸触发概率 = round(self.碎霸概率.currentIndex() / 10, 2)
-        print(属性.碎霸触发概率)

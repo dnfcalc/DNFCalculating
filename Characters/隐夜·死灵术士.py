@@ -281,7 +281,6 @@ class 技能13(主动技能):
     TP成长 = 0.1
 
     def 等效百分比(self, 武器类型):
-        print(self.等级)
         return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 

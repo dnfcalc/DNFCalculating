@@ -441,7 +441,6 @@ class 技能19(职业主动技能):
     护石选项 = ['圣痕']
 
     def 装备护石(self, x):
-        print(self.蓄力)
         if x == 0 and self.蓄力 == 0:
             self.攻击次数 = 0
             self.攻击次数2 = 1
