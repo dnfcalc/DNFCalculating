@@ -7,8 +7,6 @@ from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
 import operator
-import datetime
-
 class 技能:
     名称 = ''
     备注 = ''
@@ -1425,8 +1423,8 @@ class 角色属性(属性):
 
         self.伤害指数 = 面板 * self.属性倍率 * 增伤倍率 * 基准倍率 / 100 * self.队友增幅系数
 
-        if datetime.date.today() >= datetime.date(2021,7,8):
-            self.伤害指数 /= 1000
+        # 7.8日,伤害数据压缩
+        self.伤害指数 /= 1000
 
     def 切装判断(self):
         for i in self.装备切装:

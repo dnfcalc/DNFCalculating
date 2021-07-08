@@ -269,7 +269,7 @@ class 技能9(主动技能):
             self.攻击次数 = 0
             self.攻击次数2 = 0
             self.攻击次数3 = 1
-            self.演出时间 = 1.7
+
         return (self.data0[self.等级] * self.攻击次数 + self.data1[self.等级] * self.攻击次数2 + self.data2[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
@@ -773,6 +773,7 @@ class 职业角色属性(角色属性):
         self.技能栏[self.技能序号['G1磁力弹']].等级 = self.技能栏[self.技能序号['G1科罗纳']].等级
         if self.技能栏[self.技能序号['光反应能量模块']].等级 != 0:
             self.技能栏[self.技能序号['拦截机工厂']].光反应能量模块 = 1
+            self.技能栏[self.技能序号['拦截机工厂']].演出时间 = 1.7
         # for i in [17, 18, 19]:
         #self.技能栏[i].等级 = self.技能栏[17].等级
         #self.技能栏[self.技能序号['GSP猎鹰捕食者形态']].等级 = self.技能栏[self.技能序号['GSP猎鹰旋雷者形态']].等级 = self.技能栏[self.技能序号['GSP猎鹰科罗纳形态']].等级
