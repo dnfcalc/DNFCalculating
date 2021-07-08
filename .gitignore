@@ -2,7 +2,7 @@ __pycache__
 logs
 set*
 AutoRelease
-main.exe
+*.exe
 docs/web.config
 .vscode/launch.json
 debug.log
@@ -10,3 +10,4 @@ build.bat
 详细数据
 DLL
 .DS_Store
+SkillData
