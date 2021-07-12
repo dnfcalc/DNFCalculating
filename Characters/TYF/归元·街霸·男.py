@@ -362,11 +362,13 @@ class 技能11(职业主动技能):
         if x == 0:
             self.攻击次数2 = 0
             self.攻击次数 = 3
+            self.中毒叠加次数 = 3
             self.中毒 = [int(x*0.87) for x in self.中毒]
             self.data0 = [int(x*0.52) for x in self.data0]
         elif x == 1:
             self.攻击次数2 = 0
             self.攻击次数 = 3
+            self.中毒叠加次数 = 3
             self.中毒 = [int(x*1.08) for x in self.中毒]
             self.data0 = [int(x*0.52) for x in self.data0]
 
