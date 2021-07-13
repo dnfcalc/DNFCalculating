@@ -1,5 +1,17 @@
 ## Newest
 
+### 2021-07-13
+
+#### NewFeatures
+* 排行伤害数值显示精确到小数点后三位 ([8194f3](https://gitee.com/i_melon/DNFCalculating/commit/8194f3b97987162d2c0000128820fbd37149e070))
+* 调整奶系buff为10W/4.5K ([2762b4](https://gitee.com/i_melon/DNFCalculating/commit/2762b469cd86c4f1e801e528d4b57547aea3284f))
+* 重霄·弹药专家·男：添加弹药改良属性选择 ([e3072f](https://gitee.com/i_melon/DNFCalculating/commit/e3072fbfbfe5f1b78e955409c420d28effc324bd))
+* 隐夜·影舞者：添加刃舞攻击次数选择 ([b39d9f](https://gitee.com/i_melon/DNFCalculating/commit/b39d9f5b3f0dae36a50ecf32ddedcd1011620f20))
+* 隐夜·死灵术士：添加王子、大巴合并显示功能 ([ead858](https://gitee.com/i_melon/DNFCalculating/commit/ead85880a0862f0ee70f45ee91eb58bab7127dd2))
+
+#### BugFixes
+* 重霄·弹药专家·女：修正图标异常情况 ([30b3ca](https://gitee.com/i_melon/DNFCalculating/commit/30b3ca5883613e9db03ac7ebd079012a40743a55))
+
 ### 2021-07-07
 
 #### NewFeatures
@@ -25,6 +37,7 @@
 * 修复泰玛特鞋子属性错误 ([3ab6f5](https://gitee.com/i_melon/DNFCalculating/commit/3ab6f52652daf872df1df41a3993ed87f3874f0c))
 * 归元·街霸·男：修复毒雷引爆护石加成错误 ([8dfe71](https://gitee.com/i_melon/DNFCalculating/commit/8dfe71b3e73018b520f8ebccd0dc312f45378f8d))
 * 极诣·刃影：修正夜之风相关错误 ([9034e7](https://gitee.com/i_melon/DNFCalculating/commit/9034e7df3d687511560cd9d977554f99bf735fe7))
+
 
 
 
