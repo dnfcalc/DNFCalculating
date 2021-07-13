@@ -1,0 +1,7 @@
+QToolButton{font-size:13px;color:#d4c8ac;background-color:qlineargradient(x1:0, x2:0, y1:0, y2:1,
+stop: 0 #574d38,
+stop: 1 #25221d);
+    border-top-right-radius: 5px; /*右上角圆角*/
+    border-top-left-radius: 5px; /*左下角圆角*/
+    border-image:url(ResourceFiles/Skins/DNFStyle/img/top_select.png)
+}

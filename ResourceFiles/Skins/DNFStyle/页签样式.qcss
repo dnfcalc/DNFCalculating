@@ -1,0 +1,11 @@
+QToolButton{font-size:13px;color:#7c6e52;background-color:qlineargradient(x1:0, x2:0, y1:0, y2:1,
+stop: 0 #2e2f31,
+stop: 1 #121315);
+    border-top-right-radius: 5px; /*右上角圆角*/
+    border-top-left-radius: 5px; /*左下角圆角*/
+    border:1px solid black;
+} 
+
+QToolButton:hover{color:#c6b083;background-color:qlineargradient(x1:0, x2:0, y1:0, y2:1,
+stop: 0 #4a4b4e,
+stop: 1 #1d1e22);}
