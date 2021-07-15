@@ -13,6 +13,7 @@
 * 重霄·弹药专家·女：修正图标异常情况 ([30b3ca](https://gitee.com/i_melon/DNFCalculating/commit/30b3ca5883613e9db03ac7ebd079012a40743a55))
 * 修正[雷霆怒啸手枪]对[光反应能量模块]加成错误 ([1eb8d8](https://gitee.com/i_melon/DNFCalculating/commit/1eb8d8682a3cd6e258597f48559136c416572b31))
 * 极诣·刃影：修正[孤勇之志]站街独立显示错误 ([af495c](https://gitee.com/i_melon/DNFCalculating/commit/af495c67662f7388be4ed32b79a2934b2d4305e9))
+
 ### 2021-07-07
 
 #### NewFeatures
