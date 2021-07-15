@@ -42,10 +42,11 @@ class 技能2(被动技能):
         else:
             return round(1.14 + 0.02 * self.等级, 5)
 
-    #实际进图未显示
-    #def 独立攻击力倍率进图(self, 武器类型):
-    #    return self.加成倍率(武器类型)
-
+    def 独立攻击力倍率(self, 武器类型):
+        if self.等级 == 0:
+            return 1.0
+        else:
+            return round(1.14 + 0.02 * self.等级, 5)
 
 class 技能3(主动技能):
     名称 = '冲击斩'
