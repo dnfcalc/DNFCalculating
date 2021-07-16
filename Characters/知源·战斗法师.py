@@ -449,7 +449,7 @@ class 技能22(主动技能):
         return self.data0[self.等级] *self.攻击次数* self.倍率
 
     def 装备护石(self, x):
-        self.次数 -=6
+        self.攻击次数 -=6
         self.倍率 *= 1+6.95+1.25
 
 
