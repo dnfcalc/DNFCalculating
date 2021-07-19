@@ -94,7 +94,7 @@ readConfig('./ResourceFiles/Config/攻击目标.ini')
 
 w, h = get_real_resolution()
 
-if w > 1920 and h > 1080:
+if w >= 2048 and h >= 1080:
     窗口显示模式 = 1
 
 # 怪物属性
