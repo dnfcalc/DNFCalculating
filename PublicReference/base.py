@@ -3422,13 +3422,13 @@ class 角色窗口(窗口):
                         num += 1
                 except Exception as error:
                     logger.error(error)
-                try:
-                    skill = set_data['技能选项']
-                    for i in self.角色属性A.技能栏:
+                skill = set_data['技能选项']
+                for i in self.角色属性A.技能栏:
+                    try:
                         序号 = self.角色属性A.技能序号[i.名称]
                         self.设置技能选项(序号, skill[i.名称])
-                except Exception as error:
-                    logger.error(error)
+                    except Exception as error:
+                        logger.error(error)
             except Exception as error:
                 logger.error(error)
 
