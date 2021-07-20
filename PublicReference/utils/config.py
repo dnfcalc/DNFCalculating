@@ -20,6 +20,20 @@ global 战术白字
 
 conf = configparser.ConfigParser()
 
+from win32 import win32api, win32gui, win32print
+from win32.lib import win32con
+
+from win32.win32api import GetSystemMetrics
+
+
+def get_real_resolution():
+    """获取真实的分辨率"""
+    hDC = win32gui.GetDC(0)
+    # 横向分辨率
+    w = win32print.GetDeviceCaps(hDC, win32con.DESKTOPHORZRES)
+    # 纵向分辨率
+    h = win32print.GetDeviceCaps(hDC, win32con.DESKTOPVERTRES)
+    return w, h
 
 def readConfig(filePath):
     #基础设置##################################################################
@@ -77,6 +91,11 @@ if 输出数据 == 1:
 #攻击目标##################################################################
 
 readConfig('./ResourceFiles/Config/攻击目标.ini')
+
+w, h = get_real_resolution()
+
+if w >= 2048 and h >= 1080:
+    窗口显示模式 = 1
 
 # 怪物属性
 攻击目标 = []
