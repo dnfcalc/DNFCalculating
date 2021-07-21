@@ -7,6 +7,7 @@ from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
 import operator
+
 class 技能:
     名称 = ''
     备注 = ''
@@ -6017,7 +6018,7 @@ class 角色窗口(窗口):
         for i in self.角色属性A.技能栏:
             序号 = self.角色属性A.技能序号[i.名称]
             if i.是否有伤害 == 1:
-                s = self.次数输入[序号].currentText()
+                s = self.次数输入[序号].currentText().replace('，', ',').replace('（', '(').replace('）', ')')
                 try:
                     if eval(s.replace('/CD', '1')) >= 0:
                         属性.次数输入.append(s)
@@ -6026,7 +6027,7 @@ class 角色窗口(窗口):
                     self.是否计算 = 0
                     break
 
-                s = self.宠物次数[序号].currentText()
+                s = self.宠物次数[序号].currentText().replace('，', ',').replace('（', '(').replace('）', ')')
                 try:
                     if eval(s.replace('num', '1')) >= 0:
                         属性.宠物次数.append(s)
