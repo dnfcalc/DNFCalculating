@@ -655,7 +655,7 @@ class 苍暮·暗刃(角色窗口):
         self.符文选项 = deepcopy(苍暮·暗刃符文选项)
 
     def 护石判断(self):
-        if self.次数输入[self.角色属性A.技能序号['大回旋坠斩']].currentText() != '/CD':
+        if '/CD' not in self.次数输入[self.角色属性A.技能序号['大回旋坠斩']].currentText():
             if self.次数输入[self.角色属性A.技能序号['大回旋坠斩']].currentText() != '':
                 try:
                     大回旋坠斩次数 = round(

@@ -590,7 +590,7 @@ class 职业属性(角色属性):
                 if i.名称 == '爆裂弹':
                     技能释放次数.append(0)
                 else:
-                    if self.次数输入[self.技能序号[i.名称]] == '/CD':
+                    if '/CD' in self.次数输入[self.技能序号[i.名称]]:
                         # 根据技能CD及最大不脱手时间得到技能空转的时间
                         最终CD = i.等效CD(self.武器类型, self.类型)
                         空转时间 = 0
@@ -628,13 +628,17 @@ class 职业属性(角色属性):
         # 追加补给选择丢雷对子弹的输出时间的影响
         # 技能消耗时间 += self.技能栏[self.技能序号['空袭战略']].持续时间() if self.补给输出形态选择 == 0 else 0
         # print(补给占用时间)
-        if self.次数输入[self.技能序号['爆裂弹']] == '/CD':
+        if '/CD' in self.次数输入[self.技能序号['爆裂弹']]:
             技能释放次数[爆裂弹位置] = max(
                 int(floor((self.时间输入 - 技能消耗时间) / 每轮时间) * 每轮空射次数), 0)
             技能释放次数[爆裂弹位置] += max(floor((self.时间输入 - 技能消耗时间 - 每轮时间 *
                                  floor((self.时间输入 - 技能消耗时间) / 每轮时间) - 起落地时间/2) / 爆裂弹间隔), 0)
         else:
             技能释放次数[爆裂弹位置] = int(self.次数输入[self.技能序号['爆裂弹']] * 每轮空射次数)
+        
+        for i in range(len(self.技能栏)):
+            if '/CD' in self.次数输入[i]:
+                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
         return 技能释放次数
 
     def 预处理(self):

@@ -1515,16 +1515,17 @@ class 角色属性(属性):
         技能释放次数 = []
         for i in self.技能栏:
             if i.是否有伤害 == 1:
-                if self.次数输入[self.技能序号[i.名称]] == '/CD':
-                    技能释放次数.append(
-                        int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型, self.类型) +
-                            1 + i.基础释放次数))
-                elif self.次数输入[self.技能序号[i.名称]] != '0':
-                    技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]), 2))
+                s = self.次数输入[self.技能序号[i.名称]]
+                if '/CD' in s:
+                    技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型, self.类型)) + 1 + i.基础释放次数)
                 else:
-                    技能释放次数.append(0)
+                    技能释放次数.append(round(float(s), 2))
             else:
                 技能释放次数.append(0)
+        
+        for i in range(len(self.技能栏)):
+            if '/CD' in self.次数输入[i]:
+                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
         return 技能释放次数
 
     def 技能单次伤害计算(self, y):
@@ -1545,7 +1546,7 @@ class 角色属性(属性):
             if i.是否有伤害 == 1 and a[index] != 0:
                 技能总伤害.append(a[index] * b[index] * (
                     1 + self.白兔子技能 * 0.20 + self.年宠技能 * 0.10 *
-                    self.宠物次数[index] / a[index]  # 宠物技能占比 = 宠物次数 / 释放次数
+                    eval(self.宠物次数[index].replace('num', str(a[index]))) / a[index]  # 宠物技能占比 = 宠物次数 / 释放次数
                     + self.斗神之吼秘药 * 0.12))
             else:
                 技能总伤害.append(0)
@@ -3976,24 +3977,14 @@ class 角色窗口(窗口):
             info['TP'] = 0
 
         try:
-            info['次数'] = self.次数输入[序号].currentIndex()
+            info['次数'] = self.次数输入[序号].currentText()
         except:
-            info['次数'] = 0
-        if info['次数'] == 12 and self.次数输入[序号].currentText() != '':
-            try:
-                info['次数'] = str(round(max(0, float(self.次数输入[序号].currentText())), 3))
-            except:
-                info['次数'] = 0
+            info['次数'] = '0'
 
         try:
-            info['宠物'] = self.宠物次数[序号].currentIndex()
+            info['宠物'] = self.宠物次数[序号].currentText()
         except:
-            info['宠物'] = 0
-        if info['宠物'] == 11 and self.宠物次数[序号].currentText() != '':
-            try:
-                info['宠物'] = str(round(max(0, float(self.宠物次数[序号].currentText())), 3))
-            except:
-                info['宠物'] = 0
+            info['宠物'] = '0'
 
         if 切装模式 == 1:
             try:
@@ -6026,104 +6017,32 @@ class 角色窗口(窗口):
         for i in self.角色属性A.技能栏:
             序号 = self.角色属性A.技能序号[i.名称]
             if i.是否有伤害 == 1:
-                if self.次数输入[序号].currentText() != '/CD':
-                    if self.次数输入[序号].currentIndex() == 12:
-                        if self.次数输入[序号].currentText() != '':
-                            try:
-                                temp1 = int(float(self.次数输入[序号].currentText()))
-                                temp2 = (float(self.次数输入[序号].currentText()))
-                                if temp1 >= 0 and temp1 < 1000:
-                                    if temp1 == temp2:
-                                        属性.次数输入.append(
-                                            int(
-                                                float(self.次数输入[序号].
-                                                      currentText())))
-                                    else:
-                                        属性.次数输入.append(
-                                            int((float(
-                                                self.次数输入[序号].currentText()) +
-                                                0.001) * 100) / 100)
-                                        self.次数输入[序号].setCurrentText(
-                                            str(
-                                                int((float(self.次数输入[序号].
-                                                           currentText()) +
-                                                     0.001) * 100) / 100))
-                                else:
-                                    QMessageBox.information(
-                                        self, "错误",
-                                        "“" + i.名称 + "”" + "技能次数超出取值范围，请重新输入")
-                                    self.是否计算 = 0
-                                    break
-                            except:
-                                QMessageBox.information(
-                                    self, "错误",
-                                    "“" + i.名称 + "”" + "技能次数输入格式错误，请重新输入")
-                                self.是否计算 = 0
-                                break
-                        else:
-                            QMessageBox.information(
-                                self, "错误",
-                                "“" + i.名称 + "”" + "技能次数输入为空，请重新输入")
-                            self.是否计算 = 0
-                            break
-                    else:
-                        属性.次数输入.append(int(self.次数输入[序号].currentText()))
-                else:
-                    属性.次数输入.append((self.次数输入[序号].currentText()))
+                s = self.次数输入[序号].currentText()
+                try:
+                    if eval(s.replace('/CD', '1')) >= 0:
+                        属性.次数输入.append(s)
+                except:
+                    QMessageBox.information(self, "错误","“{}”技能次数输入错误，请重新输入".format(i.名称))
+                    self.是否计算 = 0
+                    break
 
-                if self.宠物次数[序号].currentIndex() == 11:
-                    if self.宠物次数[序号].currentText() != '':
-                        try:
-                            temp1 = int(float(self.宠物次数[序号].currentText()))
-                            if temp1 >= 0 and temp1 < 1000:
-                                self.宠物次数[序号].setCurrentText(
-                                    str(
-                                        int((float(self.宠物次数[序号].currentText())
-                                             + 0.001) * 100) / 100))
-                            else:
-                                QMessageBox.information(
-                                    self, "错误",
-                                    "“" + i.名称 + "”" + "宠物次数超出取值范围，请重新输入")
-                                self.是否计算 = 0
-                                break
-                        except:
-                            QMessageBox.information(
-                                self, "错误",
-                                "“" + i.名称 + "”" + "宠物次数输入格式错误，请重新输入")
-                            self.是否计算 = 0
-                            break
-                    else:
-                        QMessageBox.information(
-                            self, "错误", "“" + i.名称 + "”" + "宠物次数输入为空，请重新输入")
-                        self.是否计算 = 0
-                        break
-                    if self.次数输入[序号].currentIndex() != 0:
-                        temp3 = (float(self.宠物次数[序号].currentText()))
-                        temp4 = (float(self.次数输入[序号].currentText()) + i.基础释放次数)
-                        temp5 = min(temp3, temp4)
-                        if int(temp5) == temp5:
-                            self.宠物次数[序号].setCurrentText(str(int(temp5)))
-                        else:
-                            self.宠物次数[序号].setCurrentText(str(temp5))
-                    属性.宠物次数.append(float(self.宠物次数[序号].currentText()))
-                else:
-                    if self.次数输入[序号].currentText() != '/CD':
-                        temp3 = (float(self.宠物次数[序号].currentIndex()))
-                        temp4 = (float(self.次数输入[序号].currentText()) + i.基础释放次数)
-                        temp5 = min(temp3, temp4)
-                        if int(temp5) == temp5:
-                            self.宠物次数[序号].setCurrentText(str(int(temp5)))
-                        else:
-                            self.宠物次数[序号].setCurrentText(str(temp5))
-                    属性.宠物次数.append(float(self.宠物次数[序号].currentText()))
+                s = self.宠物次数[序号].currentText()
+                try:
+                    if eval(s.replace('num', '1')) >= 0:
+                        属性.宠物次数.append(s)
+                except:
+                    QMessageBox.information(self, "错误","“{}”宠物次数输入错误，请重新输入".format(i.名称))
+                    self.是否计算 = 0
+                    break
+
                 if 切装模式 == 1:
                     if self.技能切装[序号].isChecked():
                         属性.技能切装.append(1)
                     else:
                         属性.技能切装.append(0)
             else:
-                属性.次数输入.append('')
-                属性.宠物次数.append(0)
+                属性.次数输入.append('0')
+                属性.宠物次数.append('0')
                 属性.技能切装.append(0)
         if 切装模式 == 1:
             for i in range(12):
