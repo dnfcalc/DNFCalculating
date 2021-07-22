@@ -957,9 +957,9 @@ class 极诣·驭剑士角色属性(角色属性):
             self.技能栏[self.技能序号['魔剑奥义']].短精CD = temp.魔剑奥义CD倍率()
             # 1.3倍CD估算次数
             次数输入 = copy(self.次数输入)
-            if 次数输入[self.技能序号['魔剑奥义']] == '/CD':
-                次数输入[self.技能序号['魔剑奥义']] = str(
-                    2 * int(self.时间输入 / (self.技能栏[self.技能序号['魔剑奥义']].等效CD(self.武器类型, self.类型) * 1.3) + 1))
+            if '/CD' in 次数输入[self.技能序号['魔剑奥义']]:
+                次数输入[self.技能序号['魔剑奥义']] = str(eval(次数输入[self.技能序号['魔剑奥义']].replace('/CD', str(
+                    2 * int(self.时间输入 / (self.技能栏[self.技能序号['魔剑奥义']].等效CD(self.武器类型, self.类型) * 1.3) + 1)))))
             self.次数输入 = copy(次数输入)
         elif self.武器类型 == '钝器':
             temp = self.技能栏[self.技能序号['波动之钝器精通']]

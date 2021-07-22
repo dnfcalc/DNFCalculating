@@ -886,9 +886,7 @@ class 皓曦·混沌魔灵角色属性(角色属性):
             if i.是否有伤害 == 1 and a[index] != 0:
                 技能总伤害.append(a[index] * b[index] * (1
                                                     + self.白兔子技能 * 0.20
-                                                    # 宠物技能占比 = 宠物次数 / 释放次数
-                                                    + self.年宠技能 * 0.10 * \
-                                                    self.宠物次数[index] / a[index]
+                                                    + self.年宠技能 * 0.10 * eval(self.宠物次数[index].replace('num', str(a[index]))) / a[index]  # 宠物技能占比 = 宠物次数 / 释放次数
                                                     + self.斗神之吼秘药 * 0.12))
             else:
                 技能总伤害.append(0)
@@ -901,16 +899,12 @@ class 皓曦·混沌魔灵角色属性(角色属性):
             if temp1 != 0:
                 技能总伤害[15] = (b[15] * (temp2+1) + temp0 * temp2) * (1
                                                                    + self.白兔子技能 * 0.20
-                                                                   # 宠物技能占比 = 宠物次数 / 释放次数
-                                                                   + self.年宠技能 * 0.10 * \
-                                                                   self.宠物次数[index] / \
-                                                                   a[index]
+                                                                   + self.年宠技能 * 0.10 * eval(self.宠物次数[index].replace('num', str(a[index]))) / a[index]  # 宠物技能占比 = 宠物次数 / 释放次数
                                                                    + self.斗神之吼秘药 * 0.12)
             else:
                 技能总伤害[15] = (b[15] * temp2 + temp0 * temp2) * (1
                                                                + self.白兔子技能 * 0.20
-                                                               + self.年宠技能 * 0.10 * self.宠物次数[index] / a[
-                                                                   index]  # 宠物技能占比 = 宠物次数 / 释放次数
+                                                               + self.年宠技能 * 0.10 * eval(self.宠物次数[index].replace('num', str(a[index]))) / a[index]  # 宠物技能占比 = 宠物次数 / 释放次数
                                                                + self.斗神之吼秘药 * 0.12)
         return 技能总伤害
 

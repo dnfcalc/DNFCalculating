@@ -561,7 +561,7 @@ class 神启·异端审判者角色属性(角色属性):
         技能释放次数 = []
         for i in self.技能栏:
             if i.是否有伤害 == 1:
-                if self.次数输入[self.技能序号[i.名称]] == '/CD':
+                if '/CD' in self.次数输入[self.技能序号[i.名称]]:
                     技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型,self.类型) + 1 + i.基础释放次数))
                 elif self.次数输入[self.技能序号[i.名称]] != '0':
                     技能释放次数.append(round(float(self.次数输入[self.技能序号[i.名称]]),2))
@@ -570,9 +570,12 @@ class 神启·异端审判者角色属性(角色属性):
             else:
                 技能释放次数.append(0)
 
-        if '行刑' in [self.护石第一栏, self.护石第二栏, self.护石第三栏] and self.次数输入[self.技能序号['神焰']] == '/CD':
+        if '行刑' in [self.护石第一栏, self.护石第二栏, self.护石第三栏] and '/CD' in self.次数输入[self.技能序号['神焰']]:
             技能释放次数[self.技能序号['神焰']] += 技能释放次数[self.技能序号['行刑']]
-
+        
+        for i in range(len(self.技能栏)):
+            if '/CD' in self.次数输入[i]:
+                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
         return 技能释放次数
 
     def 被动倍率计算(self):

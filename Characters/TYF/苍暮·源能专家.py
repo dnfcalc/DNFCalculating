@@ -634,7 +634,7 @@ class 苍暮·源能专家(角色窗口):
         引力源光弹次数 = 0
         超能爆发次数 = 0
 
-        if self.次数输入[self.角色属性A.技能序号['引力源光弹']].currentText() != '/CD':
+        if '/CD' not in self.次数输入[self.角色属性A.技能序号['引力源光弹']].currentText():
             try:
                 引力源光弹次数 = int(
                     self.次数输入[self.角色属性A.技能序号['引力源光弹']].currentText())
@@ -642,7 +642,7 @@ class 苍暮·源能专家(角色窗口):
                 引力源光弹次数 = 100
         else:
             引力源光弹次数 = 100
-        if self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText() != '/CD':
+        if '/CD' not in self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText():
             超能爆发次数 = int(
                 self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText())
         else:
@@ -654,21 +654,21 @@ class 苍暮·源能专家(角色窗口):
                 sign = 1
 
         充能次数上限 = 1
-        if 引力源光弹次数 != 0 and 超能爆发次数 != 0 and (self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText() != '/CD' or self.次数输入[self.角色属性A.技能序号['引力源光弹']].currentText() != '/CD'):
+        if 引力源光弹次数 != 0 and 超能爆发次数 != 0 and ('/CD' not in self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText() or '/CD' not in self.次数输入[self.角色属性A.技能序号['引力源光弹']].currentText()):
             if 超能爆发次数 >= 引力源光弹次数:
                 充能次数上限 = 引力源光弹次数
             else:
                 充能次数上限 = 超能爆发次数
             # self.引力源光弹护石选项.setCurrentIndex(充能次数上限)
-        if self.引力源光弹护石选项.currentIndex() > 充能次数上限 and sign == 1 and (self.次数输入[self.角色属性A.技能序号['引力源光弹']].currentText() != '/CD' or self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText() != '/CD') and 警告 == 0:
+        if self.引力源光弹护石选项.currentIndex() > 充能次数上限 and sign == 1 and ('/CD' not in self.次数输入[self.角色属性A.技能序号['引力源光弹']].currentText() or '/CD' not in self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText()) and 警告 == 0:
             self.引力源光弹护石选项.setCurrentIndex(充能次数上限)
             if 选项变更 == 0:
                 QMessageBox.information(self, "错误",  "输入的充能次数超过上限，已自动修正")
             警告 = 1
-        elif self.引力源光弹护石选项.currentIndex() < 充能次数上限 and sign == 1 and (self.次数输入[self.角色属性A.技能序号['引力源光弹']].currentText() != '/CD' or self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText() != '/CD') and 选项变更 == 1:
+        elif self.引力源光弹护石选项.currentIndex() < 充能次数上限 and sign == 1 and ('/CD' not in self.次数输入[self.角色属性A.技能序号['引力源光弹']].currentText() or '/CD' not in self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText()) and 选项变更 == 1:
             self.引力源光弹护石选项.setCurrentIndex(充能次数上限)
             选项变更 = 0
-        elif self.次数输入[self.角色属性A.技能序号['引力源光弹']].currentText() == '/CD' and self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText() == '/CD' and 选项变更 == 1:
+        elif '/CD' in self.次数输入[self.角色属性A.技能序号['引力源光弹']].currentText() and '/CD' in self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText() and 选项变更 == 1:
             self.引力源光弹护石选项.setCurrentIndex(1)
 
         if sign == 0:
@@ -687,14 +687,14 @@ class 苍暮·源能专家(角色窗口):
         能量飞鱼弹次数 = 0
         源能护盾次数 = 0
 
-        if self.次数输入[self.角色属性A.技能序号['能量禁锢']].currentText() != '/CD':
+        if '/CD' not in self.次数输入[self.角色属性A.技能序号['能量禁锢']].currentText():
             try:
                 能量禁锢次数 = int(self.次数输入[self.角色属性A.技能序号['能量禁锢']].currentText())
             except:
                 能量禁锢次数 = 1
         else:
             能量禁锢次数 = 1
-        if self.次数输入[self.角色属性A.技能序号['能量飞鱼弹']].currentText() != '/CD':
+        if '/CD' not in self.次数输入[self.角色属性A.技能序号['能量飞鱼弹']].currentText():
             try:
                 能量飞鱼弹次数 = int(
                     self.次数输入[self.角色属性A.技能序号['能量飞鱼弹']].currentText())
@@ -703,7 +703,7 @@ class 苍暮·源能专家(角色窗口):
                 能量飞鱼弹次数 = 2
         else:
             能量飞鱼弹次数 = 2
-        if self.次数输入[self.角色属性A.技能序号['源能护盾']].currentText() != '/CD':
+        if '/CD' not in self.次数输入[self.角色属性A.技能序号['源能护盾']].currentText():
             try:
                 源能护盾次数 = int(self.次数输入[self.角色属性A.技能序号['源能护盾']].currentText())
             except:
@@ -744,7 +744,7 @@ class 苍暮·源能专家(角色窗口):
                 self.能量禁锢护石选项.setCurrentIndex(2)
         else:
             self.能量禁锢护石选项.setCurrentIndex(0)
-        if (能量飞鱼弹次数+源能护盾次数) < (能量禁锢次数*2) and sign2 == 1 and 警告 == False and (self.次数输入[self.角色属性A.技能序号['源能护盾']].currentText() != '/CD' and self.次数输入[self.角色属性A.技能序号['能量飞鱼弹']].currentText() != '/CD'):
+        if (能量飞鱼弹次数+源能护盾次数) < (能量禁锢次数*2) and sign2 == 1 and 警告 == False and ('/CD' not in self.次数输入[self.角色属性A.技能序号['源能护盾']].currentText() and '/CD' not in self.次数输入[self.角色属性A.技能序号['能量飞鱼弹']].currentText()):
             QMessageBox.information(
                 self, "错误",  "能量飞鱼弹与源能护盾次数不足以为能量禁锢提供"+str(能量禁锢次数*2)+"次爆炸，建议修改技能及爆炸次数，若不修改则按输入的数值计算")
             警告 = True

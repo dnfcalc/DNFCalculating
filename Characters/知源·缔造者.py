@@ -642,7 +642,7 @@ class 职业属性(角色属性):
                 #                print('hello')
                 i.觉醒模式(1)
             if i.是否有伤害 == 1:
-                if self.次数输入[self.技能序号[i.名称]] == '/CD':
+                if '/CD' in self.次数输入[self.技能序号[i.名称]]:
 
                     余数伤害时间 = (
                         (int(i.能量 *
@@ -688,6 +688,10 @@ class 职业属性(角色属性):
                     技能释放次数.append(0)
             else:
                 技能释放次数.append(0)
+        
+        for i in range(len(self.技能栏)):
+            if '/CD' in self.次数输入[i]:
+                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
         return 技能释放次数
 
 
