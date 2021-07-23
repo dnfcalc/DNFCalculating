@@ -206,13 +206,13 @@ class 技能9(主动技能):
             self.演出时间 = 3
             self.倍率 *= 2.64 * 20
             self.攻击次数1 = 1
-            self.CD = 30
+            self.CD *= 30
             self.装备护石 = 1
         elif x == 1:
             self.演出时间 = 3
             self.倍率 *= 2.86 * 20
             self.攻击次数1 = 1
-            self.CD = 30
+            self.CD *= 30
             self.装备护石 = 1
 
     def 等效CD(self, 武器类型, 输出类型):
