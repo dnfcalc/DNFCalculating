@@ -248,7 +248,7 @@ class 技能9(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(1.025 + 0.02 * self.等级, 5)
+            return round(1.065 + 0.02 * self.等级, 5)
 
 
 class 技能10(职业主动技能):
