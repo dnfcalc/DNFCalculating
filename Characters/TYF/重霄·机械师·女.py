@@ -744,7 +744,6 @@ class 职业角色属性(角色属性):
         self.技能序号 = deepcopy(技能序号)
 
     def 被动倍率计算(self):
-
         if self.装备检查('守护的抉择'):
             if self.护石第一栏 == 'GSP猎鹰':
                 self.技能栏[self.技能序号['GSP猎鹰科罗纳形态']].CD *= 0.7

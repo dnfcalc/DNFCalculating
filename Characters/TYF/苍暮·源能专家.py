@@ -605,6 +605,8 @@ class 苍暮·源能专家角色属性(角色属性):
 
         技能总伤害 = self.技能总伤害计算(技能释放次数, 技能单次伤害)
 
+        self.宠物次数[self.技能序号['引力源光弹']] = eval(self.宠物次数[self.技能序号['引力源光弹']].replace('num', str(技能释放次数[self.技能序号['引力源光弹']])))
+
         # 引力源光弹护石
         if self.技能栏[self.技能序号['引力源光弹']].是否装备护石 == 1:
             if self.宠物次数[self.技能序号['引力源光弹']] < self.引力源光弹充能次数:
@@ -643,8 +645,11 @@ class 苍暮·源能专家(角色窗口):
         else:
             引力源光弹次数 = 100
         if '/CD' not in self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText():
-            超能爆发次数 = int(
-                self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText())
+            try:
+                超能爆发次数 = int(
+                    self.次数输入[self.角色属性A.技能序号['CEAB-2超能爆发']].currentText())
+            except:
+                超能爆发次数 = 100
         else:
             超能爆发次数 = 100
 
