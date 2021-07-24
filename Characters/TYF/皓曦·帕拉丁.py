@@ -623,7 +623,7 @@ class 皓曦·帕拉丁(角色窗口):
         self.蓄力神圣信约.resize(120, 20)
         self.蓄力神圣信约.move(325, 380)
 
-        self.职业存档.append(('蓄力神圣信约', self.蓄力神圣信约, 1))
+        self.职业存档.append(('蓄力神圣信约', self.蓄力神圣信约, 0))
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)
