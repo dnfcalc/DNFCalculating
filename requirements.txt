@@ -1,6 +1,7 @@
 # pip install wheel==0.35.1
 # pip install -i https://pypi.mirrors.ustc.edu.cn/simple/ -r requirements.txt
-lanzou-api==2.5.8.2
-pyinstaller==4.0
-pypiwin32==223
-PyQt5==5.15.2
+lanzou-api
+pyinstaller
+pypiwin32
+PyQt5
+chardet
