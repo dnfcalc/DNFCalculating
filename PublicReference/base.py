@@ -1512,6 +1512,13 @@ class 角色属性(属性):
         self.三觉屏蔽2()
         self.伤害指数计算()
 
+    def 技能释放次数解析(self, 技能释放次数):
+        for i in range(len(self.技能栏)):
+            if '/CD' in self.次数输入[i]:
+                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
+            self.宠物次数[i] = eval(self.宠物次数[i].replace('num', str(技能释放次数[i])))
+        return 技能释放次数
+
     def 技能释放次数计算(self):
         技能释放次数 = []
         for i in self.技能栏:
@@ -1524,10 +1531,7 @@ class 角色属性(属性):
             else:
                 技能释放次数.append(0)
         
-        for i in range(len(self.技能栏)):
-            if '/CD' in self.次数输入[i]:
-                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
-        return 技能释放次数
+        return self.技能释放次数解析(技能释放次数)
 
     def 技能单次伤害计算(self, y):
         # y切装标记
@@ -1547,7 +1551,7 @@ class 角色属性(属性):
             if i.是否有伤害 == 1 and a[index] != 0:
                 技能总伤害.append(a[index] * b[index] * (
                     1 + self.白兔子技能 * 0.20 + self.年宠技能 * 0.10 *
-                    eval(self.宠物次数[index].replace('num', str(a[index]))) / a[index]  # 宠物技能占比 = 宠物次数 / 释放次数
+                    self.宠物次数[index] / a[index]  # 宠物技能占比 = 宠物次数 / 释放次数
                     + self.斗神之吼秘药 * 0.12))
             else:
                 技能总伤害.append(0)

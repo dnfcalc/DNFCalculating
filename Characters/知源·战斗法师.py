@@ -679,10 +679,7 @@ class 知源·战斗法师角色属性(角色属性):
         if '闪击碎霸' in [self.护石第一栏, self.护石第二栏, self.护石第三栏]:
             技能释放次数[self.技能序号['碎霸']] += 技能释放次数[self.技能序号['闪击碎霸']]
 
-        for i in range(len(self.技能栏)):
-            if '/CD' in self.次数输入[i]:
-                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
-        return 技能释放次数
+        return self.技能释放次数解析(技能释放次数)
 
     def 武器基础(self):
         temp = equ.get_equ_by_name(self.装备栏[11])

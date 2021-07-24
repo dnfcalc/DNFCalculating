@@ -636,10 +636,7 @@ class 职业属性(角色属性):
         else:
             技能释放次数[爆裂弹位置] = int(self.次数输入[self.技能序号['爆裂弹']] * 每轮空射次数)
         
-        for i in range(len(self.技能栏)):
-            if '/CD' in self.次数输入[i]:
-                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
-        return 技能释放次数
+        return self.技能释放次数解析(技能释放次数)
 
     def 预处理(self):
         if self.超负荷属性 == 0:

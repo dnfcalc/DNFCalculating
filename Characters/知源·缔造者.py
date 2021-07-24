@@ -689,10 +689,7 @@ class 职业属性(角色属性):
             else:
                 技能释放次数.append(0)
         
-        for i in range(len(self.技能栏)):
-            if '/CD' in self.次数输入[i]:
-                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
-        return 技能释放次数
+        return self.技能释放次数解析(技能释放次数)
 
 
 class 知源·缔造者(角色窗口):

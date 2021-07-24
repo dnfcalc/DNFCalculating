@@ -610,10 +610,7 @@ class 重霄·弹药专家·男角色属性(角色属性):
             else:
                 技能释放次数[self.技能序号['爆裂弹']] = 0
                 
-        for i in range(len(self.技能栏)):
-            if '/CD' in self.次数输入[i]:
-                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
-        return 技能释放次数
+        return self.技能释放次数解析(技能释放次数)
 
     def 伤害指数计算(self):
         super().伤害指数计算()

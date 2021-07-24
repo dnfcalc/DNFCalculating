@@ -573,10 +573,7 @@ class 神启·异端审判者角色属性(角色属性):
         if '行刑' in [self.护石第一栏, self.护石第二栏, self.护石第三栏] and '/CD' in self.次数输入[self.技能序号['神焰']]:
             技能释放次数[self.技能序号['神焰']] += 技能释放次数[self.技能序号['行刑']]
         
-        for i in range(len(self.技能栏)):
-            if '/CD' in self.次数输入[i]:
-                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
-        return 技能释放次数
+        return self.技能释放次数解析(技能释放次数)
 
     def 被动倍率计算(self):
         super().被动倍率计算()
