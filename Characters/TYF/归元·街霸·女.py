@@ -168,7 +168,7 @@ class 归元·街霸·女技能8(归元·街霸·女主动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(1.15 + 0.02 * self.等级, 5)
+            return round(1.05 + 0.02 * self.等级, 5)
 
 
 class 归元·街霸·女技能9(归元·街霸·女主动技能):
