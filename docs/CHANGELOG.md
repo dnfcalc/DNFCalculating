@@ -1,5 +1,44 @@
 ## Newest
 
+### 2021-07-26
+
+#### NewFeatures
+*  新增奶职业的自选装备双切计算 By Umi（测试中功能） ([c68098](https://gitee.com/i_melon/DNFCalculating/commit/c680988432e221e69c6d5fbfa8fcf64be08ea574))
+* S四姨体验服数据 ([a7a230](https://gitee.com/i_melon/DNFCalculating/commit/a7a230fb5d8d3bcb9420d9973b4b8d1ae5c23296))
+* 元素爆破师体验服数据 ([b87745](https://gitee.com/i_melon/DNFCalculating/commit/b87745a833c36e7c2fb84eb4a0379d3e4f65cd60))
+* 冰洁体验服数据 ([c34be8](https://gitee.com/i_melon/DNFCalculating/commit/c34be8e6d9ba881cba81fd8d2a23c344b78d2c53))
+* 决战者体验服数据 ([e72478](https://gitee.com/i_melon/DNFCalculating/commit/e724785dfc093bcd09cbbb43dd1081b91c195042))
+* 剑影体验服数据 ([fa6e93](https://gitee.com/i_melon/DNFCalculating/commit/fa6e937f06eaaa1fc834319bde3d7c9b7b4961df))
+* 女大枪体验服数据 ([ebd446](https://gitee.com/i_melon/DNFCalculating/commit/ebd44634300d08da61a836ac55a3acd82a28d9bb))
+* 女弹药体验服数据 ([7d453d](https://gitee.com/i_melon/DNFCalculating/commit/7d453d3ddb277fbc4bac96024741ba56cef5e74f))
+* 女机械体验服数据 ([22ee80](https://gitee.com/i_melon/DNFCalculating/commit/22ee80993f78c1da2fe438ac7f269a5a9fd5389f))
+* 女柔道体验服数据 ([8e3936](https://gitee.com/i_melon/DNFCalculating/commit/8e3936c7e9ee768883104a7ae4b7c107f5006be3))
+* 女气功体验服数据 ([faa217](https://gitee.com/i_melon/DNFCalculating/commit/faa2177b6f05aa594d999f518fe0def88f395440))
+* 女漫体验服数据 ([602ca0](https://gitee.com/i_melon/DNFCalculating/commit/602ca00f4a17b8f1fe086fbd2ba720495e2f9e22))
+* 女街霸体验服数据 ([e0e833](https://gitee.com/i_melon/DNFCalculating/commit/e0e8331f5cd3f14c203b15c28f350cff3f2c3d40))
+* 帕拉丁体验服数据 ([6452fc](https://gitee.com/i_melon/DNFCalculating/commit/6452fc8b63d2b4fda94e2966b20c5cb788ac5fa4))
+* 异端体验服数据 ([e70733](https://gitee.com/i_melon/DNFCalculating/commit/e7073359f03d25d79acfa52ea64273bbeddb3fdb))
+* 征战者体验服数据 ([e28525](https://gitee.com/i_melon/DNFCalculating/commit/e28525b51f1ad0c96e921f5947b263878aac0213))
+* 暗帝体验服数据 ([b1e0b7](https://gitee.com/i_melon/DNFCalculating/commit/b1e0b75598c9b47b6d6b142ef251e7e1b94dbf88))
+* 次元体验服数据 ([fd719f](https://gitee.com/i_melon/DNFCalculating/commit/fd719f1e22720f3d9a0f72fff41b21a2c1bea93e))
+* 武神体验服数据 ([281cf1](https://gitee.com/i_melon/DNFCalculating/commit/281cf1a9e5a551ecd4054388a88b4eae1fc75791))
+* 死灵体验服数据 ([363a10](https://gitee.com/i_melon/DNFCalculating/commit/363a10e326c32e9e774689a3488cdbf919f94e96))
+* 男弹药体验服数据 ([4271e3](https://gitee.com/i_melon/DNFCalculating/commit/4271e335f2f7ca00d0be84bc78ea6488ad664a57))
+* 男机械体验服数据 ([4721bb](https://gitee.com/i_melon/DNFCalculating/commit/4721bb92fba0ae22ed29e328c10325d0f07b49ef))
+* 男柔道体验服数据 ([7580e7](https://gitee.com/i_melon/DNFCalculating/commit/7580e73ca35a0cbbae9733a8bd357715e1ca37a1))
+* 男漫游体验服数据 ([e9adf5](https://gitee.com/i_melon/DNFCalculating/commit/e9adf5eb8f36d46f5effe6e0f1747112bc3d07ed))
+* 精灵骑士体验服数据 ([d6b580](https://gitee.com/i_melon/DNFCalculating/commit/d6b5802135e182a48462db700ccdda04ddaf16a6))
+* 自动监测高分辨率并开启缩放 ([d06912](https://gitee.com/i_melon/DNFCalculating/commit/d069122fe5f2532955e47093adf4bbb8fa12a7bd))
+* 蓝拳体验服数据 ([0205b6](https://gitee.com/i_melon/DNFCalculating/commit/0205b645d13a70b5ed244d50dbf861b715219fa7))
+* 阿修罗体验服数据 ([e5784a](https://gitee.com/i_melon/DNFCalculating/commit/e5784a99dc8ef387f860f3aca2926f7960fdfc59))
+* 隐夜·死灵术士：同步体验服相关护石效果修正 ([77810d](https://gitee.com/i_melon/DNFCalculating/commit/77810d839eaf2695f6c2389c0ccd60e042e662e3))
+* 龙骑体验服数据 ([8407ca](https://gitee.com/i_melon/DNFCalculating/commit/8407ca027d98ed563b4f59df5008df9ab7e65f94))
+
+#### BugFixes
+* 知源·召唤师：修复牛头王库鲁塔和愤怒咆哮护石减CD效果未生效的问题 ([11a3a2](https://gitee.com/i_melon/DNFCalculating/commit/11a3a2240f608c5bee3021e35cc85ae904f7dbbb))
+* 知源·战斗法师：修正炫纹簇护石无法计算的情况 ([20a3dd](https://gitee.com/i_melon/DNFCalculating/commit/20a3dde96770d7961844e5b24f815904030565c9))
+* 隐夜·死灵术士：修正图标错误 ([cde819](https://gitee.com/i_melon/DNFCalculating/commit/cde8194aa095637f0067999a4906e81a2335085e))
+
 ### 2021-07-15
 
 #### NewFeatures
@@ -39,6 +78,7 @@
 * 修复泰玛特鞋子属性错误 ([3ab6f5](https://gitee.com/i_melon/DNFCalculating/commit/3ab6f52652daf872df1df41a3993ed87f3874f0c))
 * 归元·街霸·男：修复毒雷引爆护石加成错误 ([8dfe71](https://gitee.com/i_melon/DNFCalculating/commit/8dfe71b3e73018b520f8ebccd0dc312f45378f8d))
 * 极诣·刃影：修正夜之风相关错误 ([9034e7](https://gitee.com/i_melon/DNFCalculating/commit/9034e7df3d687511560cd9d977554f99bf735fe7))
+
 
 
 
