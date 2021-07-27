@@ -1516,7 +1516,8 @@ class 角色属性(属性):
         for i in range(len(self.技能栏)):
             if '/CD' in self.次数输入[i]:
                 技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
-            self.宠物次数[i] = eval(self.宠物次数[i].replace('num', str(技能释放次数[i])))
+            if type(self.宠物次数[i]) == type('str'):
+                self.宠物次数[i] = eval(self.宠物次数[i].replace('num', str(技能释放次数[i])))
         return 技能释放次数
 
     def 技能释放次数计算(self):

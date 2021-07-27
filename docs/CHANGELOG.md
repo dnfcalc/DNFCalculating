@@ -1,5 +1,18 @@
 ## Newest
 
+### 2021-07-26
+
+#### NewFeatures
+* 新增奶职业的自选装备双切计算 By Umi（测试中功能） ([c68098](https://gitee.com/i_melon/DNFCalculating/commit/c680988432e221e69c6d5fbfa8fcf64be08ea574))
+* 同步国服体验服职业平衡数据 ([a7a230](https://gitee.com/i_melon/DNFCalculating/commit/a7a230fb5d8d3bcb9420d9973b4b8d1ae5c23296))
+* 隐夜·死灵术士：同步体验服相关护石效果修正 ([77810d](https://gitee.com/i_melon/DNFCalculating/commit/77810d839eaf2695f6c2389c0ccd60e042e662e3))
+* 技能次数及宠物次数支持表达式，技能次数如/CD/1.2，/CD-1，min(/CD,3)等，宠物次数如num/1.5，num-1、min(num,2)等，num表示技能释放次数 ([326fdbb](https://gitee.com/i_melon/DNFCalculating/commit/326fdbb7849f9c6240aef0b3db115f1bd80714d2))
+
+#### BugFixes
+* 知源·召唤师：修复牛头王库鲁塔和愤怒咆哮护石减CD效果未生效的问题 ([11a3a2](https://gitee.com/i_melon/DNFCalculating/commit/11a3a2240f608c5bee3021e35cc85ae904f7dbbb))
+* 知源·战斗法师：修正炫纹簇护石无法计算的情况 ([20a3dd](https://gitee.com/i_melon/DNFCalculating/commit/20a3dde96770d7961844e5b24f815904030565c9))
+* 隐夜·死灵术士：修正图标错误 ([cde819](https://gitee.com/i_melon/DNFCalculating/commit/cde8194aa095637f0067999a4906e81a2335085e))
+
 ### 2021-07-15
 
 #### NewFeatures
@@ -39,6 +52,7 @@
 * 修复泰玛特鞋子属性错误 ([3ab6f5](https://gitee.com/i_melon/DNFCalculating/commit/3ab6f52652daf872df1df41a3993ed87f3874f0c))
 * 归元·街霸·男：修复毒雷引爆护石加成错误 ([8dfe71](https://gitee.com/i_melon/DNFCalculating/commit/8dfe71b3e73018b520f8ebccd0dc312f45378f8d))
 * 极诣·刃影：修正夜之风相关错误 ([9034e7](https://gitee.com/i_melon/DNFCalculating/commit/9034e7df3d687511560cd9d977554f99bf735fe7))
+
 
 
 
