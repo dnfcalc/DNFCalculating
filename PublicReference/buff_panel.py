@@ -106,7 +106,7 @@ class 换装窗口(QWidget):
         """
         if self.初始化: return
         自选 = []
-        增幅 = [1]*13
+        增幅 = []
         黑鸦 = []
 
         for i in range(len(self.换装自选装备)):
