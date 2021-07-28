@@ -1875,8 +1875,9 @@ class 角色窗口(窗口):
         换装设置.move(390, 340)
         换装设置.resize(80, 28)
         换装设置.setStyleSheet(按钮样式)
+        
 
-    def 换装设置(self):
+    def 换装设置(self):             
         换装窗口_ = 换装窗口()
         换装窗口_.初始化(self)
         换装显示 = MainWindow(换装窗口_)
@@ -2842,16 +2843,29 @@ class 角色窗口(窗口):
         换装套装, 换装装备 = self.换装套装()
         换装启用 = len(换装装备) != 0
         if not 换装启用: return None
-        t装备打造选项 = self.装备打造选项
-        t黑鸦词条 = self.黑鸦词条
+        t装备打造 = []
+        t黑鸦词条 = []
         t希洛克选择状态 = self.希洛克选择状态
         t奥兹玛选择状态 = self.奥兹玛选择状态
+
         #  保存
-        for i in range(len(换装套装)):
-            self.装备打造选项[i].setCurrentIndex(1)  # 增幅
-            self.装备打造选项[i + 12].setCurrentIndex(self.自选换装打造[i])
+        try:
+            for i in range(len(换装套装)):
+                打造 = []
+                打造.append(self.装备打造选项[i].currentIndex())
+                打造.append(self.装备打造选项[i+12].currentIndex())
+                t装备打造.append(打造)
+                self.装备打造选项[i].setCurrentIndex(1)  # 增幅
+                self.装备打造选项[i + 12].setCurrentIndex(self.自选换装打造[i])      
+        except Exception as e:
+            print(e)
         try:
             for i in range(4):
+                词条 = []           
+                词条.append(self.黑鸦词条[i][0].currentIndex())
+                词条.append(self.黑鸦词条[i][1].currentIndex())
+                词条.append(self.黑鸦词条[i][3].currentIndex())
+                t黑鸦词条.append(词条)
                 self.黑鸦词条[i][0].setCurrentIndex(2)  # 自选数值
                 self.黑鸦词条[i][1].setCurrentIndex(self.换装遴选[i][0])  # 自选数值
                 self.黑鸦词条[i][3].setCurrentIndex(self.换装遴选[i][1])  # 自选数值
@@ -2870,8 +2884,16 @@ class 角色窗口(窗口):
         BUFF = deepcopy(self.初始属性)
         self.输入属性(BUFF)
         BUFF.穿戴装备(换装装备, 换装套装)
-        self.装备打造选项 = t装备打造选项
-        self.黑鸦词条 = t黑鸦词条
+
+        for i in range(len(t装备打造)):          
+            self.装备打造选项[i].setCurrentIndex(t装备打造[i][0])  # 增幅
+            self.装备打造选项[i + 12].setCurrentIndex(t装备打造[i][1])
+
+        for i in range(len(t黑鸦词条)):     
+            self.黑鸦词条[i][0].setCurrentIndex(t黑鸦词条[i][0])  # 自选数值
+            self.黑鸦词条[i][1].setCurrentIndex(t黑鸦词条[i][1])  # 自选数值
+            self.黑鸦词条[i][3].setCurrentIndex(t黑鸦词条[i][2])  # 自选数值
+
         self.希洛克选择状态 = t希洛克选择状态
         self.奥兹玛选择状态 = t奥兹玛选择状态
         #  恢复
@@ -2970,7 +2992,7 @@ class 角色窗口(窗口):
                 B.BUFF智力per = BUFF.BUFF智力per
                 B.BUFF独立per = BUFF.BUFF独立per
                 B.BUFF魔攻per = BUFF.BUFF魔攻per
-                B.BUFF物攻per = BUFF.BUFF物攻per
+                B.BUFF物攻per = BUFF.BUFF物攻per            
             # 双切 End
             合计力量 = 0
             合计智力 = 0
@@ -2978,12 +3000,15 @@ class 角色窗口(窗口):
             合计魔攻 = 0
             合计独立 = 0
             for i in range(len(B.技能栏)):
-                if sum(统计详情[i]) != 0:
-                    合计力量 += 统计详情[i][3]
-                    合计智力 += 统计详情[i][4]
-                    合计物攻 += 统计详情[i][5]
-                    合计魔攻 += 统计详情[i][6]
-                    合计独立 += 统计详情[i][7]
+                if sum(统计详情[i]) != 0:   
+                    详情 = 统计详情[i] # 如果设置切装 则适用切装的属性              
+                    if BUFF is not None and B.技能栏[i].名称 in ['禁忌诅咒','死命召唤', '勇气祝福','勇气圣歌','荣誉祝福']:
+                        详情 = BUFF统计详情[i]
+                    合计力量 += 详情[3]
+                    合计智力 += 详情[4]
+                    合计物攻 += 详情[5]
+                    合计魔攻 += 详情[6]
+                    合计独立 += 详情[7]
 
             总奶量 = ''
             # tempstr = ''
@@ -3369,8 +3394,13 @@ class 角色窗口(窗口):
         人物.resize(90, 90)
         人物.setAlignment(Qt.AlignTop)
 
-        x = self.角色属性B.BUFF面板()
         y = self.角色属性B.一觉面板()
+
+        if 双切开关:
+            x = 双切属性.BUFF面板()
+        else:
+            x = self.角色属性B.BUFF面板()
+
         面板显示 = []
         for i in range(11):
             面板显示.append(QLabel(输出窗口))
@@ -3676,24 +3706,9 @@ class 角色窗口(窗口):
             self.行高 = min(int(440 / count), 30)
         j = -1
 
-        for i in range(len(self.角色属性B.技能栏)):
-            if 显示模式 == 1:
-                基准值合计力量 += self.基准值[1][i][3]
-                基准值合计智力 += self.基准值[1][i][4]
-                基准值合计物攻 += self.基准值[1][i][5]
-                基准值合计魔攻 += self.基准值[1][i][6]
-                基准值合计独立 += self.基准值[1][i][7]
-            合计力量 += 统计详情[i][3]
-            合计智力 += 统计详情[i][4]
-            合计物攻 += 统计详情[i][5]
-            合计魔攻 += 统计详情[i][6]
-            合计独立 += 统计详情[i][7]
 
         for i in range(len(self.角色属性B.技能栏)):
             if sum(统计详情[i]) != 0:
-                for k in range(len(统计详情[i])):
-                    if 统计详情[i][k] == 0:
-                        统计详情[i][k] = ''
                 j += 1
                 每行详情 = []
                 for k in range(10):
@@ -3707,72 +3722,21 @@ class 角色窗口(窗口):
                 每行详情[1].setText('Lv.' + str(实际技能等级[i]))
                 每行详情[1].move(337, 50 + j * self.行高 - pox_y)
                 每行详情[1].resize(30, min(28, self.行高))
-                if self.角色属性B.技能栏[i].名称 in ['禁忌诅咒', '勇气祝福']:
-                    if 双切开关:
-                        统计详情[i] = 双切详情[i]
-                        for k in range(len(双切详情[i])):
-                            if 双切详情[i][k] == 0:
-                                双切详情[i][k] = ''
-                        每行详情[1].setText('Lv.' + str(双切属性.技能栏[i].等级))
-                # 智力
-                if 显示模式 == 1:
-                    每行详情[2].setText(self.对比输出(统计详情[i][0], self.基准值[1][i][0]))
-                else:
-                    每行详情[2].setText(str(统计详情[i][0]))
-                每行详情[2].move(370, 50 + j * self.行高 - pox_y)
-                每行详情[2].resize(50, min(28, self.行高))
-                # 体力
-                if 显示模式 == 1:
-                    每行详情[3].setText(self.对比输出(统计详情[i][1], self.基准值[1][i][1]))
-                else:
-                    每行详情[3].setText(str(统计详情[i][1]))
-                每行详情[3].move(410, 50 + j * self.行高 - pox_y)
-                每行详情[3].resize(50, min(28, self.行高))
-                # 精神
-                if 显示模式 == 1:
-                    每行详情[4].setText(self.对比输出(统计详情[i][2], self.基准值[1][i][2]))
-                else:
-                    每行详情[4].setText(str(统计详情[i][2]))
-                每行详情[4].move(450, 50 + j * self.行高 - pox_y)
-                每行详情[4].resize(50, min(28, self.行高))
-                # 力量
-                if 显示模式 == 1:
-                    每行详情[5].setText(self.对比输出(统计详情[i][3], self.基准值[1][i][3]))
-                else:
-                    每行详情[5].setText(str(统计详情[i][3]))
-                每行详情[5].move(490, 50 + j * self.行高 - pox_y)
-                每行详情[5].resize(50, min(28, self.行高))
-                # 智力
-                if 显示模式 == 1:
-                    每行详情[6].setText(self.对比输出(统计详情[i][4], self.基准值[1][i][4]))
-                else:
-                    每行详情[6].setText(str(统计详情[i][4]))
-                每行详情[6].move(530, 50 + j * self.行高 - pox_y)
-                每行详情[6].resize(50, min(28, self.行高))
-                # 物攻
-                if 显示模式 == 1:
-                    每行详情[7].setText(self.对比输出(统计详情[i][5], self.基准值[1][i][5]))
-                else:
-                    每行详情[7].setText(str(统计详情[i][5]))
-                每行详情[7].move(570, 50 + j * self.行高 - pox_y)
-                每行详情[7].resize(50, min(28, self.行高))
-                # 魔攻
-                if 显示模式 == 1:
-                    每行详情[8].setText(self.对比输出(统计详情[i][6], self.基准值[1][i][6]))
-                else:
-                    每行详情[8].setText(str(统计详情[i][6]))
-                每行详情[8].move(610, 50 + j * self.行高 - pox_y)
-                每行详情[8].resize(50, min(28, self.行高))
-                # 独立
-                if 显示模式 == 1:
-                    每行详情[9].setText(self.对比输出(统计详情[i][7], self.基准值[1][i][7]))
-                else:
-                    每行详情[9].setText(str(统计详情[i][7]))
-                每行详情[9].move(650, 50 + j * self.行高 - pox_y)
-                每行详情[9].resize(50, min(28, self.行高))
-
+                if 双切开关 and self.角色属性B.技能栏[i].名称 in ['禁忌诅咒','死命召唤', '勇气祝福','勇气圣歌', '荣誉祝福']:
+                    统计详情[i] = 双切详情[i]
+                    每行详情[1].setText('Lv.' + str(双切属性.技能栏[i].等级))
+                for k in range(8):
+                    详情 = str(统计详情[i][k])
+                    if 显示模式 == 1:
+                        详情 = self.对比输出(统计详情[i][k], self.基准值[1][i][k])
+                    if 详情  == '0' or 详情 == 0:
+                        详情 = ''                   
+                    每行详情[k+2].setText(详情)
+                    每行详情[k+2].move(370 + k* 40, 50 + j * self.行高 - pox_y)
+                    每行详情[k+2].resize(50, min(28, self.行高))
+               
                 for l in range(1, 10):
-                    if 双切开关 and self.角色属性B.技能栏[i].名称 in ['禁忌诅咒', '勇气祝福']:
+                    if 双切开关 and self.角色属性B.技能栏[i].名称 in ['禁忌诅咒','死命召唤', '勇气祝福','勇气圣歌', '荣誉祝福']:
                         每行详情[l].setStyleSheet(
                             "QLabel{font-size:12px;color:rgb(255,0,0)}")
                     else:
@@ -3780,6 +3744,18 @@ class 角色窗口(窗口):
                             "QLabel{font-size:12px;color:rgb(255,255,255)}")
                     每行详情[l].setAlignment(Qt.AlignCenter)
 
+        for i in range(len(self.角色属性B.技能栏)):
+            if 显示模式 == 1:
+                基准值合计力量 += self.基准值[1][i][3]
+                基准值合计智力 += self.基准值[1][i][4]
+                基准值合计物攻 += self.基准值[1][i][5]
+                基准值合计魔攻 += self.基准值[1][i][6]
+                基准值合计独立 += self.基准值[1][i][7]
+            合计力量 += 统计详情[i][3]
+            合计智力 += 统计详情[i][4]
+            合计物攻 += 统计详情[i][5]
+            合计魔攻 += 统计详情[i][6]
+            合计独立 += 统计详情[i][7]
         tempstr = ''
         if 显示模式 == 1:
             对比力量 = self.对比输出(合计力量, 基准值合计力量, 0, 1)
@@ -3850,7 +3826,7 @@ class 角色窗口(窗口):
         合计.setStyleSheet("QLabel{color:rgb(104,213,237);font-size:15px}")
         合计.setText(tempstr)
         if 双切开关:
-            合计.setStyleSheet("QLabel{color:rgb(104,213,237);font-size:9px}")
+            合计.setStyleSheet("QLabel{color:rgb(104,213,237);font-size:12px}")
         合计.resize(450, 300)
         合计.move(280, 30 + j * self.行高 - pox_y2)
         合计.setAlignment(Qt.AlignCenter)
