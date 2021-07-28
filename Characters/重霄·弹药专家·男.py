@@ -345,19 +345,19 @@ class 技能15(职业主动技能):
 
     def 装备护石(self, x):
         if x == 0:
-            self.基础2 = self.基础*0.22
-            self.成长2 = self.成长*0.22
+            # self.基础2 = self.基础*0.22
+            # self.成长2 = self.成长*0.22
             self.技能施放时间 = 2
-            self.攻击次数2 = 17
+            # self.攻击次数2 = 17
             self.CD *= 0.95
-            # self.倍率 *= 1.18
+            self.倍率 *= 1.22
         elif x == 1:
-            self.基础2 = self.基础*0.36
-            self.成长2 = self.成长*0.36
+            # self.基础2 = self.基础*0.36
+            # self.成长2 = self.成长*0.36
             self.技能施放时间 = 2
-            self.攻击次数2 = 17
+            # self.攻击次数2 = 17
             self.CD *= 0.95
-
+            self.倍率 *= 1.32
 
 class 技能16(被动技能):
     名称 = '战地功勋'
