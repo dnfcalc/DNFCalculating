@@ -32,7 +32,7 @@ class 技能0(主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数 + self.data2[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数2) * self.倍率
+        return 1.209*(self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数 + self.data2[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数2) * self.倍率
 
     def 技能形态改变(self):
         self.攻击次数2 = 0
@@ -66,7 +66,7 @@ class 技能2(主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数) * self.倍率
+        return 1.208*(self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数) * self.倍率
 
 
 class 技能3(主动技能):
@@ -84,7 +84,7 @@ class 技能3(主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数) * self.倍率
+        return 1.159*(self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数) * self.倍率
 
 
 class 技能4(主动技能):
@@ -148,7 +148,7 @@ class 技能6(主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数 + self.data2[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数2)
+        return 1.202*(self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数 + self.data2[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数2)
 
 
 class 技能7(主动技能):
@@ -166,7 +166,7 @@ class 技能7(主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数) * self.倍率
+        return 1.213*(self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数) * self.倍率
 
 
 class 技能8(被动技能):
@@ -199,7 +199,7 @@ class 技能9(主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数 + self.data2[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数2) * self.倍率
+        return 1.187*(self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数 + self.data2[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击次数2) * self.倍率
 
 
 class 技能10(主动技能):
@@ -218,7 +218,7 @@ class 技能10(主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        return self.data1[self.等级] * self.攻击倍率 * (1 + self.TP成长 * self.TP等级) * self.攻击次数 * self.倍率
+        return 1.211*self.data1[self.等级] * self.攻击倍率 * (1 + self.TP成长 * self.TP等级) * self.攻击次数 * self.倍率
 
     是否有护石 = 1
     护石选项 = ['魔界', '圣痕']
@@ -280,7 +280,7 @@ class 技能11(主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击倍率 * self.攻击次数 +
+        return 1.219*(self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击倍率 * self.攻击次数 +
                 self.data2[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击倍率2 * self.攻击次数2) * self.倍率
 
     是否有护石 = 1
@@ -345,7 +345,7 @@ class 技能12(主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * self.攻击倍率 * (1 + self.TP成长 * self.TP等级) * self.攻击次数 +
+        return 1.214*(self.data1[self.等级] * self.攻击倍率 * (1 + self.TP成长 * self.TP等级) * self.攻击次数 +
                 self.data2[self.等级] * self.攻击倍率2 * (1 + self.TP成长 * self.TP等级) * self.攻击次数2) * self.倍率
 
     是否有护石 = 1
@@ -414,7 +414,7 @@ class 技能14(主动技能):
     CD = 145.0
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * self.攻击次数 + self.data2[self.等级] * self.攻击次数2 + self.data3[self.等级] * self.攻击次数3) * self.倍率
+        return 1.209*(self.data1[self.等级] * self.攻击次数 + self.data2[self.等级] * self.攻击次数2 + self.data3[self.等级] * self.攻击次数3) * self.倍率
 
 
 class 技能15(主动技能):
@@ -435,7 +435,7 @@ class 技能15(主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击倍率 * self.攻击次数 +
+        return 1.209*(self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击倍率 * self.攻击次数 +
                 self.data2[self.等级] * (1 + self.TP成长 * self.TP等级) * self.攻击倍率 * self.攻击次数2) * self.倍率
 
     是否有护石 = 1
@@ -485,7 +485,7 @@ class 技能16(主动技能):
     TP上限 = 5
 
     def 等效百分比(self, 武器类型):
-        return self.data1[self.等级] * self.攻击倍率 * (1 + self.TP成长 * self.TP等级) * self.攻击次数 * self.倍率
+        return 1.27*self.data1[self.等级] * self.攻击倍率 * (1 + self.TP成长 * self.TP等级) * self.攻击次数 * self.倍率
 
     是否有护石 = 1
     护石选项 = ['魔界', '圣痕']
@@ -570,7 +570,7 @@ class 技能18(主动技能):
         if self.等级 == 0:
             return 0
         else:
-            return (self.data1[self.等级] * self.攻击倍率 * self.攻击次数 +
+            return 1.209*(self.data1[self.等级] * self.攻击倍率 * self.攻击次数 +
                     self.data2[self.等级] * self.攻击倍率 * self.攻击次数2 + 29) * self.倍率
 
     是否有护石 = 1
@@ -607,7 +607,7 @@ class 技能19(主动技能):
     CD = 40.0
 
     def 等效百分比(self, 武器类型):
-        return self.data[self.等级] * self.攻击倍率 * self.倍率
+        return 1.214*self.data[self.等级] * self.攻击倍率 * self.倍率
 
     是否有护石 = 1
     护石选项 = ['圣痕']
@@ -647,7 +647,7 @@ class 技能20(主动技能):
     CD = 180.0
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * self.攻击次数 + self.data2[self.等级] * self.攻击次数2 + self.data3[self.等级] * self.攻击次数3) * self.倍率
+        return 1.271*(self.data1[self.等级] * self.攻击次数 + self.data2[self.等级] * self.攻击次数2 + self.data3[self.等级] * self.攻击次数3) * self.倍率
 
 
 class 技能21(被动技能):
@@ -672,7 +672,7 @@ class 技能22(主动技能):
     攻击次数 = 1
     CD = 60.0
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * self.攻击次数) * self.倍率
+        return 1.23*(self.data1[self.等级] * self.攻击次数) * self.倍率
 
 
 class 技能23(主动技能):
@@ -699,7 +699,7 @@ class 技能23(主动技能):
         # sum = 252985 + self.等级 * 76385
         for i in range(len(self.次数)):
             sum += self.data0[i][self.等级] * self.次数[i]
-        return sum * self.倍率
+        return sum * self.倍率*1.21
     CD = 290.0
     关联技能 = ['无']
 
