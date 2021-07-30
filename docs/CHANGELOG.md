@@ -1,5 +1,20 @@
 ## Newest
 
+### 2021-07-30
+
+#### NewFeatures
+* 同步国服体验服数据 ([8b694e](https://gitee.com/i_melon/DNFCalculating/commit/8b694e5660523ad36d3e762dbfc7f3dc59982980))
+* 归元·柔道家·男：同步国服体验服臂铠精通实际CD效果 ([a46410](https://gitee.com/i_melon/DNFCalculating/commit/a4641029c467b753c27dca917aafdb62894037b0))
+
+#### BugFixes
+* 修复奶系换装功能bug ([b5d8c4](https://gitee.com/i_melon/DNFCalculating/commit/b5d8c4162c5be8ce89fd29448a51326303c2da85))
+* 知源·冰结师：修正旋冰穿刺倍率错误 ([e8a681](https://gitee.com/i_melon/DNFCalculating/commit/e8a68190e3e6da9bee048cc295b448136f308ad6))
+* 知源·召唤师：修正部分技能CD错误 ([9cfaee](https://gitee.com/i_melon/DNFCalculating/commit/9cfaee6d94a11cbea9356ad74f4ad88db42387e8))
+* 神启·异端审判者：修正炎狱祭坛：炮烙计算错误 ([908b04](https://gitee.com/i_melon/DNFCalculating/commit/908b04e6cb27225d3f0d4b173d00df3e0d89b6ac))
+* 重霄·弹药专家·男：修正交叉射击加强数值错误 ([643fbe](https://gitee.com/i_melon/DNFCalculating/commit/643fbea735787d33c7716597387df3073813ed2d))
+* 重霄·弹药专家·男：修正子弹选择次数后无法计算的情况 fix #I42MLF ([310c0b](https://gitee.com/i_melon/DNFCalculating/commit/310c0b4e8a572c3a55aa2b6085ca2da570ba657a))
+* 重霄·弹药专家·男：修正轻火力速射护石问题 ([02a0ab](https://gitee.com/i_melon/DNFCalculating/commit/02a0aba9112f8f5675c820c480b67e45056757a7))
+
 ### 2021-07-26
 
 #### NewFeatures
@@ -52,6 +67,7 @@
 * 修复泰玛特鞋子属性错误 ([3ab6f5](https://gitee.com/i_melon/DNFCalculating/commit/3ab6f52652daf872df1df41a3993ed87f3874f0c))
 * 归元·街霸·男：修复毒雷引爆护石加成错误 ([8dfe71](https://gitee.com/i_melon/DNFCalculating/commit/8dfe71b3e73018b520f8ebccd0dc312f45378f8d))
 * 极诣·刃影：修正夜之风相关错误 ([9034e7](https://gitee.com/i_melon/DNFCalculating/commit/9034e7df3d687511560cd9d977554f99bf735fe7))
+
 
 
 
