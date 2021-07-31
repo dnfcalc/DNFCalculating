@@ -1,5 +1,10 @@
 ## Newest
 
+### 2021-07-31
+
+#### BugFixes
+* 知源·召唤师：修正闪退的情况 ([64ea9d](https://gitee.com/i_melon/DNFCalculating/commit/64ea9dcf7b40b7ef755eb2622cc774f17f2d437d))
+
 ### 2021-07-30
 
 #### NewFeatures
@@ -67,6 +72,7 @@
 * 修复泰玛特鞋子属性错误 ([3ab6f5](https://gitee.com/i_melon/DNFCalculating/commit/3ab6f52652daf872df1df41a3993ed87f3874f0c))
 * 归元·街霸·男：修复毒雷引爆护石加成错误 ([8dfe71](https://gitee.com/i_melon/DNFCalculating/commit/8dfe71b3e73018b520f8ebccd0dc312f45378f8d))
 * 极诣·刃影：修正夜之风相关错误 ([9034e7](https://gitee.com/i_melon/DNFCalculating/commit/9034e7df3d687511560cd9d977554f99bf735fe7))
+
 
 
 
