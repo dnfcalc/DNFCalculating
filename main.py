@@ -239,9 +239,9 @@ class 选择窗口(QWidget):
                                 10 + int(count / 5) * 100)
                     butten.clicked.connect(
                         lambda state, index=角色列表[i]: self.职业版本判断(index))
-                    temp = '<b>作者：<font color="#C66211">' + 角色列表[i][
-                        "作者"] + '</font>'
-                    butten.setToolTip(temp)
+                    # temp = '<b>作者：<font color="#C66211">' + 角色列表[i][
+                    #     "作者"] + '</font>'
+                    # butten.setToolTip(temp)
             else:
                 img_box_2 = QLabel(self.topFiller)
                 img_box_2.setStyleSheet(
