@@ -125,7 +125,8 @@ class 技能4(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(1.33 + 0.02 * self.等级, 5)
+            # 默认高阶
+            return round(1.36 + 0.02 * self.等级, 5)
 
 
 class 技能5(职业主动技能):

@@ -283,9 +283,9 @@ class 技能14(被动技能):
         if self.等级 == 0:
             return 1.0
         elif self.等级 <= 16:
-            return round(0.99 + 0.015 * self.等级, 5)
+            return round(0.99 + 0.04 + 0.015 * self.等级, 5)
         else:
-            return round(1.23 + 0.02 * (self.等级 - 16), 5)
+            return round(1.23 + 0.04 + 0.02 * (self.等级 - 16), 5)
 
     def 加成倍率2(self, 武器类型):
         return self.地波加成() / self.加成倍率(武器类型)
@@ -294,9 +294,9 @@ class 技能14(被动技能):
         if self.等级 == 0:
             return 1.0
         elif self.等级 <= 16:
-            return round(1.105 + 0.015 * self.等级, 5)
+            return round(1.105 + 0.04 + 0.015 * self.等级, 5)
         else:
-            return round(1.345 + 0.02 * (self.等级 - 16), 5)
+            return round(1.345 + 0.04 + 0.02 * (self.等级 - 16), 5)
 
 
 class 技能15(主动技能):
