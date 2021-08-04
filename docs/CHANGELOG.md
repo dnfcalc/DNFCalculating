@@ -1,5 +1,16 @@
 ## Newest
 
+### 2021-08-05
+
+#### NewFeatures
+* 同步修复技能冷却时间恢复对部分技能无加成的情况 ([fa4a04](https://gitee.com/i_melon/DNFCalculating/commit/fa4a043db344c63aaacabcfaa523d3539e746826))
+* 同步职业平衡二次改动 ([811d09](https://gitee.com/i_melon/DNFCalculating/commit/811d09432f2a557d65e37771dd1cbffdeeaeac0f))
+* 部分职业作者挂着计算器作者名声发表不当言论或进行不当行为，在此再次强调一下，除西瓜和纸飞机对计算器的言论外，其余都可当做个人行为和言论<br>
+同时由于较多职业作者不再维护数据，绝大部分职业目前都是由西瓜和纸飞机维护，暂时统一取消作者显示，可在contributors中查看贡献人员名单 ([fb3c81](https://gitee.com/i_melon/DNFCalculating/commit/fb3c812145886e9f9e872c5f1f81961dc993846d))
+
+
+## History
+
 ### 2021-07-31
 
 #### BugFixes
@@ -78,8 +89,6 @@
 
 
 
-
-## History
 
 ### 2021-06-25
 
