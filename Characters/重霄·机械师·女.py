@@ -429,8 +429,8 @@ class 技能16(主动技能):
             self.倍率 *= 1.35
             self.CD *= 0.9
 
-    def 等效CD(self, 武器类型, 输出类型):
-        return round(self.CD, 1)
+    # def 等效CD(self, 武器类型, 输出类型):
+    #     return round(self.CD, 1)
 
     def 等效百分比(self, 武器类型):
         return self.data0[self.等级] * self.倍率
@@ -455,8 +455,8 @@ class 技能17(主动技能):
             self.倍率 *= 1.34
             self.CD *= 0.9
 
-    def 等效CD(self, 武器类型, 输出类型):
-        return round(self.CD, 1)
+    # def 等效CD(self, 武器类型, 输出类型):
+    #     return round(self.CD, 1)
 
     def 等效百分比(self, 武器类型):
         return self.data0[self.等级] * self.攻击次数 * self.倍率
@@ -482,8 +482,8 @@ class 技能18(主动技能):
             self.倍率 *= 1.314
             self.CD *= 0.9
 
-    def 等效CD(self, 武器类型, 输出类型):
-        return round(self.CD, 1)
+    # def 等效CD(self, 武器类型, 输出类型):
+    #     return round(self.CD, 1)
 
     def 等效百分比(self, 武器类型):
         return self.data0[self.等级] * self.攻击次数 * self.倍率
