@@ -333,13 +333,13 @@ class 技能14(职业主动技能):
             self.data0 = [int(x*0.97) for x in self.data0]
             self.攻击次数 = 6
             self.攻击次数2 = 0
-            self.CD = 15
+            self.CD /=3
             self.基础释放次数 = 2
         elif x == 1:
             self.data0 = [int(x*1.04) for x in self.data0]
             self.攻击次数 = 6
             self.攻击次数2 = 0
-            self.CD = 15
+            self.CD /=3
             self.基础释放次数 = 2
 
 
