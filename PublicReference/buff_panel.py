@@ -1,127 +1,270 @@
-
-from PyQt5.QtWidgets import QWidget, QLabel, QGraphicsOpacityEffect
+from PublicReference.view.Page import Page
+from PyQt5.QtWidgets import QLabel, QGraphicsOpacityEffect
 
 from PublicReference.equipment.武器融合_buff import *
 from PublicReference.equipment.黑鸦_buff import 装备变换属性列表, 武器变换属性列表
 from PublicReference.utils.constant import *
 from PublicReference.equipment.equ_list import *
+from PublicReference.utils.store import *
 
-class 换装窗口(QWidget):
+
+class 换装窗口(Page):
     def __init__(self):
         super().__init__()
 
-    def 初始化(self, 人物面板):
+    def 初始化(self, store: Store):
+        self.store = store
         self.初始化 = True
-        self.setDelegate(人物面板.更新换装)
-        self.初始化UI(icon=人物面板.icon, bgImg=人物面板.主背景图片)
-        self.初始化换装选择(人物面板)
+        self.初始化UI()
         self.初始化 = False
 
-    def 初始化UI(self, icon, bgImg):
+    def 初始化UI(self):
+        icon = self.store.get("/app/window/icon")
+        bgImg = self.store.get("/app/window/background_image")
         self.setStyleSheet('''QToolTip {
            background-color: black;
            color: white;
            border: 0px
            }''')
-        self.setFixedSize(600,600)
+        self.setFixedSize(960, 560)
         self.setWindowTitle("换装设置")
         self.setWindowIcon(icon)
-        self.初始化背景(bgImg)
+        backgroundColorLabel = QLabel(self)
+        backgroundColorLabel.resize(self.width(), self.height())
+        backgroundColorLabel.setStyleSheet(
+            "QLabel{background-color:rgba(50,50,50,1)}")
+        graphicsEffect = QGraphicsOpacityEffect()
+        graphicsEffect.setOpacity(0.1)
+        backgroundImageLabel = QLabel(self)
+        backgroundImageLabel.setPixmap(bgImg)
+        backgroundImageLabel.move(0, int((self.height() - 1230) / 6))
+        backgroundImageLabel.setGraphicsEffect(graphicsEffect)
+        borderLabel = QLabel(self)
+        borderLabel.resize(self.width() - 4, self.height() - 2)
+        borderLabel.move(2, -1)
+        borderLabel.setStyleSheet("QLabel{border:1px solid black}")
 
-    def 初始化背景(self, bgImg):
-        背景颜色 = QLabel(self)
-        背景颜色.resize(self.width(), self.height())
-        背景颜色.setStyleSheet("QLabel{background-color:rgba(50,50,50,1)}")
-        主背景透明度 = QGraphicsOpacityEffect()
-        主背景透明度.setOpacity(0.1)
-        主背景 = QLabel(self)
-        主背景.setPixmap(bgImg)
-        主背景.move(0, int((self.height() - 1230) / 6))
-        主背景.setGraphicsEffect(主背景透明度)
-        边框 = QLabel(self)
-        边框.resize(self.width() - 4, self.height() - 2)
-        边框.move(2, -1)
-        边框.setStyleSheet("QLabel{border:1px solid black}")
+        yesButton = QPushButton("应用", self)
+        yesButton.move(700, 500)
+        yesButton.resize(80, 24)
+        yesButton.setStyleSheet(按钮样式)
+        yesButton.clicked.connect(lambda _: self.设置换装())
 
-    def 初始化换装选择(self, 人物面板):
-        count = 0
-        self.换装自选装备 = []
-        self.换装装备增幅选项 = []
-        for i in 部位列表:
-            x = MyQComboBox(self)
-            for j in range(32):
-                x.addItem(str(j))
-            x.resize(55, 20)
-            self.换装装备增幅选项.append(x)
-            x.move(30, 50 + 30 * count)
-            self.换装自选装备.append(MyQComboBox(self))
-            self.换装自选装备[count].resize(220, 22)
-            self.换装自选装备[count].move(90, 50 + 30 * count)
-            self.换装自选装备[count].currentIndexChanged.connect(
-                lambda state, index=count: self.换装自选装备更改())
-            for j in equ.get_equ_list():
-                if j.部位 == i:
-                    if i == '武器':
-                        if j.类型 in 人物面板.角色属性A.武器选项:
-                            self.换装自选装备[count].addItem(j.名称)
-                    else:
-                        self.换装自选装备[count].addItem(j.名称)
-            count += 1
+        cancelButton = QPushButton("取消", self)
+        cancelButton.move(790, 500)
+        cancelButton.resize(80, 24)
+        cancelButton.setStyleSheet(按钮样式)
+        cancelButton.clicked.connect(lambda _: self.closeWindow())
 
+        resetButton = QPushButton("重置", self)
+        resetButton.move(700, 460)
+        resetButton.resize(170, 24)
+        resetButton.setStyleSheet(按钮样式)
+        resetButton.clicked.connect(lambda _: self.reset())
+
+        self.初始化自选装备UI()
         self.初始化奥兹玛UI()
         self.初始化希洛克UI()
         self.初始化遴选UI()
-        self.初始化武器UI()
-        self.初始化换装数据(人物面板)
-        self.初始化希洛克(人物面板.希洛克选择状态)
-        self.初始化奥兹玛(人物面板.奥兹玛选择状态)
+        self.初始化残香UI()
 
-    def setDelegate(self, func):
-        self.更新自选换装 = func
+    def showEvent(self, event):
+        self.初始化数据()
+        return super().showEvent(event)
 
-    def 初始化换装数据(self, 人物面板):
-        self.初始化装备(人物面板.自选装备,人物面板.装备打造选项)
+    def 初始化数据(self):
+        self.初始化装备()
+        self.初始化希洛克()
+        self.初始化奥兹玛()
 
-    def 初始化装备(self, 自选装备, 自选打造):
-        for 部位 in range(len(自选装备)):
-            self.换装自选装备[部位].setCurrentIndex(自选装备[部位].currentIndex())
-            self.换装装备增幅选项[部位].setCurrentIndex(自选打造[部位 + 12].currentIndex())
+    def 初始化装备(self):
+        equips = self.store.first(
+            "/buffer/data/register/equips", "/buffer/data/equips")
+        amplifies = self.store.first(
+            "/buffer/data/register/amplifies", "/buffer/data/amplifies")
+        for 部位 in range(len(equips)):
+            self.自选装备[部位].setCurrentText(equips[部位])
+            self.自选增幅选项[部位].setCurrentIndex(amplifies[部位])
 
-    def 初始化希洛克(self, 希洛克选择状态):
-        for i in range(len(希洛克选择状态)):
-            if 希洛克选择状态[i] == 1:
-                self.希洛克选择(i)
+    def 初始化希洛克(self):
+        sirocos = self.store.first(
+            "/buffer/data/register/siroco", "/buffer/data/siroco")
+        for i in range(len(sirocos)):
+            if sirocos[i] == 1:
+                self.希洛克选择(i, 1)
 
+    def 初始化奥兹玛(self):
+        ozmas = self.store.first(
+            "/buffer/data/register/ozma", "/buffer/data/ozma")
+        for i in range(len(ozmas)):
+            if ozmas[i] == 1:
+                self.奥兹玛选择(i, 1)
+    
+    def reset(self):
+        self.store.delete("^/buffer/data/register/.*$")
+        self.初始化数据()
 
-    def 初始化奥兹玛(self, 奥兹玛选择状态):
-        for i in range(len(奥兹玛选择状态)):
-            if 奥兹玛选择状态[i] == 1:
-                self.奥兹玛选择(i)
-
-
-    def 换装自选装备更改(self):
-        """
-            self.更新自选换装是一个protocol, 由 base_buff.py 实现，作用是更新换装相关数值
-            def 更新换装(self, 自选换装, 自选打造, 换装奥兹玛, 换装希洛克, 换装遴选)
-        """
-        if self.初始化: return
+    def 设置换装(self):
+        if self.初始化:
+            return
         自选 = []
         增幅 = []
         黑鸦 = []
 
-        for i in range(len(self.换装自选装备)):
-            自选.append(self.换装自选装备[i].currentText())
-            增幅.append(self.换装装备增幅选项[i].currentIndex())
+        for i in range(len(self.自选装备)):
+            自选.append(self.自选装备[i].currentText())
+            增幅.append(self.自选增幅选项[i].currentIndex())
         for i in range(len(self.黑鸦词条)):
-            黑鸦.append([self.黑鸦词条[i][1].currentIndex(), self.黑鸦词条[i][3].currentIndex()])
-        self.更新自选换装(自选,
-                    增幅,
-                    self.奥兹玛选择状态,
-                    self.希洛克选择状态,
-                    黑鸦)
+            黑鸦.append([self.黑鸦词条[i][1].currentIndex(),
+                      self.黑鸦词条[i][3].currentIndex()])
+
+        self.store.set("/buffer/data/register/equips", 自选)
+        self.store.set("/buffer/data/register/siroco", self.希洛克选择状态)
+        self.store.set("/buffer/data/register/ozma", self.奥兹玛选择状态)
+        self.store.set("/buffer/data/register/black_purgatory", 黑鸦)
+        self.store.set("/buffer/data/register/amplifies", 增幅)
+
+        self.store.emit("/buffer/event/register_changed")
+        self.closeWindow()
+
+    def 初始化自选装备UI(self):
+        count = 0
+        self.装备锁定 = []
+        self.自选装备 = []
+        self.自选增幅选项 = []
+
+        propertyA = self.store.get("/buffer/temp/property_a")
+
+        标签 = QLabel('锁定', self)
+        标签.setAlignment(Qt.AlignCenter)
+        标签.setStyleSheet(标签样式)
+        标签.resize(70, 25)
+        标签.move(20, 20)
+
+        标签 = QLabel('单件选择', self)
+        标签.setAlignment(Qt.AlignCenter)
+        标签.setStyleSheet(标签样式)
+        标签.resize(240, 25)
+        标签.move(70, 20)
+
+        for i in 部位列表:
+
+            lock = QCheckBox(i, self)
+            lock.setStyleSheet(复选框样式)
+            lock.resize(70, 22)
+            lock.move(20, 50 + 30 * count)
+            self.装备锁定.append(lock)
+
+            x = MyQComboBox(self)
+            for j in range(32):
+                x.addItem(str(j))
+            x.resize(55, 20)
+            x.move(90, 50 + 30 * count)
+            self.自选增幅选项.append(x)
+
+            combo = MyQComboBox(self)
+
+            self.自选装备.append(combo)
+            combo.resize(220, 22)
+            combo.move(150, 50 + 30 * count)
+
+            for j in equ.get_equ_list():
+                if j.部位 == i:
+                    if i == '武器':
+                        if j.类型 in propertyA.武器选项:
+                            combo.addItem(j.名称)
+                    else:
+                        combo.addItem(j.名称)
+            count += 1
+
+        标签 = QLabel('批量选择', self)
+        标签.setAlignment(Qt.AlignCenter)
+        标签.setStyleSheet(标签样式)
+        标签.resize(160, 25)
+        标签.move(400, 20)
+
+        套装类型 = ['防具', '首饰', '特殊', '上链左', '镯下右', '环鞋指']
+        count = 0
+        self.自选套装 = []
+        for i in 套装类型:
+            self.自选套装.append(MyQComboBox(self))
+            套装名称 = []
+            for j in equ.get_suit_list():
+                if j.名称 not in 套装名称 and j.类型 == i:
+                    套装名称.append(j.名称)
+            self.自选套装[count].addItems(套装名称)
+            self.自选套装[count].resize(160, 22)
+            self.自选套装[count].move(400, 50 + 30 * count)
+            self.自选套装[count].activated.connect(
+                lambda state, index=count: self.自选套装更改(index))
+            count += 1
+
+        神话部位选项 = MyQComboBox(self)
+        神话部位选项.addItems(['神话部位:无', '神话部位:上衣', '神话部位:手镯', '神话部位:耳环'])
+        神话部位选项.resize(160, 22)
+        神话部位选项.move(400, 50 + 30 * count)
+        神话部位选项.activated.connect(lambda index: self.神话部位更改(index))
+        
+        add = QPushButton('打造↑', self)
+        add.clicked.connect(lambda state: self.批量打造(1))
+        add.move(400, 270)
+        add.resize(60, 24)
+        add.setStyleSheet(按钮样式)
+
+        minus = QPushButton('打造↓', self)
+        minus.clicked.connect(lambda state: self.批量打造(-1))
+        minus.move(480, 270)
+        minus.resize(60, 24)
+        minus.setStyleSheet(按钮样式)
+    
+    def 批量打造(self, offset):
+        for i in range(12):
+            y = max(min(self.自选增幅选项[i].currentIndex() + offset, 31), 0)
+            self.自选增幅选项[i].setCurrentIndex(y)
+        return
+
+
+    def 自选套装更改(self, index):
+        name = self.自选套装[index].currentText()
+        for i in range(11):
+            x = -1
+            for j in equ.get_equ_list():
+                if j.部位 == 部位列表[i]:
+                    x += 1
+                    try:
+                        if j.所属套装2 == name:
+                            self.自选装备[i].setCurrentIndex(x)
+                            break
+                    except:
+                        if j.所属套装 == name and j.品质 != '神话':
+                            self.自选装备[i].setCurrentIndex(x)
+                            break
+    
+    def 神话部位更改(self,index):
+        部位 = [-1, 0, 5, 8]
+        序号 = 部位[index]
+        if 序号 != -1:
+            当前 = equ.get_equ_by_name(self.自选装备[序号].currentText())
+            x = -1
+            for i in equ.get_equ_list():
+                if 当前.部位 == i.部位:
+                    x += 1
+                    if i.品质 == '神话' and i.所属套装 == 当前.所属套装:
+                        self.自选装备[序号].setCurrentIndex(x)
+        for k in [0, 5, 8]:
+            if k != 序号:
+                当前 = equ.get_equ_by_name(self.自选装备[k].currentText())
+                if 当前.品质 == '神话':
+                    x = -1
+                    for i in equ.get_equ_list():
+                        if 当前.部位 == i.部位:
+                            x += 1
+                            if i.品质 == '史诗' and i.所属套装 == 当前.所属套装:
+                                self.自选装备[k].setCurrentIndex(x)
+        pass
 
     def 初始化奥兹玛UI(self):
-        横坐标 = 320
+        横坐标 = 640
         纵坐标 = 50
         名称 = ['阿斯特罗斯', '贝利亚斯', '雷德梅恩', '罗什巴赫', '泰玛特']
         self.奥兹玛套装按钮 = []
@@ -135,7 +278,7 @@ class 换装窗口(QWidget):
             self.奥兹玛套装按钮[count].resize(75, 22)
             self.奥兹玛套装按钮[count].move(横坐标, 纵坐标 + 3 + count * 32)
             self.奥兹玛套装按钮[count].clicked.connect(
-                lambda state, index=(count + 1) * 100: self.奥兹玛选择(index))
+                lambda state, index=count: self.奥兹玛套装选择(index))
             for j in range(5):
                 序号 = count * 5 + j
                 图片 = QLabel(self)
@@ -156,8 +299,8 @@ class 换装窗口(QWidget):
             count += 1
 
     def 初始化希洛克UI(self):
-        横坐标 = 320
-        纵坐标 = 220
+        横坐标 = 700
+        纵坐标 = 250
         名称 = ['奈克斯', '暗杀者', '卢克西', '守门人', '洛多斯']
         self.希洛克套装按钮 = []
         self.希洛克单件按钮 = []
@@ -170,7 +313,7 @@ class 换装窗口(QWidget):
             self.希洛克套装按钮[count].resize(75, 22)
             self.希洛克套装按钮[count].move(横坐标, 纵坐标 + 3 + count * 32)
             self.希洛克套装按钮[count].clicked.connect(
-                lambda state, index=(count + 1) * 100: self.希洛克选择(index))
+                lambda state, index=count: self.希洛克套装选择(index))
             for j in range(3):
                 序号 = count * 3 + j
                 图片 = QLabel(self)
@@ -190,23 +333,31 @@ class 换装窗口(QWidget):
                     lambda state, index=序号: self.希洛克选择(index))
             count += 1
 
-    def 初始化武器UI(self):
-        横坐标 = 30
-        纵坐标 = 380
-        纵坐标 += 10
+    def 初始化残香UI(self):
+        横坐标 = 400
+        纵坐标 = 320
+
+        标签 = QLabel('残香属性', self)
+        标签.setAlignment(Qt.AlignCenter)
+        标签.setStyleSheet(标签样式)
+        标签.resize(240, 25)
+        标签.move(横坐标, 纵坐标)
+
+        纵坐标 += 30
+
         self.武器融合属性A = MyQComboBox(self)
         for j in 武器属性A列表:
             self.武器融合属性A.addItem(j.固定属性描述)
         self.武器融合属性A.resize(60, 20)
-        self.武器融合属性A.move(横坐标, 纵坐标 + 25)
+        self.武器融合属性A.move(横坐标, 纵坐标)
 
         self.武器融合属性A1 = MyQComboBox(self)
         self.武器融合属性A1.resize(90 + 75, 20)
-        self.武器融合属性A1.move(横坐标 + 110 - 50 + 5, 纵坐标 + 25)
+        self.武器融合属性A1.move(横坐标 + 110 - 50 + 5, 纵坐标)
 
         self.武器融合属性A2 = MyQComboBox(self)
         self.武器融合属性A2.resize(50, 20)
-        self.武器融合属性A2.move(横坐标 + 205 + 20 + 10, 纵坐标 + 25)
+        self.武器融合属性A2.move(横坐标 + 205 + 20 + 10, 纵坐标)
         self.武器融合属性A.currentIndexChanged.connect(
             lambda: self.希洛克武器随机词条更新(self.武器融合属性A.currentIndex()))
 
@@ -215,27 +366,34 @@ class 换装窗口(QWidget):
         for j in 武器属性B列表:
             self.武器融合属性B.addItem(j.固定属性描述)
         self.武器融合属性B.resize(60, 20)
-        self.武器融合属性B.move(横坐标, 纵坐标 + 25)
+        self.武器融合属性B.move(横坐标, 纵坐标)
 
         self.武器融合属性B1 = MyQComboBox(self)
         self.武器融合属性B1.resize(90 + 75, 20)
-        self.武器融合属性B1.move(横坐标 + 110 - 50 + 5, 纵坐标 + 25)
+        self.武器融合属性B1.move(横坐标 + 110 - 50 + 5, 纵坐标)
 
         self.武器融合属性B2 = MyQComboBox(self)
         self.武器融合属性B2.resize(50, 20)
-        self.武器融合属性B2.move(横坐标 + 205 + 20 + 10, 纵坐标 + 25)
+        self.武器融合属性B2.move(横坐标 + 205 + 20 + 10, 纵坐标)
         self.武器融合属性B.currentIndexChanged.connect(
             lambda: self.希洛克武器随机词条更新(self.武器融合属性B.currentIndex(), 1))
 
     def 初始化遴选UI(self):
         横坐标 = 30
-        纵坐标 = 460
+        纵坐标 = 420
 
-        名称 = ['武　　器', '戒　　指', '辅助装备', '下　　装']
-        纵坐标 = 纵坐标 + 25
+        名称 = ['武器', '戒指', '辅助装备', '下装']
         self.黑鸦词条 = []
+
+        title = QLabel("黑鸦遴选词条", self)
+        title.setAlignment(Qt.AlignCenter)
+        title.setStyleSheet(标签样式)
+        title.resize(400, 25)
+        title.move(横坐标, 纵坐标)
+
+        纵坐标 += 25
+
         for i in range(4):
-            this_index = i
             x = QLabel(名称[i], self)
             x.setStyleSheet(标签样式 +
                             'QLabel{font-size:13px;};text-align: justify;')
@@ -283,69 +441,52 @@ class 换装窗口(QWidget):
             self.黑鸦词条.append(tem)
             self.黑鸦词条更新(i)
 
-    def 希洛克选择(self, index):
-        if index >= 100:
-            序号 = int(index / 100 - 1)
-            count = 0
-            for i in range(序号 * 3, 序号 * 3 + 3):
-                count += self.希洛克选择状态[i]
-            if count != 3:
-                for i in range(15):
-                    if i in range(序号 * 3, 序号 * 3 + 3):
-                        self.希洛克遮罩透明度[i].setOpacity(0)
-                        self.希洛克选择状态[i] = 1
-                    else:
-                        self.希洛克遮罩透明度[i].setOpacity(0.5)
-                        self.希洛克选择状态[i] = 0
-            else:
-                for i in range(序号 * 3, 序号 * 3 + 3):
-                    self.希洛克遮罩透明度[i].setOpacity(0.5)
-                    self.希洛克选择状态[i] = 0
-        else:
-            if self.希洛克选择状态[index] == 0:
-                for i in range(5):
-                    序号 = i * 3 + index % 3
-                    if self.希洛克选择状态[序号] == 1:
-                        self.希洛克遮罩透明度[序号].setOpacity(0.5)
-                        self.希洛克选择状态[序号] = 0
-                self.希洛克遮罩透明度[index].setOpacity(0)
-                self.希洛克选择状态[index] = 1
-            else:
-                self.希洛克遮罩透明度[index].setOpacity(0.5)
-                self.希洛克选择状态[index] = 0
-        self.换装自选装备更改()
+    def 希洛克套装选择(self, index):
+        count = 1
+        for i in range(index * 3, index * 3 + 3):
+            count &= self.希洛克选择状态[i]
+        count ^= 1
+        for i in range(index*3, index*3+3):
+            self.希洛克选择(i, count)
 
-    def 奥兹玛选择(self, index):
-        if index >= 100:
-            序号 = int(index / 100 - 1)
-            count = 0
-            for i in range(序号 * 5, 序号 * 5 + 5):
-                count += self.奥兹玛选择状态[i]
-            if count != 5:
-                for i in range(25):
-                    if i in range(序号 * 5, 序号 * 5 + 5):
-                        self.奥兹玛遮罩透明度[i].setOpacity(0)
-                        self.奥兹玛选择状态[i] = 1
-                    else:
-                        self.奥兹玛遮罩透明度[i].setOpacity(0.5)
-                        self.奥兹玛选择状态[i] = 0
-            else:
-                for i in range(序号 * 5, 序号 * 5 + 5):
-                    self.奥兹玛遮罩透明度[i].setOpacity(0.5)
-                    self.奥兹玛选择状态[i] = 0
+    def 希洛克选择(self, index, value=-1):
+        if(value == -1):
+            value = self.希洛克选择状态[index] ^ 1
+        for i in range(5):
+            序号 = i * 3 + index % 3
+            if self.希洛克选择状态[序号] == 1:
+                self.希洛克遮罩透明度[序号].setOpacity(0.5)
+                self.希洛克选择状态[序号] = 0
+        if value == 0:
+            self.希洛克遮罩透明度[index].setOpacity(0.5)
         else:
-            if self.奥兹玛选择状态[index] == 0:
-                for i in range(5):
-                    序号 = i * 5 + index % 5
-                    if self.奥兹玛选择状态[序号] == 1:
-                        self.奥兹玛遮罩透明度[序号].setOpacity(0.5)
-                        self.奥兹玛选择状态[序号] = 0
+            if value == 1:
+                self.希洛克遮罩透明度[index].setOpacity(0)
+
+        self.希洛克选择状态[index] = value
+
+    def 奥兹玛套装选择(self, index):
+        count = 1
+        for i in range(index * 5, index * 5 + 5):
+            count &= self.奥兹玛选择状态[i]
+        count ^= 1
+        for i in range(index * 5, index * 5 + 5):
+            self.奥兹玛选择(i, count)
+
+    def 奥兹玛选择(self, index, value=-1):
+        if(value == -1):
+            value = self.奥兹玛选择状态[index] ^ 1
+        for i in range(5):
+            序号 = i * 5 + index % 5
+            if self.奥兹玛选择状态[序号] == 1:
+                self.奥兹玛遮罩透明度[序号].setOpacity(0.5)
+                self.奥兹玛选择状态[序号] = 0
+        if value == 0:
+            self.奥兹玛遮罩透明度[index].setOpacity(0.5)
+        else:
+            if value == 1:
                 self.奥兹玛遮罩透明度[index].setOpacity(0)
-                self.奥兹玛选择状态[index] = 1
-            else:
-                self.奥兹玛遮罩透明度[index].setOpacity(0.5)
-                self.奥兹玛选择状态[index] = 0
-        self.换装自选装备更改()
+        self.奥兹玛选择状态[index] = value
 
     def 希洛克武器随机词条更新(self, index, x=0):
         if x == 0:
@@ -372,7 +513,6 @@ class 换装窗口(QWidget):
                     self.武器融合属性B2.addItem(str(temp) + '%')
                 temp -= 属性B.间隔
             self.武器融合属性B1.addItem(属性B.随机属性描述)
-        self.换装自选装备更改()
 
     def 黑鸦词条更新(self, index):
         for i in range(1, 4):
@@ -404,4 +544,3 @@ class 换装窗口(QWidget):
                     self.黑鸦词条[i][3].addItem(str(temp) + '%')
                 temp -= 装备属性.间隔
             self.黑鸦词条[i][2].addItem(装备属性.随机属性描述)
-        self.换装自选装备更改()
