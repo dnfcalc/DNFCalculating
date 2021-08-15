@@ -1876,6 +1876,87 @@ class 窗口(QWidget):
         self.排行窗口列表.append(排行显示)
         排行显示.show()
 
+    def 获取装备图片(self, 装备列表):
+        希洛克选择 = self.希洛克选择状态
+        奥兹玛选择 = self.奥兹玛选择状态
+        try:
+            希洛克武器标记 = 2000 if self.希洛克武器词条[0].currentIndex() > 0 else 0
+        except:
+            希洛克武器标记 = 2000 if self.希洛克武器选择.currentIndex() > 0 else 0
+
+        图片列表 = []
+        希洛克 = {}
+        for i in range(15):
+            if 希洛克选择[i] > 0:
+                希洛克[i % 3] = i
+
+        奥兹玛 = {}
+        for i in range(25):
+            if 奥兹玛选择[i] > 0:
+                奥兹玛[i % 5] = i
+
+        #0 上衣
+        图片列表.append(equ.get_img_by_name(装备列表[0]))
+
+        #1 护肩
+        if 奥兹玛.get(0, -1) >= 0:
+            图片列表.append(equ.get_img_by_id(1000 + 奥兹玛[0]))
+        else:
+            图片列表.append(equ.get_img_by_name(装备列表[1]))
+
+        #2 护腿
+        if 希洛克.get(0, -1) >= 0:
+            图片列表.append(equ.get_img_by_id(1100 + 希洛克[0]))
+        else:
+            图片列表.append(equ.get_img_by_name(装备列表[2]))
+
+        #3 腰带
+        if 奥兹玛.get(1, -1) >= 0:
+            图片列表.append(equ.get_img_by_id(1000 + 奥兹玛[1]))
+        else:
+            图片列表.append(equ.get_img_by_name(装备列表[3]))
+
+        #4 鞋子
+        if 奥兹玛.get(2, -1) >= 0:
+            图片列表.append(equ.get_img_by_id(1000 + 奥兹玛[2]))
+        else:
+            图片列表.append(equ.get_img_by_name(装备列表[4]))
+
+        #5 手镯
+        图片列表.append(equ.get_img_by_name(装备列表[5]))
+
+        #6 项链
+        if 奥兹玛.get(3, -1) >= 0:
+            图片列表.append(equ.get_img_by_id(1000 + 奥兹玛[3]))
+        else:
+            图片列表.append(equ.get_img_by_name(装备列表[6]))
+
+        #7 戒指
+        if 希洛克.get(1, -1) >= 0:
+            图片列表.append(equ.get_img_by_id(1100 + 希洛克[1]))
+        else:
+            图片列表.append(equ.get_img_by_name(装备列表[7]))
+
+        #8 耳环
+        图片列表.append(equ.get_img_by_name(装备列表[8]))
+
+        #9 辅助
+        if 希洛克.get(2, -1) >= 0:
+            图片列表.append(equ.get_img_by_id(1100 + 希洛克[2]))
+        else:
+            图片列表.append(equ.get_img_by_name(装备列表[9]))
+
+        #10 魔法石
+        if 奥兹玛.get(4, -1) >= 0:
+            图片列表.append(equ.get_img_by_id(1000 + 奥兹玛[4]))
+        else:
+            图片列表.append(equ.get_img_by_name(装备列表[10]))
+
+        #11 武器
+        图片列表.append(equ.get_img_by_name(装备列表[11], 希洛克武器标记))
+
+        return 图片列表
+
     def 组合计算(self, index):
         套装组合 = []
         if index <= 1:

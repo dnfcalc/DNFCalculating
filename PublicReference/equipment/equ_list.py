@@ -61,11 +61,31 @@ class equipment():
 
     def load_img(self):
         self.equ_img = {}
+        #基础装备图标 0~999
         for i in self.get_equ_id_list():
             path = './ResourceFiles/img/装备/{}.gif'.format(i)
             img = QMovie(path)
             img.start()
             self.equ_img[i] = img
+        #奥兹玛图标 1000~1024
+        for i in range(25):
+            path = './ResourceFiles/img/奥兹玛/{}.gif'.format(i)
+            img = QMovie(path)
+            img.start()
+            self.equ_img[1000 + i] = img            
+        #希洛克图标 1100~1114
+        for i in range(15):
+            path = './ResourceFiles/img/希洛克/{}.gif'.format(i)
+            img = QMovie(path)
+            img.start()
+            self.equ_img[1100 + i] = img 
+        #希洛克武器图标 2000~2999
+        path = './ResourceFiles/img/希洛克/武器/'
+        for i in os.listdir(path):
+            img = QMovie(os.path.join(path, i))
+            img.start()
+            self.equ_img[2000 + int(i.split('.')[0])] = img
+
 
     def get_suit_by_id(self, id):
         return self.suit_list.get(id, 套装())
@@ -82,8 +102,8 @@ class equipment():
     def get_equ_by_name(self, name):
         return self.get_equ_by_id(self.equ_id.get(name, 0))
 
-    def get_img_by_name(self, name):
-        return self.get_img_by_id(self.equ_id.get(name, 0))
+    def get_img_by_name(self, name, num = 0):
+        return self.get_img_by_id(self.equ_id.get(name, 0) + num)
 
     def get_id_by_name(self, name):
         return self.equ_id.get(name, 0)

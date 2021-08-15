@@ -4500,8 +4500,10 @@ class 角色窗口(窗口):
                 self.总伤害.setText(self.格式化输出(str(int(总伤害数值))))
 
             tempstr = self.装备描述计算(B)
-            for l in range(12):
-                self.图片显示[l].setToolTip(tempstr[l])
+            图片列表 = self.获取装备图片(装备)
+            for i in range(12):
+                self.图片显示[i].setToolTip(tempstr[i])
+                self.图片显示[i].setMovie(图片列表[i])
 
             self.面板显示[0].setText(str(int(B.面板力量())))
             self.面板显示[1].setText(str(int(B.面板物理攻击力())))
@@ -5552,79 +5554,8 @@ class 角色窗口(窗口):
         初始x = 10
         初始y = 31
 
-        图片列表 = []
+        图片列表 = self.获取装备图片(self.排行数据[index])
 
-        数量 = [0] * 3
-        for i in range(15):
-            数量[i % 3] += self.希洛克选择状态[i]
-
-        奥兹玛数量 = [0]*5
-        for i in range(25):
-            奥兹玛数量[i % 5] += self.奥兹玛选择状态[i]
-
-        # 0 上衣 1护肩 2护腿 3腰带 4鞋子 5 手镯 6 项链 7 戒指 8 耳环 9辅助 10魔法石 11 武器
-        for i in range(12):
-            # 下装
-            if 数量[0] == 1 and i == 2:
-                for item in range(5):
-                    if self.希洛克选择状态[item * 3 + 0] > 0:
-                        图片列表.append(
-                            QMovie('./ResourceFiles/img/希洛克/' +
-                                   str(item * 3 + 0) + '.gif'))
-            elif 数量[1] == 1 and i == 7:
-                for item in range(5):
-                    if self.希洛克选择状态[item * 3 + 1] > 0:
-                        图片列表.append(
-                            QMovie('./ResourceFiles/img/希洛克/' +
-                                   str(item * 3 + 1) + '.gif'))
-            elif 数量[2] == 1 and i == 9:
-                for item in range(5):
-                    if self.希洛克选择状态[item * 3 + 2] > 0:
-                        图片列表.append(
-                            QMovie('./ResourceFiles/img/希洛克/' +
-                                   str(item * 3 + 2) + '.gif'))
-            elif self.希洛克武器词条[0].currentIndex() > 0 and i == 11:
-                # 图片列表.append(QMovie('./ResourceFiles/img/希洛克/融-7.gif'))
-                图片列表.append(
-                    QMovie('./ResourceFiles/img/希洛克/武器/' +
-                           str(equ.get_id_by_name(self.排行数据[index][i])) + '.gif'))
-            # 护肩
-            elif 奥兹玛数量[0] == 1 and i ==1:
-                for item in range(5):
-                    if self.奥兹玛选择状态[item * 5 + 0] > 0:
-                        图片列表.append(
-                            QMovie('./ResourceFiles/img/奥兹玛/' +
-                                   str(item * 5 + 0) + '.gif'))
-            # 腰带
-            elif 奥兹玛数量[1] == 1 and i ==3:
-                for item in range(5):
-                    if self.奥兹玛选择状态[item * 5 + 1] > 0:
-                        图片列表.append(
-                            QMovie('./ResourceFiles/img/奥兹玛/' +
-                                   str(item * 5 + 1) + '.gif'))
-            # 鞋
-            elif 奥兹玛数量[2] == 1 and i ==4:
-                for item in range(5):
-                    if self.奥兹玛选择状态[item * 5 + 2] > 0:
-                        图片列表.append(
-                            QMovie('./ResourceFiles/img/奥兹玛/' +
-                                   str(item * 5 + 2) + '.gif'))
-            # 项链
-            elif 奥兹玛数量[3] == 1 and i ==6:
-                for item in range(5):
-                    if self.奥兹玛选择状态[item * 5 + 3] > 0:
-                        图片列表.append(
-                            QMovie('./ResourceFiles/img/奥兹玛/' +
-                                   str(item * 5 + 3) + '.gif'))
-            # 魔法石
-            elif 奥兹玛数量[4] == 1 and i ==10:
-                for item in range(5):
-                    if self.奥兹玛选择状态[item * 5 + 4] > 0:
-                        图片列表.append(
-                            QMovie('./ResourceFiles/img/奥兹玛/' +
-                                   str(item * 5 + 4) + '.gif'))
-            else:
-                图片列表.append(equ.get_img_by_name(self.排行数据[index][i]))
         偏移量 = 187
         x坐标 = [
             32, 0, 0, 32, 0, 偏移量, 偏移量 + 32, 偏移量 + 32, 偏移量, 偏移量, 偏移量 + 32, 32
@@ -5636,7 +5567,6 @@ class 角色窗口(窗口):
         for i in range(12):
             装备图标 = QLabel(输出窗口)
             装备图标.setMovie(图片列表[i])
-            图片列表[i].start()
             装备图标.resize(26, 26)
             装备图标.move(初始x + x坐标[i], 初始y + y坐标[i] - pox_y2)
             装备图标.setAlignment(Qt.AlignCenter)
