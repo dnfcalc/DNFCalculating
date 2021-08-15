@@ -4026,28 +4026,6 @@ class 角色窗口(窗口):
             else:
                 装备图标.setToolTip(tempstr[i])
         
-        if self.登记启用:
-            #换装装备图表显示
-            偏移量 = 80
-            x坐标 = [
-                32, 0, 0, 32, 0, 偏移量, 偏移量 + 32, 偏移量 + 32, 偏移量, 偏移量, 偏移量 + 32, 32
-            ]
-            y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
-            图片列表2 = self.获取装备图片(换装装备)
-            for i in range(12):
-                x = 初始x + x坐标[i] + 600
-                y = 初始y + y坐标[i] - pox_y2 + 150
-                装备图标 = QLabel(输出窗口)
-                装备图标.setMovie(图片列表2[i])
-                装备图标.resize(26, 26)
-                装备图标.move(x, y)
-                装备图标.setAlignment(Qt.AlignCenter)
-                if self.排行数据[index][i] == 换装装备[i]:
-                    图标遮罩 = QLabel(输出窗口)
-                    图标遮罩.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.8)}")
-                    图标遮罩.resize(26, 26)
-                    图标遮罩.move(x, y)
-
         for i in range(12):
             装备 = equ.get_equ_by_name(self.角色属性B.装备栏[i])
             打造状态 = QLabel(输出窗口)
@@ -4078,6 +4056,29 @@ class 角色窗口(窗口):
                 "QLabel{color:rgb(232,104,24);font-size:12px;font-weight:Bold}"
             )
             打造状态.move(初始x + x坐标[11] + 13, 初始y + y坐标[11] + 20 - pox_y2)
+
+        if self.登记启用:
+            #换装装备图表显示
+            偏移量 = 80
+            x坐标 = [
+                32, 0, 0, 32, 0, 偏移量, 偏移量 + 32, 偏移量 + 32, 偏移量, 偏移量, 偏移量 + 32, 32
+            ]
+            y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
+            图片列表2 = self.获取装备图片(换装装备)
+            for i in range(12):
+                x = 初始x + x坐标[i] + 600
+                y = 初始y + y坐标[i] - pox_y2 + 150
+                装备图标 = QLabel(输出窗口)
+                装备图标.setMovie(图片列表2[i])
+                装备图标.resize(26, 26)
+                装备图标.move(x, y)
+                装备图标.setAlignment(Qt.AlignCenter)
+                if self.排行数据[index][i] == 换装装备[i]:
+                    图标遮罩 = QLabel(输出窗口)
+                    图标遮罩.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.8)}")
+                    图标遮罩.resize(26, 26)
+                    图标遮罩.move(x, y)
+
 
         输出显示 = MainWindow(输出窗口)
         self.输出窗口列表.append(输出显示)
