@@ -839,6 +839,10 @@ class 重霄·机械师·女(角色窗口):
         属性.护石第二栏 = self.护石栏[1].currentText()
         属性.护石第三栏 = self.护石栏[2].currentText()
 
+        if self.复选框列表[7].isChecked():
+            if 属性.技能栏[self.角色属性A.技能序号['空战机械：狂风']].装备护石 == 1:
+                属性.技能栏[self.角色属性A.技能序号['空战机械：狂风']].CD *= 0.80
+
         for i in range(9):
             if self.符文[i].currentText() != '无' and self.符文效果[i].currentText() != '无' and self.符文[i].currentText() != 'GSP猎鹰':
                 for j in self.符文效果[i].currentText().split(','):
