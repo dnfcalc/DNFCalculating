@@ -3500,7 +3500,10 @@ class 角色窗口(窗口):
         # 双切 Start
 
         if self.登记启用 :
-            换装套装, 换装装备 = self.换装套装()
+            try:
+                换装套装, 换装装备 = self.换装套装()
+            except:
+                pass
 
         temp = deepcopy(self.角色属性B)
         统计详情 = self.角色属性B.BUFF计算(1)
@@ -3995,14 +3998,8 @@ class 角色窗口(窗口):
         提升率显示.move(10, 517 - pox_y2)
         提升率显示.setAlignment(Qt.AlignCenter)
 
-        数量 = [0] * 3
-        for i in range(15):
-            数量[i % 3] += self.希洛克选择状态[i]
-
-        奥兹玛数量 = [0] * 5
-        for i in range(25):
-            奥兹玛数量[i % 5] += self.奥兹玛选择状态[i]
-
+        
+        图片列表 = self.获取装备图片(self.排行数据[index])
         偏移量 = 187
         x坐标 = [
             32, 0, 0, 32, 0, 偏移量, 偏移量 + 32, 偏移量 + 32, 偏移量, 偏移量, 偏移量 + 32, 32
@@ -4012,20 +4009,44 @@ class 角色窗口(窗口):
         tempstr = self.装备描述_BUFF计算(self.角色属性B)
 
         for i in range(12):
+            x = 初始x + x坐标[i]
+            y = 初始y + y坐标[i] - pox_y2
             装备图标 = QLabel(输出窗口)
             装备图标.setMovie(图片列表[i])
             装备图标.resize(26, 26)
-            装备图标.move(初始x + x坐标[i], 初始y + y坐标[i] - pox_y2)
+            装备图标.move(x, y)
             装备图标.setAlignment(Qt.AlignCenter)
             装备 = equ.get_equ_by_name(self.角色属性B.装备栏[i])
             if self.角色属性B.装备栏[i] == 百变怪:
                 图标遮罩 = QLabel(输出窗口)
                 图标遮罩.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.5)}")
                 图标遮罩.resize(26, 26)
-                图标遮罩.move(初始x + x坐标[i], 初始y + y坐标[i] - pox_y2)
+                图标遮罩.move(x, y)
                 图标遮罩.setToolTip(tempstr[i])
             else:
                 装备图标.setToolTip(tempstr[i])
+        
+        if self.登记启用:
+            #换装装备图表显示
+            偏移量 = 80
+            x坐标 = [
+                32, 0, 0, 32, 0, 偏移量, 偏移量 + 32, 偏移量 + 32, 偏移量, 偏移量, 偏移量 + 32, 32
+            ]
+            y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
+            图片列表2 = self.获取装备图片(换装装备)
+            for i in range(12):
+                x = 初始x + x坐标[i] + 600
+                y = 初始y + y坐标[i] - pox_y2 + 150
+                装备图标 = QLabel(输出窗口)
+                装备图标.setMovie(图片列表2[i])
+                装备图标.resize(26, 26)
+                装备图标.move(x, y)
+                装备图标.setAlignment(Qt.AlignCenter)
+                if self.排行数据[index][i] == 换装装备[i]:
+                    图标遮罩 = QLabel(输出窗口)
+                    图标遮罩.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.8)}")
+                    图标遮罩.resize(26, 26)
+                    图标遮罩.move(x, y)
 
         for i in range(12):
             装备 = equ.get_equ_by_name(self.角色属性B.装备栏[i])
