@@ -121,6 +121,7 @@ class 角色属性(属性):
     自适应最高值 = []
     武器词条触发 = 0
     产物升级 = 0
+    自选计算模式 = False
 
     def 力智固定加成(self, x=0, y=0):
         if self.装备描述 == 1:
@@ -953,6 +954,7 @@ class 角色窗口(窗口):
         self.store = Store()
         super().__init__()
         self.登记启用 = False
+        self.自选计算模式 = False
         self.store.bind(self,"希洛克选择状态","/buffer/data/siroco")
         self.store.bind(self,"奥兹玛选择状态","/buffer/data/ozma")
         self.store.bind(self,"登记启用","/buffer/data/register_enable")
@@ -1073,7 +1075,7 @@ class 角色窗口(窗口):
 
         增幅选项 = []
         for i in range(12):
-            combo =  self.装备打造选项[i+12] 
+            combo =  self.装备打造选项[i+12]
             combo.currentIndexChanged.connect(lambda :self.store.emit("/buffer/data/amplifies"))
             增幅选项.append(combo)
         self.store.compute("/buffer/data/amplifies",lambda : [i.currentIndex() for i in 增幅选项],None)
@@ -1690,8 +1692,8 @@ class 角色窗口(窗口):
         self.图片显示 = []
 
         count = 0
-        
-        
+
+
         self.装备锁定 = []
         self.自选装备 = []
         self.self_selects = []
@@ -1710,7 +1712,7 @@ class 角色窗口(窗口):
             锁定选择.resize(70, 22)
             锁定选择.move(10, 50 + 30 * count)
             self.装备锁定.append(锁定选择)
-            
+
             combo = MyQComboBox(self.main_frame5)
             combo.resize(220, 22)
             combo.move(90, 50 + 30 * count)
@@ -1917,12 +1919,12 @@ class 角色窗口(窗口):
         换装设置.move(390, 340)
         换装设置.resize(80, 28)
         换装设置.setStyleSheet(按钮样式)
-        
+
     def 启用换装登记(self,checked):
-        self.登记启用 = checked        
+        self.登记启用 = checked
         self.更新换装()
 
-    def 换装设置(self):             
+    def 换装设置(self):
         def createClient():
             self.store.compute("/buffer/temp/property_a",lambda : self.角色属性A)
             # 换装更新事件
@@ -2481,7 +2483,7 @@ class 角色窗口(窗口):
         filename = os.path.join(filepath,"store.json")
 
 
-        if os.path.exists(filename):          
+        if os.path.exists(filename):
             try:
                 set_data = {}
                 with open(filename, encoding='utf-8') as fp:
@@ -2521,8 +2523,8 @@ class 角色窗口(窗口):
             try:
                 self.线程数选择.setCurrentIndex(self.store.get("/buffer/data/thread_count",12))
             except Exception as error:
-                logger.error(error)    
-                
+                logger.error(error)
+
             try:
                 self.批量选择(0)
                 num = 0
@@ -2594,7 +2596,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
 
-                
+
                 try:
                     self.希洛克武器选择.setCurrentIndex(self.store.get('/buffer/data/siroco_weapon'))
                 except Exception as error:
@@ -2608,7 +2610,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = self.store.get('/buffer/data/jude_values')                   
+                    data = self.store.get('/buffer/data/jude_values')
                     num = 0
                     for i in data:
                         self.辟邪玉数值[num].setCurrentIndex(i)
@@ -2616,7 +2618,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = self.store.get('/buffer/data/top_options')                   
+                    data = self.store.get('/buffer/data/top_options')
                     num = 0
                     for i in data:
                         self.排行选项[num].setCurrentIndex(i)
@@ -2624,7 +2626,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = self.store.get('/buffer/data/black_purgatory')                   
+                    data = self.store.get('/buffer/data/black_purgatory')
                     x = 0
                     for i in data:
                         y = 0
@@ -2719,11 +2721,11 @@ class 角色窗口(窗口):
     def 奥兹玛选择(self, index):
         super().奥兹玛选择(index)
         self.store.emit("/buffer/data/ozma")
-    
+
     def 希洛克希洛克选择(self, index, x):
         super().希洛克选择(index, x)
         self.store.emit("/buffer/data/siroco")
-     
+
 
     def 保存json(self, path='set', page=[0, 1, 2, 3, 4]):
 
@@ -2815,13 +2817,13 @@ class 角色窗口(窗口):
         except Exception as error:
             logger.error(error)
 
-            
+
 
     def 保存配置(self, path='set'):
         if self.禁用存档.isChecked():
             return
         self.保存json(path)
-    
+
     def closeEvent(self, event):
         DefaultDialogRegister.dispose()
         return super().closeEvent(event)
@@ -2938,7 +2940,7 @@ class 角色窗口(窗口):
                 if self.装备选择状态[j] == 1:
                     count += 1
         if x == 0:
-            return count == 0 
+            return count == 0
         else:
             return count
 
@@ -2998,12 +3000,12 @@ class 角色窗口(窗口):
                 打造.append(self.装备打造选项[i+12].currentIndex())
                 t装备打造.append(打造)
                 self.装备打造选项[i].setCurrentIndex(1)  # 增幅
-                self.装备打造选项[i + 12].setCurrentIndex(self.自选换装打造[i])      
+                self.装备打造选项[i + 12].setCurrentIndex(self.自选换装打造[i])
         except Exception as e:
             print(e)
         try:
             for i in range(4):
-                词条 = []           
+                词条 = []
                 词条.append(self.黑鸦词条[i][0].currentIndex())
                 词条.append(self.黑鸦词条[i][1].currentIndex())
                 词条.append(self.黑鸦词条[i][3].currentIndex())
@@ -3027,11 +3029,11 @@ class 角色窗口(窗口):
         self.输入属性(BUFF)
         BUFF.穿戴装备(换装装备, 换装套装)
 
-        for i in range(len(t装备打造)):          
+        for i in range(len(t装备打造)):
             self.装备打造选项[i].setCurrentIndex(t装备打造[i][0])  # 增幅
             self.装备打造选项[i + 12].setCurrentIndex(t装备打造[i][1])
 
-        for i in range(len(t黑鸦词条)):     
+        for i in range(len(t黑鸦词条)):
             self.黑鸦词条[i][0].setCurrentIndex(t黑鸦词条[i][0])  # 自选数值
             self.黑鸦词条[i][1].setCurrentIndex(t黑鸦词条[i][1])  # 自选数值
             self.黑鸦词条[i][3].setCurrentIndex(t黑鸦词条[i][2])  # 自选数值
@@ -3128,7 +3130,7 @@ class 角色窗口(窗口):
 
             统计详情 = B.BUFF计算(1)
             # 双切 Start
-            if self.登记启用:
+            if self.登记启用 and self.自选计算模式:
                 BUFF = self.换装计算()
 
             if BUFF is not None:
@@ -3137,7 +3139,7 @@ class 角色窗口(窗口):
                 B.BUFF智力per = BUFF.BUFF智力per
                 B.BUFF独立per = BUFF.BUFF独立per
                 B.BUFF魔攻per = BUFF.BUFF魔攻per
-                B.BUFF物攻per = BUFF.BUFF物攻per            
+                B.BUFF物攻per = BUFF.BUFF物攻per
             # 双切 End
             合计力量 = 0
             合计智力 = 0
@@ -3146,7 +3148,7 @@ class 角色窗口(窗口):
             合计独立 = 0
 
             for i in range(len(B.技能栏)):
-                if sum(统计详情[i]) != 0:   
+                if sum(统计详情[i]) != 0:
                     详情 = 统计详情[i]  # 如果设置切装 则适用切装的属性
                     if BUFF is not None and B.技能栏[i].名称 in ['禁忌诅咒', '死命召唤', '勇气祝福', '勇气圣歌', '荣誉祝福']:
                         详情 = BUFF统计详情[i]
@@ -3172,7 +3174,7 @@ class 角色窗口(窗口):
                 总奶量 += ',独立+' + str(合计独立)
             # self.总伤害.setText(str(tempstr))
 
-            if self.登记启用:
+            if self.登记启用 and self.自选计算模式:
                 x = BUFF.BUFF面板()
             else:
                 x = B.BUFF面板()
@@ -3441,6 +3443,7 @@ class 角色窗口(窗口):
 
         if x == 0:
             self.排行数据.append(装备 + [0] + 套装 + ['无'])
+            self.自选计算模式 = True
             self.输出界面(0)
 
     def 站街计算(self, 装备名称, 套装名称):
@@ -3499,7 +3502,7 @@ class 角色窗口(窗口):
         self.角色属性B.穿戴装备(装备名称, 套装名称)
         # 双切 Start
 
-        if self.登记启用 :
+        if self.登记启用 and self.自选计算模式:
             try:
                 换装套装, 换装装备 = self.换装套装()
             except:
@@ -3510,7 +3513,7 @@ class 角色窗口(窗口):
         提升率 = temp.BUFF计算(0)
 
 
-        if self.登记启用:
+        if self.登记启用 and self.自选计算模式:
             双切属性 = self.换装计算()
             双切详情 = 双切属性.BUFF计算(1)
             self.输入属性(self.角色属性B)
@@ -3549,7 +3552,7 @@ class 角色窗口(窗口):
 
         y = self.角色属性B.一觉面板()
 
-        if self.登记启用:
+        if self.登记启用 and self.自选计算模式:
             x = 双切属性.BUFF面板()
         else:
             x = self.角色属性B.BUFF面板()
@@ -3595,7 +3598,7 @@ class 角色窗口(窗口):
                     "QLabel{font-size:12px;color:rgb(150,255,30)}")
             面板显示[i].resize(100, 18)
             面板显示[i].setAlignment(Qt.AlignLeft)
-        if self.登记启用:
+        if self.登记启用 and self.自选计算模式:
             self.角色属性B.BUFF力量per = 双切属性.BUFF力量per
             self.角色属性B.BUFF智力per = 双切属性.BUFF智力per
             self.角色属性B.BUFF独立per = 双切属性.BUFF独立per
@@ -3872,22 +3875,22 @@ class 角色窗口(窗口):
                 每行详情[1].setText('Lv.' + str(实际技能等级[i]))
                 每行详情[1].move(337, 50 + j * self.行高 - pox_y)
                 每行详情[1].resize(30, min(28, self.行高))
-                if self.登记启用 and self.角色属性B.技能栏[i].名称 in ['禁忌诅咒', '死命召唤', '勇气祝福', '勇气圣歌', '荣誉祝福']:
+                if self.登记启用 and self.角色属性B.技能栏[i].名称 in ['禁忌诅咒', '死命召唤', '勇气祝福', '勇气圣歌', '荣誉祝福'] and self.自选计算模式:
                     统计详情[i] = 双切详情[i]
                     每行详情[1].setText('Lv.' + str(双切属性.技能栏[i].等级))
-                
+
                 for k in range(8):
                     详情 = str(统计详情[i][k])
                     if 显示模式 == 1:
                         详情 = self.对比输出(统计详情[i][k], self.基准值[1][i][k])
                     if 详情 == '0' or 详情 == 0:
-                        详情 = ''                   
+                        详情 = ''
                     每行详情[k+2].setText(详情)
                     每行详情[k+2].move(370 + k * 40, 50 + j * self.行高 - pox_y)
                     每行详情[k+2].resize(50, min(28, self.行高))
-               
+
                 for l in range(1, 10):
-                    if self.登记启用 and self.角色属性B.技能栏[i].名称 in ['禁忌诅咒', '死命召唤', '勇气祝福', '勇气圣歌', '荣誉祝福']:
+                    if self.登记启用 and self.角色属性B.技能栏[i].名称 in ['禁忌诅咒', '死命召唤', '勇气祝福', '勇气圣歌', '荣誉祝福'] and self.自选计算模式:
                         每行详情[l].setStyleSheet(
                             "QLabel{font-size:12px;color:rgb(255,0,0)}")
                     else:
@@ -3976,7 +3979,7 @@ class 角色窗口(窗口):
         合计 = QLabel(输出窗口)
         合计.setStyleSheet("QLabel{color:rgb(104,213,237);font-size:15px}")
         合计.setText(tempstr)
-        if self.登记启用:
+        if self.登记启用 and self.自选计算模式:
             合计.setStyleSheet("QLabel{color:rgb(104,213,237);font-size:12px}")
         合计.resize(450, 300)
         合计.move(280, 30 + j * self.行高 - pox_y2)
@@ -3998,7 +4001,7 @@ class 角色窗口(窗口):
         提升率显示.move(10, 517 - pox_y2)
         提升率显示.setAlignment(Qt.AlignCenter)
 
-        
+
         图片列表 = self.获取装备图片(self.排行数据[index])
         偏移量 = 187
         x坐标 = [
@@ -4025,7 +4028,7 @@ class 角色窗口(窗口):
                 图标遮罩.setToolTip(tempstr[i])
             else:
                 装备图标.setToolTip(tempstr[i])
-        
+
         for i in range(12):
             装备 = equ.get_equ_by_name(self.角色属性B.装备栏[i])
             打造状态 = QLabel(输出窗口)
@@ -4057,7 +4060,7 @@ class 角色窗口(窗口):
             )
             打造状态.move(初始x + x坐标[11] + 13, 初始y + y坐标[11] + 20 - pox_y2)
 
-        if self.登记启用:
+        if self.登记启用 and self.自选计算模式:
             #换装装备图表显示
             偏移量 = 80
             x坐标 = [
@@ -4078,11 +4081,10 @@ class 角色窗口(窗口):
                     图标遮罩.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.8)}")
                     图标遮罩.resize(26, 26)
                     图标遮罩.move(x, y)
-
-
         输出显示 = MainWindow(输出窗口)
         self.输出窗口列表.append(输出显示)
         输出显示.show()
+        self.自选计算模式 = False
 
     def 装备描述_BUFF计算(self, property):
         tempstr = []
