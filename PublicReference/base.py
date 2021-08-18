@@ -2244,29 +2244,23 @@ class 角色窗口(窗口):
         奶量buff力智label = QLabel("奶量buff力智", self.main_frame2)
         奶量buff力智label.setStyleSheet(标签样式)
         奶量buff力智label.setAlignment(Qt.AlignCenter)
-        奶量buff力智label.move(970, 17 + counter * 80 + 10)
-        if self.初始属性.远古记忆 != -1:
-            奶量buff力智label.move(970, 17 + counter * 80 + 45)
+
+        偏移 = (35 if self.初始属性.远古记忆 != -1 else 0)+(35 if self.初始属性.刀魂之卡赞 != -1 else 0)
+        奶量buff力智label.move(970, 18 + counter * 80 + 10+偏移)
         奶量buff力智输入框 = QLineEdit(self.main_frame2)
         奶量buff力智输入框.setStyleSheet(文本框样式黄)
-        奶量buff力智输入框.move(1050, 15 + counter * 80 + 10)
-        if self.初始属性.远古记忆 != -1:
-            奶量buff力智输入框.move(1050, 15 + counter * 80 + 45)
-        奶量buff力智输入框.resize(60, 20)
+        奶量buff力智输入框.move(1050, 15 + counter * 80 + 10+偏移)
+        奶量buff力智输入框.resize(50, 20)
         self.奶量buff输入.append(奶量buff力智输入框)
 
         奶量buff三攻label = QLabel("奶量buff三攻", self.main_frame2)
         奶量buff三攻label.setStyleSheet(标签样式)
         奶量buff三攻label.setAlignment(Qt.AlignCenter)
-        奶量buff三攻label.move(970, 17 + counter * 80 + 40)
-        if self.初始属性.远古记忆 != -1:
-            奶量buff三攻label.move(970, 17 + counter * 80 + 75)
+        奶量buff三攻label.move(970, 24 + counter * 80 + 40+偏移)
         奶量buff三攻输入框 = QLineEdit(self.main_frame2)
         奶量buff三攻输入框.setStyleSheet(文本框样式黄)
-        奶量buff三攻输入框.move(1050, 15 + counter * 80 + 45)
-        if self.初始属性.远古记忆 != -1:
-            奶量buff三攻输入框.move(1050, 15 + counter * 80 + 75)
-        奶量buff三攻输入框.resize(60, 20)
+        奶量buff三攻输入框.move(1050, 15 + counter * 80 + 45+偏移)
+        奶量buff三攻输入框.resize(50, 20)
         self.奶量buff输入.append(奶量buff三攻输入框)
 
         counter = 0
@@ -6246,10 +6240,10 @@ class 角色窗口(窗口):
 
 
         if self.奶量buff输入[0].text() not in ['', '无']:
-            print(属性.力量)
+            # print(属性.力量)
             属性.力量 += int(self.奶量buff输入[0].text())
             属性.智力 += int(self.奶量buff输入[0].text())
-            print(属性.力量)
+            # print(属性.力量)
 
         if self.奶量buff输入[1].text() not in ['', '无']:
             属性.物理攻击力 += int(self.奶量buff输入[1].text())
