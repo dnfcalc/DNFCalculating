@@ -115,8 +115,7 @@ class 换装窗口(Page):
             自选.append(self.自选装备[i].currentText())
             增幅.append(self.自选增幅选项[i].currentIndex())
         for i in range(len(self.黑鸦词条)):
-            黑鸦.append([self.黑鸦词条[i][1].currentIndex(),
-                      self.黑鸦词条[i][3].currentIndex()])
+            黑鸦.append([2,self.黑鸦词条[i][1].currentIndex(),self.黑鸦词条[i][3].currentText()])
 
         self.store.set("/buffer/data/register/equips", 自选)
         self.store.set("/buffer/data/register/siroco", self.希洛克选择状态)

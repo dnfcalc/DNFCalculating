@@ -18,7 +18,7 @@ from .calc_core import CalcData
 from .common import format_time
 from .minheap import MinHeap, MinHeapWithQueue, batch_size
 from .producer_consumer import producer, producer_data, thread_num, thread_task
-from .copy import *
+from copy import *
 # from .MainWindow import *
 import chardet
 import sys

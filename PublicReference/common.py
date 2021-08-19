@@ -42,6 +42,8 @@ class 属性():
     进图精神 = 0.0
 
     技能栏 = []
+    技能表 = {}
+
     技能序号 = {}
 
     装备栏 = []
@@ -56,6 +58,25 @@ class 属性():
     护石第一栏 = '无'
     护石第二栏 = '无'
     护石第三栏 = '无'
+
+    def __init__(self):
+        
+        self.类型  = ''
+        self.武器选项 = []
+        self.类型选择 = []
+
+        self.防具精通属性 = []
+        
+        self.装备栏 = []
+        self.套装栏 = []
+
+        self.技能栏 = []
+        self.技能序号 = {}
+
+        self.是否增幅 = [0] * 12
+        self.强化等级 = [12] * 12
+        self.改造等级 = [5] * 12
+        pass
 
     def 穿戴装备(self, 装备, 套装):
         self.装备栏 = 装备
@@ -208,7 +229,7 @@ class 属性():
                 temp.append(i.名称)
         return temp
 
-
+        
 class 窗口(QWidget):
     calc_done_signal = pyqtSignal()
     update_remaining_signal = pyqtSignal(str)
@@ -1538,7 +1559,6 @@ class 窗口(QWidget):
                 calc_data.角色属性A.强化等级 = copy(self.角色属性A.强化等级)
                 calc_data.角色属性A.改造等级 = copy(self.角色属性A.改造等级)
                 calc_data.角色属性A.是否增幅 = copy(self.角色属性A.是否增幅)
-                calc_data.角色属性A.次数输入 = copy(self.角色属性A.次数输入)
             else:
                 calc_data.是输出职业 = True
                 calc_data.智慧产物限制 = self.智慧产物限制.currentIndex() + 1
