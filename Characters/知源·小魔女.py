@@ -52,35 +52,27 @@ class 知源·小魔女技能2(主动技能):
 
     def 结算统计(self):
         倍率 = self.适用数值 / 665 + 1
-        temp = []
-        temp.append(0)  # 智力
-        temp.append(0)  # 体力
-        temp.append(0)  # 精神
-        temp.append(
-            int(round((self.力智[self.等级] + self.BUFF力量) * self.BUFF力量per, 3) * 倍率))  # 力量
-        temp.append(
-            int(round((self.力智[self.等级] + self.BUFF智力) * self.BUFF智力per, 3) * 倍率))  # 智力
-        temp.append(
-            int(round((self.三攻[self.等级] + self.BUFF物攻) * self.BUFF物攻per, 3) * 倍率))  # 物攻
-        temp.append(
-            int(round((self.三攻[self.等级] + self.BUFF魔攻) * self.BUFF魔攻per, 3) * 倍率))  # 魔攻
-        temp.append(
-            int(round((self.三攻[self.等级] + self.BUFF独立) * self.BUFF独立per, 3) * 倍率))  # 独立
+        temp = [0, 0, 0]  # 智力,体力,精神
+        temp.append(int(round((self.力智[self.等级] + self.BUFF力量) * self.BUFF力量per * 倍率,3)))  # 力量
+        temp.append(int(round((self.力智[self.等级] + self.BUFF智力) * self.BUFF智力per * 倍率,3)))  # 智力
+        temp.append(int(round((self.三攻[self.等级] + self.BUFF物攻) * self.BUFF物攻per * 倍率,3)))  # 物攻
+        temp.append(int(round((self.三攻[self.等级] + self.BUFF魔攻) * self.BUFF魔攻per * 倍率,3)))  # 魔攻
+        temp.append(int(round((self.三攻[self.等级] + self.BUFF独立) * self.BUFF独立per * 倍率,3)))  # 独立
+
+        偏爱 = self.技能表['小魔女的偏爱']
+        if 偏爱.是否启用:
+            偏爱倍率 = 1 + 偏爱.增幅倍率
+            temp = [i * 偏爱倍率 for i in temp]
         return temp
 
-    def BUFF面板(self):
+    def 技能面板(self):
         temp = []
         temp.append(self.名称)
-        temp.append(
-            int(round((self.力智[self.等级] + self.BUFF力量) * self.BUFF力量per, 0)))
-        temp.append(
-            int(round((self.力智[self.等级] + self.BUFF智力) * self.BUFF智力per, 0)))
-        temp.append(
-            int(round((self.三攻[self.等级] + self.BUFF物攻) * self.BUFF物攻per, 0)))
-        temp.append(
-            int(round((self.三攻[self.等级] + self.BUFF魔攻) * self.BUFF魔攻per, 0)))
-        temp.append(
-            int(round((self.三攻[self.等级] + self.BUFF独立) * self.BUFF独立per, 0)))
+        temp.append(int(round((self.力智[self.等级] + self.BUFF力量) * self.BUFF力量per, 0)))
+        temp.append(int(round((self.力智[self.等级] + self.BUFF智力) * self.BUFF智力per, 0)))
+        temp.append(int(round((self.三攻[self.等级] + self.BUFF物攻) * self.BUFF物攻per, 0)))
+        temp.append(int(round((self.三攻[self.等级] + self.BUFF魔攻) * self.BUFF魔攻per, 0)))
+        temp.append(int(round((self.三攻[self.等级] + self.BUFF独立) * self.BUFF独立per, 0)))
         return temp
 
 
@@ -92,7 +84,10 @@ class 知源·小魔女技能3(主动技能):
     增幅倍率 = 0.25
 
     def 结算统计(self):
-        return [0, 0, 0, 0, 0, 0, 0, 0]
+        if(self.技能表['BUFF'].是否启用 == 1):
+            values = self.技能表['BUFF'].结算统计()
+            return [int(round(i * self.增幅倍率)) for i in values]
+        return [0]*8
 
 
 class 知源·小魔女技能4(被动技能):
@@ -130,19 +125,19 @@ class 知源·小魔女技能5(主动技能):
     力智 = [0, 43, 57, 74, 91, 111, 131, 153, 176, 201, 228, 255, 284, 315, 346, 379, 414, 449, 487, 526, 567, 608,
           651, 696, 741, 789, 838, 888, 939, 993, 1047, 1103, 1160, 1219, 1278, 1340, 1403, 1467, 1533, 1600, 1668]
 
-    def 结算统计(self):
+    def 结算统计(self, 计算三觉=False):
+        if 计算三觉 is False and self.名称 in self.技能表['三次觉醒'].关联技能:
+            return [0]*8
         倍率 = self.适用数值 / 750 + 1
         x = (self.力智[self.等级] + self.一觉力智) * 倍率
-        return [0, 0, 0, int(x * self.一觉力智per), int(x * self.一觉力智per), 0, 0, 0]
+        return [0, 0, 0, int(round(x * self.一觉力智per)), int(round(x * self.一觉力智per)), 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
-    def 一觉面板(self):
+    def 技能面板(self):
         temp = []
         temp.append(self.名称)
-        temp.append(
-            int(round((self.力智[self.等级] + self.一觉力智) * self.一觉力智per, 0)))
-        temp.append(
-            int(round((self.力智[self.等级] + self.一觉力智) * self.一觉力智per, 0)))
+        temp.append(int(round((self.力智[self.等级] + self.一觉力智) * self.一觉力智per, 0)))
+        temp.append(int(round((self.力智[self.等级] + self.一觉力智) * self.一觉力智per, 0)))
         return temp
 
 
@@ -195,42 +190,46 @@ class 知源·小魔女技能9(主动技能):
     所在等级 = 100
     等级上限 = 40
     基础等级 = 2
-    关联技能 = ['无']
+    关联技能 = ['人偶之森']
     绑定一觉力智per = 1.08
     绑定二觉力智per = 0.23
 
     def 结算统计(self):
-        return [0, 0, 0, 0, 0, 0, 0, 0]
+        if(self.技能表['一次觉醒'].是否启用 == 1):
+            values = self.技能表['一次觉醒'].结算统计(True)
+            倍率 = self.加成倍率()
+            return [int(round(i * 倍率)) for i in values]
+        return [0]*8
 
     def 加成倍率(self):
-        if self.关联技能 == ['开幕！人偶剧场']:
+        if '开幕！人偶剧场' in self.关联技能:
             return round(1.08 + self.等级 * 0.01, 2)
         else:
-            return round(1.23 + self.等级 * 0.01, 2)
+            return round(0.23 + self.等级 * 0.01, 2)
 
 
-知源·小魔女技能列表 = []
+技能表 = {}
+技能栏 = []
 i = 0
 while i >= 0:
     try:
-        exec('知源·小魔女技能列表.append(知源·小魔女技能'+str(i)+'())')
+        skill: 技能 = eval("知源·小魔女技能"+str(i)+"()")
+        skill.技能序号 = i
+        skill.技能表 = 技能表
+        名称 = skill.名称
+        if skill.所在等级 == 30:
+            名称 = 'BUFF'
+        elif skill.所在等级 == 50:
+            名称 = '一次觉醒'
+        elif skill.所在等级 == 85:
+            名称 = '二次觉醒'
+        elif skill.所在等级 == 100:
+            名称 = '三次觉醒'
+        技能表[名称] = skill
+        技能栏.append(skill)
         i += 1
     except:
         i = -1
-
-知源·小魔女技能序号 = dict()
-for i in range(len(知源·小魔女技能列表)):
-    知源·小魔女技能序号[知源·小魔女技能列表[i].名称] = i
-知源·小魔女一觉序号 = 0
-知源·小魔女二觉序号 = 0
-知源·小魔女三觉序号 = 0
-for i in 知源·小魔女技能列表:
-    if i.所在等级 == 50:
-        知源·小魔女一觉序号 = 知源·小魔女技能序号[i.名称]
-    if i.所在等级 == 85:
-        知源·小魔女二觉序号 = 知源·小魔女技能序号[i.名称]
-    if i.所在等级 == 100:
-        知源·小魔女三觉序号 = 知源·小魔女技能序号[i.名称]
 
 
 class 知源·小魔女角色属性(角色属性):
@@ -238,77 +237,64 @@ class 知源·小魔女角色属性(角色属性):
     角色 = '魔法师(女)'
     职业 = '小魔女'
 
-    类型选择 = ['智力']
-
     武器选项 = ['扫把']
-
-    一觉序号 = 5
-    三觉序号 = 9
 
     防具类型 = '板甲'
     防具精通属性 = ['智力']
 
     def __init__(self):
+        super().__init__()
+        self.武器选项 = ['扫把']
+        self.防具精通属性 = ['智力']
+        self.类型选择 = ['智力']
+        self.类型 = '智力'
+        self.技能表 = deepcopy(技能表)
+        self.技能栏 = list(self.技能表.values())
+        self.一觉序号 = self.技能表['一次觉醒'].技能序号
+        self.二觉序号 = self.技能表['二次觉醒'].技能序号
+        self.三觉序号 = self.技能表['三次觉醒'].技能序号
         基础属性输入(self)
-        self.技能栏 = deepcopy(知源·小魔女技能列表)
-        self.技能序号 = deepcopy(知源·小魔女技能序号)
+
+    def 系数数值站街(self):
+        return self.智力
+
+    def 系数数值进图(self):
+        return self.进图智力
 
     def 专属词条计算(self):
 
-        self.技能栏[self.技能序号['人偶操纵者']].等级加成(self.转职被动Lv)
-        self.技能栏[self.技能序号['人偶操纵者']].额外智力 += self.转职被动智力
-        self.技能栏[self.技能序号['人偶操纵者']].进图加成 += self.被动进图加成
+        self.技能表['人偶操纵者'].等级加成(self.转职被动Lv)
+        self.技能表['人偶操纵者'].额外智力 += self.转职被动智力
+        self.技能表['人偶操纵者'].进图加成 += self.被动进图加成
 
-        self.技能栏[self.技能序号['禁忌诅咒']].等级加成(self.BUFFLv)
-        self.技能栏[self.技能序号['禁忌诅咒']].BUFF力量per = self.BUFF力量per
-        self.技能栏[self.技能序号['禁忌诅咒']].BUFF智力per = self.BUFF智力per
-        self.技能栏[self.技能序号['禁忌诅咒']].BUFF物攻per = self.BUFF物攻per
-        self.技能栏[self.技能序号['禁忌诅咒']].BUFF魔攻per = self.BUFF魔攻per
-        self.技能栏[self.技能序号['禁忌诅咒']].BUFF独立per = self.BUFF独立per
-        self.技能栏[self.技能序号['禁忌诅咒']].BUFF力量 = self.BUFF力量
-        self.技能栏[self.技能序号['禁忌诅咒']].BUFF智力 = self.BUFF智力
-        self.技能栏[self.技能序号['禁忌诅咒']].BUFF物攻 = self.BUFF物攻
-        self.技能栏[self.技能序号['禁忌诅咒']].BUFF魔攻 = self.BUFF魔攻
-        self.技能栏[self.技能序号['禁忌诅咒']].BUFF独立 = self.BUFF独立
+        self.技能表['BUFF'].等级加成(self.BUFFLv)
+        self.技能表['BUFF'].BUFF力量per = self.BUFF力量per
+        self.技能表['BUFF'].BUFF智力per = self.BUFF智力per
+        self.技能表['BUFF'].BUFF物攻per = self.BUFF物攻per
+        self.技能表['BUFF'].BUFF魔攻per = self.BUFF魔攻per
+        self.技能表['BUFF'].BUFF独立per = self.BUFF独立per
+        self.技能表['BUFF'].BUFF力量 = self.BUFF力量
+        self.技能表['BUFF'].BUFF智力 = self.BUFF智力
+        self.技能表['BUFF'].BUFF物攻 = self.BUFF物攻
+        self.技能表['BUFF'].BUFF魔攻 = self.BUFF魔攻
+        self.技能表['BUFF'].BUFF独立 = self.BUFF独立
 
-        self.技能栏[self.技能序号['开幕！人偶剧场']].等级加成(self.一觉Lv)
-        self.技能栏[self.技能序号['开幕！人偶剧场']].一觉力智 = self.一觉力智
-        self.技能栏[self.技能序号['开幕！人偶剧场']].一觉力智per = self.一觉力智per
+        self.技能表['一次觉醒'].等级加成(self.一觉Lv)
+        self.技能表['一次觉醒'].一觉力智 = self.一觉力智
+        self.技能表['一次觉醒'].一觉力智per = self.一觉力智per
 
-        self.技能栏[self.技能序号['少女的爱']].等级加成(self.一觉被动Lv)
-        self.技能栏[self.技能序号['少女的爱']].额外力智 = self.一觉被动力智
+        self.技能表['少女的爱'].等级加成(self.一觉被动Lv)
+        self.技能表['少女的爱'].额外力智 = self.一觉被动力智
 
     def BUFF计算(self, x=0):
         总数据 = self.数据计算()
-
-        if self.次数输入[self.技能序号['死命召唤']] == 0:
-            self.技能栏[self.技能序号['死命召唤']].增幅倍率 = 0
-        if self.次数输入[self.技能序号['小魔女的偏爱']] == 0:
-            self.技能栏[self.技能序号['小魔女的偏爱']].增幅倍率 = 0
-        关联技能 = self.技能栏[self.技能序号['终幕！人偶剧场']].关联技能
-        for j in range(8):
-            总数据[self.技能序号['禁忌诅咒']][j] = int(
-                总数据[self.技能序号['禁忌诅咒']][j] * (1 + self.技能栏[self.技能序号['小魔女的偏爱']].增幅倍率))
-            总数据[self.技能序号['死命召唤']][j] = int(
-                总数据[self.技能序号['禁忌诅咒']][j] * self.技能栏[self.技能序号['死命召唤']].增幅倍率)
-            if self.次数输入[self.技能序号['终幕！人偶剧场']] != 0:
-                if '开幕！人偶剧场' in 关联技能:
-                    总数据[self.技能序号['终幕！人偶剧场']][j] = int(总数据[self.技能序号['开幕！人偶剧场']][j] * (
-                        self.技能栏[self.技能序号['终幕！人偶剧场']].绑定一觉力智per + self.技能栏[self.技能序号['终幕！人偶剧场']].等级 * 0.01))
-                    总数据[self.技能序号['开幕！人偶剧场']][j] = 0
-                elif '人偶之森' in 关联技能:
-                    总数据[self.技能序号['终幕！人偶剧场']][j] = int(总数据[self.技能序号['开幕！人偶剧场']][j] * (
-                        self.技能栏[self.技能序号['终幕！人偶剧场']].绑定二觉力智per + self.技能栏[self.技能序号['终幕！人偶剧场']].等级 * 0.01))
-            else:
-                总数据[self.技能序号['终幕！人偶剧场']][j] = 0
         return self.结果返回(x, 总数据)
 
 
 class 知源·小魔女(角色窗口):
     def 窗口属性输入(self):
         self.初始属性 = 知源·小魔女角色属性()
-        self.角色属性A = 知源·小魔女角色属性()
-        self.角色属性B = 知源·小魔女角色属性()
-        self.一觉序号 = 知源·小魔女一觉序号
-        self.二觉序号 = 知源·小魔女二觉序号
-        self.三觉序号 = 知源·小魔女三觉序号
+        self.登记属性 = deepcopy(self.初始属性)
+
+        self.角色属性A = deepcopy(self.初始属性)
+        self.角色属性B = deepcopy(self.初始属性)

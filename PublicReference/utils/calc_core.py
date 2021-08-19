@@ -6,11 +6,10 @@
 # Author    : Chen Ji
 # Email     : fzls.zju@gmail.com
 # -------------------------------
-from .copy import *
+from copy import *
 from multiprocessing import Queue
 from typing import List
 from PublicReference.utils.minheap import MinHeap, expected_qsize
-import copy
 
 
 class CalcData():
