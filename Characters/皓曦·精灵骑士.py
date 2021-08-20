@@ -515,11 +515,11 @@ class 技能21(职业主动技能):
     def 装备护石(self, x):
         if x == 0:
             self.data2 = [(i*0.34) for i in self.data1]
-            攻击次数3 = 1
+            self.攻击次数3 = 1
             # self.倍率 *= 1.221
         elif x == 1:
             self.data2 = [(i*0.47) for i in self.data1]
-            攻击次数3 = 1
+            self.攻击次数3 = 1
             # self.倍率 *= 1.3055
 
 # 剑盾强袭
