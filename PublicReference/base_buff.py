@@ -1,3 +1,4 @@
+from math import e
 from PublicReference.equipment.equ_list import *
 from PublicReference.equipment.称号_buff import *
 from PublicReference.equipment.宠物_buff import *
@@ -134,7 +135,7 @@ class 角色属性(属性):
         self.次数输入 = []
         self.自适应最高值 = []
         self.技能表 = {}
-        self.觉醒择优系数 = 1    
+        self.觉醒择优系数 = 1.0 
 
 
     def 力智固定加成(self, x=0, y=0):
@@ -871,7 +872,7 @@ class 角色属性(属性):
             if skill.是否启用 != 0:
                 values = skill.结算统计()
                 if skill.所在等级 in [50,100]:
-                    values = [i * self.觉醒择优系数 for i in values]
+                    values = [round(i * self.觉醒择优系数) for i in values]
                 总数据.append(values)
             else:
                 总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
@@ -1277,13 +1278,21 @@ class 角色窗口(窗口):
         x.resize(300, 20)
         x.setStyleSheet(标签样式)
 
-        择优方向 = MyQComboBox(self.main_frame2)
-        择优方向.addItem('觉醒自适应数值')
-        择优方向.addItem('续航向:觉醒0.7系数')
-        择优方向.addItem('爆发向:觉醒1.0系数')
-        择优方向.resize(138, 20)
-        择优方向.move(横坐标 + 300, 纵坐标 + 40)
-        择优方向.currentIndexChanged.connect(lambda index: self.调整太阳系数(index))
+        self.觉醒择优方向 = MyQComboBox(self.main_frame2)
+        self.觉醒择优方向.addItem('自选觉醒择优系数')
+        self.觉醒择优方向.addItem('续航向:觉醒0.7系数')
+        self.觉醒择优方向.addItem('爆发向:觉醒1.0系数')
+        self.觉醒择优方向.resize(138, 20)
+        self.觉醒择优方向.move(横坐标 + 300, 纵坐标 + 40)
+        self.觉醒择优方向.currentIndexChanged.connect(lambda index: self.调整觉醒择优方向(index))
+
+        self.觉醒择优系数 = MyQComboBox(self.main_frame2)
+        self.觉醒择优系数.resize(138, 20)
+        self.觉醒择优系数.move(横坐标 + 440, 纵坐标 + 40)
+        for i in range(21):
+            self.觉醒择优系数.addItem(str(round(i / 10,1)))
+        self.觉醒择优系数.setCurrentIndex(10)
+
 
         纵坐标 = 纵坐标 + 30
         self.武器融合属性B = MyQComboBox(self.main_frame2)
@@ -2062,8 +2071,15 @@ class 角色窗口(窗口):
             self.武器融合属性B.setStyleSheet(下拉框样式)
             self.武器融合属性B1.setStyleSheet(下拉框样式)
             self.武器融合属性B2.setStyleSheet(下拉框样式)
-    def 调整太阳系数(self, index):
-        self.角色属性A.觉醒择优系数 = 0.7 if index == 1 else 1
+
+    def 调整觉醒择优方向(self, index):
+        if index < 1 :  
+            self.觉醒择优系数.setVisible(True)
+        else:     
+            self.觉醒择优系数.setVisible(False)
+            self.觉醒择优系数.setCurrentText(str(1.0 if index > 1 else 0.7))
+
+
 
     def 希洛克武器随机词条更新(self, index, x=0):
         if x == 0:
@@ -2578,7 +2594,16 @@ class 角色窗口(窗口):
                     except Exception as error:
                         logger.error(error)
                     num+=1
+                try:
+                    self.觉醒择优系数.setCurrentText(str(self.store.get("/buffer/data/awakening_coefficient",1.0)))
+                except Exception as error:
+                    logger.error(error)
 
+                try:
+                    self.觉醒择优方向.setCurrentIndex(self.store.get("/buffer/data/awakening_direction",0))
+                except Exception as error:
+                    logger.error(error)
+            
                 data = self.store.get('/buffer/data/weapon_fusion',[0,0,0,0])
 
                 try:
@@ -2777,6 +2802,9 @@ class 角色窗口(窗口):
                 self.store.set("/buffer/data/black_purgatory",[[j.currentIndex() for j in i] for i in self.黑鸦词条选项])
 
                 self.store.set("/buffer/data/top_options",[i.currentIndex() for i in self.排行选项])
+
+                self.store.set("/buffer/data/awakening_coefficient",float(self.觉醒择优系数.currentText()))
+                self.store.set("/buffer/data/awakening_direction",self.觉醒择优方向.currentIndex())
 
             except Exception as error:
                 logger.error(error)
@@ -4373,7 +4401,7 @@ class 角色窗口(窗口):
         if 奥兹玛选择状态 is None or len(奥兹玛选择状态) == 0:
             奥兹玛选择状态 = self.奥兹玛选择状态
 
-
+        属性.觉醒择优系数 = float(self.觉醒择优系数.currentText())
         
         属性.黑鸦计算(黑鸦词条)
         属性.希洛克计算(希洛克选择状态)
