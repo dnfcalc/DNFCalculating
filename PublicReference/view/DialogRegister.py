@@ -15,7 +15,7 @@ class DialogRegister:
             client.setWindow(dialog)
             dialog.setHideOnClose(True)
             dialog.setWindowModality(Qt.WindowModality.WindowModal)
-            if(parent is not None):
+            if (parent is not None):
                 dialog.setParent(parent)
             self.dialogs[name] = dialog
         self.dialogs[name].show()

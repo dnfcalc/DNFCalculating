@@ -26,6 +26,7 @@ from .基础函数 import *
 #     from .装备_特殊_HF import *
 #     from .装备_套装_HF import *
 
+
 class equipment():
     def __init__(self):
         self.load_equ()
@@ -37,12 +38,12 @@ class equipment():
         self.equ_tuple = ()
         self.equ_id_tuple = ()
         self.index = {}
-        for i in range(535): #534件装备
+        for i in range(535):  #534件装备
             temp = eval('装备{}()'.format(i))
             self.equ_list[i] = temp
             self.equ_id[temp.名称] = i
-            self.equ_tuple += (temp,)
-            self.equ_id_tuple += (i,)
+            self.equ_tuple += (temp, )
+            self.equ_id_tuple += (i, )
             key = '{}\t{}\t{}'.format(temp.所属套装, temp.品质, temp.部位)
             self.index[key] = i
 
@@ -51,13 +52,13 @@ class equipment():
         self.suit_id = {}
         self.suit_name = ()
         self.suit_tuple = ()
-        for i in range(127): #126个套装效果
+        for i in range(127):  #126个套装效果
             temp = eval('套装效果{}()'.format(i))
             self.suit_list[i] = temp
-            self.suit_tuple += (temp,)
+            self.suit_tuple += (temp, )
             key = '{}[{}]'.format(temp.名称, temp.件数)
             self.suit_id[key] = i
-            self.suit_name += (key,)
+            self.suit_name += (key, )
 
     def load_img(self):
         self.equ_img = {}
@@ -72,20 +73,19 @@ class equipment():
             path = './ResourceFiles/img/奥兹玛/{}.gif'.format(i)
             img = QMovie(path)
             img.start()
-            self.equ_img[1000 + i] = img            
+            self.equ_img[1000 + i] = img
         #希洛克图标 1100~1114
         for i in range(15):
             path = './ResourceFiles/img/希洛克/{}.gif'.format(i)
             img = QMovie(path)
             img.start()
-            self.equ_img[1100 + i] = img 
+            self.equ_img[1100 + i] = img
         #希洛克武器图标 2000~2999
         path = './ResourceFiles/img/希洛克/武器/'
         for i in os.listdir(path):
             img = QMovie(os.path.join(path, i))
             img.start()
             self.equ_img[2000 + int(i.split('.')[0])] = img
-
 
     def get_suit_by_id(self, id):
         return self.suit_list.get(id, 套装())
@@ -102,7 +102,7 @@ class equipment():
     def get_equ_by_name(self, name):
         return self.get_equ_by_id(self.equ_id.get(name, 0))
 
-    def get_img_by_name(self, name, num = 0):
+    def get_img_by_name(self, name, num=0):
         return self.get_img_by_id(self.equ_id.get(name, 0) + num)
 
     def get_id_by_name(self, name):
@@ -127,5 +127,6 @@ class equipment():
     def get_equ_by_index(self, suit, quality, part):
         id = self.get_id_by_index(suit, quality, part)
         return self.get_equ_by_id(id)
+
 
 equ = equipment()

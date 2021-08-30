@@ -69,7 +69,7 @@ class CalcData():
                     self.有效武器列表.append(temp.名称)
                 for j in range(6):
                     if (temp.所属套装 in 总套装列表[j]) and (temp.所属套装
-                                                       not in self.有效总套装列表[j]):
+                                                    not in self.有效总套装列表[j]):
                         self.有效总套装列表[j].append(temp.所属套装)
                 self.有效部位列表[部位列表.index(temp.部位)].append(temp.名称)
 
@@ -205,7 +205,11 @@ def calc_speed_and_set_mode(data):
                 if data.装备选择状态[index] == 1:
                     sign += 1
                 else:
-                    if sign2 == '空' and equ.get_equ_by_id(index).品质 != '神话' and equ.get_equ_by_id(index).所属套装 not in ['精灵使的权能', '大自然的呼吸', '能量主宰']:
+                    if sign2 == '空' and equ.get_equ_by_id(
+                            index).品质 != '神话' and equ.get_equ_by_id(
+                                index).所属套装 not in [
+                                    '精灵使的权能', '大自然的呼吸', '能量主宰'
+                                ]:
                         sign += 1
                         sign2 = equ.get_equ_by_id(index).名称
                 temp1.append(equ.get_equ_by_id(index).名称)

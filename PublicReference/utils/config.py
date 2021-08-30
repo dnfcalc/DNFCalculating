@@ -35,6 +35,7 @@ conf = configparser.ConfigParser()
 #         h = win32print.GetDeviceCaps(hDC, win32con.DESKTOPVERTRES)
 #         return w, h
 
+
 def readConfig(filePath):
     #基础设置##################################################################
     try:

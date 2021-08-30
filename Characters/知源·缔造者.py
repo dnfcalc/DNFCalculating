@@ -688,7 +688,7 @@ class 职业属性(角色属性):
                     技能释放次数.append(0)
             else:
                 技能释放次数.append(0)
-        
+
         return self.技能释放次数解析(技能释放次数)
 
 

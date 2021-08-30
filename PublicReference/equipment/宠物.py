@@ -50,6 +50,7 @@ class 宠物14():
         temp += '附加伤害 +10%<br>'
         return temp
 
+
 class 宠物13():
     名称 = '(21)夏日之恋莱森德'
 
@@ -72,6 +73,7 @@ class 宠物13():
         temp += '百分比力智 +10%<br>'
         temp += '附加伤害 +12%<br>'
         return temp
+
 
 class 宠物12():
     名称 = '(21)夏日之恋赫米雅'
@@ -96,6 +98,7 @@ class 宠物12():
         temp += '附加伤害 +10%<br>'
         return temp
 
+
 class 宠物11():
     名称 = '(21)比拉谢尔号'
 
@@ -118,6 +121,7 @@ class 宠物11():
         temp += '附加伤害 +12%<br>'
         temp += '百分比力智 +10%<br>'
         return temp
+
 
 class 宠物10():
     名称 = '(20)至尊·暴风圣女'

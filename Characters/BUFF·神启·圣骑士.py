@@ -205,7 +205,7 @@ class BUFF·神启·圣骑士技能8(主动技能):
         return [0]*8
 
     def 加成倍率(self):
-        if '天启之珠' in self.关联技能: 
+        if '天启之珠' in self.关联技能:
             return round(1.08 + self.等级 * 0.01, 2)
         else:
             return round(0.23 + self.等级 * 0.01, 2)

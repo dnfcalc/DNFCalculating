@@ -21,9 +21,10 @@ TITLE_CLS_ICON = RES_PATH + "exit.png"
 WINDOW_DEFAULT_WIDTH = 800
 WINDOW_DEFAULT_HEIGHT = 480
 
+
 class Dialog(QMainWindow):
-    def __init__(self, client:Page):
-        super().__init__()       
+    def __init__(self, client: Page):
+        super().__init__()
 
         self.hideOnClose = False
 
@@ -50,9 +51,6 @@ class Dialog(QMainWindow):
         self.setWindowTitle(client.windowTitle())
         self.setWindowIcon(icon)
         self.setWindowFlags(Qt.FramelessWindowHint)
-
-
-
 
     def createTitleBar(self):
         titleBar = QWidget()
@@ -97,7 +95,7 @@ class Dialog(QMainWindow):
         lay.addWidget(titleLabel)
         lay.addWidget(minButton)
         # self.lay.addWidget(self.restoreButton)
-        lay.addWidget(closeButton) 
+        lay.addWidget(closeButton)
 
         titleBar.setLayout(lay)
 
@@ -108,8 +106,10 @@ class Dialog(QMainWindow):
             titleLabel.setStyleSheet(style)
 
         def setIcon(icon):
-            iconLabel.setPixmap(icon.scaled(iconLabel.size() - QSize(TITLE_ICON_MAG, TITLE_ICON_MAG)))
-        
+            iconLabel.setPixmap(
+                icon.scaled(iconLabel.size() -
+                            QSize(TITLE_ICON_MAG, TITLE_ICON_MAG)))
+
         def setWidth(width):
             label.resize(width, TITLE_BAR_HEIGHT)
 
@@ -120,20 +120,20 @@ class Dialog(QMainWindow):
 
         return titleBar
 
-    def setHideOnClose(self,hideOnClose):
+    def setHideOnClose(self, hideOnClose):
         self.hideOnClose = hideOnClose
 
     def showEvent(self, event):
         parent = self.parent()
         if parent is not None:
             rect = parent.geometry()
-            x = rect.x() + rect.width()/2 - self.width() /2
-            y = rect.y() + rect.height()/2 - self.height() /2
-            self.move(x, y);
+            x = rect.x() + rect.width() / 2 - self.width() / 2
+            y = rect.y() + rect.height() / 2 - self.height() / 2
+            self.move(x, y)
         return super().showEvent(event)
 
     def closeEvent(self, event):
-        if(self.hideOnClose):
+        if (self.hideOnClose):
             self.hide()
             return
         return super().closeEvent(event)

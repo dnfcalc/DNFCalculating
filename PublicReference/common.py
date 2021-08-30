@@ -60,13 +60,13 @@ class 属性():
     护石第三栏 = '无'
 
     def __init__(self):
-        
-        self.类型  = ''
+
+        self.类型 = ''
         self.武器选项 = []
         self.类型选择 = []
 
         self.防具精通属性 = []
-        
+
         self.装备栏 = []
         self.套装栏 = []
 
@@ -229,7 +229,7 @@ class 属性():
                 temp.append(i.名称)
         return temp
 
-        
+
 class 窗口(QWidget):
     calc_done_signal = pyqtSignal()
     update_remaining_signal = pyqtSignal(str)
@@ -344,8 +344,8 @@ class 窗口(QWidget):
         self.frame_tool.setFrameShape(1)
         if self.初始属性.职业分类 == '输出':
             self.页面名称 = [
-                "装备/选择/打造", "技能/符文/药剂", "基础/细节/修正", "神话/改造属性修正", "辟邪玉/希洛克/黑鸦/奥兹玛",
-                "自选装备计算"
+                "装备/选择/打造", "技能/符文/药剂", "基础/细节/修正", "神话/改造属性修正",
+                "辟邪玉/希洛克/黑鸦/奥兹玛", "自选装备计算"
             ]
         else:
             self.页面名称 = [
@@ -414,11 +414,9 @@ class 窗口(QWidget):
         self.scroll = QScrollArea()
         self.scroll.setFrameShape(QFrame.NoFrame)
         self.scroll.setWidget(self.main_frame4)
-        self.scroll.setStyleSheet(
-            "QScrollArea {background-color:transparent}")
+        self.scroll.setStyleSheet("QScrollArea {background-color:transparent}")
         self.scroll.setStyleSheet(滚动条样式)
-        self.scroll.viewport().setStyleSheet(
-            "background-color:transparent")
+        self.scroll.viewport().setStyleSheet("background-color:transparent")
         self.stacked_layout.addWidget(self.scroll)
 
         if self.初始属性.职业分类 == '输出':
@@ -431,10 +429,11 @@ class 窗口(QWidget):
             try:
                 描述 = ''
                 if self.角色属性A.职业分类 == 'BUFF':
-                    描述 = equ.get_suit_by_name('{}[{}]'.format(i.名称, n)).装备描述_BUFF(
-                        self.角色属性A)[:-4]
+                    描述 = equ.get_suit_by_name('{}[{}]'.format(
+                        i.名称, n)).装备描述_BUFF(self.角色属性A)[:-4]
                 else:
-                    描述 = equ.get_suit_by_name('{}[{}]'.format(i.名称, n)).装备描述(self.角色属性A)[:-4]
+                    描述 = equ.get_suit_by_name('{}[{}]'.format(i.名称, n)).装备描述(
+                        self.角色属性A)[:-4]
                 if 描述 != '':
                     temp += '<font color="#78FF1E">' + i.名称 + '[{}]</font><br>'.format(
                         n)
@@ -550,11 +549,11 @@ class 窗口(QWidget):
                 self.按钮.setToolTip(self.单件描述(i))
                 self.遮罩透明度[equ.get_id_by_name(i.名称)].setOpacity(0.5)
                 self.按钮.setGraphicsEffect(self.遮罩透明度[equ.get_id_by_name(i.名称)])
-                self.按钮.clicked.connect(
-                    lambda state, index=equ.get_id_by_name(i.名称): self.装备图标点击事件(index, 10))
+                self.按钮.clicked.connect(lambda state, index=equ.get_id_by_name(
+                    i.名称): self.装备图标点击事件(index, 10))
                 self.装备图片按钮[equ.get_id_by_name(i.名称)] = self.按钮
-                self.装备图片按钮[equ.get_id_by_name(i.名称)].move(657 + 55 * counter4,
-                                             15 + counter5 * 32)
+                self.装备图片按钮[equ.get_id_by_name(i.名称)].move(
+                    657 + 55 * counter4, 15 + counter5 * 32)
                 counter4 += 1
                 if counter4 % 5 == 0:
                     counter5 += 1
@@ -583,11 +582,11 @@ class 窗口(QWidget):
                 self.按钮.setToolTip(self.单件描述(i))
                 self.遮罩透明度[equ.get_id_by_name(i.名称)].setOpacity(0.5)
                 self.按钮.setGraphicsEffect(self.遮罩透明度[equ.get_id_by_name(i.名称)])
-                self.按钮.clicked.connect(
-                    lambda state, index=equ.get_id_by_name(i.名称): self.装备图标点击事件(index, 10))
+                self.按钮.clicked.connect(lambda state, index=equ.get_id_by_name(
+                    i.名称): self.装备图标点击事件(index, 10))
                 self.装备图片按钮[equ.get_id_by_name(i.名称)] = self.按钮
-                self.装备图片按钮[equ.get_id_by_name(i.名称)].move(657 + 55 * counter4,
-                                             20 + counter5 * 32)
+                self.装备图片按钮[equ.get_id_by_name(i.名称)].move(
+                    657 + 55 * counter4, 20 + counter5 * 32)
                 counter4 += 1
                 if counter4 % 5 == 0:
                     counter5 += 1
@@ -741,8 +740,8 @@ class 窗口(QWidget):
                 self.神话属性图片.append(QLabel(self.main_frame4))
                 self.神话属性图片[-1].setMovie(equ.get_img_by_id(j))
                 self.神话属性图片[-1].setToolTip('<font size="3" face="宋体">' +
-                                           temp.名称 + '<br>' + temp.类型 +
-                                           '-' + temp.部位 + '</font>')
+                                           temp.名称 + '<br>' + temp.类型 + '-' +
+                                           temp.部位 + '</font>')
                 self.神话属性图片[-1].resize(28, 28)
                 self.神话属性图片[-1].move(-1000, -1000)
                 for i in range(4):
@@ -750,7 +749,8 @@ class 窗口(QWidget):
                     self.神话属性选项[-1].resize(150, 18)
                     self.神话属性选项[-1].move(-1000, -1000)
                     self.神话属性选项[-1].currentIndexChanged.connect(
-                        lambda state, index=num * 4 + i: self.神话属性选项颜色更新(index))
+                        lambda state, index=num * 4 + i: self.神话属性选项颜色更新(index
+                                                                         ))
                 num += 1
 
         if self.初始属性.职业分类 == '输出':
@@ -772,7 +772,8 @@ class 窗口(QWidget):
                         self.改造产物选项[-1].resize(150, 18)
                         self.改造产物选项[-1].move(-1000, -1000)
                         self.改造产物选项[-1].currentIndexChanged.connect(
-                            lambda state, index=num * 4 + i: self.改造产物选项颜色更新(index))
+                            lambda state, index=num * 4 + i: self.改造产物选项颜色更新(
+                                index))
                     num += 1
 
             count = 0
@@ -929,7 +930,7 @@ class 窗口(QWidget):
                 self.希洛克遮罩透明度[index].setOpacity(0.5)
                 self.希洛克选择状态[index] = 0
 
-    def 奥兹玛选择(self,index):
+    def 奥兹玛选择(self, index):
         if index >= 100:
             序号 = int(index / 100 - 1)
             count = 0
@@ -959,7 +960,6 @@ class 窗口(QWidget):
             else:
                 self.奥兹玛遮罩透明度[index].setOpacity(0.5)
                 self.奥兹玛选择状态[index] = 0
-
 
     def 存档更换(self):
         if self.存档选择.currentText() == '新建存档':
@@ -1078,7 +1078,8 @@ class 窗口(QWidget):
 
     def 自选装备更改(self, index=0):
         try:
-            self.图片显示[index].setMovie(equ.get_img_by_name(self.自选装备[index].currentText()))
+            self.图片显示[index].setMovie(
+                equ.get_img_by_name(self.自选装备[index].currentText()))
         except:
             pass
 
@@ -1176,21 +1177,24 @@ class 窗口(QWidget):
                     count += self.装备选择状态[equ.get_id_by_name(i.名称)]
             for i in equ.get_equ_list():
                 if i.类型 in self.角色属性A.武器选项:
-                    self.装备图标点击事件(equ.get_id_by_name(i.名称), 0 if count > 0 else 1)
+                    self.装备图标点击事件(equ.get_id_by_name(i.名称),
+                                  0 if count > 0 else 1)
         elif index == '智慧产物':
             for i in equ.get_equ_list():
                 if self.单件装备判断(i):
                     count += self.装备选择状态[equ.get_id_by_name(i.名称)]
             for i in equ.get_equ_list():
                 if self.单件装备判断(i):
-                    self.装备图标点击事件(equ.get_id_by_name(i.名称), 0 if count > 0 else 1)
+                    self.装备图标点击事件(equ.get_id_by_name(i.名称),
+                                  0 if count > 0 else 1)
         else:
             for i in equ.get_equ_list():
                 if i.所属套装 == index:
                     count += self.装备选择状态[equ.get_id_by_name(i.名称)]
             for i in equ.get_equ_list():
                 if i.所属套装 == index:
-                    self.装备图标点击事件(equ.get_id_by_name(i.名称), 0 if count > 0 else 1)
+                    self.装备图标点击事件(equ.get_id_by_name(i.名称),
+                                  0 if count > 0 else 1)
 
     def 组合数量计算(self, sign, x=0):
         if sign == 0 or sign == 1:
@@ -1333,8 +1337,8 @@ class 窗口(QWidget):
                         for i in range(4):
                             self.神话属性选项[num * 4 + i].move(
                                 int(width / 7 * (count1 % 7) + 6),
-                                int(height / 5.2 * (count2 + 0.05)) -
-                                3 + i * 22 + 32)
+                                int(height / 5.2 * (count2 + 0.05)) - 3 +
+                                i * 22 + 32)
                         count1 += 1
                         if count1 % 7 == 0:
                             count2 += 1
@@ -1349,15 +1353,16 @@ class 窗口(QWidget):
                 for j in equ.get_equ_id_list():
                     temp = equ.get_equ_by_id(j)
                     if temp.所属套装 == '智慧产物':
-                        if (self.装备选择状态[j] == 1 or temp.名称 in 自选装备名称) and self.智慧产物升级.isChecked():
+                        if (self.装备选择状态[j] == 1 or temp.名称
+                                in 自选装备名称) and self.智慧产物升级.isChecked():
                             self.改造产物图片[num].move(
                                 int(width / 7 * (count1 % 7 + 0.42)),
                                 int(height / 5.2 * (count2 + 0.05)) - 3)
                             for i in range(4):
                                 self.改造产物选项[num * 4 + i].move(
                                     int(width / 7 * (count1 % 7) + 6),
-                                    int(height / 5.2 * (count2 + 0.05)) -
-                                    3 + i * 22 + 32)
+                                    int(height / 5.2 * (count2 + 0.05)) - 3 +
+                                    i * 22 + 32)
                             count1 += 1
                             if count1 % 7 == 0:
                                 count2 += 1
@@ -1369,7 +1374,6 @@ class 窗口(QWidget):
                         num += 1
             page4_height = max(ceil(page4_height / 7) * 130, height)
             self.main_frame4.setMinimumSize(width, page4_height)
-
 
         if self.初始属性.职业分类 == '输出':
             if index == 5:
@@ -1795,8 +1799,8 @@ class 窗口(QWidget):
         if 输出数据 == 1 and len(筛选) == 0:
             setfile = open('./数据记录/{}-{}.csv'.format(
                 self.角色属性A.实际名称, time.strftime('%m-%d-%H-%M-%S')),
-                'w',
-                encoding='gbk')
+                           'w',
+                           encoding='gbk')
             for i in range(len(显示序号)):
                 temp = ''
                 for j in range(13):
@@ -1837,11 +1841,12 @@ class 窗口(QWidget):
 
             if 伤害数值 > 100000000:
                 伤害数值 /= 100000000
-                伤害量 = ('{' + ':.{}f'.format(max(0, 4 - int(math.log10(伤害数值)))) + '}').format(伤害数值)
+                伤害量 = ('{' +
+                       ':.{}f'.format(max(0, 4 - int(math.log10(伤害数值)))) +
+                       '}').format(伤害数值)
             else:
                 伤害量 = "{:.0f}".format(伤害数值)
 
-            
             if 最高伤害 != 0:
                 百分比 = str(round(伤害数值 / 最高伤害 * 100, 1)) + '%'
             else:
@@ -2030,9 +2035,11 @@ class 窗口(QWidget):
                         if self.装备选择状态[index] == 1:
                             sign += 1
                         else:
-                            if sign2 == '空' and equ.get_equ_by_id(index).品质 != '神话' and equ.get_equ_by_id(index).所属套装 not in [
-                                        '精灵使的权能', '大自然的呼吸', '能量主宰'
-                            ]:
+                            if sign2 == '空' and equ.get_equ_by_id(
+                                    index).品质 != '神话' and equ.get_equ_by_id(
+                                        index).所属套装 not in [
+                                            '精灵使的权能', '大自然的呼吸', '能量主宰'
+                                        ]:
                                 sign += 1
                     if sign == 11:
                         count += len(self.有效武器列表)
@@ -2071,7 +2078,8 @@ class 技能详情(QFrame):
                 CD恢复 = ''
                 try:
                     tempstr = '<font face="宋体"><font color="#FF6666">' + data.角色属性B.技能栏[
-                        i].名称 + ("<br>" if data.角色属性B.技能栏[i].备注 != '' else '') + data.角色属性B.技能栏[i].备注 + '</font><br>'
+                        i].名称 + ("<br>" if data.角色属性B.技能栏[i].备注 != '' else
+                                 '') + data.角色属性B.技能栏[i].备注 + '</font><br>'
                     百分比 = int(data.角色属性B.技能栏[i].等效百分比(data.角色属性B.武器类型) /
                               data.角色属性B.技能栏[i].倍率)
                     被动倍率 = round(data.角色属性B.技能栏[i].被动倍率 * 100, 1)

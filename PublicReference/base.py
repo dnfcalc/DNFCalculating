@@ -604,12 +604,12 @@ class 角色属性(属性):
         return int(self.智力)
 
     def 面板力量(self):
-        return (self.力量 + int((self.力量 - self.基础力量) * self.系统奶系数 + self.系统奶基数) +
-                self.进图力量) * (1 + self.百分比力智)
+        return (self.力量 + int((self.力量 - self.基础力量) * self.系统奶系数 + self.系统奶基数)
+                + self.进图力量) * (1 + self.百分比力智)
 
     def 面板智力(self):
-        return (self.智力 + int((self.智力 - self.基础智力) * self.系统奶系数 + self.系统奶基数) +
-                self.进图智力) * (1 + self.百分比力智)
+        return (self.智力 + int((self.智力 - self.基础智力) * self.系统奶系数 + self.系统奶基数)
+                + self.进图智力) * (1 + self.百分比力智)
 
     def 站街物理攻击力倍率(self):
         站街物理攻击倍率 = 1.0
@@ -649,7 +649,7 @@ class 角色属性(属性):
 
     def 面板物理攻击力(self):
         面板物理攻击 = (self.物理攻击力 + self.进图物理攻击力) * (1 + self.百分比三攻) * (
-                1 + self.年宠技能 * 0.10 + self.斗神之吼秘药 * 0.12 + self.白兔子技能 * 0.20)
+            1 + self.年宠技能 * 0.10 + self.斗神之吼秘药 * 0.12 + self.白兔子技能 * 0.20)
         for i in self.技能栏:
             try:
                 面板物理攻击 *= i.物理攻击力倍率进图(self.武器类型)
@@ -659,7 +659,7 @@ class 角色属性(属性):
 
     def 面板魔法攻击力(self):
         面板魔法攻击 = (self.魔法攻击力 + self.进图魔法攻击力) * (1 + self.百分比三攻) * (
-                1 + self.年宠技能 * 0.10 + self.斗神之吼秘药 * 0.12 + self.白兔子技能 * 0.20)
+            1 + self.年宠技能 * 0.10 + self.斗神之吼秘药 * 0.12 + self.白兔子技能 * 0.20)
         for i in self.技能栏:
             try:
                 面板魔法攻击 *= i.魔法攻击力倍率进图(self.武器类型)
@@ -1052,9 +1052,9 @@ class 角色属性(属性):
                 self.黑鸦词条[i].append("")
                 if self.择优结果[i][1] != 0:
                     self.黑鸦词条[i][4] = (
-                                          "觉醒Lv+2 " if i == 0 and self.择优结果[i][1] == 0.16 else
-                                          '') + 黑鸦武器属性列表[self.择优结果[i][0]].描述 + '+' + str(
-                        round(self.择优结果[i][1] * 100)) + '%'
+                        "觉醒Lv+2 " if i == 0 and self.择优结果[i][1] == 0.16 else
+                        '') + 黑鸦武器属性列表[self.择优结果[i][0]].描述 + '+' + str(
+                            round(self.择优结果[i][1] * 100)) + '%'
             if i == 4:
                 if self.是否择优[i] == 0:
                     self.词条提升率 = [0] * 6
@@ -1089,7 +1089,7 @@ class 角色属性(属性):
         for i in range(8):
             for j in range(6):
                 data_array[i][j] = self.择优词条[i][j] * (
-                        up[1][j] - up[0][j]) * self.是否择优[i] * 100
+                    up[1][j] - up[0][j]) * self.是否择优[i] * 100
         try:
             self.全局自适应()
         except:
@@ -1141,7 +1141,7 @@ class 角色属性(属性):
                                         damage = int(rate * self.输出提升率)
                                         wf.write(
                                             '{},{},{},{},{},{},{},{},{:.8},{}\n'
-                                                .format(
+                                            .format(
                                                 '无' if len(rangelist[0]) == 1
                                                 else 词条属性列表[a1].描述,
                                                 '无' if len(rangelist[1]) == 1
@@ -1177,7 +1177,7 @@ class 角色属性(属性):
         for i in range(y):
             for j in range(x):
                 data_array[i + 1][j] = self.择优词条[i][j] * (
-                        up[1][j] - up[0][j]) * self.是否择优[i] * 100
+                    up[1][j] - up[0][j]) * self.是否择优[i] * 100
 
         dll = ctypes.WinDLL(dllPath)
 
@@ -1515,7 +1515,8 @@ class 角色属性(属性):
             if '/CD' in self.次数输入[i]:
                 技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
             if type(self.宠物次数[i]) == type('str'):
-                self.宠物次数[i] = eval(self.宠物次数[i].replace('num', str(技能释放次数[i])))
+                self.宠物次数[i] = eval(self.宠物次数[i].replace(
+                    'num', str(技能释放次数[i])))
         return 技能释放次数
 
     def 技能释放次数计算(self):
@@ -1524,7 +1525,9 @@ class 角色属性(属性):
             if i.是否有伤害 == 1:
                 s = self.次数输入[self.技能序号[i.名称]]
                 if '/CD' in s:
-                    技能释放次数.append(int((self.时间输入 - i.演出时间) / i.等效CD(self.武器类型, self.类型)) + 1 + i.基础释放次数)
+                    技能释放次数.append(
+                        int((self.时间输入 - i.演出时间) /
+                            i.等效CD(self.武器类型, self.类型)) + 1 + i.基础释放次数)
                 else:
                     技能释放次数.append(round(float(s), 2))
             else:
@@ -1549,9 +1552,9 @@ class 角色属性(属性):
             index = self.技能序号[i.名称]
             if i.是否有伤害 == 1 and a[index] != 0:
                 技能总伤害.append(a[index] * b[index] * (
-                        1 + self.白兔子技能 * 0.20 + self.年宠技能 * 0.10 *
-                        self.宠物次数[index] / a[index]  # 宠物技能占比 = 宠物次数 / 释放次数
-                        + self.斗神之吼秘药 * 0.12))
+                    1 + self.白兔子技能 * 0.20 + self.年宠技能 * 0.10 *
+                    self.宠物次数[index] / a[index]  # 宠物技能占比 = 宠物次数 / 释放次数
+                    + self.斗神之吼秘药 * 0.12))
             else:
                 技能总伤害.append(0)
         return 技能总伤害
@@ -2245,21 +2248,22 @@ class 角色窗口(窗口):
         奶量buff力智label.setStyleSheet(标签样式)
         奶量buff力智label.setAlignment(Qt.AlignCenter)
 
-        偏移 = (35 if self.初始属性.远古记忆 != -1 else 0)+(35 if self.初始属性.刀魂之卡赞 != -1 else 0)
-        奶量buff力智label.move(970, 18 + counter * 80 + 10+偏移)
+        偏移 = (35 if self.初始属性.远古记忆 != -1 else 0) + (35 if self.初始属性.刀魂之卡赞 != -1
+                                                    else 0)
+        奶量buff力智label.move(970, 18 + counter * 80 + 10 + 偏移)
         奶量buff力智输入框 = QLineEdit(self.main_frame2)
         奶量buff力智输入框.setStyleSheet(文本框样式黄)
-        奶量buff力智输入框.move(1050, 15 + counter * 80 + 10+偏移)
+        奶量buff力智输入框.move(1050, 15 + counter * 80 + 10 + 偏移)
         奶量buff力智输入框.resize(50, 20)
         self.奶量buff输入.append(奶量buff力智输入框)
 
         奶量buff三攻label = QLabel("奶量buff三攻", self.main_frame2)
         奶量buff三攻label.setStyleSheet(标签样式)
         奶量buff三攻label.setAlignment(Qt.AlignCenter)
-        奶量buff三攻label.move(970, 24 + counter * 80 + 40+偏移)
+        奶量buff三攻label.move(970, 24 + counter * 80 + 40 + 偏移)
         奶量buff三攻输入框 = QLineEdit(self.main_frame2)
         奶量buff三攻输入框.setStyleSheet(文本框样式黄)
-        奶量buff三攻输入框.move(1050, 15 + counter * 80 + 45+偏移)
+        奶量buff三攻输入框.move(1050, 15 + counter * 80 + 45 + 偏移)
         奶量buff三攻输入框.resize(50, 20)
         self.奶量buff输入.append(奶量buff三攻输入框)
 
@@ -2725,7 +2729,8 @@ class 角色窗口(窗口):
 
         for i in range(12):
             self.图片显示.append(QLabel(self.main_frame5))
-            self.图片显示[i].setMovie(equ.get_img_by_name(self.自选装备[i].currentText()))
+            self.图片显示[i].setMovie(
+                equ.get_img_by_name(self.自选装备[i].currentText()))
             self.图片显示[i].resize(26, 26)
             self.图片显示[i].move(初始x + 10 + x坐标[i], 初始y + 31 + y坐标[i])
             self.图片显示[i].setAlignment(Qt.AlignCenter)
@@ -2955,7 +2960,8 @@ class 角色窗口(窗口):
             self.希洛克套装按钮.append(QPushButton(i, self.main_frame6))
             self.希洛克套装按钮[count].setStyleSheet(按钮样式)
             self.希洛克套装按钮[count].resize(50, 22)
-            self.希洛克套装按钮[count].move(横坐标 - 320, 纵坐标 + 160 + 3 + count * 32 - 10)
+            self.希洛克套装按钮[count].move(横坐标 - 320,
+                                     纵坐标 + 160 + 3 + count * 32 - 10)
             self.希洛克套装按钮[count].clicked.connect(
                 lambda state, index=(count + 1) * 100: self.希洛克选择(index))
             for j in range(3):
@@ -3039,7 +3045,8 @@ class 角色窗口(窗口):
             self.奥兹玛套装按钮.append(QPushButton(i, self.main_frame6))
             self.奥兹玛套装按钮[count].setStyleSheet(按钮样式)
             self.奥兹玛套装按钮[count].resize(75, 22)
-            self.奥兹玛套装按钮[count].move(横坐标 - 320 - 5, 纵坐标 + 160 + 3 + count * 32 - 10 + 纵向偏移)
+            self.奥兹玛套装按钮[count].move(横坐标 - 320 - 5,
+                                     纵坐标 + 160 + 3 + count * 32 - 10 + 纵向偏移)
             self.奥兹玛套装按钮[count].clicked.connect(
                 lambda state, index=(count + 1) * 100: self.奥兹玛选择(index))
             for j in range(5):
@@ -3048,7 +3055,8 @@ class 角色窗口(窗口):
                 图片.setPixmap(
                     QPixmap('./ResourceFiles/img/奥兹玛/' + str(序号) + '.png'))
                 图片.resize(28, 28)
-                图片.move(横坐标 - 260 + j * 30 + 20 - 5, 纵坐标 + 160 + count * 32 - 10 + 纵向偏移)
+                图片.move(横坐标 - 260 + j * 30 + 20 - 5,
+                        纵坐标 + 160 + count * 32 - 10 + 纵向偏移)
                 self.奥兹玛装备图标.append(图片)
                 self.奥兹玛遮罩透明度.append(QGraphicsOpacityEffect())
                 self.奥兹玛遮罩透明度[序号].setOpacity(0.5)
@@ -3071,7 +3079,8 @@ class 角色窗口(窗口):
             self.阿斯特罗斯选项[i].addItem('20.25.35')
             self.阿斯特罗斯选项[i].resize(60 + 15, 20)
             self.阿斯特罗斯选项[i].setCurrentIndex(0)
-            self.阿斯特罗斯选项[i].move(横坐标 - 139 + 60 - 15, 纵坐标 + 160 + 3 - 10 + 纵向偏移 + i * 32)
+            self.阿斯特罗斯选项[i].move(横坐标 - 139 + 60 - 15,
+                                 纵坐标 + 160 + 3 - 10 + 纵向偏移 + i * 32)
         self.阿斯特罗斯选项显示(0)
 
         self.计算按钮3 = QPushButton('开始计算', self.main_frame6)
@@ -3312,7 +3321,8 @@ class 角色窗口(窗口):
             try:
                 filename = 'page_1.json'
                 set_data = {}
-                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                with open(os.path.join(filepath, filename),
+                          encoding='utf-8') as fp:
                     set_data = json.load(fp)
                 fp.close()
                 try:
@@ -3390,7 +3400,8 @@ class 角色窗口(窗口):
             try:
                 filename = 'page_2.json'
                 set_data = {}
-                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                with open(os.path.join(filepath, filename),
+                          encoding='utf-8') as fp:
                     set_data = json.load(fp)
                 fp.close()
                 try:
@@ -3465,7 +3476,8 @@ class 角色窗口(窗口):
             try:
                 filename = 'page_3.json'
                 set_data = {}
-                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                with open(os.path.join(filepath, filename),
+                          encoding='utf-8') as fp:
                     set_data = json.load(fp)
                 fp.close()
 
@@ -3504,7 +3516,8 @@ class 角色窗口(窗口):
             try:
                 filename = 'page_4.json'
                 set_data = {}
-                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                with open(os.path.join(filepath, filename),
+                          encoding='utf-8') as fp:
                     set_data = json.load(fp)
                 fp.close()
                 try:
@@ -3522,7 +3535,8 @@ class 角色窗口(窗口):
             try:
                 filename = 'page_5.json'
                 set_data = {}
-                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                with open(os.path.join(filepath, filename),
+                          encoding='utf-8') as fp:
                     set_data = json.load(fp)
                 fp.close()
 
@@ -3600,7 +3614,8 @@ class 角色窗口(窗口):
             try:
                 filename = 'page_6.json'
                 set_data = {}
-                with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+                with open(os.path.join(filepath, filename),
+                          encoding='utf-8') as fp:
                     set_data = json.load(fp)
                 fp.close()
 
@@ -3625,7 +3640,8 @@ class 角色窗口(窗口):
         try:
             filename = 'char.json'
             set_data = {}
-            with open(os.path.join(filepath, filename), encoding='utf-8') as fp:
+            with open(os.path.join(filepath, filename),
+                      encoding='utf-8') as fp:
                 set_data = json.load(fp)
             fp.close()
 
@@ -3646,7 +3662,8 @@ class 角色窗口(窗口):
             logger.error(error)
 
     def 载入配置(self, path='set'):
-        if os.path.exists('./ResourceFiles/{}/{}/page_1.json'.format(self.角色属性A.实际名称, path)):
+        if os.path.exists('./ResourceFiles/{}/{}/page_1.json'.format(
+                self.角色属性A.实际名称, path)):
             self.载入json(path)
             return
         try:
@@ -4049,7 +4066,8 @@ class 角色窗口(窗口):
 
                 set_data['装备条件'] = [i.currentIndex() for i in self.装备条件选择]
 
-                with open(os.path.join(filepath, filename), "w",
+                with open(os.path.join(filepath, filename),
+                          "w",
                           encoding='utf-8') as fp:
                     json.dump(set_data, fp, ensure_ascii=False, indent=4)
                 fp.close()
@@ -4083,7 +4101,8 @@ class 角色窗口(窗口):
                     skill[i.名称] = self.获取技能选项(序号)
                 set_data['技能选项'] = skill
 
-                with open(os.path.join(filepath, filename), "w",
+                with open(os.path.join(filepath, filename),
+                          "w",
                           encoding='utf-8') as fp:
                     json.dump(set_data, fp, ensure_ascii=False, indent=4)
                 fp.close()
@@ -4100,9 +4119,11 @@ class 角色窗口(窗口):
 
                 set_data['细节数值'] = [[j.text() for j in i] for i in self.属性设置输入]
 
-                set_data['细节选项'] = [[j.currentIndex() for j in i] for i in self.细节选项输入]
+                set_data['细节选项'] = [[j.currentIndex() for j in i]
+                                    for i in self.细节选项输入]
 
-                with open(os.path.join(filepath, filename), "w",
+                with open(os.path.join(filepath, filename),
+                          "w",
                           encoding='utf-8') as fp:
                     json.dump(set_data, fp, ensure_ascii=False, indent=4)
                 fp.close()
@@ -4117,7 +4138,8 @@ class 角色窗口(窗口):
 
                 set_data['神话属性修正'] = [i.currentIndex() for i in self.神话属性选项]
 
-                with open(os.path.join(filepath, filename), "w",
+                with open(os.path.join(filepath, filename),
+                          "w",
                           encoding='utf-8') as fp:
                     json.dump(set_data, fp, ensure_ascii=False, indent=4)
                 fp.close()
@@ -4139,9 +4161,11 @@ class 角色窗口(窗口):
                 set_data['阿斯特罗斯选项'] = [i.currentIndex() for i in self.阿斯特罗斯选项]
                 set_data['希洛克选择'] = self.希洛克选择状态
                 set_data['奥兹玛选择'] = self.奥兹玛选择状态
-                set_data['黑鸦选择'] = [[j.currentIndex() for j in i] for i in self.黑鸦词条]
+                set_data['黑鸦选择'] = [[j.currentIndex() for j in i]
+                                    for i in self.黑鸦词条]
 
-                with open(os.path.join(filepath, filename), "w",
+                with open(os.path.join(filepath, filename),
+                          "w",
                           encoding='utf-8') as fp:
                     json.dump(set_data, fp, ensure_ascii=False, indent=4)
                 fp.close()
@@ -4157,7 +4181,8 @@ class 角色窗口(窗口):
                 set_data['自选装备'] = [i.currentIndex() for i in self.自选装备]
                 set_data['装备锁定'] = [i.isChecked() for i in self.装备锁定]
 
-                with open(os.path.join(filepath, filename), "w",
+                with open(os.path.join(filepath, filename),
+                          "w",
                           encoding='utf-8') as fp:
                     json.dump(set_data, fp, ensure_ascii=False, indent=4)
                 fp.close()
@@ -4602,8 +4627,8 @@ class 角色窗口(窗口):
                     套装属性[套装.index(
                         temp
                     )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
-                        i] + '</font><br>' + equ.get_suit_by_name(套装名称[i]).装备描述(
-                        self.角色属性B)[:-4] + '</font><br>'
+                        i] + '</font><br>' + equ.get_suit_by_name(
+                            套装名称[i]).装备描述(self.角色属性B)[:-4] + '</font><br>'
 
             # region 希洛克套装属性
             数量 = [0] * 3
@@ -4948,11 +4973,11 @@ class 角色窗口(窗口):
             elif temp1 > 0:
                 return '<font face="宋体" color= "#96FF1E">+' + self.格式化输出(
                     str(int(temp1)), 1) + ' (' + str(
-                    '%.2f' % abs(temp2)) + '%)</font>'
+                        '%.2f' % abs(temp2)) + '%)</font>'
             else:
                 return '<font face="宋体" color= "#E52E2E">' + self.格式化输出(
                     str(int(temp1)), 1) + ' (' + str(
-                    '%.2f' % abs(temp2)) + '%)</font>'
+                        '%.2f' % abs(temp2)) + '%)</font>'
         else:
             if temp2 == 0:
                 return '<font face="宋体">无变化</font>'
@@ -5168,7 +5193,7 @@ class 角色窗口(窗口):
                     temp
                 )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
                     i] + '</font><br>' + equ.get_suit_by_name(套装名称[i]).装备描述(
-                    self.角色属性B)[:-4] + '</font><br>'
+                        self.角色属性B)[:-4] + '</font><br>'
 
         # region 希洛克套装属性
         数量 = [0] * 3
@@ -5395,7 +5420,7 @@ class 角色窗口(窗口):
                         tempstr += self.角色属性B.技能栏[i].技能描述(self.角色属性B.武器类型)
                     else:
                         if self.角色属性B.技能栏[i].关联技能 != [
-                            '无'
+                                '无'
                         ] and self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) != 1:
                             tempstr += '<font face="宋体"><font color="#FF6666">' + self.角色属性B.技能栏[
                                 i].名称 + '</font><br>'
@@ -5452,7 +5477,7 @@ class 角色窗口(窗口):
                                         tempstr += ','
                                 tempstr += ')</font>'
                         if self.角色属性B.技能栏[i].冷却关联技能 != [
-                            '无'
+                                '无'
                         ] and self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型) != 1:
                             if tempstr == '':
                                 tempstr += '<font face="宋体"><font color="#FF6666">' + self.角色属性B.技能栏[
@@ -5973,21 +5998,25 @@ class 角色窗口(窗口):
         for i in self.角色属性A.技能栏:
             序号 = self.角色属性A.技能序号[i.名称]
             if i.是否有伤害 == 1:
-                s = self.次数输入[序号].currentText().replace('，', ',').replace('（', '(').replace('）', ')')
+                s = self.次数输入[序号].currentText().replace('，', ',').replace(
+                    '（', '(').replace('）', ')')
                 try:
                     if eval(s.replace('/CD', '1')) >= 0:
                         属性.次数输入.append(s)
                 except:
-                    QMessageBox.information(self, "错误", "“{}”技能次数输入错误，请重新输入".format(i.名称))
+                    QMessageBox.information(self, "错误",
+                                            "“{}”技能次数输入错误，请重新输入".format(i.名称))
                     self.是否计算 = 0
                     break
 
-                s = self.宠物次数[序号].currentText().replace('，', ',').replace('（', '(').replace('）', ')')
+                s = self.宠物次数[序号].currentText().replace('，', ',').replace(
+                    '（', '(').replace('）', ')')
                 try:
                     if eval(s.replace('num', '1')) >= 0:
                         属性.宠物次数.append(s)
                 except:
-                    QMessageBox.information(self, "错误", "“{}”宠物次数输入错误，请重新输入".format(i.名称))
+                    QMessageBox.information(self, "错误",
+                                            "“{}”宠物次数输入错误，请重新输入".format(i.名称))
                     self.是否计算 = 0
                     break
 
@@ -6112,11 +6141,11 @@ class 角色窗口(窗口):
                     if '攻击' in j:
                         属性.技能栏[self.角色属性A.技能序号[
                             self.符文[i].currentText()]].倍率 *= 1 + int(
-                            j.replace('攻击', '').replace('%', '')) / 100
+                                j.replace('攻击', '').replace('%', '')) / 100
                     if 'CD' in j:
                         属性.技能栏[self.角色属性A.技能序号[
                             self.符文[i].currentText()]].CD *= 1 + int(
-                            j.replace('CD', '').replace('%', '')) / 100
+                                j.replace('CD', '').replace('%', '')) / 100
 
     def 基础属性(self, 属性):
         if 切装模式 == 1:
@@ -6237,7 +6266,6 @@ class 角色窗口(窗口):
                                 if j.currentText() == k.名称 + 'Lv+1':
                                     k.等级加成(1)
                                     break
-
 
         if self.奶量buff输入[0].text() not in ['', '无']:
             # print(属性.力量)

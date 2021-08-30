@@ -31,6 +31,7 @@ os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
 if __name__ == '__main__':
     multiprocessing.freeze_support()
 
+
 class Worker(QThread):
     sinOut = pyqtSignal(int)
 
@@ -339,7 +340,7 @@ class 选择窗口(QWidget):
         action_4.triggered.connect(lambda state: self.打开链接(
             ['https://jq.qq.com/?_wv=1027&k=ekQXpyq0']))
         action_5 = QAction('打赏', parent=menu)
-        action_5.triggered.connect(lambda state,index=count : self.打赏())
+        action_5.triggered.connect(lambda state, index=count: self.打赏())
         menu.addAction(action_0)
         menu.addSeparator()
         menu.addAction(action_5)
@@ -431,10 +432,10 @@ class 选择窗口(QWidget):
                 B = box.button(QMessageBox.No)
                 A.setText('BUFF')
                 B.setText('战斗')
-                if index["类名3"]!='无':
+                if index["类名3"] != '无':
                     C = box.button(QMessageBox.Yes)
                     C.setText('前瞻版本-BUFF')
-                if index["类名4"]!='无':
+                if index["类名4"] != '无':
                     D = box.button(QMessageBox.Yes)
                     D.setText('前瞻版本-战斗')
             else:
@@ -453,12 +454,12 @@ class 选择窗口(QWidget):
                     self.打开窗口(index["类名2"])
                 elif box.clickedButton() == C:
                     self.打开窗口(index["类名3"])
-                elif  box.clickedButton() == D:
+                elif box.clickedButton() == D:
                     self.打开窗口(index["类名4"])
                 else:
                     return
             except Exception as error:
-                    pass
+                pass
         except Exception as error:
             logger.error("error={} \n detail {}".format(
                 error, traceback.print_exc()))

@@ -193,7 +193,7 @@ class 技能10(职业主动技能):
     演出时间 = 1.8
 
     def 等效百分比(self, 武器类型):
-        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率 
+        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
 #   打满是12hit
 #   实际上站位不对的话很容易丢3或6hit
 #   跟游戏里对不上的话可以试试调整下站位再打沙袋 hit对上了的话伤害应该是一致的
@@ -231,7 +231,7 @@ class 技能12(职业主动技能):
     演出时间 = 1.6
 
     def 等效百分比(self, 武器类型):
-        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率 
+        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
 class 技能13(职业主动技能):
@@ -247,7 +247,7 @@ class 技能13(职业主动技能):
     演出时间 = 0.4
 
     def 等效百分比(self, 武器类型):
-        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率 
+        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
 class 技能14(职业主动技能):
@@ -268,7 +268,7 @@ class 技能14(职业主动技能):
         return round(self.CD / self.恢复 * 武器冷却惩罚(武器类型, 输出类型, self.版本), 1)
 
     def 等效百分比(self, 武器类型):
-        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率 
+        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
 class 技能15(职业主动技能):
@@ -289,7 +289,7 @@ class 技能15(职业主动技能):
     护石选项 = ['魔界', '圣痕']
 
     def 等效百分比(self, 武器类型):
-        return ((self.data1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.data2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率 
+        return ((self.data1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.data2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率
 
     def 装备护石(self, x):
         if x == 0:
@@ -324,7 +324,7 @@ class 技能16(职业主动技能):
     护石选项 = ['魔界', '圣痕']
 
     def 等效百分比(self, 武器类型):
-        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率 
+        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
     def 装备护石(self, x):
         if x == 0:
@@ -356,7 +356,7 @@ class 技能17(职业主动技能):
     演出时间 = 4.0
 
     def 等效百分比(self, 武器类型):
-        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率 
+        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
 class 技能18(职业主动技能):
@@ -379,7 +379,7 @@ class 技能18(职业主动技能):
     护石选项 = ['魔界', '圣痕']
 
     def 等效百分比(self, 武器类型):
-        return ((self.data1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.data2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))+(self.data3[self.等级] * self.攻击次数3 * (1 + self.TP成长 * self.TP等级))) * self.倍率 
+        return ((self.data1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.data2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))+(self.data3[self.等级] * self.攻击次数3 * (1 + self.TP成长 * self.TP等级))) * self.倍率
 
     def 装备护石(self, x):
         if x == 0:
@@ -402,7 +402,7 @@ class 技能19(职业主动技能):
     CD = 145.0
 
     def 等效百分比(self, 武器类型):
-        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率 
+        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
 # 千重奏的话 能有正常放五倍差不多 想看千重奏的伤害就自己去给他释放次数改成五倍
 
 
@@ -424,7 +424,7 @@ class 技能20(职业主动技能):
     护石选项 = ['魔界', '圣痕']
 
     def 等效百分比(self, 武器类型):
-        return ((self.data1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.data2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率 
+        return ((self.data1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.data2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率
 
     def 装备护石(self, x):
         if x == 0:
@@ -457,7 +457,7 @@ class 技能21(职业主动技能):
     护石选项 = ['魔界', '圣痕']
 
     def 等效百分比(self, 武器类型):
-        return ((self.data1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.data2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率 
+        return ((self.data1[self.等级] * self.攻击次数1 * (1 + self.TP成长 * self.TP等级))+(self.data2[self.等级] * self.攻击次数2 * (1 + self.TP成长 * self.TP等级))) * self.倍率
 
     def 装备护石(self, x):
         if x == 0:
@@ -481,7 +481,7 @@ class 技能22(职业主动技能):
     护石CD缩减 = 0
 
     def 等效百分比(self, 武器类型):
-        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率 
+        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
     护石选项 = ['圣痕']
 
     def 装备护石(self, x):
@@ -504,7 +504,7 @@ class 技能23(职业主动技能):
     攻击倍率 = 1.083
 
     def 等效百分比(self, 武器类型):
-        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率 
+        return self.data[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
     护石选项 = ['圣痕']
 
     def 装备护石(self, x):
@@ -528,7 +528,7 @@ class 技能24(职业主动技能):
     CD = 180.0
 
     def 等效百分比(self, 武器类型):
-        return ((self.data1[self.等级] * self.攻击次数1)+(self.data2[self.等级] * self.攻击次数2)+(self.data3[self.等级] * self.攻击次数3)) * self.倍率 
+        return ((self.data1[self.等级] * self.攻击次数1)+(self.data2[self.等级] * self.攻击次数2)+(self.data3[self.等级] * self.攻击次数3)) * self.倍率
 
 
 class 技能25(职业主动技能):
@@ -541,7 +541,7 @@ class 技能25(职业主动技能):
     CD = 60
 
     def 等效百分比(self, 武器类型):
-        return (self.data1[self.等级] * self.攻击次数1) * self.倍率 
+        return (self.data1[self.等级] * self.攻击次数1) * self.倍率
 
 class 技能26(职业主动技能):
     名称 = '启源·微观宇宙'
@@ -560,7 +560,7 @@ class 技能26(职业主动技能):
         return 0.0
 
     def 等效百分比(self, 武器类型):
-        return ((self.data1[self.等级] * self.攻击次数1)+(self.data2[self.等级] * self.攻击次数2)+(self.data3[self.等级] * self.攻击次数3)) * self.倍率 
+        return ((self.data1[self.等级] * self.攻击次数1)+(self.data2[self.等级] * self.攻击次数2)+(self.data3[self.等级] * self.攻击次数3)) * self.倍率
 
 
 class 技能27(职业被动技能):

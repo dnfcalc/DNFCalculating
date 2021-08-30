@@ -196,4 +196,4 @@ for i in range(len(装备变换属性列表)):
 for j in range(1, 7):
     for k in range(1, 7):
         for l in range(1, 7):
-            防具变换属性组合 += ([j, k, l],)
+            防具变换属性组合 += ([j, k, l], )

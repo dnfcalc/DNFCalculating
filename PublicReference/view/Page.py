@@ -4,7 +4,6 @@ from PyQt5.QtGui import *
 
 
 class Page(QWidget):
-
     def setName(self, name):
         self.__name = name
 

@@ -528,7 +528,7 @@ class 苍暮·特工角色属性(角色属性):
                     技能释放次数.append(eval(self.次数输入[self.技能序号[i.名称]]))
             else:
                 技能释放次数.append(0)
-                
+
         return self.技能释放次数解析(技能释放次数)
 
 

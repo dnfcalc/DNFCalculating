@@ -78,28 +78,28 @@ class 换装窗口(Page):
         self.初始化奥兹玛()
 
     def 初始化装备(self):
-        equips = self.store.first(
-            "/buffer/data/register/equips", "/buffer/data/equips")
-        amplifies = self.store.first(
-            "/buffer/data/register/amplifies", "/buffer/data/amplifies")
+        equips = self.store.first("/buffer/data/register/equips",
+                                  "/buffer/data/equips")
+        amplifies = self.store.first("/buffer/data/register/amplifies",
+                                     "/buffer/data/amplifies")
         for 部位 in range(len(equips)):
             self.自选装备[部位].setCurrentText(equips[部位])
             self.自选增幅选项[部位].setCurrentIndex(amplifies[部位])
 
     def 初始化希洛克(self):
-        sirocos = self.store.first(
-            "/buffer/data/register/siroco", "/buffer/data/siroco")
+        sirocos = self.store.first("/buffer/data/register/siroco",
+                                   "/buffer/data/siroco")
         for i in range(len(sirocos)):
             if sirocos[i] == 1:
                 self.希洛克选择(i, 1)
 
     def 初始化奥兹玛(self):
-        ozmas = self.store.first(
-            "/buffer/data/register/ozma", "/buffer/data/ozma")
+        ozmas = self.store.first("/buffer/data/register/ozma",
+                                 "/buffer/data/ozma")
         for i in range(len(ozmas)):
             if ozmas[i] == 1:
                 self.奥兹玛选择(i, 1)
-    
+
     def reset(self):
         self.store.delete("^/buffer/data/register/.*$")
         self.初始化数据()
@@ -115,7 +115,10 @@ class 换装窗口(Page):
             自选.append(self.自选装备[i].currentText())
             增幅.append(self.自选增幅选项[i].currentIndex())
         for i in range(len(self.黑鸦词条)):
-            黑鸦.append([2,self.黑鸦词条[i][1].currentIndex(),self.黑鸦词条[i][3].currentText()])
+            黑鸦.append([
+                2, self.黑鸦词条[i][1].currentIndex(),
+                self.黑鸦词条[i][3].currentText()
+            ])
 
         self.store.set("/buffer/data/register/equips", 自选)
         self.store.set("/buffer/data/register/siroco", self.希洛克选择状态)
@@ -203,7 +206,7 @@ class 换装窗口(Page):
         神话部位选项.resize(160, 22)
         神话部位选项.move(400, 50 + 30 * count)
         神话部位选项.activated.connect(lambda index: self.神话部位更改(index))
-        
+
         add = QPushButton('打造↑', self)
         add.clicked.connect(lambda state: self.批量打造(1))
         add.move(400, 270)
@@ -215,13 +218,12 @@ class 换装窗口(Page):
         minus.move(480, 270)
         minus.resize(60, 24)
         minus.setStyleSheet(按钮样式)
-    
+
     def 批量打造(self, offset):
         for i in range(12):
             y = max(min(self.自选增幅选项[i].currentIndex() + offset, 31), 0)
             self.自选增幅选项[i].setCurrentIndex(y)
         return
-
 
     def 自选套装更改(self, index):
         name = self.自选套装[index].currentText()
@@ -238,8 +240,8 @@ class 换装窗口(Page):
                         if j.所属套装 == name and j.品质 != '神话':
                             self.自选装备[i].setCurrentIndex(x)
                             break
-    
-    def 神话部位更改(self,index):
+
+    def 神话部位更改(self, index):
         部位 = [-1, 0, 5, 8]
         序号 = 部位[index]
         if 序号 != -1:
@@ -284,14 +286,14 @@ class 换装窗口(Page):
                 图片.setPixmap(
                     QPixmap('./ResourceFiles/img/奥兹玛/' + str(序号) + '.png'))
                 图片.resize(28, 28)
-                图片.move(横坐标 + 60 + j * 30+20, 纵坐标 + count * 32)
+                图片.move(横坐标 + 60 + j * 30 + 20, 纵坐标 + count * 32)
                 self.奥兹玛遮罩透明度.append(QGraphicsOpacityEffect())
                 self.奥兹玛遮罩透明度[序号].setOpacity(0.5)
                 self.奥兹玛单件按钮.append(QPushButton(self))
                 self.奥兹玛单件按钮[序号].setStyleSheet(
                     "background-color: rgb(0, 0, 0)")
                 self.奥兹玛单件按钮[序号].resize(28, 28)
-                self.奥兹玛单件按钮[序号].move(横坐标 + 60 + j * 30+20, 纵坐标 + count * 32)
+                self.奥兹玛单件按钮[序号].move(横坐标 + 60 + j * 30 + 20, 纵坐标 + count * 32)
                 self.奥兹玛单件按钮[序号].setGraphicsEffect(self.奥兹玛遮罩透明度[序号])
                 self.奥兹玛单件按钮[序号].clicked.connect(
                     lambda state, index=序号: self.奥兹玛选择(index))
@@ -326,7 +328,7 @@ class 换装窗口(Page):
                 self.希洛克单件按钮[序号].setStyleSheet(
                     "background-color: rgb(0, 0, 0)")
                 self.希洛克单件按钮[序号].resize(28, 28)
-                self.希洛克单件按钮[序号].move(横坐标 + 60 + j * 30+20, 纵坐标 + count * 32)
+                self.希洛克单件按钮[序号].move(横坐标 + 60 + j * 30 + 20, 纵坐标 + count * 32)
                 self.希洛克单件按钮[序号].setGraphicsEffect(self.希洛克遮罩透明度[序号])
                 self.希洛克单件按钮[序号].clicked.connect(
                     lambda state, index=序号: self.希洛克选择(index))
@@ -445,11 +447,11 @@ class 换装窗口(Page):
         for i in range(index * 3, index * 3 + 3):
             count &= self.希洛克选择状态[i]
         count ^= 1
-        for i in range(index*3, index*3+3):
+        for i in range(index * 3, index * 3 + 3):
             self.希洛克选择(i, count)
 
     def 希洛克选择(self, index, value=-1):
-        if(value == -1):
+        if (value == -1):
             value = self.希洛克选择状态[index] ^ 1
         for i in range(5):
             序号 = i * 3 + index % 3
@@ -473,7 +475,7 @@ class 换装窗口(Page):
             self.奥兹玛选择(i, count)
 
     def 奥兹玛选择(self, index, value=-1):
-        if(value == -1):
+        if (value == -1):
             value = self.奥兹玛选择状态[index] ^ 1
         for i in range(5):
             序号 = i * 5 + index % 5

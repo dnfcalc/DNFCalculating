@@ -6,6 +6,7 @@
 ##
 import re
 
+
 class Store:
     def __init__(self):
         self.__states = {}
@@ -73,13 +74,13 @@ class Store:
         return self.compute(key, getter, setter)
 
     # 根据指定的条件删除
-    def delete(self, pattern = None):
-        match = lambda _:True
+    def delete(self, pattern=None):
+        match = lambda _: True
         if pattern is not None:
             if callable(pattern):
                 match = pattern
-            elif isinstance(pattern,str):
-                match =  lambda s: re.match(pattern,s)
+            elif isinstance(pattern, str):
+                match = lambda s: re.match(pattern, s)
         for key in list(self.__states.keys()):
             if match(key):
                 self.__states.pop(key)
@@ -96,7 +97,7 @@ class Store:
     # 导入
     def imports(self, pairs: dict = {}, prefix=''):
         for key in pairs.keys():
-            self.set(prefix+str(key), pairs[key])
+            self.set(prefix + str(key), pairs[key])
         return self
 
     # 只读属性
@@ -111,6 +112,7 @@ class Store:
         def change(value):
             self.set(key, value)
             pass
+
         return change
 
     def __get_field__(self, key: str):
@@ -149,7 +151,7 @@ class Store:
             if value is None:
                 value = self.getValue()
             for valueChanged in self.valueChangeds:
-                if(callable(valueChanged)):
+                if (callable(valueChanged)):
                     valueChanged(value)
             return
 
