@@ -52,6 +52,11 @@ class 知源·小魔女技能2(主动技能):
 
     def 结算统计(self):
         倍率 = self.适用数值 / 665 + 1
+
+        偏爱 = self.技能表['小魔女的偏爱']
+        if 偏爱.是否启用:
+            倍率 *= 1 + 偏爱.增幅倍率
+
         temp = [0, 0, 0]  # 智力,体力,精神
         temp.append(int(round((self.力智[self.等级] + self.BUFF力量) * self.BUFF力量per * 倍率,3)))  # 力量
         temp.append(int(round((self.力智[self.等级] + self.BUFF智力) * self.BUFF智力per * 倍率,3)))  # 智力
@@ -59,10 +64,6 @@ class 知源·小魔女技能2(主动技能):
         temp.append(int(round((self.三攻[self.等级] + self.BUFF魔攻) * self.BUFF魔攻per * 倍率,3)))  # 魔攻
         temp.append(int(round((self.三攻[self.等级] + self.BUFF独立) * self.BUFF独立per * 倍率,3)))  # 独立
 
-        偏爱 = self.技能表['小魔女的偏爱']
-        if 偏爱.是否启用:
-            偏爱倍率 = 1 + 偏爱.增幅倍率
-            temp = [i * 偏爱倍率 for i in temp]
         return temp
 
     def 技能面板(self):
@@ -285,10 +286,6 @@ class 知源·小魔女角色属性(角色属性):
 
         self.技能表['少女的爱'].等级加成(self.一觉被动Lv)
         self.技能表['少女的爱'].额外力智 = self.一觉被动力智
-
-    def BUFF计算(self, x=0):
-        总数据 = self.数据计算()
-        return self.结果返回(x, 总数据)
 
 
 class 知源·小魔女(角色窗口):

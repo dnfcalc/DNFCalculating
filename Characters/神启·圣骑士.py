@@ -286,11 +286,6 @@ class 神启·圣骑士角色属性(角色属性):
     def 系数数值进图(self):
         return self.进图智力
 
-    def BUFF计算(self, x=0):
-        总数据 = self.数据计算()
-        return self.结果返回(x, 总数据)
-
-
 class 神启·圣骑士(角色窗口):
     def 窗口属性输入(self):
         self.初始属性 = 神启·圣骑士角色属性()
