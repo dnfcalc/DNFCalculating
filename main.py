@@ -428,15 +428,20 @@ class 选择窗口(QWidget):
             box.setStandardButtons(QMessageBox.Yes | QMessageBox.No
                                    | QMessageBox.Cancel)
             if index["序号"] == "41":
+                if index["类名3"] != '无' and index["类名4"] != '无':
+                    box.setStandardButtons(QMessageBox.Yes | QMessageBox.No
+                                           | QMessageBox.YesToAll
+                                           | QMessageBox.Abort
+                                           | QMessageBox.Cancel)
                 A = box.button(QMessageBox.Yes)
                 B = box.button(QMessageBox.No)
                 A.setText('BUFF')
                 B.setText('战斗')
                 if index["类名3"] != '无':
-                    C = box.button(QMessageBox.Yes)
+                    C = box.button(QMessageBox.YesToAll)
                     C.setText('前瞻版本-BUFF')
                 if index["类名4"] != '无':
-                    D = box.button(QMessageBox.Yes)
+                    D = box.button(QMessageBox.Abort)
                     D.setText('前瞻版本-战斗')
             else:
                 A = box.button(QMessageBox.Yes)
