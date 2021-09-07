@@ -16,6 +16,8 @@ import sys
 import time
 import subprocess
 import base64
+import requests
+
 
 # 配置PyQt5环境变量
 import PyQt5
@@ -96,6 +98,7 @@ class 选择窗口(QWidget):
     # 自动检查版本 = False
     网盘链接 = ''
     网盘报错 = 0
+    通知时间 = ''
 
     _signal = QtCore.pyqtSignal(int)
 
@@ -303,6 +306,15 @@ class 选择窗口(QWidget):
         )
         self.版本提示 = QMessageBox(QMessageBox.Question, "提示",
                                 "此工具为开源免费软件\n如遇二次售卖获利,请协助反馈举报~")
+        repJson = requests.get(
+            "https://i_melon.gitee.io/dnfcalculating/notice.json",
+            timeout=2).json()
+        try:
+            self.通知时间 = repJson[0]['time']
+            self.消息通知 = QMessageBox(QMessageBox.Question, "通知",
+                                repJson[0]['info'])
+        except Exception as error:
+            pass
         self.版本提示.setWindowIcon(self.icon)
         self.配置错误.setWindowIcon(self.icon)
 
@@ -734,14 +746,29 @@ if __name__ == '__main__':
             json.dump(versionInfo, fp, ensure_ascii=False)
             fp.truncate()
         fp.close()
+        if not os.path.exists("ResourceFiles/Config/notice_version.json"):
+            with open("ResourceFiles/Config/notice_version.json", "w",encoding='utf-8') as fp:
+                json.dump({"time":""}, fp)
+            pass
+        with open("ResourceFiles/Config/notice_version.json", "r+") as fp:
+            versionInfo = json.load(fp)
+            通知时间 = versionInfo['time']
+            versionInfo['time'] = instance.通知时间
+            fp.seek(0)
+            json.dump(versionInfo, fp, ensure_ascii=False)
+            fp.truncate()
+        fp.close()
         if 展示信息:
             QDesktopServices.openUrl(
                 QUrl('http://dnf.17173.com/jsq/changlog.html#/'))
             instance.版本提示.exec()
         if 配置格式有误:
             instance.配置错误.exec()
+        if instance.通知时间 != 通知时间:
+            instance.消息通知.exec()
     except Exception as error:
         logger.error("error={} \n detail {}".format(error,
                                                     traceback.print_exc()))
         pass
+    
     app.exec_()
