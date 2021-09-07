@@ -306,10 +306,10 @@ class 选择窗口(QWidget):
         )
         self.版本提示 = QMessageBox(QMessageBox.Question, "提示",
                                 "此工具为开源免费软件\n如遇二次售卖获利,请协助反馈举报~")
-        repJson = requests.get(
-            "https://i_melon.gitee.io/dnfcalculating/notice.json",
-            timeout=2).json()
         try:
+            repJson = requests.get(
+                "https://i_melon.gitee.io/dnfcalculating/notice.json",
+                timeout=2).json()
             self.通知时间 = repJson[0]['time']
             self.消息通知 = QMessageBox(QMessageBox.Question, "通知",
                                 repJson[0]['info'])
