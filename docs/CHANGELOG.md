@@ -1,5 +1,34 @@
 ## Newest
 
+### 2021-09-08
+
+#### NewFeatures
+* 同步韩服职业平衡，特工、魔道、战法部分技能采用韩服体验服数据，等国服上线或韩服正式服上线进行二次核对<br>
+男女气功由于念兽龙虎啸精通等级发生变化，前瞻版本与国服版本公用set，暂时需手动在第二页调整等级 ([beb1bc](https://gitee.com/i_melon/DNFCalculating/commit/beb1bca75ee41ef250b11da4cb139726b52f775a))
+* 奶系：修改王座本源属性 ([77f98c](https://gitee.com/i_melon/DNFCalculating/commit/77f98c3b5ac9c4c0a38f50909725b8abbc970f40))
+* 奶系：换装设置只针对于自选计算，不影响排行计算等<br>
+启用换装设置后，建议自行调整太阳套残香、遴选等，自适应不是最优值 ([d89240](https://gitee.com/i_melon/DNFCalculating/commit/d892401d05ec2fd901c9fa59450aaab53c900b76))
+* 完善使用手册 ([883054](https://gitee.com/i_melon/DNFCalculating/commit/883054f3f7a73f8a9a887cfa0ecc95737791ea2a))
+* 新增奶系自选多装备栏功能 ([b2ea7b](https://gitee.com/i_melon/DNFCalculating/commit/b2ea7b1732f4a0747877ce716ace96a98c0a46a9))
+* 新增消息通知功能 ([bf2bb6](https://gitee.com/i_melon/DNFCalculating/commit/bf2bb64a159aede513d569ca6ea21f6458cd1e42))
+* 添加2021金秋礼包相关道具，并调整默认配置 ([46f111](https://gitee.com/i_melon/DNFCalculating/commit/46f111b32bd72544d3e06de88da7bf3275a08a08))
+* 输出系：宠物添加比拉谢尔号 close #I42ZF1 ([6585be](https://gitee.com/i_melon/DNFCalculating/commit/6585be21637e7a3eba6f671b20ba476c84c8177e))
+* 输出系：添加奶量buff自选输入功能 By Nicron ([3c32cc](https://gitee.com/i_melon/DNFCalculating/commit/3c32cc05d4c743240c3cb3245c4c0856718d373e))
+* 重构奶系切装登记功能By知月 ([685581](https://gitee.com/i_melon/DNFCalculating/commit/685581b8f97ea4dc80a80774064ace82e1e8c592))
+
+#### BugFixes
+* 修复女机械狂风护石装备好不吃精神刺激灵药的问题 ([bf6356](https://gitee.com/i_melon/DNFCalculating/commit/bf635675bd3a866f7a1e3cf9ea70c129d6935513))
+* 修正完美掌控等级加成为站街加成 ([bc50e6](https://gitee.com/i_melon/DNFCalculating/commit/bc50e6adac04304c1f04b84b96639c0985bab304))
+* 极诣·流浪武士：修正樱花劫护石数据错误 ([e049cd](https://gitee.com/i_melon/DNFCalculating/commit/e049cd4b815255d9fd45e9e848b7aacd2f1db92a))
+* 皓曦·帕拉丁：修正破晓之光护石错误 ([7c52be](https://gitee.com/i_melon/DNFCalculating/commit/7c52be27ff9e708b43683059196b296cb1ada1a0))
+* 皓曦·精灵骑士：修复壁垒突袭护石问题 ([3d0072](https://gitee.com/i_melon/DNFCalculating/commit/3d0072153e03dca89d24502bf684894fbc6559bf))
+* 神启·蓝拳圣使：修复极速飓风拳护石CD问题 fix:#I44H6M ([e905f0](https://gitee.com/i_melon/DNFCalculating/commit/e905f03320cd710538f8708964d70d7723bff2a2))
+* 重霄·漫游枪手·男：修复致命回射CD问题 ([dd1fa5](https://gitee.com/i_melon/DNFCalculating/commit/dd1fa5b0420dbf3114d2b439c780b1808e4f7a59))
+* 隐夜·死灵术士：修正杀戮乱舞数据错误 ([1c68f7](https://gitee.com/i_melon/DNFCalculating/commit/1c68f7ce17fa7641b2ac855646c7ec0e506d70d2))
+
+
+## History
+
 ### 2021-08-05
 
 #### NewFeatures
@@ -8,8 +37,6 @@
 * 部分职业作者挂着计算器作者名声发表不当言论或进行不当行为，在此再次强调一下，除西瓜和纸飞机对计算器的言论外，其余都可当做个人行为和言论<br>
 同时由于较多职业作者不再维护数据，绝大部分职业目前都是由西瓜和纸飞机维护，暂时统一取消作者显示，可在contributors中查看贡献人员名单 ([fb3c81](https://gitee.com/i_melon/DNFCalculating/commit/fb3c812145886e9f9e872c5f1f81961dc993846d))
 
-
-## History
 
 ### 2021-07-31
 
