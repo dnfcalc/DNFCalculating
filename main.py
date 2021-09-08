@@ -18,7 +18,6 @@ import subprocess
 import base64
 import requests
 
-
 # 配置PyQt5环境变量
 import PyQt5
 
@@ -312,7 +311,7 @@ class 选择窗口(QWidget):
                 timeout=2).json()
             self.通知时间 = repJson[0]['time']
             self.消息通知 = QMessageBox(QMessageBox.Question, "通知",
-                                repJson[0]['info'])
+                                    repJson[0]['info'])
         except Exception as error:
             pass
         self.版本提示.setWindowIcon(self.icon)
@@ -440,21 +439,17 @@ class 选择窗口(QWidget):
             box.setStandardButtons(QMessageBox.Yes | QMessageBox.No
                                    | QMessageBox.Cancel)
             if index["序号"] == "41":
-                if index["类名3"] != '无' and index["类名4"] != '无':
+                if index["类名3"] != '无':
                     box.setStandardButtons(QMessageBox.Yes | QMessageBox.No
                                            | QMessageBox.YesToAll
-                                           | QMessageBox.Abort
                                            | QMessageBox.Cancel)
                 A = box.button(QMessageBox.Yes)
-                B = box.button(QMessageBox.No)
+                B = box.button(QMessageBox.YesToAll)
                 A.setText('BUFF')
                 B.setText('战斗')
                 if index["类名3"] != '无':
-                    C = box.button(QMessageBox.YesToAll)
-                    C.setText('前瞻版本-BUFF')
-                if index["类名4"] != '无':
-                    D = box.button(QMessageBox.Abort)
-                    D.setText('前瞻版本-战斗')
+                    C = box.button(QMessageBox.No)
+                    C.setText('前瞻版本-战斗')
             else:
                 A = box.button(QMessageBox.Yes)
                 B = box.button(QMessageBox.No)
@@ -471,8 +466,8 @@ class 选择窗口(QWidget):
                     self.打开窗口(index["类名2"])
                 elif box.clickedButton() == C:
                     self.打开窗口(index["类名3"])
-                elif box.clickedButton() == D:
-                    self.打开窗口(index["类名4"])
+                # elif box.clickedButton() == D:
+                #     self.打开窗口(index["类名4"])
                 else:
                     return
             except Exception as error:
@@ -747,8 +742,10 @@ if __name__ == '__main__':
             fp.truncate()
         fp.close()
         if not os.path.exists("ResourceFiles/Config/notice_version.json"):
-            with open("ResourceFiles/Config/notice_version.json", "w",encoding='utf-8') as fp:
-                json.dump({"time":""}, fp)
+            with open("ResourceFiles/Config/notice_version.json",
+                      "w",
+                      encoding='utf-8') as fp:
+                json.dump({"time": ""}, fp)
             pass
         with open("ResourceFiles/Config/notice_version.json", "r+") as fp:
             versionInfo = json.load(fp)
@@ -770,5 +767,5 @@ if __name__ == '__main__':
         logger.error("error={} \n detail {}".format(error,
                                                     traceback.print_exc()))
         pass
-    
+
     app.exec_()
