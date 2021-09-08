@@ -76,6 +76,7 @@ class 换装窗口(Page):
         self.初始化装备()
         self.初始化希洛克()
         self.初始化奥兹玛()
+        self.初始化遴选()
 
     def 初始化装备(self):
         equips = self.store.first("/buffer/data/register/equips",
@@ -104,6 +105,14 @@ class 换装窗口(Page):
         for i in range(len(ozmas)):
             if ozmas[i] == 1:
                 self.奥兹玛选择(i, 1)
+    
+    def 初始化遴选(self):
+        black_purgatory = self.store.first("/buffer/data/register/black_purgatory",
+                                 "/buffer/data/black_purgatory")
+        for i in range(len(self.黑鸦词条)):
+            self.黑鸦词条[i][1].setCurrentIndex(black_purgatory[i][1])
+            if len(black_purgatory[i]) > 3:
+                self.黑鸦词条[i][3].setCurrentIndex(black_purgatory[i][3])
 
     def reset(self):
         self.store.delete("^/buffer/data/register/.*$")
@@ -122,7 +131,8 @@ class 换装窗口(Page):
         for i in range(len(self.黑鸦词条)):
             黑鸦.append([
                 2, self.黑鸦词条[i][1].currentIndex(),
-                self.黑鸦词条[i][3].currentText()
+                self.黑鸦词条[i][3].currentText(),
+                self.黑鸦词条[i][3].currentIndex(),
             ])
 
         self.store.set("/buffer/data/register/equips", 自选)
@@ -421,18 +431,11 @@ class 换装窗口(Page):
             """
                 只允许自选，为了保持兼容不移除
             """
-            if i == 0:
-                tem[0].addItems(['自选数值'])
-                tem[0].resize(0, 0)
-                tem[0].move(横坐标 + 60, 纵坐标 + 25 * i)
-                tem[0].currentIndexChanged.connect(
-                    lambda state, index=i: self.黑鸦词条更新(index))
-            else:
-                tem[0].addItems(['自选数值'])
-                tem[0].resize(0, 0)
-                tem[0].move(横坐标 + 60, 纵坐标 + 25 * i)
-                tem[0].currentIndexChanged.connect(
-                    lambda state, index=i: self.黑鸦词条更新(index))
+            tem[0].addItems(['自选数值'])
+            tem[0].resize(0, 0)
+            tem[0].move(横坐标 + 60, 纵坐标 + 25 * i)
+            tem[0].currentIndexChanged.connect(lambda state, index=i: self.黑鸦词条更新(index))
+
             tem.append(MyQComboBox(self))
             tem[1].resize(60, 20)
             tem[1].move(横坐标 + 156 - 91, 纵坐标 + 25 * i)
@@ -444,16 +447,10 @@ class 换装窗口(Page):
             tem.append(MyQComboBox(self))
             tem[3].resize(50, 20)
             tem[3].move(横坐标 + 361 + 20 + 10 - 91, 纵坐标 + 25 * i)
-            if i > 0:
-                for item in 装备变换属性列表:
-                    tem[1].addItem(item.固定属性描述)
-                tem[1].currentIndexChanged.connect(
-                    lambda state, index=i: self.黑鸦随机词条更新(index, 1))
-            else:
-                for item in 武器变换属性列表:
-                    tem[1].addItem(item.固定属性描述)
-                tem[1].currentIndexChanged.connect(
-                    lambda state, index=i: self.黑鸦随机词条更新(index))
+            for item in 装备变换属性列表:
+                tem[1].addItem(item.固定属性描述)
+            tem[1].currentIndexChanged.connect(lambda state, index=i: self.黑鸦随机词条更新(index))
+
             self.黑鸦词条.append(tem)
             self.黑鸦词条更新(i)
 
@@ -535,28 +532,16 @@ class 换装窗口(Page):
             self.黑鸦词条[index][i].setEnabled(True)
             self.黑鸦词条[index][i].setStyleSheet(下拉框样式)
 
-    def 黑鸦随机词条更新(self, i, x=0):
+    def 黑鸦随机词条更新(self, i):
         index = self.黑鸦词条[i][1].currentIndex()
         self.黑鸦词条[i][2].clear()
         self.黑鸦词条[i][3].clear()
-        if x == 0:
-            武器属性 = 武器变换属性列表[index]
-            temp = 武器属性.最大值
-            while temp >= 武器属性.最小值:
-                if 武器属性.间隔 / 10 >= 1:
-                    self.黑鸦词条[i][3].addItem(str(int(temp)))
-                else:
-                    self.黑鸦词条[i][3].addItem(str(temp) + '%')
-                temp -= 武器属性.间隔
-            self.黑鸦词条[i][2].addItem(武器属性.随机属性描述)
-
-        elif x == 1:
-            装备属性 = 装备变换属性列表[index]
-            temp = 装备属性.最大值
-            while temp >= 装备属性.最小值:
-                if 装备属性.间隔 / 10 >= 1:
-                    self.黑鸦词条[i][3].addItem(str(int(temp)))
-                else:
-                    self.黑鸦词条[i][3].addItem(str(temp) + '%')
-                temp -= 装备属性.间隔
-            self.黑鸦词条[i][2].addItem(装备属性.随机属性描述)
+        武器属性 = 武器变换属性列表[index]
+        temp = 武器属性.最大值
+        while temp >= 武器属性.最小值:
+            if 武器属性.间隔 / 10 >= 1:
+                self.黑鸦词条[i][3].addItem(str(int(temp)))
+            else:
+                self.黑鸦词条[i][3].addItem(str(temp) + '%')
+            temp -= 武器属性.间隔
+        self.黑鸦词条[i][2].addItem(武器属性.随机属性描述)
