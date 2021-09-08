@@ -27,7 +27,7 @@ class 换装窗口(Page):
            border: 0px
            }''')
         self.setFixedSize(960, 560)
-        self.setWindowTitle("换装设置")
+        self.setWindowTitle("登记设置")
         self.setWindowIcon(icon)
         backgroundColorLabel = QLabel(self)
         backgroundColorLabel.resize(self.width(), self.height())
@@ -92,6 +92,11 @@ class 换装窗口(Page):
         for i in range(len(sirocos)):
             if sirocos[i] == 1:
                 self.希洛克选择(i, 1)
+        weapon_fusion = self.store.first("/buffer/data/register/weapon_fusion","/buffer/data/weapon_fusion",[0]*4)
+        self.武器融合属性A.setCurrentIndex(weapon_fusion[0])
+        self.武器融合属性A2.setCurrentIndex(weapon_fusion[1])
+        self.武器融合属性B.setCurrentIndex(weapon_fusion[2])
+        self.武器融合属性B2.setCurrentIndex(weapon_fusion[3])
 
     def 初始化奥兹玛(self):
         ozmas = self.store.first("/buffer/data/register/ozma",
@@ -125,6 +130,13 @@ class 换装窗口(Page):
         self.store.set("/buffer/data/register/ozma", self.奥兹玛选择状态)
         self.store.set("/buffer/data/register/black_purgatory", 黑鸦)
         self.store.set("/buffer/data/register/amplifies", 增幅)
+        self.store.set("/buffer/data/register/amplifies", 增幅)
+        self.store.set("/buffer/data/register/weapon_fusion", [
+            self.武器融合属性A.currentIndex(),
+            self.武器融合属性A2.currentIndex(),
+            self.武器融合属性B.currentIndex(),
+            self.武器融合属性B2.currentIndex(),
+        ])
 
         self.store.emit("/buffer/event/register_changed")
         self.closeWindow()
@@ -228,10 +240,13 @@ class 换装窗口(Page):
     def 自选套装更改(self, index):
         name = self.自选套装[index].currentText()
         for i in range(11):
+            if self.装备锁定[i].isChecked():
+                continue
             x = -1
             for j in equ.get_equ_list():
                 if j.部位 == 部位列表[i]:
                     x += 1
+
                     try:
                         if j.所属套装2 == name:
                             self.自选装备[i].setCurrentIndex(x)
@@ -360,7 +375,7 @@ class 换装窗口(Page):
         self.武器融合属性A2.resize(50, 20)
         self.武器融合属性A2.move(横坐标 + 205 + 20 + 10, 纵坐标)
         self.武器融合属性A.currentIndexChanged.connect(
-            lambda: self.希洛克武器随机词条更新(self.武器融合属性A.currentIndex()))
+            lambda: self.希洛克武器融合词条更新(self.武器融合属性A.currentIndex()))
 
         纵坐标 = 纵坐标 + 30
         self.武器融合属性B = MyQComboBox(self)
@@ -377,7 +392,7 @@ class 换装窗口(Page):
         self.武器融合属性B2.resize(50, 20)
         self.武器融合属性B2.move(横坐标 + 205 + 20 + 10, 纵坐标)
         self.武器融合属性B.currentIndexChanged.connect(
-            lambda: self.希洛克武器随机词条更新(self.武器融合属性B.currentIndex(), 1))
+            lambda: self.希洛克武器融合词条更新(self.武器融合属性B.currentIndex(), 1))
 
     def 初始化遴选UI(self):
         横坐标 = 30
@@ -489,7 +504,7 @@ class 换装窗口(Page):
                 self.奥兹玛遮罩透明度[index].setOpacity(0)
         self.奥兹玛选择状态[index] = value
 
-    def 希洛克武器随机词条更新(self, index, x=0):
+    def 希洛克武器融合词条更新(self, index, x=0):
         if x == 0:
             self.武器融合属性A1.clear()
             self.武器融合属性A2.clear()
