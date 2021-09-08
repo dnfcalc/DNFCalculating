@@ -312,6 +312,7 @@ class 选择窗口(QWidget):
             self.通知时间 = repJson[0]['time']
             self.消息通知 = QMessageBox(QMessageBox.Question, "通知",
                                     repJson[0]['info'])
+            self.消息通知.setWindowIcon(self.icon)
         except Exception as error:
             pass
         self.版本提示.setWindowIcon(self.icon)
