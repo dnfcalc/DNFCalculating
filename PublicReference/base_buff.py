@@ -1972,11 +1972,9 @@ class 角色窗口(窗口):
 
     def 自选装备栏更改(self, index):
         self.计算标识 = 0
-        data = self.store.get("/buffer/data/self_select/equips", [[]])
-        if index < len(data):
-            data = data[index]
-        else:
-            data = [0] * len(self.自选装备)
+        defaultData =  [0] * len(self.自选装备)
+        data = self.store.get("/buffer/data/self_select/equips", [defaultData])
+        data = data[index] if index < len(data) else defaultData
         num = 0
         for i in data:
             self.自选装备[num].setCurrentIndex(i)
