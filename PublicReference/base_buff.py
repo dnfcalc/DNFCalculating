@@ -3958,8 +3958,7 @@ class 角色窗口(窗口):
 
         实际技能等级 = []
 
-        技能表 = list(
-            filter(lambda skill: skill.是否启用 == 1, self.角色属性B.技能表.values()))
+        技能表 = self.角色属性B.技能表.values()
 
         for skill in 技能表:
             实际技能等级.append(skill.等级)
@@ -3974,7 +3973,7 @@ class 角色窗口(窗口):
         统计详情 = []
 
         for skill in 技能表:
-            详情 = skill.结算统计()
+            详情 = skill.结算统计() if skill.是否启用 else [0]*8
             统计详情.append(详情)
             if sum(详情) != 0:
                 count += 1
@@ -3986,7 +3985,7 @@ class 角色窗口(窗口):
 
         num = 0
         for skill in 技能表:
-            if sum(统计详情[num]) != 0:
+            if skill.是否启用 and sum(统计详情[num]) != 0:
                 j += 1
                 每行详情 = []
                 for k in range(11):
