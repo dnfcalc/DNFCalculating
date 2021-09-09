@@ -2249,7 +2249,7 @@ class 角色窗口(窗口):
         奶量buff力智label.setAlignment(Qt.AlignCenter)
 
         偏移 = (35 if self.初始属性.远古记忆 != -1 else 0) + (35 if self.初始属性.刀魂之卡赞 != -1
-                                                    else 0)
+                                                    else 0)+35
         奶量buff力智label.move(970, 18 + counter * 80 + 10 + 偏移)
         奶量buff力智输入框 = QLineEdit(self.main_frame2)
         奶量buff力智输入框.setStyleSheet(文本框样式黄)
