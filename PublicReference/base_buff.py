@@ -2131,26 +2131,18 @@ class 角色窗口(窗口):
             self.武器融合属性A1.clear()
             self.武器融合属性A2.clear()
             属性A = 武器属性A列表[index]
-            temp = 属性A.最大值
-            while temp >= 属性A.最小值:
-                if 属性A.间隔 / 10 >= 1:
-                    self.武器融合属性A2.addItem(str(int(temp)))
-                else:
-                    self.武器融合属性A2.addItem(str(temp) + '%')
-                temp -= 属性A.间隔
+
+            for item in 属性A.range():
+                self.武器融合属性A2.addItem(item)
             self.武器融合属性A1.addItem(属性A.随机属性描述)
 
         elif x == 1:
             self.武器融合属性B1.clear()
             self.武器融合属性B2.clear()
             属性B = 武器属性B列表[index]
-            temp = 属性B.最大值
-            while temp >= 属性B.最小值:
-                if 属性B.间隔 / 10 >= 1:
-                    self.武器融合属性B2.addItem(str(int(temp)))
-                else:
-                    self.武器融合属性B2.addItem(str(temp) + '%')
-                temp -= 属性B.间隔
+
+            for item in 属性B.range():
+                self.武器融合属性B2.addItem(item)
             self.武器融合属性B1.addItem(属性B.随机属性描述)
 
     def 黑鸦词条更新(self, index):
@@ -3164,12 +3156,13 @@ class 角色窗口(窗口):
 
 
         武器融合属性A = 武器属性A列表[武器融合选项[0]]
-        武器融合属性A数值 = self.武器融合属性A2.itemText(武器融合选项[1]).replace('%', '')
+
+        武器融合属性A数值 = 武器融合属性A.range()[武器融合选项[1]].replace('%', '')
         武器融合属性A.当前值 = int(武器融合属性A数值 if 武器融合属性A数值 != '' else 0)
         武器融合属性A.融合属性(属性)
         if 属性.武器词条触发 == 1:
             武器融合属性B = 武器属性B列表[武器融合选项[2]]
-            武器融合属性B数值 = self.武器融合属性B2.itemText(武器融合选项[3]).replace('%', '')
+            武器融合属性B数值 = 武器融合属性B.range()[武器融合选项[3]].replace('%', '')
             武器融合属性B.当前值 = int(武器融合属性B数值 if 武器融合属性B数值 != '' else 0)
             武器融合属性B.融合属性(属性)
 

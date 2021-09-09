@@ -506,25 +506,13 @@ class 换装窗口(Page):
             self.武器融合属性A1.clear()
             self.武器融合属性A2.clear()
             属性A = 武器属性A列表[index]
-            temp = 属性A.最大值
-            while temp >= 属性A.最小值:
-                if 属性A.间隔 / 10 >= 1:
-                    self.武器融合属性A2.addItem(str(int(temp)))
-                else:
-                    self.武器融合属性A2.addItem(str(temp) + '%')
-                temp -= 属性A.间隔
+            self.武器融合属性A2.addItems(属性A.range())
             self.武器融合属性A1.addItem(属性A.随机属性描述)
         elif x == 1:
             self.武器融合属性B1.clear()
             self.武器融合属性B2.clear()
             属性B = 武器属性B列表[index]
-            temp = 属性B.最大值
-            while temp >= 属性B.最小值:
-                if 属性B.间隔 / 10 >= 1:
-                    self.武器融合属性B2.addItem(str(int(temp)))
-                else:
-                    self.武器融合属性B2.addItem(str(temp) + '%')
-                temp -= 属性B.间隔
+            self.武器融合属性B2.addItems(属性B.range())
             self.武器融合属性B1.addItem(属性B.随机属性描述)
 
     def 黑鸦词条更新(self, index):
