@@ -2797,7 +2797,7 @@ class 角色窗口(窗口):
                     num = 0
                     index = self.store.get(
                         '/buffer/data/self_select/column_index', 0)
-                    self.自选装备栏更改(index)
+                    self.自选装备栏选项.setCurrentIndex(index)
                 except Exception as error:
                     logger.error(error)
                 try:
