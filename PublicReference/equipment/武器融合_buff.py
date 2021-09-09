@@ -6,6 +6,19 @@ class 武器属性():
     随机属性描述 = ''
     当前值 = 0
     间隔 = 1
+    最小值 = 0
+    最大值 = 4
+    
+    def range(self):
+        temp = self.最大值
+        array = []
+        while temp > self.最小值 - self.间隔:
+            value = str(int(temp))
+            if self.间隔 / 10 < 1:
+                value += '%'
+            array.append(value)
+            temp -= self.间隔
+        return array
 
     def 融合属性(self, 属性):
         pass
