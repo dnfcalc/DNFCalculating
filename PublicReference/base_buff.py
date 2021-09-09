@@ -832,7 +832,6 @@ class 角色属性(属性):
             self.黑鸦武器输入(序号)
             if 序号 == 0 and self.实际名称 == 'BUFF·神启·圣骑士':
                 self.是否加觉醒 = 1
-            # print(self.武器变换属性自适应)
 
     def 替换技能(self, skill, name):
         skill.技能表 = self.技能表
@@ -991,7 +990,6 @@ class 角色窗口(窗口):
         self.store = Store()
         super().__init__()
         self.登记启用 = False
-        self.自选计算模式 = False
         self.store.bind(self, "希洛克选择状态", "/buffer/data/siroco")
         self.store.bind(self, "奥兹玛选择状态", "/buffer/data/ozma")
         self.store.bind(self, "登记启用", "/buffer/data/register_enable")
@@ -1988,14 +1986,14 @@ class 角色窗口(窗口):
 
     def 启用换装登记(self, checked):
         self.登记启用 = checked
-        self.更新换装()
+        self.自选计算(1)
 
     def 换装设置(self):
         def createClient():
             self.store.compute("/buffer/temp/property_a", lambda: self.角色属性A)
             # 换装更新事件
             self.store.watch("/buffer/event/register_changed",
-                             lambda _, : self.更新换装())
+                             lambda _, : self.自选计算(1))
             # 设置图标和背景 临时做法
             self.store.const("/app/window/icon", self.icon)
             self.store.const("/app/window/background_image", self.主背景图片)
@@ -2005,14 +2003,6 @@ class 角色窗口(窗口):
 
         DefaultDialogRegister.showDialog("buff_panel", createClient, self)
 
-    def 更新换装(self):
-        self.自选换装装备 = self.store.get("/buffer/data/register/equips",
-                                     self.self_selects)
-        self.自选换装打造 = self.store.get("/buffer/data/register/amplifies", [])
-        self.换装奥兹玛 = self.store.get("/buffer/data/register/ozma", [])
-        self.换装希洛克 = self.store.get("/buffer/data/register/siroco", [])
-        self.换装遴选 = self.store.get("/buffer/data/register/black_purgatory", [])
-        self.自选计算(1)
 
     def 时装选项更新(self, index):
         if index == 8:
@@ -2217,11 +2207,11 @@ class 角色窗口(窗口):
             A = deepcopy(self.初始属性)
             self.输入属性(A)
             A.穿戴装备计算套装(self.self_selects)
-            B = deepcopy(A)
+
             self.关闭排行窗口()
             self.排行数据.clear()
             self.排行数据.append(self.self_selects + [0] + A.套装栏 + ['无'])
-            self.输出界面(0, '基准值')
+            self.输出界面(0, '基准值',自选计算模式 = True)
             self.基准值 = deepcopy(self.自选计算数据)
         self.自选计算(1)
 
@@ -3088,38 +3078,133 @@ class 角色窗口(窗口):
             修正后面板 = 输入面板[0] - 修正前面板 + 修正面板[2]
             self.属性设置输入[2][15].setText(str(int(修正后面板)))
 
-    def 换装计算(self, x=0) -> 角色属性:
+    def 换装计算(self) -> 角色属性:
         if not self.登记启用: return None
 
-        换装装备 = copy(self.自选换装装备)
+        装备 = self.store.clone("/buffer/data/register/equips",self.self_selects)
+        装备打造 = self.store.clone("/buffer/data/register/amplifies", [])
+        奥兹玛选择状态 = self.store.clone("/buffer/data/register/ozma", [])
+        希洛克选择状态 = self.store.clone("/buffer/data/register/siroco", [])
+        黑鸦词条 = self.store.clone("/buffer/data/register/black_purgatory", [])
+        武器融合选项 = self.store.clone("/buffer/data/register/weapon_fusion", [0]*4)
 
-        t装备打造 = []
+        属性 = deepcopy(self.初始属性)
 
-        try:
-            for i in range(len(self.自选换装打造)):  # bugfix
-                打造 = []
-                打造.append(self.装备打造选项[i].currentIndex())
-                打造.append(self.装备打造选项[i + 12].currentIndex())
-                t装备打造.append(打造)
-                self.装备打造选项[i].setCurrentIndex(1)  # 增幅
-                self.装备打造选项[i + 12].setCurrentIndex(self.自选换装打造[i])
-        except Exception as e:
-            logger.error(e)
-        BUFF = deepcopy(self.初始属性)
-        self.输入属性(
-            BUFF,
-            x,
-            黑鸦词条=self.换装遴选,
-            希洛克选择状态=self.换装希洛克,
-            奥兹玛选择状态=self.换装奥兹玛,
-        )
-        BUFF.穿戴装备计算套装(换装装备)
-        for i in range(len(t装备打造)):
-            self.装备打造选项[i].setCurrentIndex(t装备打造[i][0])  # 增幅
-            self.装备打造选项[i + 12].setCurrentIndex(t装备打造[i][1])
+        num = 0
+        for skill in 属性.技能表.values():
+            skill.等级 = skill.基础等级 + int(self.等级调整[num].currentText())
+            num += 1
+
+        属性.排行系数 = self.排行参数.currentIndex()
+        属性.C力智 = int(''.join(filter(str.isdigit, self.排行选项[0].currentText())))
+        属性.C三攻 = int(''.join(filter(str.isdigit, self.排行选项[1].currentText())))
+
+        # if ':' in self.排行选项[0].currentText():
+        #     属性.C力智 = int(self.排行选项[0].currentText().split(':')[1])
+        # else:
+        #     属性.C力智 = int(self.排行选项[0].currentText())
+        # if ':' in self.排行选项[1].currentText():
+        #     属性.C三攻 = int(self.排行选项[1].currentText().split(':')[1])
+        # else:
+        #     属性.C三攻 = int(self.排行选项[1].currentText())
+        属性.排行类型 = self.排行选项[2].currentText()
+
+        if self.排行选项[3].currentIndex() == 0:
+            pass
+        elif self.排行选项[3].currentIndex() == 1:
+            属性.系统奶系数 = 1.35
+            属性.系统奶基数 = 7664
+        elif self.排行选项[3].currentIndex() == 2:
+            属性.系统奶系数 = 2.31
+            属性.系统奶基数 = 4581
+
+        if self.初始属性.技能表['三次觉醒'].是否启用 != 0:
+            if self.觉醒选择状态 == 1:
+                属性.技能表['三次觉醒'].关联技能 = [属性.技能表['一次觉醒'].名称]
+            elif self.觉醒选择状态 == 2:
+                属性.技能表['三次觉醒'].关联技能 = [属性.技能表['二次觉醒'].名称]
+
+        count = 0
+        for i in equ.get_equ_list():
+            if i.品质 == '神话':
+                i.属性1选择_BUFF = self.神话属性选项[count * 4 + 0].currentIndex()
+                i.属性2选择_BUFF = self.神话属性选项[count * 4 + 1].currentIndex()
+                i.属性3选择_BUFF = self.神话属性选项[count * 4 + 2].currentIndex()
+                i.属性4选择_BUFF = self.神话属性选项[count * 4 + 3].currentIndex()
+                count += 1
+
+        self.辟邪玉属性计算(属性)
+
+        if sum(self.希洛克选择状态) == 3:
+            属性.武器词条触发 = 1
+
+
+        武器融合属性A = 武器属性A列表[武器融合选项[0]]
+        武器融合属性A数值 = self.武器融合属性A2.itemText(武器融合选项[1]).replace('%', '')
+        武器融合属性A.当前值 = int(武器融合属性A数值 if 武器融合属性A数值 != '' else 0)
+        武器融合属性A.融合属性(属性)
+        if 属性.武器词条触发 == 1:
+            武器融合属性B = 武器属性B列表[武器融合选项[2]]
+            武器融合属性B数值 = self.武器融合属性B2.itemText(武器融合选项[3]).replace('%', '')
+            武器融合属性B.当前值 = int(武器融合属性B数值 if 武器融合属性B数值 != '' else 0)
+            武器融合属性B.融合属性(属性)
+
+        for i in range(len(self.复选框列表)):
+            if self.复选框列表[i].isChecked():
+                选项设置列表[i].适用效果(属性)
+
+        称号列表[self.称号.currentIndex()].城镇属性_BUFF(属性)
+        if 属性.称号触发:
+            称号列表[self.称号.currentIndex()].触发属性(属性)
+
+        宠物列表[self.宠物.currentIndex()].城镇属性_BUFF(属性)
+
+        if self.护石第一栏.currentText() != '无':
+            属性.护石第一栏 = self.护石第一栏.currentText()
+
+        if self.护石第二栏.currentText() != '无':
+            属性.护石第二栏 = self.护石第二栏.currentText()
+
+        if self.护石第三栏.currentText() != '无':
+            属性.护石第三栏 = self.护石第三栏.currentText()
+
+        for i in range(12):
+            属性.是否增幅[i] = 1
+            属性.强化等级[i] = 装备打造[i]
+            属性.改造等级[i] = 装备打造[i]
+        属性.武器锻造等级 = self.装备打造选项[36].currentIndex()
+        属性.类型 = self.装备打造选项[37].currentText()
+
+        self.是否计算 = 1
+
+        num = 0
+        for skill in self.角色属性A.技能表.values():
+            skill.是否启用 = self.次数输入[num].currentIndex()
+            num += 1
+
+        if 黑鸦词条 is None or len(黑鸦词条) == 0:
+            黑鸦词条 = []
+            for i in range(4):
+                temp = [
+                    self.黑鸦词条选项[i][0].currentIndex(),
+                    self.黑鸦词条选项[i][1].currentIndex(),
+                    self.黑鸦词条选项[i][3].currentText(),
+                ]
+                黑鸦词条.append(temp)
+        if 希洛克选择状态 is None or len(希洛克选择状态) == 0:
+            希洛克选择状态 = self.希洛克选择状态
+        if 奥兹玛选择状态 is None or len(奥兹玛选择状态) == 0:
+            奥兹玛选择状态 = self.奥兹玛选择状态
+
+        属性.黑鸦计算(黑鸦词条)
+        属性.希洛克计算(希洛克选择状态)
+        属性.奥兹玛计算(奥兹玛选择状态)
+        self.基础属性(属性)
+
+        属性.穿戴装备计算套装(装备)
 
         #  恢复
-        return BUFF
+        return 属性
 
     def 自选计算(self, 输出=0):
         BUFF = None
@@ -3140,34 +3225,13 @@ class 角色窗口(窗口):
             return
 
         装备 = self.self_selects
-        套装 = []
-        套装字典 = {}
-
-        for i in 装备:
-            j = equ.get_equ_by_name(i).所属套装
-            if j == '智慧产物':
-                try:
-                    k = equ.get_equ_by_name(i).所属套装2
-                    套装字典[k] = 套装字典.get(k, 0) + 1
-                except:
-                    pass
-            elif j != '无':
-                套装字典[j] = 套装字典.get(j, 0) + 1
-
-        for i in 套装字典.keys():
-            if 套装字典[i] >= 2 and (i + '[2]') in equ.get_suit_name():
-                套装.append(i + '[2]')
-            if 套装字典[i] >= 3 and (i + '[3]') in equ.get_suit_name():
-                套装.append(i + '[3]')
-            if 套装字典[i] >= 5 and (i + '[5]') in equ.get_suit_name():
-                套装.append(i + '[5]')
 
         self.角色属性A = deepcopy(self.初始属性)
 
         self.输入属性(self.角色属性A)
-        C = self.站街计算(装备, 套装)
+        C = self.站街计算(装备)
         B = deepcopy(self.角色属性A)
-        B.穿戴装备(装备, 套装)
+        B.穿戴装备计算套装(装备)
         B.预计算()
 
         # 双切 Start
@@ -3344,31 +3408,28 @@ class 角色窗口(窗口):
             self.套装名称显示[0].setStyleSheet(
                 "QLabel{font-size:12px;color:rgb(255,255,255)}")
 
-            套装名称 = []
-            套装名称.extend(套装)
+        套装名称 = copy(self.角色属性B.套装栏)
 
-            神话所在套装 = []
-            for i in range(11):
-                if equ.get_equ_by_name(装备[i]).品质 == '神话':
-                    神话所在套装.append(equ.get_equ_by_name(装备[i]).所属套装)
+        神话所在套装 = []
+        for i in range(11):
+            if equ.get_equ_by_name(装备[i]).品质 == '神话':
+                神话所在套装.append(equ.get_equ_by_name(装备[i]).所属套装)
 
-            套装 = []
-            套装件数 = []
-            套装属性 = []
-            for i in range(len(套装名称)):
-                temp = 套装名称[i].split('[')[0]
-                if temp not in 套装:
-                    套装.append(temp)
-                    套装件数.append([])
-                    套装属性.append('')
-                if len(套装名称[i].split('[')) > 1:
-                    件数 = 套装名称[i].split('[')[1].split(']')[0]
-                    套装件数[套装.index(temp)].append(件数)
-                    套装属性[套装.index(
-                        temp
-                    )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
-                        i] + '</font><br>' + equ.get_suit_by_name(
-                            套装名称[i]).装备描述_BUFF(self.角色属性B)[:-4] + '</font><br>'
+        套装 = []
+        套装件数 = []
+        套装属性 = []
+        for i in range(len(套装名称)):
+            temp = 套装名称[i].split('[')[0]
+            if temp not in 套装:
+                套装.append(temp)
+                套装件数.append([])
+                套装属性.append('')
+            if len(套装名称[i].split('[')) > 1:
+                件数 = 套装名称[i].split('[')[1].split(']')[0]
+                套装件数[套装.index(temp)].append(件数)
+                套装属性[套装.index(temp)] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
+                    i] + '</font><br>' + equ.get_suit_by_name(
+                        套装名称[i]).装备描述_BUFF(self.角色属性B)[:-4] + '</font><br>'
 
         数量 = [0] * 3
         for i in range(15):
@@ -3487,6 +3548,8 @@ class 角色窗口(窗口):
             ])
             套装属性.append(temp)
 
+        
+
         for i in range(len(套装)):
             if len(套装件数[i]) > 0:
                 self.套装名称显示[i + 1].setText(套装[i] + '[' + str(max(套装件数[i])) +
@@ -3520,12 +3583,11 @@ class 角色窗口(窗口):
 
         if 输出 == 0:
             self.排行数据.append(装备 + [0] + 套装 + ['无'])
-            self.自选计算模式 = True
-            self.输出界面(0)
+            self.输出界面(0,自选计算模式=True)
 
-    def 站街计算(self, 装备名称, 套装名称):
+    def 站街计算(self, 装备名称):
         C = deepcopy(self.角色属性A)
-        C.穿戴装备(装备名称, 套装名称)
+        C.穿戴装备计算套装(装备名称)
         for i in C.装备栏:
             equ.get_equ_by_name(i).城镇属性_BUFF(C)
             equ.get_equ_by_name(i).BUFF属性(C)
@@ -3564,24 +3626,21 @@ class 角色窗口(窗口):
                 return '<font face="宋体" color= "#E52E2E">' + str(
                     '%.2f' % temp) + '%</font>'
 
-    def 输出界面(self, index, name=''):
+    def 输出界面(self, index, name='',自选计算模式 = False):
         装备名称 = []
-        套装名称 = []
         百变怪 = self.排行数据[index][-1]
         for i in range(12):
             装备名称.append(self.排行数据[index][i])
-        for i in range(13, len(self.排行数据[index]) - 1):
-            套装名称.append(self.排行数据[index][i])
 
-        C = self.站街计算(装备名称, 套装名称)
+        C = self.站街计算(装备名称)
 
         self.角色属性B = deepcopy(self.角色属性A)
-        self.角色属性B.穿戴装备(装备名称, 套装名称)
+        self.角色属性B.穿戴装备计算套装(装备名称)
         # 双切 Start
 
-        if self.登记启用 and self.自选计算模式:
+        if self.登记启用 and 自选计算模式:
             try:
-                换装装备 = copy(self.自选换装装备)
+                换装装备 = self.store.clone("/buffer/data/register/equips",[])
             except:
                 pass
 
@@ -3589,7 +3648,7 @@ class 角色窗口(窗口):
 
         self.角色属性B.预计算()
 
-        if self.登记启用 and self.自选计算模式:
+        if self.登记启用 and 自选计算模式:
             双切属性 = self.换装计算()
             双切属性.预计算()
 
@@ -3733,6 +3792,8 @@ class 角色窗口(窗口):
         套装 = []
         套装件数 = []
         套装属性 = []
+        套装名称 = copy(self.角色属性B.套装栏)
+
         for i in range(len(套装名称)):
             temp = 套装名称[i].split('[')[0]
             if temp not in 套装:
@@ -3945,7 +4006,7 @@ class 角色窗口(窗口):
                     每行详情[10].resize(50, min(28, self.行高))
 
                 for l in range(1, 10):
-                    if self.登记启用 and skill.名称 in BUFF影响技能 and self.自选计算模式:
+                    if self.登记启用 and skill.名称 in BUFF影响技能 and 自选计算模式:
                         每行详情[l].setStyleSheet(
                             "QLabel{font-size:12px;color:rgb(255,0,0)}")
                     else:
@@ -4048,7 +4109,7 @@ class 角色窗口(窗口):
         合计 = QLabel(输出窗口)
         合计.setStyleSheet("QLabel{color:rgb(104,213,237);font-size:15px}")
         合计.setText(tempstr)
-        if self.登记启用 and self.自选计算模式:
+        if self.登记启用 and 自选计算模式:
             合计.setStyleSheet("QLabel{color:rgb(104,213,237);font-size:12px}")
         合计.resize(450, 300)
         合计.move(280, 30 + j * self.行高 - pox_y2)
@@ -4130,7 +4191,7 @@ class 角色窗口(窗口):
             )
             打造状态.move(初始x + x坐标[11] + 13, 初始y + y坐标[11] + 20 - pox_y2)
 
-        if self.登记启用 and self.自选计算模式:
+        if self.登记启用 and 自选计算模式:
             #换装装备图表显示
             偏移量 = 80
             x坐标 = [
@@ -4157,7 +4218,6 @@ class 角色窗口(窗口):
         输出显示 = MainWindow(输出窗口)
         self.输出窗口列表.append(输出显示)
         输出显示.show()
-        self.自选计算模式 = False
 
     def 装备描述_BUFF计算(self, property):
         tempstr = []
