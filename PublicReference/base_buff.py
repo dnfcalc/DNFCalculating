@@ -1,4 +1,5 @@
 from math import e
+from operator import eq
 from PublicReference.equipment.equ_list import *
 from PublicReference.equipment.称号_buff import *
 from PublicReference.equipment.宠物_buff import *
@@ -138,6 +139,13 @@ class 角色属性(属性):
         self.自适应最高值 = []
         self.技能表 = {}
         self.觉醒择优系数 = 1.0
+
+    def 穿戴装备(self, 装备, 套装 = None):
+        self.装备栏 = 装备
+        self.套装栏 = 套装
+        if 套装 is None or len(套装) == 0 :
+            self.套装栏 = equ.get_suits_by_equips(装备)
+        self.武器类型 = equ.get_equ_by_name(self.装备栏[11]).类型
 
     def 力智固定加成(self, x=0, y=0):
         if self.装备描述 == 1:
@@ -504,6 +512,7 @@ class 角色属性(属性):
                 count2 += 1
 
         sumcount = sum(count)
+
         if sumcount == 7:
             x1 = deepcopy(属性)
             x2 = deepcopy(属性)
@@ -659,33 +668,35 @@ class 角色属性(属性):
 
     def 奥兹玛计算(self, 奥兹玛选择状态):
         # region 阿斯特罗斯
-        for i in range(0, 4):
+
+        for i in range(0,5):
             if 奥兹玛选择状态[i] == 1:
                 self.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
                 self.觉醒增加(一觉力智=22)
                 self.被动增加(守护恩赐体精=55, 转职被动智力=55)
         # endregion
         # region 贝利亚斯
-        for i in range(5, 9):
+        for i in range(5,10):
             if 奥兹玛选择状态[i] == 1:
                 self.被动增加(守护恩赐体精=138, 转职被动智力=138)
+
         # endregion
         # region 雷德梅恩
-        for i in range(10, 14):
+        for i in range(10, 15):
             if 奥兹玛选择状态[i] == 1:
                 self.BUFF增加(BUFF力量per=1.02, BUFF智力per=1.02)
                 self.觉醒增加(一觉力智=25)
                 self.被动增加(守护恩赐体精=46, 转职被动智力=46)
         # endregion
         # region 罗什巴赫
-        for i in range(15, 19):
+        for i in range(15, 20):
             if 奥兹玛选择状态[i] == 1:
                 self.BUFF增加(BUFF力量per=1.01, BUFF智力per=1.01)
                 self.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
                 self.觉醒增加(一觉力智=37)
         # endregion
         # region 泰玛特
-        for i in range(20, 24):
+        for i in range(20, 25):
             if 奥兹玛选择状态[i] == 1:
                 self.BUFF增加(BUFF力量per=1.03, BUFF智力per=1.03)
                 self.觉醒增加(一觉力智=21, 一觉力智per=1.01)
@@ -988,8 +999,8 @@ class 角色窗口(窗口):
             '无', 'BUFF力量、智力+2%', 'BUFF力量、智力+4%', 'BUFF力量、智力+6%', 'BUFF力量、智力+8%'
         ]
         self.store = Store()
-        super().__init__()
         self.登记启用 = False
+        super().__init__()
         self.store.bind(self, "希洛克选择状态", "/buffer/data/siroco")
         self.store.bind(self, "奥兹玛选择状态", "/buffer/data/ozma")
         self.store.bind(self, "登记启用", "/buffer/data/register_enable")
@@ -1809,9 +1820,10 @@ class 角色窗口(窗口):
 
         for i in range(column_count):
             self.自选装备栏选项.addItem('自选装备栏:{}'.format(i))
+        self.自选装备栏选项.setCurrentIndex(-1)
         self.自选装备栏选项.resize(160, 22)
         self.自选装备栏选项.move(330, 50 + 30 * count)
-        self.自选装备栏选项.activated.connect(lambda state: self.自选装备栏更改(state))
+        self.自选装备栏选项.currentIndexChanged.connect(lambda state: self.自选装备栏更改(state))
 
         count += 1
         # 一键修正按钮添加
@@ -1970,17 +1982,24 @@ class 角色窗口(窗口):
         换装设置.resize(80, 28)
         换装设置.setStyleSheet(按钮样式)
 
-    def 自选装备栏更改(self, index):
+    def 自选装备栏更改(self, index):        
         self.计算标识 = 0
-        data = self.store.get("/buffer/data/self_select/equips", [[]])
-        if index < len(data):
-            data = data[index]
-        else:
-            data = [0] * len(self.自选装备)
-        num = 0
-        for i in data:
-            self.自选装备[num].setCurrentIndex(i)
-            num += 1
+
+        data = self.store.get("/buffer/data/self_select/equips", [])
+        length = len(self.自选装备)
+        column_index = self.store.get("/buffer/data/self_select/column_index")
+
+        if column_index != index:
+            data[column_index] = [i.currentIndex() for i in self.自选装备]
+
+        defaultData =  [0] * length
+
+        column = data[index] if index < len(data) else defaultData
+        for i in range(length):
+            self.自选装备[i].setCurrentIndex(column[i])
+        self.store.set("/buffer/data/self_select/column_index",index)
+        self.store.set("/buffer/data/self_select/equips", data)
+
         self.计算标识 = 1
         self.自选计算(1)
 
@@ -2112,26 +2131,18 @@ class 角色窗口(窗口):
             self.武器融合属性A1.clear()
             self.武器融合属性A2.clear()
             属性A = 武器属性A列表[index]
-            temp = 属性A.最大值
-            while temp >= 属性A.最小值:
-                if 属性A.间隔 / 10 >= 1:
-                    self.武器融合属性A2.addItem(str(int(temp)))
-                else:
-                    self.武器融合属性A2.addItem(str(temp) + '%')
-                temp -= 属性A.间隔
+
+            for item in 属性A.range():
+                self.武器融合属性A2.addItem(item)
             self.武器融合属性A1.addItem(属性A.随机属性描述)
 
         elif x == 1:
             self.武器融合属性B1.clear()
             self.武器融合属性B2.clear()
             属性B = 武器属性B列表[index]
-            temp = 属性B.最大值
-            while temp >= 属性B.最小值:
-                if 属性B.间隔 / 10 >= 1:
-                    self.武器融合属性B2.addItem(str(int(temp)))
-                else:
-                    self.武器融合属性B2.addItem(str(temp) + '%')
-                temp -= 属性B.间隔
+
+            for item in 属性B.range():
+                self.武器融合属性B2.addItem(item)
             self.武器融合属性B1.addItem(属性B.随机属性描述)
 
     def 黑鸦词条更新(self, index):
@@ -2800,6 +2811,7 @@ class 角色窗口(窗口):
                     self.自选装备栏选项.setCurrentIndex(index)
                 except Exception as error:
                     logger.error(error)
+                
                 try:
                     num = 0
                     data = self.store.get('/buffer/data/self_select/locked')
@@ -2921,8 +2933,12 @@ class 角色窗口(窗口):
         if 4 in page:
             # 第五页(自选装备计算)
             try:
-                self.store.set('/buffer/data/self_select/column_index',
-                               self.自选装备栏选项.currentIndex())
+                data = self.store.get("/buffer/data/self_select/equips",[])
+                column_index = self.自选装备栏选项.currentIndex()
+                data[column_index] = [i.currentIndex() for i in self.自选装备]
+
+                self.store.set("/buffer/data/self_select/equips",data)
+                self.store.set('/buffer/data/self_select/column_index',column_index)
                 self.store.set("/buffer/data/self_select/locked",
                                [i.isChecked() for i in self.装备锁定])
             except Exception as error:
@@ -3083,8 +3099,8 @@ class 角色窗口(窗口):
 
         装备 = self.store.clone("/buffer/data/register/equips",self.self_selects)
         装备打造 = self.store.clone("/buffer/data/register/amplifies", [])
-        奥兹玛选择状态 = self.store.clone("/buffer/data/register/ozma", [])
-        希洛克选择状态 = self.store.clone("/buffer/data/register/siroco", [])
+        奥兹玛选择状态 = self.store.clone("/buffer/data/register/ozma", [0]*25)
+        希洛克选择状态 = self.store.clone("/buffer/data/register/siroco", [0]*15)
         黑鸦词条 = self.store.clone("/buffer/data/register/black_purgatory", [])
         武器融合选项 = self.store.clone("/buffer/data/register/weapon_fusion", [0]*4)
 
@@ -3140,12 +3156,13 @@ class 角色窗口(窗口):
 
 
         武器融合属性A = 武器属性A列表[武器融合选项[0]]
-        武器融合属性A数值 = self.武器融合属性A2.itemText(武器融合选项[1]).replace('%', '')
+
+        武器融合属性A数值 = 武器融合属性A.range()[武器融合选项[1]].replace('%', '')
         武器融合属性A.当前值 = int(武器融合属性A数值 if 武器融合属性A数值 != '' else 0)
         武器融合属性A.融合属性(属性)
         if 属性.武器词条触发 == 1:
             武器融合属性B = 武器属性B列表[武器融合选项[2]]
-            武器融合属性B数值 = self.武器融合属性B2.itemText(武器融合选项[3]).replace('%', '')
+            武器融合属性B数值 = 武器融合属性B.range()[武器融合选项[3]].replace('%', '')
             武器融合属性B.当前值 = int(武器融合属性B数值 if 武器融合属性B数值 != '' else 0)
             武器融合属性B.融合属性(属性)
 
@@ -3229,9 +3246,11 @@ class 角色窗口(窗口):
         self.角色属性A = deepcopy(self.初始属性)
 
         self.输入属性(self.角色属性A)
+
         C = self.站街计算(装备)
+
         B = deepcopy(self.角色属性A)
-        B.穿戴装备计算套装(装备)
+        B.穿戴装备(装备)
         B.预计算()
 
         # 双切 Start
@@ -3569,25 +3588,14 @@ class 角色窗口(窗口):
         else:
             self.提升率显示.setText(str(round(提升率, 2)) + '%')
         self.自选计算数据 = [提升率, 总数据]
-
-        data = self.store.get("/buffer/data/self_select/equips", [[]])
-        column_index = self.自选装备栏选项.currentIndex()
-        equip_count = len(self.自选装备)
-
-        while len(data) <= column_index:
-            data.append([0] * equip_count)
-
-        data[column_index] = [i.currentIndex() for i in self.自选装备]
-
-        self.store.set("/buffer/data/self_select/equips", data)
-
+ 
         if 输出 == 0:
             self.排行数据.append(装备 + [0] + 套装 + ['无'])
             self.输出界面(0,自选计算模式=True)
 
-    def 站街计算(self, 装备名称):
+    def 站街计算(self, 装备名称, 套装名称=None):
         C = deepcopy(self.角色属性A)
-        C.穿戴装备计算套装(装备名称)
+        C.穿戴装备(装备名称,套装名称)
         for i in C.装备栏:
             equ.get_equ_by_name(i).城镇属性_BUFF(C)
             equ.get_equ_by_name(i).BUFF属性(C)
@@ -3628,14 +3636,19 @@ class 角色窗口(窗口):
 
     def 输出界面(self, index, name='',自选计算模式 = False):
         装备名称 = []
+        套装名称 = []
         百变怪 = self.排行数据[index][-1]
         for i in range(12):
             装备名称.append(self.排行数据[index][i])
 
+        if not 自选计算模式:
+            for i in range(13, len(self.排行数据[index]) - 1):
+                套装名称.append(self.排行数据[index][i])
+
         C = self.站街计算(装备名称)
 
         self.角色属性B = deepcopy(self.角色属性A)
-        self.角色属性B.穿戴装备计算套装(装备名称)
+        self.角色属性B.穿戴装备(装备名称,套装名称)
         # 双切 Start
 
         if self.登记启用 and 自选计算模式:
@@ -3644,13 +3657,11 @@ class 角色窗口(窗口):
             except:
                 pass
 
-        temp = deepcopy(self.角色属性B)
-
-        self.角色属性B.预计算()
+        self.角色属性B.预计算(自动切装= not 自选计算模式)
 
         if self.登记启用 and 自选计算模式:
             双切属性 = self.换装计算()
-            双切属性.预计算()
+            双切属性.预计算(自动切装 = False)
 
             self.角色属性B.替换技能(双切属性.技能表['BUFF'], 'BUFF')
             # self.输入属性(self.角色属性B)
@@ -3792,6 +3803,7 @@ class 角色窗口(窗口):
         套装 = []
         套装件数 = []
         套装属性 = []
+
         套装名称 = copy(self.角色属性B.套装栏)
 
         for i in range(len(套装名称)):
