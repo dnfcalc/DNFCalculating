@@ -2249,7 +2249,7 @@ class 角色窗口(窗口):
         奶量buff力智label.setAlignment(Qt.AlignCenter)
 
         偏移 = (35 if self.初始属性.远古记忆 != -1 else 0) + (35 if self.初始属性.刀魂之卡赞 != -1
-                                                    else 0)+35
+                                                    else 0) + 35
         奶量buff力智label.move(970, 18 + counter * 80 + 10 + 偏移)
         奶量buff力智输入框 = QLineEdit(self.main_frame2)
         奶量buff力智输入框.setStyleSheet(文本框样式黄)
@@ -6269,13 +6269,14 @@ class 角色窗口(窗口):
 
         if self.奶量buff输入[0].text() not in ['', '无']:
             # print(属性.力量)
-            属性.力量 += int(self.奶量buff输入[0].text())
-            属性.智力 += int(self.奶量buff输入[0].text())
+            属性.进图力量 += int(self.奶量buff输入[0].text())
+            属性.进图智力 += int(self.奶量buff输入[0].text())
             # print(属性.力量)
 
         if self.奶量buff输入[1].text() not in ['', '无']:
-            属性.物理攻击力 += int(self.奶量buff输入[1].text())
-            属性.魔法攻击力 += int(self.奶量buff输入[1].text())
+            属性.进图物理攻击力 += int(self.奶量buff输入[1].text())
+            属性.进图魔法攻击力 += int(self.奶量buff输入[1].text())
+            属性.进图独立攻击力 += int(self.奶量buff输入[1].text())
 
         # 守门人全属强方案
         if self.守门人全属强.isChecked():
