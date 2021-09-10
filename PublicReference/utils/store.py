@@ -4,6 +4,7 @@
 # Author: Apateat
 ##
 ##
+from copy import copy
 import re
 
 
@@ -25,6 +26,11 @@ class Store:
         if _value is None:
             _value = defaultValue
         return _value
+
+    # 获取一个克隆值
+    def clone(self,key:str,defaultValue:any = None):
+        value = self.get(key,defaultValue)
+        return copy(value)
 
     # 主动通知变化
     def emit(self, key: str, value: any = None):
