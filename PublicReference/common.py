@@ -931,7 +931,7 @@ class 窗口(QWidget):
 
     def 奥兹玛选择(self, index, x=0):
         if x == 1:
-            for i in range(15):
+            for i in range(25):
                 self.奥兹玛遮罩透明度[i].setOpacity(0.5)
                 self.奥兹玛选择状态[i] = 0
             return

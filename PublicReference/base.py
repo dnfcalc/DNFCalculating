@@ -3104,8 +3104,8 @@ class 角色窗口(窗口):
         self.计算按钮3.resize(110, 30)
         self.计算按钮3.setStyleSheet(按钮样式)
 
-    def 奥兹玛选择(self, index):
-        super().奥兹玛选择(index)
+    def 奥兹玛选择(self, index, x=0):
+        super().奥兹玛选择(index, x)
         self.阿斯特罗斯选项显示(sum(self.奥兹玛选择状态[0:5]))
 
     def 阿斯特罗斯选项显示(self, n):
