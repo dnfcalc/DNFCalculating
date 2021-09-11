@@ -762,7 +762,8 @@ class 极诣·驭剑士技能23(极诣·驭剑士主动技能):
 
     def 装备护石(self, x):
         self.次数倍率 = [1.15, 1.65]
-        self.额外倍率 = 1.65
+        # 魔剑奥义不吃护石加成
+        # self.额外倍率 = 1.65
         self.魔剑层数上限 = 3
         self.魔剑增加量 = 0.05
 
@@ -942,8 +943,10 @@ class 极诣·驭剑士角色属性(角色属性):
         temp = self.技能栏[self.技能序号['飓风魔剑']]
         if self.钻头蓄力开关 != 1:
             temp.次数[0] = 30 * (1 + temp.魔剑增加量 * min(self.魔剑堆层数, temp.魔剑层数上限))
+            temp.次数[1] = 1 * (1 + temp.魔剑增加量 * min(self.魔剑堆层数, temp.魔剑层数上限))
         else:
             temp.次数[0] = 40 * (1 + temp.魔剑增加量 * min(self.魔剑堆层数, temp.魔剑层数上限))
+            temp.次数[1] = 1 * (1 + temp.魔剑增加量 * min(self.魔剑堆层数, temp.魔剑层数上限))
 
         temp.额外百分比 = min(self.魔剑堆层数, temp.魔剑层数上限) * \
             self.技能栏[self.技能序号['魔剑奥义']].等效百分比(self.武器类型)
@@ -1001,7 +1004,7 @@ class 极诣·驭剑士(角色窗口):
             if self.护石栏[x].currentText() == '飓风魔剑':
                 sign = 1
         if sign == 1:
-            self.钻头蓄力开关.setChecked(False)
+            self.钻头蓄力开关.setChecked(True)
             self.钻头蓄力开关.setDisabled(True)
         else:
             self.钻头蓄力开关.setChecked(True)
