@@ -4650,7 +4650,7 @@ class 角色窗口(窗口):
             武器词条属性 = ['力智', '三攻', '黄字', '白字', '爆伤', '终伤']
             if self.希洛克武器词条[0].currentIndex() == 1:
                 tempstr += "残香:{}+10%".format(武器词条属性[self.角色属性A.词条选择[0]])
-                if sum(self.希洛克选择状态[i]) == 3:
+                if sum(self.希洛克选择状态) == 3:
                     tempstr += "|{}+5%".format(武器词条属性[self.角色属性A.词条选择[1]])
                 套装.append(tempstr)
                 套装件数.append([])
@@ -4718,36 +4718,40 @@ class 角色窗口(窗口):
 
     def 装备描述计算(self, 属性):
         tempstr = []
-        数量 = [0] * 3
+        数量 = sum(self.希洛克选择状态)
+
         武器词条属性 = ['力智', '三攻', '黄字', '白字', '爆伤', '终伤']
-        for i in range(15):
-            数量[i % 3] += self.希洛克选择状态[i]
+        希洛克 = self.希洛克属性计算(属性, 1)
+        奥兹玛 = self.奥兹玛属性计算(属性, 1)
+
         for i in range(12):
             装备 = equ.get_equ_by_name(属性.装备栏[i])
-            tempstr.append('<font size="3" face="宋体"><font color="' +
-                           颜色[装备.品质] + '">' + 装备.名称 + '</font><br>')
+            # 名称
+            tempstr.append('<font size="3" face="宋体"><font color="{}">{}</font>'.format(颜色[装备.品质], 装备.名称))
+            # 等级 品质 类型 部位
+            tempstr[i] += '<br>Lv{} {} {}({})'.format(装备.等级, 装备.品质, 装备.类型, 装备.部位)
+            # 套装
             if 装备.所属套装 != '无':
                 if 装备.所属套装 != '智慧产物':
-                    y = ' ' + 装备.所属套装
+                    y = 装备.所属套装
                 else:
-                    try:
-                        y = ' ' + 装备.所属套装2
-                    except:
-                        y = ' '
+                    y = 装备.所属套装2
             else:
-                y = ' '
-            if i == 11:
-                y += ' ' + 装备.类型
-            tempstr[i] += 'Lv' + str(装备.等级) + ' ' + 装备.品质 + y
-
+                y = ''
+            if y != '':
+                tempstr[i] += '<br><font color="#78FF1E">{} 套装</font>'.format(y)
+            
+            #精通描述
             if i < 5:
                 x = 属性.防具精通计算(i)
                 y = '<br>精通:'
                 for n in 属性.防具精通属性:
                     y += n + ' '
                 tempstr[i] += y + '+' + str(x)
-
+            
+            #打造描述
             if 装备.所属套装 != '智慧产物':
+                #强化描述
                 if 属性.强化等级[i] != 0:
                     if i == 8:
                         tempstr[i] += '<br><font color="#68D5ED">+' + str(
@@ -4770,28 +4774,29 @@ class 角色窗口(窗口):
                         tempstr[i] += '魔法攻击力 + ' + str(
                             武器计算(装备.等级, 装备.品质, 属性.强化等级[i], 装备.类型,
                                  '魔法')) + '</font>'
-
-                if 属性.武器锻造等级 != 0:
-                    if i == 11:
+                #锻造描述
+                if i == 11 and 属性.武器锻造等级 != 0:
                         tempstr[i] += '<br><font color="#68D5ED">+' + str(
                             属性.武器锻造等级) + '   锻造: '
                         tempstr[i] += '独立攻击力 + ' + str(
                             锻造计算(装备.等级, 装备.品质, 属性.武器锻造等级)) + '</font>'
-
+                
+                #增幅描述
                 if 属性.是否增幅[i] == 1:
                     if tempstr[i] != '':
                         tempstr[i] += '<br>'
                     tempstr[i] += '<font color="#FF00FF">+' + str(
                         属性.强化等级[i]) + ' 增幅: '
                     if '物理' in 属性.类型 or '力量' in 属性.类型:
-                        tempstr[i] += '异次元力量 + ' + str(
+                        tempstr[i] += '力量 + ' + str(
                             增幅计算(装备.等级, 装备.品质, 属性.强化等级[i],
                                  属性.增幅版本)) + '</font>'
                     else:
-                        tempstr[i] += '异次元智力 + ' + str(
+                        tempstr[i] += '智力 + ' + str(
                             增幅计算(装备.等级, 装备.品质, 属性.强化等级[i],
                                  属性.增幅版本)) + '</font>'
-
+            
+            #遴选描述
             if tempstr[i] != '':
                 tempstr[i] += '<br>'
             if i == 2 and 属性.黑鸦词条[3][0] != 0 and 属性.变换词条[3][1] != 0:
@@ -4813,31 +4818,34 @@ class 角色窗口(窗口):
             else:
                 tempstr[i] += 装备.装备描述(属性)[:-4]
 
-            if 数量[0] == 1 and i == 2:
-                tempstr[i] += '<br>'
-                tempstr[i] += '<font color="#00A2E8">希洛克融合属性：</font><br>'
-                tempstr[i] += '最终伤害 +5%'
-            elif 数量[1] == 1 and i == 7:
-                tempstr[i] += '<br>'
-                tempstr[i] += '<font color="#00A2E8">希洛克融合属性：</font><br>'
-                tempstr[i] += '三攻 +5%'
-            elif 数量[2] == 1 and i == 9:
-                tempstr[i] += '<br>'
-                tempstr[i] += '<font color="#00A2E8">希洛克融合属性：</font><br>'
-                tempstr[i] += '技能攻击力 +5%'
-            elif self.希洛克武器词条[0].currentIndex() > 0 and i == 11:
+            #希洛克描述
+            if i in [2, 7, 9]:
+                if 希洛克[i] != '':
+                    tempstr[i] += '<br>'
+                    tempstr[i] += '<font color="#00A2E8">希洛克融合属性：</font><br>'
+                    tempstr[i] += 希洛克[i]
+            
+            #奥兹玛描述
+            if i in [1, 3, 4, 6, 10]:
+                if 奥兹玛[i] != '':
+                    tempstr[i] += '<br>'
+                    tempstr[i] += '<font color="#00A2E8">奥兹玛融合属性：</font><br>'
+                    tempstr[i] += 奥兹玛[i]
+            
+            #希洛克武器描述
+            if self.希洛克武器词条[0].currentIndex() > 0 and i == 11:
                 tempstr[i] += '<br>'
                 tempstr[i] += '<font color="#00A2E8">希洛克融合属性：</font><br>'
                 if self.希洛克武器词条[0].currentIndex() == 1:
                     tempstr[i] += "属性1：{} +10%<br>".format(武器词条属性[属性.词条选择[0]])
-                    if sum(数量) == 3:
+                    if 数量 == 3:
                         tempstr[i] += "属性2：{} +5%<br>".format(
                             武器词条属性[属性.词条选择[1]])
                 else:
                     tempstr[i] += "属性1：{} +{}%<br>".format(
                         武器词条属性[self.希洛克武器词条[1].currentIndex()],
                         (self.希洛克武器词条[3].currentIndex() + 3) * 2)
-                    if sum(数量) == 3:
+                    if 数量 == 3:
                         tempstr[i] += "属性2：{} +{}%<br>".format(
                             武器词条属性[self.希洛克武器词条[2].currentIndex()],
                             (self.希洛克武器词条[4].currentIndex() + 3) * 1)
@@ -5090,7 +5098,7 @@ class 角色窗口(窗口):
         武器词条属性 = ['力智', '三攻', '黄字', '白字', '爆伤', '终伤']
         if self.希洛克武器词条[0].currentIndex() == 1:
             tempstr += "残香:{}+10%".format(武器词条属性[self.角色属性B.词条选择[0]])
-            if sum(self.希洛克选择状态[i]) == 3:
+            if sum(self.希洛克选择状态) == 3:
                 tempstr += "|{}+5%".format(武器词条属性[self.角色属性B.词条选择[1]])
             套装.append(tempstr)
             套装件数.append([])
@@ -5166,7 +5174,7 @@ class 角色窗口(窗口):
         pdata['技能'] = main.data
         main.setGeometry(277, 36 - pox_y, 498, 455)
 
-        # 被动详情
+        # region 被动详情
         num = 0
         for i in range(len(self.角色属性B.技能栏)):
             # Will修改
@@ -5344,6 +5352,7 @@ class 角色窗口(窗口):
             被动等级.setAlignment(Qt.AlignCenter)
             被动等级.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
             num += 1
+        # endregion
 
         总伤害 = QLabel(输出窗口)
         总伤害.setStyleSheet("QLabel{color:rgb(255,255,255);font-size:25px}")
@@ -5477,14 +5486,16 @@ class 角色窗口(窗口):
         except:
             pass
 
-    def 希洛克属性计算(self, 属性):
-        希洛克.希洛克属性_输出(属性, self.希洛克选择状态, self.守门人属强.currentIndex())
+    def 希洛克属性计算(self, 属性, x = 0):
+        #0表示计算属性 1表示计算描述
+        return 希洛克.希洛克属性_输出(属性, self.希洛克选择状态, self.守门人属强.currentIndex(), x)
 
-    def 奥兹玛属性计算(self, 属性):
+    def 奥兹玛属性计算(self, 属性, x = 0):
+        #0表示计算属性 1表示计算描述
         阿斯特罗斯选项 = []
         for i in range(sum(self.奥兹玛选择状态[:5])):
             阿斯特罗斯选项.append(self.阿斯特罗斯选项[i].currentIndex())
-        奥兹玛.奥兹玛属性_输出(属性, self.奥兹玛选择状态, 阿斯特罗斯选项)
+        return 奥兹玛.奥兹玛属性_输出(属性, self.奥兹玛选择状态, 阿斯特罗斯选项, x)
 
     def 输入属性(self, 属性, x=0):
 

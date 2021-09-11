@@ -94,12 +94,9 @@ class equipment():
         dictionary = {}
         for i in equips:
             j = self.get_equ_by_name(i).所属套装
-            if j == '智慧产物':
-                try:
-                    k = self.get_equ_by_name(i).所属套装2
-                    dictionary[k] = dictionary.get(k, 0) + 1
-                except:
-                    pass
+            if j == '智慧产物' and self.get_equ_by_name(i).所属套装2 != '':
+                k = self.get_equ_by_name(i).所属套装2
+                dictionary[k] = dictionary.get(k, 0) + 1
             elif j != '无':
                 dictionary[j] = dictionary.get(j, 0) + 1
 
