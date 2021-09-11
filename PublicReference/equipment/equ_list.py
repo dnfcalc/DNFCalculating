@@ -9,6 +9,8 @@ from .装备_首饰 import *
 from .装备_防具 import *
 from .装备_武器 import *
 from .基础函数 import *
+from .融合_希洛克 import 希洛克
+from .融合_奥兹玛 import 奥兹玛
 
 装备版本 = "GF"
 
