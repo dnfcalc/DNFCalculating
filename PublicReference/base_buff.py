@@ -454,6 +454,7 @@ class 角色属性(属性):
               1) * (self.C三攻 + b)
         return [x2 / x1 * 100, int(self.站街系数), 力量合计, 智力合计, 物攻合计, 魔攻合计, 独立合计][x]
 
+
     def 适用数值计算(self):
         self.专属词条计算()
         for skill in self.技能表.values():
@@ -726,7 +727,7 @@ class 角色属性(属性):
                 总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
         return 总数据
 
-    def 预计算(self, 自动切装=True):
+    def 预计算(self, 自动切装 = False):
         if self.双装备模式 == 1 and self.技能表['一次觉醒'].是否启用 != 0 and 自动切装:
             # 用于计算一觉
             temp = deepcopy(self)
@@ -737,9 +738,8 @@ class 角色属性(属性):
             可能组合 = self.装备替换(temp)
             for 一觉计算属性 in 可能组合:
                 一觉计算属性.装备属性计算()
-                一觉计算属性.自适应计算()
                 一觉计算属性.适用数值计算()
-                替换属性_temp.append(deepcopy(一觉计算属性))
+                替换属性_temp.append(一觉计算属性)
                 一觉 = 一觉计算属性.技能表['一次觉醒']
                 三觉 = 一觉计算属性.技能表['三次觉醒']
                 数据 = 三觉.结算统计()[3]
@@ -758,8 +758,7 @@ class 角色属性(属性):
                 c = int(a) - int(b)
                 if 一觉.名称 not in 三觉.关联技能:
                     temp += 一觉.名称 + '+'
-                temp += 三觉.名称 + ':' + str(b) + '->' + str(
-                    int(a)) + "(+" + str(c) + ")"
+                temp +="{}:{}->{}(+{})".format(三觉.名称,b,a,c)
             else:
                 temp = ''
                 # 计算现有装备BUFF
@@ -769,19 +768,16 @@ class 角色属性(属性):
             self.一觉Lv = 替换属性.一觉Lv
             self.一觉力智 = 替换属性.一觉力智
             self.一觉力智per = 替换属性.一觉力智per
-
+            self.技能表['三次觉醒'].等级 = 替换属性.技能表['三次觉醒'].等级
             self.自适应计算()
             self.适用数值计算()
-
-            self.替换技能(替换属性.技能表['一次觉醒'], '一次觉醒')
-            self.替换技能(替换属性.技能表['三次觉醒'], '三次觉醒')
             self.切换详情 = 切换列表[序号] + temp
         else:
             self.装备属性计算()
             self.自适应计算()
             self.适用数值计算()
-
-    def 自适应计算(self):
+    
+    def 自适应计算(self):                
 
         # 黑鸦词条计算
         黑鸦选择 = [0, 0, 0, 0]
@@ -920,7 +916,7 @@ class 角色属性(属性):
             return self.提升率计算(总数据, self.排行系数)
 
     def BUFF计算(self, x=0):
-        self.预计算()
+        self.预计算(自动切装 = True)
         总数据 = self.数据计算()
         return self.结果返回(x, 总数据)
 
@@ -946,6 +942,47 @@ class 角色属性(属性):
         for i in self.套装栏:
             equ.get_suit_by_name(i).城镇属性_BUFF(self)
             equ.get_suit_by_name(i).BUFF属性(self)
+
+        if self.排行系数 == 1:
+            P = deepcopy(self)
+            P.站街计算()
+            self.站街系数 = P.系数数值站街()
+
+        for i in self.装备栏:
+            equ.get_equ_by_name(i).进图属性_BUFF(self)
+
+        for i in self.套装栏:
+            equ.get_suit_by_name(i).进图属性_BUFF(self)
+            
+    def 装备属性计算1(self):
+        self.装备基础()
+        # self.专属词条计算()
+        for i in self.装备栏:
+            item = equ.get_equ_by_name(i)
+
+
+            item.城镇属性_BUFF(self)
+            item.BUFF属性(self)
+
+            
+            # 黑鸦武器觉醒词条
+            if self.黑鸦词条[0][0] == 3 and item.部位 == '武器':
+                self.技能等级加成('所有', 50, 50, 2)
+                self.技能等级加成('所有', 85, 85, 2)
+                self.技能等级加成('所有', 100, 100, 2)
+            if self.黑鸦词条[0][0] > 0 and item.名称 == '世界树之精灵':
+                self.技能等级加成('所有', 50, 50, -2)
+                self.技能等级加成('所有', 85, 85, -2)
+                self.技能等级加成('所有', 100, 100, -2)
+
+            # 世界树之精灵洗词条的特殊处理,没考虑择优的时候,针对的是自选
+            if self.黑鸦词条[0][0] > 1 and item.名称 == '世界树之精灵':
+                self.技能等级加成('所有', 50, 50, 2)
+
+        for i in self.套装栏:
+            suit =  equ.get_suit_by_name(i)
+            suit.城镇属性_BUFF(self)
+            suit.BUFF属性(self)
 
         if self.排行系数 == 1:
             P = deepcopy(self)
@@ -1989,10 +2026,14 @@ class 角色窗口(窗口):
         length = len(self.自选装备)
         column_index = self.store.get("/buffer/data/self_select/column_index")
 
+        defaultData =  [0] * length
+
+        while column_index >= len(data):
+            data.append(defaultData)
+
         if column_index != index:
             data[column_index] = [i.currentIndex() for i in self.自选装备]
 
-        defaultData =  [0] * length
 
         column = data[index] if index < len(data) else defaultData
         for i in range(length):
@@ -2217,7 +2258,7 @@ class 角色窗口(窗口):
         if x == 0:
             A = deepcopy(self.初始属性)
             self.输入属性(A)
-            A.穿戴装备计算套装(self.self_selects)
+            A.穿戴装备(self.self_selects)
 
             self.关闭排行窗口()
             self.排行数据.clear()
@@ -2935,6 +2976,10 @@ class 角色窗口(窗口):
             try:
                 data = self.store.get("/buffer/data/self_select/equips",[])
                 column_index = self.自选装备栏选项.currentIndex()
+                length = len(self.自选装备)
+                while column_index >= len(data):
+                    data.append([0] * length)
+
                 data[column_index] = [i.currentIndex() for i in self.自选装备]
 
                 self.store.set("/buffer/data/self_select/equips",data)
@@ -2987,7 +3032,7 @@ class 角色窗口(窗口):
         self.修正套装计算(x)
         self.角色属性B = deepcopy(self.初始属性)
         self.输入属性(self.角色属性B)
-        self.角色属性B.穿戴装备计算套装(self.有效穿戴组合[0])
+        self.角色属性B.穿戴装备(self.有效穿戴组合[0])
         for i in self.角色属性B.装备栏:
             equ.get_equ_by_name(i).城镇属性_BUFF(self.角色属性B)
             equ.get_equ_by_name(i).BUFF属性(self.角色属性B)
@@ -3098,10 +3143,10 @@ class 角色窗口(窗口):
         if not self.登记启用: return None
 
         装备 = self.store.clone("/buffer/data/register/equips",self.self_selects)
-        装备打造 = self.store.clone("/buffer/data/register/amplifies", [])
+        装备打造 = self.store.clone("/buffer/data/register/amplifies", [0]*12)
         奥兹玛选择状态 = self.store.clone("/buffer/data/register/ozma", [0]*25)
         希洛克选择状态 = self.store.clone("/buffer/data/register/siroco", [0]*15)
-        黑鸦词条 = self.store.clone("/buffer/data/register/black_purgatory", [])
+        黑鸦词条 = self.store.clone("/buffer/data/register/black_purgatory", [[0]*4]*4)
         武器融合选项 = self.store.clone("/buffer/data/register/weapon_fusion", [0]*4)
 
         属性 = deepcopy(self.初始属性)
@@ -3218,13 +3263,12 @@ class 角色窗口(窗口):
         属性.奥兹玛计算(奥兹玛选择状态)
         self.基础属性(属性)
 
-        属性.穿戴装备计算套装(装备)
+        属性.穿戴装备(装备)
 
         #  恢复
         return 属性
 
     def 自选计算(self, 输出=0):
-        BUFF = None
         if 输出 == 0:
             self.保存配置(self.存档位置)
             self.关闭排行窗口()
@@ -3232,42 +3276,36 @@ class 角色窗口(窗口):
 
         self.角色属性A = deepcopy(self.初始属性)
 
-        if 输出 == 0:
-            self.输入属性(self.角色属性A)
-        else:
-            self.输入属性(self.角色属性A, 1)
+        self.输入属性(self.角色属性A)
 
         if self.是否计算 != 1:
             self.click_window(1)
             return
 
         装备 = self.self_selects
-
-        self.角色属性A = deepcopy(self.初始属性)
-
-        self.输入属性(self.角色属性A)
-
         C = self.站街计算(装备)
 
         B = deepcopy(self.角色属性A)
         B.穿戴装备(装备)
         B.预计算()
 
-        # 双切 Start
+        # 登记 Start
         if self.登记启用:
             BUFF = self.换装计算()
             if BUFF is not None:
                 BUFF.预计算()
                 B.替换技能(BUFF.技能表['BUFF'], 'BUFF')
-            # 双切 End
-
+            # 登记 End
+        
         if 输出 != 0:
+            D = deepcopy(self.初始属性)
+            self.输入属性(D)
             伤害列表 = []
             for i in 辟邪玉列表:
                 i.当前值 = i.最大值
-                temp = deepcopy(self.角色属性A)
+                temp = deepcopy(D)
                 i.穿戴属性(temp)
-                temp.穿戴装备计算套装(装备)
+                temp.穿戴装备(装备)
                 伤害列表.append(temp.BUFF计算(0))
 
             辟邪玉提升率 = []
@@ -3330,6 +3368,16 @@ class 角色窗口(窗口):
             # self.总伤害.setText(str(tempstr))
 
         提升率 = self.角色属性A.提升率计算(总数据)
+
+
+
+
+
+
+
+
+
+
 
         x = B.BUFF面板()
         y = B.一觉面板()
@@ -3649,25 +3697,20 @@ class 角色窗口(窗口):
 
         self.角色属性B = deepcopy(self.角色属性A)
         self.角色属性B.穿戴装备(装备名称,套装名称)
-        # 双切 Start
-
-        if self.登记启用 and 自选计算模式:
-            try:
-                换装装备 = self.store.clone("/buffer/data/register/equips",[])
-            except:
-                pass
-
+        # 登记 Start
         self.角色属性B.预计算(自动切装= not 自选计算模式)
+        
 
         if self.登记启用 and 自选计算模式:
-            双切属性 = self.换装计算()
-            双切属性.预计算(自动切装 = False)
+            登记属性 = self.换装计算()
+            登记属性.预计算()
+            登记装备 = 登记属性.装备栏
 
-            self.角色属性B.替换技能(双切属性.技能表['BUFF'], 'BUFF')
+            self.角色属性B.替换技能(登记属性.技能表['BUFF'], 'BUFF')
             # self.输入属性(self.角色属性B)
             self.角色属性B.切换详情 = '换装详情: <br>' + '<br>'.join(
-                [' , '.join(换装装备[i:i + 4]) for i in range(0, len(换装装备), 4)])
-        # 双切 end
+                    [' , '.join(登记装备[i:i + 4]) for i in range(0, len(登记装备), 4)])
+        # 登记 end
         # self.角色属性B.装备属性计算()
 
         # 最大输出界面限制
@@ -4131,7 +4174,7 @@ class 角色窗口(窗口):
 
         图片列表 = self.获取装备图片(self.排行数据[index])
 
-        提升率 = self.角色属性A.提升率计算(统计详情)
+        提升率 = self.角色属性B.提升率计算(统计详情)
 
         提升率显示 = QLabel(输出窗口)
 
@@ -4203,14 +4246,14 @@ class 角色窗口(窗口):
             打造状态.move(初始x + x坐标[11] + 13, 初始y + y坐标[11] + 20 - pox_y2)
 
         if self.登记启用 and 自选计算模式:
-            #换装装备图表显示
+            #登记装备图表显示
             偏移量 = 80
             x坐标 = [
                 32, 0, 0, 32, 0, 偏移量, 偏移量 + 32, 偏移量 + 32, 偏移量, 偏移量, 偏移量 + 32,
                 32
             ]
             y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
-            图片列表2 = self.获取装备图片(换装装备)
+            图片列表2 = self.获取装备图片(登记装备)
             for i in range(12):
                 x = 初始x + x坐标[i] + 600
                 y = 初始y + y坐标[i] - pox_y2 + 150
@@ -4219,7 +4262,7 @@ class 角色窗口(窗口):
                 装备图标.resize(26, 26)
                 装备图标.move(x, y)
                 装备图标.setAlignment(Qt.AlignCenter)
-                if self.排行数据[index][i] == 换装装备[i]:
+                if self.排行数据[index][i] == 登记装备[i]:
                     图标遮罩 = QLabel(输出窗口)
                     图标遮罩.setStyleSheet(
                         "QLabel{background-color:rgba(0,0,0,0.8)}")
@@ -4683,26 +4726,19 @@ class 角色窗口(窗口):
         # 神话补正
         if 属性.类型 == '智力':
             属性.转职被动智力 += int(temp[0])
-            属性.BUFF力量per *= 1 + temp[1]
-            属性.BUFF智力per *= 1 + temp[1]
-            属性.BUFF物攻per *= 1 + temp[2]
-            属性.BUFF魔攻per *= 1 + temp[2]
-            属性.BUFF独立per *= 1 + temp[2]
-            属性.转职被动Lv += int(temp[3])
             属性.一觉被动力智 += int(temp[4])
-            属性.一觉力智per *= 1 + temp[5]
-            属性.一觉力智 += int(temp[6])
         else:
             属性.守护恩赐体精 += int(temp[0])
-            属性.BUFF力量per *= 1 + temp[1]
-            属性.BUFF智力per *= 1 + temp[1]
-            属性.BUFF物攻per *= 1 + temp[2]
-            属性.BUFF魔攻per *= 1 + temp[2]
-            属性.BUFF独立per *= 1 + temp[2]
-            属性.转职被动Lv += int(temp[3])
             属性.信念光环体精 += int(temp[4])
-            属性.一觉力智per *= 1 + temp[5]
-            属性.一觉力智 += int(temp[6])
+
+        属性.BUFF力量per *= 1 + temp[1]
+        属性.BUFF智力per *= 1 + temp[1]
+        属性.BUFF物攻per *= 1 + temp[2]
+        属性.BUFF魔攻per *= 1 + temp[2]
+        属性.BUFF独立per *= 1 + temp[2]
+        属性.转职被动Lv += int(temp[3])
+        属性.一觉力智per *= 1 + temp[5]
+        属性.一觉力智 += int(temp[6])
         for i in [0, 3, 6]:
             for j in range(17):
                 if self.属性设置输入[i][j].text() != '':
