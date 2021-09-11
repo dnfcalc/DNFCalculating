@@ -2334,6 +2334,11 @@ class 角色窗口(窗口):
         self.时间输入.move(920, self.height() - 63)
         self.时间输入.resize(50, 20)
 
+        self.技能存档选择 = MyQComboBox(self.main_frame2)
+        self.技能存档选择.move(990, self.height() - 105)
+        self.技能存档选择.resize(110, 20)
+        self.技能存档选择.currentIndexChanged.connect(lambda state: self.技能存档更换())
+
         self.计算按钮2 = QPushButton('开始计算', self.main_frame2)
         self.计算按钮2.clicked.connect(lambda state: self.计算())
         self.计算按钮2.move(990, self.height() - 70)

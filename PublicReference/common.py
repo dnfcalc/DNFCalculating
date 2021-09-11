@@ -234,6 +234,8 @@ class 窗口(QWidget):
             os.makedirs(path)
 
         self.存档列表读取()
+        if self.初始属性.职业分类 == '输出':
+            self.技能存档列表读取()
 
         self.click_window(0)
 
@@ -958,20 +960,69 @@ class 窗口(QWidget):
                 self.奥兹玛遮罩透明度[index].setOpacity(0.5)
                 self.奥兹玛选择状态[index] = 0
 
-    def 存档更换(self):
-        if self.存档选择.currentText() == '新建存档':
+    def 技能存档更换(self):
+        if self.技能存档选择.currentText() == '新建存档':
             num = 1
             while True:
                 path = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称,
-                                                      'set{}'.format(num))
+                                                      'skill-{}'.format(num))
                 if os.path.exists(path):
                     num += 1
                 else:
                     os.makedirs(path)
                     break
-            self.存档位置 = 'set{}'.format(num)
+            self.技能存档位置 = 'skill-{}'.format(num)
+            self.保存json(path = self.技能存档位置, page = [1])
+            self.技能存档选择.setItemText(self.技能存档选择.count() - 1, 'skill-{}'.format(num))
+            self.技能存档选择.addItem('新建存档')
+            return
+
+        if self.技能存档位置 == self.技能存档选择.currentText():
+            return
+        if self.技能存档位置 != '全局存档':
+            box = QMessageBox(
+                QMessageBox.Warning, "提示",
+                "即将载入<font color='#FF0000'>{}</font>技能存档，是否保存当前配置到<font color='#FF0000'>{}</font>技能存档？"
+                .format(self.技能存档选择.currentText(), self.技能存档位置))
+            box.setWindowIcon(self.icon)
+            yes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
+            no = box.addButton(self.tr("取消"), QMessageBox.NoRole)
+            box.exec_()
+            if box.clickedButton() == yes:
+                self.保存json(path = self.技能存档位置, page = [1])
+        self.技能存档位置 = self.技能存档选择.currentText()
+        if self.技能存档位置 != '全局存档':
+            self.载入json(path = self.技能存档位置, page = [1])
+        else:
+            self.载入json(path = self.存档位置, page = [1])
+
+    def 技能存档列表读取(self):
+        self.技能存档位置 = '全局存档'
+        path = './ResourceFiles/{}/'.format(self.角色属性A.实际名称)
+        setfile = ['全局存档']
+        for root, dirs, files in os.walk(path):
+            for dir in dirs:
+                if dir.startswith('skill'):
+                    setfile.append(dir)
+        self.技能存档选择.clear()
+        self.技能存档选择.addItems(setfile)
+        self.技能存档选择.addItem('新建存档')
+        self.技能存档位置 = self.技能存档选择.currentText()
+
+    def 存档更换(self):
+        if self.存档选择.currentText() == '新建存档':
+            num = 1
+            while True:
+                path = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称,
+                                                      'set-{}'.format(num))
+                if os.path.exists(path):
+                    num += 1
+                else:
+                    os.makedirs(path)
+                    break
+            self.存档位置 = 'set-{}'.format(num)
             self.保存配置(self.存档位置)
-            self.存档选择.setItemText(self.存档选择.count() - 1, 'set{}'.format(num))
+            self.存档选择.setItemText(self.存档选择.count() - 1, 'set-{}'.format(num))
             self.存档选择.addItem('新建存档')
             return
 

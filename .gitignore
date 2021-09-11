@@ -1,6 +1,7 @@
 __pycache__
 logs
 set*
+skill*
 AutoRelease
 *.exe
 docs/web.config
