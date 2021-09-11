@@ -3606,6 +3606,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
+                    self.希洛克选择(0, 1)
                     num = 0
                     for i in set_data['希洛克选择']:
                         if i == 1:
@@ -3614,6 +3615,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
+                    self.奥兹玛选择(0, 1)
                     num = 0
                     for i in set_data['奥兹玛选择']:
                         if i == 1:

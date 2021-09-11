@@ -929,7 +929,12 @@ class 窗口(QWidget):
                 self.希洛克遮罩透明度[index].setOpacity(0.5)
                 self.希洛克选择状态[index] = 0
 
-    def 奥兹玛选择(self, index):
+    def 奥兹玛选择(self, index, x=0):
+        if x == 1:
+            for i in range(15):
+                self.奥兹玛遮罩透明度[i].setOpacity(0.5)
+                self.奥兹玛选择状态[i] = 0
+            return
         if index >= 100:
             序号 = int(index / 100 - 1)
             count = 0

@@ -2740,6 +2740,7 @@ class 角色窗口(窗口):
                     logger.error(error)
                 try:
                     data = self.store.get("/buffer/data/siroco")
+                    self.希洛克选择(0, 1)
                     num = 0
                     for i in data:
                         if i == 1:
@@ -2749,6 +2750,7 @@ class 角色窗口(窗口):
                     logger.error(error)
                 try:
                     data = self.store.get("/buffer/data/ozma")
+                    self.奥兹玛选择(0, 1)
                     num = 0
                     for i in data:
                         if i == 1:
@@ -2820,11 +2822,11 @@ class 角色窗口(窗口):
             except Exception as error:
                 logger.error(error)
 
-    def 奥兹玛选择(self, index):
-        super().奥兹玛选择(index)
+    def 奥兹玛选择(self, index, x=0):
+        super().奥兹玛选择(index, x)
         self.store.emit("/buffer/data/ozma")
 
-    def 希洛克希洛克选择(self, index, x):
+    def 希洛克选择(self, index, x=0):
         super().希洛克选择(index, x)
         self.store.emit("/buffer/data/siroco")
 
