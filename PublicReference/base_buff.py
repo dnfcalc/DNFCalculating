@@ -728,6 +728,9 @@ class 角色属性(属性):
         return 总数据
 
     def 预计算(self, 自动切装 = False):
+        
+
+
         if self.双装备模式 == 1 and self.技能表['一次觉醒'].是否启用 != 0 and 自动切装:
             # 用于计算一觉
             temp = deepcopy(self)
@@ -897,17 +900,6 @@ class 角色属性(属性):
         return self.提升率计算(总数据)
 
     def 结果返回(self, x, 总数据):
-        # if self.次数输入[self.一觉序号] != 0:
-        #     if 总数据[self.一觉序号][3] != 0:
-        #         总数据[self.一觉序号][3] = int(总数据[self.一觉序号][3]*self.次数输入[self.一觉序号])
-        #         总数据[self.一觉序号][4] = int(总数据[self.一觉序号][4]*self.次数输入[self.一觉序号])
-        #     #三觉CD大于一觉CD,因而增加一觉次数多于三觉次数的情况
-        #     elif round(self.次数输入[self.一觉序号],2) > round(self.次数输入[self.三觉序号],2):
-        #         总数据[self.一觉序号][3] = int(self.一觉数据[0] * (round(self.次数输入[self.一觉序号],2)-round(self.次数输入[self.三觉序号],2)))
-        #         总数据[self.一觉序号][3] = int(self.一觉数据[1] * (round(self.次数输入[self.一觉序号],2)-round(self.次数输入[self.三觉序号],2)))
-        # if self.次数输入[self.三觉序号] != 0:
-        #     总数据[self.三觉序号][3] = int(总数据[self.三觉序号][3]*self.次数输入[self.三觉序号])
-        #     总数据[self.三觉序号][4] = int(总数据[self.三觉序号][4]*self.次数输入[self.三觉序号])
         if x == 0:
             return self.提升率计算(总数据)
         elif x == 1:
@@ -924,60 +916,24 @@ class 角色属性(属性):
         self.装备基础()
         # self.专属词条计算()
         for i in self.装备栏:
-            equ.get_equ_by_name(i).城镇属性_BUFF(self)
-            equ.get_equ_by_name(i).BUFF属性(self)
-            if self.黑鸦词条[0][0] > 0 and equ.get_equ_by_name(i).名称 == '世界树之精灵':
-                self.技能等级加成('所有', 50, 50, -2)
-                self.技能等级加成('所有', 85, 85, -2)
-                self.技能等级加成('所有', 100, 100, -2)
-            # 黑鸦武器觉醒词条
-            if self.黑鸦词条[0][0] == 3 and equ.get_equ_by_name(i).部位 == '武器':
-                self.技能等级加成('所有', 50, 50, 2)
-                self.技能等级加成('所有', 85, 85, 2)
-                self.技能等级加成('所有', 100, 100, 2)
-            # 世界树之精灵洗词条的特殊处理,没考虑择优的时候,针对的是自选
-            if self.黑鸦词条[0][0] > 1 and equ.get_equ_by_name(i).名称 == '世界树之精灵':
-                self.技能等级加成('所有', 50, 50, 2)
-
-        for i in self.套装栏:
-            equ.get_suit_by_name(i).城镇属性_BUFF(self)
-            equ.get_suit_by_name(i).BUFF属性(self)
-
-        if self.排行系数 == 1:
-            P = deepcopy(self)
-            P.站街计算()
-            self.站街系数 = P.系数数值站街()
-
-        for i in self.装备栏:
-            equ.get_equ_by_name(i).进图属性_BUFF(self)
-
-        for i in self.套装栏:
-            equ.get_suit_by_name(i).进图属性_BUFF(self)
-            
-    def 装备属性计算1(self):
-        self.装备基础()
-        # self.专属词条计算()
-        for i in self.装备栏:
             item = equ.get_equ_by_name(i)
-
-
             item.城镇属性_BUFF(self)
             item.BUFF属性(self)
 
+            觉醒词条 = self.黑鸦词条[0][0]
             
             # 黑鸦武器觉醒词条
-            if self.黑鸦词条[0][0] == 3 and item.部位 == '武器':
+            if 觉醒词条 == 3 and item.部位 == '武器':
                 self.技能等级加成('所有', 50, 50, 2)
                 self.技能等级加成('所有', 85, 85, 2)
                 self.技能等级加成('所有', 100, 100, 2)
-            if self.黑鸦词条[0][0] > 0 and item.名称 == '世界树之精灵':
+            if item.名称 == '世界树之精灵' and 觉醒词条 > 0:
                 self.技能等级加成('所有', 50, 50, -2)
                 self.技能等级加成('所有', 85, 85, -2)
                 self.技能等级加成('所有', 100, 100, -2)
-
-            # 世界树之精灵洗词条的特殊处理,没考虑择优的时候,针对的是自选
-            if self.黑鸦词条[0][0] > 1 and item.名称 == '世界树之精灵':
-                self.技能等级加成('所有', 50, 50, 2)
+                if 觉醒词条 > 1:
+                    self.技能等级加成('所有', 50, 50, 2)
+                
 
         for i in self.套装栏:
             suit =  equ.get_suit_by_name(i)
@@ -3711,7 +3667,6 @@ class 角色窗口(窗口):
             self.角色属性B.切换详情 = '换装详情: <br>' + '<br>'.join(
                     [' , '.join(登记装备[i:i + 4]) for i in range(0, len(登记装备), 4)])
         # 登记 end
-        # self.角色属性B.装备属性计算()
 
         # 最大输出界面限制
         if len(self.输出窗口列表) >= 10:
