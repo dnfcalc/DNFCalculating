@@ -89,28 +89,7 @@ class 属性():
         self.武器类型 = equ.get_equ_by_name(self.装备栏[11]).类型
 
     def 适用套装计算(self):
-        套装 = []
-        套装字典 = {}
-        for i in self.装备栏:
-            j = equ.get_equ_by_name(i).所属套装
-            if j == '智慧产物':
-                try:
-                    k = equ.get_equ_by_name(i).所属套装2
-                    套装字典[k] = 套装字典.get(k, 0) + 1
-                except:
-                    pass
-            elif j != '无':
-                套装字典[j] = 套装字典.get(j, 0) + 1
-
-        for i in 套装字典.keys():
-            if 套装字典[i] >= 2 and (i + '[2]') in equ.get_suit_name():
-                套装.append(i + '[2]')
-            if 套装字典[i] >= 3 and (i + '[3]') in equ.get_suit_name():
-                套装.append(i + '[3]')
-            if 套装字典[i] >= 5 and (i + '[5]') in equ.get_suit_name():
-                套装.append(i + '[5]')
-
-        self.套装栏 = copy(套装)
+        self.套装栏 = equ.get_suits_by_equips(self.装备栏)
 
     def 防具基础(self):
         for i in [0, 1, 2, 3, 4]:

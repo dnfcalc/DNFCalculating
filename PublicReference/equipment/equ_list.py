@@ -87,14 +87,14 @@ class equipment():
             img.start()
             self.equ_img[2000 + int(i.split('.')[0])] = img
     
-    def get_suits_by_equips(self,equips):
+    def get_suits_by_equips(self, equips):
         suits = []
         dictionary = {}
         for i in equips:
-            j = equ.get_equ_by_name(i).所属套装
+            j = self.get_equ_by_name(i).所属套装
             if j == '智慧产物':
                 try:
-                    k = equ.get_equ_by_name(i).所属套装2
+                    k = self.get_equ_by_name(i).所属套装2
                     dictionary[k] = dictionary.get(k, 0) + 1
                 except:
                     pass
@@ -102,12 +102,18 @@ class equipment():
                 dictionary[j] = dictionary.get(j, 0) + 1
 
         for i in dictionary.keys():
-            if dictionary[i] >= 2 and (i + '[2]') in equ.get_suit_name():
-                suits.append(i + '[2]')
-            if dictionary[i] >= 3 and (i + '[3]') in equ.get_suit_name():
-                suits.append(i + '[3]')
-            if dictionary[i] >= 5 and (i + '[5]') in equ.get_suit_name():
-                suits.append(i + '[5]')
+            if dictionary[i] >= 2:
+                temp = '{}[{}]'.format(i, 2)
+                if temp in self.get_suit_name():
+                    suits.append(temp)
+                if dictionary[i] >= 3:
+                    temp = '{}[{}]'.format(i, 3)
+                    if temp in self.get_suit_name():
+                        suits.append(temp)
+                    if dictionary[i] >= 5:
+                        temp = '{}[{}]'.format(i, 5)
+                        if temp in self.get_suit_name():
+                            suits.append(temp)
         return suits
 
     def get_suit_by_id(self, id):
