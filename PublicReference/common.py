@@ -248,6 +248,21 @@ class 窗口(QWidget):
     def 窗口属性输入(self):
         pass
 
+    def 重置页面(self, i):
+        box = QMessageBox(
+            QMessageBox.Warning, "提示",
+            "是否重置<font color='#FF0000'>{}</font>页面？"
+            .format(self.页面名称[i]))
+        box.setWindowIcon(self.icon)
+        yes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
+        no = box.addButton(self.tr("取消"), QMessageBox.NoRole)
+        box.exec_()
+        if box.clickedButton() == yes:
+            try:
+                self.载入json(path='reset', page=[i])
+            except:
+                pass
+
     def 界面(self):
         # self.setWindowTitle(self.角色属性A.实际名称 + "搭配计算器&17173DNF专区 （点击标签栏按钮切换界面）"+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)
         self.setWindowTitle(self.角色属性A.实际名称 + ' & 17173DNF专区')
@@ -334,12 +349,15 @@ class 窗口(QWidget):
         self.btn_group = QButtonGroup(self.frame_tool)
         self.window_btn = []
         for i in range(self.页面数量):
-            self.window_btn.append(QToolButton(self.frame_tool))
+            self.window_btn.append(MyQToolButton(self.frame_tool))
             self.window_btn[-1].setText(self.页面名称[i])
             self.window_btn[-1].resize(int(self.width() / self.页面数量 - 8), 21)
             self.window_btn[-1].move((self.window_btn[-1].width()) * i + 10, 6)
             self.window_btn[-1].clicked.connect(
                 lambda state, index=i: self.click_window(index))
+            self.window_btn[-1].DoubleClickSig.connect(
+                lambda state, index=i: self.重置页面(index))
+
             self.btn_group.addButton(self.window_btn[-1], i)
 
         # 2. 工作区域

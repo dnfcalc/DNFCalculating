@@ -316,3 +316,9 @@ class MyQComboBox(QComboBox):
         super().__init__(win)
         self.setView(QListView())
         self.setStyleSheet(下拉框样式)
+
+class MyQToolButton(QToolButton):
+    DoubleClickSig = pyqtSignal(str)
+    def mouseDoubleClickEvent(self, e):   # 双击
+        sigContent = self.objectName()
+        self.DoubleClickSig.emit(sigContent)
