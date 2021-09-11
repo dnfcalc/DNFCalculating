@@ -1989,10 +1989,14 @@ class 角色窗口(窗口):
         length = len(self.自选装备)
         column_index = self.store.get("/buffer/data/self_select/column_index")
 
+        defaultData =  [0] * length
+
+        while column_index >= len(data):
+            data.append(defaultData)
+
         if column_index != index:
             data[column_index] = [i.currentIndex() for i in self.自选装备]
 
-        defaultData =  [0] * length
 
         column = data[index] if index < len(data) else defaultData
         for i in range(length):
@@ -2217,7 +2221,7 @@ class 角色窗口(窗口):
         if x == 0:
             A = deepcopy(self.初始属性)
             self.输入属性(A)
-            A.穿戴装备计算套装(self.self_selects)
+            A.穿戴装备(self.self_selects)
 
             self.关闭排行窗口()
             self.排行数据.clear()
@@ -2935,6 +2939,10 @@ class 角色窗口(窗口):
             try:
                 data = self.store.get("/buffer/data/self_select/equips",[])
                 column_index = self.自选装备栏选项.currentIndex()
+                length = len(self.自选装备)
+                while column_index >= len(data):
+                    data.append([0] * length)
+
                 data[column_index] = [i.currentIndex() for i in self.自选装备]
 
                 self.store.set("/buffer/data/self_select/equips",data)
@@ -2987,7 +2995,7 @@ class 角色窗口(窗口):
         self.修正套装计算(x)
         self.角色属性B = deepcopy(self.初始属性)
         self.输入属性(self.角色属性B)
-        self.角色属性B.穿戴装备计算套装(self.有效穿戴组合[0])
+        self.角色属性B.穿戴装备(self.有效穿戴组合[0])
         for i in self.角色属性B.装备栏:
             equ.get_equ_by_name(i).城镇属性_BUFF(self.角色属性B)
             equ.get_equ_by_name(i).BUFF属性(self.角色属性B)
@@ -3218,7 +3226,7 @@ class 角色窗口(窗口):
         属性.奥兹玛计算(奥兹玛选择状态)
         self.基础属性(属性)
 
-        属性.穿戴装备计算套装(装备)
+        属性.穿戴装备(装备)
 
         #  恢复
         return 属性
@@ -3267,7 +3275,7 @@ class 角色窗口(窗口):
                 i.当前值 = i.最大值
                 temp = deepcopy(self.角色属性A)
                 i.穿戴属性(temp)
-                temp.穿戴装备计算套装(装备)
+                temp.穿戴装备(装备)
                 伤害列表.append(temp.BUFF计算(0))
 
             辟邪玉提升率 = []
