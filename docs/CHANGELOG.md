@@ -1,5 +1,13 @@
 ## Newest
 
+### 2021-09-11
+
+#### BugFixes
+* 修复奶系自选装备栏不生效的bug ([2963a1](https://gitee.com/i_melon/DNFCalculating/commit/2963a158773b699f5a5f1b3ed6db2b07eeeab2b6))
+* 修正奶量buff自定义加成错误 ([d26302](https://gitee.com/i_melon/DNFCalculating/commit/d263020948d9a3289853e1e3f887769d28791421))
+* 奶系bug修复 ([3dbb70](https://gitee.com/i_melon/DNFCalculating/commit/3dbb7030eabef8d8de4a1bcf161b04ef0c4d7168))
+* 极诣·驭剑士(前瞻版本)：修正太刀精通数据错误 ([a05db6](https://gitee.com/i_melon/DNFCalculating/commit/a05db604d6b9dedcfa8872a7445dd81c657e3066))
+
 ### 2021-09-10
 
 #### BugFixes
@@ -39,6 +47,7 @@
 * 神启·蓝拳圣使：修复极速飓风拳护石CD问题 fix:#I44H6M ([e905f0](https://gitee.com/i_melon/DNFCalculating/commit/e905f03320cd710538f8708964d70d7723bff2a2))
 * 重霄·漫游枪手·男：修复致命回射CD问题 ([dd1fa5](https://gitee.com/i_melon/DNFCalculating/commit/dd1fa5b0420dbf3114d2b439c780b1808e4f7a59))
 * 隐夜·死灵术士：修正杀戮乱舞数据错误 ([1c68f7](https://gitee.com/i_melon/DNFCalculating/commit/1c68f7ce17fa7641b2ac855646c7ec0e506d70d2))
+
 
 
 
