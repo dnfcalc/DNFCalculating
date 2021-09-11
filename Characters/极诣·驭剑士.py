@@ -987,8 +987,10 @@ class 极诣·驭剑士角色属性(角色属性):
         temp = self.技能栏[self.技能序号['飓风魔剑']]
         if self.钻头蓄力开关 != 1:
             temp.次数[0] = 30 * (1 + temp.魔剑增加量 * min(self.魔剑堆层数, temp.魔剑层数上限))
+            temp.次数[1] = 1 * (1 + temp.魔剑增加量 * min(self.魔剑堆层数, temp.魔剑层数上限))
         else:
             temp.次数[0] = 40 * (1 + temp.魔剑增加量 * min(self.魔剑堆层数, temp.魔剑层数上限))
+            temp.次数[1] = 1 * (1 + temp.魔剑增加量 * min(self.魔剑堆层数, temp.魔剑层数上限))
 
         temp.额外百分比 = min(self.魔剑堆层数, temp.魔剑层数上限) * \
             self.技能栏[self.技能序号['魔剑奥义']].等效百分比(self.武器类型)
