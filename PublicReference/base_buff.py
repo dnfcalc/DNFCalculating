@@ -1,5 +1,3 @@
-from math import e
-from operator import eq
 from PublicReference.equipment.equ_list import *
 from PublicReference.equipment.称号_buff import *
 from PublicReference.equipment.宠物_buff import *
@@ -727,9 +725,6 @@ class 角色属性(属性):
         return 总数据
 
     def 预计算(self, 自动切装 = False):
-        
-
-
         if self.双装备模式 == 1 and self.技能表['一次觉醒'].是否启用 != 0 and 自动切装:
             # 用于计算一觉
             temp = deepcopy(self)
@@ -914,19 +909,22 @@ class 角色属性(属性):
     def 装备属性计算(self):
         self.装备基础()
         # self.专属词条计算()
-        for i in self.装备栏:
-            item = equ.get_equ_by_name(i)
-            item.城镇属性_BUFF(self)
-            item.BUFF属性(self)
+
+        equips = [equ.get_equ_by_name(i) for i in self.装备栏]
+        suits = [equ.get_suit_by_name(i) for i in self.套装栏]
+
+        for equip in equips:
+            equip.城镇属性_BUFF(self)
+            equip.BUFF属性(self)
 
             觉醒词条 = self.黑鸦词条[0][0]
             
             # 黑鸦武器觉醒词条
-            if 觉醒词条 == 3 and item.部位 == '武器':
+            if 觉醒词条 == 3 and equip.部位 == '武器':
                 self.技能等级加成('所有', 50, 50, 2)
                 self.技能等级加成('所有', 85, 85, 2)
                 self.技能等级加成('所有', 100, 100, 2)
-            if item.名称 == '世界树之精灵' and 觉醒词条 > 0:
+            if equip.名称 == '世界树之精灵' and 觉醒词条 > 0:
                 self.技能等级加成('所有', 50, 50, -2)
                 self.技能等级加成('所有', 85, 85, -2)
                 self.技能等级加成('所有', 100, 100, -2)
@@ -934,8 +932,7 @@ class 角色属性(属性):
                     self.技能等级加成('所有', 50, 50, 2)
                 
 
-        for i in self.套装栏:
-            suit =  equ.get_suit_by_name(i)
+        for suit in suits:
             suit.城镇属性_BUFF(self)
             suit.BUFF属性(self)
 
@@ -944,11 +941,11 @@ class 角色属性(属性):
             P.站街计算()
             self.站街系数 = P.系数数值站街()
 
-        for i in self.装备栏:
-            equ.get_equ_by_name(i).进图属性_BUFF(self)
+        for equip in equips:
+            equip.进图属性_BUFF(self)
 
-        for i in self.套装栏:
-            equ.get_suit_by_name(i).进图属性_BUFF(self)
+        for suit in suits:
+            suit.进图属性_BUFF(self)
 
     def 专属词条计算(self):
         pass
@@ -2199,8 +2196,7 @@ class 角色窗口(窗口):
             if i.部位 != '武器':
                 if i.品质 != '神话' or index == 0 or self.全选状态 == 0:
                     self.装备图标点击事件(equ.get_id_by_name(i.名称), index, x=0)
-            else:
-                if i.类型 in self.角色属性A.武器选项:
+            elif i.类型 in self.角色属性A.武器选项:
                     self.装备图标点击事件(equ.get_id_by_name(i.名称), index, x=0)
 
         self.装备图标点击事件(74, index)
