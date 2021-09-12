@@ -64,7 +64,7 @@ skillDataPath = resource_path("SkillData")
     "武器": 11
 }
 
-颜色 = {'神话': '#E0502F', '史诗': '#FFB400', '传说': '#FF7800'}
+颜色 = {'神话': '#E0502F', '史诗': '#FFB400', '传说': '#FF7800', '神器':'#FF00FF', '稀有':'#B36BFF'}
 
 总套装列表 = [防具套装, 首饰套装, 特殊套装, 上链左套装, 镯下右套装, 环鞋指套装]
 所有套装列表 = 防具套装 + 首饰套装 + 特殊套装 + 上链左套装 + 镯下右套装 + 环鞋指套装
@@ -316,3 +316,9 @@ class MyQComboBox(QComboBox):
         super().__init__(win)
         self.setView(QListView())
         self.setStyleSheet(下拉框样式)
+
+class MyQToolButton(QToolButton):
+    DoubleClickSig = pyqtSignal(str)
+    def mouseDoubleClickEvent(self, e):   # 双击
+        sigContent = self.objectName()
+        self.DoubleClickSig.emit(sigContent)

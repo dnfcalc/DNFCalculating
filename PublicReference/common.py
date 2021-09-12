@@ -235,6 +235,8 @@ class 窗口(QWidget):
             os.makedirs(path)
 
         self.存档列表读取()
+        if self.初始属性.职业分类 == '输出':
+            self.技能存档列表读取()
 
         self.click_window(0)
 
@@ -248,6 +250,21 @@ class 窗口(QWidget):
 
     def 窗口属性输入(self):
         pass
+
+    def 重置页面(self, i):
+        box = QMessageBox(
+            QMessageBox.Warning, "提示",
+            "是否重置<font color='#FF0000'>{}</font>页面？"
+            .format(self.页面名称[i]))
+        box.setWindowIcon(self.icon)
+        yes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
+        no = box.addButton(self.tr("取消"), QMessageBox.NoRole)
+        box.exec_()
+        if box.clickedButton() == yes:
+            try:
+                self.载入json(path='reset', page=[i])
+            except:
+                pass
 
     def 界面(self):
         # self.setWindowTitle(self.角色属性A.实际名称 + "搭配计算器&17173DNF专区 （点击标签栏按钮切换界面）"+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)
@@ -335,12 +352,15 @@ class 窗口(QWidget):
         self.btn_group = QButtonGroup(self.frame_tool)
         self.window_btn = []
         for i in range(self.页面数量):
-            self.window_btn.append(QToolButton(self.frame_tool))
+            self.window_btn.append(MyQToolButton(self.frame_tool))
             self.window_btn[-1].setText(self.页面名称[i])
             self.window_btn[-1].resize(int(self.width() / self.页面数量 - 8), 21)
             self.window_btn[-1].move((self.window_btn[-1].width()) * i + 10, 6)
             self.window_btn[-1].clicked.connect(
                 lambda state, index=i: self.click_window(index))
+            self.window_btn[-1].DoubleClickSig.connect(
+                lambda state, index=i: self.重置页面(index))
+
             self.btn_group.addButton(self.window_btn[-1], i)
 
         # 2. 工作区域
@@ -910,7 +930,12 @@ class 窗口(QWidget):
                 self.希洛克遮罩透明度[index].setOpacity(0.5)
                 self.希洛克选择状态[index] = 0
 
-    def 奥兹玛选择(self, index):
+    def 奥兹玛选择(self, index, x=0):
+        if x == 1:
+            for i in range(25):
+                self.奥兹玛遮罩透明度[i].setOpacity(0.5)
+                self.奥兹玛选择状态[i] = 0
+            return
         if index >= 100:
             序号 = int(index / 100 - 1)
             count = 0
@@ -941,20 +966,69 @@ class 窗口(QWidget):
                 self.奥兹玛遮罩透明度[index].setOpacity(0.5)
                 self.奥兹玛选择状态[index] = 0
 
-    def 存档更换(self):
-        if self.存档选择.currentText() == '新建存档':
+    def 技能存档更换(self):
+        if self.技能存档选择.currentText() == '新建存档':
             num = 1
             while True:
                 path = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称,
-                                                      'set{}'.format(num))
+                                                      'skill-{}'.format(num))
                 if os.path.exists(path):
                     num += 1
                 else:
                     os.makedirs(path)
                     break
-            self.存档位置 = 'set{}'.format(num)
+            self.技能存档位置 = 'skill-{}'.format(num)
+            self.保存json(path = self.技能存档位置, page = [1])
+            self.技能存档选择.setItemText(self.技能存档选择.count() - 1, 'skill-{}'.format(num))
+            self.技能存档选择.addItem('新建存档')
+            return
+
+        if self.技能存档位置 == self.技能存档选择.currentText():
+            return
+        if self.技能存档位置 != '全局存档':
+            box = QMessageBox(
+                QMessageBox.Warning, "提示",
+                "即将载入<font color='#FF0000'>{}</font>技能存档，是否保存当前配置到<font color='#FF0000'>{}</font>技能存档？"
+                .format(self.技能存档选择.currentText(), self.技能存档位置))
+            box.setWindowIcon(self.icon)
+            yes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
+            no = box.addButton(self.tr("取消"), QMessageBox.NoRole)
+            box.exec_()
+            if box.clickedButton() == yes:
+                self.保存json(path = self.技能存档位置, page = [1])
+        self.技能存档位置 = self.技能存档选择.currentText()
+        if self.技能存档位置 != '全局存档':
+            self.载入json(path = self.技能存档位置, page = [1])
+        else:
+            self.载入json(path = self.存档位置, page = [1])
+
+    def 技能存档列表读取(self):
+        self.技能存档位置 = '全局存档'
+        path = './ResourceFiles/{}/'.format(self.角色属性A.实际名称)
+        setfile = ['全局存档']
+        for root, dirs, files in os.walk(path):
+            for dir in dirs:
+                if dir.startswith('skill'):
+                    setfile.append(dir)
+        self.技能存档选择.clear()
+        self.技能存档选择.addItems(setfile)
+        self.技能存档选择.addItem('新建存档')
+        self.技能存档位置 = self.技能存档选择.currentText()
+
+    def 存档更换(self):
+        if self.存档选择.currentText() == '新建存档':
+            num = 1
+            while True:
+                path = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称,
+                                                      'set-{}'.format(num))
+                if os.path.exists(path):
+                    num += 1
+                else:
+                    os.makedirs(path)
+                    break
+            self.存档位置 = 'set-{}'.format(num)
             self.保存配置(self.存档位置)
-            self.存档选择.setItemText(self.存档选择.count() - 1, 'set{}'.format(num))
+            self.存档选择.setItemText(self.存档选择.count() - 1, 'set-{}'.format(num))
             self.存档选择.addItem('新建存档')
             return
 
@@ -1079,17 +1153,13 @@ class 窗口(QWidget):
             x = -1
             for j in equ.get_equ_list():
                 if j.部位 == 部位列表[i]:
-                    print(j.所属套装)
                     x += 1
-                    try:
-                        if j.所属套装2 == name:
-                            self.自选装备[i].setCurrentIndex(x)
-                            print(x)
-                            break
-                    except:
-                        if j.所属套装 == name and j.品质 != '神话':
-                            self.自选装备[i].setCurrentIndex(x)
-                            break
+                    if j.所属套装2 == name:
+                        self.自选装备[i].setCurrentIndex(x)
+                        break
+                    elif j.所属套装 == name and j.品质 != '神话':
+                        self.自选装备[i].setCurrentIndex(x)
+                        break
         self.计算标识 = 1
         self.自选计算(1)
 
@@ -1102,10 +1172,11 @@ class 窗口(QWidget):
         x = self.辟邪玉选择[index].currentIndex()
         temp = 辟邪玉列表[x].最大值 * 10
         while temp >= 辟邪玉列表[x].最小值 * 10:
+            t = '+' if temp >=0 else ''
             if 辟邪玉列表[x].间隔 == 1:
-                self.辟邪玉数值[index].addItem(str(int(temp / 10)))
+                self.辟邪玉数值[index].addItem(t + str(int(temp / 10)))
             else:
-                self.辟邪玉数值[index].addItem(str('%.1f' % (temp / 10)) + '%')
+                self.辟邪玉数值[index].addItem(t + str('%.1f' % (temp / 10)) + '%')
             temp -= 辟邪玉列表[x].间隔 * 10
 
     def 辟邪玉属性计算(self, 属性):

@@ -245,10 +245,9 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
 
     temp = equ.get_equ_by_id(i).所属套装
     if temp == '智慧产物':
-        try:
-            temp = equ.get_equ_by_id(i).所属套装2
-        except:
-            pass
+        temp = equ.get_equ_by_id(i).所属套装2
+        if temp == '':
+            temp = '无'
     套装[x] = temp
 
     count = []
