@@ -1,4 +1,5 @@
 from math import ceil
+from PublicReference.utils.storex import *
 from PublicReference.equipment.equ_list import *
 from PublicReference.utils.MainWindow import *
 
@@ -1078,10 +1079,12 @@ class 窗口(QWidget):
             x = -1
             for j in equ.get_equ_list():
                 if j.部位 == 部位列表[i]:
+                    print(j.所属套装)
                     x += 1
                     try:
                         if j.所属套装2 == name:
                             self.自选装备[i].setCurrentIndex(x)
+                            print(x)
                             break
                     except:
                         if j.所属套装 == name and j.品质 != '神话':

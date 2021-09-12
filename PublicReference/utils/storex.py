@@ -164,3 +164,4 @@ class Store:
         def apply(self, valueChanged):
             if callable(valueChanged):
                 self.valueChangeds.append(valueChanged)
+store = Store()

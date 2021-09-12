@@ -5,22 +5,21 @@ from PublicReference.equipment.武器融合_buff import *
 from PublicReference.equipment.黑鸦_buff import 装备变换属性列表, 武器变换属性列表
 from PublicReference.utils.constant import *
 from PublicReference.equipment.equ_list import *
-from PublicReference.utils.store import *
+from PublicReference.utils.storex import *
 
 
 class 换装窗口(Page):
     def __init__(self):
         super().__init__()
 
-    def 初始化(self, store: Store):
-        self.store = store
+    def 初始化(self):
         self.初始化 = True
         self.初始化UI()
         self.初始化 = False
 
     def 初始化UI(self):
-        icon = self.store.get("/app/window/icon")
-        bgImg = self.store.get("/app/window/background_image")
+        icon = store.get("/app/window/icon")
+        bgImg = store.get("/app/window/background_image")
         self.setStyleSheet('''QToolTip {
            background-color: black;
            color: white;
@@ -79,35 +78,35 @@ class 换装窗口(Page):
         self.初始化遴选()
 
     def 初始化装备(self):
-        equips = self.store.first("/buffer/data/register/equips",
+        equips = store.first("/buffer/data/register/equips",
                                   "/buffer/data/equips")
-        amplifies = self.store.first("/buffer/data/register/amplifies",
+        amplifies = store.first("/buffer/data/register/amplifies",
                                      "/buffer/data/amplifies")
         for 部位 in range(len(equips)):
             self.自选装备[部位].setCurrentText(equips[部位])
             self.自选增幅选项[部位].setCurrentIndex(amplifies[部位])
 
     def 初始化希洛克(self):
-        sirocos = self.store.first("/buffer/data/register/siroco",
+        sirocos = store.first("/buffer/data/register/siroco",
                                    "/buffer/data/siroco")
         for i in range(len(sirocos)):
             if sirocos[i] == 1:
                 self.希洛克选择(i, 1)
-        weapon_fusion = self.store.first("/buffer/data/register/weapon_fusion","/buffer/data/weapon_fusion",[0]*4)
+        weapon_fusion = store.first("/buffer/data/register/weapon_fusion","/buffer/data/weapon_fusion",[0]*4)
         self.武器融合属性A.setCurrentIndex(weapon_fusion[0])
         self.武器融合属性A2.setCurrentIndex(weapon_fusion[1])
         self.武器融合属性B.setCurrentIndex(weapon_fusion[2])
         self.武器融合属性B2.setCurrentIndex(weapon_fusion[3])
 
     def 初始化奥兹玛(self):
-        ozmas = self.store.first("/buffer/data/register/ozma",
+        ozmas = store.first("/buffer/data/register/ozma",
                                  "/buffer/data/ozma")
         for i in range(len(ozmas)):
             if ozmas[i] == 1:
                 self.奥兹玛选择(i, 1)
     
     def 初始化遴选(self):
-        black_purgatory = self.store.first("/buffer/data/register/black_purgatory",
+        black_purgatory = store.first("/buffer/data/register/black_purgatory",
                                  "/buffer/data/black_purgatory")
         for i in range(len(self.黑鸦词条)):
             self.黑鸦词条[i][1].setCurrentIndex(black_purgatory[i][1])
@@ -115,7 +114,7 @@ class 换装窗口(Page):
                 self.黑鸦词条[i][3].setCurrentIndex(black_purgatory[i][3])
 
     def reset(self):
-        self.store.delete("^/buffer/data/register/.*$")
+        store.delete("^/buffer/data/register/.*$")
         self.初始化数据()
 
     def 设置换装(self):
@@ -135,20 +134,20 @@ class 换装窗口(Page):
                 self.黑鸦词条[i][3].currentIndex(),
             ])
 
-        self.store.set("/buffer/data/register/equips", 自选)
-        self.store.set("/buffer/data/register/siroco", self.希洛克选择状态)
-        self.store.set("/buffer/data/register/ozma", self.奥兹玛选择状态)
-        self.store.set("/buffer/data/register/black_purgatory", 黑鸦)
-        self.store.set("/buffer/data/register/amplifies", 增幅)
-        self.store.set("/buffer/data/register/amplifies", 增幅)
-        self.store.set("/buffer/data/register/weapon_fusion", [
+        store.set("/buffer/data/register/equips", 自选)
+        store.set("/buffer/data/register/siroco", self.希洛克选择状态)
+        store.set("/buffer/data/register/ozma", self.奥兹玛选择状态)
+        store.set("/buffer/data/register/black_purgatory", 黑鸦)
+        store.set("/buffer/data/register/amplifies", 增幅)
+        store.set("/buffer/data/register/amplifies", 增幅)
+        store.set("/buffer/data/register/weapon_fusion", [
             self.武器融合属性A.currentIndex(),
             self.武器融合属性A2.currentIndex(),
             self.武器融合属性B.currentIndex(),
             self.武器融合属性B2.currentIndex(),
         ])
 
-        self.store.emit("/buffer/event/register_changed")
+        store.emit("/buffer/event/register_changed")
         self.closeWindow()
 
     def 初始化自选装备UI(self):
@@ -157,7 +156,7 @@ class 换装窗口(Page):
         self.自选装备 = []
         self.自选增幅选项 = []
 
-        propertyA = self.store.get("/buffer/temp/property_a")
+        propertyA = store.get("/buffer/temp/property_a")
 
         标签 = QLabel('锁定', self)
         标签.setAlignment(Qt.AlignCenter)
