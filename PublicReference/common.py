@@ -1171,10 +1171,11 @@ class 窗口(QWidget):
         x = self.辟邪玉选择[index].currentIndex()
         temp = 辟邪玉列表[x].最大值 * 10
         while temp >= 辟邪玉列表[x].最小值 * 10:
+            t = '+' if temp >=0 else ''
             if 辟邪玉列表[x].间隔 == 1:
-                self.辟邪玉数值[index].addItem(str(int(temp / 10)))
+                self.辟邪玉数值[index].addItem(t + str(int(temp / 10)))
             else:
-                self.辟邪玉数值[index].addItem(str('%.1f' % (temp / 10)) + '%')
+                self.辟邪玉数值[index].addItem(t + str('%.1f' % (temp / 10)) + '%')
             temp -= 辟邪玉列表[x].间隔 * 10
 
     def 辟邪玉属性计算(self, 属性):

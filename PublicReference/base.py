@@ -2713,39 +2713,10 @@ class 角色窗口(窗口):
             self.图片显示[i].setAlignment(Qt.AlignCenter)
 
         self.面板显示 = []
-        for i in range(17):
+        for i in range(18):
             self.面板显示.append(QLabel(self.main_frame5))
 
-        const = 139 + 初始y
-        count = 0
-        for i in [9, 10, 0, 1]:
-            self.面板显示[i].move(20 + 初始x, const + count * 18)
-            count += 1
-        count = 0
-        for i in [11, 12, 2, 3]:
-            self.面板显示[i].move(150 + 初始x, const + count * 18)
-            count += 1
-        self.面板显示[4].move(150 + 初始x, const + count * 18)
-        count = 5
-        for i in [5, 6, 7, 8]:
-            self.面板显示[i].move(125 + 初始x, const + count * 18)
-            count += 1
-        count = 5
-        for i in [13, 14, 15, 16]:
-            self.面板显示[i].move(20 + 初始x, const + count * 18)
-            count += 1
-        for i in range(len(self.面板显示)):
-            if i >= 9:
-                self.面板显示[i].setStyleSheet(
-                    "QLabel{font-size:12px;color:rgb(255,255,255)}")
-            else:
-                self.面板显示[i].setStyleSheet(
-                    "QLabel{font-size:12px;color:rgb(150,255,30)}")
-            self.面板显示[i].resize(100, 18)
-            if i in [5, 6, 7, 8]:
-                self.面板显示[i].setAlignment(Qt.AlignLeft)
-            else:
-                self.面板显示[i].setAlignment(Qt.AlignRight)
+        self.面板布局设置(self.面板显示, 1)
 
         self.词条显示 = []
         for i in range(12):
@@ -4595,6 +4566,52 @@ class 角色窗口(窗口):
                     y = y.replace(' ', '')
                 tempstr[i] += temp + '{}</font>'.format(y.format(round(x * 100, 1)))
         return tempstr
+
+    def 面板布局设置(self, 面板显示, x = 0):
+        
+        
+        初始x = 0
+        const = 128
+        
+        #self.main_frame5
+        if x == 1:
+            初始x += 805
+            const += 31
+
+        count = 0
+
+        for i in [9, 10, 0, 1]:
+            面板显示[i].move(20 + 初始x, const + count * 18)
+            count += 1
+        count = 0
+        for i in [11, 12, 2, 3]:
+            面板显示[i].move(150 + 初始x, const + count * 18)
+            count += 1
+        面板显示[4].move(150 + 初始x, const + count * 18)
+        count = 5
+        for i in [5, 6, 7, 8]:
+            面板显示[i].move(125 + 初始x, const + count * 18)
+            count += 1
+        count = 5
+        for i in [13, 14, 15, 16]:
+            面板显示[i].move(20 + 初始x, const + count * 18)
+            count += 1
+        for i in range(len(面板显示) - 1):
+            if i >= 9:
+                面板显示[i].setStyleSheet(
+                    "QLabel{font-size:12px;color:rgb(255,255,255)}")
+            else:
+                面板显示[i].setStyleSheet(
+                    "QLabel{font-size:12px;color:rgb(150,255,30)}")
+            面板显示[i].resize(100, 18)
+            if i in [5, 6, 7, 8]:
+                面板显示[i].setAlignment(Qt.AlignLeft)
+            else:
+                面板显示[i].setAlignment(Qt.AlignRight)
+
+        面板显示[17].resize(100, 72)
+        面板显示[17].move(175 + 初始x, const + count * 18 - 75)
+        面板显示[17].setAlignment(Qt.AlignCenter)
     
     def 面板显示设置(self, 显示, 进图, 站街):
         显示[0].setText(str(int(进图.面板力量())))
@@ -4625,14 +4642,15 @@ class 角色窗口(窗口):
         显示[14].setText(str(int(站街.冰属性强化)))
         显示[15].setText(str(int(站街.光属性强化)))
         显示[16].setText(str(int(站街.暗属性强化)))
+        显示[17].setText(self.辟邪玉显示(1))
 
     def 辟邪玉显示(self, x = 0):
         temp = ''
         num = 0
-        for i in self.辟邪玉选择:
-            k = i.currentIndex()
+        for i in range(4):
+            k = self.辟邪玉选择[i].currentIndex()
             if k > 0:
-                temp += '{}|'.format(辟邪玉列表[k].简称)
+                temp += '{}{}<br>'.format(辟邪玉列表[k].简称, self.辟邪玉数值[i].currentText())
                 num += 1
         辟邪玉颜色 = 颜色[{4:'史诗', 3:'传说', 2:'神器', 1:'稀有'}.get(num, '稀有')]
         if x == 0:
@@ -4641,7 +4659,7 @@ class 角色窗口(窗口):
             if num == 0:
                 return ''
             else:
-                return '<font color="{}">{}</font>'.format(辟邪玉颜色, temp[:-1])
+                return '<font color="{}">辟邪玉:<br>{}</font>'.format(辟邪玉颜色, temp[:-4])
 
     def 套装显示设置(self, 显示, 属性):
         count = 0
@@ -4722,13 +4740,6 @@ class 角色窗口(窗口):
                 显示[count].setStyleSheet(
                     "QLabel{font-size:12px;color:rgb(255,255,255)}")
                 count += 1
-
-        #辟邪玉显示
-        temp = self.辟邪玉显示(1)
-        if temp != '':
-            显示[count].setText(temp)
-            显示[count].setStyleSheet("QLabel{font-size:12px;}")
-
 
     def 打造显示设置(self, 显示, 属性, x=0):
         初始x = 10
@@ -5064,46 +5075,12 @@ class 角色窗口(窗口):
         excel.sort()
 
         面板显示 = []
-        for i in range(17):
+        for i in range(18):
             面板显示.append(QLabel(输出窗口))
 
+        self.面板布局设置(面板显示)
+
         self.面板显示设置(面板显示, self.角色属性B, C)
-
-        const = 139
-        count = 0
-        for i in [9, 10, 0, 1]:
-            面板显示[i].move(20, const + count * 18 - pox_y2)
-            count += 1
-
-        count = 0
-        for i in [11, 12, 2, 3]:
-            面板显示[i].move(150, const + count * 18 - pox_y2)
-            count += 1
-
-        面板显示[4].move(150, const + count * 18 - pox_y2)
-
-        count = 5
-        for i in [5, 6, 7, 8]:
-            面板显示[i].move(125, const + count * 18 - pox_y2)
-            count += 1
-
-        count = 5
-        for i in [13, 14, 15, 16]:
-            面板显示[i].move(20, const + count * 18 - pox_y2)
-            count += 1
-
-        for i in range(len(面板显示)):
-            if i >= 9:
-                面板显示[i].setStyleSheet(
-                    "QLabel{font-size:12px;color:rgb(255,255,255)}")
-            else:
-                面板显示[i].setStyleSheet(
-                    "QLabel{font-size:12px;color:rgb(150,255,30)}")
-            面板显示[i].resize(100, 18)
-            if i in [5, 6, 7, 8]:
-                面板显示[i].setAlignment(Qt.AlignLeft)
-            else:
-                面板显示[i].setAlignment(Qt.AlignRight)
 
         j = 312
         pdata['词条'] = self.词条显示计算(self.角色属性B)
@@ -5121,7 +5098,7 @@ class 角色窗口(窗口):
         间隔 = 17
         
         套装名称显示 = []
-        for i in range(12):
+        for i in range(15):
             套装名称显示.append(QLabel(输出窗口))
             套装名称显示[i].move(114, 位置 - pox_y2 + 间隔 * i)
             套装名称显示[i].resize(150, 18)
