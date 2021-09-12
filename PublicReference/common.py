@@ -1,4 +1,5 @@
 from math import ceil
+from PublicReference.utils.storex import *
 from PublicReference.equipment.equ_list import *
 from PublicReference.utils.MainWindow import *
 
