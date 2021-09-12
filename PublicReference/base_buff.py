@@ -2740,7 +2740,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = store.get("/buffer/data/siroco")
+                    data = store.get("/buffer/data/siroco",[0]*15)
                     self.希洛克选择(0, 1)
                     num = 0
                     for i in data:
@@ -2750,7 +2750,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = store.get("/buffer/data/ozma")
+                    data = store.get("/buffer/data/ozma",[0]*25)
                     self.奥兹玛选择(0, 1)
                     num = 0
                     for i in data:
@@ -2832,7 +2832,7 @@ class 角色窗口(窗口):
         store.emit("/buffer/data/siroco")
 
     def 保存json(self, path='set', page=[0, 1, 2, 3, 4]):
-
+        
         if 0 in page:
             # 第一页(装备/选择/打造)
             try:
@@ -2917,7 +2917,8 @@ class 角色窗口(窗口):
                 # 细节选项
                 store.set("/buffer/data/detail_options",
                                [i.currentIndex() for i in self.技能设置输入])
-
+                store.set("/buffer/data/siroco",self.希洛克选择状态)
+                store.set("/buffer/data/ozma",self.奥兹玛选择状态)
             except Exception as error:
                 logger.error(error)
 
