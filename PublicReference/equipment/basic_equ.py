@@ -1,5 +1,5 @@
 from PublicReference.equipment.equ_list import *
-
+from PublicReference.equipment.基础函数 import 防具体力
 
 class 装备:
     名称 = ''
@@ -136,15 +136,18 @@ class 装备:
     def 装备描述_BUFF(self, 属性):
         属性.装备描述 = 1
         self.属性描述 = ''
-        if self.部位 not in ['上衣', '下装', '腰带', '头肩', '鞋']:
-            if (属性.角色 == '圣职者(女)' or 属性.角色 == '魔法师(女)'):
-                self.属性描述 += ('智力 +{}<br>'.format(
-                    self.智力)) if self.智力 > 0 else ''
-            else:
-                self.属性描述 += ('体力 +{}<br>'.format(
-                    self.体力)) if self.体力 > 0 else ''
-                self.属性描述 += ('精神 +{}<br>'.format(
-                    self.精神)) if self.精神 > 0 else ''
+        if self.部位 in ['上衣', '下装', '腰带', '头肩', '鞋']:
+            self.属性描述 += ('智力 +{}<br>'.format(self.智力['板甲'])) if self.智力['板甲'] > 0 else ''
+            self.属性描述 += ('力量 +{}<br>'.format(self.力量['板甲'])) if self.力量['板甲'] > 0 else ''
+            体力 = 防具体力(self.等级, self.品质, self.部位)
+            self.属性描述 += ('体力 +{}<br>'.format(体力)) if 体力 > 0 else ''
+
+        else:
+            self.属性描述 += ('智力 +{}<br>'.format(self.智力)) if self.智力 > 0 else ''
+            self.属性描述 += ('力量 +{}<br>'.format(self.力量)) if self.力量 > 0 else ''
+            self.属性描述 += ('体力 +{}<br>'.format(self.体力)) if self.体力 > 0 else ''
+            self.属性描述 += ('精神 +{}<br>'.format(self.精神)) if self.精神 > 0 else ''
+
         self.城镇属性_BUFF(属性)
         self.属性描述 += '<font color="#00A2E8">辅助职业专属属性：</font><br>'
         self.BUFF属性(属性)

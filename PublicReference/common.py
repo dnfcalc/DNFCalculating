@@ -426,21 +426,21 @@ class 窗口(QWidget):
     def 套装描述(self, i):
         temp = '<font size="3" face="宋体">'
         for n in [2, 3, 5]:
-            try:
-                描述 = ''
-                if self.角色属性A.职业分类 == 'BUFF':
-                    描述 = equ.get_suit_by_name('{}[{}]'.format(
-                        i.名称, n)).装备描述_BUFF(self.角色属性A)[:-4]
-                else:
-                    描述 = equ.get_suit_by_name('{}[{}]'.format(i.名称, n)).装备描述(
-                        self.角色属性A)[:-4]
-                if 描述 != '':
-                    temp += '<font color="#78FF1E">' + i.名称 + '[{}]</font><br>'.format(
-                        n)
-                    temp += 描述
-                    temp += '<br>'
-            except:
-                pass
+            name = '{}[{}]'.format(i.名称, n)
+            if name in equ.get_suit_name():
+                try:
+                    描述 = ''
+                    if self.角色属性A.职业分类 == 'BUFF':
+                        描述 = equ.get_suit_by_name(name).装备描述_BUFF(self.角色属性A)[:-4]
+                    else:
+                        描述 = equ.get_suit_by_name(name).装备描述(self.角色属性A)[:-4]
+                    if 描述 != '':
+                        temp += '<font color="#78FF1E">' + i.名称 + '[{}]</font><br>'.format(
+                            n)
+                        temp += 描述
+                        temp += '<br>'
+                except:
+                    pass
         return temp[:-4] + '</font>'
 
     def 单件描述(self, i):
