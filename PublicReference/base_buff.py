@@ -992,8 +992,6 @@ class 角色窗口(窗口):
         ]
         self.登记启用 = False
         super().__init__()
-        store.bind(self, "希洛克选择状态", "/buffer/data/siroco")
-        store.bind(self, "奥兹玛选择状态", "/buffer/data/ozma")
         store.bind(self, "登记启用", "/buffer/data/register_enable")
 
     def 称号描述(self):
@@ -2228,6 +2226,9 @@ class 角色窗口(窗口):
                     os.path.join(filepath, "store.json")):
             self.载入json(path)
             return
+        else: 
+            # 如果不存在任何存档则载入重置存档
+            self.载入json(path = 'reset')
         try:
             setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
                            '/equ3.ini',
@@ -2504,8 +2505,10 @@ class 角色窗口(窗口):
                 store.set('/buffer/data/top_options', set_data['排行选项'])
                 store.set('/buffer/data/black_purgatory',
                                set_data['黑鸦选择'])
-                store.set('/buffer/data/siroco', set_data['希洛克选择'])
-                store.set('/buffer/data/ozma', set_data['奥兹玛选择'])
+                if '希洛克选择' in set_data:
+                    store.set('/buffer/data/siroco', set_data['希洛克选择'])
+                if '奥兹玛选择' in set_data:
+                    store.set('/buffer/data/ozma', set_data['奥兹玛选择'])
             except Exception as error:
                 logger.error(error)
 
@@ -2822,7 +2825,7 @@ class 角色窗口(窗口):
 
     def 奥兹玛选择(self, index, x=0):
         super().奥兹玛选择(index, x)
-        self.store.emit("/buffer/data/ozma")
+        store.emit("/buffer/data/ozma")
 
     def 希洛克选择(self, index, x=0):
         super().希洛克选择(index, x)

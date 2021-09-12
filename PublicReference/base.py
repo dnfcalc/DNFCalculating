@@ -3677,10 +3677,6 @@ class 角色窗口(窗口):
                 try:
                     store.set("/carry/data/self_select/equips",[set_data['自选装备']])
                     store.set("/carry/data/self_select/column_index", 0)
-                    num = 0
-                    for i in set_data['自选装备']:
-                        self.自选装备[num].setCurrentIndex(i)
-                        num += 1
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -3698,7 +3694,7 @@ class 角色窗口(窗口):
                       encoding='utf-8') as fp:
                 set_data = json.load(fp)
             fp.close()
-            store.set("/buffer/data/character_sets",set_data)
+            store.set("/carry/data/character_sets",set_data)
         except Exception as error:
             logger.error(error)
         pass
@@ -4006,7 +4002,7 @@ class 角色窗口(窗口):
             # 第六页(自选装备计算)
             try:
                 try:
-                    data = store.get("/buffer/data/self_select/equips",[[]])
+                    data = store.get("/carry/data/self_select/equips",[[]])
                     column_index = store.get("/carry/data/self_select/column_index",0)
                     data = data[column_index]
                     num = 0
@@ -4053,6 +4049,9 @@ class 角色窗口(窗口):
         if os.path.exists(os.path.join(filepath, "page_1.json")) or os.path.exists(os.path.join(filepath, "store.json")):
             self.载入json(path)
             return
+        else: 
+            # 如果不存在任何存档则载入重置存档
+            self.载入json(path = 'reset')
         try:
             setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
                            '/equ3.ini',
@@ -4398,32 +4397,34 @@ class 角色窗口(窗口):
     def 获取技能选项(self, 序号):
         info = {}
         try:
-            info['等级'] = self.等级调整[序号].currentIndex()
+            info['level'] = self.等级调整[序号].currentIndex()
         except:
-            info['等级'] = 0
+            info['level'] = 0
         try:
-            info['TP'] = self.TP输入[序号].currentIndex()
+            info['tp'] = self.TP输入[序号].currentIndex()
         except:
-            info['TP'] = 0
+            info['tp'] = 0
 
         try:
-            info['次数'] = self.次数输入[序号].currentText()
+            info['count'] = self.次数输入[序号].currentText()
         except:
-            info['次数'] = '0'
+            info['count'] = '0'
 
         try:
-            info['宠物'] = self.宠物次数[序号].currentText()
+            info['pet'] = self.宠物次数[序号].currentText()
         except:
-            info['宠物'] = '0'
+            info['pet'] = '0'
 
         if 切装模式 == 1:
             try:
-                info['切装'] = self.技能切装[序号].isChecked()
+                info['switch'] = self.技能切装[序号].isChecked()
             except:
-                info['切装'] = False
+                info['switch'] = False
         return info
 
-    def 保存json(self, path='set', page=[0, 1, 2, 3, 4, 5]):
+    def 保存json(self, path='set', page=[0, 1, 2, 3, 4, 5],store = None):
+        if store is None :
+            from PublicReference.utils.storex import store
         if 0 in page:
             # 第一页(装备/选择/打造)
             try:
@@ -4465,17 +4466,7 @@ class 角色窗口(窗口):
                 skills = {}
                 for i in self.角色属性A.技能栏:
                     序号 = self.角色属性A.技能序号[i.名称]
-                    技能 = self.获取技能选项(序号)
-                    skill = {
-                        'level': 技能['等级'],
-                        'count': 技能['次数']
-                    }
-                    if 'TP' in 技能:
-                        skill['tp'] = 技能['TP']
-                    if '宠物' in 技能:
-                        skill['pet'] = 技能['宠物']
-                    if '切装' in 技能:
-                        skill['switch'] = 技能['切装']   
+                    skill = self.获取技能选项(序号)
                     skills[i.名称] = skill
                 store.set("/carry/data/skill",skills)
             except Exception as error:
@@ -4516,7 +4507,15 @@ class 角色窗口(窗口):
         if 5 in page:
             # 第六页(自选装备计算)
             try:
-                store.set("/carry/data/self_select/equips",[[i.currentIndex() for i in self.自选装备]])
+                data = store.get("/carry/data/self_select/equips",[])
+                column_index = 0
+                length = len(self.自选装备)
+                while column_index >= len(data):
+                    data.append([0] * length)
+
+                data[column_index] = [i.currentIndex() for i in self.自选装备]
+                store.set("/carry/data/self_select/equips",data)
+                store.set('/carry/data/self_select/column_index',column_index)
                 store.set("/carry/data/self_select/locked",[i.isChecked() for i in self.装备锁定])
             except Exception as error:
                 logger.error(error)
@@ -4548,6 +4547,8 @@ class 角色窗口(窗口):
     def 保存配置(self, path='set'):
         if self.禁用存档.isChecked():
             return
+        if self.技能存档位置 != '全局存档':
+            self.保存json(path = self.技能存档位置, store = Store())
         self.保存json(path)
     # endregion
 
