@@ -2728,7 +2728,7 @@ class 角色窗口(窗口):
         self.面板显示[4].move(150 + 初始x, const + count * 18)
         count = 5
         for i in [5, 6, 7, 8]:
-            self.面板显示[i].move(150 + 初始x, const + count * 18)
+            self.面板显示[i].move(125 + 初始x, const + count * 18)
             count += 1
         count = 5
         for i in [13, 14, 15, 16]:
@@ -2742,7 +2742,10 @@ class 角色窗口(窗口):
                 self.面板显示[i].setStyleSheet(
                     "QLabel{font-size:12px;color:rgb(150,255,30)}")
             self.面板显示[i].resize(100, 18)
-            self.面板显示[i].setAlignment(Qt.AlignRight)
+            if i in [5, 6, 7, 8]:
+                self.面板显示[i].setAlignment(Qt.AlignLeft)
+            else:
+                self.面板显示[i].setAlignment(Qt.AlignRight)
 
         self.词条显示 = []
         for i in range(12):
@@ -4556,30 +4559,41 @@ class 角色窗口(窗口):
 
         tempstr = []
 
-        tempstr.append(' 黄字:' + str(round(属性.伤害增加 * 100, 0)) + '%')
-        tempstr.append(' 爆伤:' + str(round(属性.暴击伤害 * 100, 1)) + '%')
+        temp = '<font color="{}">'.format(self.辟邪玉显示())
+        
+        tempstr.append('黄字:{}%'.format(round(属性.伤害增加 * 100, 0))) #0
+        tempstr.append('爆伤:{}%'.format(round(属性.暴击伤害 * 100, 1))) #1
+        tempstr.append('白字:{}%'.format(round(属性.附加伤害 * 100, 1))) #2
+        tempstr.append('属白:{}%'.format(round(属性.属性附加 * 100, 1))) #3
+        tempstr.append('终伤:{}%'.format(round(属性.最终伤害 * 100, 1))) #4
+        tempstr.append('技攻:{}%'.format(round(属性.技能攻击力 * 100 - 100, 1))) #5
+        tempstr.append('三攻:{}%'.format(round(属性.百分比三攻 * 100, 1))) #6
+        tempstr.append('力智:{}%'.format(round(属性.百分比力智 * 100, 1))) #7
+        tempstr.append('持续:{}%'.format(round(属性.持续伤害 * 100, 1))) #8
+        tempstr.append('攻速:{}%'.format(round(属性.攻击速度 * 100, 1))) #9
+        tempstr.append('释放:{}%'.format(round(属性.释放速度 * 100, 1))) #10
+        tempstr.append('移速:{}%'.format(round(属性.移动速度 * 100, 1))) #11
 
-        temp = ' 白字:' + str(round(属性.附加伤害 * 100, 1)) + '%'
         if 属白换算 != 0:
-            temp += '[' + str(round(属白换算 * 100 + 属性.附加伤害 * 100, 1)) + '%]'
-        tempstr.append(temp)
-
-        temp = ' 属白:' + str(round(属性.属性附加 * 100, 1)) + '%'
-        if 属白换算 != 0:
-            temp += '[' + str(round(属白换算 * 100, 1)) + '%]'
-        tempstr.append(temp)
-
-        tempstr.append(' 终伤:' + str(round(属性.最终伤害 * 100, 1)) + '%')
-        tempstr.append(' 技攻:' + str(round(属性.技能攻击力 * 100 - 100, 1)) + '%')
-        tempstr.append(' 三攻:' + str(round(属性.百分比三攻 * 100, 1)) + '%')
-
-        tempstr.append(' 力智:' + str(round(属性.百分比力智 * 100, 1)) + '%')
-
-        tempstr.append(' 持续:' + str(round(属性.持续伤害 * 100, 1)) + '%')
-        tempstr.append(' 攻速:' + str(int(round(属性.攻击速度 * 100, 0))) + '%')
-        tempstr.append(' 释放:' + str(int(round(属性.释放速度 * 100, 0))) + '%')
-        tempstr.append(' 移速:' + str(int(round(属性.移动速度 * 100, 0))) + '%')
-
+            tempstr[2] += '|{}%'.format(round(属白换算 * 100 + 属性.附加伤害 * 100, 1))
+            tempstr[3] += '|{}%'.format(round(属白换算 * 100, 1))
+        
+        date = {2:属性.附加伤害增加增幅,
+                3:属性.属性附加伤害增加增幅,
+                5:属性.技能伤害增加增幅,
+                1:属性.暴击伤害增加增幅,
+                0:属性.伤害增加增幅,
+                4:属性.最终伤害增加增幅,
+                7:属性.力量智力增加增幅,
+                6:属性.物理魔法攻击力增加增幅}
+        
+        for i in date.keys():
+            if date[i] != 1.0:
+                x = date[i] - 1
+                y = ' +{}%' if x > 0 else ' {}%' 
+                if i in [2, 3] and '|' in tempstr[i]:
+                    y = y.replace(' ', '')
+                tempstr[i] += temp + '{}</font>'.format(y.format(round(x * 100, 1)))
         return tempstr
     
     def 面板显示设置(self, 显示, 进图, 站街):
@@ -4587,13 +4601,22 @@ class 角色窗口(窗口):
         显示[1].setText(str(int(进图.面板物理攻击力())))
         显示[2].setText(str(int(进图.面板智力())))
         显示[3].setText(str(int(进图.面板魔法攻击力())))
+
+        #独立攻击力
         tempstr = '<font color="#FFFFFF">{}</font>   '.format(int(站街.站街独立攻击力()))
         tempstr += '<font color="#96FF32">{}</font>'.format(int(进图.面板独立攻击力()))
         显示[4].setText(tempstr)
-        显示[5].setText(str(int(进图.火属性强化)))
-        显示[6].setText(str(int(进图.冰属性强化)))
-        显示[7].setText(str(int(进图.光属性强化)))
-        显示[8].setText(str(int(进图.暗属性强化)))
+        
+        #属性强化
+        tempstr = ''
+        if 进图.所有属性强化增加 != 1.0:
+            x = 进图.所有属性强化增加 - 1
+            y = ' +{}%' if x > 0 else ' {}%' 
+            tempstr += '<font color="{}">{}</font>'.format(self.辟邪玉显示(), y.format(round(x * 100, 1)))
+        显示[5].setText('{}{}'.format(int(进图.火属性强化), tempstr))
+        显示[6].setText('{}{}'.format(int(进图.冰属性强化), tempstr))
+        显示[7].setText('{}{}'.format(int(进图.光属性强化), tempstr))
+        显示[8].setText('{}{}'.format(int(进图.暗属性强化), tempstr))
         显示[9].setText(str(int( 站街.站街力量())))
         显示[10].setText(str(int(站街.站街物理攻击力())))
         显示[11].setText(str(int(站街.站街智力())))
@@ -4602,7 +4625,24 @@ class 角色窗口(窗口):
         显示[14].setText(str(int(站街.冰属性强化)))
         显示[15].setText(str(int(站街.光属性强化)))
         显示[16].setText(str(int(站街.暗属性强化)))
-    
+
+    def 辟邪玉显示(self, x = 0):
+        temp = ''
+        num = 0
+        for i in self.辟邪玉选择:
+            k = i.currentIndex()
+            if k > 0:
+                temp += '{}|'.format(辟邪玉列表[k].简称)
+                num += 1
+        辟邪玉颜色 = 颜色[{4:'史诗', 3:'传说', 2:'神器', 1:'稀有'}.get(num, '稀有')]
+        if x == 0:
+            return 辟邪玉颜色
+        else:
+            if num == 0:
+                return ''
+            else:
+                return '<font color="{}">{}</font>'.format(辟邪玉颜色, temp[:-1])
+
     def 套装显示设置(self, 显示, 属性):
         count = 0
 
@@ -4682,6 +4722,13 @@ class 角色窗口(窗口):
                 显示[count].setStyleSheet(
                     "QLabel{font-size:12px;color:rgb(255,255,255)}")
                 count += 1
+
+        #辟邪玉显示
+        temp = self.辟邪玉显示(1)
+        if temp != '':
+            显示[count].setText(temp)
+            显示[count].setStyleSheet("QLabel{font-size:12px;}")
+
 
     def 打造显示设置(self, 显示, 属性, x=0):
         初始x = 10
@@ -5037,7 +5084,7 @@ class 角色窗口(窗口):
 
         count = 5
         for i in [5, 6, 7, 8]:
-            面板显示[i].move(150, const + count * 18 - pox_y2)
+            面板显示[i].move(125, const + count * 18 - pox_y2)
             count += 1
 
         count = 5
@@ -5053,7 +5100,10 @@ class 角色窗口(窗口):
                 面板显示[i].setStyleSheet(
                     "QLabel{font-size:12px;color:rgb(150,255,30)}")
             面板显示[i].resize(100, 18)
-            面板显示[i].setAlignment(Qt.AlignRight)
+            if i in [5, 6, 7, 8]:
+                面板显示[i].setAlignment(Qt.AlignLeft)
+            else:
+                面板显示[i].setAlignment(Qt.AlignRight)
 
         j = 312
         pdata['词条'] = self.词条显示计算(self.角色属性B)
