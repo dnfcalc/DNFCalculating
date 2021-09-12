@@ -256,15 +256,12 @@ class 换装窗口(Page):
             for j in equ.get_equ_list():
                 if j.部位 == 部位列表[i]:
                     x += 1
-
-                    try:
-                        if j.所属套装2 == name:
-                            self.自选装备[i].setCurrentIndex(x)
-                            break
-                    except:
-                        if j.所属套装 == name and j.品质 != '神话':
-                            self.自选装备[i].setCurrentIndex(x)
-                            break
+                    if j.所属套装2 == name:
+                        self.自选装备[i].setCurrentIndex(x)
+                        break
+                    elif j.所属套装 == name and j.品质 != '神话':
+                        self.自选装备[i].setCurrentIndex(x)
+                        break
 
     def 神话部位更改(self, index):
         部位 = [-1, 0, 5, 8]

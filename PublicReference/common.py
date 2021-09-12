@@ -1153,14 +1153,12 @@ class 窗口(QWidget):
             for j in equ.get_equ_list():
                 if j.部位 == 部位列表[i]:
                     x += 1
-                    try:
-                        if j.所属套装2 == name:
-                            self.自选装备[i].setCurrentIndex(x)
-                            break
-                    except:
-                        if j.所属套装 == name and j.品质 != '神话':
-                            self.自选装备[i].setCurrentIndex(x)
-                            break
+                    if j.所属套装2 == name:
+                        self.自选装备[i].setCurrentIndex(x)
+                        break
+                    elif j.所属套装 == name and j.品质 != '神话':
+                        self.自选装备[i].setCurrentIndex(x)
+                        break
         self.计算标识 = 1
         self.自选计算(1)
 

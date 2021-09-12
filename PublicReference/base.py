@@ -43,7 +43,6 @@ class 技能:
             else:
                 self.等级 += x
 
-
 class 主动技能(技能):
     # 只扩展了技能的三条属性，第一条技能hit默认1,2、3条hit默认为0，需要手动赋值
     # 如果需要继续扩展，可以在各自职业类内继承后自行扩展，同时需要重写下等效百分比函数
@@ -84,12 +83,10 @@ class 主动技能(技能):
     def 等效CD(self, 武器类型, 输出类型):
         return round(self.CD / self.恢复 * 武器冷却惩罚(武器类型, 输出类型, self.版本), 1)
 
-
 class 被动技能(技能):
     是否主动 = 0
     是否有伤害 = 0
     关联技能 = ['所有']
-
 
 符文效果选项 = [
     '无', '攻击+5%,CD+3%', 'CD-4%', '攻击+3%', '攻击-3%,CD-6%', '攻击+3%,CD+2%',
@@ -102,8 +99,9 @@ class 被动技能(技能):
     250, 270, 292, 313
 ]
 
-
 class 角色属性(属性):
+
+    # region 属性变量
     职业分类 = '输出'
     主BUFF = 1.0
     系统奶系数 = 0
@@ -243,9 +241,9 @@ class 角色属性(属性):
     # 计算自适应方式 = 0
     输出提升率 = 0
 
-    希洛克选择状态 = []
-    守门人属强选择 = 0
-
+    # endregion
+    
+    # region 词条属性
     def 附加伤害加成(self, x, 可变=0, 辟邪玉加成=1):
         if self.装备描述 == 1:
             return '附加伤害 +{}%<br>'.format(round(x * 100))
@@ -471,45 +469,6 @@ class 角色属性(属性):
             self.魔法暴击率 += x
         return ''
 
-    def 防具精通计算(self, i):
-        temp = equ.get_equ_by_name(self.装备栏[i])
-        if temp.等级 == 100:
-            if temp.所属套装 != '智慧产物':
-                return 精通计算(temp.等级, temp.品质, self.强化等级[i], 部位列表[i])
-            else:
-                return 精通计算(temp.等级, temp.品质, self.改造等级[i], 部位列表[i])
-        elif temp.等级 > 85:
-            计算等级 = temp.等级
-            if temp.所属套装 == '兵法之神':
-                if self.装备检查('过往时光的轮回'):
-                    计算等级 = 100
-            return 精通计算(计算等级, temp.品质, self.强化等级[i], 部位列表[i])
-        else:
-            计算等级 = temp.等级
-            if temp.所属套装 == '战术之王的御敌':
-                if self.装备检查('战术之王的战术指挥棒'):
-                    计算等级 = 100
-            elif temp.所属套装 == '魔战无双':
-                if self.装备检查('聚魔漩涡'):
-                    计算等级 = 100
-            x = 精通计算(计算等级, temp.品质, self.强化等级[i], 部位列表[i])
-            if self.转甲选项 == 1:
-                return round(x, 2)
-            else:
-                return round(0.4 * x, 2)
-
-    def 装备检查(self, 装备名称):
-        for i in self.装备栏:
-            if i == 装备名称:
-                return True
-        return False
-
-    def 所有属性强化(self, x):
-        self.火属性强化 += x
-        self.冰属性强化 += x
-        self.光属性强化 += x
-        self.暗属性强化 += x
-
     def 技能等级加成(self, 加成类型, minLv, maxLv, lv, 可变=0):
         lv = int(lv)
         if self.装备描述 == 1:
@@ -607,6 +566,42 @@ class 角色属性(属性):
                         i.CD *= CD
         return ''
 
+    def 所有属性强化(self, x):
+        self.火属性强化 += x
+        self.冰属性强化 += x
+        self.光属性强化 += x
+        self.暗属性强化 += x
+
+    # endregion
+
+    # region 面板计算
+    def 防具精通计算(self, i):
+        temp = equ.get_equ_by_name(self.装备栏[i])
+        if temp.等级 == 100:
+            if temp.所属套装 != '智慧产物':
+                return 精通计算(temp.等级, temp.品质, self.强化等级[i], 部位列表[i])
+            else:
+                return 精通计算(temp.等级, temp.品质, self.改造等级[i], 部位列表[i])
+        elif temp.等级 > 85:
+            计算等级 = temp.等级
+            if temp.所属套装 == '兵法之神':
+                if self.装备检查('过往时光的轮回'):
+                    计算等级 = 100
+            return 精通计算(计算等级, temp.品质, self.强化等级[i], 部位列表[i])
+        else:
+            计算等级 = temp.等级
+            if temp.所属套装 == '战术之王的御敌':
+                if self.装备检查('战术之王的战术指挥棒'):
+                    计算等级 = 100
+            elif temp.所属套装 == '魔战无双':
+                if self.装备检查('聚魔漩涡'):
+                    计算等级 = 100
+            x = 精通计算(计算等级, temp.品质, self.强化等级[i], 部位列表[i])
+            if self.转甲选项 == 1:
+                return round(x, 2)
+            else:
+                return round(0.4 * x, 2)
+
     def 站街力量(self):
         return int(self.力量)
 
@@ -686,6 +681,26 @@ class 角色属性(属性):
                 pass
         return 面板独立攻击 * self.站街独立攻击力倍率()
 
+    def 面板系数计算(self):
+        if self.类型 == '物理百分比':
+            return int((self.面板力量() / 250 + 1) * (self.物理攻击力 + self.进图物理攻击力) *
+                       (1 + self.百分比三攻))
+        elif self.类型 == '魔法百分比':
+            return int((self.面板智力() / 250 + 1) * (self.魔法攻击力 + self.进图魔法攻击力) *
+                       (1 + self.百分比三攻))
+        elif self.类型 == '物理固伤':
+            return int((self.面板力量() / 250 + 1) * (self.独立攻击力 + self.进图独立攻击力) *
+                       (1 + self.百分比三攻))
+        elif self.类型 == '魔法固伤':
+            return int((self.面板智力() / 250 + 1) * (self.独立攻击力 + self.进图独立攻击力) *
+                       (1 + self.百分比三攻))
+
+    def 力智计算(self):
+        return max(self.面板力量(), self.面板智力())
+
+    # endregion
+
+    # region 输出计算
     def 加算冷却计算(self):
         for i in self.技能栏:
             if i.是否有伤害 == 1:
@@ -803,24 +818,225 @@ class 角色属性(属性):
                 else:
                     for k in i.非关联技能3:
                         self.技能栏[self.技能序号[k]].被动倍率 /= i.加成倍率3(self.武器类型)
+    
+    def 属性倍率计算(self):
+        # 火、冰、光、暗
+        self.属性倍率组 = []
+        self.属性倍率组.append(1.05 + 0.0045 * int(self.火属性强化 - self.火抗输入))
+        self.属性倍率组.append(1.05 + 0.0045 * int(self.冰属性强化 - self.冰抗输入))
+        self.属性倍率组.append(1.05 + 0.0045 * int(self.光属性强化 - self.光抗输入))
+        self.属性倍率组.append(1.05 + 0.0045 * int(self.暗属性强化 - self.暗抗输入))
+        if self.攻击属性 == 0:
+            self.属性倍率 = max(self.属性倍率组)
+        elif self.攻击属性 == 1:
+            self.属性倍率 = self.属性倍率组[0]
+        elif self.攻击属性 == 2:
+            self.属性倍率 = self.属性倍率组[1]
+        elif self.攻击属性 == 3:
+            self.属性倍率 = self.属性倍率组[2]
+        elif self.攻击属性 == 4:
+            self.属性倍率 = self.属性倍率组[3]
 
-    def 面板系数计算(self):
-        if self.类型 == '物理百分比':
-            return int((self.面板力量() / 250 + 1) * (self.物理攻击力 + self.进图物理攻击力) *
-                       (1 + self.百分比三攻))
-        elif self.类型 == '魔法百分比':
-            return int((self.面板智力() / 250 + 1) * (self.魔法攻击力 + self.进图魔法攻击力) *
-                       (1 + self.百分比三攻))
-        elif self.类型 == '物理固伤':
-            return int((self.面板力量() / 250 + 1) * (self.独立攻击力 + self.进图独立攻击力) *
-                       (1 + self.百分比三攻))
-        elif self.类型 == '魔法固伤':
-            return int((self.面板智力() / 250 + 1) * (self.独立攻击力 + self.进图独立攻击力) *
-                       (1 + self.百分比三攻))
+    def 伤害指数计算(self):
 
-    def 力智计算(self):
-        return max(self.面板力量(), self.面板智力())
+        防御 = max(self.防御输入 - self.固定减防, 0) * (1 - self.百分比减防)
+        基准倍率 = 1.5 * self.主BUFF * (1 - 防御 / (防御 + 20000))
 
+        # 避免出现浮点数取整BUG
+        self.伤害增加 += 0.00000001
+
+        self.属性倍率计算()
+
+        # if sum(self.自适应选项) != 0:
+        if self.计算自适应 == 1:
+            self.自适应计算()
+
+        # self.希洛克武器提升()
+
+        面板 = self.面板系数计算()
+
+        增伤倍率 = 1 + int(self.伤害增加 * 100) / 100
+        增伤倍率 *= 1 + self.暴击伤害
+        增伤倍率 *= 1 + self.最终伤害
+        增伤倍率 *= self.技能攻击力
+        增伤倍率 *= 1 + self.持续伤害 * self.持续伤害计算比例
+        增伤倍率 *= 1 + self.附加伤害 + self.属性附加 * self.属性倍率
+
+        self.伤害指数 = 面板 * self.属性倍率 * 增伤倍率 * 基准倍率 / 100 * self.队友增幅系数
+
+        # 7.8日,伤害数据压缩
+        self.伤害指数 /= 1000
+    
+    def 伤害计算(self, x=0):
+        if 切装模式 == 1 and self.切装判断():
+            temp = self.装备替换()
+            A = temp[0].数据计算(1, 1)  # 身上装备计算
+            B = temp[1].数据计算(1, 0)  # 切装装备计算
+            self.预处理()
+            for i in range(len(self.技能栏)):
+                self.技能栏[i] = deepcopy(temp[self.技能切装[i]].技能栏[i])
+            C = []
+            总伤害 = 0
+            for i in range(len(A)):
+                C.append(A[i] if (self.技能切装[int(i / 4)] == 0) else B[i])
+                if i % 4 == 1:
+                    总伤害 += C[i]
+            if x == 0:
+                return 总伤害
+            else:
+                for i in range(int(len(A) / 4)):
+                    if 总伤害 != 0:
+                        C[i * 4 + 3] = C[i * 4 + 1] / 总伤害 * 100
+                    else:
+                        C[i * 4 + 3] = 0
+                return C
+        else:
+            self.技能切装 = [0] * len(self.技能栏)
+            # if self.计算自适应 == 1:
+            #     self.择优拷贝 = deepcopy(self)
+            #     self.择优拷贝.计算自适应 = 0
+            return self.数据计算(x)
+    
+    def 技能释放次数解析(self, 技能释放次数):
+        for i in range(len(self.技能栏)):
+            if '/CD' in self.次数输入[i]:
+                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
+            if type(self.宠物次数[i]) == type('str'):
+                self.宠物次数[i] = eval(self.宠物次数[i].replace(
+                    'num', str(技能释放次数[i])))
+        return 技能释放次数
+
+    def 技能释放次数计算(self):
+        技能释放次数 = []
+        for i in self.技能栏:
+            if i.是否有伤害 == 1:
+                s = self.次数输入[self.技能序号[i.名称]]
+                if '/CD' in s:
+                    技能释放次数.append(
+                        int((self.时间输入 - i.演出时间) /
+                            i.等效CD(self.武器类型, self.类型)) + 1 + i.基础释放次数)
+                else:
+                    技能释放次数.append(round(float(s), 2))
+            else:
+                技能释放次数.append(0)
+
+        return self.技能释放次数解析(技能释放次数)
+
+    def 技能单次伤害计算(self, y):
+        # y切装标记
+        技能单次伤害 = []
+        for i in self.技能栏:
+            if i.是否有伤害 == 1 and self.技能切装[self.技能序号[i.名称]] != y:
+                技能单次伤害.append(i.等效百分比(self.武器类型) * self.伤害指数 * i.被动倍率)
+            else:
+                技能单次伤害.append(0)
+        return 技能单次伤害
+
+    def 技能总伤害计算(self, a, b):
+        # a次数 b单次伤害
+        技能总伤害 = []
+        for i in self.技能栏:
+            index = self.技能序号[i.名称]
+            if i.是否有伤害 == 1 and a[index] != 0:
+                技能总伤害.append(a[index] * b[index] * (
+                    1 + self.白兔子技能 * 0.20 + self.年宠技能 * 0.10 *
+                    self.宠物次数[index] / a[index]  # 宠物技能占比 = 宠物次数 / 释放次数
+                    + self.斗神之吼秘药 * 0.12))
+            else:
+                技能总伤害.append(0)
+        return 技能总伤害
+
+    def 数据返回(self, x, a, b):
+        # a次数  b伤害
+        总伤害 = sum(b)
+        if x == 0:
+            # 伤害数据，用于排序
+            return 总伤害
+        elif x == 1:
+            # 详细数据，用于展示  四个数据一组
+            # 0次数 1总伤害 2平均伤害 3占比
+            data = []
+            for i in range(len(self.技能栏)):
+                data.append(a[i])
+                data.append(b[i])
+                if a[i] != 0:
+                    data.append(b[i] / a[i])
+                else:
+                    data.append(b[i])
+                if 总伤害 != 0:
+                    data.append(b[i] / 总伤害 * 100)
+                else:
+                    data.append(0)
+            return data
+
+    def 数据计算(self, x=0, y=-1):
+        self.预处理()
+        # 初步计算
+        技能释放次数 = self.技能释放次数计算()
+        技能单次伤害 = self.技能单次伤害计算(y)
+        技能总伤害 = self.技能总伤害计算(技能释放次数, 技能单次伤害)
+
+        # 返回结果
+        return self.数据返回(x, 技能释放次数, 技能总伤害)
+
+    def 装备词条计算(self):
+        # 初始化 以防和自选冲突
+        self.变换词条 = [
+            # 原词条类型，原词条数值，可洗最小值，可洗最大值，择优不考虑觉醒
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ]
+        if 调试开关 == 0:
+            for i in range(12):
+                temp = equ.get_equ_by_name(self.装备栏[i])
+                temp.城镇属性(self)
+                temp.变换属性(self)
+                if temp.所属套装 == '智慧产物' and self.产物升级 == 1:
+                    temp.产物升级(self)
+                # 添加可洗属性
+
+            for i in self.套装栏:
+                equ.get_suit_by_name(i).城镇属性(self)
+            # print(self.变换词条)
+            # 进图触发属强向下取整
+            self.状态 = 1
+            for i in range(12):
+                equ.get_equ_by_name(self.装备栏[i]).进图属性(self)
+
+            for i in self.套装栏:
+                equ.get_suit_by_name(i).进图属性(self)
+            self.状态 = 0
+        self.黑鸦词条扣除()
+        # print(self.黑鸦词条)
+        # 冲突属性计算
+        self.伤害增加加成(self.黄字)
+        self.暴击伤害加成(self.爆伤)
+    
+    def 预处理(self):
+        self.装备属性计算()
+        self.三觉屏蔽1()
+        self.所有属性强化(self.进图属强)
+        self.CD倍率计算()
+        self.加算冷却计算()
+        self.被动倍率计算()
+        self.三觉屏蔽2()
+        self.伤害指数计算()
+
+    def 装备属性计算(self):
+        self.装备基础()
+        self.装备词条计算()
+
+    def 其它属性计算(self):
+        for i in range(12):
+            equ.get_equ_by_name(self.装备栏[i]).其它属性(self)
+
+        for i in self.套装栏:
+            equ.get_suit_by_name(i).其它属性(self)
+    # endregion
+
+    # region 择优相关
     def 词条提示上下限计算(self, 词条范围, 词条数值):
         词条提升率 = [[0, 0]] * 6
 
@@ -1373,270 +1589,7 @@ class 角色属性(属性):
                 temp += '|'
             temp += '光环:' + self.自适应描述[1]
         return temp
-
-    # def 希洛克武器提升(self):
-    #     if self.希洛克武器词条 == 0:
-    #         self.词条提升率 = [0] * 6
-    #         return
-
-    #     self.词条选择.clear()
-    #     self.词条选择.append(self.词条提升率计算([0, 1, 2, 3, 4, 5], [0.10] * 6, 1))
-    #     if self.武器词条触发 == 1:
-    #         self.词条选择.append(self.词条提升率计算([0, 1, 2, 3, 4, 5], [0.05] * 6))
-
-    def 黑鸦洗词条(self):
-        pass
-
-    def 属性倍率计算(self):
-        # 火、冰、光、暗
-        self.属性倍率组 = []
-        self.属性倍率组.append(1.05 + 0.0045 * int(self.火属性强化 - self.火抗输入))
-        self.属性倍率组.append(1.05 + 0.0045 * int(self.冰属性强化 - self.冰抗输入))
-        self.属性倍率组.append(1.05 + 0.0045 * int(self.光属性强化 - self.光抗输入))
-        self.属性倍率组.append(1.05 + 0.0045 * int(self.暗属性强化 - self.暗抗输入))
-        if self.攻击属性 == 0:
-            self.属性倍率 = max(self.属性倍率组)
-        elif self.攻击属性 == 1:
-            self.属性倍率 = self.属性倍率组[0]
-        elif self.攻击属性 == 2:
-            self.属性倍率 = self.属性倍率组[1]
-        elif self.攻击属性 == 3:
-            self.属性倍率 = self.属性倍率组[2]
-        elif self.攻击属性 == 4:
-            self.属性倍率 = self.属性倍率组[3]
-
-    def 伤害指数计算(self):
-
-        防御 = max(self.防御输入 - self.固定减防, 0) * (1 - self.百分比减防)
-        基准倍率 = 1.5 * self.主BUFF * (1 - 防御 / (防御 + 20000))
-
-        # 避免出现浮点数取整BUG
-        self.伤害增加 += 0.00000001
-
-        self.属性倍率计算()
-
-        # if sum(self.自适应选项) != 0:
-        if self.计算自适应 == 1:
-            self.自适应计算()
-
-        # self.希洛克武器提升()
-
-        面板 = self.面板系数计算()
-
-        增伤倍率 = 1 + int(self.伤害增加 * 100) / 100
-        增伤倍率 *= 1 + self.暴击伤害
-        增伤倍率 *= 1 + self.最终伤害
-        增伤倍率 *= self.技能攻击力
-        增伤倍率 *= 1 + self.持续伤害 * self.持续伤害计算比例
-        增伤倍率 *= 1 + self.附加伤害 + self.属性附加 * self.属性倍率
-
-        self.伤害指数 = 面板 * self.属性倍率 * 增伤倍率 * 基准倍率 / 100 * self.队友增幅系数
-
-        # 7.8日,伤害数据压缩
-        self.伤害指数 /= 1000
-
-    def 切装判断(self):
-        for i in self.装备切装:
-            if i != '无':
-                return True
-        return False
-
-    def 装备替换(self):
-        Q = deepcopy(self)
-        P = deepcopy(self)
-
-        for i in range(12):
-            if P.装备切装[i] != '无':
-                P.装备栏[i] = P.装备切装[i]
-
-        P.适用套装计算()
-
-        P.武器类型 = equ.get_equ_by_name(P.装备栏[11]).类型
-        P.力量 += P.切装修正[0]
-        P.智力 += P.切装修正[1]
-        P.物理攻击力 += P.切装修正[2]
-        P.魔法攻击力 += P.切装修正[3]
-        P.独立攻击力 += P.切装修正[4]
-        P.所有属性强化加成(P.切装修正[5])
-
-        return [Q, P]
-
-    def 伤害计算(self, x=0):
-        if 切装模式 == 1 and self.切装判断():
-            temp = self.装备替换()
-            A = temp[0].数据计算(1, 1)  # 身上装备计算
-            B = temp[1].数据计算(1, 0)  # 切装装备计算
-            self.预处理()
-            for i in range(len(self.技能栏)):
-                self.技能栏[i] = deepcopy(temp[self.技能切装[i]].技能栏[i])
-            C = []
-            总伤害 = 0
-            for i in range(len(A)):
-                C.append(A[i] if (self.技能切装[int(i / 4)] == 0) else B[i])
-                if i % 4 == 1:
-                    总伤害 += C[i]
-            if x == 0:
-                return 总伤害
-            else:
-                for i in range(int(len(A) / 4)):
-                    if 总伤害 != 0:
-                        C[i * 4 + 3] = C[i * 4 + 1] / 总伤害 * 100
-                    else:
-                        C[i * 4 + 3] = 0
-                return C
-        else:
-            self.技能切装 = [0] * len(self.技能栏)
-            # if self.计算自适应 == 1:
-            #     self.择优拷贝 = deepcopy(self)
-            #     self.择优拷贝.计算自适应 = 0
-            return self.数据计算(x)
-
-    def 三觉屏蔽1(self):
-        if self.屏蔽三觉 == True:
-            for i in self.技能栏:
-                if i.所在等级 >= 95:
-                    if i.所在等级 == 95 and i.是否主动 == 0:
-                        self.超卓之心等级 = i.等级 - 3
-                    else:
-                        i.倍率 = 0
-
-    def 三觉屏蔽2(self):
-        if self.屏蔽三觉 == True:
-            temp = None
-            for j in self.技能栏:
-                if j.是否有伤害 == 1:
-                    j.被动倍率 *= 1.045 + 0.005 * self.超卓之心等级
-                if j.所在等级 == 100:
-                    temp = j
-            self.技能栏[self.技能序号[self.觉醒之抉择技能]].被动倍率 *= 1.1 + 0.05 * temp.等级
-
-    def 预处理(self):
-        self.装备属性计算()
-        self.三觉屏蔽1()
-        self.所有属性强化(self.进图属强)
-        self.CD倍率计算()
-        self.加算冷却计算()
-        self.被动倍率计算()
-        self.三觉屏蔽2()
-        self.伤害指数计算()
-
-    def 技能释放次数解析(self, 技能释放次数):
-        for i in range(len(self.技能栏)):
-            if '/CD' in self.次数输入[i]:
-                技能释放次数[i] = eval(self.次数输入[i].replace('/CD', str(技能释放次数[i])))
-            if type(self.宠物次数[i]) == type('str'):
-                self.宠物次数[i] = eval(self.宠物次数[i].replace(
-                    'num', str(技能释放次数[i])))
-        return 技能释放次数
-
-    def 技能释放次数计算(self):
-        技能释放次数 = []
-        for i in self.技能栏:
-            if i.是否有伤害 == 1:
-                s = self.次数输入[self.技能序号[i.名称]]
-                if '/CD' in s:
-                    技能释放次数.append(
-                        int((self.时间输入 - i.演出时间) /
-                            i.等效CD(self.武器类型, self.类型)) + 1 + i.基础释放次数)
-                else:
-                    技能释放次数.append(round(float(s), 2))
-            else:
-                技能释放次数.append(0)
-
-        return self.技能释放次数解析(技能释放次数)
-
-    def 技能单次伤害计算(self, y):
-        # y切装标记
-        技能单次伤害 = []
-        for i in self.技能栏:
-            if i.是否有伤害 == 1 and self.技能切装[self.技能序号[i.名称]] != y:
-                技能单次伤害.append(i.等效百分比(self.武器类型) * self.伤害指数 * i.被动倍率)
-            else:
-                技能单次伤害.append(0)
-        return 技能单次伤害
-
-    def 技能总伤害计算(self, a, b):
-        # a次数 b单次伤害
-        技能总伤害 = []
-        for i in self.技能栏:
-            index = self.技能序号[i.名称]
-            if i.是否有伤害 == 1 and a[index] != 0:
-                技能总伤害.append(a[index] * b[index] * (
-                    1 + self.白兔子技能 * 0.20 + self.年宠技能 * 0.10 *
-                    self.宠物次数[index] / a[index]  # 宠物技能占比 = 宠物次数 / 释放次数
-                    + self.斗神之吼秘药 * 0.12))
-            else:
-                技能总伤害.append(0)
-        return 技能总伤害
-
-    def 数据返回(self, x, a, b):
-        # a次数  b伤害
-        总伤害 = sum(b)
-        if x == 0:
-            # 伤害数据，用于排序
-            return 总伤害
-        elif x == 1:
-            # 详细数据，用于展示  四个数据一组
-            # 0次数 1总伤害 2平均伤害 3占比
-            data = []
-            for i in range(len(self.技能栏)):
-                data.append(a[i])
-                data.append(b[i])
-                if a[i] != 0:
-                    data.append(b[i] / a[i])
-                else:
-                    data.append(b[i])
-                if 总伤害 != 0:
-                    data.append(b[i] / 总伤害 * 100)
-                else:
-                    data.append(0)
-            return data
-
-    def 数据计算(self, x=0, y=-1):
-        self.预处理()
-        # 初步计算
-        技能释放次数 = self.技能释放次数计算()
-        技能单次伤害 = self.技能单次伤害计算(y)
-        技能总伤害 = self.技能总伤害计算(技能释放次数, 技能单次伤害)
-
-        # 返回结果
-        return self.数据返回(x, 技能释放次数, 技能总伤害)
-
-    def 装备词条计算(self):
-        # 初始化 以防和自选冲突
-        self.变换词条 = [
-            # 原词条类型，原词条数值，可洗最小值，可洗最大值，择优不考虑觉醒
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]
-        ]
-        if 调试开关 == 0:
-            for i in range(12):
-                temp = equ.get_equ_by_name(self.装备栏[i])
-                temp.城镇属性(self)
-                temp.变换属性(self)
-                if temp.所属套装 == '智慧产物' and self.产物升级 == 1:
-                    temp.产物升级(self)
-                # 添加可洗属性
-
-            for i in self.套装栏:
-                equ.get_suit_by_name(i).城镇属性(self)
-            # print(self.变换词条)
-            # 进图触发属强向下取整
-            self.状态 = 1
-            for i in range(12):
-                equ.get_equ_by_name(self.装备栏[i]).进图属性(self)
-
-            for i in self.套装栏:
-                equ.get_suit_by_name(i).进图属性(self)
-            self.状态 = 0
-        self.黑鸦词条扣除()
-        # print(self.黑鸦词条)
-        # 冲突属性计算
-        self.伤害增加加成(self.黄字)
-        self.暴击伤害加成(self.爆伤)
-
+    
     def 黑鸦词条扣除(self):
         for i in range(4):
             self.黑鸦词条[i].append("")
@@ -1667,10 +1620,6 @@ class 角色属性(属性):
             self.技能等级加成('所有', 85, 85, 2)
             self.技能等级加成('所有', 100, 100, 2)
 
-    def 装备属性计算(self):
-        self.装备基础()
-        self.装备词条计算()
-
     def 黑鸦词条变更(self, 变换词条, 增减=1):
         # print(变换词条)
         if 变换词条[0] == 6:
@@ -1678,34 +1627,66 @@ class 角色属性(属性):
         else:
             黑鸦武器属性列表[变换词条[0]].加成属性(self, 增减 * 变换词条[1] / 100)
 
-    def 其它属性计算(self):
+    # endregion
+    
+    # region 功能函数
+    def 装备检查(self, 装备名称):
+        for i in self.装备栏:
+            if i == 装备名称:
+                return True
+        return False
+
+    def 切装判断(self):
+        for i in self.装备切装:
+            if i != '无':
+                return True
+        return False
+
+    def 装备替换(self):
+        Q = deepcopy(self)
+        P = deepcopy(self)
+
         for i in range(12):
-            equ.get_equ_by_name(self.装备栏[i]).其它属性(self)
+            if P.装备切装[i] != '无':
+                P.装备栏[i] = P.装备切装[i]
 
-        for i in self.套装栏:
-            equ.get_suit_by_name(i).其它属性(self)
+        P.适用套装计算()
 
+        P.武器类型 = equ.get_equ_by_name(P.装备栏[11]).类型
+        P.力量 += P.切装修正[0]
+        P.智力 += P.切装修正[1]
+        P.物理攻击力 += P.切装修正[2]
+        P.魔法攻击力 += P.切装修正[3]
+        P.独立攻击力 += P.切装修正[4]
+        P.所有属性强化加成(P.切装修正[5])
+
+        return [Q, P]
+
+    def 三觉屏蔽1(self):
+        if self.屏蔽三觉 == True:
+            for i in self.技能栏:
+                if i.所在等级 >= 95:
+                    if i.所在等级 == 95 and i.是否主动 == 0:
+                        self.超卓之心等级 = i.等级 - 3
+                    else:
+                        i.倍率 = 0
+
+    def 三觉屏蔽2(self):
+        if self.屏蔽三觉 == True:
+            temp = None
+            for j in self.技能栏:
+                if j.是否有伤害 == 1:
+                    j.被动倍率 *= 1.045 + 0.005 * self.超卓之心等级
+                if j.所在等级 == 100:
+                    temp = j
+            self.技能栏[self.技能序号[self.觉醒之抉择技能]].被动倍率 *= 1.1 + 0.05 * temp.等级
+    # endregion
 
 class 角色窗口(窗口):
     def __init__(self):
         super().__init__()
 
-    def 称号描述(self):
-        temp = '<font size="3" face="宋体">'
-        temp += '<font color="#78FF1E">' + self.称号.currentText(
-        ) + '</font><br>'
-        temp += 称号列表[self.称号.currentIndex()].装备描述(self.角色属性B)[:-4]
-        temp += '</font>'
-        return temp
-
-    def 宠物描述(self):
-        temp = '<font size="3" face="宋体">'
-        temp += '<font color="#78FF1E">' + self.宠物.currentText(
-        ) + '</font><br>'
-        temp += 宠物列表[self.宠物.currentIndex()].装备描述(self.角色属性B)[:-4]
-        temp += '</font>'
-        return temp
-
+    # region 界面分页
     def 界面(self):
         count = 0
         for i in self.角色属性A.技能栏:
@@ -1903,18 +1884,6 @@ class 角色窗口(窗口):
         self.攻击属性选项.addItem('攻击属性:冰')
         self.攻击属性选项.addItem('攻击属性:光')
         self.攻击属性选项.addItem('攻击属性:暗')
-
-    def 输出时间变化(self):
-        输出时间变化提示 = QMessageBox(QMessageBox.Question, "提示",
-                               "切换输出时间请检查技能次数是否为/CD,否则计算结果不发生变化")
-        输出时间变化提示.setWindowIcon(self.icon)
-        输出时间变化提示.exec_()
-        pass
-
-    def 技能列表显示排序(self, skill):
-        temp = deepcopy(skill)
-        temp.sort(key=operator.attrgetter('所在等级'))
-        return temp
 
     def 界面2(self):
         # 第二个布局界面
@@ -2554,13 +2523,6 @@ class 角色窗口(窗口):
         self.计算按钮3.resize(110, 30)
         self.计算按钮3.setStyleSheet(按钮样式)
 
-    def 细节增伤选项颜色更新(self, index):
-        if index.currentIndex() <= 0:
-            index.setStyleSheet(下拉框样式_warn)
-        else:
-            index.setStyleSheet(下拉框样式_detail)
-        pass
-
     def 界面5(self):
         # 第五个布局
         标签 = QLabel('单件选择', self.main_frame5)
@@ -2801,11 +2763,16 @@ class 角色窗口(窗口):
         self.总伤害.setAlignment(Qt.AlignCenter)
 
         self.套装名称显示 = []
-        for i in range(20):
+        for i in range(12):
             self.套装名称显示.append(QLabel(self.main_frame5))
             self.套装名称显示[i].move(114 + 初始x, 128 + 180 + 17 * i + 初始y)
             self.套装名称显示[i].resize(150, 18)
             self.套装名称显示[i].setAlignment(Qt.AlignCenter)
+
+        self.打造显示 = []
+        for i in range(13):
+            self.打造显示.append(QLabel(self.main_frame5))
+            self.打造显示[i].move(-100, -100)
 
         自选计算按钮 = QPushButton('查看详情', self.main_frame5)
         自选计算按钮.clicked.connect(lambda state: self.自选计算())
@@ -3103,69 +3070,21 @@ class 角色窗口(窗口):
         self.计算按钮3.move(990, self.height() - 70)
         self.计算按钮3.resize(110, 30)
         self.计算按钮3.setStyleSheet(按钮样式)
-
-    def 奥兹玛选择(self, index, x=0):
-        super().奥兹玛选择(index, x)
-        self.阿斯特罗斯选项显示(sum(self.奥兹玛选择状态[0:5]))
-
-    def 阿斯特罗斯选项显示(self, n):
-        for i in range(5):
-            if i < n:
-                self.阿斯特罗斯选项[i].setEnabled(True)
-            else:
-                self.阿斯特罗斯选项[i].setEnabled(False)
-
-    def 下拉框禁用(self, a, b, c=下拉框样式):
-        if a.isChecked():
-            b.setStyleSheet(c)
-            b.setEnabled(False)
-        else:
-            b.setStyleSheet(c)
-            b.setEnabled(True)
-
-    def 守门人属强选项(self, x):
-        if self.守门人属强.currentIndex() != 3:
-            self.守门人全属强.setEnabled(False)
-            self.守门人全属强.setChecked(False)
-            self.守门人全属强.setStyleSheet(复选框样式)
-        else:
-            number = self.希洛克选择状态[9] + self.希洛克选择状态[10] + self.希洛克选择状态[11]
-            if self.角色属性A.职业 not in ('冰结师', '鬼泣', '死灵术士', '气功师', '忍者', '暗枪士'):
-                if number == 3:
-                    self.守门人全属强.setEnabled(True)
-                    self.守门人全属强.setChecked(True)
-                    self.守门人全属强.setStyleSheet(复选框样式)
-
-    def 希洛克武器词条更新(self):
-        if self.希洛克武器词条[0].currentIndex() != 2:
-            for i in range(1, 5):
-                self.希洛克武器词条[i].setEnabled(False)
-                # self.希洛克武器词条[i].setStyleSheet(下拉框样式)
-        else:
-            for i in range(1, 5):
-                self.希洛克武器词条[i].setEnabled(True)
-                # self.希洛克武器词条[i].setStyleSheet(下拉框样式)
-
-    def 黑鸦词条更新(self, index):
-        if self.黑鸦词条[index][0].currentIndex() < 2:
-            for i in range(1, 3):
-                self.黑鸦词条[index][i].setEnabled(False)
-                # self.黑鸦词条[index][i].setStyleSheet(下拉框样式)
-        else:
-            for i in range(1, 3):
-                self.黑鸦词条[index][i].setEnabled(True)
-                # self.黑鸦词条[index][i].setStyleSheet(下拉框样式)
-
-        # def 黑鸦武器词条更新(self):
-
-    #     if self.黑鸦词条[0][1].currentIndex() == 6 :
-    #         self.黑鸦词条[0][2].clear()
-    #         self.黑鸦词条[0][2].addItem("+ 1")
-    #         self.黑鸦词条[0][2].addItem("+ 2")
-    #     else:
-    #         self.黑鸦词条[0][2].clear()
-    #         for item in range(4,17):
-    #             self.黑鸦词条[0][2].addItem("+" + str(item) + '%')
+    # endregion
+    
+    # region 界面函数
+    #第二页
+    def 输出时间变化(self):
+        输出时间变化提示 = QMessageBox(QMessageBox.Question, "提示",
+                               "切换输出时间请检查技能次数是否为/CD,否则计算结果不发生变化")
+        输出时间变化提示.setWindowIcon(self.icon)
+        输出时间变化提示.exec_()
+        pass
+    
+    def 技能列表显示排序(self, skill):
+        temp = deepcopy(skill)
+        temp.sort(key=operator.attrgetter('所在等级'))
+        return temp
 
     def 次数输入填写(self, x):
         if self.次数输入[x].currentIndex() == 12:
@@ -3272,6 +3191,77 @@ class 角色窗口(窗口):
             if x == 10:
                 self.刀魂之卡赞.setStyleSheet(下拉框样式)
 
+    def 加载护石(self, 属性):
+        for k in range(3):
+            if self.护石栏[k].currentText() != '无':
+                try:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石()
+                except:
+                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石(
+                        self.护石类型选项[k].currentIndex())
+
+        属性.护石第一栏 = self.护石栏[0].currentText()
+        属性.护石第二栏 = self.护石栏[1].currentText()
+        属性.护石第三栏 = self.护石栏[2].currentText()
+
+        for i in range(9):
+            if self.符文[i].currentText() != '无' and self.符文效果[i].currentText(
+            ) != '无':
+                for j in self.符文效果[i].currentText().split(','):
+                    if '攻击' in j:
+                        属性.技能栏[self.角色属性A.技能序号[
+                            self.符文[i].currentText()]].倍率 *= 1 + int(
+                                j.replace('攻击', '').replace('%', '')) / 100
+                    if 'CD' in j:
+                        属性.技能栏[self.角色属性A.技能序号[
+                            self.符文[i].currentText()]].CD *= 1 + int(
+                                j.replace('CD', '').replace('%', '')) / 100
+
+    #第三页
+    def 细节增伤选项颜色更新(self, index):
+        if index.currentIndex() <= 0:
+            index.setStyleSheet(下拉框样式_warn)
+        else:
+            index.setStyleSheet(下拉框样式_detail)
+        pass
+
+    #第五页
+    def 阿斯特罗斯选项显示(self, n):
+        for i in range(5):
+            if i < n:
+                self.阿斯特罗斯选项[i].setEnabled(True)
+            else:
+                self.阿斯特罗斯选项[i].setEnabled(False)
+
+    def 守门人属强选项(self, x):
+        if self.守门人属强.currentIndex() != 3:
+            self.守门人全属强.setEnabled(False)
+            self.守门人全属强.setChecked(False)
+            self.守门人全属强.setStyleSheet(复选框样式)
+        else:
+            number = sum(self.希洛克选择状态[9:11])
+            if self.角色属性A.职业 not in ('冰结师', '鬼泣', '死灵术士', '气功师', '忍者', '暗枪士'):
+                if number == 3:
+                    self.守门人全属强.setEnabled(True)
+                    self.守门人全属强.setChecked(True)
+                    self.守门人全属强.setStyleSheet(复选框样式)
+
+    def 希洛克武器词条更新(self):
+        if self.希洛克武器词条[0].currentIndex() != 2:
+            for i in range(1, 5):
+                self.希洛克武器词条[i].setEnabled(False)
+        else:
+            for i in range(1, 5):
+                self.希洛克武器词条[i].setEnabled(True)
+
+    def 黑鸦词条更新(self, index):
+        if self.黑鸦词条[index][0].currentIndex() < 2:
+            for i in range(1, 3):
+                self.黑鸦词条[index][i].setEnabled(False)
+        else:
+            for i in range(1, 3):
+                self.黑鸦词条[index][i].setEnabled(True)
+
     def 时装选项更新(self, index):
         if index == 8:
             count = 0
@@ -3328,6 +3318,140 @@ class 角色窗口(窗口):
             self.属性设置输入[6][16].setText(str(max(力量, 智力)))
             self.属性设置输入[8][16].setText(str(属强 if 属强 != 0 else ''))
 
+    #通用
+    def 下拉框禁用(self, a, b, c=下拉框样式):
+        if a.isChecked():
+            b.setStyleSheet(c)
+            b.setEnabled(False)
+        else:
+            b.setStyleSheet(c)
+            b.setEnabled(True)
+    # endregion
+
+    # region 计算相关
+
+    def 奥兹玛选择(self, index, x=0):
+        super().奥兹玛选择(index, x)
+        self.阿斯特罗斯选项显示(sum(self.奥兹玛选择状态[0:5]))
+
+    def 希洛克属性计算(self, 属性, x = 0):
+        #0表示计算属性 1表示计算描述
+        return 希洛克.希洛克属性_输出(属性, self.希洛克选择状态, self.守门人属强.currentIndex(), x)
+
+    def 奥兹玛属性计算(self, 属性, x = 0):
+        #0表示计算属性 1表示计算描述
+        阿斯特罗斯选项 = []
+        for i in range(sum(self.奥兹玛选择状态[:5])):
+            阿斯特罗斯选项.append(self.阿斯特罗斯选项[i].currentIndex())
+        return 奥兹玛.奥兹玛属性_输出(属性, self.奥兹玛选择状态, 阿斯特罗斯选项, x)
+
+    def 自选计算(self, x=0):
+        if x == 0:
+            self.保存配置(self.存档位置)
+            self.关闭排行窗口()
+            self.排行数据.clear()
+
+        self.角色属性A = deepcopy(self.初始属性)
+        if x == 0:
+            self.输入属性(self.角色属性A)
+        else:
+            self.输入属性(self.角色属性A, 1)
+        if self.是否计算 != 1:
+            self.click_window(1)
+            return
+        装备 = []
+        for i in self.自选装备:
+            装备.append(i.currentText())
+
+        temp = deepcopy(self.初始属性)
+        temp.穿戴装备计算套装(装备)
+        套装 = temp.套装栏
+
+        if x != 0:
+            伤害列表 = []
+            for i in range(len(辟邪玉列表)):
+                temp = deepcopy(self.初始属性)
+                self.输入属性(temp, 100 + i)
+                temp.穿戴装备(装备, 套装)
+                伤害列表.append(temp.伤害计算(0))
+
+            提升率 = []
+            for i in range(1, len(伤害列表)):
+                if 伤害列表[0] != 0:
+                    提升率.append(伤害列表[i] / 伤害列表[0] - 1)
+                else:
+                    提升率.append(0)
+
+            提升率排序 = copy(提升率)
+            提升率排序.sort(reverse=True)
+
+            for i in range(len(提升率)):
+                temp = str('%.2f' % (提升率[i] * 100)) + '%'
+                self.辟邪玉提升率2[i].setText(temp)
+                x = 提升率排序.index(提升率[i]) / len(提升率) * 10 - 2
+                y = 1 / (1 + math.exp(-x))
+                if SkinVersion == 'None':
+                    颜色 = (0, 0, 0)
+                else:
+                    颜色 = (int(255 - 80 * y), int(245 - 100 * y),
+                          int(0 + 150 * y))
+                self.辟邪玉提升率1[i].setStyleSheet(
+                    'QLabel{font-size:12px;color:rgb' + str(颜色) + '}')
+                self.辟邪玉提升率2[i].setStyleSheet(
+                    'QLabel{font-size:12px;color:rgb' + str(颜色) + '}')
+
+            self.角色属性A = deepcopy(self.初始属性)
+            self.输入属性(self.角色属性A)
+            C = self.站街计算(装备, 套装)
+            B = deepcopy(self.角色属性A)
+            B.穿戴装备(装备, 套装)
+            B.其它属性计算()
+            总伤害数值 = B.伤害计算(0)
+
+            if len(self.基准值) != 0:
+                self.总伤害.setText(self.百分比输出(总伤害数值, self.基准值[0]))
+            else:
+                self.总伤害.setText(self.格式化输出(str(int(总伤害数值))))
+
+            tempstr = self.装备描述计算(B)
+            图片列表 = self.获取装备图片(装备)
+            for i in range(12):
+                self.图片显示[i].setToolTip(tempstr[i])
+                self.图片显示[i].setMovie(图片列表[i])
+            
+            self.面板显示设置(self.面板显示, B, C)
+            self.打造显示设置(self.打造显示, B, 1)
+
+            count = 0
+            for i in self.词条显示计算(B):
+                self.词条显示[count].setText(i)
+                count += 1
+
+            for i in self.套装名称显示:
+                i.setText('')
+
+            self.套装显示设置(self.套装名称显示, B)
+
+        if x == 0:
+            self.排行数据.append(装备 + [0] + 套装 + ['无'])
+            self.输出界面(0)
+
+    def 站街计算(self, 装备名称, 套装名称):
+        C = deepcopy(self.角色属性A)
+        C.穿戴装备(装备名称, 套装名称)
+        if 调试开关 == 0:
+            for i in C.装备栏:
+                equ.get_equ_by_name(i).城镇属性(C)
+            for i in C.套装栏:
+                equ.get_suit_by_name(i).城镇属性(C)
+            C.装备基础()
+        C.被动倍率计算()
+
+        return C
+
+    # endregion
+
+    # region 读档存档
     def 载入json(self, path='set', page=[0, 1, 2, 3, 4, 5]):
         filepath = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称, path)
 
@@ -3984,7 +4108,7 @@ class 角色窗口(窗口):
                         num += 1
             except:
                 pass
-
+ 
     def 设置技能选项(self, 序号, info):
         try:
             self.等级调整[序号].setCurrentIndex(info['等级'])
@@ -4233,8 +4357,9 @@ class 角色窗口(窗口):
         if self.禁用存档.isChecked():
             return
         self.保存json(path)
+    # endregion
 
-    # 一键修正计算
+    # region 一键修正
     def 一键修正(self, x=0):
         if x == 0:
             if self.组合计算(2) == 0:
@@ -4422,46 +4547,10 @@ class 角色窗口(窗口):
         修改后 = temp + 修改前
         self.属性设置输入[5][15].setText(str(int(修改后)))
 
-    def 提升率颜色显示(self, 属性, k):
-        if k in 属性.词条选择:
-            if len(属性.词条选择) == 1:
-                颜色 = '<font color="#CC00CC">'
-            elif k == 属性.词条选择[0]:
-                if k == 属性.词条选择[1]:
-                    颜色 = '<font color="#FF00FF">'
-                else:
-                    颜色 = '<font color="#CC00CC">'
-            elif k == 属性.词条选择[1]:
-                颜色 = '<font color="#990099">'
-            return 颜色 + ' %.2f' % (属性.词条提升率[k] * 100) + ' </font>'
-        else:
-            return '<font color="#96FF1E"> %.2f' % (属性.词条提升率[k] *
-                                                    100) + ' </font>'
+    # endregion
 
-    def 希洛克武器词条提升率显示(self, 属性):
-        tempstr = []
-        # if sum(属性.词条提升率) > 0:
-        #     tempstr.append(self.提升率颜色显示(属性, 0))
-        #     tempstr.append(self.提升率颜色显示(属性, 1))
-        #     tempstr.append(self.提升率颜色显示(属性, 2))
-        #     tempstr.append(self.提升率颜色显示(属性, 3))
-        #     tempstr.append('·· ')
-        #     tempstr.append(self.提升率颜色显示(属性, 4))
-        #     tempstr.append(self.提升率颜色显示(属性, 5))
-        #     tempstr.append('·· ')
-        #     tempstr.append('·· ')
-        #     tempstr.append('·· ')
-        #     tempstr.append('·· ')
-        #     tempstr.append('·· ')
-        # else:
-        #     for i in range(12):
-        #         tempstr.append('· ')
-        for i in range(12):
-            tempstr.append('· ')
-        return tempstr
-
+    # region 输出界面
     def 词条显示计算(self, 属性):
-        # 词条提升率 = self.希洛克武器词条提升率显示(属性)
 
         属白换算 = 属性.属性倍率 * 属性.属性附加
 
@@ -4492,206 +4581,162 @@ class 角色窗口(窗口):
         tempstr.append(' 移速:' + str(int(round(属性.移动速度 * 100, 0))) + '%')
 
         return tempstr
+    
+    def 面板显示设置(self, 显示, 进图, 站街):
+        显示[0].setText(str(int(进图.面板力量())))
+        显示[1].setText(str(int(进图.面板物理攻击力())))
+        显示[2].setText(str(int(进图.面板智力())))
+        显示[3].setText(str(int(进图.面板魔法攻击力())))
+        tempstr = '<font color="#FFFFFF">{}</font>   '.format(int(站街.站街独立攻击力()))
+        tempstr += '<font color="#96FF32">{}</font>'.format(int(进图.面板独立攻击力()))
+        显示[4].setText(tempstr)
+        显示[5].setText(str(int(进图.火属性强化)))
+        显示[6].setText(str(int(进图.冰属性强化)))
+        显示[7].setText(str(int(进图.光属性强化)))
+        显示[8].setText(str(int(进图.暗属性强化)))
+        显示[9].setText(str(int( 站街.站街力量())))
+        显示[10].setText(str(int(站街.站街物理攻击力())))
+        显示[11].setText(str(int(站街.站街智力())))
+        显示[12].setText(str(int(站街.站街魔法攻击力())))
+        显示[13].setText(str(int(站街.火属性强化)))
+        显示[14].setText(str(int(站街.冰属性强化)))
+        显示[15].setText(str(int(站街.光属性强化)))
+        显示[16].setText(str(int(站街.暗属性强化)))
+    
+    def 套装显示设置(self, 显示, 属性):
+        count = 0
 
-    def 自选计算(self, x=0):
-        if x == 0:
-            self.保存配置(self.存档位置)
-            self.关闭排行窗口()
-            self.排行数据.clear()
+        显示[count].setText(self.称号.currentText())
+        显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+        显示[count].setToolTip(self.称号描述())
+        count += 1
 
-        self.角色属性A = deepcopy(self.初始属性)
-        if x == 0:
-            self.输入属性(self.角色属性A)
-        else:
-            self.输入属性(self.角色属性A, 1)
-        if self.是否计算 != 1:
-            self.click_window(1)
-            return
-        装备 = []
-        for i in self.自选装备:
-            装备.append(i.currentText())
+        显示[count].setText(self.宠物.currentText())
+        显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+        显示[count].setToolTip(self.宠物描述())
+        count += 1
 
-        temp = deepcopy(self.初始属性)
-        temp.穿戴装备计算套装(装备)
-        套装 = temp.套装栏
+        神话所在套装 = []
+        for i in range(11):
+            temp = equ.get_equ_by_name(属性.装备栏[i])
+            if temp.品质 == '神话':
+                神话所在套装.append(temp.所属套装)
 
-        if x != 0:
-            伤害列表 = []
-            for i in range(len(辟邪玉列表)):
-                temp = deepcopy(self.初始属性)
-                self.输入属性(temp, 100 + i)
-                temp.穿戴装备(装备, 套装)
-                伤害列表.append(temp.伤害计算(0))
+        # 套装属性合并
+        套装 = []
+        套装件数 = []
+        套装属性 = []
+        套装名称 = 属性.套装栏
+        for i in range(len(套装名称)):
+            temp = 套装名称[i].split('[')[0]
+            if temp not in 套装:
+                套装.append(temp)
+                套装件数.append([])
+                套装属性.append('')
+            if len(套装名称[i].split('[')) > 1:
+                件数 = 套装名称[i].split('[')[1].split(']')[0]
+                套装件数[套装.index(temp)].append(件数)
+                套装属性[套装.index(
+                    temp
+                )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
+                    i] + '</font><br>' + equ.get_suit_by_name(
+                        套装名称[i]).装备描述(self.角色属性B)[:-4] + '</font><br>'
 
-            提升率 = []
-            for i in range(1, len(伤害列表)):
-                if 伤害列表[0] != 0:
-                    提升率.append(伤害列表[i] / 伤害列表[0] - 1)
-                else:
-                    提升率.append(0)
+        # 自适应属性
+        if sum(self.角色属性A.自适应选项) != 0:
+            套装.append(self.角色属性A.自适应输出())
+            套装件数.append([])
+            套装属性.append('')
+        tempstr = ''
+        武器词条属性 = ['力智', '三攻', '黄字', '白字', '爆伤', '终伤']
+        if self.希洛克武器词条[0].currentIndex() == 1:
+            tempstr += "残香:{}+10%".format(武器词条属性[self.角色属性A.词条选择[0]])
+            if sum(self.希洛克选择状态) == 3:
+                tempstr += "|{}+5%".format(武器词条属性[self.角色属性A.词条选择[1]])
+            套装.append(tempstr)
+            套装件数.append([])
+            套装属性.append('')
 
-            提升率排序 = copy(提升率)
-            提升率排序.sort(reverse=True)
-
-            for i in range(len(提升率)):
-                temp = str('%.2f' % (提升率[i] * 100)) + '%'
-                self.辟邪玉提升率2[i].setText(temp)
-                x = 提升率排序.index(提升率[i]) / len(提升率) * 10 - 2
-                y = 1 / (1 + math.exp(-x))
-                if SkinVersion == 'None':
-                    颜色 = (0, 0, 0)
-                else:
-                    颜色 = (int(255 - 80 * y), int(245 - 100 * y),
-                          int(0 + 150 * y))
-                self.辟邪玉提升率1[i].setStyleSheet(
-                    'QLabel{font-size:12px;color:rgb' + str(颜色) + '}')
-                self.辟邪玉提升率2[i].setStyleSheet(
-                    'QLabel{font-size:12px;color:rgb' + str(颜色) + '}')
-
-            self.角色属性A = deepcopy(self.初始属性)
-            self.输入属性(self.角色属性A)
-            C = self.站街计算(装备, 套装)
-            B = deepcopy(self.角色属性A)
-            B.穿戴装备(装备, 套装)
-            B.其它属性计算()
-            总伤害数值 = B.伤害计算(0)
-            # self.B.计算自适应方式 = 0
-            if len(self.基准值) != 0:
-                self.总伤害.setText(self.百分比输出(总伤害数值, self.基准值[0]))
+        # 显示套装
+        for i in range(len(套装)):
+            if len(套装件数[i]) > 0:
+                显示[count].setText(套装[i] + '[' +
+                                           str(max(套装件数[i])) + ']')
             else:
-                self.总伤害.setText(self.格式化输出(str(int(总伤害数值))))
-
-            tempstr = self.装备描述计算(B)
-            图片列表 = self.获取装备图片(装备)
-            for i in range(12):
-                self.图片显示[i].setToolTip(tempstr[i])
-                self.图片显示[i].setMovie(图片列表[i])
-
-            self.面板显示[0].setText(str(int(B.面板力量())))
-            self.面板显示[1].setText(str(int(B.面板物理攻击力())))
-            self.面板显示[2].setText(str(int(B.面板智力())))
-            self.面板显示[3].setText(str(int(B.面板魔法攻击力())))
-
-            self.面板显示[5].setText(str(int(B.火属性强化)))
-            self.面板显示[6].setText(str(int(B.冰属性强化)))
-            self.面板显示[7].setText(str(int(B.光属性强化)))
-            self.面板显示[8].setText(str(int(B.暗属性强化)))
-
-            tempstr = '<font color="#FFFFFF">' + str(int(
-                C.站街独立攻击力())) + '</font>   '
-            tempstr += '<font color="#96FF32">' + str(int(
-                B.面板独立攻击力())) + '</font>'
-            self.面板显示[4].setText(tempstr)
-
-            self.面板显示[9].setText(str(int(C.站街力量())))
-            self.面板显示[10].setText(str(int(C.站街物理攻击力())))
-            self.面板显示[11].setText(str(int(C.站街智力())))
-            self.面板显示[12].setText(str(int(C.站街魔法攻击力())))
-
-            self.面板显示[13].setText(str(int(C.火属性强化)))
-            self.面板显示[14].setText(str(int(C.冰属性强化)))
-            self.面板显示[15].setText(str(int(C.光属性强化)))
-            self.面板显示[16].setText(str(int(C.暗属性强化)))
-
-            count = 0
-            for i in self.词条显示计算(B):
-                self.词条显示[count].setText(i)
+                显示[count].setText(套装[i])
+            if 套装[i] in 神话所在套装:
+                显示[count].setStyleSheet(
+                    "QLabel{font-size:12px;color:rgb(226,150,146)}")
+            else:
+                显示[count].setStyleSheet(
+                    "QLabel{font-size:12px;color:rgb(255,255,255)}")
+            显示[count].setToolTip(套装属性[i][:-4])
+            count += 1
+        
+        #显示黑鸦词条
+        黑鸦部位 = ['武器', '戒指', '辅助装备', '下装']
+        for i in range(4):
+            if 属性.黑鸦词条[i][4] != '':
+                显示[count].setText(
+                    黑鸦部位[i] + ':' + 属性.黑鸦词条[i][4].replace('<br>', ' '))
+                显示[count].setStyleSheet(
+                    "QLabel{font-size:12px;color:rgb(255,255,255)}")
                 count += 1
 
-            for i in self.套装名称显示:
-                i.setText('')
-            count = 0
+    def 打造显示设置(self, 显示, 属性, x=0):
+        初始x = 10
+        初始y = 31
+        pox_y2 = 11
 
-            self.套装名称显示[count].setText(self.称号.currentText())
-            self.套装名称显示[count].setStyleSheet(
-                "QLabel{font-size:12px;color:rgb(255,255,255)}")
-            self.套装名称显示[count].setToolTip(self.称号描述())
-            count += 1
+        #self.main_frame5
+        if x == 1:
+            初始x += 805
+            初始y += 20 + pox_y2
 
-            self.套装名称显示[count].setText(self.宠物.currentText())
-            self.套装名称显示[count].setStyleSheet(
-                "QLabel{font-size:12px;color:rgb(255,255,255)}")
-            self.套装名称显示[count].setToolTip(self.宠物描述())
-            count += 1
+        偏移量 = 187
+        x坐标 = [
+            32, 0, 0, 32, 0, 偏移量, 偏移量 + 32, 偏移量 + 32, 偏移量, 偏移量, 偏移量 + 32, 32
+        ]
+        y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
 
-            # 位置不够，移除武器
-            # self.套装名称显示[count].setText(装备[11])
-            # self.套装名称显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
-            # count += 1
-
-            套装名称 = []
-            套装名称.extend(套装)
-
-            神话所在套装 = []
-            for i in range(11):
-                temp = equ.get_equ_by_name(装备[i])
-                if temp.品质 == '神话':
-                    神话所在套装.append(temp.所属套装)
-
-            # 套装属性合并
-            套装 = []
-            套装件数 = []
-            套装属性 = []
-            for i in range(len(套装名称)):
-                temp = 套装名称[i].split('[')[0]
-                if temp not in 套装:
-                    套装.append(temp)
-                    套装件数.append([])
-                    套装属性.append('')
-                if len(套装名称[i].split('[')) > 1:
-                    件数 = 套装名称[i].split('[')[1].split(']')[0]
-                    套装件数[套装.index(temp)].append(件数)
-                    套装属性[套装.index(
-                        temp
-                    )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
-                        i] + '</font><br>' + equ.get_suit_by_name(
-                            套装名称[i]).装备描述(self.角色属性B)[:-4] + '</font><br>'
-
-            # 自适应属性
-            if sum(self.角色属性A.自适应选项) != 0:
-                套装.append(self.角色属性A.自适应输出())
-                套装件数.append([])
-                套装属性.append('')
-
-            tempstr = ''
-            武器词条属性 = ['力智', '三攻', '黄字', '白字', '爆伤', '终伤']
-            if self.希洛克武器词条[0].currentIndex() == 1:
-                tempstr += "残香:{}+10%".format(武器词条属性[self.角色属性A.词条选择[0]])
-                if sum(self.希洛克选择状态) == 3:
-                    tempstr += "|{}+5%".format(武器词条属性[self.角色属性A.词条选择[1]])
-                套装.append(tempstr)
-                套装件数.append([])
-                套装属性.append('')
-
-            # 显示套装
-            for i in range(len(套装)):
-                if len(套装件数[i]) > 0:
-                    self.套装名称显示[count].setText(套装[i] + '[' +
-                                               str(max(套装件数[i])) + ']')
+        temp = []
+        for i in range(12):
+            装备 = equ.get_equ_by_name(属性.装备栏[i])
+            打造状态 = 显示[i]
+            if 装备.所属套装 != '智慧产物':
+                打造状态.setText('+' + str(属性.强化等级[i]))
+                if 属性.是否增幅[i] == 1:
+                    打造状态.setStyleSheet(
+                        "QLabel{color:rgb(228,88,169);font-size:12px;font-weight:Bold}"
+                    )
+                    temp.append('增幅+{} {}'.format(属性.强化等级[i], 装备.名称))
                 else:
-                    self.套装名称显示[count].setText(套装[i])
-                if 套装[i] in 神话所在套装:
-                    self.套装名称显示[count].setStyleSheet(
-                        "QLabel{font-size:12px;color:rgb(226,150,146)}")
-                else:
-                    self.套装名称显示[count].setStyleSheet(
-                        "QLabel{font-size:12px;color:rgb(255,255,255)}")
-                self.套装名称显示[count].setToolTip(套装属性[i][:-4])
-                count += 1
+                    打造状态.setStyleSheet(
+                        "QLabel{color:rgb(25,199,234);font-size:12px;font-weight:Bold}"
+                    )
+                    temp.append('强化+{} {}'.format(属性.强化等级[i], 装备.名称))
 
-            黑鸦部位 = ['武器', '戒指', '辅助装备', '下装']
-            for i in range(4):
-                if B.黑鸦词条[i][4] != '':
-                    self.套装名称显示[count].setText(
-                        黑鸦部位[i] + ':' + B.黑鸦词条[i][4].replace('<br>', ' '))
-                    self.套装名称显示[count].setStyleSheet(
-                        "QLabel{font-size:12px;color:rgb(255,255,255)}")
-                    count += 1
+            else:
+                打造状态.setText('+' + str(属性.改造等级[i]))
+                打造状态.setStyleSheet(
+                    "QLabel{color:rgb(249,141,62);font-size:12px;font-weight:Bold;}"
+                )
+                temp.append('改造+{} {}'.format(属性.改造等级[i], 装备.名称))
 
-        if x == 0:
-            self.排行数据.append(装备 + [0] + 套装 + ['无'])
-            self.输出界面(0)
+            打造状态.move(初始x + x坐标[i] + 13, 初始y + y坐标[i] - 8 - pox_y2)
+            打造状态.resize(21,10)
 
+        装备 = equ.get_equ_by_name(属性.装备栏[11])
+        if 装备.所属套装 != '智慧产物' and 属性.武器锻造等级 != 0:
+            打造状态 = 显示[12]
+            打造状态.setText('+' + str(属性.武器锻造等级))
+            打造状态.setStyleSheet(
+                "QLabel{color:rgb(232,104,24);font-size:12px;font-weight:Bold}"
+            )
+            打造状态.move(初始x + x坐标[11] + 13, 初始y + y坐标[11] + 20 - pox_y2)
+            temp[11] += '(锻造+{})'.format(属性.武器锻造等级)
+            打造状态.resize(21,10)
+        
     def 格式化输出(self, 数字文本, x=0):
         if x == 1:
             返回值 = str('%.2f' % round(int(数字文本) / 100000000, 2))
@@ -4709,19 +4754,22 @@ class 角色窗口(窗口):
                         返回值 += ','
                 返回值 += str(数字文本[i])
         return 返回值
+    
+    def 称号描述(self):
+        temp = '<font size="3" face="宋体">'
+        temp += '<font color="#78FF1E">' + self.称号.currentText(
+        ) + '</font><br>'
+        temp += 称号列表[self.称号.currentIndex()].装备描述(self.角色属性B)[:-4]
+        temp += '</font>'
+        return temp
 
-    def 站街计算(self, 装备名称, 套装名称):
-        C = deepcopy(self.角色属性A)
-        C.穿戴装备(装备名称, 套装名称)
-        if 调试开关 == 0:
-            for i in C.装备栏:
-                equ.get_equ_by_name(i).城镇属性(C)
-            for i in C.套装栏:
-                equ.get_suit_by_name(i).城镇属性(C)
-            C.装备基础()
-        C.被动倍率计算()
-
-        return C
+    def 宠物描述(self):
+        temp = '<font size="3" face="宋体">'
+        temp += '<font color="#78FF1E">' + self.宠物.currentText(
+        ) + '</font><br>'
+        temp += 宠物列表[self.宠物.currentIndex()].装备描述(self.角色属性B)[:-4]
+        temp += '</font>'
+        return temp
 
     def 装备描述计算(self, 属性):
         tempstr = []
@@ -4951,8 +4999,8 @@ class 角色窗口(窗口):
             #     temp+= ' - 局部择优'
         else:
             temp += name
-        # temp += '（最多显示前18个技能）' + "装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本
-        # temp += '（最多显示前18个技能）'
+        # temp += "装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本
+
         输出窗口.setWindowTitle(temp)
         输出窗口.setWindowIcon(self.icon)
         QLabel(输出窗口).setPixmap(self.输出背景图片)
@@ -4972,31 +5020,7 @@ class 角色窗口(窗口):
         for i in range(17):
             面板显示.append(QLabel(输出窗口))
 
-        面板显示[0].setText(str(int(self.角色属性B.面板力量())))
-        面板显示[1].setText(str(int(self.角色属性B.面板物理攻击力())))
-        面板显示[2].setText(str(int(self.角色属性B.面板智力())))
-        面板显示[3].setText(str(int(self.角色属性B.面板魔法攻击力())))
-
-        面板显示[5].setText(str(int(self.角色属性B.火属性强化)))
-        面板显示[6].setText(str(int(self.角色属性B.冰属性强化)))
-        面板显示[7].setText(str(int(self.角色属性B.光属性强化)))
-        面板显示[8].setText(str(int(self.角色属性B.暗属性强化)))
-
-        tempstr = '<font color="#FFFFFF">' + str(int(
-            C.站街独立攻击力())) + '</font>   '
-        tempstr += '<font color="#96FF1E">' + str(int(
-            self.角色属性B.面板独立攻击力())) + '</font>'
-        面板显示[4].setText(tempstr)
-
-        面板显示[9].setText(str(int(C.站街力量())))
-        面板显示[10].setText(str(int(C.站街物理攻击力())))
-        面板显示[11].setText(str(int(C.站街智力())))
-        面板显示[12].setText(str(int(C.站街魔法攻击力())))
-
-        面板显示[13].setText(str(int(C.火属性强化)))
-        面板显示[14].setText(str(int(C.冰属性强化)))
-        面板显示[15].setText(str(int(C.光属性强化)))
-        面板显示[16].setText(str(int(C.暗属性强化)))
+        self.面板显示设置(面板显示, self.角色属性B, C)
 
         const = 139
         count = 0
@@ -5045,108 +5069,16 @@ class 角色窗口(窗口):
 
         位置 = 308
         间隔 = 17
-
-        适用称号名称 = QLabel(self.称号.currentText(), 输出窗口)
-        适用称号名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
-        适用称号名称.move(114, 位置 - pox_y2)
-        适用称号名称.resize(150, 18)
-        适用称号名称.setAlignment(Qt.AlignCenter)
-        位置 += 间隔
-        适用称号名称.setToolTip(self.称号描述())
-
-        适用宠物名称 = QLabel(self.宠物.currentText(), 输出窗口)
-        适用宠物名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
-        适用宠物名称.move(114, 位置 - pox_y2)
-        适用宠物名称.resize(150, 18)
-        适用宠物名称.setAlignment(Qt.AlignCenter)
-        位置 += 间隔
-        适用宠物名称.setToolTip(self.宠物描述())
-
-        # 位置不够 先移除武器
-        # 适用武器名称=QLabel(装备名称[11],输出窗口)
-        # 适用武器名称.setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
-        # 适用武器名称.move(114, 位置 - pox_y2)
-        # 适用武器名称.resize(150,18)
-        # 适用武器名称.setAlignment(Qt.AlignCenter)
-        # 位置 += 间隔
-
-        神话所在套装 = []
-        for i in range(11):
-            temp = equ.get_equ_by_name(装备名称[i])
-            if temp.品质 == '神话':
-                神话所在套装.append(temp.所属套装)
-
-        套装 = []
-        套装件数 = []
-        套装属性 = []
-        for i in range(len(套装名称)):
-            temp = 套装名称[i].split('[')[0]
-            if temp not in 套装:
-                套装.append(temp)
-                套装件数.append([])
-                套装属性.append('')
-            if len(套装名称[i].split('[')) > 1:
-                件数 = 套装名称[i].split('[')[1].split(']')[0]
-                套装件数[套装.index(temp)].append(件数)
-                套装属性[套装.index(
-                    temp
-                )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
-                    i] + '</font><br>' + equ.get_suit_by_name(套装名称[i]).装备描述(
-                        self.角色属性B)[:-4] + '</font><br>'
-
-
-        # 自适应属性
-        if sum(self.角色属性B.自适应选项) != 0:
-            套装.append(self.角色属性B.自适应输出())
-            套装件数.append([])
-            套装属性.append('')
-
-        tempstr = ''
-        武器词条属性 = ['力智', '三攻', '黄字', '白字', '爆伤', '终伤']
-        if self.希洛克武器词条[0].currentIndex() == 1:
-            tempstr += "残香:{}+10%".format(武器词条属性[self.角色属性B.词条选择[0]])
-            if sum(self.希洛克选择状态) == 3:
-                tempstr += "|{}+5%".format(武器词条属性[self.角色属性B.词条选择[1]])
-            套装.append(tempstr)
-            套装件数.append([])
-            套装属性.append('')
-
-        for i in range(len(套装)):
-            适用套装名称 = QLabel(输出窗口)
-            if len(套装件数[i]) > 0:
-                适用套装名称.setText(套装[i] + '[' + str(max(套装件数[i])) + ']')
-            else:
-                适用套装名称.setText(套装[i])
-            适用套装名称.move(114, 位置 + i * 间隔 - pox_y2)
-            适用套装名称.resize(150, 18)
-            适用套装名称.setAlignment(Qt.AlignCenter)
-            if 套装[i] in 神话所在套装:
-                适用套装名称.setStyleSheet(
-                    "QLabel{font-size:12px;color:rgb(226,150,146)}")
-            else:
-                适用套装名称.setStyleSheet(
-                    "QLabel{font-size:12px;color:rgb(255,255,255)}")
-            sign = 1
-            if sum(self.角色属性B.自适应选项) != 0:
-                if i == len(套装名称) - 1:
-                    sign = 0
-            if sign == 1:
-                适用套装名称.setToolTip(套装属性[i][:-4])
-        位置 += 间隔 * len(套装)
-
-        黑鸦部位 = ['武器', '戒指', '辅助装备', '下装']
-        黑鸦显示 = []
-        for i in range(4):
-            if self.角色属性B.黑鸦词条[i][4] != '':
-                黑鸦词条 = QLabel(
-                    黑鸦部位[i] + ':' + self.角色属性B.黑鸦词条[i][4].replace('<br>', ' '),
-                    输出窗口)
-                黑鸦词条.setStyleSheet(
-                    "QLabel{font-size:12px;color:rgb(255,255,255)}")
-                黑鸦词条.move(114, 位置 - pox_y2)
-                黑鸦词条.resize(150, 18)
-                黑鸦词条.setAlignment(Qt.AlignCenter)
-                位置 += 间隔
+        
+        套装名称显示 = []
+        for i in range(12):
+            套装名称显示.append(QLabel(输出窗口))
+            套装名称显示[i].move(114, 位置 - pox_y2 + 间隔 * i)
+            套装名称显示[i].resize(150, 18)
+            套装名称显示[i].setAlignment(Qt.AlignCenter)
+            套装名称显示[i].setText('')
+        
+        self.套装显示设置(套装名称显示, self.角色属性B)
 
         实际技能等级 = []
         技能等效CD = []
@@ -5383,14 +5315,14 @@ class 角色窗口(窗口):
         y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
 
         tempstr = self.装备描述计算(self.角色属性B)
-
+        
+        
         for i in range(12):
             装备图标 = QLabel(输出窗口)
             装备图标.setMovie(图片列表[i])
             装备图标.resize(26, 26)
             装备图标.move(初始x + x坐标[i], 初始y + y坐标[i] - pox_y2)
             装备图标.setAlignment(Qt.AlignCenter)
-            装备 = equ.get_equ_by_name(self.角色属性B.装备栏[i])
             if self.角色属性B.装备栏[i] == 百变怪:
                 图标遮罩 = QLabel(输出窗口)
                 图标遮罩.setStyleSheet("QLabel{background-color:rgba(0,0,0,0.5)}")
@@ -5400,42 +5332,13 @@ class 角色窗口(窗口):
             else:
                 装备图标.setToolTip(tempstr[i])
 
-        temp = []
-        for i in range(12):
-            装备 = equ.get_equ_by_name(self.角色属性B.装备栏[i])
-            打造状态 = QLabel(输出窗口)
-            if 装备.所属套装 != '智慧产物':
-                打造状态.setText('+' + str(self.角色属性B.强化等级[i]))
-                if self.角色属性B.是否增幅[i] == 1:
-                    打造状态.setStyleSheet(
-                        "QLabel{color:rgb(228,88,169);font-size:12px;font-weight:Bold}"
-                    )
-                    temp.append('增幅+{} {}'.format(self.角色属性B.强化等级[i], 装备.名称))
-                else:
-                    打造状态.setStyleSheet(
-                        "QLabel{color:rgb(25,199,234);font-size:12px;font-weight:Bold}"
-                    )
-                    temp.append('强化+{} {}'.format(self.角色属性B.强化等级[i], 装备.名称))
-
-            else:
-                打造状态.setText('+' + str(self.角色属性B.改造等级[i]))
-                打造状态.setStyleSheet(
-                    "QLabel{color:rgb(249,141,62);font-size:12px;font-weight:Bold;}"
-                )
-                temp.append('改造+{} {}'.format(self.角色属性B.改造等级[i], 装备.名称))
-
-            打造状态.move(初始x + x坐标[i] + 13, 初始y + y坐标[i] - 8 - pox_y2)
-
-        装备 = equ.get_equ_by_name(self.角色属性B.装备栏[11])
-        if 装备.所属套装 != '智慧产物' and self.角色属性B.武器锻造等级 != 0:
-            打造状态 = QLabel(输出窗口)
-            打造状态.setText('+' + str(self.角色属性B.武器锻造等级))
-            打造状态.setStyleSheet(
-                "QLabel{color:rgb(232,104,24);font-size:12px;font-weight:Bold}"
-            )
-            打造状态.move(初始x + x坐标[11] + 13, 初始y + y坐标[11] + 20 - pox_y2)
-            temp[11] += '(锻造+{})'.format(self.角色属性B.武器锻造等级)
-
+        打造显示 = []
+        for i in range(13):
+            打造显示.append(QLabel(输出窗口))
+            打造显示[i].move(-100, -100)
+    
+        self.打造显示设置(打造显示, self.角色属性B)
+        
         pdata['名称'] = self.角色属性A.实际名称
         pdata['装备'] = temp
 
@@ -5492,18 +5395,9 @@ class 角色窗口(窗口):
             os.startfile(result_path)
         except:
             pass
+    # endregion
 
-    def 希洛克属性计算(self, 属性, x = 0):
-        #0表示计算属性 1表示计算描述
-        return 希洛克.希洛克属性_输出(属性, self.希洛克选择状态, self.守门人属强.currentIndex(), x)
-
-    def 奥兹玛属性计算(self, 属性, x = 0):
-        #0表示计算属性 1表示计算描述
-        阿斯特罗斯选项 = []
-        for i in range(sum(self.奥兹玛选择状态[:5])):
-            阿斯特罗斯选项.append(self.阿斯特罗斯选项[i].currentIndex())
-        return 奥兹玛.奥兹玛属性_输出(属性, self.奥兹玛选择状态, 阿斯特罗斯选项, x)
-
+    # region 输入属性
     def 输入属性(self, 属性, x=0):
 
         i = self.攻击目标.currentIndex()
@@ -5692,32 +5586,6 @@ class 角色窗口(窗口):
         self.奥兹玛属性计算(属性)
         self.基础属性(属性)
 
-    def 加载护石(self, 属性):
-        for k in range(3):
-            if self.护石栏[k].currentText() != '无':
-                try:
-                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石()
-                except:
-                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石(
-                        self.护石类型选项[k].currentIndex())
-
-        属性.护石第一栏 = self.护石栏[0].currentText()
-        属性.护石第二栏 = self.护石栏[1].currentText()
-        属性.护石第三栏 = self.护石栏[2].currentText()
-
-        for i in range(9):
-            if self.符文[i].currentText() != '无' and self.符文效果[i].currentText(
-            ) != '无':
-                for j in self.符文效果[i].currentText().split(','):
-                    if '攻击' in j:
-                        属性.技能栏[self.角色属性A.技能序号[
-                            self.符文[i].currentText()]].倍率 *= 1 + int(
-                                j.replace('攻击', '').replace('%', '')) / 100
-                    if 'CD' in j:
-                        属性.技能栏[self.角色属性A.技能序号[
-                            self.符文[i].currentText()]].CD *= 1 + int(
-                                j.replace('CD', '').replace('%', '')) / 100
-
     def 基础属性(self, 属性):
         if 切装模式 == 1:
             属性.切装修正.clear()
@@ -5896,3 +5764,5 @@ class 角色窗口(窗口):
                     属性.所有属性强化加成(-(float(self.属性设置输入[8][11].text())))
                 # 武器全属强为13
                 属性.所有属性强化加成(int(13))
+
+    # endregion
