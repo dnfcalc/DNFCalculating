@@ -905,13 +905,6 @@ class 归元·街霸·女(角色窗口):
     def 界面(self):
         super().界面()
         self.收招选择 = []
-        self.打桩展示 = QPushButton('打桩展示(25S)', self.main_frame2)
-        self.打桩展示.setStyleSheet(按钮样式)
-        self.打桩展示.resize(100, 25)
-        self.打桩展示.move(990, self.height() - 100)
-        self.打桩展示.clicked.connect(lambda state, index=0: QDesktopServices.openUrl(
-            QUrl('https://www.bilibili.com/video/BV1jz4y1Z7hp')))
-        count = 0
 
         self.死亡毒雾力智开关 = QCheckBox('死亡毒雾效果', self.main_frame2)
         self.死亡毒雾力智开关.resize(100, 20)

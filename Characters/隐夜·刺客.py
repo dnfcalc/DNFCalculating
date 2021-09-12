@@ -606,12 +606,6 @@ class 隐夜·刺客(角色窗口):
     def 界面(self):
         super().界面()
         self.收招选择 = []
-        self.打桩展示 = QPushButton('打桩展示(25S)', self.main_frame2)
-        self.打桩展示.setStyleSheet(按钮样式)
-        self.打桩展示.resize(100, 25)
-        self.打桩展示.move(990, self.height() - 100)
-        self.打桩展示.clicked.connect(lambda state, index=0: QDesktopServices.openUrl(
-            QUrl('https://www.bilibili.com/video/BV1454y1t71Y')))
         count = 0
         for i in self.初始属性.技能栏:
             if i.是否有伤害 == 1:
