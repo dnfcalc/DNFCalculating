@@ -2459,7 +2459,8 @@ class 角色窗口(窗口):
                     elif 行2技能[j][0] == 999:
                         templist[n].addItem('无')
                         for skill in self.角色属性A.技能栏:
-                            templist[n].addItem(skill.名称 + 'Lv+1')
+                            if skill.所在等级 <= 85:
+                                templist[n].addItem(skill.名称 + 'Lv+1')
                     else:
                         templist[n].addItem('无')
                         for s_id in 行2技能[j]:
@@ -4087,7 +4088,7 @@ class 角色窗口(窗口):
         else:
             # 如果不存在任何存档则载入重置存档
             self.载入json(path='reset')
-            
+
     def 设置技能选项(self, 序号, info):
         try:
             self.等级调整[序号].setCurrentIndex(info['level'])
