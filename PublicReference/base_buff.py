@@ -425,7 +425,7 @@ class 角色属性(属性):
     def 适用数值计算(self):
         self.专属词条计算()
         for skill in self.技能表.values():
-            if skill.是否启用 != 0:
+            if skill.是否启用:
                 结算 = skill.结算统计()
                 self.智力 += 结算[0]
                 self.体力 += 结算[1]
@@ -688,14 +688,14 @@ class 角色属性(属性):
     def 数据计算(self):
         总数据 = []
         for skill in self.技能表.values():
-            if skill.是否启用 == 1:
+            if skill.是否启用:
                 总数据.append(skill.结算统计())
             else:
                 总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
         return 总数据
 
     def 预计算(self, 自动切装 = False):
-        if self.双装备模式 == 1 and self.技能表['一次觉醒'].是否启用 != 0 and 自动切装:
+        if self.双装备模式 == 1 and self.技能表['一次觉醒'].是否启用 and 自动切装:
             # 用于计算一觉
             temp = deepcopy(self)
             # 拷贝数据,并修改装备,返回可能的组合
@@ -849,12 +849,12 @@ class 角色属性(属性):
     def 择优提升率计算(self):
         总数据 = []
         self.适用数值计算()
-        if self.双装备模式 == 1 and self.技能表['一次觉醒'].是否启用 != 0:
+        if self.双装备模式 == 1 and self.技能表['一次觉醒'].是否启用:
             if self.实际名称 == 'BUFF·神启·圣骑士':
                 if self.是否加觉醒 == 1:
                     self.技能表['一次觉醒'].适用数值 += self.一觉切装加二觉增加体精
         for skill in self.技能表.values():
-            if skill.是否启用 != 0:
+            if skill.是否启用:
                 values = skill.结算统计()
                 if skill.所在等级 in [50, 100]:
                     values = [round(i * self.觉醒择优系数) for i in values]
@@ -3102,7 +3102,7 @@ class 角色窗口(窗口):
             属性.系统奶系数 = 2.31
             属性.系统奶基数 = 4581
 
-        if self.初始属性.技能表['三次觉醒'].是否启用 != 0:
+        if self.初始属性.技能表['三次觉醒'].是否启用:
             if self.觉醒选择状态 == 1:
                 属性.技能表['三次觉醒'].关联技能 = [属性.技能表['一次觉醒'].名称]
             elif self.觉醒选择状态 == 2:
@@ -4439,7 +4439,7 @@ class 角色窗口(窗口):
             属性.系统奶系数 = 2.31
             属性.系统奶基数 = 4581
 
-        if self.初始属性.技能表['三次觉醒'].是否启用 != 0:
+        if self.初始属性.技能表['三次觉醒'].是否启用:
             if self.觉醒选择状态 == 1:
                 属性.技能表['三次觉醒'].关联技能 = [属性.技能表['一次觉醒'].名称]
             elif self.觉醒选择状态 == 2:
