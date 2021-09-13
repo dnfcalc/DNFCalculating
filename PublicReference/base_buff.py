@@ -310,7 +310,8 @@ class 角色属性(属性):
                 self.精神 += x * 2
             # 装备属性
             self.智力 += temp.智力['板甲']
-            self.体力 += 防具体力(temp.等级, temp.品质, temp.部位)
+            self.体力 += temp.体力['板甲']
+            self.精神 += temp.精神['板甲']
 
         for i in [9, 10]:
             temp = equ.get_equ_by_name(self.装备栏[i])
