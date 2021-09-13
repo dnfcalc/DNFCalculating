@@ -3265,7 +3265,7 @@ class 角色窗口(窗口):
         num = 0
         总数据 = []
         for skill in B.技能表.values():
-            详情 = skill.结算统计()
+            详情 = skill.结算统计() if skill.是否启用 else [0]*8
             总数据.append(详情)
             if round(sum(详情)) != 0:
                 合计力量 += 详情[3]
@@ -3290,17 +3290,7 @@ class 角色窗口(窗口):
             总奶量 += ',独立+' + str(round(合计独立))
             # self.总伤害.setText(str(tempstr))
 
-        提升率 = self.角色属性A.提升率计算(总数据)
-
-
-
-
-
-
-
-
-
-
+        提升率 = B.提升率计算(总数据)
 
         x = B.BUFF面板()
         y = B.一觉面板()
