@@ -4911,11 +4911,10 @@ class 角色窗口(窗口):
 
         #属性强化
         tempstr = ''
-        if 进图.所有属性强化增加 != 1.0:
-            x = 进图.所有属性强化增加 - 1
-            y = ' +{}%' if x > 0 else ' {}%'
-            tempstr += '<font color="{}">{}</font>'.format(
-                self.辟邪玉显示(), y.format(round(x * 100, 1)))
+        # if 进图.所有属性强化增加 != 1.0:
+        #     x = 进图.所有属性强化增加 - 1
+        #     y = ' +{}%' if x > 0 else ' {}%'
+        #     tempstr += '<font color="{}">{}</font>'.format(self.辟邪玉显示(), y.format(round(x * 100, 1)))
         显示[5].setText('{}{}'.format(int(进图.火属性强化), tempstr))
         显示[6].setText('{}{}'.format(int(进图.冰属性强化), tempstr))
         显示[7].setText('{}{}'.format(int(进图.光属性强化), tempstr))
