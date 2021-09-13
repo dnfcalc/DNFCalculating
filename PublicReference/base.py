@@ -43,6 +43,7 @@ class 技能:
             else:
                 self.等级 += x
 
+
 class 主动技能(技能):
     # 只扩展了技能的三条属性，第一条技能hit默认1,2、3条hit默认为0，需要手动赋值
     # 如果需要继续扩展，可以在各自职业类内继承后自行扩展，同时需要重写下等效百分比函数
@@ -83,10 +84,12 @@ class 主动技能(技能):
     def 等效CD(self, 武器类型, 输出类型):
         return round(self.CD / self.恢复 * 武器冷却惩罚(武器类型, 输出类型, self.版本), 1)
 
+
 class 被动技能(技能):
     是否主动 = 0
     是否有伤害 = 0
     关联技能 = ['所有']
+
 
 符文效果选项 = [
     '无', '攻击+5%,CD+3%', 'CD-4%', '攻击+3%', '攻击-3%,CD-6%', '攻击+3%,CD+2%',
@@ -98,6 +101,7 @@ class 被动技能(技能):
     0, 31, 40, 48, 58, 67, 79, 90, 103, 116, 131, 145, 161, 178, 194, 212, 230,
     250, 270, 292, 313
 ]
+
 
 class 角色属性(属性):
 
@@ -242,7 +246,7 @@ class 角色属性(属性):
     输出提升率 = 0
 
     # endregion
-    
+
     # region 词条属性
     def 附加伤害加成(self, x, 可变=0, 辟邪玉加成=1):
         if self.装备描述 == 1:
@@ -818,7 +822,7 @@ class 角色属性(属性):
                 else:
                     for k in i.非关联技能3:
                         self.技能栏[self.技能序号[k]].被动倍率 /= i.加成倍率3(self.武器类型)
-    
+
     def 属性倍率计算(self):
         # 火、冰、光、暗
         self.属性倍率组 = []
@@ -866,7 +870,7 @@ class 角色属性(属性):
 
         # 7.8日,伤害数据压缩
         self.伤害指数 /= 1000
-    
+
     def 伤害计算(self, x=0):
         if 切装模式 == 1 and self.切装判断():
             temp = self.装备替换()
@@ -896,7 +900,7 @@ class 角色属性(属性):
             #     self.择优拷贝 = deepcopy(self)
             #     self.择优拷贝.计算自适应 = 0
             return self.数据计算(x)
-    
+
     def 技能释放次数解析(self, 技能释放次数):
         for i in range(len(self.技能栏)):
             if '/CD' in self.次数输入[i]:
@@ -1013,7 +1017,7 @@ class 角色属性(属性):
         # 冲突属性计算
         self.伤害增加加成(self.黄字)
         self.暴击伤害加成(self.爆伤)
-    
+
     def 预处理(self):
         self.装备属性计算()
         self.三觉屏蔽1()
@@ -1034,6 +1038,7 @@ class 角色属性(属性):
 
         for i in self.套装栏:
             equ.get_suit_by_name(i).其它属性(self)
+
     # endregion
 
     # region 择优相关
@@ -1589,7 +1594,7 @@ class 角色属性(属性):
                 temp += '|'
             temp += '光环:' + self.自适应描述[1]
         return temp
-    
+
     def 黑鸦词条扣除(self):
         for i in range(4):
             self.黑鸦词条[i].append("")
@@ -1628,7 +1633,7 @@ class 角色属性(属性):
             黑鸦武器属性列表[变换词条[0]].加成属性(self, 增减 * 变换词条[1] / 100)
 
     # endregion
-    
+
     # region 功能函数
     def 装备检查(self, 装备名称):
         for i in self.装备栏:
@@ -1680,7 +1685,9 @@ class 角色属性(属性):
                 if j.所在等级 == 100:
                     temp = j
             self.技能栏[self.技能序号[self.觉醒之抉择技能]].被动倍率 *= 1.1 + 0.05 * temp.等级
+
     # endregion
+
 
 class 角色窗口(窗口):
     def __init__(self):
@@ -3044,8 +3051,9 @@ class 角色窗口(窗口):
         self.计算按钮3.move(990, self.height() - 70)
         self.计算按钮3.resize(110, 30)
         self.计算按钮3.setStyleSheet(按钮样式)
+
     # endregion
-    
+
     # region 界面函数
     #第二页
     def 输出时间变化(self):
@@ -3054,7 +3062,7 @@ class 角色窗口(窗口):
         输出时间变化提示.setWindowIcon(self.icon)
         输出时间变化提示.exec_()
         pass
-    
+
     def 技能列表显示排序(self, skill):
         temp = deepcopy(skill)
         temp.sort(key=operator.attrgetter('所在等级'))
@@ -3300,6 +3308,7 @@ class 角色窗口(窗口):
         else:
             b.setStyleSheet(c)
             b.setEnabled(True)
+
     # endregion
 
     # region 计算相关
@@ -3308,11 +3317,11 @@ class 角色窗口(窗口):
         super().奥兹玛选择(index, x)
         self.阿斯特罗斯选项显示(sum(self.奥兹玛选择状态[0:5]))
 
-    def 希洛克属性计算(self, 属性, x = 0):
+    def 希洛克属性计算(self, 属性, x=0):
         #0表示计算属性 1表示计算描述
         return 希洛克.希洛克属性_输出(属性, self.希洛克选择状态, self.守门人属强.currentIndex(), x)
 
-    def 奥兹玛属性计算(self, 属性, x = 0):
+    def 奥兹玛属性计算(self, 属性, x=0):
         #0表示计算属性 1表示计算描述
         阿斯特罗斯选项 = []
         for i in range(sum(self.奥兹玛选择状态[:5])):
@@ -3392,7 +3401,7 @@ class 角色窗口(窗口):
             for i in range(12):
                 self.图片显示[i].setToolTip(tempstr[i])
                 self.图片显示[i].setMovie(图片列表[i])
-            
+
             self.面板显示设置(self.面板显示, B, C)
             self.打造显示设置(self.打造显示, B, 1)
 
@@ -3428,7 +3437,7 @@ class 角色窗口(窗口):
     # region 读档存档
     def 载入旧版json(self, path='set', page=[0, 1, 2, 3, 4, 5]):
         filepath = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称, path)
-        
+
         if 0 in page:
             # 第一页(装备/选择/打造)
             try:
@@ -3439,15 +3448,15 @@ class 角色窗口(窗口):
                     set_data = json.load(fp)
                 fp.close()
                 try:
-                    store.set("/carry/data/title",set_data['称号'])
+                    store.set("/carry/data/title", set_data['称号'])
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/pet",set_data['称号'])
+                    store.set("/carry/data/pet", set_data['称号'])
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/compute_mode",set_data['计算模式'])
+                    store.set("/carry/data/compute_mode", set_data['计算模式'])
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -3455,19 +3464,21 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/pet_equip_adaptive",set_data['宠物装备择优'])
+                    store.set("/carry/data/pet_equip_adaptive",
+                              set_data['宠物装备择优'])
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/aura_adaptive",set_data['光环词条择优'])
+                    store.set("/carry/data/aura_adaptive", set_data['光环词条择优'])
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/myth_top_checked",set_data['神话排名勾选'])                
+                    store.set("/carry/data/myth_top_checked",
+                              set_data['神话排名勾选'])
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/damage_unit",set_data['亿为单位显示'])
+                    store.set("/carry/data/damage_unit", set_data['亿为单位显示'])
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -3478,7 +3489,7 @@ class 角色窗口(窗口):
                     store.set("/carry/data/attack_elemental", set_data['攻击属性'])
                 except Exception as error:
                     logger.error(error)
-                try:                    
+                try:
                     store.set("/carry/data/remodel_limit", set_data['改造数量'])
                 except Exception as error:
                     logger.error(error)
@@ -3515,17 +3526,19 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/awakening_binding",set_data['觉醒选择'])
+                    store.set("/carry/data/awakening_binding",
+                              set_data['觉醒选择'])
                 except Exception as error:
                     logger.error(error)
                 try:
                     if '远古记忆' in set_data:
-                        store.set("/carry/data/ancient_memory",set_data['远古记忆'])
+                        store.set("/carry/data/ancient_memory",
+                                  set_data['远古记忆'])
                 except Exception as error:
                     logger.error(error)
                 try:
                     if '刀魂之卡赞' in set_data:
-                        store.set("/carry/data/kazan",set_data['刀魂之卡赞'])
+                        store.set("/carry/data/kazan", set_data['刀魂之卡赞'])
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -3547,16 +3560,13 @@ class 角色窗口(窗口):
                 try:
                     store.set("/carry/data/consumables", set_data['药剂勾选'])
                 except Exception as error:
-                    logger.error(error) 
+                    logger.error(error)
                 try:
                     skills = {}
-                    技能选项 = set_data['技能选项']             
+                    技能选项 = set_data['技能选项']
                     for key in 技能选项.keys():
                         技能 = 技能选项[key]
-                        skill = {
-                            'level': 技能['等级'],
-                            'count': 技能['次数']
-                        }
+                        skill = {'level': 技能['等级'], 'count': 技能['次数']}
                         if 'TP' in 技能:
                             skill['tp'] = 技能['TP']
                         if '宠物' in 技能:
@@ -3566,7 +3576,7 @@ class 角色窗口(窗口):
                         skills[key] = skill
                     store.set("/carry/data/skill", skills)
                 except Exception as error:
-                        logger.error(error)
+                    logger.error(error)
             except Exception as error:
                 logger.error(error)
 
@@ -3605,7 +3615,8 @@ class 角色窗口(窗口):
                     set_data = json.load(fp)
                 fp.close()
                 try:
-                    store.set("/carry/data/myth_properties",set_data['神话属性修正'])
+                    store.set("/carry/data/myth_properties",
+                              set_data['神话属性修正'])
                 except Exception as error:
                     logger.error(error)
             except Exception as error:
@@ -3622,19 +3633,22 @@ class 角色窗口(窗口):
                 fp.close()
 
                 try:
-                    store.set("/carry/data/remodel_upgrade",set_data['智慧产物升级'])
+                    store.set("/carry/data/remodel_upgrade",
+                              set_data['智慧产物升级'])
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/weapon_adaptive_mode",set_data['武器择优模式'])
+                    store.set("/carry/data/weapon_adaptive_mode",
+                              set_data['武器择优模式'])
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/nameless_elemental_value",set_data['守门人属强'])
+                    store.set("/carry/data/nameless_elemental_value",
+                              set_data['守门人属强'])
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/siroco_weapon",set_data['希洛克武器'])
+                    store.set("/carry/data/siroco_weapon", set_data['希洛克武器'])
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -3646,11 +3660,12 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/astaroth_options", set_data['阿斯特罗斯选项'])
+                    store.set("/carry/data/astaroth_options",
+                              set_data['阿斯特罗斯选项'])
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set('/carry/data/black_purgatory',set_data['黑鸦选择'])
+                    store.set('/carry/data/black_purgatory', set_data['黑鸦选择'])
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -3675,12 +3690,14 @@ class 角色窗口(窗口):
                 fp.close()
 
                 try:
-                    store.set("/carry/data/self_select/equips",[set_data['自选装备']])
+                    store.set("/carry/data/self_select/equips",
+                              [set_data['自选装备']])
                     store.set("/carry/data/self_select/column_index", 0)
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/carry/data/self_select/locked",set_data['装备锁定'])
+                    store.set("/carry/data/self_select/locked",
+                              set_data['装备锁定'])
                 except Exception as error:
                     logger.error(error)
             except Exception as error:
@@ -3694,7 +3711,7 @@ class 角色窗口(窗口):
                       encoding='utf-8') as fp:
                 set_data = json.load(fp)
             fp.close()
-            store.set("/carry/data/character_sets",set_data)
+            store.set("/carry/data/character_sets", set_data)
         except Exception as error:
             logger.error(error)
         pass
@@ -3719,47 +3736,56 @@ class 角色窗口(窗口):
             # 第一页(装备/选择/打造)
             try:
                 try:
-                    self.称号.setCurrentIndex(store.get("/carry/data/title",0))
+                    self.称号.setCurrentIndex(store.get("/carry/data/title", 0))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.宠物.setCurrentIndex(store.get("/carry/data/pet",0))
+                    self.宠物.setCurrentIndex(store.get("/carry/data/pet", 0))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.计算模式选择.setCurrentIndex(store.get("/carry/data/compute_mode",0))
+                    self.计算模式选择.setCurrentIndex(
+                        store.get("/carry/data/compute_mode", 0))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.百变怪选项.setChecked(store.get("/carry/data/ditto_checked",False))
+                    self.百变怪选项.setChecked(
+                        store.get("/carry/data/ditto_checked", False))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.红色宠物装备.setChecked(store.get("/carry/data/pet_equip_adaptive",True))
+                    self.红色宠物装备.setChecked(
+                        store.get("/carry/data/pet_equip_adaptive", True))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.光环自适应.setChecked(store.get("/carry/data/aura_adaptive",True))
+                    self.光环自适应.setChecked(
+                        store.get("/carry/data/aura_adaptive", True))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.神话排名选项.setChecked(store.get("/carry/data/myth_top_checked",True))
+                    self.神话排名选项.setChecked(
+                        store.get("/carry/data/myth_top_checked", True))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.显示选项.setChecked(store.get("/carry/data/damage_unit",True))
+                    self.显示选项.setChecked(
+                        store.get("/carry/data/damage_unit", True))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.线程数选择.setCurrentIndex(store.get("/carry/data/thread_count"))
+                    self.线程数选择.setCurrentIndex(
+                        store.get("/carry/data/thread_count"))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.攻击属性选项.setCurrentIndex(store.get("/carry/data/attack_elemental"))
+                    self.攻击属性选项.setCurrentIndex(
+                        store.get("/carry/data/attack_elemental"))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.智慧产物限制.setCurrentIndex(store.get("/carry/data/remodel_limit"))
+                    self.智慧产物限制.setCurrentIndex(
+                        store.get("/carry/data/remodel_limit"))
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -3799,7 +3825,8 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.时间输入.setCurrentIndex(store.get("/carry/data/time_input"))
+                    self.时间输入.setCurrentIndex(
+                        store.get("/carry/data/time_input"))
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -3808,12 +3835,14 @@ class 角色窗口(窗口):
                     logger.error(error)
                 try:
                     if self.初始属性.远古记忆 != -1:
-                        self.远古记忆.setCurrentIndex(store.get("/carry/data/ancient_memory"))
+                        self.远古记忆.setCurrentIndex(
+                            store.get("/carry/data/ancient_memory"))
                 except Exception as error:
                     logger.error(error)
                 try:
                     if self.初始属性.刀魂之卡赞 != -1:
-                        self.刀魂之卡赞.setCurrentIndex(store.get("/carry/data/kazan"))
+                        self.刀魂之卡赞.setCurrentIndex(
+                            store.get("/carry/data/kazan"))
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -3921,15 +3950,18 @@ class 角色窗口(窗口):
             # 第五页(辟邪玉/希洛克/黑鸦/奥兹玛)
             try:
                 try:
-                    self.智慧产物升级.setChecked(store.get("/carry/data/remodel_upgrade"))
+                    self.智慧产物升级.setChecked(
+                        store.get("/carry/data/remodel_upgrade"))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.武器择优模式.setCurrentIndex(store.get("/carry/data/weapon_adaptive_mode"))
+                    self.武器择优模式.setCurrentIndex(
+                        store.get("/carry/data/weapon_adaptive_mode"))
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.守门人属强.setCurrentIndex(store.get("/carry/data/nameless_elemental_value"))
+                    self.守门人属强.setCurrentIndex(
+                        store.get("/carry/data/nameless_elemental_value"))
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -3957,7 +3989,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = store.get("/carry/data/astaroth_options",[])
+                    data = store.get("/carry/data/astaroth_options", [])
                     num = 0
                     for i in data:
                         self.阿斯特罗斯选项[num].setCurrentIndex(i)
@@ -3976,7 +4008,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = store.get("/carry/data/siroco",[])
+                    data = store.get("/carry/data/siroco", [])
                     self.希洛克选择(0, 1)
                     num = 0
                     for i in data:
@@ -3986,7 +4018,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = store.get("/carry/data/ozma",[])
+                    data = store.get("/carry/data/ozma", [])
                     self.奥兹玛选择(0, 1)
                     num = 0
                     for i in data:
@@ -4002,8 +4034,9 @@ class 角色窗口(窗口):
             # 第六页(自选装备计算)
             try:
                 try:
-                    data = store.get("/carry/data/self_select/equips",[[]])
-                    column_index = store.get("/carry/data/self_select/column_index",0)
+                    data = store.get("/carry/data/self_select/equips", [[]])
+                    column_index = store.get(
+                        "/carry/data/self_select/column_index", 0)
                     data = data[column_index]
                     num = 0
                     for i in data:
@@ -4024,7 +4057,7 @@ class 角色窗口(窗口):
 
         # 职业存档
         try:
-            data = store.get("/carry/data/character_set",[])
+            data = store.get("/carry/data/character_set", [])
             for i in self.职业存档:
                 try:
                     key = i[0]
@@ -4046,12 +4079,14 @@ class 角色窗口(窗口):
 
     def 载入配置(self, path='set'):
         filepath = './ResourceFiles/{}/{}/'.format(self.角色属性A.实际名称, path)
-        if os.path.exists(os.path.join(filepath, "page_1.json")) or os.path.exists(os.path.join(filepath, "store.json")):
+        if os.path.exists(os.path.join(
+                filepath, "page_1.json")) or os.path.exists(
+                    os.path.join(filepath, "store.json")):
             self.载入json(path)
             return
-        else: 
+        else:
             # 如果不存在任何存档则载入重置存档
-            self.载入json(path = 'reset')
+            self.载入json(path='reset')
         try:
             setfile = open('./ResourceFiles/' + self.角色属性A.实际名称 + '/' + path +
                            '/equ3.ini',
@@ -4353,7 +4388,7 @@ class 角色窗口(窗口):
                         num += 1
             except:
                 pass
- 
+
     def 设置技能选项(self, 序号, info):
         try:
             self.等级调整[序号].setCurrentIndex(info['level'])
@@ -4422,26 +4457,34 @@ class 角色窗口(窗口):
                 info['switch'] = False
         return info
 
-    def 保存json(self, path='set', page=[0, 1, 2, 3, 4, 5],store = None):
-        if store is None :
+    def 保存json(self, path='set', page=[0, 1, 2, 3, 4, 5], store=None):
+        if store is None:
             from PublicReference.utils.storex import store
         if 0 in page:
             # 第一页(装备/选择/打造)
             try:
-                store.set("/carry/data/title",self.称号.currentIndex())
-                store.set("/carry/data/pet",self.宠物.currentIndex())
-                store.set("/carry/data/compute_mode",self.计算模式选择.currentIndex())
-                store.set("/carry/data/ditto_checked",self.百变怪选项.isChecked())
-                store.set("/carry/data/pet_equip_adaptive",self.红色宠物装备.isChecked())
+                store.set("/carry/data/title", self.称号.currentIndex())
+                store.set("/carry/data/pet", self.宠物.currentIndex())
+                store.set("/carry/data/compute_mode",
+                          self.计算模式选择.currentIndex())
+                store.set("/carry/data/ditto_checked", self.百变怪选项.isChecked())
+                store.set("/carry/data/pet_equip_adaptive",
+                          self.红色宠物装备.isChecked())
                 store.set("/carry/data/aura_adaptive", self.光环自适应.isChecked())
-                store.set("/carry/data/myth_top_checked",self.神话排名选项.isChecked())
-                store.set("/carry/data/damage_unit",self.显示选项.isChecked())
-                store.set("/carry/data/thread_count",self.线程数选择.currentIndex())
-                store.set("/carry/data/attack_elemental",self.攻击属性选项.currentIndex())
-                store.set("/carry/data/remodel_limit",self.智慧产物限制.currentIndex())
-                store.set("/carry/data/equip_checked",self.装备选择状态)
-                store.set("/carry/data/equip_forges",[i.currentIndex() for i in self.装备打造选项])
-                store.set("/carry/data/equip_conditions",[i.currentIndex() for i in self.装备条件选择])
+                store.set("/carry/data/myth_top_checked",
+                          self.神话排名选项.isChecked())
+                store.set("/carry/data/damage_unit", self.显示选项.isChecked())
+                store.set("/carry/data/thread_count",
+                          self.线程数选择.currentIndex())
+                store.set("/carry/data/attack_elemental",
+                          self.攻击属性选项.currentIndex())
+                store.set("/carry/data/remodel_limit",
+                          self.智慧产物限制.currentIndex())
+                store.set("/carry/data/equip_checked", self.装备选择状态)
+                store.set("/carry/data/equip_forges",
+                          [i.currentIndex() for i in self.装备打造选项])
+                store.set("/carry/data/equip_conditions",
+                          [i.currentIndex() for i in self.装备条件选择])
             except Exception as error:
                 logger.error(error)
 
@@ -4454,51 +4497,69 @@ class 角色窗口(窗口):
                 store.set("/carry/data/awakening_binding", self.觉醒选择状态)
 
                 if self.初始属性.远古记忆 != -1:
-                    store.set("/carry/data/ancient_memory", self.远古记忆.currentIndex())
+                    store.set("/carry/data/ancient_memory",
+                              self.远古记忆.currentIndex())
                 if self.初始属性.刀魂之卡赞 != -1:
                     store.set("/carry/data/kazan", self.刀魂之卡赞.currentIndex())
-                store.set("/carry/data/talismans", [i.currentIndex() for i in self.护石栏])
-                store.set("/carry/data/talisman_types", [i.currentIndex() for i in self.护石类型选项])
-                store.set("/carry/data/runes_skills", [i.currentIndex() for i in self.符文])
-                store.set("/carry/data/runes_effects", [i.currentIndex() for i in self.符文效果])
-                store.set("/carry/data/consumables", [i.isChecked() for i in self.复选框列表])
+                store.set("/carry/data/talismans",
+                          [i.currentIndex() for i in self.护石栏])
+                store.set("/carry/data/talisman_types",
+                          [i.currentIndex() for i in self.护石类型选项])
+                store.set("/carry/data/runes_skills",
+                          [i.currentIndex() for i in self.符文])
+                store.set("/carry/data/runes_effects",
+                          [i.currentIndex() for i in self.符文效果])
+                store.set("/carry/data/consumables",
+                          [i.isChecked() for i in self.复选框列表])
 
                 skills = {}
                 for i in self.角色属性A.技能栏:
                     序号 = self.角色属性A.技能序号[i.名称]
                     skill = self.获取技能选项(序号)
                     skills[i.名称] = skill
-                store.set("/carry/data/skill",skills)
+                store.set("/carry/data/skill", skills)
             except Exception as error:
                 logger.error(error)
 
         if 2 in page:
             # 第三页(基础/细节/修正)
             try:
-                store.set("/carry/data/avatar", [i.currentIndex() for i in self.时装选项])
-                store.set("/carry/data/detail_values", [[j.text() for j in i] for i in self.属性设置输入])
-                store.set("/carry/data/detail_options", [[j.currentIndex() for j in i] for i in self.细节选项输入])
+                store.set("/carry/data/avatar",
+                          [i.currentIndex() for i in self.时装选项])
+                store.set("/carry/data/detail_values",
+                          [[j.text() for j in i] for i in self.属性设置输入])
+                store.set("/carry/data/detail_options",
+                          [[j.currentIndex() for j in i] for i in self.细节选项输入])
             except Exception as error:
                 logger.error(error)
 
         if 3 in page:
             # 第四页(神话属性修正)
             try:
-                store.set("/carry/data/myth_properties", [i.currentIndex() for i in self.神话属性选项])
+                store.set("/carry/data/myth_properties",
+                          [i.currentIndex() for i in self.神话属性选项])
             except Exception as error:
                 logger.error(error)
 
         if 4 in page:
             # 第五页(辟邪玉/希洛克/黑鸦)
             try:
-                store.set("/carry/data/remodel_upgrade", self.智慧产物升级.isChecked())
-                store.set("/carry/data/weapon_adaptive_mode", self.武器择优模式.currentIndex())
-                store.set("/carry/data/nameless_elemental_value", self.守门人属强.currentIndex())  
-                store.set("/carry/data/siroco_weapon", [i.currentIndex() for i in self.希洛克武器词条])
-                store.set("/carry/data/jude_effects", [i.currentIndex() for i in self.辟邪玉选择])
-                store.set("/carry/data/jude_values", [i.currentIndex() for i in self.辟邪玉数值])
-                store.set("/carry/data/astaroth_options", [i.currentIndex() for i in self.阿斯特罗斯选项])
-                store.set('/carry/data/black_purgatory',[[j.currentIndex() for j in i] for i in self.黑鸦词条])
+                store.set("/carry/data/remodel_upgrade",
+                          self.智慧产物升级.isChecked())
+                store.set("/carry/data/weapon_adaptive_mode",
+                          self.武器择优模式.currentIndex())
+                store.set("/carry/data/nameless_elemental_value",
+                          self.守门人属强.currentIndex())
+                store.set("/carry/data/siroco_weapon",
+                          [i.currentIndex() for i in self.希洛克武器词条])
+                store.set("/carry/data/jude_effects",
+                          [i.currentIndex() for i in self.辟邪玉选择])
+                store.set("/carry/data/jude_values",
+                          [i.currentIndex() for i in self.辟邪玉数值])
+                store.set("/carry/data/astaroth_options",
+                          [i.currentIndex() for i in self.阿斯特罗斯选项])
+                store.set('/carry/data/black_purgatory',
+                          [[j.currentIndex() for j in i] for i in self.黑鸦词条])
                 store.set('/carry/data/siroco', self.希洛克选择状态)
                 store.set('/carry/data/ozma', self.奥兹玛选择状态)
             except Exception as error:
@@ -4507,16 +4568,17 @@ class 角色窗口(窗口):
         if 5 in page:
             # 第六页(自选装备计算)
             try:
-                data = store.get("/carry/data/self_select/equips",[])
+                data = store.get("/carry/data/self_select/equips", [])
                 column_index = 0
                 length = len(self.自选装备)
                 while column_index >= len(data):
                     data.append([0] * length)
 
                 data[column_index] = [i.currentIndex() for i in self.自选装备]
-                store.set("/carry/data/self_select/equips",data)
-                store.set('/carry/data/self_select/column_index',column_index)
-                store.set("/carry/data/self_select/locked",[i.isChecked() for i in self.装备锁定])
+                store.set("/carry/data/self_select/equips", data)
+                store.set('/carry/data/self_select/column_index', column_index)
+                store.set("/carry/data/self_select/locked",
+                          [i.isChecked() for i in self.装备锁定])
             except Exception as error:
                 logger.error(error)
         # 职业存档
@@ -4532,24 +4594,27 @@ class 角色窗口(窗口):
                 # 文本框
                 elif i[2] == 2:
                     set_data[i[0]] = i[1].text()
-            store.set("/carry/data/character_set",set_data)
+            store.set("/carry/data/character_set", set_data)
         except Exception as error:
             logger.error(error)
         try:
-            filepath = './ResourceFiles/{}/{}/store.json'.format(self.角色属性A.实际名称, path)
-            set_data = store.exports(lambda i: str.startswith(i, "/carry/data"))
+            filepath = './ResourceFiles/{}/{}/store.json'.format(
+                self.角色属性A.实际名称, path)
+            set_data = store.exports(
+                lambda i: str.startswith(i, "/carry/data"))
             with open(filepath, "w", encoding='utf-8') as fp:
                 json.dump(set_data, fp, ensure_ascii=False, indent=4)
             fp.close()
         except Exception as error:
-            logger.error(error)      
+            logger.error(error)
 
     def 保存配置(self, path='set'):
         if self.禁用存档.isChecked():
             return
         if self.技能存档位置 != '全局存档':
-            self.保存json(path = self.技能存档位置, store = Store())
+            self.保存json(path=self.技能存档位置, store=Store())
         self.保存json(path)
+
     # endregion
 
     # region 一键修正
@@ -4750,48 +4815,48 @@ class 角色窗口(窗口):
         tempstr = []
 
         temp = '<font color="{}">'.format(self.辟邪玉显示())
-        
-        tempstr.append('黄字:{}%'.format(round(属性.伤害增加 * 100, 0))) #0
-        tempstr.append('爆伤:{}%'.format(round(属性.暴击伤害 * 100, 1))) #1
-        tempstr.append('白字:{}%'.format(round(属性.附加伤害 * 100, 1))) #2
-        tempstr.append('属白:{}%'.format(round(属性.属性附加 * 100, 1))) #3
-        tempstr.append('终伤:{}%'.format(round(属性.最终伤害 * 100, 1))) #4
-        tempstr.append('技攻:{}%'.format(round(属性.技能攻击力 * 100 - 100, 1))) #5
-        tempstr.append('三攻:{}%'.format(round(属性.百分比三攻 * 100, 1))) #6
-        tempstr.append('力智:{}%'.format(round(属性.百分比力智 * 100, 1))) #7
-        tempstr.append('持续:{}%'.format(round(属性.持续伤害 * 100, 1))) #8
-        tempstr.append('攻速:{}%'.format(round(属性.攻击速度 * 100, 1))) #9
-        tempstr.append('释放:{}%'.format(round(属性.释放速度 * 100, 1))) #10
-        tempstr.append('移速:{}%'.format(round(属性.移动速度 * 100, 1))) #11
+
+        tempstr.append('黄字:{}%'.format(round(属性.伤害增加 * 100, 0)))  #0
+        tempstr.append('爆伤:{}%'.format(round(属性.暴击伤害 * 100, 1)))  #1
+        tempstr.append('白字:{}%'.format(round(属性.附加伤害 * 100, 1)))  #2
+        tempstr.append('属白:{}%'.format(round(属性.属性附加 * 100, 1)))  #3
+        tempstr.append('终伤:{}%'.format(round(属性.最终伤害 * 100, 1)))  #4
+        tempstr.append('技攻:{}%'.format(round(属性.技能攻击力 * 100 - 100, 1)))  #5
+        tempstr.append('三攻:{}%'.format(round(属性.百分比三攻 * 100, 1)))  #6
+        tempstr.append('力智:{}%'.format(round(属性.百分比力智 * 100, 1)))  #7
+        tempstr.append('持续:{}%'.format(round(属性.持续伤害 * 100, 1)))  #8
+        tempstr.append('攻速:{}%'.format(round(属性.攻击速度 * 100, 1)))  #9
+        tempstr.append('释放:{}%'.format(round(属性.释放速度 * 100, 1)))  #10
+        tempstr.append('移速:{}%'.format(round(属性.移动速度 * 100, 1)))  #11
 
         if 属白换算 != 0:
             tempstr[2] += '|{}%'.format(round(属白换算 * 100 + 属性.附加伤害 * 100, 1))
             tempstr[3] += '|{}%'.format(round(属白换算 * 100, 1))
-        
-        date = {2:属性.附加伤害增加增幅,
-                3:属性.属性附加伤害增加增幅,
-                5:属性.技能伤害增加增幅,
-                1:属性.暴击伤害增加增幅,
-                0:属性.伤害增加增幅,
-                4:属性.最终伤害增加增幅,
-                7:属性.力量智力增加增幅,
-                6:属性.物理魔法攻击力增加增幅}
-        
-        for i in date.keys():
-            if date[i] != 1.0:
-                x = date[i] - 1
-                y = ' +{}%' if x > 0 else ' {}%' 
-                if i in [2, 3] and '|' in tempstr[i]:
-                    y = y.replace(' ', '')
-                tempstr[i] += temp + '{}</font>'.format(y.format(round(x * 100, 1)))
+
+        # 为防止部分**对显示造成误解，暂不在词条后显示加成
+        # date = {2:属性.附加伤害增加增幅,
+        #         3:属性.属性附加伤害增加增幅,
+        #         5:属性.技能伤害增加增幅,
+        #         1:属性.暴击伤害增加增幅,
+        #         0:属性.伤害增加增幅,
+        #         4:属性.最终伤害增加增幅,
+        #         7:属性.力量智力增加增幅,
+        #         6:属性.物理魔法攻击力增加增幅}
+
+        # for i in date.keys():
+        #     if date[i] != 1.0:
+        #         x = date[i] - 1
+        #         y = ' +{}%' if x > 0 else ' {}%'
+        #         if i in [2, 3] and '|' in tempstr[i]:
+        #             y = y.replace(' ', '')
+        #         tempstr[i] += temp + '{}</font>'.format(y.format(round(x * 100, 1)))
         return tempstr
 
-    def 面板布局设置(self, 面板显示, x = 0):
-        
-        
+    def 面板布局设置(self, 面板显示, x=0):
+
         初始x = 0
         const = 128
-        
+
         #self.main_frame5
         if x == 1:
             初始x += 805
@@ -4831,7 +4896,7 @@ class 角色窗口(窗口):
         面板显示[17].resize(100, 72)
         面板显示[17].move(175 + 初始x, const + count * 18 - 75)
         面板显示[17].setAlignment(Qt.AlignCenter)
-    
+
     def 面板显示设置(self, 显示, 进图, 站街):
         显示[0].setText(str(int(进图.面板力量())))
         显示[1].setText(str(int(进图.面板物理攻击力())))
@@ -4839,21 +4904,23 @@ class 角色窗口(窗口):
         显示[3].setText(str(int(进图.面板魔法攻击力())))
 
         #独立攻击力
-        tempstr = '<font color="#FFFFFF">{}</font>   '.format(int(站街.站街独立攻击力()))
+        tempstr = '<font color="#FFFFFF">{}</font>   '.format(int(
+            站街.站街独立攻击力()))
         tempstr += '<font color="#96FF32">{}</font>'.format(int(进图.面板独立攻击力()))
         显示[4].setText(tempstr)
-        
+
         #属性强化
         tempstr = ''
         if 进图.所有属性强化增加 != 1.0:
             x = 进图.所有属性强化增加 - 1
-            y = ' +{}%' if x > 0 else ' {}%' 
-            tempstr += '<font color="{}">{}</font>'.format(self.辟邪玉显示(), y.format(round(x * 100, 1)))
+            y = ' +{}%' if x > 0 else ' {}%'
+            tempstr += '<font color="{}">{}</font>'.format(
+                self.辟邪玉显示(), y.format(round(x * 100, 1)))
         显示[5].setText('{}{}'.format(int(进图.火属性强化), tempstr))
         显示[6].setText('{}{}'.format(int(进图.冰属性强化), tempstr))
         显示[7].setText('{}{}'.format(int(进图.光属性强化), tempstr))
         显示[8].setText('{}{}'.format(int(进图.暗属性强化), tempstr))
-        显示[9].setText(str(int( 站街.站街力量())))
+        显示[9].setText(str(int(站街.站街力量())))
         显示[10].setText(str(int(站街.站街物理攻击力())))
         显示[11].setText(str(int(站街.站街智力())))
         显示[12].setText(str(int(站街.站街魔法攻击力())))
@@ -4863,33 +4930,37 @@ class 角色窗口(窗口):
         显示[16].setText(str(int(站街.暗属性强化)))
         显示[17].setText(self.辟邪玉显示(1))
 
-    def 辟邪玉显示(self, x = 0):
+    def 辟邪玉显示(self, x=0):
         temp = ''
         num = 0
         for i in range(4):
             k = self.辟邪玉选择[i].currentIndex()
             if k > 0:
-                temp += '{}{}<br>'.format(辟邪玉列表[k].简称, self.辟邪玉数值[i].currentText())
+                temp += '{}{}<br>'.format(辟邪玉列表[k].简称,
+                                          self.辟邪玉数值[i].currentText())
                 num += 1
-        辟邪玉颜色 = 颜色[{4:'史诗', 3:'传说', 2:'神器', 1:'稀有'}.get(num, '稀有')]
+        辟邪玉颜色 = 颜色[{4: '史诗', 3: '传说', 2: '神器', 1: '稀有'}.get(num, '稀有')]
         if x == 0:
             return 辟邪玉颜色
         else:
             if num == 0:
                 return ''
             else:
-                return '<font color="{}">辟邪玉:<br>{}</font>'.format(辟邪玉颜色, temp[:-4])
+                return '<font color="{}">辟邪玉:<br>{}</font>'.format(
+                    辟邪玉颜色, temp[:-4])
 
     def 套装显示设置(self, 显示, 属性):
         count = 0
 
         显示[count].setText(self.称号.currentText())
-        显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+        显示[count].setStyleSheet(
+            "QLabel{font-size:12px;color:rgb(255,255,255)}")
         显示[count].setToolTip(self.称号描述())
         count += 1
 
         显示[count].setText(self.宠物.currentText())
-        显示[count].setStyleSheet("QLabel{font-size:12px;color:rgb(255,255,255)}")
+        显示[count].setStyleSheet(
+            "QLabel{font-size:12px;color:rgb(255,255,255)}")
         显示[count].setToolTip(self.宠物描述())
         count += 1
 
@@ -4916,8 +4987,8 @@ class 角色窗口(窗口):
                 套装属性[套装.index(
                     temp
                 )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
-                    i] + '</font><br>' + equ.get_suit_by_name(
-                        套装名称[i]).装备描述(self.角色属性B)[:-4] + '</font><br>'
+                    i] + '</font><br>' + equ.get_suit_by_name(套装名称[i]).装备描述(
+                        self.角色属性B)[:-4] + '</font><br>'
 
         # 自适应属性
         if sum(self.角色属性A.自适应选项) != 0:
@@ -4937,8 +5008,7 @@ class 角色窗口(窗口):
         # 显示套装
         for i in range(len(套装)):
             if len(套装件数[i]) > 0:
-                显示[count].setText(套装[i] + '[' +
-                                           str(max(套装件数[i])) + ']')
+                显示[count].setText(套装[i] + '[' + str(max(套装件数[i])) + ']')
             else:
                 显示[count].setText(套装[i])
             if 套装[i] in 神话所在套装:
@@ -4949,13 +5019,13 @@ class 角色窗口(窗口):
                     "QLabel{font-size:12px;color:rgb(255,255,255)}")
             显示[count].setToolTip(套装属性[i][:-4])
             count += 1
-        
+
         #显示黑鸦词条
         黑鸦部位 = ['武器', '戒指', '辅助装备', '下装']
         for i in range(4):
             if 属性.黑鸦词条[i][4] != '':
-                显示[count].setText(
-                    黑鸦部位[i] + ':' + 属性.黑鸦词条[i][4].replace('<br>', ' '))
+                显示[count].setText(黑鸦部位[i] + ':' +
+                                  属性.黑鸦词条[i][4].replace('<br>', ' '))
                 显示[count].setStyleSheet(
                     "QLabel{font-size:12px;color:rgb(255,255,255)}")
                 count += 1
@@ -5001,7 +5071,7 @@ class 角色窗口(窗口):
                 temp.append('改造+{} {}'.format(属性.改造等级[i], 装备.名称))
 
             打造状态.move(初始x + x坐标[i] + 13, 初始y + y坐标[i] - 8 - pox_y2)
-            打造状态.resize(21,10)
+            打造状态.resize(21, 10)
 
         装备 = equ.get_equ_by_name(属性.装备栏[11])
         if 装备.所属套装 != '智慧产物' and 属性.武器锻造等级 != 0:
@@ -5012,8 +5082,8 @@ class 角色窗口(窗口):
             )
             打造状态.move(初始x + x坐标[11] + 13, 初始y + y坐标[11] + 20 - pox_y2)
             temp[11] += '(锻造+{})'.format(属性.武器锻造等级)
-            打造状态.resize(21,10)
-        
+            打造状态.resize(21, 10)
+
     def 格式化输出(self, 数字文本, x=0):
         if x == 1:
             返回值 = str('%.2f' % round(int(数字文本) / 100000000, 2))
@@ -5031,7 +5101,7 @@ class 角色窗口(窗口):
                         返回值 += ','
                 返回值 += str(数字文本[i])
         return 返回值
-    
+
     def 称号描述(self):
         temp = '<font size="3" face="宋体">'
         temp += '<font color="#78FF1E">' + self.称号.currentText(
@@ -5059,9 +5129,12 @@ class 角色窗口(窗口):
         for i in range(12):
             装备 = equ.get_equ_by_name(属性.装备栏[i])
             # 名称
-            tempstr.append('<font size="3" face="宋体"><font color="{}">{}</font>'.format(颜色[装备.品质], 装备.名称))
+            tempstr.append(
+                '<font size="3" face="宋体"><font color="{}">{}</font>'.format(
+                    颜色[装备.品质], 装备.名称))
             # 等级 品质 类型 部位
-            tempstr[i] += '<br>Lv{} {} {}({})'.format(装备.等级, 装备.品质, 装备.类型, 装备.部位)
+            tempstr[i] += '<br>Lv{} {} {}({})'.format(装备.等级, 装备.品质, 装备.类型,
+                                                      装备.部位)
             # 套装
             if 装备.所属套装 != '无':
                 if 装备.所属套装 != '智慧产物':
@@ -5071,8 +5144,9 @@ class 角色窗口(窗口):
             else:
                 y = ''
             if y != '':
-                tempstr[i] += '<br><font color="#78FF1E">{} 套装</font>'.format(y)
-            
+                tempstr[i] += '<br><font color="#78FF1E">{} 套装</font>'.format(
+                    y)
+
             #精通描述
             if i < 5:
                 x = 属性.防具精通计算(i)
@@ -5080,7 +5154,7 @@ class 角色窗口(窗口):
                 for n in 属性.防具精通属性:
                     y += n + ' '
                 tempstr[i] += y + '+' + str(x)
-            
+
             #打造描述
             if 装备.所属套装 != '智慧产物':
                 #强化描述
@@ -5108,11 +5182,11 @@ class 角色窗口(窗口):
                                  '魔法')) + '</font>'
                 #锻造描述
                 if i == 11 and 属性.武器锻造等级 != 0:
-                        tempstr[i] += '<br><font color="#68D5ED">+' + str(
-                            属性.武器锻造等级) + '   锻造: '
-                        tempstr[i] += '独立攻击力 + ' + str(
-                            锻造计算(装备.等级, 装备.品质, 属性.武器锻造等级)) + '</font>'
-                
+                    tempstr[i] += '<br><font color="#68D5ED">+' + str(
+                        属性.武器锻造等级) + '   锻造: '
+                    tempstr[i] += '独立攻击力 + ' + str(
+                        锻造计算(装备.等级, 装备.品质, 属性.武器锻造等级)) + '</font>'
+
                 #增幅描述
                 if 属性.是否增幅[i] == 1:
                     if tempstr[i] != '':
@@ -5127,7 +5201,7 @@ class 角色窗口(窗口):
                         tempstr[i] += '智力 + ' + str(
                             增幅计算(装备.等级, 装备.品质, 属性.强化等级[i],
                                  属性.增幅版本)) + '</font>'
-            
+
             #遴选描述
             if tempstr[i] != '':
                 tempstr[i] += '<br>'
@@ -5156,14 +5230,14 @@ class 角色窗口(窗口):
                     tempstr[i] += '<br>'
                     tempstr[i] += '<font color="#00A2E8">希洛克融合属性：</font><br>'
                     tempstr[i] += 希洛克[i]
-            
+
             #奥兹玛描述
             if i in [1, 3, 4, 6, 10]:
                 if 奥兹玛[i] != '':
                     tempstr[i] += '<br>'
                     tempstr[i] += '<font color="#00A2E8">奥兹玛融合属性：</font><br>'
                     tempstr[i] += 奥兹玛[i]
-            
+
             #希洛克武器描述
             if self.希洛克武器词条[0].currentIndex() > 0 and i == 11:
                 tempstr[i] += '<br>'
@@ -5315,7 +5389,7 @@ class 角色窗口(窗口):
 
         位置 = 308
         间隔 = 17
-        
+
         套装名称显示 = []
         for i in range(15):
             套装名称显示.append(QLabel(输出窗口))
@@ -5323,7 +5397,7 @@ class 角色窗口(窗口):
             套装名称显示[i].resize(150, 18)
             套装名称显示[i].setAlignment(Qt.AlignCenter)
             套装名称显示[i].setText('')
-        
+
         self.套装显示设置(套装名称显示, self.角色属性B)
 
         实际技能等级 = []
@@ -5561,8 +5635,7 @@ class 角色窗口(窗口):
         y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
 
         tempstr = self.装备描述计算(self.角色属性B)
-        
-        
+
         for i in range(12):
             装备图标 = QLabel(输出窗口)
             装备图标.setMovie(图片列表[i])
@@ -5582,9 +5655,9 @@ class 角色窗口(窗口):
         for i in range(13):
             打造显示.append(QLabel(输出窗口))
             打造显示[i].move(-100, -100)
-    
+
         self.打造显示设置(打造显示, self.角色属性B)
-        
+
         pdata['名称'] = self.角色属性A.实际名称
         pdata['装备'] = temp
 
@@ -5641,6 +5714,7 @@ class 角色窗口(窗口):
             os.startfile(result_path)
         except:
             pass
+
     # endregion
 
     # region 输入属性
