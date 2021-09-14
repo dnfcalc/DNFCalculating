@@ -47,7 +47,7 @@ class equipment():
             self.equ_tuple += (temp, )
             self.equ_id_tuple += (i, )
             key = '{}\t{}\t{}'.format(temp.所属套装, temp.品质, temp.部位)
-            self.index[key] = i
+            self.index[key] = i            
 
     def load_suit(self):
         self.suit_list = {}
@@ -93,9 +93,10 @@ class equipment():
         suits = []
         dictionary = {}
         for i in equips:
-            j = self.get_equ_by_name(i).所属套装
-            if j == '智慧产物' and self.get_equ_by_name(i).所属套装2 != '':
-                k = self.get_equ_by_name(i).所属套装2
+            item = self.get_equ_by_name(i)
+            j = item.所属套装
+            if j == '智慧产物' and item.所属套装2 != '':
+                k = item.所属套装2
                 dictionary[k] = dictionary.get(k, 0) + 1
             elif j != '无':
                 dictionary[j] = dictionary.get(j, 0) + 1
@@ -103,15 +104,15 @@ class equipment():
         for i in dictionary.keys():
             if dictionary[i] >= 2:
                 temp = '{}[{}]'.format(i, 2)
-                if temp in self.get_suit_name():
+                if temp in self.suit_name:
                     suits.append(temp)
                 if dictionary[i] >= 3:
                     temp = '{}[{}]'.format(i, 3)
-                    if temp in self.get_suit_name():
+                    if temp in self.suit_name:
                         suits.append(temp)
                     if dictionary[i] >= 5:
                         temp = '{}[{}]'.format(i, 5)
-                        if temp in self.get_suit_name():
+                        if temp in self.suit_name:
                             suits.append(temp)
         return suits
 
@@ -135,7 +136,7 @@ class equipment():
 
     def get_id_by_name(self, name):
         return self.equ_id.get(name, 0)
-
+        
     def get_equ_list(self):
         return self.equ_tuple
 
