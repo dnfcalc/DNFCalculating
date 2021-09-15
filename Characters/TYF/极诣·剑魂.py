@@ -553,7 +553,7 @@ class 极诣·剑魂技能15(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(0.995 + 0.02 * self.等级, 5)
+            return round(0.995 + 0.03  + 0.02 * self.等级, 5)
 
 
 class 极诣·剑魂技能16(被动技能):
