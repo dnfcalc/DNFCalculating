@@ -1,5 +1,25 @@
 ## Newest
 
+### 2021-09-15
+
+#### NewFeatures
+* 前瞻数据：同步韩服正式服(剑魂、男街霸、男气功)调整 ([1e111e](https://gitee.com/i_melon/DNFCalculating/commit/1e111e67aae1b60ccadcbd4b097e2a3d2166272f))
+* 新增双击页签重置当前页面功能 ([ca575b](https://gitee.com/i_melon/DNFCalculating/commit/ca575bfb93c3b8820fe1beb22769099ffed65fb4))
+* 详情界面新增辟邪玉属性显示 ([22d5d8](https://gitee.com/i_melon/DNFCalculating/commit/22d5d89b1c8f74da92de3eed107336f8f79e5b62))
+* 调整时装选择区间 ([31f5fe](https://gitee.com/i_melon/DNFCalculating/commit/31f5feb1bc4b3c688fa3190a48c8ce4ad7dcabe4))
+* 输出系新增单独技能存档 ([a9f628](https://gitee.com/i_melon/DNFCalculating/commit/a9f628948455e1eb8642ffc0ca22b0128dad9a72))
+
+#### BugFixes
+* 修复奶系各种bug ([ddf792](https://gitee.com/i_melon/DNFCalculating/commit/ddf792203ecc21c853c205079560f7e0e529c490))
+* 修复奶系奥兹玛右槽不生效的bug ([5aa41f](https://gitee.com/i_melon/DNFCalculating/commit/5aa41fc06b9786617835039249d06b667d8b7407))
+* 修复奶系奥兹玛希洛克存档bug ([bf00f2](https://gitee.com/i_melon/DNFCalculating/commit/bf00f26b61fa13f37b18c4196039514f16d76112))
+* 修复奶系登记设置残香效果异常的bug ([19da4e](https://gitee.com/i_melon/DNFCalculating/commit/19da4eb2afe16b0c1d45e56a80d4ba62ec12a4f3))
+* 修复奶系输出页面技能图片不对的bug ([7df107](https://gitee.com/i_melon/DNFCalculating/commit/7df107689fa235a9053cbdb81ddb5d8cfdbfc6ff))
+* 修正奶量buff自定义加成错误 ([baa2eb](https://gitee.com/i_melon/DNFCalculating/commit/baa2eb58ff1178f6e793a3d94cd36a63002309a4))
+* 存档功能bug修复 ([591924](https://gitee.com/i_melon/DNFCalculating/commit/5919240af243687afa88726b8c6d6238f6c21258))
+* 极诣·驭剑士(前瞻版本)：修正太刀精通数据错误 ([a8d7b3](https://gitee.com/i_melon/DNFCalculating/commit/a8d7b30446fa184d356fc90ec998ed626627ee9e))
+* 极诣·驭剑士：修正飓风魔剑护石加成错误 ([b764b1](https://gitee.com/i_melon/DNFCalculating/commit/b764b1760b042502dd555423da863804e42edc34))
+
 ### 2021-09-11
 
 #### BugFixes
@@ -38,6 +58,7 @@
 - 神启·蓝拳圣使：修复极速飓风拳护石 CD 问题 fix:#I44H6M ([e905f0](https://gitee.com/i_melon/DNFCalculating/commit/e905f03320cd710538f8708964d70d7723bff2a2))
 - 重霄·漫游枪手·男：修复致命回射 CD 问题 ([dd1fa5](https://gitee.com/i_melon/DNFCalculating/commit/dd1fa5b0420dbf3114d2b439c780b1808e4f7a59))
 - 隐夜·死灵术士：修正杀戮乱舞数据错误 ([1c68f7](https://gitee.com/i_melon/DNFCalculating/commit/1c68f7ce17fa7641b2ac855646c7ec0e506d70d2))
+
 
 ## History
 
