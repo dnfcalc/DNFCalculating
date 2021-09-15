@@ -534,11 +534,11 @@ class 角色属性(属性):
                         i.恢复 += x
         return ''
 
-    def 进图属强加成(self, x):
+    def 进图属强加成(self, x, 辟邪玉加成=1):
         if self.装备描述 == 1:
             return "进图属性强化+{}<br>".format(x)
         else:
-            self.进图属强 += x
+            self.进图属强 += int(self.所有属性强化增加 * x if 辟邪玉加成 == 1 else x)
         return ''
 
     def 技能倍率加成(self, lv, x):
