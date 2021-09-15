@@ -4596,6 +4596,7 @@ class 角色窗口(窗口):
         面板显示[17].resize(100, 72)
         面板显示[17].move(175 + 初始x, const + count * 18 - 75)
         面板显示[17].setAlignment(Qt.AlignCenter)
+        面板显示[17].setStyleSheet('QLabel{font-size:13px}')
 
     def 面板显示设置(self, 显示, 进图, 站街):
         显示[0].setText(str(int(进图.面板力量())))
