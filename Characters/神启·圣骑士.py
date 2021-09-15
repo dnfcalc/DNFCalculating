@@ -34,29 +34,39 @@ class 神启·圣骑士技能1(主动技能):
     BUFF物攻 = 0
     BUFF魔攻 = 0
     BUFF独立 = 0
-    三攻 = [0, 34, 35, 37, 38, 39, 41, 42, 43, 45, 46, 47, 49, 50, 51, 53, 54, 55, 57, 58,
-          60, 61, 62, 64, 65, 66, 68, 69, 70, 72, 73, 74, 76, 77, 78, 80, 81, 82, 84, 85, 87]
-    力智 = [0, 131, 140, 149, 158, 167, 175, 184, 193, 202, 211, 220, 229, 238, 247, 256, 264, 273, 282, 291,
-          300, 309, 318, 327, 336, 345, 353, 362, 371, 380, 389, 398, 407, 416, 425, 434, 442, 451, 460, 469, 478]
+    三攻 = [0, 38, 40, 42, 43, 44, 46, 48, 49, 51, 52, 53, 55, 57, 58, 60, 61, 62, 64, 66, 68, 69, 70, 72, 74, 75, 77, 78, 79, 81, 83, 84, 86, 87, 88, 90, 92, 93, 95,
+          96, 98, 100, 101, 103, 104, 105, 107, 109, 110, 112, 113, 114, 116, 118, 119, 121, 122, 123, 126, 127, 129, 130, 131, 133, 135, 136, 138, 139, 140, 143, 144]
+    力智 = [0, 148, 158, 169, 179, 189, 198, 208, 218, 228, 239, 249, 259, 269, 279, 290, 299, 309, 319, 329, 339, 349, 360, 370, 380, 390, 399, 409, 420, 430, 440, 450, 460, 470, 481,
+          491, 500, 510, 520, 530, 541, 551, 561, 571, 581, 592, 601, 611, 621, 631, 641, 651, 662, 672, 682, 692, 701, 711, 722, 732, 742, 752, 762, 772, 783, 793, 802, 812, 822, 832, 843]
 
     def 结算统计(self):
         倍率 = self.适用数值 / 665 + 1
         temp = [0, 0, 0]  # 智力,体力,精神
-        temp.append(int(round(((self.力智[self.等级] * 1.131) + self.BUFF力量) * self.BUFF力量per * 倍率,3)))  # 力量
-        temp.append(int(round(((self.力智[self.等级] * 1.131) + self.BUFF智力 )* self.BUFF智力per * 倍率,3)))  # 智力
-        temp.append(int(round(((self.三攻[self.等级] * 1.131) + self.BUFF物攻) * self.BUFF物攻per * 倍率,3)))  # 物攻
-        temp.append(int(round(((self.三攻[self.等级] * 1.131) + self.BUFF魔攻) * self.BUFF魔攻per * 倍率,3)))  # 魔攻
-        temp.append(int(round(((self.三攻[self.等级] * 1.131) + self.BUFF独立) * self.BUFF独立per * 倍率,3)))  # 独立
+        temp.append(int(round(
+            (self.力智[self.等级] + self.BUFF力量) * self.BUFF力量per * 倍率, 3)))  # 力量
+        temp.append(int(round(
+            (self.力智[self.等级] + self.BUFF智力) * self.BUFF智力per * 倍率, 3)))  # 智力
+        temp.append(int(round(
+            (self.三攻[self.等级] + self.BUFF物攻) * self.BUFF物攻per * 倍率, 3)))  # 物攻
+        temp.append(int(round(
+            (self.三攻[self.等级] + self.BUFF魔攻) * self.BUFF魔攻per * 倍率, 3)))  # 魔攻
+        temp.append(int(round(
+            (self.三攻[self.等级] + self.BUFF独立) * self.BUFF独立per * 倍率, 3)))  # 独立
         return temp
 
     def 技能面板(self):
         temp = []
         temp.append(self.名称)
-        temp.append(int(round(((self.力智[self.等级] * 1.131) + self.BUFF力量) * self.BUFF力量per)))
-        temp.append(int(round(((self.力智[self.等级] * 1.131) + self.BUFF智力) * self.BUFF智力per)))
-        temp.append(int(round(((self.三攻[self.等级] * 1.131) + self.BUFF物攻) * self.BUFF物攻per)))
-        temp.append(int(round(((self.三攻[self.等级] * 1.131) + self.BUFF魔攻) * self.BUFF魔攻per)))
-        temp.append(int(round(((self.三攻[self.等级] * 1.131) + self.BUFF独立) * self.BUFF独立per)))
+        temp.append(
+            int(round((self.力智[self.等级] + self.BUFF力量) * self.BUFF力量per)))
+        temp.append(
+            int(round((self.力智[self.等级] + self.BUFF智力) * self.BUFF智力per)))
+        temp.append(
+            int(round((self.三攻[self.等级] + self.BUFF物攻) * self.BUFF物攻per)))
+        temp.append(
+            int(round((self.三攻[self.等级] + self.BUFF魔攻) * self.BUFF魔攻per)))
+        temp.append(
+            int(round((self.三攻[self.等级] + self.BUFF独立) * self.BUFF独立per)))
         return temp
 
 
@@ -285,6 +295,7 @@ class 神启·圣骑士角色属性(角色属性):
 
     def 系数数值进图(self):
         return self.进图智力
+
 
 class 神启·圣骑士(角色窗口):
     def 窗口属性输入(self):
