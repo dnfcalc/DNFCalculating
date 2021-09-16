@@ -144,7 +144,7 @@ class 角色属性(属性):
     附加伤害 = 0.0
     属性附加 = 0.0
     暴击伤害 = 0.0
-    爆伤 = 0.0  # 冲突属性
+    暴伤 = 0.0  # 冲突属性
     最终伤害 = 0.0
     技能攻击力 = 1.0
     持续伤害 = 0.0
@@ -165,7 +165,7 @@ class 角色属性(属性):
 
     攻击速度 = 0.00
     移动速度 = 0.00
-    释放速度 = 0.00
+    施放速度 = 0.00
     命中率 = 0.0
     回避率 = 0.0
     物理暴击率 = 0.00
@@ -191,7 +191,7 @@ class 角色属性(属性):
     角色熟练度 = 0
     # 0 1 2 3 4 5 6
     技能栏空位 = 6
-    # 0数学期望 1黄字+35% 2爆伤+35% 3白字+35% 4终伤+35% 5三攻+35%
+    # 0数学期望 1黄字+35% 2暴伤+35% 3白字+35% 4终伤+35% 5三攻+35%
     命运的抉择 = 0
     # 0数学期望 123456
     天命无常 = 0
@@ -443,12 +443,12 @@ class 角色属性(属性):
             self.移动速度 += x
         return ''
 
-    def 释放速度增加(self, x):
+    def 施放速度增加(self, x):
         if self.装备描述 == 1:
-            return '释放速度 {}%<br>'.format(("+" if x > 0 else '') +
+            return '施放速度 {}%<br>'.format(("+" if x > 0 else '') +
                                          str(round(x * 100, 2)))
         else:
-            self.释放速度 += x
+            self.施放速度 += x
         return ''
 
     def 命中率增加(self, x):
@@ -1016,7 +1016,7 @@ class 角色属性(属性):
         # print(self.黑鸦词条)
         # 冲突属性计算
         self.伤害增加加成(self.黄字)
-        self.暴击伤害加成(self.爆伤)
+        self.暴击伤害加成(self.暴伤)
 
     def 预处理(self):
         self.装备属性计算()
@@ -1729,7 +1729,7 @@ class 角色窗口(窗口):
         ])
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems([
-            '命运的抉择：数学期望', '命运的抉择：黄字+10%', '命运的抉择：爆伤+10%', '命运的抉择：终伤+10%',
+            '命运的抉择：数学期望', '命运的抉择：黄字+10%', '命运的抉择：暴伤+10%', '命运的抉择：终伤+10%',
             '命运的抉择：三攻+10%', '命运的抉择：技攻+10%'
         ])
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
@@ -1828,7 +1828,7 @@ class 角色窗口(窗口):
         self.光环自适应.resize(宽度, 高度)
         self.光环自适应.setStyleSheet(复选框样式)
         self.光环自适应.setToolTip(
-            '<font size="3" face="宋体">5%黄字，5%爆伤，5%三攻取最高值<br>需配合修改第三页相关选项</font>'
+            '<font size="3" face="宋体">5%黄字，5%暴伤，5%三攻取最高值<br>需配合修改第三页相关选项</font>'
         )
         self.光环自适应.stateChanged.connect(lambda state: self.下拉框禁用(
             self.光环自适应, self.细节选项输入[1][13], 下拉框样式_detail))
@@ -2482,7 +2482,7 @@ class 角色窗口(窗口):
             else:
                 self.属性设置输入.append(templist)
 
-        self.修正列表名称 = ['力智%', '三攻%', '黄字', '白字', '属白', '爆伤', '终伤', '技攻']
+        self.修正列表名称 = ['力智%', '三攻%', '黄字', '白字', '属白', '暴伤', '终伤', '技攻']
 
         距离 = 30
         templist = []
@@ -2794,7 +2794,7 @@ class 角色窗口(窗口):
 
         temp = '<font face="宋体">假定基础伤害为100，词条1=50%，词条2=50%：<br><br>'
         temp += '5%黄字增幅，佩戴前：200，佩戴后：205<br>'
-        temp += '爆伤终伤白字属白力智三攻同上，黄字向下取整<br>'
+        temp += '暴伤终伤白字属白力智三攻同上，黄字向下取整<br>'
         temp += '技攻辟邪玉加成等级技攻(歧路腰类)<br>不加成具体技能技攻(歧路鞋类)<br><br>'
         temp += '3%技攻增幅，佩戴前：100*1.5*1.5=225<br>佩戴后：100*1.515*1.515=229.5225<br><br>'
         # temp += '附加、最终、百分力智增幅：宠物相关词条不享受加成<br>'
@@ -3406,10 +3406,11 @@ class 角色窗口(窗口):
             self.面板显示设置(self.面板显示, B, C)
             self.打造显示设置(self.打造显示, B, 1)
 
-            count = 0
-            for i in self.词条显示计算(B):
-                self.词条显示[count].setText(i)
-                count += 1
+            词条数值 = self.词条显示计算(B)
+            词条解释 = self.词条显示计算(B,1)
+            for i in range(0,len(词条数值)):
+                self.词条显示[i].setText(词条数值[i])
+                self.词条显示[i].setToolTip('<font color="#B99460">'+词条解释[i]+'</font>')
 
             for i in self.套装名称显示:
                 i.setText('')
@@ -4508,30 +4509,42 @@ class 角色窗口(窗口):
     # endregion
 
     # region 输出界面
-    def 词条显示计算(self, 属性):
+    def 词条显示计算(self, 属性,x=0):
 
         属白换算 = 属性.属性倍率 * 属性.属性附加
 
         tempstr = []
+        # temp = '<font color="{}">'.format(self.辟邪玉显示())
+        if x == 0:
+            tempstr.append('黄字:{}%'.format(round(属性.伤害增加 * 100, 0)))  #0
+            tempstr.append('暴伤:{}%'.format(round(属性.暴击伤害 * 100, 1)))  #1
+            tempstr.append('白字:{}%'.format(round(属性.附加伤害 * 100, 1)))  #2
+            tempstr.append('属白:{}%'.format(round(属性.属性附加 * 100, 1)))  #3
+            tempstr.append('终伤:{}%'.format(round(属性.最终伤害 * 100, 1)))  #4
+            tempstr.append('技攻:{}%'.format(round(属性.技能攻击力 * 100 - 100, 1)))  #5
+            tempstr.append('三攻:{}%'.format(round(属性.百分比三攻 * 100, 1)))  #6
+            tempstr.append('力智:{}%'.format(round(属性.百分比力智 * 100, 1)))  #7
+            tempstr.append('持续:{}%'.format(round(属性.持续伤害 * 100, 1)))  #8
+            tempstr.append('攻速:{}%'.format(round(属性.攻击速度 * 100, 1)))  #9
+            tempstr.append('施放:{}%'.format(round(属性.施放速度 * 100, 1)))  #10
+            tempstr.append('移速:{}%'.format(round(属性.移动速度 * 100, 1)))  #11
 
-        temp = '<font color="{}">'.format(self.辟邪玉显示())
-
-        tempstr.append('黄字:{}%'.format(round(属性.伤害增加 * 100, 0)))  #0
-        tempstr.append('爆伤:{}%'.format(round(属性.暴击伤害 * 100, 1)))  #1
-        tempstr.append('白字:{}%'.format(round(属性.附加伤害 * 100, 1)))  #2
-        tempstr.append('属白:{}%'.format(round(属性.属性附加 * 100, 1)))  #3
-        tempstr.append('终伤:{}%'.format(round(属性.最终伤害 * 100, 1)))  #4
-        tempstr.append('技攻:{}%'.format(round(属性.技能攻击力 * 100 - 100, 1)))  #5
-        tempstr.append('三攻:{}%'.format(round(属性.百分比三攻 * 100, 1)))  #6
-        tempstr.append('力智:{}%'.format(round(属性.百分比力智 * 100, 1)))  #7
-        tempstr.append('持续:{}%'.format(round(属性.持续伤害 * 100, 1)))  #8
-        tempstr.append('攻速:{}%'.format(round(属性.攻击速度 * 100, 1)))  #9
-        tempstr.append('释放:{}%'.format(round(属性.释放速度 * 100, 1)))  #10
-        tempstr.append('移速:{}%'.format(round(属性.移动速度 * 100, 1)))  #11
-
-        if 属白换算 != 0:
-            tempstr[2] += '|{}%'.format(round(属白换算 * 100 + 属性.附加伤害 * 100, 1))
-            tempstr[3] += '|{}%'.format(round(属白换算 * 100, 1))
+            if 属白换算 != 0:
+                tempstr[2] += '|{}%'.format(round(属白换算 * 100 + 属性.附加伤害 * 100, 1))
+                tempstr[3] += '|{}%'.format(round(属白换算 * 100, 1))
+        else:
+            tempstr.append('攻击时,额外增加{}%的伤害增加量'.format(round(属性.伤害增加 * 100, 0)))  #0
+            tempstr.append('暴击时,额外增加{}%的伤害增加量'.format(round(属性.暴击伤害 * 100, 1)))  #1
+            tempstr.append('攻击时,附加{}%的伤害'.format(round(属性.附加伤害 * 100, 1)))  #2
+            tempstr.append('攻击时,附加{}%的属性伤害'.format(round(属性.属性附加 * 100, 1)))  #3
+            tempstr.append('最终伤害 +{}%'.format(round(属性.最终伤害 * 100, 1)))  #4
+            tempstr.append('技能攻击力 +{}%'.format(round(属性.技能攻击力 * 100 - 100, 1)))  #5
+            tempstr.append('物理、魔法、独立攻击力 +{}%'.format(round(属性.百分比三攻 * 100, 1)))  #6
+            tempstr.append('力量、智力 +{}%'.format(round(属性.百分比力智 * 100, 1)))  #7
+            tempstr.append('发生持续伤害X秒,伤害量为对敌人增加造成伤害的{}%'.format(round(属性.持续伤害 * 100, 1)))  #8
+            tempstr.append('攻击速度 +{}%'.format(round(属性.攻击速度 * 100, 1)))  #9
+            tempstr.append('施放速度 +{}%'.format(round(属性.施放速度 * 100, 1)))  #10
+            tempstr.append('移动速度 +{}%'.format(round(属性.移动速度 * 100, 1)))  #11
 
         # 为防止部分**对显示造成误解，暂不在词条后显示加成
         # date = {2:属性.附加伤害增加增幅,
@@ -4696,7 +4709,7 @@ class 角色窗口(窗口):
             套装件数.append([])
             套装属性.append('')
         tempstr = ''
-        武器词条属性 = ['力智', '三攻', '黄字', '白字', '爆伤', '终伤']
+        武器词条属性 = ['力智', '三攻', '黄字', '白字', '暴伤', '终伤']
         if self.希洛克武器词条[0].currentIndex() == 1:
             tempstr += "残香:{}+10%".format(武器词条属性[self.角色属性A.词条选择[0]])
             if sum(self.希洛克选择状态) == 3:
@@ -4822,7 +4835,7 @@ class 角色窗口(窗口):
         tempstr = []
         数量 = sum(self.希洛克选择状态)
 
-        武器词条属性 = ['力智', '三攻', '黄字', '白字', '爆伤', '终伤']
+        武器词条属性 = ['力智', '三攻', '黄字', '白字', '暴伤', '终伤']
         希洛克 = self.希洛克属性计算(属性, 1)
         奥兹玛 = self.奥兹玛属性计算(属性, 1)
 
@@ -5077,14 +5090,16 @@ class 角色窗口(窗口):
 
         j = 312
         pdata['词条'] = self.词条显示计算(self.角色属性B)
-        for i in pdata['词条']:
+        词条解释 = self.词条显示计算(self.角色属性B,1)
+        for i in range(0,len(pdata['词条'])):
             templab = QLabel(输出窗口)
-            templab.setText(i)
+            templab.setText(pdata['词条'][i])
             templab.setStyleSheet(
                 "QLabel{font-size:12px;color:rgb(104,213,237)}")
             templab.move(2, j - pox_y2)
             templab.resize(180, 17)
             templab.setAlignment(Qt.AlignLeft)
+            templab.setToolTip('<font color="#B99460">'+词条解释[i]+'</font>')
             j += 17
 
         位置 = 308
