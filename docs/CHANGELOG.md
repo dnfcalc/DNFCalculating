@@ -1,5 +1,13 @@
 ## Newest
 
+### 2021-09-16
+
+#### NewFeatures
+* 前瞻数据：同步韩服正式服(混沌魔灵)调整 ([901fd2](https://gitee.com/i_melon/DNFCalculating/commit/901fd2e296abaeaff84afa94244aedfe29e7d117))
+
+#### BugFixes
+* 重霄·机械师·男：修正[拦截机工厂]在[光反应能量模块]下数据问题 ([1c33ba](https://gitee.com/i_melon/DNFCalculating/commit/1c33baf4bdbce78beff619098e3774bfdc4e8a67))
+
 ### 2021-09-15
 
 #### NewFeatures
@@ -58,6 +66,7 @@
 - 神启·蓝拳圣使：修复极速飓风拳护石 CD 问题 fix:#I44H6M ([e905f0](https://gitee.com/i_melon/DNFCalculating/commit/e905f03320cd710538f8708964d70d7723bff2a2))
 - 重霄·漫游枪手·男：修复致命回射 CD 问题 ([dd1fa5](https://gitee.com/i_melon/DNFCalculating/commit/dd1fa5b0420dbf3114d2b439c780b1808e4f7a59))
 - 隐夜·死灵术士：修正杀戮乱舞数据错误 ([1c68f7](https://gitee.com/i_melon/DNFCalculating/commit/1c68f7ce17fa7641b2ac855646c7ec0e506d70d2))
+
 
 
 ## History
