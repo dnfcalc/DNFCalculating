@@ -55,7 +55,7 @@ class 换装窗口(Page):
         cancelButton.setStyleSheet(按钮样式)
         cancelButton.clicked.connect(lambda _: self.closeWindow())
 
-        resetButton = QPushButton("重置", self)
+        resetButton = QPushButton("全部重置", self)
         resetButton.move(700, 460)
         resetButton.resize(170, 24)
         resetButton.setStyleSheet(按钮样式)
@@ -90,8 +90,7 @@ class 换装窗口(Page):
         sirocos = store.first("/buffer/data/register/siroco",
                                    "/buffer/data/siroco")
         for i in range(len(sirocos)):
-            if sirocos[i] == 1:
-                self.希洛克选择(i, 1)
+            self.希洛克选择(i, sirocos[i])
         weapon_fusion = store.first("/buffer/data/register/weapon_fusion","/buffer/data/weapon_fusion",[0]*4)
         self.武器融合属性A.setCurrentIndex(weapon_fusion[0])
         self.武器融合属性A2.setCurrentIndex(weapon_fusion[1])
@@ -102,13 +101,12 @@ class 换装窗口(Page):
         ozmas = store.first("/buffer/data/register/ozma",
                                  "/buffer/data/ozma")
         for i in range(len(ozmas)):
-            if ozmas[i] == 1:
-                self.奥兹玛选择(i, 1)
+            self.奥兹玛选择(i, ozmas[i])
     
     def 初始化遴选(self):
         black_purgatory = store.first("/buffer/data/register/black_purgatory",
                                  "/buffer/data/black_purgatory")
-        for i in range(len(self.黑鸦词条)):
+        for i in range(len(black_purgatory)):
             self.黑鸦词条[i][1].setCurrentIndex(black_purgatory[i][1])
             if len(black_purgatory[i]) > 3:
                 self.黑鸦词条[i][3].setCurrentIndex(black_purgatory[i][3])
@@ -125,8 +123,9 @@ class 换装窗口(Page):
         黑鸦 = []
 
         for i in range(len(self.自选装备)):
-            自选.append(self.自选装备[i].currentText())
-            增幅.append(self.自选增幅选项[i].currentIndex())
+            equip = self.自选装备[i].currentText()
+            自选.append(equip)
+            增幅.append(self.自选增幅选项[i].currentIndex() if equip != '无' else -1)
         for i in range(len(self.黑鸦词条)):
             黑鸦.append([
                 2, self.黑鸦词条[i][1].currentIndex(),
@@ -190,7 +189,7 @@ class 换装窗口(Page):
             self.自选装备.append(combo)
             combo.resize(220, 22)
             combo.move(150, 50 + 30 * count)
-
+            combo.addItem("无")
             for j in equ.get_equ_list():
                 if j.部位 == i:
                     if i == '武器':
@@ -231,20 +230,31 @@ class 换装窗口(Page):
         add = QPushButton('打造↑', self)
         add.clicked.connect(lambda state: self.批量打造(1))
         add.move(400, 270)
-        add.resize(60, 24)
+        add.resize(40, 24)
         add.setStyleSheet(按钮样式)
 
         minus = QPushButton('打造↓', self)
         minus.clicked.connect(lambda state: self.批量打造(-1))
-        minus.move(480, 270)
-        minus.resize(60, 24)
+        minus.move(460, 270)
+        minus.resize(40, 24)
         minus.setStyleSheet(按钮样式)
 
+        reset = QPushButton('重置', self)
+        reset.clicked.connect(lambda state: self.初始化装备())
+        reset.move(520, 270)
+        reset.resize(40, 24)
+        reset.setStyleSheet(按钮样式)
+
+        tips = QLabel("提示:当选择无时,将按穿戴装备的设置",self)
+        tips.move(400,300)
+        tips.resize(240,24)
+        tips.setStyleSheet("QLabel{font-size:12px;color:rgb(211,167,106)}")
+
     def 批量打造(self, offset):
-        for i in range(12):
+        for i in range(len(self.自选增幅选项)):
             y = max(min(self.自选增幅选项[i].currentIndex() + offset, 31), 0)
             self.自选增幅选项[i].setCurrentIndex(y)
-        return
+        pass
 
     def 自选套装更改(self, index):
         name = self.自选套装[index].currentText()
@@ -459,18 +469,17 @@ class 换装窗口(Page):
             self.希洛克选择(i, count)
 
     def 希洛克选择(self, index, value=-1):
-        if (value == -1):
+        if value == -1:
             value = self.希洛克选择状态[index] ^ 1
-        for i in range(5):
-            序号 = i * 3 + index % 3
-            if self.希洛克选择状态[序号] == 1:
-                self.希洛克遮罩透明度[序号].setOpacity(0.5)
-                self.希洛克选择状态[序号] = 0
         if value == 0:
             self.希洛克遮罩透明度[index].setOpacity(0.5)
-        else:
-            if value == 1:
-                self.希洛克遮罩透明度[index].setOpacity(0)
+        elif value == 1:
+            for i in range(5):
+                序号 = i * 3 + index % 3
+                if self.希洛克选择状态[序号] == 1:
+                    self.希洛克遮罩透明度[序号].setOpacity(0.5)
+                    self.希洛克选择状态[序号] = 0
+            self.希洛克遮罩透明度[index].setOpacity(0)
 
         self.希洛克选择状态[index] = value
 
@@ -483,18 +492,17 @@ class 换装窗口(Page):
             self.奥兹玛选择(i, count)
 
     def 奥兹玛选择(self, index, value=-1):
-        if (value == -1):
+        if value == -1:
             value = self.奥兹玛选择状态[index] ^ 1
-        for i in range(5):
-            序号 = i * 5 + index % 5
-            if self.奥兹玛选择状态[序号] == 1:
-                self.奥兹玛遮罩透明度[序号].setOpacity(0.5)
-                self.奥兹玛选择状态[序号] = 0
         if value == 0:
             self.奥兹玛遮罩透明度[index].setOpacity(0.5)
-        else:
-            if value == 1:
-                self.奥兹玛遮罩透明度[index].setOpacity(0)
+        elif value == 1:
+            for i in range(5):
+                序号 = i * 5 + index % 5
+                if self.奥兹玛选择状态[序号] == 1:
+                    self.奥兹玛遮罩透明度[序号].setOpacity(0.5)
+                    self.奥兹玛选择状态[序号] = 0
+            self.奥兹玛遮罩透明度[index].setOpacity(0)
         self.奥兹玛选择状态[index] = value
 
     def 希洛克武器融合词条更新(self, index, x=0):

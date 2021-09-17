@@ -2772,7 +2772,8 @@ class 角色窗口(窗口):
                                float(self.觉醒择优系数.currentText()))
                 store.set("/buffer/data/awakening_direction",
                                self.觉醒择优方向.currentIndex())
-
+                store.set("/buffer/data/siroco",self.希洛克选择状态)
+                store.set("/buffer/data/ozma",self.奥兹玛选择状态)
             except Exception as error:
                 logger.error(error)
 
@@ -2788,8 +2789,7 @@ class 角色窗口(窗口):
                 # 细节选项
                 store.set("/buffer/data/detail_options",
                                [i.currentIndex() for i in self.技能设置输入])
-                store.set("/buffer/data/siroco",self.希洛克选择状态)
-                store.set("/buffer/data/ozma",self.奥兹玛选择状态)
+
             except Exception as error:
                 logger.error(error)
 
@@ -2902,7 +2902,9 @@ class 角色窗口(窗口):
             self, "自动修正计算完毕", "仅对站街修正进行了修改,使面板与输入一致<br>请自行核对其它页面 非智力/体力/精神条目")
 
     def click_window(self, index):
+        self.保存json(self.存档位置,page=[self.当前页面])
         self.当前页面 = index
+
         if self.stacked_layout.currentIndex() != index:
             self.stacked_layout.setCurrentIndex(index)
         for i in self.window_btn:
@@ -2971,11 +2973,38 @@ class 角色窗口(窗口):
         if not self.登记启用: return None
 
         装备 = store.clone("/buffer/data/register/equips",self.self_selects)
-        装备打造 = store.clone("/buffer/data/register/amplifies", [0]*12)
+        装备打造 = store.clone("/buffer/data/register/amplifies", [-1]*12)
         奥兹玛选择状态 = store.clone("/buffer/data/register/ozma", [0]*25)
         希洛克选择状态 = store.clone("/buffer/data/register/siroco", [0]*15)
         黑鸦词条 = store.clone("/buffer/data/register/black_purgatory", [[0]*4]*4)
         武器融合选项 = store.clone("/buffer/data/register/weapon_fusion", [0]*4)
+
+        for i in range(len(装备)):
+            if 装备[i] == '无':
+                装备[i] = self.self_selects[i]
+            if 装备打造[i] == -1:
+                装备打造[i] = self.装备打造选项[i + 12].currentIndex()
+
+        for i in range(4):
+            if 黑鸦词条[i][1] == 0: 
+                temp = [
+                    self.黑鸦词条选项[i][0].currentIndex(),
+                    self.黑鸦词条选项[i][1].currentIndex(),
+                    self.黑鸦词条选项[i][3].currentText(),
+                ]
+                黑鸦词条[i]= temp
+        if 希洛克选择状态 is None or len(希洛克选择状态) == 0 or sum(希洛克选择状态) == 0:
+            希洛克选择状态 = self.希洛克选择状态
+        if 奥兹玛选择状态 is None or len(奥兹玛选择状态) == 0 or sum(奥兹玛选择状态) == 0:
+            奥兹玛选择状态 = self.奥兹玛选择状态
+            
+        if 武器融合选项[0] == 0:
+            武器融合选项[0] = self.武器融合属性A.currentIndex()
+            武器融合选项[1] = self.武器融合属性A1.currentIndex()
+
+        if 武器融合选项[2] == 0:
+            武器融合选项[2] = self.武器融合属性B.currentIndex()
+            武器融合选项[3] = self.武器融合属性B1.currentIndex()
 
         属性 = deepcopy(self.初始属性)
 
@@ -3024,9 +3053,11 @@ class 角色窗口(窗口):
 
         self.辟邪玉属性计算(属性)
 
+
+
         if sum(self.希洛克选择状态) == 3:
             属性.武器词条触发 = 1
-
+        
 
         武器融合属性A = 武器属性A列表[武器融合选项[0]]
 
@@ -3071,20 +3102,6 @@ class 角色窗口(窗口):
         for skill in self.角色属性A.技能表.values():
             skill.是否启用 = self.次数输入[num].currentIndex()
             num += 1
-
-        if 黑鸦词条 is None or len(黑鸦词条) == 0:
-            黑鸦词条 = []
-            for i in range(4):
-                temp = [
-                    self.黑鸦词条选项[i][0].currentIndex(),
-                    self.黑鸦词条选项[i][1].currentIndex(),
-                    self.黑鸦词条选项[i][3].currentText(),
-                ]
-                黑鸦词条.append(temp)
-        if 希洛克选择状态 is None or len(希洛克选择状态) == 0:
-            希洛克选择状态 = self.希洛克选择状态
-        if 奥兹玛选择状态 is None or len(奥兹玛选择状态) == 0:
-            奥兹玛选择状态 = self.奥兹玛选择状态
 
         属性.黑鸦计算(黑鸦词条)
         属性.希洛克计算(希洛克选择状态)
