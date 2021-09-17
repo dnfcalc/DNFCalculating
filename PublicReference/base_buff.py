@@ -1780,7 +1780,7 @@ class 角色窗口(窗口):
         self.自选装备栏选项.setCurrentIndex(-1)
         self.自选装备栏选项.resize(160, 22)
         self.自选装备栏选项.move(330, 50 + 30 * count)
-        self.自选装备栏选项.currentIndexChanged.connect(lambda state: self.自选装备栏更改(state))
+        self.自选装备栏选项.activated.connect(lambda state: self.自选装备栏更改(state))
 
         count += 1
         # 一键修正按钮添加
@@ -1940,6 +1940,9 @@ class 角色窗口(窗口):
         换装设置.setStyleSheet(按钮样式)
 
     def 自选装备栏更改(self, index):        
+        if self.计算标识 == 0:
+            return
+        
         self.计算标识 = 0
 
         data = store.get("/buffer/data/self_select/equips", [])
@@ -2587,6 +2590,7 @@ class 角色窗口(窗口):
                     index = store.get(
                         '/buffer/data/self_select/column_index', 0)
                     self.自选装备栏选项.setCurrentIndex(index)
+                    self.自选装备栏更改(index)
                 except Exception as error:
                     logger.error(error)
                 
