@@ -94,11 +94,11 @@ class equipment():
         dictionary = {}
         for i in equips:
             item = self.get_equ_by_name(i)
-            j = item.所属套装
-            if j == '智慧产物' and item.所属套装2 != '':
-                k = item.所属套装2
-                dictionary[k] = dictionary.get(k, 0) + 1
-            elif j != '无':
+            if item.所属套装2 != '无':
+                j = item.所属套装2
+            else:
+                j = item.所属套装
+            if j != '无':
                 dictionary[j] = dictionary.get(j, 0) + 1
 
         for i in dictionary.keys():

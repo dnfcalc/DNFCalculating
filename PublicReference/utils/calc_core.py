@@ -243,12 +243,12 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
     for k in 顺序[顺序字典[x]:]:
         套装[k] = '无'
 
-    temp = equ.get_equ_by_id(i).所属套装
-    if temp == '智慧产物':
-        temp = equ.get_equ_by_id(i).所属套装2
-        if temp == '':
-            temp = '无'
-    套装[x] = temp
+    当前装备 = equ.get_equ_by_id(i)
+
+    if 当前装备.所属套装2 != '无':
+        套装[x] = 当前装备.所属套装2
+    else:
+        套装[x] = 当前装备.所属套装
 
     count = []
     num = 0
@@ -271,7 +271,7 @@ def 筛选(名称, x, 装备, 套装, 神话, 种类, data):
     elif x == 5:
         神话[8] = 0
 
-    if equ.get_equ_by_id(i).品质 == '神话':
+    if 当前装备.品质 == '神话':
         神话[x] = 1
         if sum(神话) > 1:
             return 1
