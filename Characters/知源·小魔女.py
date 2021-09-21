@@ -251,6 +251,8 @@ class 知源·小魔女角色属性(角色属性):
         self.类型 = '智力'
         self.技能表 = deepcopy(技能表)
         self.技能栏 = list(self.技能表.values())
+        self.buff_type = 1
+        self.buff_rate = 1.25
         self.一觉序号 = self.技能表['一次觉醒'].技能序号
         self.二觉序号 = self.技能表['二次觉醒'].技能序号
         self.三觉序号 = self.技能表['三次觉醒'].技能序号
@@ -287,6 +289,12 @@ class 知源·小魔女角色属性(角色属性):
         self.技能表['少女的爱'].等级加成(self.一觉被动Lv)
         self.技能表['少女的爱'].额外力智 = self.一觉被动力智
 
+    def get_data(self):
+        in_int_data,in_double_data = super().get_data()
+        buff_rate = self.buff_rate if self.技能表['死命召唤'].是否启用 else 1
+        buff_rate *= 1.15 if self.技能表['小魔女的偏爱'].是否启用 else 1
+        in_double_data[1] = buff_rate
+        return in_int_data,in_double_data
 
 class 知源·小魔女(角色窗口):
     def 窗口属性输入(self):

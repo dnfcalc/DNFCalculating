@@ -8,7 +8,11 @@ from PublicReference.choise.选项设置_buff import *
 from PublicReference.common import *
 from PublicReference.buff_panel import *
 from PublicReference.view.DialogRegister import DefaultDialogRegister
-
+from ctypes import *
+try:
+    preferred = ctypes.WinDLL(dllPath)
+except Exception as e:
+    logger.error(e)
 
 class 技能:
     名称 = ''
@@ -120,6 +124,52 @@ class 角色属性(属性):
         self.自适应最高值 = []
         self.技能表 = {}
         self.觉醒择优系数 = 1.0
+        self.buff_type = 0
+        self.buff_rate = 1
+
+    def get_data(self):
+        buff = self.技能表['BUFF']
+        awake = self.技能表['一次觉醒']
+
+        other_power= 0
+        other_attack = 0
+
+        for i in self.技能表.keys():
+            if i not in ['BUFF','一次觉醒','三次觉醒','死命召唤','勇气圣歌']:
+                skill = self.技能表[i]
+                data = skill.结算统计()
+                other_power += data[3]
+                other_attack += data[5]
+
+
+        in_int_data = (ctypes.c_int * 12)()
+        in_int_data[0] = self.buff_type
+        in_int_data[1] = int(buff.适用数值)
+        in_int_data[2] = buff.等级
+        in_int_data[3] = int(buff.BUFF力量)
+        in_int_data[4] = int(buff.BUFF物攻)
+        in_int_data[5] = int(awake.适用数值)
+        in_int_data[6] = awake.等级
+        in_int_data[7] = int(awake.一觉力智)
+        in_int_data[8] = int(other_power)
+        in_int_data[9] = int(other_attack)
+        in_int_data[10] = int(self.C力智)
+        in_int_data[11] = int(self.C三攻)
+
+        third_awake = self.技能表['三次觉醒']
+        awake_rate = third_awake.加成倍率()
+        awake_rate = awake_rate+1 if awake_rate < 1 else awake_rate
+
+        in_double_data = (ctypes.c_double * 8)()
+        in_double_data[0] = self.觉醒择优系数
+        in_double_data[1] = self.buff_rate
+        in_double_data[2] = buff.BUFF力量per
+        in_double_data[3] = buff.BUFF物攻per
+        in_double_data[4] = awake_rate
+        in_double_data[5] = awake.一觉力智per
+        in_double_data[6] = self.系统奶系数
+        in_double_data[7] = self.系统奶基数
+        return in_int_data,in_double_data
 
     def 穿戴装备(self, 装备, 套装 = None):
         self.装备栏 = 装备
@@ -736,16 +786,55 @@ class 角色属性(属性):
             self.一觉Lv = 替换属性.一觉Lv
             self.一觉力智 = 替换属性.一觉力智
             self.一觉力智per = 替换属性.一觉力智per
-            self.技能表['三次觉醒'].等级 = 替换属性.技能表['三次觉醒'].等级
-            self.自适应计算()
+            self.技能表['三次觉醒'].等级 = 替换属性.技能表['三次觉醒'].等级                 
+            self.自适应计算()             
             self.适用数值计算()
             self.切换详情 = 切换列表[序号] + temp
         else:
-            self.装备属性计算()
+            self.装备属性计算()            
             self.自适应计算()
             self.适用数值计算()
-    
-    def 自适应计算(self):                
+
+
+    def 自适应计算(self):
+        if preferred is not None:
+
+            temp = deepcopy(self)
+            temp.适用数值计算()
+
+            in_pre_range = (ctypes.c_int * 6)()
+            if self.希洛克武器词条 == 1:
+                in_pre_range[0] = 1
+                in_pre_range[1] = 1
+            preferred_armor = False
+
+            for i in range(4):
+                if self.黑鸦词条[i][0] == 1:
+                    in_pre_range[i+2] = 1
+                    preferred_armor = True
+            in_int_data,in_double_data = temp.get_data()
+            preferred.cal_index_buff(in_pre_range,in_int_data,in_double_data)
+            
+            if self.希洛克武器词条 == 1:
+                a = in_pre_range[0]
+                b = in_pre_range[1]
+                self.自适应最高值 = [a,b]
+                self.武器属性输入(a,b)
+
+            if self.黑鸦词条[0][0] >0:
+                self.武器变换属性自适应 = in_pre_range[2]
+                self.黑鸦武器输入(in_pre_range[2])
+
+            if preferred_armor:    
+                self.防具变换属性自适应 = in_pre_range[3:]         
+                self.黑鸦属性输入(in_pre_range[3],in_pre_range[4],in_pre_range[5])
+
+            pass
+        else:
+            self.旧版自适应计算()
+        pass
+
+    def 旧版自适应计算(self):                
 
         # 黑鸦词条计算
         黑鸦选择 = [0, 0, 0, 0]
