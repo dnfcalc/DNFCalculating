@@ -10,7 +10,7 @@ from PublicReference.buff_panel import *
 from PublicReference.view.DialogRegister import DefaultDialogRegister
 from ctypes import *
 try:
-    preferred = ctypes.WinDLL("./Preferred.dll")
+    preferred = ctypes.WinDLL(dllPath)
 except Exception as e:
     logger.error(e)
 
