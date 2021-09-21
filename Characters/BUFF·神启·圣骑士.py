@@ -255,6 +255,8 @@ class BUFF·神启·圣骑士角色属性(角色属性):
         self.类型 = '体力'
         self.技能表 = deepcopy(技能表)
         self.技能栏 = list(self.技能表.values())
+        self.buff_type = 2
+        self.buff_rate = 1.15
         self.一觉序号 = self.技能表['一次觉醒'].技能序号
         self.二觉序号 = self.技能表['二次觉醒'].技能序号
         self.三觉序号 = self.技能表['三次觉醒'].技能序号

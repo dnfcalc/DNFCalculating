@@ -260,6 +260,7 @@ class 神启·圣骑士角色属性(角色属性):
         self.类型 = '智力'
         self.技能表 = deepcopy(技能表)
         self.技能栏 = list(self.技能表.values())
+        self.buff_rate = 1.15
         self.一觉序号 = self.技能表['一次觉醒'].技能序号
         self.二觉序号 = self.技能表['二次觉醒'].技能序号
         self.三觉序号 = self.技能表['三次觉醒'].技能序号
@@ -295,6 +296,11 @@ class 神启·圣骑士角色属性(角色属性):
 
     def 系数数值进图(self):
         return self.进图智力
+
+    def get_data(self):
+        in_int_data,in_double_data = super().get_data()
+        in_double_data[1] = self.buff_rate if self.技能表['勇气圣歌'].是否启用 else 1
+        return in_int_data,in_double_data
 
 
 class 神启·圣骑士(角色窗口):
