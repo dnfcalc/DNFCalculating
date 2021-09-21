@@ -12,6 +12,7 @@ import traceback
 from PublicReference.utils import zipfile
 from PublicReference.utils import img
 from PublicReference.utils.LZextends import *
+from PublicReference.view import NotificationButton
 import sys
 import time
 import subprocess
@@ -313,6 +314,9 @@ class 选择窗口(QWidget):
             self.消息通知 = QMessageBox(QMessageBox.Question, "通知",
                                     repJson[0]['info'])
             self.消息通知.setWindowIcon(self.icon)
+            confirm = NotificationButton.ConfirmButton(self.消息通知)
+            self.消息通知.setWindowFlags(Qt.Window | Qt.WindowTitleHint | Qt.CustomizeWindowHint)
+            self.消息通知.addButton(confirm, QMessageBox.YesRole)
         except Exception as error:
             pass
         self.版本提示.setWindowIcon(self.icon)
