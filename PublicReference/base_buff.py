@@ -11,6 +11,7 @@ from PublicReference.view.DialogRegister import DefaultDialogRegister
 from ctypes import *
 try:
     preferred = ctypes.WinDLL(dllPath)
+    logger.info("Preferred included.")
 except Exception as e:
     logger.error(e)
 

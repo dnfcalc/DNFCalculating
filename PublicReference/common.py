@@ -1,5 +1,4 @@
 from math import ceil
-from PublicReference.utils.storex import *
 from PublicReference.equipment.equ_list import *
 from PublicReference.utils.MainWindow import *
 
@@ -219,6 +218,7 @@ class 窗口(QWidget):
 
         self.calc_done_signal.connect(self.calc_done)
         self.update_remaining_signal.connect(self.update_remaining)
+        store.delete("^/(buffer|carry)/data/.*$")
 
         self.窗口属性输入()
         self.界面()

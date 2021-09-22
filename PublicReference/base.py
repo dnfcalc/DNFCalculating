@@ -6,8 +6,14 @@ from PublicReference.equipment.武器融合 import *
 from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
+import ctypes
 import operator
 
+try:
+    preferred = ctypes.WinDLL(dllPath)
+    logger.info("Preferred included.")
+except Exception as e:
+    logger.error(e)
 
 class 技能:
     名称 = ''
@@ -1410,9 +1416,7 @@ class 角色属性(属性):
                 data_array[i + 1][j] = self.择优词条[i][j] * (
                     up[1][j] - up[0][j]) * self.是否择优[i] * 100
 
-        dll = ctypes.WinDLL(dllPath)
-
-        dll.cal_index(data_array, byref(index))
+        preferred.cal_index(data_array, byref(index))
 
         for i in range(y):
             if self.是否择优[i] != 0:
