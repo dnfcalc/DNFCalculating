@@ -2,6 +2,8 @@ import configparser
 import os
 import json
 
+from PyQt5.QtCore import showbase
+
 global 配置格式有误
 global 窗口显示模式
 global 切装模式
@@ -117,3 +119,27 @@ for i in range(100):
 
 if len(攻击目标) == 0:
     攻击目标 = [['120沙袋(绿)', 443243, 0, 0, 0, 0]]
+
+languageJson = []
+languagePath = "ResourceFiles/Config/language.json"
+if os.path.exists(languagePath):
+    with open(languagePath, encoding='utf-8') as fp:
+        languageJson = json.load(fp)
+        fp.close()
+
+def trans(key):
+    show = key
+    if type(key) == type([]):
+        show = []
+        for item in key:
+            show.append(tran(item))
+    elif type(key) == type(""):
+        show = tran(key)
+    return show
+
+def tran(key):
+    try:
+        show = languageJson[key]
+        return show
+    except:
+        return key

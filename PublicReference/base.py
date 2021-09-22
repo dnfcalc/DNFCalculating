@@ -1725,12 +1725,10 @@ class 角色窗口(窗口):
         标签.setStyleSheet(标签样式)
         self.装备条件选择.clear()
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems(['角色熟练度：英雄', '角色熟练度：传说'])
+        self.装备条件选择[-1].addItems([trans('角色熟练度：英雄'), '角色熟练度：传说'])
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems([
-            '技能栏空位：0', '技能栏空位：1', '技能栏空位：2', '技能栏空位：3', '技能栏空位：4', '技能栏空位：5',
-            '技能栏空位：6'
-        ])
+        for i in range(0,7):
+            self.装备条件选择[-1].addItem('技能栏空位：'+str(i))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems([
             '命运的抉择：数学期望', '命运的抉择：黄字+10%', '命运的抉择：暴伤+10%', '命运的抉择：终伤+10%',
@@ -1768,7 +1766,7 @@ class 角色窗口(窗口):
             self.装备条件选择[i].resize(170, 20)
             self.装备条件选择[i].move(940, 30 + 28 * i)
 
-        self.百变怪选项 = QCheckBox('百变怪   ', self.main_frame1)
+        self.百变怪选项 = QCheckBox('百变怪', self.main_frame1)
         self.百变怪选项.move(660, 613)
         self.百变怪选项.resize(80, 24)
         self.百变怪选项.setToolTip('<font size="3" face="宋体">仅在极速模式和套装模式下生效</font>')
@@ -1822,7 +1820,7 @@ class 角色窗口(窗口):
         self.红色宠物装备.resize(宽度, 高度)
         self.红色宠物装备.setStyleSheet(复选框样式)
         self.红色宠物装备.setToolTip(
-            '<font size="3" face="宋体">7%黄字,8%力智,8%白字,8%三攻取最高值<br>需配合修改第三页相关选项</font>'
+            '<font size="3" face="宋体">7%黄字,8%力智,8%白字,8%三攻取最高值</font>'
         )
         self.红色宠物装备.stateChanged.connect(lambda state: self.下拉框禁用(
             self.红色宠物装备, self.细节选项输入[0][11], 下拉框样式_detail))
@@ -1832,7 +1830,7 @@ class 角色窗口(窗口):
         self.光环自适应.resize(宽度, 高度)
         self.光环自适应.setStyleSheet(复选框样式)
         self.光环自适应.setToolTip(
-            '<font size="3" face="宋体">5%黄字，5%暴伤，5%三攻取最高值<br>需配合修改第三页相关选项</font>'
+            '<font size="3" face="宋体">5%黄字，5%暴伤，5%三攻取最高值</font>'
         )
         self.光环自适应.stateChanged.connect(lambda state: self.下拉框禁用(
             self.光环自适应, self.细节选项输入[1][13], 下拉框样式_detail))
@@ -2001,7 +1999,7 @@ class 角色窗口(窗口):
                 x = QLabel(self.main_frame2)
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
                 x.resize(28, 28)
-                tempstr = '<font face="宋体"><font color="#FF6666">' + i.名称 + (
+                tempstr = '<font face="宋体"><font color="#FF6666">' + trans(i.名称) + (
                     "<br>" if i.备注 != '' else '') + i.备注 + '</font><br>'
                 tempstr += '所在等级：' + str(i.所在等级) + '<br>'
                 tempstr += '等级上限：' + str(i.等级上限)
@@ -2123,7 +2121,7 @@ class 角色窗口(窗口):
         self.二觉遮罩.clicked.connect(lambda state, index=2: self.强化觉醒选择(index))
 
         for i in range(3):
-            self.护石栏[i].addItems(self.护石选项)
+            self.护石栏[i].addItems(trans(self.护石选项))
         self.护石类型选项 = []
 
         for i in range(9):
@@ -2135,7 +2133,7 @@ class 角色窗口(窗口):
         横坐标 = 480
         纵坐标 = 20
         行高 = 18
-        x = QLabel("护石Ⅰ", self.main_frame2)
+        x = QLabel("护石"+"Ⅰ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -2167,7 +2165,7 @@ class 角色窗口(窗口):
 
         横坐标 = 650
         纵坐标 = 20
-        x = QLabel("护石Ⅱ", self.main_frame2)
+        x = QLabel("护石"+"Ⅱ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -2195,7 +2193,7 @@ class 角色窗口(窗口):
 
         横坐标 = 820
         纵坐标 = 20
-        x = QLabel("护石Ⅲ", self.main_frame2)
+        x = QLabel("护石"+"Ⅲ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -2486,7 +2484,7 @@ class 角色窗口(窗口):
             else:
                 self.属性设置输入.append(templist)
 
-        self.修正列表名称 = ['力智%', '三攻%', '黄字', '白字', '属白', '暴伤', '终伤', '技攻']
+        self.修正列表名称 = ['力智'+'%', '三攻'+'%', '黄字', '白字', '属白', '暴伤', '终伤', '技攻']
 
         距离 = 30
         templist = []
@@ -2523,7 +2521,7 @@ class 角色窗口(窗口):
 
         self.时装选项.append(MyQComboBox(self.main_frame3))
         self.时装选项[8].setStyleSheet(下拉框样式_detail)
-        self.时装选项[8].addItems(['高级套装[8]', '节日套装[8]', '稀有套装[8]', '神器套装[8]'])
+        self.时装选项[8].addItems(['高级套装'+'[8]', '节日套装'+'[8]', '稀有套装'+'[8]', '神器套装'+'[8]'])
         self.时装选项[8].resize(100, 22)
         self.时装选项[8].move(990, 570)
         self.时装选项[8].currentIndexChanged.connect(
@@ -3109,17 +3107,17 @@ class 角色窗口(窗口):
         try:
             self.护石栏[x].setToolTip(
                 '<font face="宋体">' +
-                self.初始属性.技能栏[self.初始属性.技能序号[self.护石栏[x].currentText()]].护石描述(
+                self.初始属性.技能栏[self.初始属性.技能序号[self.护石选项[self.护石栏[x].currentIndex()]]].护石描述(
                     self.护石类型选项[x].currentIndex()) + '</font></font>')
         except:
             self.护石栏[x].setToolTip('<font face="宋体">暂缺</font>')
 
     def 护石类型选项更新(self, x):
         self.护石类型选项[x].clear()
-        if self.护石栏[x].currentText() != '无':
+        if self.护石栏[x].currentText() != trans('无'):
             try:
                 self.护石类型选项[x].addItems(self.初始属性.技能栏[self.初始属性.技能序号[
-                    self.护石栏[x].currentText()]].护石选项)
+                    self.护石选项[self.护石栏[x].currentIndex()]]].护石选项)
             except:
                 self.护石类型选项[x].addItem('魔界')
                 self.护石类型选项[x].addItem('圣痕')
@@ -3182,14 +3180,14 @@ class 角色窗口(窗口):
         for k in range(3):
             if self.护石栏[k].currentText() != '无':
                 try:
-                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石()
+                    属性.技能栏[self.角色属性A.技能序号[self.护石选项[self.护石栏[k].currentIndex()]]].装备护石()
                 except:
-                    属性.技能栏[self.角色属性A.技能序号[self.护石栏[k].currentText()]].装备护石(
+                    属性.技能栏[self.角色属性A.技能序号[self.护石选项[self.护石栏[k].currentIndex()]]].装备护石(
                         self.护石类型选项[k].currentIndex())
 
-        属性.护石第一栏 = self.护石栏[0].currentText()
-        属性.护石第二栏 = self.护石栏[1].currentText()
-        属性.护石第三栏 = self.护石栏[2].currentText()
+        属性.护石第一栏 = self.护石选项[self.护石栏[0].currentIndex()]
+        属性.护石第二栏 = self.护石选项[self.护石栏[1].currentIndex()]
+        属性.护石第三栏 = self.护石选项[self.护石栏[2].currentIndex()]
 
         for i in range(9):
             if self.符文[i].currentText() != '无' and self.符文效果[i].currentText(
