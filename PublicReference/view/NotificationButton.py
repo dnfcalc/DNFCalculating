@@ -6,7 +6,7 @@ class ConfirmButton(QPushButton):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setEnabled(False)
-        self.setText("test")
+        # self.setText("test")
         self.time = QTimer(self)
         self.count = 10
         self.time.setInterval(1000)

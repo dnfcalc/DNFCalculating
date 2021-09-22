@@ -762,14 +762,14 @@ if __name__ == '__main__':
                 json.dump(versionInfo, fp, ensure_ascii=False)
                 fp.truncate()
             fp.close()
-            if ("main.py" not in sys.argv[0]) and 展示信息:
-                QDesktopServices.openUrl(
-                    QUrl('http://dnf.17173.com/jsq/changlog.html#/'))
-                instance.版本提示.exec()
             if ("main.py" not in sys.argv[0]) and 配置格式有误:
                 instance.配置错误.exec()
             if ("main.py" not in sys.argv[0]) and instance.通知时间 != 通知时间:
                 instance.消息通知.exec()
+            if ("main.py" not in sys.argv[0]) and 展示信息:
+                QDesktopServices.openUrl(
+                    QUrl('http://dnf.17173.com/jsq/changlog.html#/'))
+                instance.版本提示.exec()
         except Exception as error:
             logger.error("error={} \n detail {}".format(
                 error, traceback.print_exc()))
