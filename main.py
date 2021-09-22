@@ -315,7 +315,8 @@ class 选择窗口(QWidget):
                                     repJson[0]['info'])
             self.消息通知.setWindowIcon(self.icon)
             confirm = NotificationButton.ConfirmButton(self.消息通知)
-            self.消息通知.setWindowFlags(Qt.Window | Qt.WindowTitleHint | Qt.CustomizeWindowHint)
+            self.消息通知.setWindowFlags(Qt.Window | Qt.WindowTitleHint
+                                     | Qt.CustomizeWindowHint)
             self.消息通知.addButton(confirm, QMessageBox.YesRole)
         except Exception as error:
             pass
@@ -737,40 +738,41 @@ if __name__ == '__main__':
         instance.报错提示.exec()
     except Exception as error:
         pass
-    try:
-        with open("ResourceFiles/Config/release_version.json", "r+") as fp:
-            versionInfo = json.load(fp)
-            展示信息 = versionInfo['ShowChangeLog']
-            versionInfo['ShowChangeLog'] = False
-            fp.seek(0)
-            json.dump(versionInfo, fp, ensure_ascii=False)
-            fp.truncate()
-        fp.close()
-        if not os.path.exists("ResourceFiles/Config/notice_version.json"):
-            with open("ResourceFiles/Config/notice_version.json",
-                      "w",
-                      encoding='utf-8') as fp:
-                json.dump({"time": ""}, fp)
+    if "main.py" not in sys.argv[0]:
+        try:
+            with open("ResourceFiles/Config/release_version.json", "r+") as fp:
+                versionInfo = json.load(fp)
+                展示信息 = versionInfo['ShowChangeLog']
+                versionInfo['ShowChangeLog'] = False
+                fp.seek(0)
+                json.dump(versionInfo, fp, ensure_ascii=False)
+                fp.truncate()
+            fp.close()
+            if not os.path.exists("ResourceFiles/Config/notice_version.json"):
+                with open("ResourceFiles/Config/notice_version.json",
+                          "w",
+                          encoding='utf-8') as fp:
+                    json.dump({"time": ""}, fp)
+                pass
+            with open("ResourceFiles/Config/notice_version.json", "r+") as fp:
+                versionInfo = json.load(fp)
+                通知时间 = versionInfo['time']
+                versionInfo['time'] = instance.通知时间
+                fp.seek(0)
+                json.dump(versionInfo, fp, ensure_ascii=False)
+                fp.truncate()
+            fp.close()
+            if ("main.py" not in sys.argv[0]) and 展示信息:
+                QDesktopServices.openUrl(
+                    QUrl('http://dnf.17173.com/jsq/changlog.html#/'))
+                instance.版本提示.exec()
+            if ("main.py" not in sys.argv[0]) and 配置格式有误:
+                instance.配置错误.exec()
+            if ("main.py" not in sys.argv[0]) and instance.通知时间 != 通知时间:
+                instance.消息通知.exec()
+        except Exception as error:
+            logger.error("error={} \n detail {}".format(
+                error, traceback.print_exc()))
             pass
-        with open("ResourceFiles/Config/notice_version.json", "r+") as fp:
-            versionInfo = json.load(fp)
-            通知时间 = versionInfo['time']
-            versionInfo['time'] = instance.通知时间
-            fp.seek(0)
-            json.dump(versionInfo, fp, ensure_ascii=False)
-            fp.truncate()
-        fp.close()
-        if 展示信息:
-            QDesktopServices.openUrl(
-                QUrl('http://dnf.17173.com/jsq/changlog.html#/'))
-            instance.版本提示.exec()
-        if 配置格式有误:
-            instance.配置错误.exec()
-        if instance.通知时间 != 通知时间:
-            instance.消息通知.exec()
-    except Exception as error:
-        logger.error("error={} \n detail {}".format(error,
-                                                    traceback.print_exc()))
-        pass
 
     app.exec_()
