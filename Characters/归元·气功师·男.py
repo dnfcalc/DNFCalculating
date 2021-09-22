@@ -483,6 +483,17 @@ class 技能19(主动技能):
     CD = 50
     TP成长 = 0.10
     TP上限 = 5
+    是否有护石 = 1
+    护石选项 = ['魔界','圣痕']
+
+    def 装备护石(self, x):
+        if x == 0:
+            self.风雷啸 = 1
+            self.倍率 *= 2.03
+            pass
+        elif x == 1:
+            self.风雷啸 = 1
+            self.倍率 *= 2.16
 
     def 等效百分比(self, 武器类型):
         # return (self.data1[self.等级] * self.攻击次数1 + self.data2[self.等级] * self.攻击次数2) * (
