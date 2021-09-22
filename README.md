@@ -10,6 +10,10 @@ python(3.8)编写，使用 pyqt5 图形 GUI 库
 安装[Python](https://www.python.org/),计算器开发使用的是 3.8 版本  
 安装项目依赖
 
+## 其余注意
+
+择优相关加速，需自行将 PublicReference/preferred 的 C++ 的程序需要自己编译为 DLL 然后放到 InternalFile/DLL 目录
+
 > pip install -i https://pypi.mirrors.ustc.edu.cn/simple/ -r requirements.txt
 
 <!-- ### 修改项目
@@ -32,7 +36,10 @@ python(3.8)编写，使用 pyqt5 图形 GUI 库
 ## 程序结构
 
 |--　 DNFCalculating  
-　　　　|--　 run*mac.command：macOS 下运行脚本  
+　　　　|--　 .gitignore  
+　　　　|--　 .gitmodules  
+　　　　|--　 .editorconfig  
+　　　　|--　 run_mac.command：macOS 下运行脚本  
 　　　　|--　 CHANGELOG.md：程序更新记录  
 　　　　|--　 LICENSE：开源许可  
 　　　　|--　 main.py：程序主入口  
@@ -42,8 +49,9 @@ python(3.8)编写，使用 pyqt5 图形 GUI 库
 　　　　|--　 PublicReference：公有引用方法  
 　　　　|　　　|--　 base.py：输出职业公有实现方法  
 　　　　|　　　|--　 base_buff.py：奶系职业公有实现方法  
+　　　　|　　　|--　 buff_panel.py：奶系切装功能实现  
 　　　　|　　　|--　 common.py：界面公有实现方法  
-　　　　|　　　|--　**init**.py：初始化文件，启用多线程及日志记录  
+　　　　|　　　|--　 \_\_init\_\_.py：初始化文件，启用多线程及日志记录  
 　　　　|　　　|--　 choise：选项设置  
 　　　　|　　　|　　　|--　细节选项.py  
 　　　　|　　　|　　　|--　选项设置.py  
@@ -58,13 +66,17 @@ python(3.8)编写，使用 pyqt5 图形 GUI 库
 　　　　|　　　|　　　|--　武器融合\_buff.py  
 　　　　|　　　|　　　|--　称号.py  
 　　　　|　　　|　　　|--　称号\_buff.py  
-　　　　|　　　|　　　|--　装备*套装.py  
-　　　　|　　　|　　　|--　装备*武器.py  
-　　　　|　　　|　　　|--　装备*特殊.py  
-　　　　|　　　|　　　|--　装备*防具.py  
-　　　　|　　　|　　　|--　装备*首饰.py  
+　　　　|　　　|　　　|--　装备\_套装.py  
+　　　　|　　　|　　　|--　装备\_武器.py  
+　　　　|　　　|　　　|--　装备\_特殊.py  
+　　　　|　　　|　　　|--　装备\_防具.py  
+　　　　|　　　|　　　|--　装备\_首饰.py  
 　　　　|　　　|　　　|--　辟邪玉.py  
 　　　　|　　　|　　　|--　辟邪玉\_buff.py  
+　　　　|　　　|　　　|--　融合\_奥兹玛.py  
+　　　　|　　　|　　　|--　融合\_希洛克.py  
+　　　　|　　　|--　 preferred：择优 DLL 源码，需自行编译  
+　　　　|　　　|--　 views：界面扩展类
 　　　　|　　　|--　 utils：工具类  
 　　　　|　　　　　　　|--　 calc_core.py：装备寻优  
 　　　　|　　　　　　　|--　 common.py：格式化时间  
@@ -77,6 +89,8 @@ python(3.8)编写，使用 pyqt5 图形 GUI 库
 　　　　|　　　　　　　|--　 producer_consumer.py：多进程  
 　　　　|　　　　　　　|--　 TitleBar.py：自定义标题栏  
 　　　　|　　　　　　　|--　 zipfile.py：压缩文件  
+　　　　|　　　　　　　|--　 storex.py：存储数据,组件间通信  
+　　　　|　　　　　　　|--　 LZextends.py：蓝奏云扩展  
 　　　　|--　 ResourceFiles：资源文件夹  
 　　　　|　　　|--　职业文件夹  
 　　　　|　　　|　　　|--　 bg.jpg：背景图  
