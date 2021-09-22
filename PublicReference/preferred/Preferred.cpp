@@ -1,6 +1,6 @@
 #include "Preferred.h"
 
-//·µ»Ø×î´óÖµË÷Òý Êä³öÏµ
+//è¿”å›žæœ€å¤§å€¼ç´¢å¼• è¾“å‡ºç³»
 DLLEXPORT void cal_index(double data[9][6], int* index) {
     double max = 0;
     vector<int> list[8];
@@ -55,20 +55,20 @@ DLLEXPORT void cal_index(double data[9][6], int* index) {
     }
 }
 
-//¸¨ÖúÏµ
-//0 ÄÌÂè ÏµÊý665
+//è¾…åŠ©ç³»
+//0 å¥¶å¦ˆ ç³»æ•°665
 int buff_attack_0[41] = { 0, 38, 40, 42, 43, 44, 46, 48, 49, 51, 52, 53, 55, 57, 58, 60, 61, 62, 64, 66, 68, 69, 70, 72, 74, 75, 77, 78, 79, 81, 83, 84, 86, 87, 88, 90, 92, 93, 95, 96, 98 };
 int buff_power_0[41] = {0, 148, 158, 169, 179, 189, 198, 208, 218, 228, 239, 249, 259, 269, 279, 290, 299, 309, 319, 329, 339, 349, 360, 370, 380, 390, 399, 409, 420, 430, 440, 450, 460, 470, 481, 491, 500, 510, 520, 530, 541};
 
-//1 ÄÌÂÜ ÏµÊý665
+//1 å¥¶è ç³»æ•°665
 int buff_attack_1[41] = { 0, 34, 35, 37, 38, 39, 41, 42, 43, 45, 46, 47, 49, 50, 51, 53, 54, 55, 57, 58, 60, 61, 62, 64, 65, 66, 68, 69, 70, 72, 73, 74, 76, 77, 78, 80, 81, 82, 84, 85, 87 };
 int buff_power_1[41] = { 0, 131, 140, 149, 158, 167, 175, 184, 193, 202, 211, 220, 229, 238, 247, 256, 264, 273, 282, 291, 300, 309, 318, 327, 336, 345, 353, 362, 371, 380, 389, 398, 407, 416, 425, 434, 442, 451, 460, 469, 478 };
 
-//2 ÄÌ°Ö ÏµÊý620
+//2 å¥¶çˆ¸ ç³»æ•°620
 int buff_attack_2[41] = { 0, 43, 44, 46, 48, 49, 51, 53, 54, 56, 58, 59, 61, 63, 64, 66, 68, 69, 71, 73, 75, 76, 78, 80, 81, 83, 85, 86, 88, 90, 91, 93, 95, 96, 98, 100, 101, 103, 105, 106, 109 };
 int buff_power_2[41] = { 0, 164, 175, 186, 198, 209, 219, 230, 241, 253, 264, 275, 286, 298, 309, 320, 330, 341, 353, 364, 375, 386, 398, 409, 420, 431, 441, 453, 464, 475, 486, 498, 509, 520, 531, 543, 553, 564, 575, 586, 598 };
 
-//ÏµÊý750
+//ç³»æ•°750
 int awake_power_0[41] = { 0, 43, 57, 74, 91, 111, 131, 153, 176, 201, 228, 255, 284, 315, 346, 379, 414, 449, 487, 526, 567, 608, 651, 696, 741, 789, 838, 888, 939, 993, 1047, 1103, 1160, 1219, 1278, 1340, 1403, 1467, 1533, 1600, 1668 };
 
 
@@ -169,11 +169,11 @@ double Char::cal() {
 }
 
 
-//¿ÕÊôÐÔ
+//ç©ºå±žæ€§
 void attr_0(Char &c) {
 }
 
-//²ÐÏã1
+//æ®‹é¦™1
 void attr_1(Char &c) {
     c.buff_power_per *= 1.03;
     c.awake_power_add += 60;
@@ -198,7 +198,7 @@ void attr_6(Char &c) {
     c.awake_lv += 1;
     c.buff_power_per *= 1.03;
 }
-//²ÐÏã2
+//æ®‹é¦™2
 void attr_7(Char &c) {
     c.buff_power_per *= 1.03;
     c.awake_power_add += 40;
@@ -224,7 +224,7 @@ void attr_12(Char &c) {
     c.buff_lv += 1;
     c.awake_power_add += 30;
 }
-//ÎäÆ÷
+//æ­¦å™¨
 void attr_13(Char &c) {
     c.buff_power_per *= 1.03;
     c.awake_power_add += 60;
@@ -249,7 +249,7 @@ void attr_18(Char &c) {
     c.buff_power_per *= 1.04;
     c.awake_lv += 1;
 }
-//½äÖ¸¡¢¸¨Öú×°±¸¡¢ÏÂ×°
+//æˆ’æŒ‡ã€è¾…åŠ©è£…å¤‡ã€ä¸‹è£…
 void attr_19(Char &c) {
     c.buff_power_per *= 1.04;
     c.awake_power_add += 40;
@@ -309,34 +309,76 @@ DLLEXPORT void cal_index_buff(int* range, int* i_data, double* d_data) {
         list[i] = range_buff(range[i]);
     }
     double max = 0;
-    for (auto a1 = list[0].cbegin(); a1 != list[0].cend(); a1++)
+    if (list[3][0] * list[4][0] * list[5][0] != 0) 
     {
-        for (auto a2 = list[1].cbegin(); a2 != list[1].cend(); a2++)
+        for (auto a1 = list[0].cbegin(); a1 != list[0].cend(); a1++)
         {
-            for (auto a3 = list[2].cbegin(); a3 != list[2].cend(); a3++)
+            for (auto a2 = list[1].cbegin(); a2 != list[1].cend(); a2++)
             {
-                for (auto a4 = list[3].cbegin(); a4 != list[3].cend(); a4++)
+                for (auto a3 = list[2].cbegin(); a3 != list[2].cend(); a3++)
                 {
-                    for (auto a5 = list[4].cbegin(); a5 != list[4].cend(); a5++)
+                    for (auto a4 = list[3].cbegin(); a4 != list[3].cend(); a4++)
                     {
-                        for (auto a6 = list[5].cbegin(); a6 != list[5].cend(); a6++)
+                        for (auto a5 = list[4].cbegin(); a5 != list[4].cend(); a5++)
                         {
-                            Char p = c;
-                            attr_list[0][*a1](p);
-                            attr_list[1][*a2](p);
-                            attr_list[2][*a3](p);
-                            attr_list[3][*a4](p);
-                            attr_list[3][*a5](p);
-                            attr_list[3][*a6](p);
-                            double result = p.cal();
-                            if (result > max) {
-                                max = result;
-                                range[0] = *a1;
-                                range[1] = *a2;
-                                range[2] = *a3;
-                                range[3] = *a4;
-                                range[4] = *a5;
-                                range[5] = *a6;
+                            for (auto a6 = list[5].cbegin(); a6 != list[5].cend(); a6++)
+                            {
+                                if ((*a4 >= *a5) & (*a5 >= *a6)) {
+                                    Char p = c;
+                                    attr_list[0][*a1](p);
+                                    attr_list[1][*a2](p);
+                                    attr_list[2][*a3](p);
+                                    attr_list[3][*a4](p);
+                                    attr_list[3][*a5](p);
+                                    attr_list[3][*a6](p);
+                                    double result = p.cal();
+                                    if (result > max) {
+                                        max = result;
+                                        range[0] = *a1;
+                                        range[1] = *a2;
+                                        range[2] = *a3;
+                                        range[3] = *a4;
+                                        range[4] = *a5;
+                                        range[5] = *a6;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    else {
+        for (auto a1 = list[0].cbegin(); a1 != list[0].cend(); a1++)
+        {
+            for (auto a2 = list[1].cbegin(); a2 != list[1].cend(); a2++)
+            {
+                for (auto a3 = list[2].cbegin(); a3 != list[2].cend(); a3++)
+                {
+                    for (auto a4 = list[3].cbegin(); a4 != list[3].cend(); a4++)
+                    {
+                        for (auto a5 = list[4].cbegin(); a5 != list[4].cend(); a5++)
+                        {
+                            for (auto a6 = list[5].cbegin(); a6 != list[5].cend(); a6++)
+                            {
+                                Char p = c;
+                                attr_list[0][*a1](p);
+                                attr_list[1][*a2](p);
+                                attr_list[2][*a3](p);
+                                attr_list[3][*a4](p);
+                                attr_list[3][*a5](p);
+                                attr_list[3][*a6](p);
+                                double result = p.cal();
+                                if (result > max) {
+                                    max = result;
+                                    range[0] = *a1;
+                                    range[1] = *a2;
+                                    range[2] = *a3;
+                                    range[3] = *a4;
+                                    range[4] = *a5;
+                                    range[5] = *a6;
+                                }
                             }
                         }
                     }

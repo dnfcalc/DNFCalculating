@@ -4,7 +4,7 @@
 using namespace std;
 #define DLLEXPORT extern "C" __declspec(dllexport)
 
-//¼ÆËãÔñÓÅ·¶Î§
+//è®¡ç®—æ‹©ä¼˜èŒƒå›´
 vector<int> range(double* array) {
     vector<int> range;
     for (int i = 0; i < 6; i++) {
@@ -18,7 +18,7 @@ vector<int> range(double* array) {
     return range;
 }
 
-//È¡×îĞ¡Öµ
+//å–æœ€å°å€¼
 int min(int num1, int num2)
 {
     if (num1 < num2)
@@ -27,7 +27,7 @@ int min(int num1, int num2)
         return num2;
 }
 
-//¼ÆËãÔñÓÅ·¶Î§ buff
+//è®¡ç®—æ‹©ä¼˜èŒƒå›´ buff
 vector<int> range_buff(int sign) {
     vector<int> range;
     if (sign != 0) {
