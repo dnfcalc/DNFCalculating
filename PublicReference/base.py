@@ -4737,15 +4737,18 @@ class 角色窗口(窗口):
             显示[count].setToolTip(套装属性[i][:-4])
             count += 1
 
-        #显示黑鸦词条
-        黑鸦部位 = ['武器', '戒指', '辅助装备', '下装']
-        for i in range(4):
-            if 属性.黑鸦词条[i][4] != '':
-                显示[count].setText(黑鸦部位[i] + ':' +
-                                  属性.黑鸦词条[i][4].replace('<br>', ' '))
-                显示[count].setStyleSheet(
-                    "QLabel{font-size:12px;color:rgb(255,255,255)}")
-                count += 1
+        try:
+            #显示黑鸦词条
+            黑鸦部位 = ['武器', '戒指', '辅助装备', '下装']
+            for i in range(4):
+                if 属性.黑鸦词条[i][4] != '':
+                    显示[count].setText(黑鸦部位[i] + ':' +
+                                    属性.黑鸦词条[i][4].replace('<br>', ' '))
+                    显示[count].setStyleSheet(
+                        "QLabel{font-size:12px;color:rgb(255,255,255)}")
+                    count += 1
+        except:
+            pass
 
     def 打造显示设置(self, 显示, 属性, x=0):
         初始x = 10
