@@ -87,9 +87,9 @@ class Store:
                 match = pattern
             elif isinstance(pattern, str):
                 match = lambda s: re.match(pattern, s)
-        for key in list(self.__states.keys()):
-            if match(key):
-                self.__states.pop(key)
+        keys = list(filter(match,self.__states.keys()))
+        for key in keys:
+            self.__states.pop(key)
         return self
 
     # 根据指定的条件导出
