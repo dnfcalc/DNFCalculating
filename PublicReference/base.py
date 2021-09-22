@@ -251,6 +251,9 @@ class 角色属性(属性):
     # 计算自适应方式 = 0
     输出提升率 = 0
 
+    def getskillinfo(self):
+        return self.技能栏
+
     # endregion
 
     # region 词条属性
@@ -2126,9 +2129,9 @@ class 角色窗口(窗口):
 
         for i in range(9):
             self.符文.append(MyQComboBox(self.main_frame2))
-            self.符文[i].addItems(self.符文选项)
+            self.符文[i].addItems(trans(self.符文选项))
             self.符文效果.append(MyQComboBox(self.main_frame2))
-            self.符文效果[i].addItems(符文效果选项)
+            self.符文效果[i].addItems(trans(符文效果选项))
 
         横坐标 = 480
         纵坐标 = 20
@@ -3178,7 +3181,7 @@ class 角色窗口(窗口):
 
     def 加载护石(self, 属性):
         for k in range(3):
-            if self.护石栏[k].currentText() != '无':
+            if self.护石栏[k].currentText() != trans('无'):
                 try:
                     属性.技能栏[self.角色属性A.技能序号[self.护石选项[self.护石栏[k].currentIndex()]]].装备护石()
                 except:
@@ -3190,16 +3193,15 @@ class 角色窗口(窗口):
         属性.护石第三栏 = self.护石选项[self.护石栏[2].currentIndex()]
 
         for i in range(9):
-            if self.符文[i].currentText() != '无' and self.符文效果[i].currentText(
-            ) != '无':
+            if self.符文[i].currentText() != trans('无') and self.符文效果[i].currentText(
+            ) != trans('无'):
                 for j in self.符文效果[i].currentText().split(','):
                     if '攻击' in j:
-                        属性.技能栏[self.角色属性A.技能序号[
-                            self.符文[i].currentText()]].倍率 *= 1 + int(
+                        属性.技能栏[self.角色属性A.技能序号[self.符文选项[self.符文[i].currentIndex()]
+                            ]].倍率 *= 1 + int(
                                 j.replace('攻击', '').replace('%', '')) / 100
                     if 'CD' in j:
-                        属性.技能栏[self.角色属性A.技能序号[
-                            self.符文[i].currentText()]].CD *= 1 + int(
+                        属性.技能栏[self.角色属性A.技能序号[self.符文选项[self.符文[i].currentIndex()]]].CD *= 1 + int(
                                 j.replace('CD', '').replace('%', '')) / 100
 
     #第三页

@@ -140,6 +140,8 @@ def trans(key):
 def tran(key):
     try:
         show = languageJson[key]
-        return show
     except:
-        return key
+        show = key
+    if show == '':
+        show = key
+    return show
