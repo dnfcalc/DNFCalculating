@@ -1728,41 +1728,50 @@ class 角色窗口(窗口):
         标签.setStyleSheet(标签样式)
         self.装备条件选择.clear()
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems([trans('角色熟练度：英雄'), '角色熟练度：传说'])
+        self.装备条件选择[-1].addItems(trans(['角色熟练度：英雄', '角色熟练度：传说']))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        for i in range(0,7):
-            self.装备条件选择[-1].addItem('技能栏空位：'+str(i))
-        self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems([
-            '命运的抉择：数学期望', '命运的抉择：黄字+10%', '命运的抉择：暴伤+10%', '命运的抉择：终伤+10%',
-            '命运的抉择：三攻+10%', '命运的抉择：技攻+10%'
-        ])
+        for i in range(0, 7):
+            self.装备条件选择[-1].addItem('技能栏空位：' + str(i))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(
-            ['骰子：数学期望', '骰子：1点', '骰子：2点', '骰子：3点', '骰子：4点', '骰子：5点', '骰子：6点'])
+            trans([
+                '命运的抉择：数学期望', '命运的抉择：黄字+10%', '命运的抉择：暴伤+10%', '命运的抉择：终伤+10%',
+                '命运的抉择：三攻+10%', '命运的抉择：技攻+10%'
+            ]))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(
-            ['悲剧的残骸：数学期望', '悲剧的残骸：HP高于70%', '悲剧的残骸：HP70-30%', '悲剧的残骸：HP低于30%'])
+            trans([
+                '骰子：数学期望', '骰子：1点', '骰子：2点', '骰子：3点', '骰子：4点', '骰子：5点', '骰子：6点'
+            ]))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(
-            ['先知者预言：数学期望', '先知者预言：属白+5%', '先知者预言：技攻+10%', '先知者预言：技攻+15%'])
-        self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems(['贫瘠沙漠的遗产：无', '贫瘠沙漠的遗产：霸体', '贫瘠沙漠的遗产：无伤'])
+            trans([
+                '悲剧的残骸：数学期望', '悲剧的残骸：HP高于70%', '悲剧的残骸：HP70-30%',
+                '悲剧的残骸：HP低于30%'
+            ]))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(
-            ['幸运三角：数学期望', '幸运三角：7效果', '幸运三角：77效果', '幸运三角：777效果'])
+            trans(
+                ['先知者预言：数学期望', '先知者预言：属白+5%', '先知者预言：技攻+10%', '先知者预言：技攻+15%']))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
+        self.装备条件选择[-1].addItems(
+            trans(['贫瘠沙漠的遗产：无', '贫瘠沙漠的遗产：霸体', '贫瘠沙漠的遗产：无伤']))
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
+        self.装备条件选择[-1].addItems(
+            trans(['幸运三角：数学期望', '幸运三角：7效果', '幸运三角：77效果', '幸运三角：777效果']))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['擎天战甲：过充电状态', '擎天战甲：过负荷状态'])
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         for i in range(101):
-            self.装备条件选择[-1].addItem('持续伤害适用：' + str(100 - i) + '%')
+            self.装备条件选择[-1].addItem(trans('持续伤害适用：') + str(100 - i) + '%')
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems([
-            '军神的隐秘遗产：120%以上', '军神的隐秘遗产：120-100%', '军神的隐秘遗产：100-80%',
-            '军神的隐秘遗产：80-60%', '军神的隐秘遗产：60-40%', '军神的隐秘遗产：40%以下'
-        ])
+        self.装备条件选择[-1].addItems(
+            trans([
+                '军神的隐秘遗产：120%以上', '军神的隐秘遗产：120-100%', '军神的隐秘遗产：100-80%',
+                '军神的隐秘遗产：80-60%', '军神的隐秘遗产：60-40%', '军神的隐秘遗产：40%以下'
+            ]))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems(['太极天帝剑：阳', '太极天帝剑：阴'])
+        self.装备条件选择[-1].addItems(trans(['太极天帝剑：阳', '太极天帝剑：阴']))
         # self.装备条件选择.append(MyQComboBox(self.main_frame1))
         # self.装备条件选择[-1].addItems(['绿色生命的面容：无', '绿色生命的面容：阴暗面'])
         for i in range(len(self.装备条件选择)):
@@ -1772,22 +1781,24 @@ class 角色窗口(窗口):
         self.百变怪选项 = QCheckBox('百变怪', self.main_frame1)
         self.百变怪选项.move(660, 613)
         self.百变怪选项.resize(80, 24)
-        self.百变怪选项.setToolTip('<font size="3" face="宋体">仅在极速模式和套装模式下生效</font>')
+        self.百变怪选项.setToolTip('<font size="3" face="宋体">{}</font>'.format(
+            trans("仅在极速模式和套装模式下生效")))
         self.百变怪选项.setStyleSheet(复选框样式)
 
         self.计算模式选择 = MyQComboBox(self.main_frame1)
-        self.计算模式选择.addItems(['计算模式：极速模式', '计算模式：套装模式', '计算模式：单件模式'])
+        self.计算模式选择.addItems(trans(['计算模式：极速模式', '计算模式：套装模式', '计算模式：单件模式']))
         self.计算模式选择.move(750, 613)
         self.计算模式选择.resize(235, 24)
         self.计算模式选择.setStyleSheet(下拉框样式)
-        self.计算模式选择.setToolTip(
-            '<font size="3" face="宋体">极速模式：533和3332(散搭) (不含智慧产物)<br><br>套装模式：533、3332(散搭)和3233(双防具) (不含智慧产物)<br><br>单件模式：所有组合 (不含百变怪)</font>'
-        )
+        self.计算模式选择.setToolTip('<font size="3" face="宋体">{}</font>'.format(
+            trans(
+                '极速模式：533和3332(散搭) (不含智慧产物)<br><br>套装模式：533、3332(散搭)和3233(双防具) (不含智慧产物)<br><br>单件模式：所有组合 (不含百变怪)'
+            )))
 
         self.最大使用线程数 = thread_num
 
         # 一键修正按钮添加
-        一键站街修正名称 = ['站街力智', '站街三攻', '站街属强']
+        一键站街修正名称 = trans(['站街力智', '站街三攻', '站街属强'])
         for i in range(len(一键站街修正名称)):
             名称 = QLabel(一键站街修正名称[i], self.main_frame1)
             名称.setAlignment(Qt.AlignCenter)
@@ -1800,7 +1811,7 @@ class 角色窗口(窗口):
             self.一键站街设置输入[i].resize(52, 22)
             self.一键站街设置输入[i].move(940 + i * 57, 424)
 
-        一键修正按钮 = QPushButton('一键修正面板细节', self.main_frame1)
+        一键修正按钮 = QPushButton(trans('一键修正面板细节'), self.main_frame1)
         一键修正按钮.clicked.connect(lambda state: self.一键修正())
         一键修正按钮.move(940, 450)
         一键修正按钮.resize(166, 25)
@@ -1818,39 +1829,37 @@ class 角色窗口(窗口):
         宽度 = 100
         高度 = 20
         间隔 = 4
-        self.红色宠物装备 = QCheckBox('宠物装备择优', self.main_frame1)
+        self.红色宠物装备 = QCheckBox(trans('宠物装备择优'), self.main_frame1)
         self.红色宠物装备.move(x, y)
         self.红色宠物装备.resize(宽度, 高度)
         self.红色宠物装备.setStyleSheet(复选框样式)
-        self.红色宠物装备.setToolTip(
-            '<font size="3" face="宋体">7%黄字,8%力智,8%白字,8%三攻取最高值</font>'
-        )
+        self.红色宠物装备.setToolTip('<font size="3" face="宋体">{}</font>'.format(
+            trans('7%黄字,8%力智,8%白字,8%三攻取最高值')))
         self.红色宠物装备.stateChanged.connect(lambda state: self.下拉框禁用(
             self.红色宠物装备, self.细节选项输入[0][11], 下拉框样式_detail))
 
-        self.光环自适应 = QCheckBox('光环词条择优', self.main_frame1)
+        self.光环自适应 = QCheckBox(trans('光环词条择优'), self.main_frame1)
         self.光环自适应.move(x, y + (高度 + 间隔) * 1)
         self.光环自适应.resize(宽度, 高度)
         self.光环自适应.setStyleSheet(复选框样式)
-        self.光环自适应.setToolTip(
-            '<font size="3" face="宋体">5%黄字，5%暴伤，5%三攻取最高值</font>'
-        )
+        self.光环自适应.setToolTip('<font size="3" face="宋体">{}</font>'.format(
+            trans('5%黄字，5%暴伤，5%三攻取最高值')))
         self.光环自适应.stateChanged.connect(lambda state: self.下拉框禁用(
             self.光环自适应, self.细节选项输入[1][13], 下拉框样式_detail))
 
-        self.禁用存档 = QCheckBox('禁用自动存档', self.main_frame1)
+        self.禁用存档 = QCheckBox(trans('禁用自动存档'), self.main_frame1)
         self.禁用存档.move(x, y + (高度 + 间隔) * 2)
         self.禁用存档.resize(宽度, 高度)
         self.禁用存档.setStyleSheet(复选框样式)
 
-        self.神话排名选项 = QCheckBox('神话排名模式', self.main_frame1)
+        self.神话排名选项 = QCheckBox(trans('神话排名模式'), self.main_frame1)
         self.神话排名选项.move(x, y + (高度 + 间隔) * 3)
         self.神话排名选项.resize(宽度, 高度)
-        self.神话排名选项.setToolTip(
-            '<font size="3" face="宋体">仅显示有神话的组合，且每件神话装备只会出现一次</font>')
+        self.神话排名选项.setToolTip('<font size="3" face="宋体">{}</font>'.format(
+            trans('仅显示有神话的组合，且每件神话装备只会出现一次')))
         self.神话排名选项.setStyleSheet(复选框样式)
 
-        self.显示选项 = QCheckBox('亿为单位显示', self.main_frame1)
+        self.显示选项 = QCheckBox(trans('亿为单位显示'), self.main_frame1)
         self.显示选项.move(x, y + (高度 + 间隔) * 4)
         self.显示选项.resize(宽度, 高度)
         self.显示选项.setStyleSheet(复选框样式)
@@ -1860,7 +1869,7 @@ class 角色窗口(窗口):
         宽度 = 90
         高度 = 20
         间隔 = 4
-        重置按钮 = QPushButton('全局重置', self.main_frame1)
+        重置按钮 = QPushButton(trans('全局重置'), self.main_frame1)
         重置按钮.clicked.connect(lambda state: self.全局重置())
         重置按钮.move(x, y)
         重置按钮.resize(宽度, 高度)
@@ -1870,7 +1879,7 @@ class 角色窗口(窗口):
         self.线程数选择.move(x, y + (高度 + 间隔) * 1)
         self.线程数选择.resize(宽度, 高度)
         for i in range(thread_num, 0, -1):
-            self.线程数选择.addItem('进程:' + str(i))
+            self.线程数选择.addItem(trans('进程:') + str(i))
         if thread_num > 1:
             self.线程数选择.setCurrentIndex(1)
 
@@ -1883,19 +1892,19 @@ class 角色窗口(窗口):
         self.智慧产物限制.move(x, y + (高度 + 间隔) * 3)
         self.智慧产物限制.resize(宽度, 高度)
         for i in range(1, 12):
-            self.智慧产物限制.addItem('改造≤{}件'.format(i))
+            self.智慧产物限制.addItem(trans('改造≤{}件').format(i))
         self.智慧产物限制.setCurrentIndex(2)
-        self.智慧产物限制.setToolTip(
-            '<font size="3" face="宋体">不计智慧产物武器以及轮回SS</font>')
+        self.智慧产物限制.setToolTip('<font size="3" face="宋体">{}</font>'.format(
+            trans('不计智慧产物武器以及轮回SS')))
 
         self.攻击属性选项 = MyQComboBox(self.main_frame1)
         self.攻击属性选项.move(x, y + (高度 + 间隔) * 4)
         self.攻击属性选项.resize(宽度, 高度)
-        self.攻击属性选项.addItem('攻击属性:全')
-        self.攻击属性选项.addItem('攻击属性:火')
-        self.攻击属性选项.addItem('攻击属性:冰')
-        self.攻击属性选项.addItem('攻击属性:光')
-        self.攻击属性选项.addItem('攻击属性:暗')
+        self.攻击属性选项.addItem(trans('攻击属性:全'))
+        self.攻击属性选项.addItem(trans('攻击属性:火'))
+        self.攻击属性选项.addItem(trans('攻击属性:冰'))
+        self.攻击属性选项.addItem(trans('攻击属性:光'))
+        self.攻击属性选项.addItem(trans('攻击属性:暗'))
 
     def 界面2(self):
         # 第二个布局界面
@@ -1966,10 +1975,10 @@ class 角色窗口(窗口):
                 for j in range(11):
                     self.次数输入[序号].addItem(str(j))
                     self.宠物次数[序号].addItem(str(j))
-                self.次数输入[序号].addItem('填写')
+                self.次数输入[序号].addItem(trans('填写'))
                 self.次数输入[序号].activated.connect(
                     lambda state, index=序号: self.次数输入填写(index))
-                self.宠物次数[序号].addItem('填写')
+                self.宠物次数[序号].addItem(trans('填写'))
                 self.宠物次数[序号].activated.connect(
                     lambda state, index=序号: self.宠物次数填写(index))
 
@@ -1987,7 +1996,7 @@ class 角色窗口(窗口):
         行高 = 20
 
         counter = 0
-        for i in ["契约满级", "等级调整", " TP等级", "释放次数", "宠物次数"]:
+        for i in trans(["契约满级", "等级调整", " TP等级", "释放次数", "宠物次数"]):
             x = QLabel(i, self.main_frame2)
             x.move(横坐标 + 横坐标偏移量 - 30 + 50 * counter, 纵坐标 + 5)
             x.setStyleSheet(标签样式)
@@ -2002,16 +2011,18 @@ class 角色窗口(窗口):
                 x = QLabel(self.main_frame2)
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
                 x.resize(28, 28)
-                tempstr = '<font face="宋体"><font color="#FF6666">' + trans(i.名称) + (
-                    "<br>" if i.备注 != '' else '') + i.备注 + '</font><br>'
-                tempstr += '所在等级：' + str(i.所在等级) + '<br>'
-                tempstr += '等级上限：' + str(i.等级上限)
+                tempstr = '<font face="宋体"><font color="#FF6666">' + trans(
+                    i.名称) + ("<br>"
+                             if i.备注 != '' else '') + i.备注 + '</font><br>'
+                tempstr += trans('所在等级：') + str(i.所在等级) + '<br>'
+                tempstr += trans('等级上限：') + str(i.等级上限)
                 if i.是否主动 == 1:
-                    tempstr += '<br>百分比：' + str(int(i.等效百分比(
-                        self.角色属性A.武器类型))) + '%'
+                    tempstr += '<br>' + trans('百分比：') + str(
+                        int(i.等效百分比(self.角色属性A.武器类型))) + '%'
                     if i.TP上限 != 0:
-                        tempstr += '<br>TP成长：' + str(int(i.TP成长 * 100)) + '%'
-                        tempstr += '<br>TP上限：' + str(i.TP上限)
+                        tempstr += '<br>' + trans('TP成长：') + str(
+                            int(i.TP成长 * 100)) + '%'
+                        tempstr += '<br>' + trans('TP上限：') + str(i.TP上限)
                 tempstr += '</font>'
                 x.setToolTip(tempstr)
                 x.move(横坐标, 纵坐标 + 7)
@@ -2136,7 +2147,7 @@ class 角色窗口(窗口):
         横坐标 = 480
         纵坐标 = 20
         行高 = 18
-        x = QLabel("护石"+"Ⅰ", self.main_frame2)
+        x = QLabel("护石" + "Ⅰ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -2168,7 +2179,7 @@ class 角色窗口(窗口):
 
         横坐标 = 650
         纵坐标 = 20
-        x = QLabel("护石"+"Ⅱ", self.main_frame2)
+        x = QLabel("护石" + "Ⅱ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -2196,7 +2207,7 @@ class 角色窗口(窗口):
 
         横坐标 = 820
         纵坐标 = 20
-        x = QLabel("护石"+"Ⅲ", self.main_frame2)
+        x = QLabel("护石" + "Ⅲ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -2487,7 +2498,9 @@ class 角色窗口(窗口):
             else:
                 self.属性设置输入.append(templist)
 
-        self.修正列表名称 = ['力智'+'%', '三攻'+'%', '黄字', '白字', '属白', '暴伤', '终伤', '技攻']
+        self.修正列表名称 = [
+            '力智' + '%', '三攻' + '%', '黄字', '白字', '属白', '暴伤', '终伤', '技攻'
+        ]
 
         距离 = 30
         templist = []
@@ -2524,7 +2537,8 @@ class 角色窗口(窗口):
 
         self.时装选项.append(MyQComboBox(self.main_frame3))
         self.时装选项[8].setStyleSheet(下拉框样式_detail)
-        self.时装选项[8].addItems(['高级套装'+'[8]', '节日套装'+'[8]', '稀有套装'+'[8]', '神器套装'+'[8]'])
+        self.时装选项[8].addItems(
+            ['高级套装' + '[8]', '节日套装' + '[8]', '稀有套装' + '[8]', '神器套装' + '[8]'])
         self.时装选项[8].resize(100, 22)
         self.时装选项[8].move(990, 570)
         self.时装选项[8].currentIndexChanged.connect(
@@ -2538,13 +2552,13 @@ class 角色窗口(窗口):
 
     def 界面5(self):
         # 第五个布局
-        标签 = QLabel('单件选择', self.main_frame5)
+        标签 = QLabel(trans('单件选择'), self.main_frame5)
         标签.setAlignment(Qt.AlignCenter)
         标签.setStyleSheet(标签样式)
         标签.resize(240, 25)
         标签.move(70, 20)
 
-        标签 = QLabel('锁定', self.main_frame5)
+        标签 = QLabel(trans('锁定'), self.main_frame5)
         标签.setAlignment(Qt.AlignCenter)
         标签.setStyleSheet(标签样式)
         标签.resize(70, 25)
@@ -2554,6 +2568,8 @@ class 角色窗口(窗口):
 
         count = 0
         self.自选装备 = []
+        self.自选装备结果 = []
+        self.自选装备list = []
         if 切装模式 == 1:
             self.装备切装 = []
             self.切装修正属性 = []
@@ -2565,6 +2581,7 @@ class 角色窗口(窗口):
             锁定选择.move(10, 50 + 30 * count)
             self.装备锁定.append(锁定选择)
             self.自选装备.append(MyQComboBox(self.main_frame5))
+            self.自选装备list.append([])
             self.自选装备[count].resize(220, 22)
             self.自选装备[count].move(90, 50 + 30 * count)
             self.自选装备[count].currentIndexChanged.connect(
@@ -2578,9 +2595,11 @@ class 角色窗口(窗口):
                 if j.部位 == i:
                     if i == '武器':
                         if j.类型 in self.角色属性A.武器选项:
-                            self.自选装备[count].addItem(j.名称)
+                            self.自选装备[count].addItem(trans(j.名称))
+                            self.自选装备list[count].append(j.名称)
                     else:
-                        self.自选装备[count].addItem(j.名称)
+                        self.自选装备[count].addItem(trans(j.名称))
+                        self.自选装备list[count].append(j.名称)
             count += 1
 
         if 切装模式 == 1:
@@ -2650,7 +2669,7 @@ class 角色窗口(窗口):
 
         count += 1
         # 一键修正按钮添加
-        一键站街修正名称 = ['站街力智', '站街三攻', '站街属强']
+        一键站街修正名称 = trans(['站街力智', '站街三攻', '站街属强'])
         for i in range(len(一键站街修正名称)):
             名称 = QLabel(一键站街修正名称[i], self.main_frame5)
             名称.setAlignment(Qt.AlignCenter)
@@ -2664,13 +2683,13 @@ class 角色窗口(窗口):
             self.一键站街设置输入[i + 3].move(横坐标 - 5 + i * 57, 80 + 30 * count)
 
         count += 2
-        一键修正按钮 = QPushButton('一键修正面板细节', self.main_frame5)
+        一键修正按钮 = QPushButton(trans('一键修正面板细节'), self.main_frame5)
         一键修正按钮.clicked.connect(lambda state: self.一键修正(1))
         一键修正按钮.move(横坐标 - 5, 50 + 30 * count)
         一键修正按钮.resize(165, 25)
         一键修正按钮.setStyleSheet(按钮样式)
 
-        标签 = QLabel('辟邪玉提升率(理论值仅供参考)', self.main_frame5)
+        标签 = QLabel(trans('辟邪玉提升率(理论值仅供参考)'), self.main_frame5)
         标签.setAlignment(Qt.AlignCenter)
         标签.setStyleSheet(标签样式)
         标签.resize(200, 25)
@@ -2682,9 +2701,9 @@ class 角色窗口(窗口):
         for i in 辟邪玉列表:
             if i.名称 != '无':
                 if i.最大值 != 1:
-                    temp = i.名称 + '+' + str(i.最大值) + '%'
+                    temp = trans(i.名称) + '+' + str(i.最大值) + '%'
                 else:
-                    temp = i.名称 + '+' + str(i.最大值)
+                    temp = trans(i.名称) + '+' + str(i.最大值)
                 self.辟邪玉提升率1.append(QLabel(temp, self.main_frame5))
                 self.辟邪玉提升率1[count].setAlignment(Qt.AlignCenter)
                 self.辟邪玉提升率1[count].setStyleSheet(标签样式)
@@ -2720,7 +2739,7 @@ class 角色窗口(窗口):
         for i in range(12):
             self.图片显示.append(QLabel(self.main_frame5))
             self.图片显示[i].setMovie(
-                equ.get_img_by_name(self.自选装备[i].currentText()))
+                equ.get_img_by_name(self.自选装备list[i][self.自选装备[i].currentIndex()]))
             self.图片显示[i].resize(26, 26)
             self.图片显示[i].move(初始x + 10 + x坐标[i], 初始y + 31 + y坐标[i])
             self.图片显示[i].setAlignment(Qt.AlignCenter)
@@ -3108,9 +3127,8 @@ class 角色窗口(窗口):
 
     def 护石描述更新(self, x):
         try:
-            self.护石栏[x].setToolTip(
-                '<font face="宋体">' +
-                self.初始属性.技能栏[self.初始属性.技能序号[self.护石选项[self.护石栏[x].currentIndex()]]].护石描述(
+            self.护石栏[x].setToolTip('<font face="宋体">' + self.初始属性.技能栏[
+                self.初始属性.技能序号[self.护石选项[self.护石栏[x].currentIndex()]]].护石描述(
                     self.护石类型选项[x].currentIndex()) + '</font></font>')
         except:
             self.护石栏[x].setToolTip('<font face="宋体">暂缺</font>')
@@ -3119,8 +3137,8 @@ class 角色窗口(窗口):
         self.护石类型选项[x].clear()
         if self.护石栏[x].currentText() != trans('无'):
             try:
-                self.护石类型选项[x].addItems(self.初始属性.技能栏[self.初始属性.技能序号[
-                    self.护石选项[self.护石栏[x].currentIndex()]]].护石选项)
+                self.护石类型选项[x].addItems(self.初始属性.技能栏[self.初始属性.技能序号[self.护石选项[
+                    self.护石栏[x].currentIndex()]]].护石选项)
             except:
                 self.护石类型选项[x].addItem('魔界')
                 self.护石类型选项[x].addItem('圣痕')
@@ -3183,25 +3201,28 @@ class 角色窗口(窗口):
         for k in range(3):
             if self.护石栏[k].currentText() != trans('无'):
                 try:
-                    属性.技能栏[self.角色属性A.技能序号[self.护石选项[self.护石栏[k].currentIndex()]]].装备护石()
+                    属性.技能栏[self.角色属性A.技能序号[self.护石选项[
+                        self.护石栏[k].currentIndex()]]].装备护石()
                 except:
-                    属性.技能栏[self.角色属性A.技能序号[self.护石选项[self.护石栏[k].currentIndex()]]].装备护石(
-                        self.护石类型选项[k].currentIndex())
+                    属性.技能栏[self.角色属性A.技能序号[self.护石选项[
+                        self.护石栏[k].currentIndex()]]].装备护石(
+                            self.护石类型选项[k].currentIndex())
 
         属性.护石第一栏 = self.护石选项[self.护石栏[0].currentIndex()]
         属性.护石第二栏 = self.护石选项[self.护石栏[1].currentIndex()]
         属性.护石第三栏 = self.护石选项[self.护石栏[2].currentIndex()]
 
         for i in range(9):
-            if self.符文[i].currentText() != trans('无') and self.符文效果[i].currentText(
-            ) != trans('无'):
+            if self.符文[i].currentText() != trans(
+                    '无') and self.符文效果[i].currentText() != trans('无'):
                 for j in self.符文效果[i].currentText().split(','):
                     if '攻击' in j:
-                        属性.技能栏[self.角色属性A.技能序号[self.符文选项[self.符文[i].currentIndex()]
-                            ]].倍率 *= 1 + int(
+                        属性.技能栏[self.角色属性A.技能序号[self.符文选项[
+                            self.符文[i].currentIndex()]]].倍率 *= 1 + int(
                                 j.replace('攻击', '').replace('%', '')) / 100
                     if 'CD' in j:
-                        属性.技能栏[self.角色属性A.技能序号[self.符文选项[self.符文[i].currentIndex()]]].CD *= 1 + int(
+                        属性.技能栏[self.角色属性A.技能序号[self.符文选项[
+                            self.符文[i].currentIndex()]]].CD *= 1 + int(
                                 j.replace('CD', '').replace('%', '')) / 100
 
     #第三页
@@ -3348,8 +3369,8 @@ class 角色窗口(窗口):
             self.click_window(1)
             return
         装备 = []
-        for i in self.自选装备:
-            装备.append(i.currentText())
+        for index in range(len(self.自选装备)):
+            装备.append(self.自选装备list[index][self.自选装备[index].currentIndex()])
 
         temp = deepcopy(self.初始属性)
         temp.穿戴装备计算套装(装备)
@@ -3411,10 +3432,11 @@ class 角色窗口(窗口):
             self.打造显示设置(self.打造显示, B, 1)
 
             词条数值 = self.词条显示计算(B)
-            词条解释 = self.词条显示计算(B,1)
-            for i in range(0,len(词条数值)):
+            词条解释 = self.词条显示计算(B, 1)
+            for i in range(0, len(词条数值)):
                 self.词条显示[i].setText(词条数值[i])
-                self.词条显示[i].setToolTip('<font color="#B99460">'+词条解释[i]+'</font>')
+                self.词条显示[i].setToolTip('<font color="#B99460">' + 词条解释[i] +
+                                        '</font>')
 
             for i in self.套装名称显示:
                 i.setText('')
@@ -4513,7 +4535,7 @@ class 角色窗口(窗口):
     # endregion
 
     # region 输出界面
-    def 词条显示计算(self, 属性,x=0):
+    def 词条显示计算(self, 属性, x=0):
 
         属白换算 = 属性.属性倍率 * 属性.属性附加
 
@@ -4534,18 +4556,25 @@ class 角色窗口(窗口):
             tempstr.append('移速:{}%'.format(round(属性.移动速度 * 100, 1)))  #11
 
             if 属白换算 != 0:
-                tempstr[2] += '|{}%'.format(round(属白换算 * 100 + 属性.附加伤害 * 100, 1))
+                tempstr[2] += '|{}%'.format(
+                    round(属白换算 * 100 + 属性.附加伤害 * 100, 1))
                 tempstr[3] += '|{}%'.format(round(属白换算 * 100, 1))
         else:
-            tempstr.append('攻击时,额外增加{}%的伤害增加量'.format(round(属性.伤害增加 * 100, 1)))  #0
-            tempstr.append('暴击时,额外增加{}%的伤害增加量'.format(round(属性.暴击伤害 * 100, 1)))  #1
+            tempstr.append('攻击时,额外增加{}%的伤害增加量'.format(round(属性.伤害增加 * 100,
+                                                            1)))  #0
+            tempstr.append('暴击时,额外增加{}%的伤害增加量'.format(round(属性.暴击伤害 * 100,
+                                                            1)))  #1
             tempstr.append('攻击时,附加{}%的伤害'.format(round(属性.附加伤害 * 100, 1)))  #2
-            tempstr.append('攻击时,附加{}%的属性伤害'.format(round(属性.属性附加 * 100, 1)))  #3
+            tempstr.append('攻击时,附加{}%的属性伤害'.format(round(属性.属性附加 * 100,
+                                                         1)))  #3
             tempstr.append('最终伤害 +{}%'.format(round(属性.最终伤害 * 100, 1)))  #4
-            tempstr.append('技能攻击力 +{}%'.format(round(属性.技能攻击力 * 100 - 100, 1)))  #5
-            tempstr.append('物理、魔法、独立攻击力 +{}%'.format(round(属性.百分比三攻 * 100, 1)))  #6
+            tempstr.append('技能攻击力 +{}%'.format(round(属性.技能攻击力 * 100 - 100,
+                                                     1)))  #5
+            tempstr.append('物理、魔法、独立攻击力 +{}%'.format(round(属性.百分比三攻 * 100,
+                                                           1)))  #6
             tempstr.append('力量、智力 +{}%'.format(round(属性.百分比力智 * 100, 1)))  #7
-            tempstr.append('发生持续伤害X秒,伤害量为对敌人增加造成伤害的{}%'.format(round(属性.持续伤害 * 100, 1)))  #8
+            tempstr.append('发生持续伤害X秒,伤害量为对敌人增加造成伤害的{}%'.format(
+                round(属性.持续伤害 * 100, 1)))  #8
             tempstr.append('攻击速度 +{}%'.format(round(属性.攻击速度 * 100, 1)))  #9
             tempstr.append('施放速度 +{}%'.format(round(属性.施放速度 * 100, 1)))  #10
             tempstr.append('移动速度 +{}%'.format(round(属性.移动速度 * 100, 1)))  #11
@@ -4743,7 +4772,7 @@ class 角色窗口(窗口):
             for i in range(4):
                 if 属性.黑鸦词条[i][4] != '':
                     显示[count].setText(黑鸦部位[i] + ':' +
-                                    属性.黑鸦词条[i][4].replace('<br>', ' '))
+                                      属性.黑鸦词条[i][4].replace('<br>', ' '))
                     显示[count].setStyleSheet(
                         "QLabel{font-size:12px;color:rgb(255,255,255)}")
                     count += 1
@@ -5098,8 +5127,8 @@ class 角色窗口(窗口):
 
         j = 312
         pdata['词条'] = self.词条显示计算(self.角色属性B)
-        词条解释 = self.词条显示计算(self.角色属性B,1)
-        for i in range(0,len(pdata['词条'])):
+        词条解释 = self.词条显示计算(self.角色属性B, 1)
+        for i in range(0, len(pdata['词条'])):
             templab = QLabel(输出窗口)
             templab.setText(pdata['词条'][i])
             templab.setStyleSheet(
@@ -5107,7 +5136,7 @@ class 角色窗口(窗口):
             templab.move(2, j - pox_y2)
             templab.resize(180, 17)
             templab.setAlignment(Qt.AlignLeft)
-            templab.setToolTip('<font color="#B99460">'+词条解释[i]+'</font>')
+            templab.setToolTip('<font color="#B99460">' + 词条解释[i] + '</font>')
             j += 17
 
         位置 = 308
@@ -5540,7 +5569,7 @@ class 角色窗口(窗口):
         if 切装模式 == 1:
             for i in range(12):
                 if self.装备切装[i].isChecked():
-                    属性.装备切装.append(self.自选装备[i].currentText())
+                    属性.装备切装.append(self.自选装备list[i][self.自选装备[i].currentIndex()])
                 else:
                     属性.装备切装.append('无')
 

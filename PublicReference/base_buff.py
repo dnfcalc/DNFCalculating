@@ -787,12 +787,12 @@ class 角色属性(属性):
             self.一觉Lv = 替换属性.一觉Lv
             self.一觉力智 = 替换属性.一觉力智
             self.一觉力智per = 替换属性.一觉力智per
-            self.技能表['三次觉醒'].等级 = 替换属性.技能表['三次觉醒'].等级                 
-            self.自适应计算()             
+            self.技能表['三次觉醒'].等级 = 替换属性.技能表['三次觉醒'].等级
+            self.自适应计算()
             self.适用数值计算()
             self.切换详情 = 切换列表[序号] + temp
         else:
-            self.装备属性计算()            
+            self.装备属性计算()
             self.自适应计算()
             self.适用数值计算()
 
@@ -815,7 +815,7 @@ class 角色属性(属性):
                     preferred_armor = True
             in_int_data,in_double_data = temp.get_data()
             preferred.cal_index_buff(in_pre_range,in_int_data,in_double_data)
-            
+
             if self.希洛克武器词条 == 1:
                 a = in_pre_range[0]
                 b = in_pre_range[1]
@@ -826,8 +826,8 @@ class 角色属性(属性):
                 self.武器变换属性自适应 = in_pre_range[2]
                 self.黑鸦武器输入(in_pre_range[2])
 
-            if preferred_armor:    
-                self.防具变换属性自适应 = in_pre_range[3:]         
+            if preferred_armor:
+                self.防具变换属性自适应 = in_pre_range[3:]
                 self.黑鸦属性输入(in_pre_range[3],in_pre_range[4],in_pre_range[5])
 
             pass
@@ -835,7 +835,7 @@ class 角色属性(属性):
             self.旧版自适应计算()
         pass
 
-    def 旧版自适应计算(self):                
+    def 旧版自适应计算(self):
 
         # 黑鸦词条计算
         黑鸦选择 = [0, 0, 0, 0]
@@ -979,7 +979,7 @@ class 角色属性(属性):
             equip.BUFF属性(self)
 
             觉醒词条 = self.黑鸦词条[0][0]
-            
+
             # 黑鸦武器觉醒词条
             if 觉醒词条 == 3 and equip.部位 == '武器':
                 self.技能等级加成('所有', 50, 50, 2)
@@ -991,7 +991,7 @@ class 角色属性(属性):
                 self.技能等级加成('所有', 100, 100, -2)
                 if 觉醒词条 > 1:
                     self.技能等级加成('所有', 50, 50, 2)
-                
+
 
         for suit in suits:
             suit.城镇属性_BUFF(self)
@@ -1790,6 +1790,8 @@ class 角色窗口(窗口):
 
         self.装备锁定 = []
         self.自选装备 = []
+        self.自选装备结果 = []
+        self.自选装备list = []
         self.self_selects = []
 
         def equips_getter():
@@ -2029,10 +2031,10 @@ class 角色窗口(窗口):
         换装设置.resize(80, 28)
         换装设置.setStyleSheet(按钮样式)
 
-    def 自选装备栏更改(self, index):        
+    def 自选装备栏更改(self, index):
         if self.计算标识 == 0:
             return
-        
+
         self.计算标识 = 0
 
         data = store.get("/buffer/data/self_select/equips", [])
@@ -2286,7 +2288,7 @@ class 角色窗口(窗口):
                     os.path.join(filepath, "store.json")):
             self.载入json(path)
             return
-        else: 
+        else:
             # 如果不存在任何存档则载入重置存档
             self.载入json(path = 'reset')
 
@@ -2683,7 +2685,7 @@ class 角色窗口(窗口):
                     self.自选装备栏更改(index)
                 except Exception as error:
                     logger.error(error)
-                
+
                 try:
                     num = 0
                     data = store.get('/buffer/data/self_select/locked')
@@ -2704,7 +2706,7 @@ class 角色窗口(窗口):
         store.emit("/buffer/data/siroco")
 
     def 保存json(self, path='set', page=[0, 1, 2, 3, 4]):
-        
+
         if 0 in page:
             # 第一页(装备/选择/打造)
             try:
@@ -2987,7 +2989,7 @@ class 角色窗口(窗口):
                 装备打造[i] = self.装备打造选项[i + 12].currentIndex()
 
         for i in range(4):
-            if 黑鸦词条[i][1] == 0: 
+            if 黑鸦词条[i][1] == 0:
                 temp = [
                     self.黑鸦词条选项[i][0].currentIndex(),
                     self.黑鸦词条选项[i][1].currentIndex(),
@@ -2998,7 +3000,7 @@ class 角色窗口(窗口):
             希洛克选择状态 = self.希洛克选择状态
         if 奥兹玛选择状态 is None or len(奥兹玛选择状态) == 0 or sum(奥兹玛选择状态) == 0:
             奥兹玛选择状态 = self.奥兹玛选择状态
-            
+
         if 武器融合选项[0] == 0:
             武器融合选项[0] = self.武器融合属性A.currentIndex()
             武器融合选项[1] = self.武器融合属性A1.currentIndex()
@@ -3058,7 +3060,7 @@ class 角色窗口(窗口):
 
         if sum(self.希洛克选择状态) == 3:
             属性.武器词条触发 = 1
-        
+
 
         武器融合属性A = 武器属性A列表[武器融合选项[0]]
 
@@ -3142,7 +3144,7 @@ class 角色窗口(窗口):
                 BUFF.预计算()
                 B.替换技能(BUFF.技能表['BUFF'], 'BUFF')
             # 登记 End
-        
+
         if 输出 != 0:
             D = deepcopy(self.初始属性)
             self.输入属性(D)
@@ -3451,7 +3453,7 @@ class 角色窗口(窗口):
             ])
             套装属性.append(temp)
 
-        
+
 
         for i in range(len(套装)):
             if len(套装件数[i]) > 0:
@@ -3472,7 +3474,7 @@ class 角色窗口(窗口):
         else:
             self.提升率显示.setText(str(round(提升率, 2)) + '%')
         self.自选计算数据 = [提升率, 总数据]
- 
+
         if 输出 == 0:
             self.排行数据.append(装备 + [0] + 套装 + ['无'])
             self.输出界面(0,自选计算模式=True)
@@ -3535,7 +3537,7 @@ class 角色窗口(窗口):
         self.角色属性B.穿戴装备(装备名称,套装名称)
         # 登记 Start
         self.角色属性B.预计算(自动切装= not 自选计算模式)
-        
+
 
         if self.登记启用 and 自选计算模式:
             登记属性 = self.换装计算()
