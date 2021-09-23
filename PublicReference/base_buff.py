@@ -15,6 +15,7 @@ try:
 except Exception as e:
     logger.error(e)
 
+
 class 技能:
     名称 = ''
     备注 = ''
@@ -55,6 +56,7 @@ class 主动技能(技能):
 
 
 BUFF影响技能 = ['勇气祝福', '勇气圣歌', '荣誉祝福', '禁忌诅咒', '死命召唤']
+
 
 class 角色属性(属性):
     职业分类 = 'BUFF'
@@ -132,16 +134,15 @@ class 角色属性(属性):
         buff = self.技能表['BUFF']
         awake = self.技能表['一次觉醒']
 
-        other_power= 0
+        other_power = 0
         other_attack = 0
 
         for i in self.技能表.keys():
-            if i not in ['BUFF','一次觉醒','三次觉醒','死命召唤','勇气圣歌']:
+            if i not in ['BUFF', '一次觉醒', '三次觉醒', '死命召唤', '勇气圣歌']:
                 skill = self.技能表[i]
                 data = skill.结算统计()
                 other_power += data[3]
                 other_attack += data[5]
-
 
         in_int_data = (ctypes.c_int * 12)()
         in_int_data[0] = self.buff_type
@@ -159,7 +160,7 @@ class 角色属性(属性):
 
         third_awake = self.技能表['三次觉醒']
         awake_rate = third_awake.加成倍率()
-        awake_rate = awake_rate+1 if awake_rate < 1 else awake_rate
+        awake_rate = awake_rate + 1 if awake_rate < 1 else awake_rate
 
         in_double_data = (ctypes.c_double * 8)()
         in_double_data[0] = self.觉醒择优系数
@@ -170,12 +171,12 @@ class 角色属性(属性):
         in_double_data[5] = awake.一觉力智per
         in_double_data[6] = self.系统奶系数
         in_double_data[7] = self.系统奶基数
-        return in_int_data,in_double_data
+        return in_int_data, in_double_data
 
-    def 穿戴装备(self, 装备, 套装 = None):
+    def 穿戴装备(self, 装备, 套装=None):
         self.装备栏 = 装备
         self.套装栏 = 套装
-        if 套装 is None or len(套装) == 0 :
+        if 套装 is None or len(套装) == 0:
             self.套装栏 = equ.get_suits_by_equips(装备)
         self.武器类型 = equ.get_equ_by_name(self.装备栏[11]).类型
 
@@ -473,7 +474,6 @@ class 角色属性(属性):
               1) * (self.C三攻 + b)
         return [x2 / x1 * 100, int(self.站街系数), 力量合计, 智力合计, 物攻合计, 魔攻合计, 独立合计][x]
 
-
     def 适用数值计算(self):
         self.专属词条计算()
         for skill in self.技能表.values():
@@ -689,14 +689,14 @@ class 角色属性(属性):
     def 奥兹玛计算(self, 奥兹玛选择状态):
         # region 阿斯特罗斯
 
-        for i in range(0,5):
+        for i in range(0, 5):
             if 奥兹玛选择状态[i] == 1:
                 self.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
                 self.觉醒增加(一觉力智=22)
                 self.被动增加(守护恩赐体精=55, 转职被动智力=55)
         # endregion
         # region 贝利亚斯
-        for i in range(5,10):
+        for i in range(5, 10):
             if 奥兹玛选择状态[i] == 1:
                 self.被动增加(守护恩赐体精=138, 转职被动智力=138)
 
@@ -746,7 +746,7 @@ class 角色属性(属性):
                 总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
         return 总数据
 
-    def 预计算(self, 自动切装 = False):
+    def 预计算(self, 自动切装=False):
         if self.双装备模式 == 1 and self.技能表['一次觉醒'].是否启用 and 自动切装:
             # 用于计算一觉
             temp = deepcopy(self)
@@ -777,7 +777,7 @@ class 角色属性(属性):
                 c = int(a) - int(b)
                 if 一觉.名称 not in 三觉.关联技能:
                     temp += 一觉.名称 + '+'
-                temp +="{}:{}->{}(+{})".format(三觉.名称,b,a,c)
+                temp += "{}:{}->{}(+{})".format(三觉.名称, b, a, c)
             else:
                 temp = ''
                 # 计算现有装备BUFF
@@ -787,15 +787,14 @@ class 角色属性(属性):
             self.一觉Lv = 替换属性.一觉Lv
             self.一觉力智 = 替换属性.一觉力智
             self.一觉力智per = 替换属性.一觉力智per
-            self.技能表['三次觉醒'].等级 = 替换属性.技能表['三次觉醒'].等级                 
-            self.自适应计算()             
+            self.技能表['三次觉醒'].等级 = 替换属性.技能表['三次觉醒'].等级
+            self.自适应计算()
             self.适用数值计算()
             self.切换详情 = 切换列表[序号] + temp
         else:
-            self.装备属性计算()            
+            self.装备属性计算()
             self.自适应计算()
             self.适用数值计算()
-
 
     def 自适应计算(self):
         if preferred is not None:
@@ -811,31 +810,31 @@ class 角色属性(属性):
 
             for i in range(4):
                 if self.黑鸦词条[i][0] == 1:
-                    in_pre_range[i+2] = 1
+                    in_pre_range[i + 2] = 1
                     preferred_armor = True
-            in_int_data,in_double_data = temp.get_data()
-            preferred.cal_index_buff(in_pre_range,in_int_data,in_double_data)
-            
+            in_int_data, in_double_data = temp.get_data()
+            preferred.cal_index_buff(in_pre_range, in_int_data, in_double_data)
+
             if self.希洛克武器词条 == 1:
                 a = in_pre_range[0]
                 b = in_pre_range[1]
-                self.自适应最高值 = [a,b]
-                self.武器属性输入(a,b)
+                self.自适应最高值 = [a, b]
+                self.武器属性输入(a, b)
 
-            if self.黑鸦词条[0][0] >0:
+            if self.黑鸦词条[0][0] > 0:
                 self.武器变换属性自适应 = in_pre_range[2]
                 self.黑鸦武器输入(in_pre_range[2])
 
-            if preferred_armor:    
-                self.防具变换属性自适应 = in_pre_range[3:]         
-                self.黑鸦属性输入(in_pre_range[3],in_pre_range[4],in_pre_range[5])
+            if preferred_armor:
+                self.防具变换属性自适应 = in_pre_range[3:]
+                self.黑鸦属性输入(in_pre_range[3], in_pre_range[4], in_pre_range[5])
 
             pass
         else:
             self.旧版自适应计算()
         pass
 
-    def 旧版自适应计算(self):                
+    def 旧版自适应计算(self):
 
         # 黑鸦词条计算
         黑鸦选择 = [0, 0, 0, 0]
@@ -963,7 +962,7 @@ class 角色属性(属性):
             return self.提升率计算(总数据, self.排行系数)
 
     def BUFF计算(self, x=0):
-        self.预计算(自动切装 = True)
+        self.预计算(自动切装=True)
         总数据 = self.数据计算()
         return self.结果返回(x, 总数据)
 
@@ -979,7 +978,7 @@ class 角色属性(属性):
             equip.BUFF属性(self)
 
             觉醒词条 = self.黑鸦词条[0][0]
-            
+
             # 黑鸦武器觉醒词条
             if 觉醒词条 == 3 and equip.部位 == '武器':
                 self.技能等级加成('所有', 50, 50, 2)
@@ -991,7 +990,6 @@ class 角色属性(属性):
                 self.技能等级加成('所有', 100, 100, -2)
                 if 觉醒词条 > 1:
                     self.技能等级加成('所有', 50, 50, 2)
-                
 
         for suit in suits:
             suit.城镇属性_BUFF(self)
@@ -1171,7 +1169,7 @@ class 角色窗口(窗口):
                 lambda: store.emit("/buffer/data/amplifies"))
             增幅选项.append(combo)
         store.compute("/buffer/data/amplifies",
-                           lambda: [i.currentIndex() for i in 增幅选项], None)
+                      lambda: [i.currentIndex() for i in 增幅选项], None)
 
     def 界面2(self):
         # 第二个布局界面
@@ -1790,6 +1788,7 @@ class 角色窗口(窗口):
 
         self.装备锁定 = []
         self.自选装备 = []
+        self.自选装备结果 = []
         self.self_selects = []
 
         def equips_getter():
@@ -1859,8 +1858,7 @@ class 角色窗口(窗口):
         self.自选装备栏选项 = MyQComboBox(self.main_frame5)
 
         # 自行设定自选装备栏数量,最大值为20,最小值为1,默认为6
-        column_count = store.get("/buffer/data/self-select/column-count",
-                                      6)
+        column_count = store.get("/buffer/data/self-select/column-count", 6)
         column_count = min(max(column_count, 1), 20)
 
         self.last_select_column = 0
@@ -2029,17 +2027,17 @@ class 角色窗口(窗口):
         换装设置.resize(80, 28)
         换装设置.setStyleSheet(按钮样式)
 
-    def 自选装备栏更改(self, index):        
+    def 自选装备栏更改(self, index):
         if self.计算标识 == 0:
             return
-        
+
         self.计算标识 = 0
 
         data = store.get("/buffer/data/self_select/equips", [])
         length = len(self.自选装备)
         column_index = store.get("/buffer/data/self_select/column_index")
 
-        defaultData =  [0] * length
+        defaultData = [0] * length
 
         while column_index >= len(data):
             data.append(defaultData)
@@ -2047,11 +2045,10 @@ class 角色窗口(窗口):
         if column_index != index:
             data[column_index] = [i.currentIndex() for i in self.自选装备]
 
-
         column = data[index] if index < len(data) else defaultData
         for i in range(length):
             self.自选装备[i].setCurrentIndex(column[i])
-        store.set("/buffer/data/self_select/column_index",index)
+        store.set("/buffer/data/self_select/column_index", index)
         store.set("/buffer/data/self_select/equips", data)
 
         self.计算标识 = 1
@@ -2066,7 +2063,7 @@ class 角色窗口(窗口):
             store.compute("/buffer/temp/property_a", lambda: self.角色属性A)
             # 换装更新事件
             store.watch("/buffer/event/register_changed",
-                             lambda _, : self.自选计算(1))
+                        lambda _, : self.自选计算(1))
             # 设置图标和背景 临时做法
             store.const("/app/window/icon", self.icon)
             store.const("/app/window/background_image", self.主背景图片)
@@ -2075,7 +2072,6 @@ class 角色窗口(窗口):
             return client
 
         DefaultDialogRegister.showDialog("buff_panel", createClient, self)
-
 
     def 时装选项更新(self, index):
         if index == 8:
@@ -2261,7 +2257,7 @@ class 角色窗口(窗口):
                 if i.品质 != '神话' or index == 0 or self.全选状态 == 0:
                     self.装备图标点击事件(equ.get_id_by_name(i.名称), index, x=0)
             elif i.类型 in self.角色属性A.武器选项:
-                    self.装备图标点击事件(equ.get_id_by_name(i.名称), index, x=0)
+                self.装备图标点击事件(equ.get_id_by_name(i.名称), index, x=0)
 
         self.装备图标点击事件(74, index)
 
@@ -2275,7 +2271,7 @@ class 角色窗口(窗口):
             self.关闭排行窗口()
             self.排行数据.clear()
             self.排行数据.append(self.self_selects + [0] + A.套装栏 + ['无'])
-            self.输出界面(0, '基准值',自选计算模式 = True)
+            self.输出界面(0, '基准值', 自选计算模式=True)
             self.基准值 = deepcopy(self.自选计算数据)
         self.自选计算(1)
 
@@ -2286,9 +2282,9 @@ class 角色窗口(窗口):
                     os.path.join(filepath, "store.json")):
             self.载入json(path)
             return
-        else: 
+        else:
             # 如果不存在任何存档则载入重置存档
-            self.载入json(path = 'reset')
+            self.载入json(path='reset')
 
     def 设置技能选项(self, num, info):
 
@@ -2331,10 +2327,9 @@ class 角色窗口(窗口):
                 store.set("/buffer/data/pet", set_data['宠物'])
                 store.set('/buffer/data/compute_mode', set_data["计算模式"])
                 store.set('/buffer/data/ditto_checked', set_data["百变怪"])
-                store.set('/buffer/data/myth_top_checked',
-                               set_data['神话排名勾选'])
+                store.set('/buffer/data/myth_top_checked', set_data['神话排名勾选'])
                 store.set('/buffer/data/awakening_switch_checked',
-                               set_data['切装模式选项'])
+                          set_data['切装模式选项'])
                 store.set('/buffer/data/thread_count', set_data['线程数量'])
                 store.set("/buffer/data/equip_checked", set_data['装备勾选'])
                 store.set("/buffer/data/equip_forges", set_data['装备打造'])
@@ -2351,8 +2346,7 @@ class 角色窗口(窗口):
                     set_data = json.load(fp)
                 fp.close()
 
-                store.set("/buffer/data/awakening_binding",
-                               set_data['觉醒选择'])
+                store.set("/buffer/data/awakening_binding", set_data['觉醒选择'])
                 store.set("/buffer/data/talismans", set_data['护石栏'])
                 store.set("/buffer/data/consumables", set_data['药剂勾选'])
 
@@ -2369,13 +2363,11 @@ class 角色窗口(窗口):
                     set_data['武器融合属性A'], set_data['武器融合属性A2'],
                     set_data['武器融合属性B'], set_data['武器融合属性B2']
                 ])
-                store.set("/buffer/data/siroco_weapon",
-                               set_data['希洛克武器选择'])
+                store.set("/buffer/data/siroco_weapon", set_data['希洛克武器选择'])
                 store.set("/buffer/data/jude_effects", set_data['辟邪玉效果'])
                 store.set('/buffer/data/jude_values', set_data['辟邪玉数值'])
                 store.set('/buffer/data/top_options', set_data['排行选项'])
-                store.set('/buffer/data/black_purgatory',
-                               set_data['黑鸦选择'])
+                store.set('/buffer/data/black_purgatory', set_data['黑鸦选择'])
                 if '希洛克选择' in set_data:
                     store.set('/buffer/data/siroco', set_data['希洛克选择'])
                 if '奥兹玛选择' in set_data:
@@ -2408,8 +2400,7 @@ class 角色窗口(窗口):
                           encoding='utf-8') as fp:
                     set_data = json.load(fp)
                 fp.close()
-                store.set("/buffer/data/myth_properties",
-                               set_data['神话属性修正'])
+                store.set("/buffer/data/myth_properties", set_data['神话属性修正'])
             except Exception as error:
                 logger.error(error)
         if 4 in page:
@@ -2422,10 +2413,9 @@ class 角色窗口(窗口):
                     set_data = json.load(fp)
                 fp.close()
                 store.set("/buffer/data/self_select/equips",
-                               [set_data['自选装备']])
+                          [set_data['自选装备']])
                 store.set("/buffer/data/self_select/column_index", 0)
-                store.set("/buffer/data/self_select/locked",
-                               set_data['装备锁定'])
+                store.set("/buffer/data/self_select/locked", set_data['装备锁定'])
             except Exception as error:
                 logger.error(error)
 
@@ -2449,8 +2439,7 @@ class 角色窗口(窗口):
 
         if 0 in page:
             try:
-                self.称号.setCurrentIndex(store.get("/buffer/data/title",
-                                                       0))
+                self.称号.setCurrentIndex(store.get("/buffer/data/title", 0))
             except Exception as error:
                 logger.error(error)
             try:
@@ -2505,8 +2494,7 @@ class 角色窗口(窗口):
         if 1 in page:
             try:
                 try:
-                    self.强化觉醒选择(
-                        store.get('/buffer/data/awakening_binding'))
+                    self.强化觉醒选择(store.get('/buffer/data/awakening_binding'))
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -2539,8 +2527,8 @@ class 角色窗口(窗口):
                 try:
                     self.觉醒择优系数.setCurrentText(
                         str(
-                            store.get(
-                                "/buffer/data/awakening_coefficient", 1.0)))
+                            store.get("/buffer/data/awakening_coefficient",
+                                      1.0)))
                 except Exception as error:
                     logger.error(error)
 
@@ -2550,8 +2538,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
 
-                data = store.get('/buffer/data/weapon_fusion',
-                                      [0, 0, 0, 0])
+                data = store.get('/buffer/data/weapon_fusion', [0, 0, 0, 0])
 
                 try:
                     self.武器融合属性A.setCurrentIndex(data[0])
@@ -2611,7 +2598,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = store.get("/buffer/data/siroco",[0]*15)
+                    data = store.get("/buffer/data/siroco", [0] * 15)
                     self.希洛克选择(0, 1)
                     num = 0
                     for i in data:
@@ -2621,7 +2608,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = store.get("/buffer/data/ozma",[0]*25)
+                    data = store.get("/buffer/data/ozma", [0] * 25)
                     self.奥兹玛选择(0, 1)
                     num = 0
                     for i in data:
@@ -2677,13 +2664,13 @@ class 角色窗口(窗口):
             try:
                 try:
                     num = 0
-                    index = store.get(
-                        '/buffer/data/self_select/column_index', 0)
+                    index = store.get('/buffer/data/self_select/column_index',
+                                      0)
                     self.自选装备栏选项.setCurrentIndex(index)
                     self.自选装备栏更改(index)
                 except Exception as error:
                     logger.error(error)
-                
+
                 try:
                     num = 0
                     data = store.get('/buffer/data/self_select/locked')
@@ -2704,26 +2691,25 @@ class 角色窗口(窗口):
         store.emit("/buffer/data/siroco")
 
     def 保存json(self, path='set', page=[0, 1, 2, 3, 4]):
-        
+
         if 0 in page:
             # 第一页(装备/选择/打造)
             try:
                 store.set('/buffer/data/title', self.称号.currentIndex())
                 store.set('/buffer/data/pet', self.宠物.currentIndex())
                 store.set('/buffer/data/compute_mode',
-                               self.计算模式选择.currentIndex())
-                store.set('/buffer/data/ditto_checked',
-                               self.百变怪选项.isChecked())
+                          self.计算模式选择.currentIndex())
+                store.set('/buffer/data/ditto_checked', self.百变怪选项.isChecked())
 
                 store.set('/buffer/data/myth_top_checked',
-                               self.神话排名选项.isChecked())
+                          self.神话排名选项.isChecked())
                 store.set('/buffer/data/awakening_switch_checked',
-                               self.切装模式选项.isChecked())
+                          self.切装模式选项.isChecked())
                 store.set('/buffer/data/thread_count',
-                               self.线程数选择.currentIndex())
+                          self.线程数选择.currentIndex())
                 store.set('/buffer/data/equip_checked', self.装备选择状态)
                 store.set('/buffer/data/equip_forges',
-                               [i.currentIndex() for i in self.装备打造选项])
+                          [i.currentIndex() for i in self.装备打造选项])
 
             except Exception as error:
                 logger.error(error)
@@ -2734,9 +2720,9 @@ class 角色窗口(窗口):
 
                 store.set('/buffer/data/awakening_binding', self.觉醒选择状态)
                 store.set('/buffer/data/talismans',
-                               [i.currentIndex() for i in self.护石栏])
+                          [i.currentIndex() for i in self.护石栏])
                 store.set('/buffer/data/consumables',
-                               [i.isChecked() for i in self.复选框列表])
+                          [i.isChecked() for i in self.复选框列表])
 
                 skills = {}
                 num = 0
@@ -2755,26 +2741,25 @@ class 角色窗口(窗口):
                 store.set("/buffer/data/weapon_fusion", data)
 
                 store.set("/buffer/data/siroco_weapon",
-                               self.希洛克武器选择.currentIndex())
+                          self.希洛克武器选择.currentIndex())
 
                 store.set("/buffer/data/jude_effects",
-                               [i.currentIndex() for i in self.辟邪玉选择])
+                          [i.currentIndex() for i in self.辟邪玉选择])
                 store.set("/buffer/data/jude_values",
-                               [i.currentIndex() for i in self.辟邪玉数值])
+                          [i.currentIndex() for i in self.辟邪玉数值])
 
                 store.set("/buffer/data/black_purgatory",
-                               [[j.currentIndex() for j in i]
-                                for i in self.黑鸦词条选项])
+                          [[j.currentIndex() for j in i] for i in self.黑鸦词条选项])
 
                 store.set("/buffer/data/top_options",
-                               [i.currentIndex() for i in self.排行选项])
+                          [i.currentIndex() for i in self.排行选项])
 
                 store.set("/buffer/data/awakening_coefficient",
-                               float(self.觉醒择优系数.currentText()))
+                          float(self.觉醒择优系数.currentText()))
                 store.set("/buffer/data/awakening_direction",
-                               self.觉醒择优方向.currentIndex())
-                store.set("/buffer/data/siroco",self.希洛克选择状态)
-                store.set("/buffer/data/ozma",self.奥兹玛选择状态)
+                          self.觉醒择优方向.currentIndex())
+                store.set("/buffer/data/siroco", self.希洛克选择状态)
+                store.set("/buffer/data/ozma", self.奥兹玛选择状态)
             except Exception as error:
                 logger.error(error)
 
@@ -2783,13 +2768,13 @@ class 角色窗口(窗口):
             try:
                 # 时装选项
                 store.set("/buffer/data/avatar",
-                               [i.currentIndex() for i in self.时装选项])
+                          [i.currentIndex() for i in self.时装选项])
                 # 细节数值
                 store.set("/buffer/data/detail_values",
-                               [[j.text() for j in i] for i in self.属性设置输入])
+                          [[j.text() for j in i] for i in self.属性设置输入])
                 # 细节选项
                 store.set("/buffer/data/detail_options",
-                               [i.currentIndex() for i in self.技能设置输入])
+                          [i.currentIndex() for i in self.技能设置输入])
 
             except Exception as error:
                 logger.error(error)
@@ -2799,14 +2784,14 @@ class 角色窗口(窗口):
             try:
                 # 神话属性修正
                 store.set("/buffer/data/myth_properties",
-                               [i.currentIndex() for i in self.神话属性选项])
+                          [i.currentIndex() for i in self.神话属性选项])
             except Exception as error:
                 logger.error(error)
 
         if 4 in page:
             # 第五页(自选装备计算)
             try:
-                data = store.get("/buffer/data/self_select/equips",[])
+                data = store.get("/buffer/data/self_select/equips", [])
                 column_index = self.自选装备栏选项.currentIndex()
                 length = len(self.自选装备)
                 while column_index >= len(data):
@@ -2814,15 +2799,18 @@ class 角色窗口(窗口):
 
                 data[column_index] = [i.currentIndex() for i in self.自选装备]
 
-                store.set("/buffer/data/self_select/equips",data)
-                store.set('/buffer/data/self_select/column_index',column_index)
+                store.set("/buffer/data/self_select/equips", data)
+                store.set('/buffer/data/self_select/column_index',
+                          column_index)
                 store.set("/buffer/data/self_select/locked",
-                               [i.isChecked() for i in self.装备锁定])
+                          [i.isChecked() for i in self.装备锁定])
             except Exception as error:
                 logger.error(error)
         try:
-            filepath = './ResourceFiles/{}/{}/store.json'.format(self.角色属性A.实际名称, path)
-            set_data = store.exports(lambda i: str.startswith(i, "/buffer/data"))
+            filepath = './ResourceFiles/{}/{}/store.json'.format(
+                self.角色属性A.实际名称, path)
+            set_data = store.exports(
+                lambda i: str.startswith(i, "/buffer/data"))
             with open(filepath, "w", encoding='utf-8') as fp:
                 json.dump(set_data, fp, ensure_ascii=False, indent=4)
             fp.close()
@@ -2903,7 +2891,7 @@ class 角色窗口(窗口):
             self, "自动修正计算完毕", "仅对站街修正进行了修改,使面板与输入一致<br>请自行核对其它页面 非智力/体力/精神条目")
 
     def click_window(self, index):
-        self.保存json(self.存档位置,page=[self.当前页面])
+        self.保存json(self.存档位置, page=[self.当前页面])
         self.当前页面 = index
 
         if self.stacked_layout.currentIndex() != index:
@@ -2973,12 +2961,13 @@ class 角色窗口(窗口):
     def 换装计算(self) -> 角色属性:
         if not self.登记启用: return None
 
-        装备 = store.clone("/buffer/data/register/equips",self.self_selects)
-        装备打造 = store.clone("/buffer/data/register/amplifies", [-1]*12)
-        奥兹玛选择状态 = store.clone("/buffer/data/register/ozma", [0]*25)
-        希洛克选择状态 = store.clone("/buffer/data/register/siroco", [0]*15)
-        黑鸦词条 = store.clone("/buffer/data/register/black_purgatory", [[0]*4]*4)
-        武器融合选项 = store.clone("/buffer/data/register/weapon_fusion", [0]*4)
+        装备 = store.clone("/buffer/data/register/equips", self.self_selects)
+        装备打造 = store.clone("/buffer/data/register/amplifies", [-1] * 12)
+        奥兹玛选择状态 = store.clone("/buffer/data/register/ozma", [0] * 25)
+        希洛克选择状态 = store.clone("/buffer/data/register/siroco", [0] * 15)
+        黑鸦词条 = store.clone("/buffer/data/register/black_purgatory",
+                           [[0] * 4] * 4)
+        武器融合选项 = store.clone("/buffer/data/register/weapon_fusion", [0] * 4)
 
         for i in range(len(装备)):
             if 装备[i] == '无':
@@ -2987,18 +2976,18 @@ class 角色窗口(窗口):
                 装备打造[i] = self.装备打造选项[i + 12].currentIndex()
 
         for i in range(4):
-            if 黑鸦词条[i][1] == 0: 
+            if 黑鸦词条[i][1] == 0:
                 temp = [
                     self.黑鸦词条选项[i][0].currentIndex(),
                     self.黑鸦词条选项[i][1].currentIndex(),
                     self.黑鸦词条选项[i][3].currentText(),
                 ]
-                黑鸦词条[i]= temp
+                黑鸦词条[i] = temp
         if 希洛克选择状态 is None or len(希洛克选择状态) == 0 or sum(希洛克选择状态) == 0:
             希洛克选择状态 = self.希洛克选择状态
         if 奥兹玛选择状态 is None or len(奥兹玛选择状态) == 0 or sum(奥兹玛选择状态) == 0:
             奥兹玛选择状态 = self.奥兹玛选择状态
-            
+
         if 武器融合选项[0] == 0:
             武器融合选项[0] = self.武器融合属性A.currentIndex()
             武器融合选项[1] = self.武器融合属性A1.currentIndex()
@@ -3054,11 +3043,8 @@ class 角色窗口(窗口):
 
         self.辟邪玉属性计算(属性)
 
-
-
         if sum(self.希洛克选择状态) == 3:
             属性.武器词条触发 = 1
-        
 
         武器融合属性A = 武器属性A列表[武器融合选项[0]]
 
@@ -3142,7 +3128,7 @@ class 角色窗口(窗口):
                 BUFF.预计算()
                 B.替换技能(BUFF.技能表['BUFF'], 'BUFF')
             # 登记 End
-        
+
         if 输出 != 0:
             D = deepcopy(self.初始属性)
             self.输入属性(D)
@@ -3188,7 +3174,7 @@ class 角色窗口(窗口):
         num = 0
         总数据 = []
         for skill in B.技能表.values():
-            详情 = skill.结算统计() if skill.是否启用 else [0]*8
+            详情 = skill.结算统计() if skill.是否启用 else [0] * 8
             总数据.append(详情)
             if round(sum(详情)) != 0:
                 合计力量 += 详情[3]
@@ -3330,7 +3316,9 @@ class 角色窗口(窗口):
             if len(套装名称[i].split('[')) > 1:
                 件数 = 套装名称[i].split('[')[1].split(']')[0]
                 套装件数[套装.index(temp)].append(件数)
-                套装属性[套装.index(temp)] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
+                套装属性[套装.index(
+                    temp
+                )] += '<font size="3" face="宋体"><font color="#78FF1E">' + 套装名称[
                     i] + '</font><br>' + equ.get_suit_by_name(
                         套装名称[i]).装备描述_BUFF(self.角色属性B)[:-4] + '</font><br>'
 
@@ -3451,8 +3439,6 @@ class 角色窗口(窗口):
             ])
             套装属性.append(temp)
 
-        
-
         for i in range(len(套装)):
             if len(套装件数[i]) > 0:
                 self.套装名称显示[i + 1].setText(套装[i] + '[' + str(max(套装件数[i])) +
@@ -3472,14 +3458,14 @@ class 角色窗口(窗口):
         else:
             self.提升率显示.setText(str(round(提升率, 2)) + '%')
         self.自选计算数据 = [提升率, 总数据]
- 
+
         if 输出 == 0:
             self.排行数据.append(装备 + [0] + 套装 + ['无'])
-            self.输出界面(0,自选计算模式=True)
+            self.输出界面(0, 自选计算模式=True)
 
     def 站街计算(self, 装备名称, 套装名称=None):
         C = deepcopy(self.角色属性A)
-        C.穿戴装备(装备名称,套装名称)
+        C.穿戴装备(装备名称, 套装名称)
         for i in C.装备栏:
             equ.get_equ_by_name(i).城镇属性_BUFF(C)
             equ.get_equ_by_name(i).BUFF属性(C)
@@ -3518,7 +3504,7 @@ class 角色窗口(窗口):
                 return '<font face="宋体" color= "#E52E2E">' + str(
                     '%.2f' % temp) + '%</font>'
 
-    def 输出界面(self, index, name='',自选计算模式 = False):
+    def 输出界面(self, index, name='', 自选计算模式=False):
         装备名称 = []
         套装名称 = []
         百变怪 = self.排行数据[index][-1]
@@ -3532,10 +3518,9 @@ class 角色窗口(窗口):
         C = self.站街计算(装备名称)
 
         self.角色属性B = deepcopy(self.角色属性A)
-        self.角色属性B.穿戴装备(装备名称,套装名称)
+        self.角色属性B.穿戴装备(装备名称, 套装名称)
         # 登记 Start
-        self.角色属性B.预计算(自动切装= not 自选计算模式)
-        
+        self.角色属性B.预计算(自动切装=not 自选计算模式)
 
         if self.登记启用 and 自选计算模式:
             登记属性 = self.换装计算()
@@ -3545,7 +3530,7 @@ class 角色窗口(窗口):
             self.角色属性B.替换技能(登记属性.技能表['BUFF'], 'BUFF')
             # self.输入属性(self.角色属性B)
             self.角色属性B.切换详情 = '换装详情: <br>' + '<br>'.join(
-                    [' , '.join(登记装备[i:i + 4]) for i in range(0, len(登记装备), 4)])
+                [' , '.join(登记装备[i:i + 4]) for i in range(0, len(登记装备), 4)])
         # 登记 end
 
         # 最大输出界面限制
@@ -3851,7 +3836,7 @@ class 角色窗口(窗口):
         统计详情 = []
 
         for skill in 技能表:
-            详情 = skill.结算统计() if skill.是否启用 else [0]*8
+            详情 = skill.结算统计() if skill.是否启用 else [0] * 8
             统计详情.append(详情)
             if sum(详情) != 0:
                 count += 1

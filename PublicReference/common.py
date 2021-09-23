@@ -254,8 +254,7 @@ class 窗口(QWidget):
     def 重置页面(self, i):
         box = QMessageBox(
             QMessageBox.Warning, "提示",
-            "是否重置<font color='#FF0000'>{}</font>页面？"
-            .format(self.页面名称[i]))
+            "是否重置<font color='#FF0000'>{}</font>页面？".format(self.页面名称[i]))
         box.setWindowIcon(self.icon)
         yes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
         no = box.addButton(self.tr("取消"), QMessageBox.NoRole)
@@ -340,14 +339,13 @@ class 窗口(QWidget):
         self.frame_tool.move(-1, -1)
         self.frame_tool.setFrameShape(1)
         if self.初始属性.职业分类 == '输出':
-            self.页面名称 = [
+            self.页面名称 = trans([
                 "装备/选择/打造", "技能/符文/药剂", "基础/细节/修正", "神话/改造属性修正",
                 "辟邪玉/希洛克/黑鸦/奥兹玛", "自选装备计算"
-            ]
+            ])
         else:
-            self.页面名称 = [
-                "装备/选择/打造", "技能/符文/其它", "基础/细节/修正", "神话属性修正", "自选装备计算"
-            ]
+            self.页面名称 = trans(
+                ["装备/选择/打造", "技能/符文/其它", "基础/细节/修正", "神话属性修正", "自选装备计算"])
         self.页面数量 = len(self.页面名称)
         self.btn_group = QButtonGroup(self.frame_tool)
         self.window_btn = []
@@ -431,7 +429,8 @@ class 窗口(QWidget):
                 try:
                     描述 = ''
                     if self.角色属性A.职业分类 == 'BUFF':
-                        描述 = equ.get_suit_by_name(name).装备描述_BUFF(self.角色属性A)[:-4]
+                        描述 = equ.get_suit_by_name(name).装备描述_BUFF(
+                            self.角色属性A)[:-4]
                     else:
                         描述 = equ.get_suit_by_name(name).装备描述(self.角色属性A)[:-4]
                     if 描述 != '':
@@ -487,7 +486,7 @@ class 窗口(QWidget):
             for 名称 in 布局列表:
                 for i in equ.get_suit_list():
                     if i.名称 == 名称 and i.件数 == 2:
-                        self.按钮 = QPushButton(i.名称, self.main_frame1)
+                        self.按钮 = QPushButton(trans(i.名称), self.main_frame1)
                         self.按钮.move(水平间距[counter1] + 10, 10 + counter2 * 32)
                         self.按钮.setStyleSheet(套装按钮样式)
                         self.按钮.resize(120, 28)
@@ -529,7 +528,7 @@ class 窗口(QWidget):
             counter1 += 1
 
         counter5 = 8
-        self.按钮 = QPushButton('武器列表', self.main_frame1)
+        self.按钮 = QPushButton(trans('武器列表'), self.main_frame1)
         self.按钮.move(650, 15 + counter5 * 32)
         self.按钮.resize(265, 28)
         self.按钮.setStyleSheet(套装按钮样式)
@@ -561,7 +560,7 @@ class 窗口(QWidget):
 
         if counter4 != 0:
             counter5 += 1
-        self.按钮 = QPushButton('智慧产物', self.main_frame1)
+        self.按钮 = QPushButton(trans('智慧产物'), self.main_frame1)
         self.按钮.move(650, 20 + counter5 * 32)
         self.按钮.resize(265, 28)
         self.按钮.setStyleSheet(套装按钮样式)
@@ -612,7 +611,7 @@ class 窗口(QWidget):
         counter = 0
         for i in 部位列表:
             x = MyQComboBox(self.main_frame1)
-            x.addItems(['强化', '增幅'])
+            x.addItems(trans(['强化', '增幅']))
             x.resize(55, 20)
             self.装备打造选项.append(x)
             if counter < 5:
@@ -644,7 +643,7 @@ class 窗口(QWidget):
         for i in 部位列表:
             x = MyQComboBox(self.main_frame1)
             for j in range(32):
-                x.addItem('改造+' + str(j))
+                x.addItem(trans('改造') + '+' + str(j))
             x.resize(75, 20)
             self.装备打造选项.append(x)
             if counter < 5:
@@ -659,7 +658,7 @@ class 窗口(QWidget):
 
         x = MyQComboBox(self.main_frame1)
         for j in range(11):
-            x.addItem('锻造+' + str(j))
+            x.addItem(trans('锻造') + '+' + str(j))
         x.resize(110, 20)
         x.move(540, 504 + (counter - 9) * 30)
         self.装备打造选项.append(x)
@@ -670,25 +669,25 @@ class 窗口(QWidget):
         x.move(540, 504 + (counter - 8) * 30)
         self.装备打造选项.append(x)
 
-        x = QPushButton('一键全选', self.main_frame1)
+        x = QPushButton(trans('一键全选'), self.main_frame1)
         x.clicked.connect(lambda state, index=1: self.批量选择(index))
         x.move(520, 400)
         x.resize(105, 24)
         x.setStyleSheet(按钮样式)
 
-        x = QPushButton('一键清空', self.main_frame1)
+        x = QPushButton(trans('一键清空'), self.main_frame1)
         x.clicked.connect(lambda state, index=0: self.批量选择(index))
         x.move(520, 430)
         x.resize(105, 24)
         x.setStyleSheet(按钮样式)
 
-        x = QPushButton('打造↑', self.main_frame1)
+        x = QPushButton(trans('打造') + '↑', self.main_frame1)
         x.clicked.connect(lambda state: self.批量打造(1))
         x.move(520, 460)
         x.resize(50, 24)
         x.setStyleSheet(按钮样式)
 
-        x = QPushButton('打造↓', self.main_frame1)
+        x = QPushButton(trans('打造') + '↓', self.main_frame1)
         x.clicked.connect(lambda state: self.批量打造(-1))
         x.move(575, 460)
         x.resize(50, 24)
@@ -702,7 +701,7 @@ class 窗口(QWidget):
         self.宠物.currentIndexChanged.connect(
             lambda state, index='宠物': self.描述更新(index, self.宠物))
 
-        x = QLabel('称号&宠物选择：', self.main_frame1)
+        x = QLabel(trans('称号&宠物选择：'), self.main_frame1)
         x.resize(130, 20)
         x.move(360, 400)
         x.setAlignment(Qt.AlignCenter)
@@ -714,7 +713,7 @@ class 窗口(QWidget):
             x.move(350, 430 + counter * 30)
             counter += 1
 
-        self.计算按钮1 = QPushButton('开始计算', self.main_frame1)
+        self.计算按钮1 = QPushButton(trans('开始计算'), self.main_frame1)
         self.计算按钮1.clicked.connect(lambda state: self.计算())
         self.计算按钮1.move(990, 610)
         self.计算按钮1.resize(110, 30)
@@ -978,8 +977,9 @@ class 窗口(QWidget):
                     os.makedirs(path)
                     break
             self.技能存档位置 = 'skill-{}'.format(num)
-            self.保存json(path = self.技能存档位置, page = [1])
-            self.技能存档选择.setItemText(self.技能存档选择.count() - 1, 'skill-{}'.format(num))
+            self.保存json(path=self.技能存档位置, page=[1])
+            self.技能存档选择.setItemText(self.技能存档选择.count() - 1,
+                                    'skill-{}'.format(num))
             self.技能存档选择.addItem('新建存档')
             return
 
@@ -995,12 +995,12 @@ class 窗口(QWidget):
             no = box.addButton(self.tr("取消"), QMessageBox.NoRole)
             box.exec_()
             if box.clickedButton() == yes:
-                self.保存json(path = self.技能存档位置, page = [1])
+                self.保存json(path=self.技能存档位置, page=[1])
         self.技能存档位置 = self.技能存档选择.currentText()
         if self.技能存档位置 != '全局存档':
-            self.载入json(path = self.技能存档位置, page = [1])
+            self.载入json(path=self.技能存档位置, page=[1])
         else:
-            self.载入json(path = self.存档位置, page = [1])
+            self.载入json(path=self.存档位置, page=[1])
 
     def 技能存档列表读取(self):
         self.技能存档位置 = '全局存档'
@@ -1172,7 +1172,7 @@ class 窗口(QWidget):
         x = self.辟邪玉选择[index].currentIndex()
         temp = 辟邪玉列表[x].最大值 * 10
         while temp >= 辟邪玉列表[x].最小值 * 10:
-            t = '+' if temp >=0 else ''
+            t = '+' if temp >= 0 else ''
             if 辟邪玉列表[x].间隔 == 1:
                 self.辟邪玉数值[index].addItem(t + str(int(temp / 10)))
             else:
