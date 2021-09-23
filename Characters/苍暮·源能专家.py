@@ -580,6 +580,7 @@ class 苍暮·源能专家角色属性(角色属性):
 
     引力源光弹充能次数 = 0
     能量禁锢爆炸次数 = 0
+    二觉多段次数 = 6
 
     def __init__(self):
         基础属性输入(self)
@@ -589,7 +590,8 @@ class 苍暮·源能专家角色属性(角色属性):
     def 被动倍率计算(self):
         if self.装备检查('谍影：超级核心'):
             self.技能栏[self.技能序号['源力剑精通']].谍影专用倍率 = 2
-
+        print(self.二觉多段次数)
+        self.技能栏[self.技能序号['终焉：超世界崩坏']].攻击次数 = self.二觉多段次数
         super().被动倍率计算()
 
     def 数据计算(self, x=0, y=-1):
@@ -813,9 +815,19 @@ class 苍暮·源能专家(角色窗口):
         self.临界源能弹蓄力选项.setToolTip('蓄力释放临界源能弹')
         self.临界源能弹蓄力选项.setChecked(True)
 
+        self.二觉hit选项 = MyQComboBox(self.main_frame2)
+        for i in range(6, 15):
+            self.二觉hit选项.addItem('终焉:超世界崩坏多段次数:' + str(i))
+        self.二觉hit选项.setCurrentIndex(0)
+        self.二觉hit选项.resize(160, 20)
+        self.二觉hit选项.move(300, 510)
+        self.二觉hit选项.setToolTip('秒C6+1,打满14+1')
+
         self.职业存档.append(('引力源光弹护石选项', self.引力源光弹护石选项, 1))
         self.职业存档.append(('能量禁锢护石选项', self.能量禁锢护石选项, 1))
         self.职业存档.append(('临界源能弹蓄力选项', self.临界源能弹蓄力选项, 0))
+        self.职业存档.append(('二觉hit选项', self.二觉hit选项, 1))
+
 
     def 输入属性(self, 属性, x=0):
         super().输入属性(属性, x)
@@ -823,6 +835,7 @@ class 苍暮·源能专家(角色窗口):
         属性.引力源光弹充能次数 = self.引力源光弹护石选项.currentIndex()
         # 属性.技能栏[属性.技能序号['能量禁锢']].爆炸次数 = self.能量禁锢护石选项.currentIndex()
         属性.能量禁锢爆炸次数 = self.能量禁锢护石选项.currentIndex()
+        属性.二觉多段次数 = self.二觉hit选项.currentIndex() +6
 
         if self.临界源能弹蓄力选项.isChecked():
             属性.技能栏[属性.技能序号['临界源能弹']].攻击次数 = 0
