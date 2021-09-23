@@ -2750,7 +2750,7 @@ class 角色窗口(窗口):
         self.总伤害.setAlignment(Qt.AlignCenter)
 
         self.套装名称显示 = []
-        for i in range(12):
+        for i in range(13):
             self.套装名称显示.append(QLabel(self.main_frame5))
             self.套装名称显示[i].move(114 + 初始x, 128 + 180 + 17 * i + 初始y)
             self.套装名称显示[i].resize(150, 18)
@@ -4520,7 +4520,7 @@ class 角色窗口(窗口):
         tempstr = []
         # temp = '<font color="{}">'.format(self.辟邪玉显示())
         if x == 0:
-            tempstr.append('黄字:{}%'.format(round(属性.伤害增加 * 100, 0)))  #0
+            tempstr.append('黄字:{}%'.format(round(属性.伤害增加 * 100, 1)))  #0
             tempstr.append('暴伤:{}%'.format(round(属性.暴击伤害 * 100, 1)))  #1
             tempstr.append('白字:{}%'.format(round(属性.附加伤害 * 100, 1)))  #2
             tempstr.append('属白:{}%'.format(round(属性.属性附加 * 100, 1)))  #3
@@ -4537,7 +4537,7 @@ class 角色窗口(窗口):
                 tempstr[2] += '|{}%'.format(round(属白换算 * 100 + 属性.附加伤害 * 100, 1))
                 tempstr[3] += '|{}%'.format(round(属白换算 * 100, 1))
         else:
-            tempstr.append('攻击时,额外增加{}%的伤害增加量'.format(round(属性.伤害增加 * 100, 0)))  #0
+            tempstr.append('攻击时,额外增加{}%的伤害增加量'.format(round(属性.伤害增加 * 100, 1)))  #0
             tempstr.append('暴击时,额外增加{}%的伤害增加量'.format(round(属性.暴击伤害 * 100, 1)))  #1
             tempstr.append('攻击时,附加{}%的伤害'.format(round(属性.附加伤害 * 100, 1)))  #2
             tempstr.append('攻击时,附加{}%的属性伤害'.format(round(属性.属性附加 * 100, 1)))  #3
@@ -4747,7 +4747,8 @@ class 角色窗口(窗口):
                     显示[count].setStyleSheet(
                         "QLabel{font-size:12px;color:rgb(255,255,255)}")
                     count += 1
-        except:
+        except Exception as error:
+            logger.error(error)
             pass
 
     def 打造显示设置(self, 显示, 属性, x=0):
@@ -5113,7 +5114,7 @@ class 角色窗口(窗口):
         间隔 = 17
 
         套装名称显示 = []
-        for i in range(15):
+        for i in range(16):
             套装名称显示.append(QLabel(输出窗口))
             套装名称显示[i].move(114, 位置 - pox_y2 + 间隔 * i)
             套装名称显示[i].resize(150, 18)
