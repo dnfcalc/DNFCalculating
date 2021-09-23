@@ -1133,7 +1133,7 @@ class 窗口(QWidget):
     def 自选装备更改(self, index=0):
         try:
             self.图片显示[index].setMovie(
-                equ.get_img_by_name(self.自选装备list[index][self.自选装备[index].currentIndex()]))
+                equ.get_img_by_name(self.自选装备[index].currentText()))
         except:
             pass
 

@@ -15,6 +15,7 @@ try:
 except Exception as e:
     logger.error(e)
 
+
 class 技能:
     名称 = ''
     备注 = ''
@@ -2629,13 +2630,16 @@ class 角色窗口(窗口):
         套装类型 = ['防具', '首饰', '特殊', '上链左', '镯下右', '环鞋指']
         count = 0
         self.自选套装 = []
+        self.自选套装_list = []
         for i in 套装类型:
             self.自选套装.append(MyQComboBox(self.main_frame5))
             套装名称 = []
+            self.自选套装_list.append([])
             for j in equ.get_suit_list():
                 if j.名称 not in 套装名称 and j.类型 == i:
                     套装名称.append(j.名称)
-            self.自选套装[count].addItems(套装名称)
+                    self.自选套装_list[count].append(j.名称)
+            self.自选套装[count].addItems(trans(套装名称))
             self.自选套装[count].resize(160, 22)
             self.自选套装[count].move(横坐标, 50 + 30 * count)
             self.自选套装[count].activated.connect(
@@ -2739,7 +2743,8 @@ class 角色窗口(窗口):
         for i in range(12):
             self.图片显示.append(QLabel(self.main_frame5))
             self.图片显示[i].setMovie(
-                equ.get_img_by_name(self.自选装备list[i][self.自选装备[i].currentIndex()]))
+                equ.get_img_by_name(
+                    self.自选装备list[i][self.自选装备[i].currentIndex()]))
             self.图片显示[i].resize(26, 26)
             self.图片显示[i].move(初始x + 10 + x坐标[i], 初始y + 31 + y坐标[i])
             self.图片显示[i].setAlignment(Qt.AlignCenter)
@@ -2805,6 +2810,39 @@ class 角色窗口(窗口):
         self.对比格式.move(720, 612)
         self.对比格式.resize(70, 24)
         self.对比格式.setStyleSheet(复选框样式)
+
+    def 自选装备更改(self, index=0):
+        try:
+            self.图片显示[index].setMovie(
+                equ.get_img_by_name(self.自选装备list[index][self.自选装备[index].currentIndex()]))
+        except:
+            pass
+
+        if self.初始属性.职业分类 == '输出':
+            if self.当前页面 == 5 and self.计算标识 == 1:
+                self.自选计算(1)
+        else:
+            if self.当前页面 == 4 and self.计算标识 == 1:
+                self.自选计算(1)
+
+    def 自选套装更改(self, index):
+        self.计算标识 = 0
+        name = self.自选套装_list[index][self.自选套装[index].currentIndex()]
+        for i in range(11):
+            if self.装备锁定[i].isChecked():
+                continue
+            x = -1
+            for j in equ.get_equ_list():
+                if j.部位 == 部位列表[i]:
+                    x += 1
+                    if j.所属套装2 == name:
+                        self.自选装备[i].setCurrentIndex(x)
+                        break
+                    elif j.所属套装 == name and j.品质 != '神话':
+                        self.自选装备[i].setCurrentIndex(x)
+                        break
+        self.计算标识 = 1
+        self.自选计算(1)
 
     def 界面6(self):
         横坐标 = 10
@@ -5569,7 +5607,8 @@ class 角色窗口(窗口):
         if 切装模式 == 1:
             for i in range(12):
                 if self.装备切装[i].isChecked():
-                    属性.装备切装.append(self.自选装备list[i][self.自选装备[i].currentIndex()])
+                    属性.装备切装.append(
+                        self.自选装备list[i][self.自选装备[i].currentIndex()])
                 else:
                     属性.装备切装.append('无')
 
