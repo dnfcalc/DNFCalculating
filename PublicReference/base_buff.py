@@ -211,12 +211,7 @@ class 角色属性(属性):
         if self.装备描述 == 1:
             tem = ''
             if BUFFLv > 0:
-                if self.角色 == '圣职者(女)':
-                    tem += '[勇气祝福]技能Lv +{}<br>'.format(int(BUFFLv))
-                elif self.角色 == '圣职者(男)':
-                    tem += '[荣誉祝福]技能Lv +{}<br>'.format(int(BUFFLv))
-                elif self.角色 == '魔法师(女)':
-                    tem += '[禁忌诅咒]技能Lv +{}<br>'.format(int(BUFFLv))
+                tem += '[{}]技能Lv +{}<br>'.format(self.技能表['BUFF'].名称,int(BUFFLv))
 
             if BUFF力量 > 0 and BUFF智力 > 0:
                 tem += 'Lv30 Buff技能力量、智力增加量 +{}<br>'.format(int(BUFF力量))
@@ -281,27 +276,28 @@ class 角色属性(属性):
              一觉被动Lv=0,
              一觉被动力智=0):
         if self.装备描述 == 1:
+
             tem = ''
-            if 守护恩赐Lv > 0 or 转职被动Lv > 0:
-                tem += '[守护恩赐]、[启示:圣歌]、[人偶操纵者]技能Lv +{}<br>'.format(
-                    int(守护恩赐Lv if 守护恩赐Lv else 转职被动Lv))
-            elif 守护恩赐体精 > 0 and self.角色 == '圣职者(男)':
-                tem += '[守护恩赐]体力、精神 +{}<br>'.format(int(守护恩赐体精))
-            elif 转职被动智力 > 0 and self.角色 == '圣职者(女)':
-                tem += '[启示:圣歌]智力 +{}<br>'.format(int(转职被动智力))
-            elif 转职被动智力 > 0 and self.角色 == '魔法师(女)':
-                tem += '[人偶操纵者]智力 +{}<br>'.format(int(转职被动智力))
-            elif 信念光环Lv > 0:
-                tem += '[信念光环]技能Lv +{}'.format(int(信念光环Lv))
-            elif 一觉被动Lv > 0:
-                if self.角色 == '圣职者(女)':
-                    tem += '[虔诚信念]技能Lv +{}<br>'.format(int(一觉被动Lv))
-                elif self.角色 == '魔法师(女)':
-                    tem += '[少女的爱]技能Lv +{}<br>'.format(int(一觉被动Lv))
-            elif 信念光环体精 > 0:
-                tem += '[信念光环]体力、精神增加量 +{}<br>'.format(int(信念光环体精))
-            elif 一觉被动力智 > 0:
-                tem += '[虔诚信念]、[少女的爱]力量、智力增加量 +{}<br>'.format(int(一觉被动力智))
+            if self.角色 == '圣职者(男)':
+                 if 守护恩赐Lv > 0:       
+                    tem += '[守护恩赐]技能Lv +{}<br>'.format(int(守护恩赐Lv))
+                 if 守护恩赐体精 > 0:
+                    tem += '[守护恩赐]体力、精神 +{}<br>'.format(int(守护恩赐体精))
+                 if 信念光环Lv > 0:
+                    tem += '[信念光环]技能Lv +{}'.format(int(信念光环Lv))
+                 if 信念光环体精 > 0 :
+                    tem += '[信念光环]体力、精神增加量 +{}<br>'.format(int(信念光环体精))
+            else:
+                转职被动 = {'圣职者(女)':'启示:圣歌','魔法师(女)':'人偶操纵者'}[self.角色]
+                觉醒被动 = {'圣职者(女)':'虔诚信念','魔法师(女)':'少女的爱'}[self.角色]
+                if 转职被动Lv > 0 :
+                    tem += '[{}]技能Lv +{}<br>'.format(转职被动,int(转职被动Lv))
+                if 转职被动智力 > 0 :
+                    tem += '[{}]智力 +{}<br>'.format(转职被动,int(转职被动智力))
+                if 一觉被动Lv > 0:
+                    tem += '[{}]技能Lv +{}<br>'.format(觉醒被动,int(一觉被动Lv))
+                if 一觉被动力智 > 0 :
+                    tem += '[{}]力量、智力增加量 +{}<br>'.format(觉醒被动,int(一觉被动力智))
             return tem
         else:
             self.转职被动Lv += 转职被动Lv
@@ -1610,40 +1606,47 @@ class 角色窗口(窗口):
         行名称1 = [
             "工会属性", "训练官BUFF", "戒指", "婚房", "冒险团", "晶体契约", "收集箱", "勋章", "名称装饰卡",
             "快捷栏纹章", "宠物装备-红", "  宠物装备-蓝  ", "  宠物装备-绿  ", "宠物附魔", "皮肤",
-            "站街修正", "进图修正"
+            "站街修正", "进图修正","登记修正",''
         ]
+
+        column_count = len(列名称1)
+        row_count= len(行名称1)
+
         名称 = QLabel("基础细节", self.main_frame3)
         名称.setAlignment(Qt.AlignCenter)
         名称.setStyleSheet(标签样式)
         名称.resize(80, 25)
         名称.move(10, 5)
 
-        for i in range(3):
+        for i in range(column_count):
             名称 = QLabel(列名称1[i], self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             名称.setStyleSheet(标签样式)
             名称.resize(宽度, 25)
             名称.move(95 + i * (宽度 + 5), 5)
 
-        for j in range(17):
+        Linelist = [[],[],[]]
+
+        for j in range(row_count):
             名称 = QLabel(行名称1[j], self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             名称.setStyleSheet(标签样式)
             名称.resize(80, 25)
-            名称.move(10, 35 + j * 30)
+            名称.move(10, 35 + j * 30)     
 
-        for i in range(3):
-            Linelist = []
-            for j in range(19):
-                Linelist.append(QLineEdit(self.main_frame3))
-                Linelist[j].setAlignment(Qt.AlignCenter)
-                Linelist[j].setStyleSheet(输入框样式)
-                if j < 17:
-                    Linelist[j].resize(宽度, 22)
-                    Linelist[j].move(95 + i * (宽度 + 5), 35 + j * 30)
+            for i in range(column_count):
+                Linelist[i].append(QLineEdit(self.main_frame3))
+                Linelist[i][j].setAlignment(Qt.AlignCenter)
+                Linelist[i][j].setStyleSheet(输入框样式)
+                if 行名称1[j] !='':
+                    Linelist[i][j].resize(宽度, 22)
+                    Linelist[i][j].move(95 + i * (宽度 + 5), 35 + j * 30)
                 else:
-                    Linelist[j].resize(0, 0)
-            self.属性设置输入.append(Linelist)
+                    Linelist[i][j].resize(0,0)
+
+        self.属性设置输入.extend(Linelist)
+
+
 
         列名称2 = ["智力", "体力", "精神", "徽章智", "徽章体", "徽章精", "技能等级及选项"]
         行名称2 = [
@@ -1697,10 +1700,9 @@ class 角色窗口(窗口):
             self.技能设置输入[j].addItems(['Lv1-30(主动)Lv+1', 'Lv1-50(主动)Lv+1'])
         self.技能设置输入[2].addItems(['Lv1-35(主动)Lv+1', 'Lv30-50(主动)Lv+1'])
         self.技能设置输入[3].addItem('Lv30-50(主动)Lv+1')
-
+        
         for j in [8, 9, 16]:
-            for skill in self.角色属性A.技能表.values():
-                self.技能设置输入[j].addItem(skill.名称 + 'Lv+1')
+            self.技能设置输入[j].addItems(i.名称+'Lv+1' for i in self.角色属性A.技能表.values()  if i.所在等级 < 48)
         self.技能设置输入[12].addItems(
             ['BUFFLv+1', 'BUFFLv+2', 'BUFFLv+3', 'BUFFLv+4'])
         self.技能设置输入[13].addItems(['Lv1-50(主动)Lv+1', '一觉Lv+1', '一觉Lv+2'])
@@ -2635,7 +2637,10 @@ class 角色窗口(窗口):
                     for i in data:
                         y = 0
                         for j in i:
-                            self.属性设置输入[x][y].setText(j)
+                            try:
+                                self.属性设置输入[x][y].setText(j)
+                            except Exception as e:
+                                logger.error(e)
                             y += 1
                         x += 1
                 except Exception as error:
@@ -2850,42 +2855,23 @@ class 角色窗口(窗口):
         self.角色属性B = deepcopy(self.初始属性)
         self.输入属性(self.角色属性B)
         self.角色属性B.穿戴装备(self.有效穿戴组合[0])
-        for i in self.角色属性B.装备栏:
-            equ.get_equ_by_name(i).城镇属性_BUFF(self.角色属性B)
-            equ.get_equ_by_name(i).BUFF属性(self.角色属性B)
-        for i in self.角色属性B.套装栏:
-            equ.get_suit_by_name(i).城镇属性_BUFF(self.角色属性B)
-            equ.get_suit_by_name(i).BUFF属性(self.角色属性B)
-        self.角色属性B.装备基础()
-        self.角色属性B.站街计算()
-        self.面板修正(self.角色属性B.类型, x)
+        self.角色属性B.排行系数 = 1
+        self.角色属性B.装备属性计算()
 
-    def 面板修正(self, 类型, x):
-        数据 = []
-        原始数据 = []
-        名称 = ['站街面板']
-        for i in range(1):
-            try:
-                if self.一键站街设置输入[i + x].text() != '':
-                    数据.append(int(self.一键站街设置输入[i + x].text()))
-                else:
-                    数据.append(0)
-            except:
-                QMessageBox.information(self, "错误", 名称[i] + "输入格式错误,已重置为空")
-                self.一键站街设置输入[i + x].setText('')
-                数据.append(0)
+        self.面板修正(self.角色属性B, x)
 
-        if 数据[0] == 0:
+    def 面板修正(self, 属性, x):
+        数据 = 0
+        数据 = to_int(self.一键站街设置输入[x].text())
+        if 数据 is None:
+            QMessageBox.information(self, "错误", "站街面板输入格式错误,已重置为空")
+            self.一键站街设置输入[x].setText('')
+            数据= 0 
+
+        if 数据 == 0:
             QMessageBox.information(self, "错误", "请输入站街面板")
             return
-
-        for i in range(3):
-            if self.属性设置输入[i][15].text() != '':
-                原始数据.append(int(self.属性设置输入[i][15].text()))
-            else:
-                原始数据.append(0)
-
-        self.站街面板修正(类型, 数据, 原始数据)
+        self.站街面板修正(属性, 数据)
         self.click_window(2)
         QMessageBox.information(
             self, "自动修正计算完毕", "仅对站街修正进行了修改,使面板与输入一致<br>请自行核对其它页面 非智力/体力/精神条目")
@@ -2944,19 +2930,15 @@ class 角色窗口(窗口):
         else:
             return count
 
-    def 站街面板修正(self, 类型, 输入面板, 修正面板):
-        if 类型 == '智力':
-            修正前面板 = int(self.角色属性B.系数数值站街())
-            修正后面板 = 输入面板[0] - 修正前面板 + 修正面板[0]
-            self.属性设置输入[0][15].setText(str(int(修正后面板)))
-        elif 类型 == '体力':
-            修正前面板 = int(self.角色属性B.系数数值站街())
-            修正后面板 = 输入面板[0] - 修正前面板 + 修正面板[1]
-            self.属性设置输入[1][15].setText(str(int(修正后面板)))
-        elif 类型 == '精神':
-            修正前面板 = int(self.角色属性B.系数数值站街())
-            修正后面板 = 输入面板[0] - 修正前面板 + 修正面板[2]
-            self.属性设置输入[2][15].setText(str(int(修正后面板)))
+    def 站街面板修正(self,属性, 输入面板,x = 0,append = True):        
+        i = ['智力','体力','精神'].index(属性.类型)
+        修正前面板 = int(属性.站街系数)
+        修正后面板 = 输入面板 - 修正前面板
+        if append:
+            修正面板 = to_int(self.属性设置输入[i][15+x].text(),0)
+            修正后面板 += 修正面板
+        self.属性设置输入[i][15+x].setText(str(int(修正后面板)))
+
 
     def 换装计算(self) -> 角色属性:
         if not self.登记启用: return None
@@ -2968,6 +2950,7 @@ class 角色窗口(窗口):
         黑鸦词条 = store.clone("/buffer/data/register/black_purgatory",
                            [[0] * 4] * 4)
         武器融合选项 = store.clone("/buffer/data/register/weapon_fusion", [0] * 4)
+        站街面板 = store.get("/buffer/data/register/display_power",-1)
 
         for i in range(len(装备)):
             if 装备[i] == '无':
@@ -3094,9 +3077,15 @@ class 角色窗口(窗口):
         属性.希洛克计算(希洛克选择状态)
         属性.奥兹玛计算(奥兹玛选择状态)
         self.基础属性(属性)
+        站街属性 = deepcopy(属性)       
 
         属性.穿戴装备(装备)
+        站街属性.穿戴装备(装备)
 
+        站街属性.排行系数 = 1
+        站街属性.装备属性计算()
+        
+        self.站街面板修正(站街属性,站街面板,2,False)
         #  恢复
         return 属性
 

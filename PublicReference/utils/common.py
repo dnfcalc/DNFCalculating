@@ -6,6 +6,7 @@
 # Author    : Chen Ji
 # Email     : fzls.zju@gmail.com
 # -------------------------------
+import re
 
 
 # 格式化时间为比较美观的格式
@@ -23,3 +24,8 @@ def format_time(ftime):
     remaining_time_str += "{:02.2f}s".format(seconds)
 
     return remaining_time_str
+
+def to_int(content, default=None):
+    if re.match("^-?\d+$", content):
+        return int(content)
+    return default

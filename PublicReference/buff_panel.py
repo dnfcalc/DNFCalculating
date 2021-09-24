@@ -1,3 +1,4 @@
+from PublicReference.utils.common import to_int
 from PublicReference.view.Page import Page
 from PyQt5.QtWidgets import QLabel, QGraphicsOpacityEffect
 
@@ -79,19 +80,23 @@ class 换装窗口(Page):
 
     def 初始化装备(self):
         equips = store.first("/buffer/data/register/equips",
-                                  "/buffer/data/equips")
+                             "/buffer/data/equips")
         amplifies = store.first("/buffer/data/register/amplifies",
-                                     "/buffer/data/amplifies")
+                                "/buffer/data/amplifies")
         for 部位 in range(len(equips)):
             self.自选装备[部位].setCurrentText(equips[部位])
             self.自选增幅选项[部位].setCurrentIndex(amplifies[部位])
 
+        self.站街面板输入.setText(
+            str(store.get('/buffer/data/register/display_power', '')))
+
     def 初始化希洛克(self):
         sirocos = store.first("/buffer/data/register/siroco",
-                                   "/buffer/data/siroco")
+                              "/buffer/data/siroco")
         for i in range(len(sirocos)):
             self.希洛克选择(i, sirocos[i])
-        weapon_fusion = store.first("/buffer/data/register/weapon_fusion","/buffer/data/weapon_fusion",[0]*4)
+        weapon_fusion = store.first(
+            "/buffer/data/register/weapon_fusion", "/buffer/data/weapon_fusion", [0]*4)
         self.武器融合属性A.setCurrentIndex(weapon_fusion[0])
         self.武器融合属性A2.setCurrentIndex(weapon_fusion[1])
         self.武器融合属性B.setCurrentIndex(weapon_fusion[2])
@@ -99,13 +104,13 @@ class 换装窗口(Page):
 
     def 初始化奥兹玛(self):
         ozmas = store.first("/buffer/data/register/ozma",
-                                 "/buffer/data/ozma")
+                            "/buffer/data/ozma")
         for i in range(len(ozmas)):
             self.奥兹玛选择(i, ozmas[i])
-    
+
     def 初始化遴选(self):
         black_purgatory = store.first("/buffer/data/register/black_purgatory",
-                                 "/buffer/data/black_purgatory")
+                                      "/buffer/data/black_purgatory")
         for i in range(len(black_purgatory)):
             self.黑鸦词条[i][1].setCurrentIndex(black_purgatory[i][1])
             if len(black_purgatory[i]) > 3:
@@ -145,6 +150,9 @@ class 换装窗口(Page):
             self.武器融合属性B.currentIndex(),
             self.武器融合属性B2.currentIndex(),
         ])
+
+        store.set('/buffer/data/register/display_power',
+                  to_int(self.站街面板输入.text(), 0))
 
         store.emit("/buffer/event/register_changed")
         self.closeWindow()
@@ -198,12 +206,14 @@ class 换装窗口(Page):
                     else:
                         combo.addItem(j.名称)
             count += 1
+        x = 400
+        y = 20
 
         标签 = QLabel('批量选择', self)
         标签.setAlignment(Qt.AlignCenter)
         标签.setStyleSheet(标签样式)
         标签.resize(160, 25)
-        标签.move(400, 20)
+        标签.move(x, y)
 
         套装类型 = ['防具', '首饰', '特殊', '上链左', '镯下右', '环鞋指']
         count = 0
@@ -214,41 +224,54 @@ class 换装窗口(Page):
             for j in equ.get_suit_list():
                 if j.名称 not in 套装名称 and j.类型 == i:
                     套装名称.append(j.名称)
+            y += 30
             self.自选套装[count].addItems(套装名称)
             self.自选套装[count].resize(160, 22)
-            self.自选套装[count].move(400, 50 + 30 * count)
+            self.自选套装[count].move(400, y)
             self.自选套装[count].activated.connect(
                 lambda state, index=count: self.自选套装更改(index))
             count += 1
 
+        y += 30
+
         神话部位选项 = MyQComboBox(self)
         神话部位选项.addItems(['神话部位:无', '神话部位:上衣', '神话部位:手镯', '神话部位:耳环'])
         神话部位选项.resize(160, 22)
-        神话部位选项.move(400, 50 + 30 * count)
+        神话部位选项.move(400, y)
         神话部位选项.activated.connect(lambda index: self.神话部位更改(index))
+
+        y += 30
+
+        label = QLabel('站街面板', self)
+        label.setAlignment(Qt.AlignCenter)
+        label.setStyleSheet(标签样式)
+        label.resize(60, 25)
+        label.move(x, y)
+
+        self.站街面板输入 = QLineEdit(self)
+        self.站街面板输入.move(x+60, y)
+        self.站街面板输入.resize(70, 24)
+        self.站街面板输入.setStyleSheet(输入框样式)
+
+        y += 30
 
         add = QPushButton('打造↑', self)
         add.clicked.connect(lambda state: self.批量打造(1))
-        add.move(400, 270)
+        add.move(x, y)
         add.resize(40, 24)
         add.setStyleSheet(按钮样式)
 
         minus = QPushButton('打造↓', self)
         minus.clicked.connect(lambda state: self.批量打造(-1))
-        minus.move(460, 270)
+        minus.move(x+60, y)
         minus.resize(40, 24)
         minus.setStyleSheet(按钮样式)
 
         reset = QPushButton('重置', self)
         reset.clicked.connect(lambda state: self.初始化装备())
-        reset.move(520, 270)
+        reset.move(x+120, y)
         reset.resize(40, 24)
         reset.setStyleSheet(按钮样式)
-
-        tips = QLabel("提示:当选择无时,将按穿戴装备的设置",self)
-        tips.move(400,300)
-        tips.resize(240,24)
-        tips.setStyleSheet("QLabel{font-size:12px;color:rgb(211,167,106)}")
 
     def 批量打造(self, offset):
         for i in range(len(self.自选增幅选项)):
@@ -366,49 +389,56 @@ class 换装窗口(Page):
             count += 1
 
     def 初始化残香UI(self):
-        横坐标 = 400
-        纵坐标 = 320
+        x = 400
+        y = 320
 
         标签 = QLabel('残香属性', self)
         标签.setAlignment(Qt.AlignCenter)
         标签.setStyleSheet(标签样式)
         标签.resize(240, 25)
-        标签.move(横坐标, 纵坐标)
+        标签.move(x, y)
 
-        纵坐标 += 30
+        y += 30
 
         self.武器融合属性A = MyQComboBox(self)
         for j in 武器属性A列表:
             self.武器融合属性A.addItem(j.固定属性描述)
         self.武器融合属性A.resize(60, 20)
-        self.武器融合属性A.move(横坐标, 纵坐标)
+        self.武器融合属性A.move(x, y)
 
         self.武器融合属性A1 = MyQComboBox(self)
         self.武器融合属性A1.resize(90 + 75, 20)
-        self.武器融合属性A1.move(横坐标 + 110 - 50 + 5, 纵坐标)
+        self.武器融合属性A1.move(x + 110 - 50 + 5, y)
 
         self.武器融合属性A2 = MyQComboBox(self)
         self.武器融合属性A2.resize(50, 20)
-        self.武器融合属性A2.move(横坐标 + 205 + 20 + 10, 纵坐标)
+        self.武器融合属性A2.move(x + 205 + 20 + 10, y)
         self.武器融合属性A.currentIndexChanged.connect(
             lambda: self.希洛克武器融合词条更新(self.武器融合属性A.currentIndex()))
 
-        纵坐标 = 纵坐标 + 30
+        y += 30
         self.武器融合属性B = MyQComboBox(self)
         for j in 武器属性B列表:
             self.武器融合属性B.addItem(j.固定属性描述)
         self.武器融合属性B.resize(60, 20)
-        self.武器融合属性B.move(横坐标, 纵坐标)
+        self.武器融合属性B.move(x, y)
 
         self.武器融合属性B1 = MyQComboBox(self)
         self.武器融合属性B1.resize(90 + 75, 20)
-        self.武器融合属性B1.move(横坐标 + 110 - 50 + 5, 纵坐标)
+        self.武器融合属性B1.move(x + 110 - 50 + 5, y)
 
         self.武器融合属性B2 = MyQComboBox(self)
         self.武器融合属性B2.resize(50, 20)
-        self.武器融合属性B2.move(横坐标 + 205 + 20 + 10, 纵坐标)
+        self.武器融合属性B2.move(x + 205 + 20 + 10, y)
         self.武器融合属性B.currentIndexChanged.connect(
             lambda: self.希洛克武器融合词条更新(self.武器融合属性B.currentIndex(), 1))
+
+        y += 30
+
+        tips = QLabel("提示:当选择无时,将按穿戴装备的设置", self)
+        tips.move(x, y)
+        tips.resize(240, 24)
+        tips.setStyleSheet("QLabel{font-size:12px;color:rgb(211,167,106)}")
 
     def 初始化遴选UI(self):
         横坐标 = 30
@@ -440,7 +470,8 @@ class 换装窗口(Page):
             tem[0].addItems(['自选数值'])
             tem[0].resize(0, 0)
             tem[0].move(横坐标 + 60, 纵坐标 + 25 * i)
-            tem[0].currentIndexChanged.connect(lambda state, index=i: self.黑鸦词条更新(index))
+            tem[0].currentIndexChanged.connect(
+                lambda state, index=i: self.黑鸦词条更新(index))
 
             tem.append(MyQComboBox(self))
             tem[1].resize(60, 20)
@@ -455,7 +486,8 @@ class 换装窗口(Page):
             tem[3].move(横坐标 + 361 + 20 + 10 - 91, 纵坐标 + 25 * i)
             for item in 装备变换属性列表:
                 tem[1].addItem(item.固定属性描述)
-            tem[1].currentIndexChanged.connect(lambda state, index=i: self.黑鸦随机词条更新(index))
+            tem[1].currentIndexChanged.connect(
+                lambda state, index=i: self.黑鸦随机词条更新(index))
 
             self.黑鸦词条.append(tem)
             self.黑鸦词条更新(i)
