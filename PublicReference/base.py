@@ -154,6 +154,7 @@ class 角色属性(属性):
     暴伤 = 0.0  # 冲突属性
     最终伤害 = 0.0
     技能攻击力 = 1.0
+    技能攻击力显示 = 1.0
     持续伤害 = 0.0
     加算冷却缩减 = 0.0
     百分比减防 = 0.0
@@ -313,6 +314,7 @@ class 角色属性(属性):
             return '技能攻击力 +{}%<br>'.format(round(x * 100))
         else:
             self.技能攻击力 *= 1 + self.技能伤害增加增幅 * x if 辟邪玉加成 == 1 else x
+            self.技能攻击力显示 *= int((1 + self.技能伤害增加增幅 * x if 辟邪玉加成 == 1 else x)*1000)/1000
         return ''
 
     def 暴击伤害加成(self, x, 可变=0, 辟邪玉加成=1):
@@ -2814,7 +2816,8 @@ class 角色窗口(窗口):
     def 自选装备更改(self, index=0):
         try:
             self.图片显示[index].setMovie(
-                equ.get_img_by_name(self.自选装备list[index][self.自选装备[index].currentIndex()]))
+                equ.get_img_by_name(
+                    self.自选装备list[index][self.自选装备[index].currentIndex()]))
         except:
             pass
 
@@ -4585,7 +4588,7 @@ class 角色窗口(窗口):
             tempstr.append('白字:{}%'.format(round(属性.附加伤害 * 100, 1)))  #2
             tempstr.append('属白:{}%'.format(round(属性.属性附加 * 100, 1)))  #3
             tempstr.append('终伤:{}%'.format(round(属性.最终伤害 * 100, 1)))  #4
-            tempstr.append('技攻:{}%'.format(round(属性.技能攻击力 * 100 - 100, 1)))  #5
+            tempstr.append('技攻:{}%'.format(round(属性.技能攻击力显示 * 100 - 100, 1)))  #5
             tempstr.append('三攻:{}%'.format(round(属性.百分比三攻 * 100, 1)))  #6
             tempstr.append('力智:{}%'.format(round(属性.百分比力智 * 100, 1)))  #7
             tempstr.append('持续:{}%'.format(round(属性.持续伤害 * 100, 1)))  #8
@@ -4606,7 +4609,7 @@ class 角色窗口(窗口):
             tempstr.append('攻击时,附加{}%的属性伤害'.format(round(属性.属性附加 * 100,
                                                          1)))  #3
             tempstr.append('最终伤害 +{}%'.format(round(属性.最终伤害 * 100, 1)))  #4
-            tempstr.append('技能攻击力 +{}%'.format(round(属性.技能攻击力 * 100 - 100,
+            tempstr.append('技能攻击力 +{}%'.format(round(属性.技能攻击力显示 * 100 - 100,
                                                      1)))  #5
             tempstr.append('物理、魔法、独立攻击力 +{}%'.format(round(属性.百分比三攻 * 100,
                                                            1)))  #6
