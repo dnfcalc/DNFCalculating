@@ -1,5 +1,26 @@
 ## Newest
 
+### 2021-09-24
+
+#### NewFeatures
+* 增加奶系登记面板修正 ([6772fa](https://gitee.com/i_melon/DNFCalculating/commit/6772fac26d1a435bc6cf311a439fa369306abff5))
+* 奶系择优算法优化 ([889746](https://gitee.com/i_melon/DNFCalculating/commit/8897463527cb66a8f8ea843c284342e96663f365))
+* 奶系换装新增重置装备和默认选项 ([397115](https://gitee.com/i_melon/DNFCalculating/commit/397115c6dd7fab112e9445cbb258e411dc3f553f))
+* 奶系登记设置支持默认选项 ([87ce6b](https://gitee.com/i_melon/DNFCalculating/commit/87ce6b1ac97f95ab07b87a008800206d3ca8bc80))
+* 归元·气功师·男：添加冲云念气场护石 ([11e7ff](https://gitee.com/i_melon/DNFCalculating/commit/11e7ffbf4633b15a81c9b69eea51565d2942b6d9))
+* 苍暮·源能专家：添加[终焉:超世界崩坏]多段次数选择 ([9abbe2](https://gitee.com/i_melon/DNFCalculating/commit/9abbe22f33644bb250c36418de4565c7bb7523db))
+* 详情界面词条名称新增提示,鼠标移动到对应词条显示游戏内词条名称 ([fa31a6](https://gitee.com/i_melon/DNFCalculating/commit/fa31a6d0048ea7d29072c32c5fd62c5ef53df891))
+
+#### BugFixes
+* 修复奶系自选页面重置无效的bug ([88bcb0](https://gitee.com/i_melon/DNFCalculating/commit/88bcb054278937001d5d5e34d444335a9f10287c))
+* 修复改造限制不生效的问题 ([54cca7](https://gitee.com/i_melon/DNFCalculating/commit/54cca7befac113104f01b04fa30bd70091c9b6bd))
+* 修复输出系自选面板显示问题 ([3ec71d](https://gitee.com/i_melon/DNFCalculating/commit/3ec71da38113fd359de162e1c08aaa148e28132c))
+* 修复输出系自选面板显示问题 ([d1a898](https://gitee.com/i_melon/DNFCalculating/commit/d1a8981a514efc418468dce6e4766af5a65f794a))
+* 修正自选在锁定部位情况切换下可能会闪退的情况 ([599564](https://gitee.com/i_melon/DNFCalculating/commit/59956444615c073ddacfe977f8652c28e5f275a5))
+* 同步游戏内详情界面技能攻击力词条算法 ([9735f6](https://gitee.com/i_melon/DNFCalculating/commit/9735f68989cf944a544e156d8810b8eecc5d32cc))
+* 归元·柔道家·女：修正末日摇篮数据错误 ([842e5f](https://gitee.com/i_melon/DNFCalculating/commit/842e5f882db66c388e8ac299f3f3a2c85b470765))
+* 隐夜·刺客：修正一叶障目对死亡风暴加成未能享受技能攻击力辟邪玉加成的情况 ([ac270e](https://gitee.com/i_melon/DNFCalculating/commit/ac270efda806eeee0256942b5e5b29b26583c17a))
+
 ### 2021-09-17
 
 #### BugFixes
@@ -67,6 +88,7 @@
 - 神启·蓝拳圣使：修复极速飓风拳护石 CD 问题 fix:#I44H6M ([e905f0](https://gitee.com/i_melon/DNFCalculating/commit/e905f03320cd710538f8708964d70d7723bff2a2))
 - 重霄·漫游枪手·男：修复致命回射 CD 问题 ([dd1fa5](https://gitee.com/i_melon/DNFCalculating/commit/dd1fa5b0420dbf3114d2b439c780b1808e4f7a59))
 - 隐夜·死灵术士：修正杀戮乱舞数据错误 ([1c68f7](https://gitee.com/i_melon/DNFCalculating/commit/1c68f7ce17fa7641b2ac855646c7ec0e506d70d2))
+
 
 
 ## History
