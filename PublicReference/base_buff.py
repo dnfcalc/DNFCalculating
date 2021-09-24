@@ -2950,7 +2950,7 @@ class 角色窗口(窗口):
         黑鸦词条 = store.clone("/buffer/data/register/black_purgatory",
                            [[0] * 4] * 4)
         武器融合选项 = store.clone("/buffer/data/register/weapon_fusion", [0] * 4)
-        站街面板 = store.get("/buffer/data/register/display_power",-1)
+        站街面板 = store.get("/buffer/data/register/display_power")
 
         for i in range(len(装备)):
             if 装备[i] == '无':
@@ -2970,7 +2970,8 @@ class 角色窗口(窗口):
             希洛克选择状态 = self.希洛克选择状态
         if 奥兹玛选择状态 is None or len(奥兹玛选择状态) == 0 or sum(奥兹玛选择状态) == 0:
             奥兹玛选择状态 = self.奥兹玛选择状态
-
+        self.登记希洛克 = 希洛克选择状态
+        self.登记奥兹玛 = 奥兹玛选择状态
         if 武器融合选项[0] == 0:
             武器融合选项[0] = self.武器融合属性A.currentIndex()
             武器融合选项[1] = self.武器融合属性A1.currentIndex()
@@ -3077,15 +3078,16 @@ class 角色窗口(窗口):
         属性.希洛克计算(希洛克选择状态)
         属性.奥兹玛计算(奥兹玛选择状态)
         self.基础属性(属性)
-        站街属性 = deepcopy(属性)       
 
         属性.穿戴装备(装备)
-        站街属性.穿戴装备(装备)
 
-        站街属性.排行系数 = 1
-        站街属性.装备属性计算()
-        
-        self.站街面板修正(站街属性,站街面板,2,False)
+        if 站街面板 is not None:
+            站街属性 = deepcopy(属性)       
+
+            站街属性.排行系数 = 1
+            站街属性.装备属性计算()
+            
+            self.站街面板修正(站街属性,站街面板,2,False)
         #  恢复
         return 属性
 
@@ -4062,7 +4064,7 @@ class 角色窗口(窗口):
                 32
             ]
             y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
-            图片列表2 = self.获取装备图片(登记装备)
+            图片列表2 = self.获取装备图片(登记装备,self.登记希洛克,self.登记奥兹玛)
             for i in range(12):
                 x = 初始x + x坐标[i] + 600
                 y = 初始y + y坐标[i] - pox_y2 + 150

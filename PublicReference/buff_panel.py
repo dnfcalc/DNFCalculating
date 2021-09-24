@@ -151,8 +151,7 @@ class 换装窗口(Page):
             self.武器融合属性B2.currentIndex(),
         ])
 
-        store.set('/buffer/data/register/display_power',
-                  to_int(self.站街面板输入.text(), 0))
+        store.set('/buffer/data/register/display_power',to_int(self.站街面板输入.text()))
 
         store.emit("/buffer/event/register_changed")
         self.closeWindow()

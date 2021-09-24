@@ -1852,8 +1852,8 @@ class 窗口(QWidget):
         if 输出数据 == 1 and len(筛选) == 0:
             setfile = open('./数据记录/{}-{}.csv'.format(
                 self.角色属性A.实际名称, time.strftime('%m-%d-%H-%M-%S')),
-                           'w',
-                           encoding='gbk')
+                'w',
+                encoding='gbk')
             for i in range(len(显示序号)):
                 temp = ''
                 for j in range(13):
@@ -1954,9 +1954,11 @@ class 窗口(QWidget):
         self.排行窗口列表.append(排行显示)
         排行显示.show()
 
-    def 获取装备图片(self, 装备列表):
-        希洛克选择 = self.希洛克选择状态
-        奥兹玛选择 = self.奥兹玛选择状态
+    def 获取装备图片(self, 装备列表, 希洛克选择=None, 奥兹玛选择=None):
+        if 希洛克选择 is None:
+            希洛克选择 = self.希洛克选择状态
+        if 奥兹玛选择 is None:
+            奥兹玛选择 = self.奥兹玛选择状态
         try:
             希洛克武器标记 = 2000 if self.希洛克武器词条[0].currentIndex() > 0 else 0
         except:
@@ -2092,7 +2094,7 @@ class 窗口(QWidget):
                                     index).品质 != '神话' and equ.get_equ_by_id(
                                         index).所属套装 not in [
                                             '精灵使的权能', '大自然的呼吸', '能量主宰'
-                                        ]:
+                            ]:
                                 sign += 1
                     if sign == 11:
                         count += len(self.有效武器列表)
