@@ -594,7 +594,7 @@ class 窗口(QWidget):
         self.装备打造选项 = []
         counter = 0
         for i in 部位列表:
-            x = QLabel(i, self.main_frame1)
+            x = QLabel(trans(i), self.main_frame1)
             x.resize(50, 20)
             x.setAlignment(Qt.AlignCenter)
             x.setStyleSheet(标签样式)
@@ -701,7 +701,7 @@ class 窗口(QWidget):
         self.宠物.currentIndexChanged.connect(
             lambda state, index='宠物': self.描述更新(index, self.宠物))
 
-        x = QLabel(trans('称号&宠物选择：'), self.main_frame1)
+        x = QLabel(trans(trans('称号&宠物选择：')), self.main_frame1)
         x.resize(130, 20)
         x.move(360, 400)
         x.setAlignment(Qt.AlignCenter)
@@ -1214,11 +1214,11 @@ class 窗口(QWidget):
 
                 if x == 1:
                     self.计算模式选择.setItemText(0,
-                                            '计算模式：极速模式  组合：' + self.组合数量计算(0))
+                                            trans('计算模式：极速模式')+'  '+trans('组合：')+ self.组合数量计算(0))
                     self.计算模式选择.setItemText(1,
-                                            '计算模式：套装模式  组合：' + self.组合数量计算(1))
+                                            trans('计算模式：套装模式')+'  '+trans('组合：') + self.组合数量计算(1))
                     self.计算模式选择.setItemText(2,
-                                            '计算模式：单件模式  组合：' + self.组合数量计算(2))
+                                            trans('计算模式：单件模式')+'  '+trans('组合：') + self.组合数量计算(2))
             except Exception as error:
                 pass
 
