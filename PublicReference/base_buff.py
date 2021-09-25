@@ -732,6 +732,7 @@ class 角色属性(属性):
                     装备属性数值 = str(黑鸦词条[i][2]).replace("%", '')
                     装备属性.当前值 = int(装备属性数值 if 装备属性数值 != '' else 0)
                     装备属性.变换属性(self)
+            
 
     def 数据计算(self):
         总数据 = []
@@ -925,12 +926,6 @@ class 角色属性(属性):
             黑鸦武器 = 武器变换属性列表[黑鸦武器]
             黑鸦武器.当前值 = int(黑鸦武器.最大值)
             黑鸦武器.变换属性(self)
-        else:
-            self.技能等级加成('所有', 50, 50, 2)
-            self.技能等级加成('所有', 85, 85, 2)
-            self.技能等级加成('所有', 100, 100, 2)
-        if self.装备检查('世界树之精灵'):
-            self.技能等级加成('所有', 50, 50, 2)
 
     def 择优提升率计算(self):
         总数据 = []
@@ -1701,8 +1696,9 @@ class 角色窗口(窗口):
         self.技能设置输入[2].addItems(['Lv1-35(主动)Lv+1', 'Lv30-50(主动)Lv+1'])
         self.技能设置输入[3].addItem('Lv30-50(主动)Lv+1')
         
-        for j in [8, 9, 16]:
+        for j in [8,9]:
             self.技能设置输入[j].addItems(i.名称+'Lv+1' for i in self.角色属性A.技能表.values()  if i.所在等级 < 48)
+
         self.技能设置输入[12].addItems(
             ['BUFFLv+1', 'BUFFLv+2', 'BUFFLv+3', 'BUFFLv+4'])
         self.技能设置输入[13].addItems(['Lv1-50(主动)Lv+1', '一觉Lv+1', '一觉Lv+2'])
@@ -1710,6 +1706,8 @@ class 角色窗口(窗口):
             'Lv1-30(所有)Lv+1', 'Lv1-50(所有)Lv+1', 'Lv1-20(所有)Lv+1',
             'Lv20-30(所有)Lv+1', 'Lv1-80(所有)Lv+1'
         ])
+
+        self.技能设置输入[16].addItems(i.名称+'Lv+1' for i in self.角色属性A.技能表.values()  if i.所在等级 <= 85)
 
         self.技能设置输入[17].addItems(['BUFF力智+3%', 'BUFF三攻+3%', 'BUFF力智、三攻+3%'])
         self.技能设置输入[18].addItems(['BUFF力智+3%'])
@@ -4065,7 +4063,26 @@ class 角色窗口(窗口):
             ]
             y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
             图片列表2 = self.获取装备图片(登记装备,self.登记希洛克,self.登记奥兹玛)
-            for i in range(12):
+
+            def compare(i):
+                if 登记装备[i] !=self.排行数据[index][i]:
+                    return False
+                if i == 2 :
+                    if self.角色属性A.黑鸦词条[3][0] != self.角色属性B.黑鸦词条[3][0]:
+                        return False
+                elif i == 7 :
+                    if self.角色属性A.黑鸦词条[1][0] != self.角色属性B.黑鸦词条[1][0]:
+                        return False
+                elif i == 9:
+                    if self.角色属性A.黑鸦词条[2][0] != self.角色属性B.黑鸦词条[2][0]:
+                        return False
+                elif i == 11:
+                    if self.角色属性A.黑鸦词条[0][0] != self.角色属性B.黑鸦词条[0][0]:
+                        return False
+                return True
+
+
+            for i in range(len(登记装备)):
                 x = 初始x + x坐标[i] + 600
                 y = 初始y + y坐标[i] - pox_y2 + 150
                 装备图标 = QLabel(输出窗口)
@@ -4073,7 +4090,8 @@ class 角色窗口(窗口):
                 装备图标.resize(26, 26)
                 装备图标.move(x, y)
                 装备图标.setAlignment(Qt.AlignCenter)
-                if self.排行数据[index][i] == 登记装备[i]:
+                               
+                if compare(i):
                     图标遮罩 = QLabel(输出窗口)
                     图标遮罩.setStyleSheet(
                         "QLabel{background-color:rgba(0,0,0,0.8)}")
@@ -4086,9 +4104,12 @@ class 角色窗口(窗口):
 
     def 装备描述_BUFF计算(self, property):
         tempstr = []
-        数量 = [0] * 3
-        for i in range(15):
-            数量[i % 3] += self.希洛克选择状态[i]
+        希洛克选择状态 = [0] * 3
+        for i in range(len(self.希洛克选择状态)):
+            希洛克选择状态[i % 3] += self.希洛克选择状态[i]
+        奥兹玛选择状态 = [0] * 5
+        for i in range(len(self.奥兹玛选择状态)):
+            奥兹玛选择状态[i % 5] += self.奥兹玛选择状态[i]
         for i in range(12):
             装备 = equ.get_equ_by_name(property.装备栏[i])
             tempstr.append('<font size="3" face="宋体"><font color="' +
@@ -4212,18 +4233,19 @@ class 角色窗口(窗口):
                                 装备变换属性列表[property.武器变换属性自适应].最大值, 1)
                         if 装备.名称 == '世界树之精灵':
                             tempstr[i] += 'Lv50 技能等级+2<br>'
-                # 武器
-            tempstr[i] += 装备.装备描述_BUFF(property)
+                    # 武器
+                else:
+                    tempstr[i] += 装备.装备描述_BUFF(property)
 
-            if 数量[0] == 1 and i == 2:
+            if 希洛克选择状态[0] == 1 and i == 2:
                 # tempstr[i]+='<br>'
                 tempstr[i] += '<font color="#00A2E8">希洛克融合属性:</font><br>'
                 tempstr[i] += 'Lv30 Buff技能 力量、智力增加量 +3%'
-            elif 数量[1] == 1 and i == 7:
+            elif 希洛克选择状态[1] == 1 and i == 7:
                 # tempstr[i]+='<br>'
                 tempstr[i] += '<font color="#00A2E8">希洛克融合属性:</font><br>'
                 tempstr[i] += 'Lv50主动技能力量、智力增加量 +3%'
-            elif 数量[2] == 1 and i == 9:
+            elif 希洛克选择状态[2] == 1 and i == 9:
                 # tempstr[i]+='<br>'
                 tempstr[i] += '<font color="#00A2E8">希洛克融合属性:</font><br>'
                 tempstr[i] += '[守护恩赐]体力、精神 +80<br>'

@@ -283,7 +283,7 @@ class 换装窗口(Page):
         for i in range(11):
             if self.装备锁定[i].isChecked():
                 continue
-            x = -1
+            x = 0
             for j in equ.get_equ_list():
                 if j.部位 == 部位列表[i]:
                     x += 1
@@ -299,7 +299,7 @@ class 换装窗口(Page):
         序号 = 部位[index]
         if 序号 != -1:
             当前 = equ.get_equ_by_name(self.自选装备[序号].currentText())
-            x = -1
+            x = 0
             for i in equ.get_equ_list():
                 if 当前.部位 == i.部位:
                     x += 1
@@ -309,7 +309,7 @@ class 换装窗口(Page):
             if k != 序号:
                 当前 = equ.get_equ_by_name(self.自选装备[k].currentText())
                 if 当前.品质 == '神话':
-                    x = -1
+                    x = 0
                     for i in equ.get_equ_list():
                         if 当前.部位 == i.部位:
                             x += 1
