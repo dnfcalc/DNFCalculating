@@ -778,7 +778,7 @@ class 窗口(QWidget):
             count = 0
             for i in equ.get_equ_list():
                 if i.品质 == '神话':
-                    描述列表 = [i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述]
+                    描述列表 = trans([i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述])
                     范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
                     for j in range(4):
                         if 描述列表[j] != '无':
@@ -795,7 +795,7 @@ class 窗口(QWidget):
             count = 0
             for i in equ.get_equ_list():
                 if i.所属套装 == '智慧产物':
-                    描述列表 = [i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述]
+                    描述列表 = trans([i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述])
                     范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
                     for j in range(4):
                         if 描述列表[j] != '无':
@@ -812,9 +812,9 @@ class 窗口(QWidget):
             count = 0
             for i in equ.get_equ_list():
                 if i.品质 == '神话':
-                    描述列表 = [
+                    描述列表 = trans([
                         i.属性1描述_BUFF, i.属性2描述_BUFF, i.属性3描述_BUFF, i.属性4描述_BUFF
-                    ]
+                    ])
                     范围列表 = [
                         i.属性1范围_BUFF, i.属性2范围_BUFF, i.属性3范围_BUFF, i.属性4范围_BUFF
                     ]
@@ -1213,12 +1213,18 @@ class 窗口(QWidget):
                 self.装备图片按钮[index].setGraphicsEffect(self.遮罩透明度[index])
 
                 if x == 1:
-                    self.计算模式选择.setItemText(0,
-                                            trans('计算模式：极速模式')+'  '+trans('组合：')+ self.组合数量计算(0))
-                    self.计算模式选择.setItemText(1,
-                                            trans('计算模式：套装模式')+'  '+trans('组合：') + self.组合数量计算(1))
-                    self.计算模式选择.setItemText(2,
-                                            trans('计算模式：单件模式')+'  '+trans('组合：') + self.组合数量计算(2))
+                    self.计算模式选择.setItemText(
+                        0,
+                        trans('计算模式：极速模式') + '  ' + trans('组合：') +
+                        self.组合数量计算(0))
+                    self.计算模式选择.setItemText(
+                        1,
+                        trans('计算模式：套装模式') + '  ' + trans('组合：') +
+                        self.组合数量计算(1))
+                    self.计算模式选择.setItemText(
+                        2,
+                        trans('计算模式：单件模式') + '  ' + trans('组合：') +
+                        self.组合数量计算(2))
             except Exception as error:
                 pass
 
@@ -1852,8 +1858,8 @@ class 窗口(QWidget):
         if 输出数据 == 1 and len(筛选) == 0:
             setfile = open('./数据记录/{}-{}.csv'.format(
                 self.角色属性A.实际名称, time.strftime('%m-%d-%H-%M-%S')),
-                'w',
-                encoding='gbk')
+                           'w',
+                           encoding='gbk')
             for i in range(len(显示序号)):
                 temp = ''
                 for j in range(13):
@@ -2094,7 +2100,7 @@ class 窗口(QWidget):
                                     index).品质 != '神话' and equ.get_equ_by_id(
                                         index).所属套装 not in [
                                             '精灵使的权能', '大自然的呼吸', '能量主宰'
-                            ]:
+                                        ]:
                                 sign += 1
                     if sign == 11:
                         count += len(self.有效武器列表)

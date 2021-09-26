@@ -99,9 +99,19 @@ class 被动技能(技能):
 
 
 符文效果选项 = [
-    '无', trans('攻击')+'+5%,CD+3%', 'CD-4%', trans('攻击')+'+3%', trans('攻击')+'-3%,CD-6%', trans('攻击')+'+3%,CD+2%',
-    'CD-3%', trans('攻击')+'+2%', trans('攻击')+'-2%,CD-4%', trans('攻击')+'+2%,CD+1%', 'CD-2%', trans('攻击')+'+1%',
-    trans('攻击')+'-1%,CD-3%', trans('攻击')+'+6%,CD+4%', 'CD-5%', trans('攻击')+'+4%',trans('攻击')+'-4%,CD-7%'
+    '无',
+    trans('攻击') + '+5%,CD+3%', 'CD-4%',
+    trans('攻击') + '+3%',
+    trans('攻击') + '-3%,CD-6%',
+    trans('攻击') + '+3%,CD+2%', 'CD-3%',
+    trans('攻击') + '+2%',
+    trans('攻击') + '-2%,CD-4%',
+    trans('攻击') + '+2%,CD+1%', 'CD-2%',
+    trans('攻击') + '+1%',
+    trans('攻击') + '-1%,CD-3%',
+    trans('攻击') + '+6%,CD+4%', 'CD-5%',
+    trans('攻击') + '+4%',
+    trans('攻击') + '-4%,CD-7%'
 ]
 
 刀魂之卡赞数据 = [
@@ -1734,7 +1744,7 @@ class 角色窗口(窗口):
         self.装备条件选择[-1].addItems(trans(['角色熟练度：英雄', '角色熟练度：传说']))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         for i in range(0, 7):
-            self.装备条件选择[-1].addItem('技能栏空位：' + str(i))
+            self.装备条件选择[-1].addItem(trans('技能栏空位：') + str(i))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(
             trans([
@@ -2350,7 +2360,7 @@ class 角色窗口(窗口):
         self.列名称 = []
         self.行名称 = []
 
-        名称 = QLabel(表头名称1, self.main_frame3)
+        名称 = QLabel(trans(表头名称1), self.main_frame3)
         名称.setAlignment(Qt.AlignCenter)
         名称.setStyleSheet(标签样式)
         名称.resize(80, 25)
@@ -2359,7 +2369,7 @@ class 角色窗口(窗口):
         m = -1
         for i in 列名称1:
             m += 1
-            名称 = QLabel(i, self.main_frame3)
+            名称 = QLabel(trans(i), self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             名称.setStyleSheet(标签样式)
             if i == "选项":
@@ -2372,7 +2382,7 @@ class 角色窗口(窗口):
         n = -1
         for j in 行名称1.keys():
             n += 1
-            名称 = QLabel(j, self.main_frame3)
+            名称 = QLabel(trans(j), self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             if 行名称1[j] == 1:
                 名称.setStyleSheet(标签样式_2)
@@ -2396,7 +2406,7 @@ class 角色窗口(窗口):
                     if 行1选项[j][0] != -1:
                         templist[n].addItem('无')
                         for s_id in 行1选项[j]:
-                            templist[n].addItem(细节选项列表[s_id].描述)
+                            templist[n].addItem(trans(细节选项列表[s_id].描述))
                     else:
                         templist[n].setDisabled(True)
                 else:
@@ -2413,7 +2423,7 @@ class 角色窗口(窗口):
             else:
                 self.属性设置输入.append(templist)
 
-        名称 = QLabel(表头名称2, self.main_frame3)
+        名称 = QLabel(trans(表头名称2), self.main_frame3)
         名称.setAlignment(Qt.AlignCenter)
         名称.setStyleSheet(标签样式)
         名称.resize(80, 25)
@@ -2422,7 +2432,7 @@ class 角色窗口(窗口):
         m = -1
         for i in 列名称2:
             m += 1
-            名称 = QLabel(i, self.main_frame3)
+            名称 = QLabel(trans(i), self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             名称.setStyleSheet(标签样式)
             if i == "技能":
@@ -2432,14 +2442,14 @@ class 角色窗口(窗口):
             else:
                 名称.resize(文本框宽度, 25)
             名称.move(245 + (len(列名称1) + 1) * 文本框宽度 + m * (文本框宽度 + 5), 文本框间隔)
-            self.列名称.append(i)
+            self.列名称.append(trans(i))
             if i == "选项":
                 m += 1
 
         n = -1
         for j in 行名称2.keys():
             n += 1
-            名称 = QLabel(j, self.main_frame3)
+            名称 = QLabel(trans(j), self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             if 行名称2[j] == 1:
                 名称.setStyleSheet(标签样式_2)
@@ -2447,7 +2457,7 @@ class 角色窗口(窗口):
                 名称.setStyleSheet(标签样式)
             名称.resize(80, 25)
             名称.move(160 + (len(列名称1) + 1) * 文本框宽度, 文本框间隔 + 30 + n * 30)
-            self.行名称.append(j)
+            self.行名称.append(trans(j))
         count = len(self.细节选项输入)
         m = -1
         for i in 列名称2:
@@ -2467,7 +2477,7 @@ class 角色窗口(窗口):
                             lambda state, index=templist[n]: self.细节增伤选项颜色更新(
                                 index))
                         for s_id in 行2选项[j]:
-                            templist[n].addItem(细节选项列表[s_id].描述)
+                            templist[n].addItem(trans(细节选项列表[s_id].描述))
                     else:
                         templist[n].setDisabled(True)
                 elif i == "技能":
@@ -2485,7 +2495,7 @@ class 角色窗口(窗口):
                     else:
                         templist[n].addItem('无')
                         for s_id in 行2技能[j]:
-                            templist[n].addItem(细节选项列表[s_id].描述)
+                            templist[n].addItem(trans(细节选项列表[s_id].描述))
                 else:
                     templist.append(QLineEdit(self.main_frame3))
                     if 行名称2[j] == 1:
@@ -2504,7 +2514,14 @@ class 角色窗口(窗口):
                 self.属性设置输入.append(templist)
 
         self.修正列表名称 = [
-            '力智' + '%', '三攻' + '%', '黄字', '白字', '属白', '暴伤', '终伤', '技攻'
+            trans('力智') + '%',
+            trans('三攻') + '%',
+            trans('黄字'),
+            trans('白字'),
+            trans('属白'),
+            trans('暴伤'),
+            trans('终伤'),
+            trans('技攻')
         ]
 
         距离 = 30
@@ -2526,14 +2543,14 @@ class 角色窗口(窗口):
         count = 0
         self.时装选项 = []
         for i in ['头部', '帽子', '脸部', '胸部', '上衣', '腰带', '下装', '鞋']:
-            名称 = QLabel(i, self.main_frame3)
+            名称 = QLabel(trans(i), self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             名称.setStyleSheet(标签样式)
             名称.resize(50, 25)
             名称.move(520 + count * 55, 570)
             self.时装选项.append(MyQComboBox(self.main_frame3))
             self.时装选项[count].setStyleSheet(下拉框样式_detail)
-            self.时装选项[count].addItems(['高级', '节日', '稀有', '神器'])
+            self.时装选项[count].addItems(trans(['高级', '节日', '稀有', '神器']))
             self.时装选项[count].resize(50, 22)
             self.时装选项[count].move(520 + count * 55, 610)
             self.时装选项[count].currentIndexChanged.connect(
@@ -2543,13 +2560,15 @@ class 角色窗口(窗口):
         self.时装选项.append(MyQComboBox(self.main_frame3))
         self.时装选项[8].setStyleSheet(下拉框样式_detail)
         self.时装选项[8].addItems(
-            ['高级套装' + '[8]', '节日套装' + '[8]', '稀有套装' + '[8]', '神器套装' + '[8]'])
+            trans([
+                '高级套装' + '[8]', '节日套装' + '[8]', '稀有套装' + '[8]', '神器套装' + '[8]'
+            ]))
         self.时装选项[8].resize(100, 22)
         self.时装选项[8].move(990, 570)
         self.时装选项[8].currentIndexChanged.connect(
             lambda state, index=8: self.时装选项更新(index))
 
-        self.计算按钮3 = QPushButton('开始计算', self.main_frame3)
+        self.计算按钮3 = QPushButton(trans('开始计算'), self.main_frame3)
         self.计算按钮3.clicked.connect(lambda state: self.计算())
         self.计算按钮3.move(990, 610)
         self.计算按钮3.resize(110, 30)
@@ -2859,15 +2878,21 @@ class 角色窗口(窗口):
         标签.move(横坐标 + 10, 纵坐标)
         标签.setAlignment(Qt.AlignCenter)
 
-        temp = '<font face="宋体">{}<br><br>'.format(trans('假定基础伤害为100，词条1=50%，词条2=50%：'))
+        temp = '<font face="宋体">{}<br><br>'.format(
+            trans('假定基础伤害为100，词条1=50%，词条2=50%：'))
         temp += trans('5%黄字增幅，佩戴前：200，佩戴后：205<br>')
         temp += trans('暴伤终伤白字属白力智三攻同上，黄字向下取整<br>')
         temp += trans('技攻辟邪玉加成等级技攻(歧路腰类)<br>不加成具体技能技攻(歧路鞋类)<br><br>')
-        temp += trans('3%技攻增幅，佩戴前：100*1.5*1.5=225<br>佩戴后：100*1.515*1.515=229.5225<br><br>')
+        temp += trans(
+            '3%技攻增幅，佩戴前：100*1.5*1.5=225<br>佩戴后：100*1.515*1.515=229.5225<br><br>'
+        )
         # temp += '附加、最终、百分力智增幅：宠物相关词条不享受加成<br>'
         temp += trans('属强增幅：唤醒(13)婚房(8)药剂和技能属强不享受加成<br>')
         temp += trans('进图触发属强单独计算向下取整<br><br>')
-        temp += '<font color="#B99460">{}</font></font>'.format(trans('属白增幅分对应属性，计算器未作区分<br>双属性附加(星之海)需手动计算并在第三页修正<br><br>计算方式仅供参考，请以实际游戏为准！'))
+        temp += '<font color="#B99460">{}</font></font>'.format(
+            trans(
+                '属白增幅分对应属性，计算器未作区分<br>双属性附加(星之海)需手动计算并在第三页修正<br><br>计算方式仅供参考，请以实际游戏为准！'
+            ))
 
         标签.setToolTip(temp)
 
@@ -2959,11 +2984,11 @@ class 角色窗口(窗口):
         self.守门人全属强.setEnabled(False)
         self.守门人全属强.setStyleSheet(复选框样式)
         self.守门人全属强.setToolTip(
-            trans('<font size="3" face="宋体">计算时自动替换细节页的附魔勋章为全属强方案<br>')+
-            trans('自带单属强职业不可使用<br>')+
-            trans('守门人属强：全属强+30*3<br>')+
-            trans('武器：全属强+13（若原附魔为龙珠时不替换）<br>首饰：全属强+28*3(25*3站街修正属强自行-9)<br>')+
-            trans('辅助装备：全属强+12<br>魔法石：全属强+30<br>勋章：全属强+7<br>宠物附魔：三攻+60</font>'))
+            trans('<font size="3" face="宋体">计算时自动替换细节页的附魔勋章为全属强方案<br>') +
+            trans('自带单属强职业不可使用<br>') + trans('守门人属强：全属强+30*3<br>') + trans(
+                '武器：全属强+13（若原附魔为龙珠时不替换）<br>首饰：全属强+28*3(25*3站街修正属强自行-9)<br>') +
+            trans('辅助装备：全属强+12<br>魔法石：全属强+30<br>勋章：全属强+7<br>宠物附魔：三攻+60</font>')
+        )
 
         self.智慧产物升级 = QCheckBox(' 智慧产物升级', self.main_frame6)
         self.智慧产物升级.resize(140, 20)
@@ -3180,8 +3205,9 @@ class 角色窗口(窗口):
         self.护石类型选项[x].clear()
         if self.护石栏[x].currentText() != trans('无'):
             try:
-                self.护石类型选项[x].addItems(trans(self.初始属性.技能栏[self.初始属性.技能序号[self.护石选项[
-                    self.护石栏[x].currentIndex()]]].护石选项))
+                self.护石类型选项[x].addItems(
+                    trans(self.初始属性.技能栏[self.初始属性.技能序号[self.护石选项[
+                        self.护石栏[x].currentIndex()]]].护石选项))
             except:
                 self.护石类型选项[x].addItem(trans('魔界'))
                 self.护石类型选项[x].addItem(trans('圣痕'))
@@ -3262,7 +3288,8 @@ class 角色窗口(窗口):
                     if trans('攻击') in j:
                         属性.技能栏[self.角色属性A.技能序号[self.符文选项[
                             self.符文[i].currentIndex()]]].倍率 *= 1 + int(
-                                j.replace(trans('攻击'), '').replace('%', '')) / 100
+                                j.replace(trans('攻击'), '').replace('%',
+                                                                   '')) / 100
                     if 'CD' in j:
                         属性.技能栏[self.角色属性A.技能序号[self.符文选项[
                             self.符文[i].currentIndex()]]].CD *= 1 + int(
@@ -5620,7 +5647,6 @@ class 角色窗口(窗口):
         for i in range(len(self.复选框列表)):
             if self.复选框列表[i].isChecked():
                 选项设置列表[选项设置序号[self.复选框列表list[i]]].适用效果(属性)
-        
 
         count = 0
         count2 = 0
