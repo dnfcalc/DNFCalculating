@@ -1,1053 +1,21 @@
-from PublicReference.equipment.equ_list import *
-from PublicReference.equipment.称号_buff import *
-from PublicReference.equipment.宠物_buff import *
-from PublicReference.equipment.辟邪玉_buff import *
-from PublicReference.equipment.武器融合_buff import *
-from PublicReference.equipment.黑鸦_buff import *
+from ctypes import *
+
+from PublicReference.buff_panel import *
+from PublicReference.buff_property import *
 from PublicReference.choise.选项设置_buff import *
 from PublicReference.common import *
-from PublicReference.buff_panel import *
+from PublicReference.equipment.equ_list import *
+from PublicReference.equipment.宠物_buff import *
+from PublicReference.equipment.武器融合_buff import *
+from PublicReference.equipment.称号_buff import *
+from PublicReference.equipment.辟邪玉_buff import *
+from PublicReference.equipment.黑鸦_buff import *
 from PublicReference.view.DialogRegister import DefaultDialogRegister
-from ctypes import *
-try:
-    preferred = ctypes.WinDLL(dllPath)
-    logger.info("Preferred included.")
-except Exception as e:
-    logger.error(e)
-
-
-class 技能:
-    名称 = ''
-    备注 = ''
-    所在等级 = 0
-    等级上限 = 0
-    等级 = 0
-    基础等级 = 0
-    是否主动 = 0
-    站街生效 = 0
-    等级溢出 = 0
-
-    是否启用 = 1
-    技能序号 = 0
-    技能表 = {}
-
-    def 等级加成(self, x):
-        if self.等级 != 0:
-            if self.等级 + x > self.等级上限:
-                self.等级 = self.等级上限
-                if self.基础等级 != self.等级上限:
-                    self.等级溢出 = 1
-            else:
-                self.等级 += x
-
-    def 结算统计(self):
-        return [0, 0, 0, 0, 0, 0, 0, 0]
-        # 智力 体力 精神  力量  智力  物攻  魔攻 独立
-
-
-class 被动技能(技能):
-    是否主动 = 0
-    进图加成 = 0
-
-
-class 主动技能(技能):
-    是否主动 = 1
-    适用数值 = 0
-
-
-BUFF影响技能 = ['勇气祝福', '勇气圣歌', '荣誉祝福', '禁忌诅咒', '死命召唤']
-
-
-class 角色属性(属性):
-    职业分类 = 'BUFF'
-    C力智 = 5000
-    C三攻 = 3000
-    系统奶系数 = 0
-    系统奶基数 = 0
-    排行类型 = '物理百分比'
-    称号触发 = False
-
-    排行系数 = 0
-    站街系数 = 0
-
-    百分比体精 = 0.0
-
-    被动进图加成 = 0
-    守护恩赐体精 = 0
-    守护徽章per = 0
-    转职被动智力 = 0
-    BUFF额外增幅率 = 0
-
-    转职被动Lv = 0
-    一觉被动Lv = 0
-
-    BUFFLv = 0
-    BUFF力量per = 1
-    BUFF智力per = 1
-    BUFF物攻per = 1
-    BUFF魔攻per = 1
-    BUFF独立per = 1
-    一觉Lv = 0
-    一觉力智 = 0
-    一觉力智per = 1
-
-    BUFF力量 = 0
-    BUFF智力 = 0
-    BUFF物攻 = 0
-    BUFF魔攻 = 0
-    BUFF独立 = 0
-
-    一觉被动力智 = 0
-    信念光环体精 = 0
-
-    BUFF适用面板 = 0
-    BUFF补正力智 = 0
-    BUFF补正体力 = 0
-    BUFF补正精神 = 0
-
-    一觉序号 = 0
-    二觉序号 = 0
-    三觉序号 = 0
-    双装备模式 = 0
-    切换详情 = '无'
-
-    次数输入 = []
-    # 是否为输出装备描述
-    装备描述 = 0
-
-    希洛克武器词条 = 0
-    自适应最高值 = []
-    武器词条触发 = 0
-    产物升级 = 0
-    技能表 = {}
-
-    def __init__(self):
-        super().__init__()
-        self.次数输入 = []
-        self.自适应最高值 = []
-        self.技能表 = {}
-        self.觉醒择优系数 = 1.0
-        self.buff_type = 0
-        self.buff_rate = 1
-
-    def get_data(self):
-        buff = self.技能表['BUFF']
-        awake = self.技能表['一次觉醒']
-
-        other_power = 0
-        other_attack = 0
-
-        for i in self.技能表.keys():
-            if i not in ['BUFF', '一次觉醒', '三次觉醒', '死命召唤', '勇气圣歌']:
-                skill = self.技能表[i]
-                data = skill.结算统计()
-                other_power += data[3]
-                other_attack += data[5]
-
-        in_int_data = (ctypes.c_int * 12)()
-        in_int_data[0] = self.buff_type
-        in_int_data[1] = int(buff.适用数值)
-        in_int_data[2] = buff.等级
-        in_int_data[3] = int(buff.BUFF力量)
-        in_int_data[4] = int(buff.BUFF物攻)
-        in_int_data[5] = int(awake.适用数值)
-        in_int_data[6] = awake.等级
-        in_int_data[7] = int(awake.一觉力智)
-        in_int_data[8] = int(other_power)
-        in_int_data[9] = int(other_attack)
-        in_int_data[10] = int(self.C力智)
-        in_int_data[11] = int(self.C三攻)
-
-        third_awake = self.技能表['三次觉醒']
-        awake_rate = third_awake.加成倍率()
-        awake_rate = awake_rate + 1 if awake_rate < 1 else awake_rate
-
-        in_double_data = (ctypes.c_double * 8)()
-        in_double_data[0] = self.觉醒择优系数
-        in_double_data[1] = self.buff_rate
-        in_double_data[2] = buff.BUFF力量per
-        in_double_data[3] = buff.BUFF物攻per
-        in_double_data[4] = awake_rate
-        in_double_data[5] = awake.一觉力智per
-        in_double_data[6] = self.系统奶系数
-        in_double_data[7] = self.系统奶基数
-        return in_int_data, in_double_data
-
-    def 穿戴装备(self, 装备, 套装=None):
-        self.装备栏 = 装备
-        self.套装栏 = 套装
-        if 套装 is None or len(套装) == 0:
-            self.套装栏 = equ.get_suits_by_equips(装备)
-        self.武器类型 = equ.get_equ_by_name(self.装备栏[11]).类型
-
-    def 力智固定加成(self, x=0, y=0):
-        if self.装备描述 == 1:
-            return '力量、智力 +{}<br>'.format(x)
-        else:
-            self.力量 += x
-            self.智力 += x
-        return ''
-
-    def 体精固定加成(self, x=0, y=0):
-        if self.装备描述 == 1:
-            return '体力、精神 +{}<br>'.format(x)
-        else:
-            self.体力 += x
-            self.精神 += x
-        return ''
-
-    def BUFF增加(self,
-               BUFFLv=0,
-               BUFF力量=0,
-               BUFF智力=0,
-               BUFF力量per=1,
-               BUFF智力per=1,
-               BUFF物攻=0,
-               BUFF魔攻=0,
-               BUFF独立=0,
-               BUFF物攻per=1,
-               BUFF魔攻per=1,
-               BUFF独立per=1):
-        if self.装备描述 == 1:
-            tem = ''
-            if BUFFLv > 0:
-                tem += '[{}]技能Lv +{}<br>'.format(self.技能表['BUFF'].名称,int(BUFFLv))
-
-            if BUFF力量 > 0 and BUFF智力 > 0:
-                tem += 'Lv30 Buff技能力量、智力增加量 +{}<br>'.format(int(BUFF力量))
-            elif BUFF力量 > 0:
-                tem += 'Lv30 Buff技能力量增加量 +{}<br>'.format(int(BUFF力量))
-            elif BUFF智力 > 0:
-                tem += 'Lv30 Buff技能智力增加量 +{}<br>'.format(int(BUFF智力))
-
-            if BUFF力量per > 1 and BUFF智力per > 1:
-                tem += 'Lv30 Buff技能力智增加量 +{}%<br>'.format(
-                    round((BUFF力量per - 1) * 100, 0))
-            elif BUFF力量per > 1:
-                tem += 'Lv30 Buff技能力量增加量 +{}%<br>'.format(
-                    round((BUFF力量per - 1) * 100, 0))
-            elif BUFF智力per > 1:
-                tem += 'Lv30 Buff技能智力增加量 +{}%<br>'.format(
-                    round((BUFF智力per - 1) * 100, 0))
-
-            if BUFF物攻 > 0 and BUFF魔攻 > 0 and BUFF独立 > 0:
-                tem += 'Lv30 Buff技能三攻攻击力增加量 +{}<br>'.format(int(BUFF物攻))
-            elif BUFF物攻 > 0:
-                tem += 'Lv30 Buff技能物理攻击力增加量 +{}<br>'.format(int(BUFF物攻))
-            elif BUFF魔攻 > 0:
-                tem += 'Lv30 Buff技能魔法攻击力增加量 +{}<br>'.format(int(BUFF魔攻))
-            elif BUFF独立 > 0:
-                tem += 'Lv30 Buff技能独立攻击力增加量 +{}<br>'.format(int(BUFF独立))
-
-            if BUFF物攻per > 1 and BUFF魔攻per > 1 and BUFF独立per > 1:
-                tem += 'Lv30 Buff技能三攻攻击力增加量 +{}%<br>'.format(
-                    round((BUFF物攻per - 1) * 100, 0))
-            elif BUFF物攻per > 1:
-                tem += 'Lv30 Buff技能物理攻击力增加量 +{}%<br>'.format(
-                    round((BUFF物攻per - 1) * 100, 0))
-            elif BUFF魔攻per > 1:
-                tem += 'Lv30 Buff技能魔法攻击力增加量 +{}%<br>'.format(
-                    round((BUFF魔攻per - 1) * 100, 0))
-            elif BUFF独立per > 1:
-                tem += 'Lv30 Buff技能独立攻击力增加量 +{}%<br>'.format(
-                    round((BUFF独立per - 1) * 100, 0))
-            return tem
-        else:
-            self.BUFFLv += BUFFLv
-            self.BUFF力量 += BUFF力量
-            self.BUFF智力 += BUFF智力
-            self.BUFF物攻 += BUFF物攻
-            self.BUFF魔攻 += BUFF魔攻
-            self.BUFF独立 += BUFF独立
-            self.BUFF力量per *= BUFF力量per
-            self.BUFF智力per *= BUFF智力per
-            self.BUFF物攻per *= BUFF物攻per
-            self.BUFF魔攻per *= BUFF魔攻per
-            self.BUFF独立per *= BUFF独立per
-        return ''
-
-    def 被动增加(self,
-             守护恩赐Lv=0,
-             守护恩赐体精=0,
-             转职被动Lv=0,
-             转职被动智力=0,
-             信念光环Lv=0,
-             信念光环体精=0,
-             一觉被动Lv=0,
-             一觉被动力智=0):
-        if self.装备描述 == 1:
-
-            tem = ''
-            if self.角色 == '圣职者(男)':
-                 if 守护恩赐Lv > 0:       
-                    tem += '[守护恩赐]技能Lv +{}<br>'.format(int(守护恩赐Lv))
-                 if 守护恩赐体精 > 0:
-                    tem += '[守护恩赐]体力、精神 +{}<br>'.format(int(守护恩赐体精))
-                 if 信念光环Lv > 0:
-                    tem += '[信念光环]技能Lv +{}'.format(int(信念光环Lv))
-                 if 信念光环体精 > 0 :
-                    tem += '[信念光环]体力、精神增加量 +{}<br>'.format(int(信念光环体精))
-            else:
-                转职被动 = {'圣职者(女)':'启示:圣歌','魔法师(女)':'人偶操纵者'}[self.角色]
-                觉醒被动 = {'圣职者(女)':'虔诚信念','魔法师(女)':'少女的爱'}[self.角色]
-                if 转职被动Lv > 0 :
-                    tem += '[{}]技能Lv +{}<br>'.format(转职被动,int(转职被动Lv))
-                if 转职被动智力 > 0 :
-                    tem += '[{}]智力 +{}<br>'.format(转职被动,int(转职被动智力))
-                if 一觉被动Lv > 0:
-                    tem += '[{}]技能Lv +{}<br>'.format(觉醒被动,int(一觉被动Lv))
-                if 一觉被动力智 > 0 :
-                    tem += '[{}]力量、智力增加量 +{}<br>'.format(觉醒被动,int(一觉被动力智))
-            return tem
-        else:
-            self.转职被动Lv += 转职被动Lv
-            self.守护恩赐体精 += 守护恩赐体精
-            self.转职被动智力 += 转职被动智力
-            self.一觉被动Lv += 一觉被动Lv
-            self.信念光环体精 += 信念光环体精
-            self.一觉被动力智 += 一觉被动力智
-        return ''
-
-    def 觉醒增加(self, 一觉Lv=0, 一觉力智=0, 一觉力智per=1):
-        if self.装备描述 == 1:
-            tem = ''
-            if 一觉Lv > 0:
-                if self.角色 == '圣职者(女)':
-                    tem += '[圣光天启]技能Lv +{}<br>'.format(int(一觉Lv))
-                elif self.角色 == '圣职者(男)':
-                    tem += '[天启之珠]技能Lv +{}<br>'.format(int(一觉Lv))
-                elif self.角色 == '魔法师(女)':
-                    tem += '[开幕！人偶剧场]技能Lv +{}<br>'.format(int(一觉Lv))
-            elif 一觉力智 > 0:
-                tem += 'Lv50 主动技能力量、智力增加量 +{}<br>'.format(int(一觉力智))
-            elif 一觉力智per > 1:
-                tem += 'Lv50 主动技能力量、智力增加量 +{}%<br>'.format(
-                    round((一觉力智per - 1) * 100, 0))
-            return tem
-        else:
-            self.一觉Lv += 一觉Lv
-            self.一觉力智 += 一觉力智
-            self.一觉力智per *= 一觉力智per
-        return ''
-
-    def 系数数值站街(self):
-        pass
-
-    def 系数数值进图(self):
-        pass
-
-    def 防具精通计算(self, i):
-        temp = equ.get_equ_by_name(self.装备栏[i])
-        if temp.所属套装 != '智慧产物':
-            return 精通体力(temp.等级, temp.品质, self.强化等级[i], 部位列表[i])
-        else:
-            return 精通体力(temp.等级, temp.品质, self.改造等级[i], 部位列表[i])
-
-    def 装备基础(self):
-        for i in range(5):
-            # 精通
-            temp = equ.get_equ_by_name(self.装备栏[i])
-            x = self.防具精通计算(i)
-            if '智力' in self.防具精通属性:
-                self.智力 += x * 2
-            if '体力' in self.防具精通属性:
-                self.体力 += x
-            if '精神' in self.防具精通属性:
-                self.精神 += x * 2
-            # 装备属性
-            self.智力 += temp.智力['板甲']
-            self.体力 += temp.体力['板甲']
-            self.精神 += temp.精神['板甲']
-
-        for i in [9, 10]:
-            temp = equ.get_equ_by_name(self.装备栏[i])
-            if temp.所属套装 != '智慧产物':
-                x = 左右计算(temp.等级, temp.品质, self.强化等级[i])
-                self.智力 += x
-                self.体力 += x
-                self.精神 += x
-        for i in range(12):
-            temp = equ.get_equ_by_name(self.装备栏[i])
-            if self.是否增幅[i] and temp.所属套装 != '智慧产物':
-                x = 增幅计算(temp.等级, temp.品质, self.强化等级[i], self.增幅版本)
-                if '智力' in self.类型:
-                    self.智力 += x
-                if '体力' in self.类型:
-                    self.体力 += x
-                if '精神' in self.类型:
-                    self.精神 += x
-        for i in [5, 6, 7, 8, 9, 10]:
-            temp = equ.get_equ_by_name(self.装备栏[i])
-            self.智力 += temp.智力
-            self.体力 += temp.体力
-            self.精神 += temp.精神
-
-        temp = equ.get_equ_by_name(self.装备栏[11])
-        if temp.所属套装 != '智慧产物':
-            四维 = 锻造四维(temp.等级, temp.品质, self.武器锻造等级)
-            self.智力 += temp.智力 + 四维
-            self.体力 += temp.体力 + 四维
-            self.精神 += temp.精神 + 四维
-
-    def 单技能等级加成(self, 名称, lv):
-        if self.装备描述 == 1:
-            return "{} Lv +{}<br>".format(名称, lv)
-        else:
-            for i in self.技能表.keys():
-                if i == 名称:
-                    self.技能表[i].等级加成(lv)
-        return ''
-
-    def 等级溢出判断(self, 装备, 套装):
-        self.穿戴装备(装备, 套装)
-        self.装备属性计算()
-        temp = []
-        for skill in self.技能表.values():
-            if skill.等级溢出 == 1:
-                temp.append(skill.名称)
-        return temp
-
-    def 技能等级加成(self, 加成类型, min, max, lv, 可变=0):
-        lv = int(lv)
-        if self.装备描述 == 1:
-            if 加成类型 == "所有":
-                if min == max:
-                    return "Lv{} 技能等级+{}<br>".format(min, lv)
-                else:
-                    return "Lv{}-{} 技能等级+{}<br>".format(min, max, lv)
-            else:
-                if min == max:
-                    return "Lv{} 主动技能等级+{}<br>".format(min, lv)
-                else:
-                    return "Lv{}-{} 主动技能等级+{}<br>".format(min, max, lv)
-        else:
-            for skill in self.技能表.values():
-                if skill.所在等级 >= min and skill.所在等级 <= max:
-                    if 加成类型 == '所有':
-                        skill.等级加成(lv)
-                    else:
-                        if skill.是否主动 == 1:
-                            skill.等级加成(lv)
-            # if 可变 > 0:
-            #     self.变换词条[可变-1] = [6,2,14 + (2 if 可变 > 1 else 4), 14 + (9 if 可变 > 1 else 17)]
-
-        return ''
-
-    def 提升率计算(self, 总数据, x=0):
-
-        力量合计 = 0
-        智力合计 = 0
-        物攻合计 = 0
-        魔攻合计 = 0
-        独立合计 = 0
-
-        for i in 总数据:
-            力量合计 += i[3]
-            智力合计 += i[4]
-            物攻合计 += i[5]
-            魔攻合计 += i[6]
-            独立合计 += i[7]
-
-        x1 = (
-            (self.C力智 +
-             (self.C力智 - 950) * self.系统奶系数 + self.系统奶基数) / 250 + 1) * self.C三攻
-
-        if self.排行类型 == '物理百分比':
-            a = 力量合计
-            b = 物攻合计
-        elif self.排行类型 == '魔法百分比':
-            a = 智力合计
-            b = 魔攻合计
-        elif self.排行类型 == '物理固伤':
-            a = 力量合计
-            b = 独立合计
-        elif self.排行类型 == '魔法固伤':
-            a = 智力合计
-            b = 独立合计
-
-        x2 = ((self.C力智 +
-               (self.C力智 - 950) * self.系统奶系数 + self.系统奶基数 + a) / 250 +
-              1) * (self.C三攻 + b)
-        return [x2 / x1 * 100, int(self.站街系数), 力量合计, 智力合计, 物攻合计, 魔攻合计, 独立合计][x]
-        
-    def 适用数值计算(self):
-        self.专属词条计算()
-        for skill in self.技能表.values():
-            if skill.是否启用:
-                结算 = skill.结算统计()
-                self.智力 += 结算[0]
-                self.体力 += 结算[1]
-                self.精神 += 结算[2]
-
-        self.进图智力 += self.智力
-        self.进图体力 += self.体力
-        self.进图精神 += self.精神
-
-        self.进图体力 *= 1 + self.百分比体精
-        self.进图精神 *= 1 + self.百分比体精
-
-        进图 = 0
-        BUFF补正 = 0
-        if self.类型 == '智力':
-            进图 = self.进图智力
-            BUFF补正 = self.BUFF补正力智
-        elif self.类型 == '体力':
-            进图 = self.进图体力
-            BUFF补正 = self.BUFF补正体力
-        elif self.类型 == '精神':
-            进图 = self.进图精神
-            BUFF补正 = self.BUFF补正精神
-        self.技能表['一次觉醒'].适用数值 = 进图
-        self.技能表['BUFF'].适用数值 = 进图 + BUFF补正
-        return 进图
-    # 返回可能的组合列表
-    def 装备替换(self, 属性):
-        套装栏 = []
-        for i in 属性.套装栏:
-            套装栏.append(i.split('[')[0])
-        if len(套装栏) < 7 or self.排行系数 == 1:
-            return [deepcopy(属性)]
-
-        匹配1 = [防具套装, 上链左套装, 上链左套装, 镯下右套装, 镯下右套装, 环鞋指套装, 环鞋指套装]
-        匹配0 = [防具套装, 上链左套装, 防具套装, 镯下右套装, 防具套装, 环鞋指套装, 防具套装]
-        匹配 = [防具套装, 防具套装, 防具套装, 首饰套装, 首饰套装, 特殊套装, 特殊套装]
-
-        count = []
-        count2 = 0
-
-        for i in range(7):
-            # 3332散搭
-            if 套装栏[i] in 匹配1[i]:
-                count.append(1)
-            elif 套装栏[i] in 匹配0[i]:
-                count.append(0)
-            else:
-                count.append(-9)
-            # 3233双防具
-            if 套装栏[i] in 匹配[i]:
-                count2 += 1
-
-        sumcount = sum(count)
-
-        if sumcount == 7:
-            x1 = deepcopy(属性)
-            x2 = deepcopy(属性)
-            x3 = deepcopy(属性)
-            x4 = deepcopy(属性)
-            num = 0
-            index = [6, 5, 7]
-            for i in [x2, x3, x4]:
-                i.装备栏[num * 2] = equ.get_equ_by_index(
-                    equ.get_equ_by_name(i.装备栏[1]).所属套装, '史诗',
-                    equ.get_equ_by_name(i.装备栏[num * 2]).部位).名称
-                i.套装栏[2 * num + 2] = i.套装栏[2 * num + 2].replace(
-                    equ.get_equ_by_name(i.装备栏[index[num]]).所属套装,
-                    equ.get_equ_by_name(i.装备栏[1]).所属套装)
-                i.切换详情 = equ.get_equ_by_name(i.装备栏[num * 2]).部位 + ':' + x1.装备栏[
-                    num * 2] + ' → ' + i.装备栏[num * 2]
-                num += 1
-            return [x1, x2, x3, x4]
-        elif sumcount == 6:
-            index = count.index(0)
-            部位 = {2: 6, 4: 5, 6: 7}
-            x1 = deepcopy(属性)
-            x2 = deepcopy(属性)
-            x2.装备栏[index - 2] = equ.get_equ_by_index(
-                equ.get_equ_by_name(x2.装备栏[部位[index]]).所属套装, '史诗',
-                equ.get_equ_by_name(x2.装备栏[index - 2]).部位).名称
-            x2.套装栏[index] = x2.套装栏[index].replace(
-                equ.get_equ_by_name(x2.装备栏[1]).所属套装,
-                equ.get_equ_by_name(x2.装备栏[部位[index]]).所属套装)
-            x2.切换详情 = equ.get_equ_by_name(x2.装备栏[index - 2]).部位 + ':' + x1.装备栏[
-                index - 2] + ' → ' + x2.装备栏[index - 2]
-            return [x1, x2]
-        elif count2 == 7 and 套装栏[1] != 套装栏[2]:
-            x1 = deepcopy(属性)
-            x2 = deepcopy(属性)
-            x3 = deepcopy(属性)
-            x4 = deepcopy(属性)
-            x5 = deepcopy(属性)
-            两件套名称 = 属性.套装栏[2].split('[')[0]
-            三件套名称 = 属性.套装栏[1].split('[')[0]
-            x2.套装栏[1] = x2.套装栏[1].replace(三件套名称, 两件套名称)
-            x3.套装栏[1] = x3.套装栏[1].replace(三件套名称, 两件套名称)
-            x4.套装栏[1] = x4.套装栏[1].replace(三件套名称, 两件套名称)
-            x5.套装栏[2] = x5.套装栏[2].replace(两件套名称 + '[2]', 三件套名称 + '[5]')
-            可更换部位 = []
-            不可更换部位 = []
-            for i in range(5):
-                if equ.get_equ_by_name(属性.装备栏[i]).所属套装 == 三件套名称:
-                    可更换部位.append(i)
-                else:
-                    不可更换部位.append(i)
-            x2.装备栏[可更换部位[0]] = equ.get_equ_by_index(两件套名称, '史诗',
-                                                    部位列表[可更换部位[0]]).名称
-            x3.装备栏[可更换部位[1]] = equ.get_equ_by_index(两件套名称, '史诗',
-                                                    部位列表[可更换部位[1]]).名称
-            x4.装备栏[可更换部位[2]] = equ.get_equ_by_index(两件套名称, '史诗',
-                                                    部位列表[可更换部位[2]]).名称
-            x5.装备栏[不可更换部位[0]] = equ.get_equ_by_index(三件套名称, '史诗',
-                                                     部位列表[不可更换部位[0]]).名称
-            x5.装备栏[不可更换部位[1]] = equ.get_equ_by_index(三件套名称, '史诗',
-                                                     部位列表[不可更换部位[1]]).名称
-
-            x2.切换详情 = 部位列表[可更换部位[0]] + ':' + 属性.装备栏[可更换部位[0]] + ' → ' + x2.装备栏[
-                可更换部位[0]]
-            x3.切换详情 = 部位列表[可更换部位[1]] + ':' + 属性.装备栏[可更换部位[1]] + ' → ' + x3.装备栏[
-                可更换部位[1]]
-            x4.切换详情 = 部位列表[可更换部位[2]] + ':' + 属性.装备栏[可更换部位[2]] + ' → ' + x4.装备栏[
-                可更换部位[2]]
-            x5.切换详情 = 属性.套装栏[2] + ' → ' + x5.套装栏[2]
-            return [x1, x2, x3, x4, x5]
-        else:
-            return [deepcopy(属性)]
-
-    def 希洛克计算(self, 希洛克选择状态):
-        数量 = [0] * 3
-        for i in range(15):
-            数量[i % 3] += 希洛克选择状态[i]
-
-        # 下装属性1
-        if 数量[0] == 1:
-            self.BUFF力量per *= 1.03
-            self.BUFF智力per *= 1.03
-
-        # 戒指属性1
-        if 数量[1] == 1:
-            self.一觉力智per *= 1.03
-
-        # 辅助装备属性1
-        if 数量[2] == 1:
-            self.守护恩赐体精 += 80
-            self.转职被动智力 += 80
-
-        i = 0  # 奈克斯属性2
-        if (希洛克选择状态[i * 3 + 0] + 希洛克选择状态[i * 3 + 1]) == 2:
-            self.一觉力智 += 40
-        if (希洛克选择状态[i * 3 + 1] + 希洛克选择状态[i * 3 + 2]) == 2:
-            self.被动进图加成 += 80
-            # 属性.守护恩赐体精 += 80
-            # 属性.转职被动智力 += 80  # 戒指
-        if (希洛克选择状态[i * 3 + 2] + 希洛克选择状态[i * 3 + 0]) == 2:
-            self.BUFF物攻per *= 1.02
-            self.BUFF魔攻per *= 1.02
-            self.BUFF独立per *= 1.02  # 辅助装备
-
-        i = 1  # 暗杀者属性2
-        if (希洛克选择状态[i * 3 + 0] + 希洛克选择状态[i * 3 + 1]) == 2:
-            self.一觉力智 += 28
-        if (希洛克选择状态[i * 3 + 1] + 希洛克选择状态[i * 3 + 2]) == 2:
-            self.被动进图加成 += 55
-            # 属性.守护恩赐体精 += 55
-            # 属性.转职被动智力 += 55  # 戒指
-        if (希洛克选择状态[i * 3 + 2] + 希洛克选择状态[i * 3 + 0]) == 2:
-            self.BUFF物攻per *= 1.01
-            self.BUFF魔攻per *= 1.01
-            self.BUFF独立per *= 1.01
-            self.BUFF力量per *= 1.01
-            self.BUFF智力per *= 1.01  # 辅助装备
-
-        i = 2  # 卢克西属性2
-        if (希洛克选择状态[i * 3 + 0] + 希洛克选择状态[i * 3 + 1]) == 2:
-            pass  # 下装
-        if (希洛克选择状态[i * 3 + 1] + 希洛克选择状态[i * 3 + 2]) == 2:
-            pass  # 戒指
-        if (希洛克选择状态[i * 3 + 2] + 希洛克选择状态[i * 3 + 0]) == 2:
-            pass  # 辅助装备
-
-        i = 3  # 守门人属性2
-        if (希洛克选择状态[i * 3 + 0] + 希洛克选择状态[i * 3 + 1]) == 2:
-            self.一觉力智per *= 1.01
-            self.一觉力智 += 20
-        if (希洛克选择状态[i * 3 + 1] + 希洛克选择状态[i * 3 + 2]) == 2:
-            self.被动进图加成 += 55
-            # 属性.守护恩赐体精 += 55
-            # 属性.转职被动智力 += 55  # 戒指
-        if (希洛克选择状态[i * 3 + 2] + 希洛克选择状态[i * 3 + 0]) == 2:
-            self.BUFF力量per *= 1.01
-            self.BUFF智力per *= 1.01
-            self.被动进图加成 += 30
-            # 属性.守护恩赐体精 += 30
-            # 属性.转职被动智力 += 30  # 辅助装备
-
-        i = 4  # 洛多斯属性2
-        if (希洛克选择状态[i * 3 + 0] + 希洛克选择状态[i * 3 + 1]) == 2:
-            self.一觉力智per *= 1.02  # 下装
-        if (希洛克选择状态[i * 3 + 1] + 希洛克选择状态[i * 3 + 2]) == 2:
-            self.BUFF力量per *= 1.02
-            self.BUFF智力per *= 1.02  # 戒指
-        if (希洛克选择状态[i * 3 + 2] + 希洛克选择状态[i * 3 + 0]) == 2:
-            self.BUFF物攻per *= 1.01
-            self.BUFF魔攻per *= 1.01
-            self.BUFF独立per *= 1.01
-            self.被动进图加成 += 30
-
-    def 奥兹玛计算(self, 奥兹玛选择状态):
-        # region 阿斯特罗斯
-
-        for i in range(0, 5):
-            if 奥兹玛选择状态[i] == 1:
-                self.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
-                self.觉醒增加(一觉力智=22)
-                self.被动增加(守护恩赐体精=55, 转职被动智力=55)
-        # endregion
-        # region 贝利亚斯
-        for i in range(5, 10):
-            if 奥兹玛选择状态[i] == 1:
-                self.被动增加(守护恩赐体精=138, 转职被动智力=138)
-
-        # endregion
-        # region 雷德梅恩
-        for i in range(10, 15):
-            if 奥兹玛选择状态[i] == 1:
-                self.BUFF增加(BUFF力量per=1.02, BUFF智力per=1.02)
-                self.觉醒增加(一觉力智=25)
-                self.被动增加(守护恩赐体精=46, 转职被动智力=46)
-        # endregion
-        # region 罗什巴赫
-        for i in range(15, 20):
-            if 奥兹玛选择状态[i] == 1:
-                self.BUFF增加(BUFF力量per=1.01, BUFF智力per=1.01)
-                self.BUFF增加(BUFF物攻per=1.01, BUFF魔攻per=1.01, BUFF独立per=1.01)
-                self.觉醒增加(一觉力智=37)
-        # endregion
-        # region 泰玛特
-        for i in range(20, 25):
-            if 奥兹玛选择状态[i] == 1:
-                self.BUFF增加(BUFF力量per=1.03, BUFF智力per=1.03)
-                self.觉醒增加(一觉力智=21, 一觉力智per=1.01)
-        return
-
-    def 黑鸦计算(self, 黑鸦词条):
-        self.黑鸦词条 = 黑鸦词条
-        for i in range(4):
-            if 黑鸦词条[i][0] == 2:
-                if i == 0:
-                    武器属性 = 武器变换属性列表[黑鸦词条[i][1]]
-                    武器属性数值 = str(黑鸦词条[i][2]).replace("%", '')
-                    武器属性.当前值 = int(武器属性数值 if 武器属性数值 != '' else 0)
-                    武器属性.变换属性(self)
-                else:
-                    装备属性 = 装备变换属性列表[黑鸦词条[i][1]]
-                    装备属性数值 = str(黑鸦词条[i][2]).replace("%", '')
-                    装备属性.当前值 = int(装备属性数值 if 装备属性数值 != '' else 0)
-                    装备属性.变换属性(self)
-            
-
-    def 数据计算(self):
-        总数据 = []
-        for skill in self.技能表.values():
-            if skill.是否启用:
-                总数据.append(skill.结算统计())
-            else:
-                总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
-        return 总数据
-
-    def 预计算(self, 自动切装=False):
-        if self.双装备模式 == 1 and self.技能表['一次觉醒'].是否启用 and 自动切装:
-            # 用于计算一觉
-            temp = deepcopy(self)
-            # 拷贝数据,并修改装备,返回可能的组合
-            数据列表 = []
-            切换列表 = []
-            替换属性_temp = []
-            可能组合 = self.装备替换(temp)
-            for 一觉计算属性 in 可能组合:
-                一觉计算属性.装备属性计算()
-                一觉计算属性.适用数值计算()
-                替换属性_temp.append(一觉计算属性)
-                一觉 = 一觉计算属性.技能表['一次觉醒']
-                三觉 = 一觉计算属性.技能表['三次觉醒']
-                数据 = 三觉.结算统计()[3]
-                if 一觉.名称 not in 三觉.关联技能:
-                    数据 += 一觉.结算统计()[3]
-                数据列表.append(数据)  # 3是力量属性  一觉力智都是相等的
-                切换列表.append(一觉计算属性.切换详情)
-                # 取一觉最大值,并修改数据
-            a = max(数据列表)
-            序号 = 数据列表.index(a)
-            if 序号 != 0:
-                temp = '<br><br>'
-                一觉 = self.技能表['一次觉醒']
-                三觉 = self.技能表['三次觉醒']
-                b = int(数据列表[0])
-                c = int(a) - int(b)
-                if 一觉.名称 not in 三觉.关联技能:
-                    temp += 一觉.名称 + '+'
-                temp += "{}:{}->{}(+{})".format(三觉.名称, b, a, c)
-            else:
-                temp = ''
-                # 计算现有装备BUFF
-            self.装备属性计算()
-            # 一觉属性替换
-            替换属性 = 替换属性_temp[序号]
-            self.一觉Lv = 替换属性.一觉Lv
-            self.一觉力智 = 替换属性.一觉力智
-            self.一觉力智per = 替换属性.一觉力智per
-
-            P = deepcopy(self)
-            适用数值 = P.适用数值计算()
-            适用数值补正 =替换属性.技能表['一次觉醒'].适用数值 - 适用数值
-
-
-            self.自适应计算()
-            self.适用数值计算() 
-            self.技能表['一次觉醒'].等级 = 替换属性.技能表['一次觉醒'].等级
-            self.技能表['三次觉醒'].等级 = 替换属性.技能表['三次觉醒'].等级
-            self.技能表['一次觉醒'].适用数值 += 适用数值补正
-            self.切换详情 = 切换列表[序号] + temp
-        else:
-            self.装备属性计算()
-            self.自适应计算()
-            self.适用数值计算()
-
-    def 自适应计算(self):
-        if preferred is not None:
-
-            temp = deepcopy(self)
-            temp.适用数值计算()
-
-            in_pre_range = (ctypes.c_int * 6)()
-            if self.希洛克武器词条 == 1:
-                in_pre_range[0] = 1
-                in_pre_range[1] = 1
-            preferred_armor = False
-
-            for i in range(4):
-                if self.黑鸦词条[i][0] == 1:
-                    in_pre_range[i + 2] = 1
-                    preferred_armor = True
-            in_int_data, in_double_data = temp.get_data()
-            preferred.cal_index_buff(in_pre_range, in_int_data, in_double_data)
-
-            if self.希洛克武器词条 == 1:
-                a = in_pre_range[0]
-                b = in_pre_range[1]
-                self.自适应最高值 = [a, b]
-                self.武器属性输入(a, b)
-
-            if self.黑鸦词条[0][0] == 1:
-                self.武器变换属性自适应 = in_pre_range[2]
-                self.黑鸦武器输入(in_pre_range[2])
-
-            if preferred_armor:
-                self.防具变换属性自适应 = in_pre_range[3:]
-                self.黑鸦属性输入(in_pre_range[3], in_pre_range[4], in_pre_range[5])
-
-            pass
-        else:
-            self.旧版自适应计算()
-        pass
-
-    def 旧版自适应计算(self):
-
-        # 黑鸦词条计算
-        黑鸦选择 = [0, 0, 0, 0]
-        for i in range(4):
-            if self.黑鸦词条[i][0] == 1:
-                黑鸦选择[i] = 1
-        # 武器词条自适应计算
-        if self.希洛克武器词条 == 1:
-            词条提升率 = []
-            for i in range(len(武器属性组合)):
-                temp = deepcopy(self)
-                # 总数据 = []
-                武器属性A = 武器属性组合[i][0]
-                武器属性B = 武器属性组合[i][1]
-                temp.武器属性输入(武器属性A, 武器属性B)
-
-                提升率 = temp.择优提升率计算()
-                词条提升率.append(提升率)
-            a = max(词条提升率)
-            序号 = 词条提升率.index(a)
-            self.自适应最高值 = 武器属性组合[序号]
-            self.武器属性输入(self.自适应最高值[0], self.自适应最高值[1])
-
-        # 先择优黑鸦防具部分
-        if 黑鸦选择[1] + 黑鸦选择[2] + 黑鸦选择[3] > 0:
-            词条提升率 = []
-            for i in range(len(防具变换属性组合)):
-                temp = deepcopy(self)
-                # 总数据 = []
-                黑鸦戒指 = 防具变换属性组合[i][0]
-                黑鸦辅助 = 防具变换属性组合[i][1]
-                黑鸦下装 = 防具变换属性组合[i][2]
-                temp.黑鸦属性输入(黑鸦戒指, 黑鸦辅助, 黑鸦下装)
-                提升率 = temp.择优提升率计算()
-                词条提升率.append(提升率)
-            a = max(词条提升率)
-            序号 = 词条提升率.index(a)
-            self.防具变换属性自适应 = 防具变换属性组合[序号]
-            self.黑鸦属性输入(self.防具变换属性自适应[0], self.防具变换属性自适应[1],
-                        self.防具变换属性自适应[2])
-
-        # 再择优武器部分
-        if 黑鸦选择[0] > 0:
-            词条提升率 = []
-            for i in range(7):
-                temp = deepcopy(self)
-                # 总数据 = []
-                temp.黑鸦武器输入(i)
-                if temp.实际名称 == 'BUFF·神启·圣骑士':
-                    if i == 0:
-                        temp.是否加觉醒 = 1
-                    else:
-                        temp.是否加觉醒 = 0
-                提升率 = temp.择优提升率计算()
-                词条提升率.append(提升率)
-            a = max(词条提升率)
-            序号 = 词条提升率.index(a)
-            self.武器变换属性自适应 = 序号
-            self.黑鸦武器输入(序号)
-            if 序号 == 0 and self.实际名称 == 'BUFF·神启·圣骑士':
-                self.是否加觉醒 = 1
-
-    def 替换技能(self, skill, name):
-        skill.技能表 = self.技能表
-        self.技能表[name] = skill
-
-    def 武器属性输入(self, 武器属性A, 武器属性B):
-        武器属性A = 武器属性A列表[武器属性A]
-        武器属性B = 武器属性B列表[武器属性B]
-        武器属性A.当前值 = int(武器属性A.最大值)
-        武器属性B.当前值 = int(武器属性B.最大值)
-        武器属性A.融合属性(self)
-        if self.武器词条触发 == 1:
-            武器属性B.融合属性(self)
-
-    def 黑鸦属性输入(self, 黑鸦戒指, 黑鸦辅助, 黑鸦下装):
-        黑鸦戒指 = 装备变换属性列表[黑鸦戒指]
-        黑鸦辅助 = 装备变换属性列表[黑鸦辅助]
-        黑鸦下装 = 装备变换属性列表[黑鸦下装]
-        黑鸦戒指.当前值 = int(黑鸦戒指.最大值)
-        黑鸦辅助.当前值 = int(黑鸦辅助.最大值)
-        黑鸦下装.当前值 = int(黑鸦下装.最大值)
-        if self.黑鸦词条[1][0] == 1:
-            黑鸦戒指.变换属性(self)
-        if self.黑鸦词条[2][0] == 1:
-            黑鸦辅助.变换属性(self)
-        if self.黑鸦词条[3][0] == 1:
-            黑鸦下装.变换属性(self)
-
-    def 黑鸦武器输入(self, 黑鸦武器):
-        if 黑鸦武器 > 0:
-            黑鸦武器 = 武器变换属性列表[黑鸦武器]
-            黑鸦武器.当前值 = int(黑鸦武器.最大值)
-            黑鸦武器.变换属性(self)
-        else:
-            self.技能等级加成('所有', 50, 50, 2)
-            self.技能等级加成('所有', 85, 85, 2)
-            self.技能等级加成('所有', 100, 100, 2)
-        if self.装备检查('世界树之精灵'):
-            self.技能等级加成('所有', 50, 50, 2)
-
-    def 择优提升率计算(self):
-        总数据 = []
-        self.适用数值计算()
-        if self.双装备模式 == 1 and self.技能表['一次觉醒'].是否启用:
-            if self.实际名称 == 'BUFF·神启·圣骑士':
-                if self.是否加觉醒 == 1:
-                    self.技能表['一次觉醒'].适用数值 += self.一觉切装加二觉增加体精
-        for skill in self.技能表.values():
-            if skill.是否启用:
-                values = skill.结算统计()
-                if skill.所在等级 in [50, 100]:
-                    values = [round(i * self.觉醒择优系数) for i in values]
-                总数据.append(values)
-            else:
-                总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
-        return self.提升率计算(总数据)
-
-    def 结果返回(self, x, 总数据):
-        if x == 0:
-            return self.提升率计算(总数据)
-        elif x == 1:
-            return 总数据
-        elif x == 2:
-            return self.提升率计算(总数据, self.排行系数)
-
-    def BUFF计算(self, x=0):
-        self.预计算(自动切装=True)
-        总数据 = self.数据计算()
-        return self.结果返回(x, 总数据)
-
-    def 装备属性计算(self):
-        self.装备基础()
-        # self.专属词条计算()
-
-        equips = [equ.get_equ_by_name(i) for i in self.装备栏]
-        suits = [equ.get_suit_by_name(i) for i in self.套装栏]
-
-        for equip in equips:
-            equip.城镇属性_BUFF(self)
-            equip.BUFF属性(self)
-
-            觉醒词条 = self.黑鸦词条[0][0]
-
-            # 黑鸦武器觉醒词条
-            if 觉醒词条 == 3 and equip.部位 == '武器':
-                self.技能等级加成('所有', 50, 50, 2)
-                self.技能等级加成('所有', 85, 85, 2)
-                self.技能等级加成('所有', 100, 100, 2)
-            if equip.名称 == '世界树之精灵' and 觉醒词条 > 0:
-                self.技能等级加成('所有', 50, 50, -2)
-                self.技能等级加成('所有', 85, 85, -2)
-                self.技能等级加成('所有', 100, 100, -2)
-                if 觉醒词条 > 1:
-                    self.技能等级加成('所有', 50, 50, 2)
-
-        for suit in suits:
-            suit.城镇属性_BUFF(self)
-            suit.BUFF属性(self)
-
-        if self.排行系数 == 1:
-            P = deepcopy(self)
-            P.站街计算()
-            self.站街系数 = P.系数数值站街()
-
-        for equip in equips:
-            equip.进图属性_BUFF(self)
-
-        for suit in suits:
-            suit.进图属性_BUFF(self)
-
-    def 专属词条计算(self):
-        pass
-
-    def 站街计算(self):
-        self.专属词条计算()
-        for skill in self.技能表.values():
-            if skill.站街生效 == 1:
-                skill.进图加成 = 0
-                结算 = skill.结算统计()
-                self.智力 += 结算[0]
-                self.体力 += 结算[1]
-                self.精神 += 结算[2]
-
-    def 护石计算(self, 护石选项):
-        if 护石选项 == 'BUFF力量、智力+2%':
-            self.BUFF力量per *= 1.02
-            self.BUFF智力per *= 1.02
-        elif 护石选项 == 'BUFF力量、智力+4%':
-            self.BUFF力量per *= 1.04
-            self.BUFF智力per *= 1.04
-        elif 护石选项 == 'BUFF力量、智力+6%':
-            self.BUFF力量per *= 1.06
-            self.BUFF智力per *= 1.06
-        elif 护石选项 == 'BUFF力量、智力+8%':
-            self.BUFF力量per *= 1.08
-            self.BUFF智力per *= 1.08
-
-    def BUFF面板(self):
-        return self.技能表['BUFF'].技能面板()
-
-    def 一觉面板(self):
-        return self.技能表['一次觉醒'].技能面板()
 
 
 class 角色窗口(窗口):
     def __init__(self):
-        self.初始属性: 属性 = None
+        self.初始属性: 辅助角色属性 = None
         self.护石选项 = [
             '无', 'BUFF力量、智力+2%', 'BUFF力量、智力+4%', 'BUFF力量、智力+6%', 'BUFF力量、智力+8%'
         ]
@@ -2085,7 +1053,7 @@ class 角色窗口(窗口):
             client.初始化()
             return client
 
-        DefaultDialogRegister.showDialog("buff_panel", createClient, self)
+        DefaultDialogRegister.showDialog("buff_panel({})".format(type(self)), createClient, self)
 
     def 时装选项更新(self, index):
         if index == 8:
@@ -2194,6 +1162,10 @@ class 角色窗口(窗口):
         if x == 0:
             self.武器融合属性A1.clear()
             self.武器融合属性A2.clear()
+
+            if index == 0:
+                return
+
             属性A = 武器属性A列表[index]
 
             for item in 属性A.range():
@@ -2203,6 +1175,10 @@ class 角色窗口(窗口):
         elif x == 1:
             self.武器融合属性B1.clear()
             self.武器融合属性B2.clear()
+
+            if index == 0:
+                return
+
             属性B = 武器属性B列表[index]
 
             for item in 属性B.range():
@@ -2227,27 +1203,20 @@ class 角色窗口(窗口):
         index = self.黑鸦词条选项[i][1].currentIndex()
         self.黑鸦词条选项[i][2].clear()
         self.黑鸦词条选项[i][3].clear()
-        if x == 0:
-            武器属性 = 武器变换属性列表[index]
-            temp = 武器属性.最大值
-            while temp >= 武器属性.最小值:
-                if 武器属性.间隔 / 10 >= 1:
-                    self.黑鸦词条选项[i][3].addItem(str(int(temp)))
-                else:
-                    self.黑鸦词条选项[i][3].addItem(str(temp) + '%')
-                temp -= 武器属性.间隔
-            self.黑鸦词条选项[i][2].addItem(武器属性.随机属性描述)
+        if index == 0:
+            return
 
-        elif x == 1:
-            装备属性 = 装备变换属性列表[index]
-            temp = 装备属性.最大值
-            while temp >= 装备属性.最小值:
-                if 装备属性.间隔 / 10 >= 1:
-                    self.黑鸦词条选项[i][3].addItem(str(int(temp)))
-                else:
-                    self.黑鸦词条选项[i][3].addItem(str(temp) + '%')
-                temp -= 装备属性.间隔
-            self.黑鸦词条选项[i][2].addItem(装备属性.随机属性描述)
+        装备属性 = 武器变换属性列表[index] if x == 0 else 装备变换属性列表[index]
+        temp = 装备属性.最大值
+        while temp >= 装备属性.最小值:
+            if 装备属性.间隔 / 10 >= 1:
+                self.黑鸦词条选项[i][3].addItem(str(int(temp)))
+            else:
+                self.黑鸦词条选项[i][3].addItem(str(temp) + '%')
+            temp -= 装备属性.间隔
+        self.黑鸦词条选项[i][2].addItem(装备属性.随机属性描述)
+
+
 
     def BUFF次数输入填写(self, x, skill=None):
         if self.次数输入[x].currentIndex() == 2:
@@ -2952,8 +1921,10 @@ class 角色窗口(窗口):
         self.属性设置输入[i][15+x].setText(str(int(修正后面板)))
 
 
-    def 换装计算(self) -> 角色属性:
+    def 换装计算(self,AWAKE:辅助角色属性 = None) -> 辅助角色属性:
         if not self.登记启用: return None
+        if AWAKE is None:
+            AWAKE = self.角色属性A
 
         装备 = store.clone("/buffer/data/register/equips", self.self_selects)
         装备打造 = store.clone("/buffer/data/register/amplifies", [-1] * 12)
@@ -2964,6 +1935,8 @@ class 角色窗口(窗口):
         武器融合选项 = store.clone("/buffer/data/register/weapon_fusion", [0] * 4)
         站街面板 = store.get("/buffer/data/register/display_power")
 
+        BUFF = deepcopy(self.初始属性)
+
         for i in range(len(装备)):
             if 装备[i] == '无':
                 装备[i] = self.self_selects[i]
@@ -2971,37 +1944,37 @@ class 角色窗口(窗口):
                 装备打造[i] = self.装备打造选项[i + 12].currentIndex()
 
         for i in range(4):
-            if 黑鸦词条[i][1] == 0:
-                temp = [
-                    self.黑鸦词条选项[i][0].currentIndex(),
-                    self.黑鸦词条选项[i][1].currentIndex(),
-                    self.黑鸦词条选项[i][3].currentText(),
-                ]
-                黑鸦词条[i] = temp
+            if 黑鸦词条[i][0] == 0 or 黑鸦词条[i][1] == 0:
+                黑鸦词条[i] = deepcopy(AWAKE.黑鸦词条[i])
+                黑鸦词条[i][0] == 2
+        BUFF.黑鸦词条 = 黑鸦词条
         if 希洛克选择状态 is None or len(希洛克选择状态) == 0 or sum(希洛克选择状态) == 0:
             希洛克选择状态 = self.希洛克选择状态
+        BUFF.希洛克选择状态 = 希洛克选择状态
+
         if 奥兹玛选择状态 is None or len(奥兹玛选择状态) == 0 or sum(奥兹玛选择状态) == 0:
             奥兹玛选择状态 = self.奥兹玛选择状态
+        BUFF.奥兹玛选择状态 = 奥兹玛选择状态
         self.登记希洛克 = 希洛克选择状态
         self.登记奥兹玛 = 奥兹玛选择状态
         if 武器融合选项[0] == 0:
-            武器融合选项[0] = self.武器融合属性A.currentIndex()
-            武器融合选项[1] = self.武器融合属性A1.currentIndex()
+            武器融合选项[0] = AWAKE.残香词条[0]
+            武器融合选项[1] = AWAKE.残香词条[1]
 
         if 武器融合选项[2] == 0:
-            武器融合选项[2] = self.武器融合属性B.currentIndex()
-            武器融合选项[3] = self.武器融合属性B1.currentIndex()
-
-        属性 = deepcopy(self.初始属性)
+            武器融合选项[2] = AWAKE.残香词条[2]
+            武器融合选项[3] = AWAKE.残香词条[3]
+        BUFF.希洛克武器词条 = 2
+        BUFF.残香词条 = 武器融合选项
 
         num = 0
-        for skill in 属性.技能表.values():
+        for skill in BUFF.技能表.values():
             skill.等级 = skill.基础等级 + int(self.等级调整[num].currentText())
             num += 1
 
-        属性.排行系数 = self.排行参数.currentIndex()
-        属性.C力智 = int(''.join(filter(str.isdigit, self.排行选项[0].currentText())))
-        属性.C三攻 = int(''.join(filter(str.isdigit, self.排行选项[1].currentText())))
+        BUFF.排行系数 = self.排行参数.currentIndex()
+        BUFF.C力智 = int(''.join(filter(str.isdigit, self.排行选项[0].currentText())))
+        BUFF.C三攻 = int(''.join(filter(str.isdigit, self.排行选项[1].currentText())))
 
         # if ':' in self.排行选项[0].currentText():
         #     属性.C力智 = int(self.排行选项[0].currentText().split(':')[1])
@@ -3011,22 +1984,22 @@ class 角色窗口(窗口):
         #     属性.C三攻 = int(self.排行选项[1].currentText().split(':')[1])
         # else:
         #     属性.C三攻 = int(self.排行选项[1].currentText())
-        属性.排行类型 = self.排行选项[2].currentText()
+        BUFF.排行类型 = self.排行选项[2].currentText()
 
         if self.排行选项[3].currentIndex() == 0:
             pass
         elif self.排行选项[3].currentIndex() == 1:
-            属性.系统奶系数 = 1.35
-            属性.系统奶基数 = 7664
+            BUFF.系统奶系数 = 1.35
+            BUFF.系统奶基数 = 7664
         elif self.排行选项[3].currentIndex() == 2:
-            属性.系统奶系数 = 2.31
-            属性.系统奶基数 = 4581
+            BUFF.系统奶系数 = 2.31
+            BUFF.系统奶基数 = 4581
 
         if self.初始属性.技能表['三次觉醒'].是否启用:
             if self.觉醒选择状态 == 1:
-                属性.技能表['三次觉醒'].关联技能 = [属性.技能表['一次觉醒'].名称]
+                BUFF.技能表['三次觉醒'].关联技能 = [BUFF.技能表['一次觉醒'].名称]
             elif self.觉醒选择状态 == 2:
-                属性.技能表['三次觉醒'].关联技能 = [属性.技能表['二次觉醒'].名称]
+                BUFF.技能表['三次觉醒'].关联技能 = [BUFF.技能表['二次觉醒'].名称]
 
         count = 0
         for i in equ.get_equ_list():
@@ -3037,47 +2010,37 @@ class 角色窗口(窗口):
                 i.属性4选择_BUFF = self.神话属性选项[count * 4 + 3].currentIndex()
                 count += 1
 
-        self.辟邪玉属性计算(属性)
+        self.辟邪玉属性计算(BUFF)
 
-        if sum(self.希洛克选择状态) == 3:
-            属性.武器词条触发 = 1
+        if sum(希洛克选择状态) == 3:
+            BUFF.武器词条触发 = 1
 
-        武器融合属性A = 武器属性A列表[武器融合选项[0]]
-
-        武器融合属性A数值 = 武器融合属性A.range()[武器融合选项[1]].replace('%', '')
-        武器融合属性A.当前值 = int(武器融合属性A数值 if 武器融合属性A数值 != '' else 0)
-        武器融合属性A.融合属性(属性)
-        if 属性.武器词条触发 == 1:
-            武器融合属性B = 武器属性B列表[武器融合选项[2]]
-            武器融合属性B数值 = 武器融合属性B.range()[武器融合选项[3]].replace('%', '')
-            武器融合属性B.当前值 = int(武器融合属性B数值 if 武器融合属性B数值 != '' else 0)
-            武器融合属性B.融合属性(属性)
 
         for i in range(len(self.复选框列表)):
             if self.复选框列表[i].isChecked():
-                选项设置列表[i].适用效果(属性)
+                选项设置列表[i].适用效果(BUFF)
 
-        称号列表[self.称号.currentIndex()].城镇属性_BUFF(属性)
-        if 属性.称号触发:
-            称号列表[self.称号.currentIndex()].触发属性(属性)
+        称号列表[self.称号.currentIndex()].城镇属性_BUFF(BUFF)
+        if BUFF.称号触发:
+            称号列表[self.称号.currentIndex()].触发属性(BUFF)
 
-        宠物列表[self.宠物.currentIndex()].城镇属性_BUFF(属性)
+        宠物列表[self.宠物.currentIndex()].城镇属性_BUFF(BUFF)
 
         if self.护石第一栏.currentText() != '无':
-            属性.护石第一栏 = self.护石第一栏.currentText()
+            BUFF.护石第一栏 = self.护石第一栏.currentText()
 
         if self.护石第二栏.currentText() != '无':
-            属性.护石第二栏 = self.护石第二栏.currentText()
+            BUFF.护石第二栏 = self.护石第二栏.currentText()
 
         if self.护石第三栏.currentText() != '无':
-            属性.护石第三栏 = self.护石第三栏.currentText()
+            BUFF.护石第三栏 = self.护石第三栏.currentText()
 
         for i in range(12):
-            属性.是否增幅[i] = 1
-            属性.强化等级[i] = 装备打造[i]
-            属性.改造等级[i] = 装备打造[i]
-        属性.武器锻造等级 = self.装备打造选项[36].currentIndex()
-        属性.类型 = self.装备打造选项[37].currentText()
+            BUFF.是否增幅[i] = 1
+            BUFF.强化等级[i] = 装备打造[i]
+            BUFF.改造等级[i] = 装备打造[i]
+        BUFF.武器锻造等级 = self.装备打造选项[36].currentIndex()
+        BUFF.类型 = self.装备打造选项[37].currentText()
 
         self.是否计算 = 1
 
@@ -3086,22 +2049,21 @@ class 角色窗口(窗口):
             skill.是否启用 = self.次数输入[num].currentIndex()
             num += 1
 
-        属性.黑鸦计算(黑鸦词条)
-        属性.希洛克计算(希洛克选择状态)
-        属性.奥兹玛计算(奥兹玛选择状态)
-        self.基础属性(属性)
+        self.基础属性(BUFF)
 
-        属性.穿戴装备(装备)
+        BUFF.穿戴装备(装备)
 
         if 站街面板 is not None:
-            站街属性 = deepcopy(属性)       
+            站街属性 = deepcopy(BUFF)       
 
             站街属性.排行系数 = 1
             站街属性.装备属性计算()
             
             self.站街面板修正(站街属性,站街面板,2,False)
-        #  恢复
-        return 属性
+        
+        BUFF.预计算()
+        AWAKE.替换技能(BUFF.技能表['BUFF'],'BUFF')
+        return BUFF
 
     def 自选计算(self, 输出=0):
         if 输出 == 0:
@@ -3123,14 +2085,8 @@ class 角色窗口(窗口):
         B = deepcopy(self.角色属性A)
         B.穿戴装备(装备)
         B.预计算()
-
-        # 登记 Start
-        if self.登记启用:
-            BUFF = self.换装计算()
-            if BUFF is not None:
-                BUFF.预计算()
-                B.替换技能(BUFF.技能表['BUFF'], 'BUFF')
-            # 登记 End
+        
+        self.换装计算(B)
 
         if 输出 != 0:
             D = deepcopy(self.初始属性)
@@ -3469,13 +2425,7 @@ class 角色窗口(窗口):
     def 站街计算(self, 装备名称, 套装名称=None):
         C = deepcopy(self.角色属性A)
         C.穿戴装备(装备名称, 套装名称)
-        for i in C.装备栏:
-            equ.get_equ_by_name(i).城镇属性_BUFF(C)
-            equ.get_equ_by_name(i).BUFF属性(C)
-        for i in C.套装栏:
-            equ.get_suit_by_name(i).城镇属性_BUFF(C)
-            equ.get_suit_by_name(i).BUFF属性(C)
-        C.装备基础()
+        C.装备属性计算(x = 1)
         C.站街计算()
         return C
 
@@ -3526,12 +2476,10 @@ class 角色窗口(窗口):
         self.角色属性B.预计算(自动切装=not 自选计算模式)
 
         if self.登记启用 and 自选计算模式:
-            登记属性 = self.换装计算()
-            登记属性.预计算()
+            登记属性 = self.换装计算(self.角色属性B)
             登记装备 = 登记属性.装备栏
 
-            self.角色属性B.替换技能(登记属性.技能表['BUFF'], 'BUFF')
-            # self.输入属性(self.角色属性B)
+                # self.输入属性(self.角色属性B)
             self.角色属性B.切换详情 = '换装详情: <br>' + '<br>'.join(
                 [' , '.join(登记装备[i:i + 4]) for i in range(0, len(登记装备), 4)])
         # 登记 end
@@ -3600,23 +2548,24 @@ class 角色窗口(窗口):
             面板显示[i].setStyleSheet("QLabel{font-size:12px;color:white;}")
             面板显示[i].resize(100, 18)
             面板显示[i].setAlignment(Qt.AlignLeft)
+        
+        BUFF = self.角色属性B.技能表['BUFF']
+        AWAKE = self.角色属性B.技能表['一次觉醒']
 
         tempstr = []
         tempstr.append('BUFF力量% :' +
-                       str(int(round(self.角色属性B.BUFF力量per * 100, 0))) + '%')
+                       str(int(round(BUFF.BUFF力量per * 100, 0))) + '%')
         tempstr.append('BUFF智力% :' +
-                       str(int(round(self.角色属性B.BUFF智力per * 100, 0))) + '%')
+                       str(int(round(BUFF.BUFF智力per * 100, 0))) + '%')
         tempstr.append('BUFF物攻% :' +
-                       str(int(round(self.角色属性B.BUFF物攻per * 100, 0))) + '%')
+                       str(int(round(BUFF.BUFF物攻per * 100, 0))) + '%')
         tempstr.append('BUFF魔攻% :' +
-                       str(int(round(self.角色属性B.BUFF魔攻per * 100, 0))) + '%')
+                       str(int(round(BUFF.BUFF魔攻per * 100, 0))) + '%')
         tempstr.append('BUFF独立% :' +
-                       str(int(round(self.角色属性B.BUFF独立per * 100, 0))) + '%')
-        tempstr.append('一觉力智  :' + str(int(round(self.角色属性B.一觉力智, 0))))
+                       str(int(round(BUFF.BUFF独立per * 100, 0))) + '%')
+        tempstr.append('一觉力智  :' + str(int(round(AWAKE.一觉力智, 0))))
         tempstr.append('一觉力智% :' +
-                       str(int(round(self.角色属性B.一觉力智per * 100, 0))) + '%')
-        tempstr.append('守护徽章% :' +
-                       str(int(round(self.角色属性B.守护徽章per * 100, 0))) + '%')
+                       str(int(round(AWAKE.一觉力智per * 100, 0))) + '%')
         if self.角色属性B.角色 == '圣职者(男)':
             tempstr.append('守护徽章% :' +
                            str(int(round(self.角色属性B.守护徽章per * 100, 0))) + '%')
@@ -4320,18 +3269,10 @@ class 角色窗口(窗口):
                 value) + ('%' if 装备属性.间隔 / 10 < 1 else '') + '<br>'
         return tempstr
 
-    def 武器融合属性计算(self, 属性):
-        武器融合属性A = 武器属性A列表[self.武器融合属性A.currentIndex()]
-        武器融合属性B = 武器属性B列表[self.武器融合属性B.currentIndex()]
-        武器融合属性A数值 = self.武器融合属性A2.currentText().replace('%', '')
-        武器融合属性B数值 = self.武器融合属性B2.currentText().replace('%', '')
-        武器融合属性A.当前值 = int(武器融合属性A数值 if 武器融合属性A数值 != '' else 0)
-        武器融合属性A.融合属性(属性)
-        if 属性.武器词条触发 == 1:
-            武器融合属性B.当前值 = int(武器融合属性B数值 if 武器融合属性B数值 != '' else 0)
-            武器融合属性B.融合属性(属性)
 
-    def 黑鸦属性计算(self, 属性):
+
+
+    def 黑鸦属性计算(self, 属性:辅助角色属性):
         for i in range(4):
             if self.黑鸦词条选项[i][0].currentIndex() == 2:
                 if i == 0:
@@ -4345,7 +3286,7 @@ class 角色窗口(窗口):
                     装备属性.当前值 = int(装备属性数值 if 装备属性数值 != '' else 0)
                     装备属性.变换属性(属性)
 
-    def 输入属性(self, 属性, x=0, 黑鸦词条=None, 希洛克选择状态=None, 奥兹玛选择状态=None):
+    def 输入属性(self, 属性:辅助角色属性, x=0, 黑鸦词条=None, 希洛克选择状态=None, 奥兹玛选择状态=None):
         num = 0
         for skill in 属性.技能表.values():
             skill.等级 = skill.基础等级 + int(self.等级调整[num].currentText())
@@ -4399,11 +3340,11 @@ class 角色窗口(窗口):
         if sum(self.希洛克选择状态) == 3:
             属性.武器词条触发 = 1
 
-        if self.希洛克武器选择.currentIndex() == 1:
-            属性.希洛克武器词条 = 1
-        if self.希洛克武器选择.currentIndex() == 2:
-            属性.希洛克武器词条 = 2
-            self.武器融合属性计算(属性)
+        属性.希洛克武器词条 = self.希洛克武器选择.currentIndex()
+        
+        if 属性.希洛克武器词条 == 2:
+            属性.残香词条 = [self.武器融合属性A.currentIndex(),self.武器融合属性A2.currentIndex(),self.武器融合属性B.currentIndex(),self.武器融合属性B2.currentIndex()]
+
 
         for i in range(len(self.复选框列表)):
             if self.复选框列表[i].isChecked():
@@ -4446,16 +3387,18 @@ class 角色窗口(窗口):
                     self.黑鸦词条选项[i][3].currentText(),
                 ]
                 黑鸦词条.append(temp)
+        属性.黑鸦词条 = 黑鸦词条
+        
         if 希洛克选择状态 is None or len(希洛克选择状态) == 0:
             希洛克选择状态 = self.希洛克选择状态
+        属性.希洛克选择状态 = 希洛克选择状态
+
         if 奥兹玛选择状态 is None or len(奥兹玛选择状态) == 0:
             奥兹玛选择状态 = self.奥兹玛选择状态
+        属性.奥兹玛选择状态 = 奥兹玛选择状态
 
         属性.觉醒择优系数 = float(self.觉醒择优系数.currentText())
 
-        属性.黑鸦计算(黑鸦词条)
-        属性.希洛克计算(希洛克选择状态)
-        属性.奥兹玛计算(奥兹玛选择状态)
         self.基础属性(属性)
 
     def 技能加成判断(self, name, 属性):
