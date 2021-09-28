@@ -6,7 +6,6 @@ from PublicReference.equipment.武器融合_buff import *
 from PublicReference.equipment.黑鸦_buff import 装备变换属性列表, 武器变换属性列表
 from PublicReference.utils.constant import *
 from PublicReference.equipment.equ_list import *
-from PublicReference.utils.storex import *
 
 
 class 换装窗口(Page):
@@ -559,12 +558,16 @@ class 换装窗口(Page):
         index = self.黑鸦词条[i][1].currentIndex()
         self.黑鸦词条[i][2].clear()
         self.黑鸦词条[i][3].clear()
-        武器属性 = 武器变换属性列表[index]
-        temp = 武器属性.最大值
-        while temp >= 武器属性.最小值:
-            if 武器属性.间隔 / 10 >= 1:
+        if index == 0:
+            return
+        变换属性 =  武器变换属性列表[index] if i == 0 else 装备变换属性列表[index]
+
+
+        temp = 变换属性.最大值
+        while temp >= 变换属性.最小值:
+            if 变换属性.间隔 / 10 >= 1:
                 self.黑鸦词条[i][3].addItem(str(int(temp)))
             else:
                 self.黑鸦词条[i][3].addItem(str(temp) + '%')
-            temp -= 武器属性.间隔
-        self.黑鸦词条[i][2].addItem(武器属性.随机属性描述)
+            temp -= 变换属性.间隔
+        self.黑鸦词条[i][2].addItem(变换属性.随机属性描述)

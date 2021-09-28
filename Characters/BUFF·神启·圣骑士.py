@@ -201,7 +201,7 @@ class BUFF·神启·圣骑士技能8(主动技能):
         if(self.技能表['一次觉醒'].是否启用 == 1):
             values = self.技能表['一次觉醒'].结算统计(True)
             倍率 = self.加成倍率()
-            return [i * 倍率 for i in values]
+            return [int(round(i * 倍率)) for i in values]
         return [0]*8
 
     def 加成倍率(self):
@@ -235,7 +235,7 @@ while i >= 0:
     except:
         i = -1
 
-class BUFF·神启·圣骑士角色属性(角色属性):
+class BUFF·神启·圣骑士角色属性(辅助角色属性):
     实际名称 = 'BUFF·神启·圣骑士'
     角色 = '圣职者(男)'
     职业 = '圣骑士'
