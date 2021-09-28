@@ -1305,8 +1305,8 @@ class 角色属性(属性):
                 self.黑鸦词条[i].append("")
                 if self.择优结果[i][1] != 0:
                     self.黑鸦词条[i][4] = (
-                        "觉醒Lv+2 " if i == 0 and self.择优结果[i][1] == 0.16 else
-                        '') + 黑鸦武器属性列表[self.择优结果[i][0]].描述 + '+' + str(
+                        trans("觉醒Lv+2 ") if i == 0 and self.择优结果[i][1] == 0.16 else
+                        '') + trans(黑鸦武器属性列表[self.择优结果[i][0]].描述) + '+' + str(
                             round(self.择优结果[i][1] * 100)) + '%'
             if i == 4:
                 if self.是否择优[i] == 0:
@@ -1608,11 +1608,11 @@ class 角色属性(属性):
     def 自适应输出(self):
         temp = ''
         if self.自适应选项[0] != 0:  # 宠物
-            temp += '宠物:' + self.自适应描述[0]
+            temp += trans('宠物:') + self.自适应描述[0]
         if self.自适应选项[1] != 0:  # 光环
             if temp != '':
                 temp += '|'
-            temp += '光环:' + self.自适应描述[1]
+            temp += trans('光环:') + self.自适应描述[1]
         return temp
 
     def 黑鸦词条扣除(self):
@@ -1729,10 +1729,10 @@ class 角色窗口(窗口):
         super().界面1()
 
         for i in 称号列表:
-            self.称号.addItem(i.名称)
+            self.称号.addItem(trans(i.名称))
 
         for i in 宠物列表:
-            self.宠物.addItem(i.名称)
+            self.宠物.addItem(trans(i.名称))
 
         标签 = QLabel('装备条件设置', self.main_frame1)
         标签.move(940, 5)
@@ -4612,42 +4612,54 @@ class 角色窗口(窗口):
         tempstr = []
         # temp = '<font color="{}">'.format(self.辟邪玉显示())
         if x == 0:
-            tempstr.append('黄字:{}%'.format(round(属性.伤害增加 * 100, 1)))  #0
-            tempstr.append('暴伤:{}%'.format(round(属性.暴击伤害 * 100, 1)))  #1
-            tempstr.append('白字:{}%'.format(round(属性.附加伤害 * 100, 1)))  #2
-            tempstr.append('属白:{}%'.format(round(属性.属性附加 * 100, 1)))  #3
-            tempstr.append('终伤:{}%'.format(round(属性.最终伤害 * 100, 1)))  #4
-            tempstr.append('技攻:{}%'.format(round(属性.技能攻击力 * 100 - 100, 1)))  #5
-            tempstr.append('三攻:{}%'.format(round(属性.百分比三攻 * 100, 1)))  #6
-            tempstr.append('力智:{}%'.format(round(属性.百分比力智 * 100, 1)))  #7
-            tempstr.append('持续:{}%'.format(round(属性.持续伤害 * 100, 1)))  #8
-            tempstr.append('攻速:{}%'.format(round(属性.攻击速度 * 100, 1)))  #9
-            tempstr.append('施放:{}%'.format(round(属性.施放速度 * 100, 1)))  #10
-            tempstr.append('移速:{}%'.format(round(属性.移动速度 * 100, 1)))  #11
+            tempstr.append(trans('黄字:{}%').format(round(属性.伤害增加 * 100, 1)))  #0
+            tempstr.append(trans('暴伤:{}%').format(round(属性.暴击伤害 * 100, 1)))  #1
+            tempstr.append(trans('白字:{}%').format(round(属性.附加伤害 * 100, 1)))  #2
+            tempstr.append(trans('属白:{}%').format(round(属性.属性附加 * 100, 1)))  #3
+            tempstr.append(trans('终伤:{}%').format(round(属性.最终伤害 * 100, 1)))  #4
+            tempstr.append(
+                trans('技攻:{}%').format(round(属性.技能攻击力 * 100 - 100, 1)))  #5
+            tempstr.append(trans('三攻:{}%').format(round(属性.百分比三攻 * 100,
+                                                        1)))  #6
+            tempstr.append(trans('力智:{}%').format(round(属性.百分比力智 * 100,
+                                                        1)))  #7
+            tempstr.append(trans('持续:{}%').format(round(属性.持续伤害 * 100, 1)))  #8
+            tempstr.append(trans('攻速:{}%').format(round(属性.攻击速度 * 100, 1)))  #9
+            tempstr.append(trans('施放:{}%').format(round(属性.施放速度 * 100,
+                                                        1)))  #10
+            tempstr.append(trans('移速:{}%').format(round(属性.移动速度 * 100,
+                                                        1)))  #11
 
             if 属白换算 != 0:
                 tempstr[2] += '|{}%'.format(
                     round(属白换算 * 100 + 属性.附加伤害 * 100, 1))
                 tempstr[3] += '|{}%'.format(round(属白换算 * 100, 1))
         else:
-            tempstr.append('攻击时,额外增加{}%的伤害增加量'.format(round(属性.伤害增加 * 100,
-                                                            1)))  #0
-            tempstr.append('暴击时,额外增加{}%的伤害增加量'.format(round(属性.暴击伤害 * 100,
-                                                            1)))  #1
-            tempstr.append('攻击时,附加{}%的伤害'.format(round(属性.附加伤害 * 100, 1)))  #2
-            tempstr.append('攻击时,附加{}%的属性伤害'.format(round(属性.属性附加 * 100,
-                                                         1)))  #3
-            tempstr.append('最终伤害 +{}%'.format(round(属性.最终伤害 * 100, 1)))  #4
-            tempstr.append('技能攻击力 +{}%'.format(round(属性.技能攻击力 * 100 - 100,
-                                                     1)))  #5
-            tempstr.append('物理、魔法、独立攻击力 +{}%'.format(round(属性.百分比三攻 * 100,
-                                                           1)))  #6
-            tempstr.append('力量、智力 +{}%'.format(round(属性.百分比力智 * 100, 1)))  #7
-            tempstr.append('发生持续伤害X秒,伤害量为对敌人增加造成伤害的{}%'.format(
-                round(属性.持续伤害 * 100, 1)))  #8
-            tempstr.append('攻击速度 +{}%'.format(round(属性.攻击速度 * 100, 1)))  #9
-            tempstr.append('施放速度 +{}%'.format(round(属性.施放速度 * 100, 1)))  #10
-            tempstr.append('移动速度 +{}%'.format(round(属性.移动速度 * 100, 1)))  #11
+            tempstr.append(
+                trans('攻击时,额外增加{}%的伤害增加量').format(round(属性.伤害增加 * 100, 1)))  #0
+            tempstr.append(
+                trans('暴击时,额外增加{}%的伤害增加量').format(round(属性.暴击伤害 * 100, 1)))  #1
+            tempstr.append(
+                trans('攻击时,附加{}%的伤害').format(round(属性.附加伤害 * 100, 1)))  #2
+            tempstr.append(
+                trans('攻击时,附加{}%的属性伤害').format(round(属性.属性附加 * 100, 1)))  #3
+            tempstr.append(trans('最终伤害 +{}%').format(round(属性.最终伤害 * 100,
+                                                           1)))  #4
+            tempstr.append(
+                trans('技能攻击力 +{}%').format(round(属性.技能攻击力 * 100 - 100, 1)))  #5
+            tempstr.append(
+                trans('物理、魔法、独立攻击力 +{}%').format(round(属性.百分比三攻 * 100, 1)))  #6
+            tempstr.append(
+                trans('力量、智力 +{}%').format(round(属性.百分比力智 * 100, 1)))  #7
+            tempstr.append(
+                trans('发生持续伤害X秒,伤害量为对敌人增加造成伤害的{}%').format(
+                    round(属性.持续伤害 * 100, 1)))  #8
+            tempstr.append(trans('攻击速度 +{}%').format(round(属性.攻击速度 * 100,
+                                                           1)))  #9
+            tempstr.append(trans('施放速度 +{}%').format(round(属性.施放速度 * 100,
+                                                           1)))  #10
+            tempstr.append(trans('移动速度 +{}%').format(round(属性.移动速度 * 100,
+                                                           1)))  #11
 
         # 为防止部分**对显示造成误解，暂不在词条后显示加成
         # date = {2:属性.附加伤害增加增幅,
@@ -4768,13 +4780,13 @@ class 角色窗口(窗口):
     def 套装显示设置(self, 显示, 属性):
         count = 0
 
-        显示[count].setText(self.称号.currentText())
+        显示[count].setText(trans(self.称号.currentText()))
         显示[count].setStyleSheet(
             "QLabel{font-size:12px;color:rgb(255,255,255)}")
         显示[count].setToolTip(self.称号描述())
         count += 1
 
-        显示[count].setText(self.宠物.currentText())
+        显示[count].setText(trans(self.宠物.currentText()))
         显示[count].setStyleSheet(
             "QLabel{font-size:12px;color:rgb(255,255,255)}")
         显示[count].setToolTip(self.宠物描述())
@@ -4812,9 +4824,9 @@ class 角色窗口(窗口):
             套装件数.append([])
             套装属性.append('')
         tempstr = ''
-        武器词条属性 = ['力智', '三攻', '黄字', '白字', '暴伤', '终伤']
+        武器词条属性 = trans(['力智', '三攻', '黄字', '白字', '暴伤', '终伤'])
         if self.希洛克武器词条[0].currentIndex() == 1:
-            tempstr += "残香:{}+10%".format(武器词条属性[self.角色属性A.词条选择[0]])
+            tempstr += trans("残香:{}+10%").format(武器词条属性[self.角色属性A.词条选择[0]])
             if sum(self.希洛克选择状态) == 3:
                 tempstr += "|{}+5%".format(武器词条属性[self.角色属性A.词条选择[1]])
             套装.append(tempstr)
@@ -4824,9 +4836,9 @@ class 角色窗口(窗口):
         # 显示套装
         for i in range(len(套装)):
             if len(套装件数[i]) > 0:
-                显示[count].setText(套装[i] + '[' + str(max(套装件数[i])) + ']')
+                显示[count].setText(trans(套装[i]) + '[' + str(max(套装件数[i])) + ']')
             else:
-                显示[count].setText(套装[i])
+                显示[count].setText(trans(套装[i]))
             if 套装[i] in 神话所在套装:
                 显示[count].setStyleSheet(
                     "QLabel{font-size:12px;color:rgb(226,150,146)}")
@@ -4838,7 +4850,7 @@ class 角色窗口(窗口):
 
         try:
             #显示黑鸦词条
-            黑鸦部位 = ['武器', '戒指', '辅助装备', '下装']
+            黑鸦部位 = trans(['武器', '戒指', '辅助装备', '下装'])
             for i in range(4):
                 if 属性.黑鸦词条[i][4] != '':
                     显示[count].setText(黑鸦部位[i] + ':' +
@@ -5163,7 +5175,7 @@ class 角色窗口(窗口):
         pox_y2 = 11
         temp = ''
         if name == '':
-            temp += '详细数据'
+            temp += trans('详细数据')
             # if self.角色属性A.计算自适应方式 == 1:
             #     temp+= ' - 全局择优'
             # else:
@@ -5483,14 +5495,14 @@ class 角色窗口(窗口):
         pdata['名称'] = self.角色属性A.实际名称
         pdata['装备'] = temp
 
-        butten = QtWidgets.QPushButton('输出技能数据', 输出窗口)
+        butten = QtWidgets.QPushButton(trans('输出技能数据'), 输出窗口)
         butten.clicked.connect(lambda state, d=deepcopy(pdata): self.输出数据(d))
         butten.move(676, 540 - pox_y)
         butten.setStyleSheet(按钮样式)
         butten.resize(90, 21)
 
         词条提升率计算.输出提升率 = 总伤害数值
-        butten = QtWidgets.QPushButton('输出择优数据', 输出窗口)
+        butten = QtWidgets.QPushButton(trans('输出择优数据'), 输出窗口)
         butten.clicked.connect(lambda state: 词条提升率计算.伤害计算(0))
         butten.move(575, 540 - pox_y)
         butten.setStyleSheet(按钮样式)

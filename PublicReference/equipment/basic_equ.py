@@ -143,10 +143,14 @@ class 装备:
         属性.装备描述 = 1
         self.属性描述 = ''
         if self.部位 in ['上衣', '下装', '腰带', '头肩', '鞋']:
-            self.属性描述 += ('智力 +{}<br>'.format(self.智力['板甲'])) if self.智力['板甲'] > 0 else ''
-            self.属性描述 += ('力量 +{}<br>'.format(self.力量['板甲'])) if self.力量['板甲'] > 0 else ''
-            self.属性描述 += ('体力 +{}<br>'.format(self.体力['板甲'])) if self.体力['板甲'] > 0 else ''
-            self.属性描述 += ('精神 +{}<br>'.format(self.精神['板甲'])) if self.精神['板甲'] > 0 else ''
+            self.属性描述 += ('智力 +{}<br>'.format(
+                self.智力['板甲'])) if self.智力['板甲'] > 0 else ''
+            self.属性描述 += ('力量 +{}<br>'.format(
+                self.力量['板甲'])) if self.力量['板甲'] > 0 else ''
+            self.属性描述 += ('体力 +{}<br>'.format(
+                self.体力['板甲'])) if self.体力['板甲'] > 0 else ''
+            self.属性描述 += ('精神 +{}<br>'.format(
+                self.精神['板甲'])) if self.精神['板甲'] > 0 else ''
         else:
             self.属性描述 += ('智力 +{}<br>'.format(self.智力)) if self.智力 > 0 else ''
             self.属性描述 += ('力量 +{}<br>'.format(self.力量)) if self.力量 > 0 else ''
@@ -173,10 +177,14 @@ class 装备:
         属性.装备描述 = 1
         self.属性描述 = ''
         if self.部位 in ['上衣', '下装', '腰带', '头肩', '鞋']:
-            self.属性描述 += ('智力 +{}<br>'.format(self.智力['板甲'])) if self.智力['板甲'] > 0 else ''
-            self.属性描述 += ('力量 +{}<br>'.format(self.力量['板甲'])) if self.力量['板甲'] > 0 else ''
-            self.属性描述 += ('体力 +{}<br>'.format(self.体力['板甲'])) if self.体力['板甲'] > 0 else ''
-            self.属性描述 += ('精神 +{}<br>'.format(self.精神['板甲'])) if self.精神['板甲'] > 0 else ''
+            self.属性描述 += ('智力 +{}<br>'.format(
+                self.智力['板甲'])) if self.智力['板甲'] > 0 else ''
+            self.属性描述 += ('力量 +{}<br>'.format(
+                self.力量['板甲'])) if self.力量['板甲'] > 0 else ''
+            self.属性描述 += ('体力 +{}<br>'.format(
+                self.体力['板甲'])) if self.体力['板甲'] > 0 else ''
+            self.属性描述 += ('精神 +{}<br>'.format(
+                self.精神['板甲'])) if self.精神['板甲'] > 0 else ''
         else:
             self.属性描述 += ('智力 +{}<br>'.format(self.智力)) if self.智力 > 0 else ''
             self.属性描述 += ('力量 +{}<br>'.format(self.力量)) if self.力量 > 0 else ''

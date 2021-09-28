@@ -182,7 +182,7 @@ class 选择窗口(QWidget):
             self.计算器版本 += versionInfo['version'].replace('-', '.')
             # self.自动检查版本 = versionInfo['AutoCheckUpdate']
         fp.close()
-        self.setWindowTitle('DNF搭配计算器&17173DNF专区')
+        self.setWindowTitle(trans('DNF搭配计算器&17173DNF专区'))
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
 
@@ -231,7 +231,7 @@ class 选择窗口(QWidget):
                     txt_box = QLabel(self.topFiller)
                     txt_box.setStyleSheet(
                         'QLabel{font-size:13px;color:rgb(175,148,89)}')
-                    txt_box.setText(角色列表[i]["显示名称"])
+                    txt_box.setText(trans(角色列表[i]["显示名称"]))
                     txt_box.resize(121, 24)
                     txt_box.setAlignment(Qt.AlignCenter)
                     txt_box.move(100 + 偏移量 + (count % 5) * 125,
@@ -278,7 +278,7 @@ class 选择窗口(QWidget):
         # 为了女鬼调整位置
         count = 1
 
-        butten = QtWidgets.QPushButton('首页\n手册|日志|源码', self.topFiller)
+        butten = QtWidgets.QPushButton(trans('首页\n手册|日志|源码'), self.topFiller)
         # menu=QMenu()
         # action_0 = QAction('手册',parent=menu)
         # action_1 = QAction('日志',parent=menu)
@@ -295,7 +295,7 @@ class 选择窗口(QWidget):
 
         count += 1
 
-        butten = QtWidgets.QPushButton('检查更新', self.topFiller)
+        butten = QtWidgets.QPushButton(trans('检查更新'), self.topFiller)
         butten.clicked.connect(lambda state, index=count: self.检查更新())
         butten.move(100 + 偏移量 + 4 * 125, 10 + (count + 1) * 100)
         butten.setStyleSheet(按钮样式3)
@@ -305,7 +305,7 @@ class 选择窗口(QWidget):
             "配置文件有误，程序将以默认设置开启！\n请检查以下文件\nResourceFiles\\Config\\基础设置.ini\nResourceFiles\\Config\\攻击目标.ini\nResourceFiles\\Skins\\Skin.ini\n是否以UTF-8编码存储且文件内格式正确"
         )
         self.版本提示 = QMessageBox(QMessageBox.Question, "提示",
-                                "此工具为开源免费软件\n如遇二次售卖获利,请协助反馈举报~")
+                                trans("此工具为开源免费软件\n如遇二次售卖获利,请协助反馈举报~"))
         try:
             repJson = requests.get(
                 "https://i_melon.gitee.io/dnfcalculating/notice.json",
@@ -328,7 +328,7 @@ class 选择窗口(QWidget):
                 self.网盘检查()
                 if self.网盘报错 == 1:
                     self.报错提示 = QMessageBox(QMessageBox.Question, "提示",
-                                            "无法自动检查更新，请在每周三/四自行前往检查版本")
+                                            trans("无法自动检查更新，请在每周三/四自行前往检查版本"))
                     self.报错提示.setWindowIcon(self.icon)
                     # box.exec_()
                 if self.网盘链接 != '':
@@ -507,7 +507,7 @@ class 选择窗口(QWidget):
             C = box.button(QMessageBox.Cancel)
             A.setText("首页查看更新")
             B.setText("自动更新")
-            C.setText("取消")
+            C.setText(trans("取消"))
             box.exec_()
             if box.clickedButton() == B:
                 self.update()
@@ -516,7 +516,7 @@ class 选择窗口(QWidget):
 
     def processBar(self, process):
         if process < 100:
-            self.pbar.setFormat("正在下载..." + str(process) + '%')
+            self.pbar.setFormat("Downloading..." + str(process) + '%')
             self.pbar.setValue(process)
         else:
             self.遮罩.hide()
@@ -527,7 +527,7 @@ class 选择窗口(QWidget):
             box.setWindowIcon(self.icon)
             box.setStandardButtons(QMessageBox.Yes)
             A = box.button(QMessageBox.Yes)
-            A.setText("确定")
+            A.setText(trans("确定"))
             box.exec_()
             if box.clickedButton() == A:
                 for p in self.worker:
@@ -573,7 +573,7 @@ class 选择窗口(QWidget):
                 width: 10px;
             }
         ''')
-        self.pbar.setFormat("正在下载...")
+        self.pbar.setFormat("Downloading...")
         self.pbar.show()
         self.thread = Worker(fileURL=self.网盘链接)
         self.thread.sinOut.connect(self.processBar)
@@ -618,7 +618,7 @@ class SetWindows(QWidget):
         fp.close()
 
         self.setMinimumSize(805, 625)
-        self.setWindowTitle('全局设置选项(需重启计算器生效)')
+        self.setWindowTitle(trans('全局设置选项(需重启计算器生效)'))
         self.icon = QIcon('ResourceFiles/img/logo.ico')
         self.setWindowIcon(self.icon)
 
@@ -675,8 +675,8 @@ class SetWindows(QWidget):
         fp.close()
         box = QMessageBox(QMessageBox.Warning, "提示", "保存完毕，重启计算器才能生效，是否重启")
         box.setWindowIcon(self.icon)
-        yes = box.addButton(self.tr("确定"), QMessageBox.YesRole)
-        no = box.addButton(self.tr("取消"), QMessageBox.NoRole)
+        yes = box.addButton(self.tr(trans("确定")), QMessageBox.YesRole)
+        no = box.addButton(self.tr(trans("取消")), QMessageBox.NoRole)
         box.exec_()
         if box.clickedButton() == yes:
             self.立即重启()
