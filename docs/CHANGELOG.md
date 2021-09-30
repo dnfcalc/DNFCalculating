@@ -1,5 +1,14 @@
 ## Newest
 
+### 2021-09-30
+
+#### NewFeatures
+* 同步国服体验服职业平衡数据 ([85f0cc](https://gitee.com/i_melon/DNFCalculating/commit/85f0cce02b6dff77bda47e2569e3435ded157005))
+
+#### BugFixes
+* 修复奶系切一件觉醒等级及适用不对的bug ([8779eb](https://gitee.com/i_melon/DNFCalculating/commit/8779eb622cfe4d71839615b78498e5d294dacde3))
+* 修复奶系登记设置遴选词条显示不对的bug ([cefca9](https://gitee.com/i_melon/DNFCalculating/commit/cefca9e95e46bd018ede7dd8cd0441acd7bd0eb6))
+
 ### 2021-09-26
 
 #### BugFixes
@@ -98,6 +107,7 @@
 - 神启·蓝拳圣使：修复极速飓风拳护石 CD 问题 fix:#I44H6M ([e905f0](https://gitee.com/i_melon/DNFCalculating/commit/e905f03320cd710538f8708964d70d7723bff2a2))
 - 重霄·漫游枪手·男：修复致命回射 CD 问题 ([dd1fa5](https://gitee.com/i_melon/DNFCalculating/commit/dd1fa5b0420dbf3114d2b439c780b1808e4f7a59))
 - 隐夜·死灵术士：修正杀戮乱舞数据错误 ([1c68f7](https://gitee.com/i_melon/DNFCalculating/commit/1c68f7ce17fa7641b2ac855646c7ec0e506d70d2))
+
 
 
 
