@@ -1773,7 +1773,7 @@ class 角色窗口(窗口):
         self.装备条件选择[-1].addItems(
             trans(['幸运三角：数学期望', '幸运三角：7效果', '幸运三角：77效果', '幸运三角：777效果']))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems(['擎天战甲：过充电状态', '擎天战甲：过负荷状态'])
+        self.装备条件选择[-1].addItems(trans(['擎天战甲：过充电状态', '擎天战甲：过负荷状态']))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         for i in range(101):
             self.装备条件选择[-1].addItem(trans('持续伤害适用：') + str(100 - i) + '%')
@@ -2009,7 +2009,7 @@ class 角色窗口(窗口):
         行高 = 20
 
         counter = 0
-        for i in trans(["契约满级", "等级调整", " TP等级", "释放次数", "宠物次数"]):
+        for i in trans(["契约满级", "等级调整", "TP等级", "释放次数", "宠物次数"]):
             x = QLabel(i, self.main_frame2)
             x.move(横坐标 + 横坐标偏移量 - 30 + 50 * counter, 纵坐标 + 5)
             x.setStyleSheet(标签样式)
