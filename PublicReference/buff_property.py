@@ -76,7 +76,6 @@ class 辅助角色属性(属性):
     守护恩赐体精 = 0
     守护徽章per = 0
     转职被动智力 = 0
-    BUFF额外增幅率 = 0
 
     转职被动Lv = 0
     一觉被动Lv = 0
@@ -682,7 +681,7 @@ class 辅助角色属性(属性):
         return 总数据
 
     def 预计算(self, 自动切装=False):
-        if self.双装备模式 == 1 and self.技能表['一次觉醒'].是否启用 and self.技能表['BUFF'].是否启用 and 自动切装:
+        if self.双装备模式 == 1 and 自动切装:
             # 用于计算一觉
             temp = deepcopy(self)
             # 拷贝数据,并修改装备,返回可能的组合

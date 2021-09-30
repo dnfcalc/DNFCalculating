@@ -10,6 +10,7 @@ from PublicReference.equipment.武器融合_buff import *
 from PublicReference.equipment.称号_buff import *
 from PublicReference.equipment.辟邪玉_buff import *
 from PublicReference.equipment.黑鸦_buff import *
+from PublicReference.utils.common import *
 from PublicReference.view.DialogRegister import DefaultDialogRegister
 
 
@@ -2091,6 +2092,7 @@ class 角色窗口(窗口):
         if 输出 != 0:
             D = deepcopy(self.初始属性)
             self.输入属性(D)
+            D.双装备模式 = 0
             伤害列表 = []
             for i in 辟邪玉列表:
                 i.当前值 = i.最大值
@@ -2180,25 +2182,19 @@ class 角色窗口(窗口):
         self.面板显示[9].setText('力量:' + str(y[1]))
         self.面板显示[10].setText('智力:' + str(y[2]))
 
+        skill_buff = B.技能表['BUFF']
+        skill_awake = B.技能表['一次觉醒']
+        
         tempstr = []
-        tempstr.append('BUFF力量% :' + str(int(round(B.BUFF力量per * 100, 0))) +
-                       '%')
-        tempstr.append('BUFF智力% :' + str(int(round(B.BUFF智力per * 100, 0))) +
-                       '%')
-        tempstr.append('BUFF物攻% :' + str(int(round(B.BUFF物攻per * 100, 0))) +
-                       '%')
-        tempstr.append('BUFF魔攻% :' + str(int(round(B.BUFF魔攻per * 100, 0))) +
-                       '%')
-        tempstr.append('BUFF独立% :' + str(int(round(B.BUFF独立per * 100, 0))) +
-                       '%')
-        tempstr.append('一觉力智  :' + str(int(round(B.一觉力智, 0))))
-        tempstr.append('一觉力智% :' + str(int(round(B.一觉力智per * 100, 0))) + '%')
+        tempstr.append('BUFF力量% :' + to_percent(skill_buff.BUFF力量per))
+        tempstr.append('BUFF智力% :' + to_percent(skill_buff.BUFF智力per))
+        tempstr.append('BUFF物攻% :' + to_percent(skill_buff.BUFF物攻per))
+        tempstr.append('BUFF魔攻% :' + to_percent(skill_buff.BUFF魔攻per))
+        tempstr.append('BUFF独立% :' + to_percent(skill_buff.BUFF独立per))
+        tempstr.append('一觉力智  :' + str(int(round(skill_awake.一觉力智, 0))))
+        tempstr.append('一觉力智% :' + to_percent(skill_awake.一觉力智per))
         if B.角色 == '圣职者(男)':
-            tempstr.append('守护徽章% :' + str(int(round(B.守护徽章per * 100, 0))) +
-                           '%')
-        elif B.角色 == '圣职者(女)' or B.角色 == '圣职者(女)':
-            tempstr.append('BUFF增幅率:' + str(int(round(B.BUFF额外增幅率 * 100, 0))) +
-                           '%')
+            tempstr.append('守护徽章% :' + to_percent(B.守护徽章per))
         tempstr.append(str(总奶量))
 
         # if self.角色属性B.希洛克武器词条 == 1:
@@ -2549,30 +2545,19 @@ class 角色窗口(窗口):
             面板显示[i].resize(100, 18)
             面板显示[i].setAlignment(Qt.AlignLeft)
         
-        BUFF = self.角色属性B.技能表['BUFF']
-        AWAKE = self.角色属性B.技能表['一次觉醒']
+        skill_buff = self.角色属性B.技能表['BUFF']
+        skill_awake = self.角色属性B.技能表['一次觉醒']
 
         tempstr = []
-        tempstr.append('BUFF力量% :' +
-                       str(int(round(BUFF.BUFF力量per * 100, 0))) + '%')
-        tempstr.append('BUFF智力% :' +
-                       str(int(round(BUFF.BUFF智力per * 100, 0))) + '%')
-        tempstr.append('BUFF物攻% :' +
-                       str(int(round(BUFF.BUFF物攻per * 100, 0))) + '%')
-        tempstr.append('BUFF魔攻% :' +
-                       str(int(round(BUFF.BUFF魔攻per * 100, 0))) + '%')
-        tempstr.append('BUFF独立% :' +
-                       str(int(round(BUFF.BUFF独立per * 100, 0))) + '%')
-        tempstr.append('一觉力智  :' + str(int(round(AWAKE.一觉力智, 0))))
-        tempstr.append('一觉力智% :' +
-                       str(int(round(AWAKE.一觉力智per * 100, 0))) + '%')
+        tempstr.append('BUFF力量% :' + to_percent(skill_buff.BUFF力量per))
+        tempstr.append('BUFF智力% :' + to_percent(skill_buff.BUFF智力per))
+        tempstr.append('BUFF物攻% :' + to_percent(skill_buff.BUFF物攻per))
+        tempstr.append('BUFF魔攻% :' + to_percent(skill_buff.BUFF魔攻per))
+        tempstr.append('BUFF独立% :' + to_percent(skill_buff.BUFF独立per))
+        tempstr.append('一觉力智  :' + str(int(round(skill_awake.一觉力智, 0))))
+        tempstr.append('一觉力智% :' + to_percent(skill_awake.一觉力智per))
         if self.角色属性B.角色 == '圣职者(男)':
-            tempstr.append('守护徽章% :' +
-                           str(int(round(self.角色属性B.守护徽章per * 100, 0))) + '%')
-        elif self.角色属性B.角色 == '圣职者(女)' or self.角色属性B.角色 == '魔法师(女)':
-            tempstr.append('BUFF增幅率:' +
-                           str(int(round(self.角色属性B.BUFF额外增幅率 * 100, 0))) +
-                           '%')
+            tempstr.append('守护徽章% :' + to_percent(self.角色属性B.守护徽章per))
 
         j = 318
         for i in tempstr:
@@ -3321,9 +3306,6 @@ class 角色窗口(窗口):
             elif self.觉醒选择状态 == 2:
                 属性.技能表['三次觉醒'].关联技能 = [属性.技能表['二次觉醒'].名称]
 
-        if self.切装模式选项.isChecked() and self.计算模式选择.currentIndex() != 2:
-            属性.双装备模式 = 1
-            pass
 
         count = 0
         for i in equ.get_equ_list():
@@ -3378,6 +3360,9 @@ class 角色窗口(窗口):
             skill.是否启用 = self.次数输入[num].currentIndex()
             num += 1
 
+        if self.切装模式选项.isChecked() and self.计算模式选择.currentIndex() != 2 and 属性.技能表['BUFF'].是否启用 and 属性.技能表['一次觉醒'].是否启用:
+            属性.双装备模式 = 1
+            pass
         if 黑鸦词条 is None or len(黑鸦词条) == 0:
             黑鸦词条 = []
             for i in range(4):
