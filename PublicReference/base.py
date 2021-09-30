@@ -2160,7 +2160,7 @@ class 角色窗口(窗口):
         横坐标 = 480
         纵坐标 = 20
         行高 = 18
-        x = QLabel("护石" + "Ⅰ", self.main_frame2)
+        x = QLabel(trans("护石") + "Ⅰ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -2174,7 +2174,7 @@ class 角色窗口(窗口):
             lambda state, index=0: self.护石类型选项更新(index))
         纵坐标 += 25
         for i in range(3):
-            tempstr = '符文' + str(i + 1) + '选择: '
+            tempstr = trans("符文") + str(i + 1) + trans("选择:")
             x = QLabel(tempstr, self.main_frame2)
             x.move(横坐标, 纵坐标)
             x.setStyleSheet(标签样式)
@@ -2192,7 +2192,7 @@ class 角色窗口(窗口):
 
         横坐标 = 650
         纵坐标 = 20
-        x = QLabel("护石" + "Ⅱ", self.main_frame2)
+        x = QLabel(trans("护石") + "Ⅱ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -2206,7 +2206,7 @@ class 角色窗口(窗口):
             lambda state, index=1: self.护石类型选项更新(index))
         纵坐标 += 25
         for i in range(3, 6):
-            tempstr = '符文' + str(i + 1) + '选择: '
+            tempstr = trans("符文") + str(i + 1) + trans("选择:")
             x = QLabel(tempstr, self.main_frame2)
             x.move(横坐标, 纵坐标)
             x.setStyleSheet(标签样式)
@@ -2220,7 +2220,7 @@ class 角色窗口(窗口):
 
         横坐标 = 820
         纵坐标 = 20
-        x = QLabel("护石" + "Ⅲ", self.main_frame2)
+        x = QLabel(trans("护石") + "Ⅲ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         y = MyQComboBox(self.main_frame2)
@@ -2234,7 +2234,7 @@ class 角色窗口(窗口):
             lambda state, index=2: self.护石类型选项更新(index))
         纵坐标 += 25
         for i in range(6, 9):
-            tempstr = '符文' + str(i + 1) + '选择: '
+            tempstr = trans("符文") + str(i + 1) + trans("选择:")
             x = QLabel(tempstr, self.main_frame2)
             x.move(横坐标, 纵坐标)
             x.setStyleSheet(标签样式)

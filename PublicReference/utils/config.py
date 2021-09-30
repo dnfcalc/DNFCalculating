@@ -86,6 +86,7 @@ SkinVersion = ["DNFStyle", "LightStyle", "None"][setJson['5']]
 战术白字 = 0.40 + 0.05 * setJson['10']
 天御套装 = setJson['11']
 千蛛减防 = setJson['12']
+多语言开关 = setJson['13']
 
 if 输出数据 == 1:
     if not os.path.exists('./数据记录'):
@@ -128,6 +129,8 @@ if os.path.exists(languagePath):
         fp.close()
 
 def trans(key):
+    if 多语言开关 == 0:
+        return key
     show = key
     if type(key) == type([]):
         show = []
