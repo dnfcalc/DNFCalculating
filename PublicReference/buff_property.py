@@ -1,13 +1,17 @@
 from ctypes import *
 
 from PublicReference.common import *
-from PublicReference.equipment.宠物_buff import *
-from PublicReference.equipment.武器融合_buff import *
-from PublicReference.equipment.称号_buff import *
-from PublicReference.equipment.融合_奥兹玛_buff import OzmaList
-from PublicReference.equipment.融合_希洛克_buff import SirocoList
-from PublicReference.equipment.辟邪玉_buff import *
-from PublicReference.equipment.黑鸦_buff import *
+from PublicReference.equipment.buff.宠物_buff import *
+from PublicReference.equipment.buff.武器融合_buff import *
+from PublicReference.equipment.buff.称号_buff import *
+from PublicReference.equipment.buff.融合_奥兹玛_buff import OzmaList
+from PublicReference.equipment.buff.融合_希洛克_buff import SirocoList
+from PublicReference.equipment.buff.辟邪玉_buff import *
+from PublicReference.equipment.buff.黑鸦_buff import *
+from PublicReference.equipment.buff.护石_buff import *
+from PublicReference.equipment.buff.描述_buff import *
+
+preferred = None
 
 try:
     preferred = ctypes.WinDLL(dllPath)
@@ -40,7 +44,7 @@ class 技能:
             else:
                 self.等级 += x
 
-    def 结算统计(self):
+    def 结算统计(self, context=None):
         return [0, 0, 0, 0, 0, 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -53,6 +57,60 @@ class 被动技能(技能):
 class 主动技能(技能):
     是否主动 = 1
     适用数值 = 0
+
+
+class 觉醒技能(主动技能):
+    所在等级 = 50
+    等级上限 = 40
+    基础等级 = 12
+    一觉力智 = 0
+    一觉力智per = 0
+    # 28 原力智 941  测试修改为 939
+    力智 = [0, 43, 57, 74, 91, 111, 131, 153, 176, 201, 228, 255, 284, 315, 346, 379, 414, 449, 487, 526, 567, 608,
+          651, 696, 741, 789, 838, 888, 939, 993, 1047, 1103, 1160, 1219, 1278, 1340, 1403, 1467, 1533, 1600, 1668]
+
+    def 结算统计(self, context, compute_3rd_awake=False):
+        if not compute_3rd_awake and self.名称 in context.技能表['三次觉醒'].关联技能:
+            return [0]*8
+        倍率 = self.适用数值 / 750 + 1
+        x = (self.力智[self.等级] + self.一觉力智) * 倍率
+        values = [0, 0, 0, int(round(x * self.一觉力智per)),
+                  int(round(x * self.一觉力智per)), 0, 0, 0]
+        return values
+        # 智力 体力 精神  力量  智力  物攻  魔攻 独立
+
+    def 技能面板(self):
+        temp = []
+        temp.append(self.名称)
+        temp.append(
+            int(round((self.力智[self.等级] + self.一觉力智) * self.一觉力智per, 0)))
+        temp.append(
+            int(round((self.力智[self.等级] + self.一觉力智) * self.一觉力智per, 0)))
+        return temp
+
+
+class 三觉技能(主动技能):
+    所在等级 = 100
+    等级上限 = 40
+    基础等级 = 2
+    绑定一觉力智per = 1.08
+    绑定二觉力智per = 0.23
+    关联技能 = []
+
+    def 结算统计(self, context):
+        技能表 = context.技能表
+        awake = 技能表['一次觉醒']
+        if awake.是否启用:
+            values = awake.结算统计(context, True)
+            倍率 = self.加成倍率(awake.名称 in self.关联技能)
+            return [int(round(i * 倍率)) for i in values]
+        return [0]*8
+
+    def 加成倍率(self, bind_awake):
+        if bind_awake:
+            return round(1.08 + self.等级 * 0.01, 2)
+        else:
+            return round(0.23 + self.等级 * 0.01, 2)
 
 
 BUFF影响技能 = ['勇气祝福', '勇气圣歌', '荣誉祝福', '禁忌诅咒', '死命召唤']
@@ -74,7 +132,6 @@ class 辅助角色属性(属性):
 
     被动进图加成 = 0
     守护恩赐体精 = 0
-    守护徽章per = 0
     转职被动智力 = 0
 
     转职被动Lv = 0
@@ -132,6 +189,7 @@ class 辅助角色属性(属性):
         self.武器词条触发 = 0
         self.buff_type = 0
         self.buff_rate = 1
+        self.护石栏 = [0]*3
 
     def get_data(self):
         buff = self.技能表['BUFF']
@@ -145,18 +203,18 @@ class 辅助角色属性(属性):
         for i in self.技能表.keys():
             if i not in ignores:
                 skill = self.技能表[i]
-                data = skill.结算统计()
+                data = skill.结算统计(self)
                 other_power += data[3]
                 other_attack += data[5]
 
         in_int_data = (ctypes.c_int * 12)()
         in_int_data[0] = self.buff_type
         in_int_data[1] = int(buff.适用数值)
-        in_int_data[2] = buff.等级 
+        in_int_data[2] = buff.等级
         in_int_data[3] = int(buff.BUFF力量)
         in_int_data[4] = int(buff.BUFF物攻)
         in_int_data[5] = int(awake.适用数值)
-        in_int_data[6] = awake.等级 
+        in_int_data[6] = awake.等级
         in_int_data[7] = int(awake.一觉力智)
         in_int_data[8] = int(other_power)
         in_int_data[9] = int(other_attack)
@@ -167,9 +225,9 @@ class 辅助角色属性(属性):
 
         awake_rate = 1
         if third_awake.是否启用:
-            awake_rate = third_awake.加成倍率()
+            awake_rate = third_awake.加成倍率(awake.名称 in third_awake.关联技能)
             awake_rate = awake_rate + 1 if awake_rate < 1 else awake_rate
-        
+
         awake_rate = awake_rate if awake.是否启用 else 0
 
         buff_rate = self.buff_rate if buff.是否启用 else 0
@@ -193,20 +251,10 @@ class 辅助角色属性(属性):
         self.武器类型 = equ.get_equ_by_name(self.装备栏[11]).类型
 
     def 力智固定加成(self, x=0):
-        if self.装备描述 == 1:
-            return '力量、智力 +{}<br>'.format(x)
-        else:
-            self.力量 += x
-            self.智力 += x
-        return ''
+        return 力智固定加成(self,x)
 
     def 体精固定加成(self, x=0):
-        if self.装备描述 == 1:
-            return '体力、精神 +{}<br>'.format(x)
-        else:
-            self.体力 += x
-            self.精神 += x
-        return ''
+        return 体精固定加成(self,x)
 
     def BUFF增加(self,
                BUFFLv=0,
@@ -220,67 +268,9 @@ class 辅助角色属性(属性):
                BUFF物攻per=1,
                BUFF魔攻per=1,
                BUFF独立per=1):
-        if self.装备描述 == 1:
-            tem = ''
-            if BUFFLv > 0:
-                tem += '[{}]技能Lv +{}<br>'.format(
-                    self.技能表['BUFF'].名称, int(BUFFLv))
-
-            if BUFF力量 > 0 and BUFF智力 > 0:
-                tem += 'Lv30 Buff技能力量、智力增加量 +{}<br>'.format(int(BUFF力量))
-            elif BUFF力量 > 0:
-                tem += 'Lv30 Buff技能力量增加量 +{}<br>'.format(int(BUFF力量))
-            elif BUFF智力 > 0:
-                tem += 'Lv30 Buff技能智力增加量 +{}<br>'.format(int(BUFF智力))
-
-            if BUFF力量per > 1 and BUFF智力per > 1:
-                tem += 'Lv30 Buff技能力智增加量 +{}%<br>'.format(
-                    round((BUFF力量per - 1) * 100, 0))
-            elif BUFF力量per > 1:
-                tem += 'Lv30 Buff技能力量增加量 +{}%<br>'.format(
-                    round((BUFF力量per - 1) * 100, 0))
-            elif BUFF智力per > 1:
-                tem += 'Lv30 Buff技能智力增加量 +{}%<br>'.format(
-                    round((BUFF智力per - 1) * 100, 0))
-
-            if BUFF物攻 > 0 and BUFF魔攻 > 0 and BUFF独立 > 0:
-                tem += 'Lv30 Buff技能物理、魔法、独立攻击力增加量 +{}<br>'.format(int(BUFF物攻))
-            elif BUFF物攻 > 0:
-                tem += 'Lv30 Buff技能物理攻击力增加量 +{}<br>'.format(int(BUFF物攻))
-            elif BUFF魔攻 > 0:
-                tem += 'Lv30 Buff技能魔法攻击力增加量 +{}<br>'.format(int(BUFF魔攻))
-            elif BUFF独立 > 0:
-                tem += 'Lv30 Buff技能独立攻击力增加量 +{}<br>'.format(int(BUFF独立))
-
-            if BUFF物攻per > 1 and BUFF魔攻per > 1 and BUFF独立per > 1:
-                tem += 'Lv30 Buff技能物理、魔法、独立攻击力增加量 +{}%<br>'.format(
-                    round((BUFF物攻per - 1) * 100, 0))
-            elif BUFF物攻per > 1:
-                tem += 'Lv30 Buff技能物理攻击力增加量 +{}%<br>'.format(
-                    round((BUFF物攻per - 1) * 100, 0))
-            elif BUFF魔攻per > 1:
-                tem += 'Lv30 Buff技能魔法攻击力增加量 +{}%<br>'.format(
-                    round((BUFF魔攻per - 1) * 100, 0))
-            elif BUFF独立per > 1:
-                tem += 'Lv30 Buff技能独立攻击力增加量 +{}%<br>'.format(
-                    round((BUFF独立per - 1) * 100, 0))
-            return tem
-        else:
-            self.BUFFLv += BUFFLv
-            self.BUFF力量 += BUFF力量
-            self.BUFF智力 += BUFF智力
-            self.BUFF物攻 += BUFF物攻
-            self.BUFF魔攻 += BUFF魔攻
-            self.BUFF独立 += BUFF独立
-            self.BUFF力量per *= BUFF力量per
-            self.BUFF智力per *= BUFF智力per
-            self.BUFF物攻per *= BUFF物攻per
-            self.BUFF魔攻per *= BUFF魔攻per
-            self.BUFF独立per *= BUFF独立per
-        return ''
+        return BUFF增加(self, BUFFLv, BUFF力量, BUFF智力, BUFF力量per, BUFF智力per, BUFF物攻, BUFF魔攻, BUFF独立, BUFF物攻per, BUFF魔攻per, BUFF独立per)
 
     def 被动增加(self,
-             守护恩赐Lv=0,
              守护恩赐体精=0,
              转职被动Lv=0,
              转职被动智力=0,
@@ -288,60 +278,12 @@ class 辅助角色属性(属性):
              信念光环体精=0,
              一觉被动Lv=0,
              一觉被动力智=0):
-        if self.装备描述 == 1:
-
-            tem = ''
-            if self.角色 == '圣职者(男)':
-                if 守护恩赐Lv > 0:
-                    tem += '[守护恩赐]技能Lv +{}<br>'.format(int(守护恩赐Lv))
-                if 守护恩赐体精 > 0:
-                    tem += '[守护恩赐]体力、精神 +{}<br>'.format(int(守护恩赐体精))
-                if 信念光环Lv > 0:
-                    tem += '[信念光环]技能Lv +{}'.format(int(信念光环Lv))
-                if 信念光环体精 > 0:
-                    tem += '[信念光环]体力、精神增加量 +{}<br>'.format(int(信念光环体精))
-            else:
-                转职被动 = {'圣职者(女)': '启示:圣歌', '魔法师(女)': '人偶操纵者'}[self.角色]
-                觉醒被动 = {'圣职者(女)': '虔诚信念', '魔法师(女)': '少女的爱'}[self.角色]
-                if 转职被动Lv > 0:
-                    tem += '[{}]技能Lv +{}<br>'.format(转职被动, int(转职被动Lv))
-                if 转职被动智力 > 0:
-                    tem += '[{}]智力 +{}<br>'.format(转职被动, int(转职被动智力))
-                if 一觉被动Lv > 0:
-                    tem += '[{}]技能Lv +{}<br>'.format(觉醒被动, int(一觉被动Lv))
-                if 一觉被动力智 > 0:
-                    tem += '[{}]力量、智力增加量 +{}<br>'.format(觉醒被动, int(一觉被动力智))
-            return tem
-        else:
-            self.转职被动Lv += 转职被动Lv
-            self.守护恩赐体精 += 守护恩赐体精
-            self.转职被动智力 += 转职被动智力
-            self.一觉被动Lv += 一觉被动Lv
-            self.信念光环体精 += 信念光环体精
-            self.一觉被动力智 += 一觉被动力智
-        return ''
+        if 信念光环Lv > 0 and 一觉被动Lv == 0:
+            一觉被动Lv = 信念光环Lv
+        return 被动增加(self, 转职被动Lv, 转职被动智力, 守护恩赐体精, 信念光环体精, 一觉被动Lv, 一觉被动力智)
 
     def 觉醒增加(self, 一觉Lv=0, 一觉力智=0, 一觉力智per=1):
-        if self.装备描述 == 1:
-            tem = ''
-            if 一觉Lv > 0:
-                if self.角色 == '圣职者(女)':
-                    tem += '[圣光天启]技能Lv +{}<br>'.format(int(一觉Lv))
-                elif self.角色 == '圣职者(男)':
-                    tem += '[天启之珠]技能Lv +{}<br>'.format(int(一觉Lv))
-                elif self.角色 == '魔法师(女)':
-                    tem += '[开幕！人偶剧场]技能Lv +{}<br>'.format(int(一觉Lv))
-            elif 一觉力智 > 0:
-                tem += 'Lv50 主动技能力量、智力增加量 +{}<br>'.format(int(一觉力智))
-            elif 一觉力智per > 1:
-                tem += 'Lv50 主动技能力量、智力增加量 +{}%<br>'.format(
-                    round((一觉力智per - 1) * 100, 0))
-            return tem
-        else:
-            self.一觉Lv += 一觉Lv
-            self.一觉力智 += 一觉力智
-            self.一觉力智per *= 一觉力智per
-        return ''
+        return 觉醒增加(self, 一觉Lv, 一觉力智, 一觉力智per)
 
     def 系数数值站街(self):
         pass
@@ -487,7 +429,7 @@ class 辅助角色属性(属性):
         self.专属词条计算()
         for skill in self.技能表.values():
             if skill.是否启用:
-                结算 = skill.结算统计()
+                结算 = skill.结算统计(self)
                 self.智力 += 结算[0]
                 self.体力 += 结算[1]
                 self.精神 += 结算[2]
@@ -515,7 +457,7 @@ class 辅助角色属性(属性):
         return 进图
 
     # 返回可能的组合列表
-    def 装备替换(self, 属性:属性) -> 属性:
+    def 装备替换(self, 属性: 属性) -> 属性:
         套装栏 = []
         for i in 属性.套装栏:
             套装栏.append(i.split('[')[0])
@@ -630,7 +572,7 @@ class 辅助角色属性(属性):
                     siroco.set_character(self)
                     sirocos.append(siroco)
                 siroco.fuse(i % 3)
-
+            
         for siroco in sirocos:
             siroco.compute()
 
@@ -671,14 +613,18 @@ class 辅助角色属性(属性):
                 装备属性.当前值 = int(装备属性数值 if 装备属性数值 != '' else 0)
                 装备属性.变换属性(self)
 
-    def 数据计算(self):
-        总数据 = []
+    def compute(self, match=None, handle=None):
+        if match is None:
+            def match(skill): return skill.是否启用
+        if handle is None:
+            def handle(skill, values): return values
+        data = []
         for skill in self.技能表.values():
-            if skill.是否启用:
-                总数据.append(skill.结算统计())
-            else:
-                总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
-        return 总数据
+            values = skill.结算统计(self) if match(skill) else [0]*8
+            values = handle(skill, values)
+            data.append(values)
+        self.awake_computed = False
+        return data
 
     def 预计算(self, 自动切装=False):
         if self.双装备模式 == 1 and 自动切装:
@@ -693,11 +639,13 @@ class 辅助角色属性(属性):
                 一觉计算属性.装备属性计算()
                 一觉计算属性.适用数值计算()
                 替换属性_temp.append(一觉计算属性)
+                一觉计算属性.awake_computed = False
                 一觉 = 一觉计算属性.技能表['一次觉醒']
                 三觉 = 一觉计算属性.技能表['三次觉醒']
-                数据 = 三觉.结算统计()[3]
+                数据 = 三觉.结算统计(一觉计算属性)[3]
                 if 一觉.名称 not in 三觉.关联技能:
-                    数据 += 一觉.结算统计()[3]
+                    数据 += 一觉.结算统计(一觉计算属性)[3]
+                一觉计算属性.awake_computed = False
                 数据列表.append(数据)  # 3是力量属性  一觉力智都是相等的
                 切换列表.append(一觉计算属性.切换详情)
                 # 取一觉最大值,并修改数据
@@ -848,7 +796,7 @@ class 辅助角色属性(属性):
             武器属性B.融合属性(self)
         else:
             index_b = 0
-        self.残香词条 = [index_a,0,index_b,0]
+        self.残香词条 = [index_a, 0, index_b, 0]
 
     def 黑鸦属性输入(self, indices):
         for i in range(1, 4):
@@ -880,14 +828,14 @@ class 辅助角色属性(属性):
             if self.实际名称 == 'BUFF·神启·圣骑士':
                 if self.是否加觉醒 == 1:
                     self.技能表['一次觉醒'].适用数值 += self.一觉切装加二觉增加体精
-        for skill in self.技能表.values():
-            if skill.是否启用:
-                values = skill.结算统计()
-                if skill.所在等级 in [50, 100]:
-                    values = [round(i * self.觉醒择优系数) for i in values]
-                总数据.append(values)
-            else:
-                总数据.append([0, 0, 0, 0, 0, 0, 0, 0])
+
+        def handle(skill, values):
+            if skill.所在等级 in [50, 100]:
+                values = [int(round(i * self.觉醒择优系数)) for i in values]
+            return values
+
+        self.compute(None, handle)
+
         return self.提升率计算(总数据)
 
     def 结果返回(self, x, 总数据):
@@ -900,10 +848,10 @@ class 辅助角色属性(属性):
 
     def BUFF计算(self, x=0):
         self.预计算(自动切装=True)
-        总数据 = self.数据计算()
+        总数据 = self.compute()
         return self.结果返回(x, 总数据)
 
-    def 装备属性计算(self,x = 0):
+    def 装备属性计算(self, x=0):
         self.装备基础()
         # self.专属词条计算()
 
@@ -931,11 +879,10 @@ class 辅助角色属性(属性):
         for suit in suits:
             suit.城镇属性_BUFF(self)
             suit.BUFF属性(self)
-       
+
         self.黑鸦计算()
         self.希洛克计算()
         self.奥兹玛计算()
-
 
         if self.排行系数 == 1 or x:
             P = deepcopy(self)
@@ -956,27 +903,19 @@ class 辅助角色属性(属性):
 
     def 站街计算(self):
         self.专属词条计算()
+
         for skill in self.技能表.values():
             if skill.站街生效 == 1:
                 skill.进图加成 = 0
-                结算 = skill.结算统计()
+                结算 = skill.结算统计(self)
                 self.智力 += 结算[0]
                 self.体力 += 结算[1]
                 self.精神 += 结算[2]
 
-    def 护石计算(self, 护石选项):
-        if 护石选项 == 'BUFF力量、智力+2%':
-            self.BUFF力量per *= 1.02
-            self.BUFF智力per *= 1.02
-        elif 护石选项 == 'BUFF力量、智力+4%':
-            self.BUFF力量per *= 1.04
-            self.BUFF智力per *= 1.04
-        elif 护石选项 == 'BUFF力量、智力+6%':
-            self.BUFF力量per *= 1.06
-            self.BUFF智力per *= 1.06
-        elif 护石选项 == 'BUFF力量、智力+8%':
-            self.BUFF力量per *= 1.08
-            self.BUFF智力per *= 1.08
+    def 护石计算(self):
+        indices = self.护石栏
+        for i in indices:
+            Talismans(self, i)
 
     def BUFF面板(self):
         return self.技能表['BUFF'].技能面板()

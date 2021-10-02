@@ -1167,7 +1167,7 @@ class 窗口(QWidget):
         if self.初始属性.职业分类 == '输出':
             from PublicReference.equipment.辟邪玉 import 辟邪玉列表
         else:
-            from PublicReference.equipment.辟邪玉_buff import 辟邪玉列表
+            from PublicReference.equipment.buff.辟邪玉_buff import 辟邪玉列表
         self.辟邪玉数值[index].clear()
         x = self.辟邪玉选择[index].currentIndex()
         temp = 辟邪玉列表[x].最大值 * 10
@@ -1183,7 +1183,7 @@ class 窗口(QWidget):
         if self.初始属性.职业分类 == '输出':
             from PublicReference.equipment.辟邪玉 import 辟邪玉列表
         else:
-            from PublicReference.equipment.辟邪玉_buff import 辟邪玉列表
+            from PublicReference.equipment.buff.辟邪玉_buff import 辟邪玉列表
         for i in range(4):
             x = self.辟邪玉选择[i].currentIndex()
             if self.辟邪玉数值[i].currentIndex() >= 0:

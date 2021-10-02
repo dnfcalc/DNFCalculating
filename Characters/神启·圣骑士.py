@@ -14,7 +14,7 @@ class 神启·圣骑士技能0(被动技能):
     def 智力加成(self):
         return self.智力[self.等级] + self.额外智力 + self.进图加成
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [self.智力加成(), 0, 0, 0, 0, 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -39,7 +39,7 @@ class 神启·圣骑士技能1(主动技能):
     力智 = [0, 148, 158, 169, 179, 189, 198, 208, 218, 228, 239, 249, 259, 269, 279, 290, 299, 309, 319, 329, 339, 349, 360, 370, 380, 390, 399, 409, 420, 430, 440, 450, 460, 470, 481,
           491, 500, 510, 520, 530, 541, 551, 561, 571, 581, 592, 601, 611, 621, 631, 641, 651, 662, 672, 682, 692, 701, 711, 722, 732, 742, 752, 762, 772, 783, 793, 802, 812, 822, 832, 843]
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         倍率 = self.适用数值 / 665 + 1
         temp = [0, 0, 0]  # 智力,体力,精神
         temp.append(int(round(
@@ -77,9 +77,10 @@ class 神启·圣骑士技能2(主动技能):
     基础等级 = 24
     增幅倍率 = 0.15
 
-    def 结算统计(self):
-        if(self.技能表['BUFF'].是否启用 == 1):
-            values = self.技能表['BUFF'].结算统计()
+    def 结算统计(self,context):
+        buff = context.技能表['BUFF']
+        if buff.是否启用:
+            values = buff.结算统计(context)
             return [int(round(i * self.增幅倍率)) for i in values]
         return [0]*8
 
@@ -94,7 +95,7 @@ class 神启·圣骑士技能3(主动技能):
     def 力智加成(self):
         return self.力智 + self.等级 * 6
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [0, 0, 0, self.力智加成(), self.力智加成(), 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -118,37 +119,14 @@ class 神启·圣骑士技能4(被动技能):
         else:
             return 0
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [self.力智加成(), 0, 0, self.力智加成(), self.力智加成(), 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
 
-class 神启·圣骑士技能5(主动技能):
+class 神启·圣骑士技能5(觉醒技能):
     名称 = '圣光天启'
-    所在等级 = 50
-    等级上限 = 40
-    基础等级 = 12
-    一觉力智 = 0
-    一觉力智per = 0
-    # 28 原力智 941  测试修改为 939
-    力智 = [0, 43, 57, 74, 91, 111, 131, 153, 176, 201, 228, 255, 284, 315, 346, 379, 414, 449, 487, 526, 567, 608,
-          651, 696, 741, 789, 838, 888, 939, 993, 1047, 1103, 1160, 1219, 1278, 1340, 1403, 1467, 1533, 1600, 1668]
-
-    def 结算统计(self, 计算三觉=False):
-        if 计算三觉 is False and self.名称 in self.技能表['三次觉醒'].关联技能:
-            return [0]*8
-        倍率 = self.适用数值 / 750 + 1
-        x = (self.力智[self.等级] + self.一觉力智) * 倍率
-        return [0, 0, 0, int(round(x * self.一觉力智per)), int(round(x * self.一觉力智per)), 0, 0, 0]
-
-    def 技能面板(self):
-        temp = []
-        temp.append(self.名称)
-        temp.append(
-            int(round((self.力智[self.等级] + self.一觉力智) * self.一觉力智per, 0)))
-        temp.append(
-            int(round((self.力智[self.等级] + self.一觉力智) * self.一觉力智per, 0)))
-        return temp
+    pass
 
 
 class 神启·圣骑士技能6(被动技能):
@@ -163,7 +141,7 @@ class 神启·圣骑士技能6(被动技能):
     def 智力加成(self):
         return self.智力[self.等级]
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [self.智力加成(), 0, 0, 0, 0, 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -174,7 +152,7 @@ class 神启·圣骑士技能7(主动技能):
     等级上限 = 40
     基础等级 = 5
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [0, 0, 0, 0, 0, 0, 0, 0]
 
 
@@ -190,32 +168,17 @@ class 神启·圣骑士技能8(被动技能):
     def 智力加成(self):
         return self.智力[self.等级]
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [self.智力加成(), 0, 0, 0, 0, 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
 
-class 神启·圣骑士技能9(主动技能):
+class 神启·圣骑士技能9(三觉技能):
     名称 = '祈愿·天使赞歌'
-    所在等级 = 100
-    等级上限 = 40
-    基础等级 = 2
     关联技能 = ['救赎彼岸：惩戒圣枪']
-    绑定一觉力智per = 1.08
-    绑定二觉力智per = 0.23
+    pass
 
-    def 结算统计(self):
-        if(self.技能表['一次觉醒'].是否启用 == 1):
-            values = self.技能表['一次觉醒'].结算统计(True)
-            倍率 = self.加成倍率()
-            return [int(round(i * 倍率)) for i in values]
-        return [0]*8
 
-    def 加成倍率(self):
-        if '圣光天启' in self.关联技能:
-            return round(1.08 + self.等级 * 0.01, 2)
-        else:
-            return round(0.23 + self.等级 * 0.01, 2)
 
 
 技能表 = {}

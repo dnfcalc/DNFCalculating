@@ -4,12 +4,6 @@ from PublicReference.buff_panel import *
 from PublicReference.buff_property import *
 from PublicReference.choise.选项设置_buff import *
 from PublicReference.common import *
-from PublicReference.equipment.equ_list import *
-from PublicReference.equipment.宠物_buff import *
-from PublicReference.equipment.武器融合_buff import *
-from PublicReference.equipment.称号_buff import *
-from PublicReference.equipment.辟邪玉_buff import *
-from PublicReference.equipment.黑鸦_buff import *
 from PublicReference.utils.common import *
 from PublicReference.view.DialogRegister import DefaultDialogRegister
 
@@ -407,20 +401,24 @@ class 角色窗口(窗口):
 
         横坐标 = 740
         纵坐标 = 30
-        名称 = ['奈克斯', '暗杀者', '卢克西', '守门人', '洛多斯']
         self.希洛克套装按钮 = []
         self.希洛克单件按钮 = []
         self.希洛克遮罩透明度 = []
         self.希洛克选择状态 = [0] * 15
 
+
+
+
         count = 0
-        for i in 名称:
+        for i in 希洛克套装:
             self.希洛克套装按钮.append(QPushButton(i, self.main_frame2))
             self.希洛克套装按钮[count].setStyleSheet(按钮样式)
             self.希洛克套装按钮[count].resize(50, 22)
             self.希洛克套装按钮[count].move(横坐标, 纵坐标 + 3 + count * 40)
             self.希洛克套装按钮[count].clicked.connect(
                 lambda state, index=(count + 1) * 100: self.希洛克选择(index))
+
+
             for j in range(3):
                 序号 = count * 3 + j
                 图片 = QLabel(self.main_frame2)
@@ -430,32 +428,40 @@ class 角色窗口(窗口):
                 图片.move(横坐标 + 60 + j * 30, 纵坐标 + count * 40)
                 self.希洛克遮罩透明度.append(QGraphicsOpacityEffect())
                 self.希洛克遮罩透明度[序号].setOpacity(0.5)
-                self.希洛克单件按钮.append(QPushButton(self.main_frame2))
-                self.希洛克单件按钮[序号].setStyleSheet(
-                    "background-color: rgb(0, 0, 0)")
-                self.希洛克单件按钮[序号].resize(28, 28)
-                self.希洛克单件按钮[序号].move(横坐标 + 60 + j * 30, 纵坐标 + count * 40)
-                self.希洛克单件按钮[序号].setGraphicsEffect(self.希洛克遮罩透明度[序号])
-                self.希洛克单件按钮[序号].clicked.connect(
+
+                siroco_button = QPushButton(self.main_frame2)
+                siroco_button.setStyleSheet("background-color: rgb(0, 0, 0)")
+                siroco_button.resize(28, 28)
+                siroco_button.move(横坐标 + 60 + j * 30, 纵坐标 + count * 40)
+                siroco_button.setGraphicsEffect(self.希洛克遮罩透明度[序号])
+                siroco_button.clicked.connect(
                     lambda state, index=序号: self.希洛克选择(index))
+                self.希洛克单件按钮.append(siroco_button)
             count += 1
+
 
         横坐标 = 395
         纵坐标 = 480
-        名称 = ['阿斯特罗斯', '贝利亚斯', '雷德梅恩', '罗什巴赫', '泰玛特']
         self.奥兹玛套装按钮 = []
         self.奥兹玛单件按钮 = []
         self.奥兹玛遮罩透明度 = []
         self.奥兹玛选择状态 = [0] * 25
 
+        T = deepcopy(self.初始属性)
+
+        T.装备描述 = 1
+
         count = 0
-        for i in 名称:
+        for i in 奥兹玛套装:
             self.奥兹玛套装按钮.append(QPushButton(i, self.main_frame2))
             self.奥兹玛套装按钮[count].setStyleSheet(按钮样式)
             self.奥兹玛套装按钮[count].resize(75, 22)
             self.奥兹玛套装按钮[count].move(横坐标, 纵坐标 + 3 + count * 32)
             self.奥兹玛套装按钮[count].clicked.connect(
                 lambda state, index=(count + 1) * 100: self.奥兹玛选择(index))
+
+            ozma = OzmaList[count]
+
             for j in range(5):
                 序号 = count * 5 + j
                 图片 = QLabel(self.main_frame2)
@@ -465,14 +471,20 @@ class 角色窗口(窗口):
                 图片.move(横坐标 + 60 + j * 30 + 20, 纵坐标 + count * 32)
                 self.奥兹玛遮罩透明度.append(QGraphicsOpacityEffect())
                 self.奥兹玛遮罩透明度[序号].setOpacity(0.5)
-                self.奥兹玛单件按钮.append(QPushButton(self.main_frame2))
-                self.奥兹玛单件按钮[序号].setStyleSheet(
-                    "background-color: rgb(0, 0, 0)")
-                self.奥兹玛单件按钮[序号].resize(28, 28)
-                self.奥兹玛单件按钮[序号].move(横坐标 + 60 + j * 30 + 20, 纵坐标 + count * 32)
-                self.奥兹玛单件按钮[序号].setGraphicsEffect(self.奥兹玛遮罩透明度[序号])
-                self.奥兹玛单件按钮[序号].clicked.connect(
+
+                tooltip ='<font color="#00A2E8">奥兹玛融合属性：</font><br>'
+                tooltip += ozma(T)
+                tooltip = tooltip_trim(tooltip)
+
+                ozma_button = QPushButton(self.main_frame2)
+                ozma_button.setStyleSheet("background-color: rgb(0, 0, 0)")
+                ozma_button.setToolTip(tooltip)
+                ozma_button.resize(28, 28)
+                ozma_button.move(横坐标 + 60 + j * 30 + 20, 纵坐标 + count * 32)
+                ozma_button.setGraphicsEffect(self.奥兹玛遮罩透明度[序号])
+                ozma_button.clicked.connect(
                     lambda state, index=序号: self.奥兹玛选择(index))
+                self.奥兹玛单件按钮.append(ozma_button)
             count += 1
 
         counter = 0
@@ -584,11 +596,11 @@ class 角色窗口(窗口):
         行名称1 = [
             "工会属性", "训练官BUFF", "戒指", "婚房", "冒险团", "晶体契约", "收集箱", "勋章", "名称装饰卡",
             "快捷栏纹章", "宠物装备-红", "  宠物装备-蓝  ", "  宠物装备-绿  ", "宠物附魔", "皮肤",
-            "站街修正", "进图修正","登记修正",''
+            "站街修正", "进图修正", "登记修正", ''
         ]
 
         column_count = len(列名称1)
-        row_count= len(行名称1)
+        row_count = len(行名称1)
 
         名称 = QLabel("基础细节", self.main_frame3)
         名称.setAlignment(Qt.AlignCenter)
@@ -603,28 +615,26 @@ class 角色窗口(窗口):
             名称.resize(宽度, 25)
             名称.move(95 + i * (宽度 + 5), 5)
 
-        Linelist = [[],[],[]]
+        Linelist = [[], [], []]
 
         for j in range(row_count):
             名称 = QLabel(行名称1[j], self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             名称.setStyleSheet(标签样式)
             名称.resize(80, 25)
-            名称.move(10, 35 + j * 30)     
+            名称.move(10, 35 + j * 30)
 
             for i in range(column_count):
                 Linelist[i].append(QLineEdit(self.main_frame3))
                 Linelist[i][j].setAlignment(Qt.AlignCenter)
                 Linelist[i][j].setStyleSheet(输入框样式)
-                if 行名称1[j] !='':
+                if 行名称1[j] != '':
                     Linelist[i][j].resize(宽度, 22)
                     Linelist[i][j].move(95 + i * (宽度 + 5), 35 + j * 30)
                 else:
-                    Linelist[i][j].resize(0,0)
+                    Linelist[i][j].resize(0, 0)
 
         self.属性设置输入.extend(Linelist)
-
-
 
         列名称2 = ["智力", "体力", "精神", "徽章智", "徽章体", "徽章精", "技能等级及选项"]
         行名称2 = [
@@ -678,9 +688,10 @@ class 角色窗口(窗口):
             self.技能设置输入[j].addItems(['Lv1-30(主动)Lv+1', 'Lv1-50(主动)Lv+1'])
         self.技能设置输入[2].addItems(['Lv1-35(主动)Lv+1', 'Lv30-50(主动)Lv+1'])
         self.技能设置输入[3].addItem('Lv30-50(主动)Lv+1')
-        
-        for j in [8,9]:
-            self.技能设置输入[j].addItems(i.名称+'Lv+1' for i in self.角色属性A.技能表.values()  if i.所在等级 < 48)
+
+        for j in [8, 9]:
+            self.技能设置输入[j].addItems(
+                i.名称+'Lv+1' for i in self.角色属性A.技能表.values() if i.所在等级 < 48)
 
         self.技能设置输入[12].addItems(
             ['BUFFLv+1', 'BUFFLv+2', 'BUFFLv+3', 'BUFFLv+4'])
@@ -690,7 +701,8 @@ class 角色窗口(窗口):
             'Lv20-30(所有)Lv+1', 'Lv1-80(所有)Lv+1'
         ])
 
-        self.技能设置输入[16].addItems(i.名称+'Lv+1' for i in self.角色属性A.技能表.values()  if i.所在等级 <= 85)
+        self.技能设置输入[16].addItems(
+            i.名称+'Lv+1' for i in self.角色属性A.技能表.values() if i.所在等级 <= 85)
 
         self.技能设置输入[17].addItems(['BUFF力智+3%', 'BUFF三攻+3%', 'BUFF力智、三攻+3%'])
         self.技能设置输入[18].addItems(['BUFF力智+3%'])
@@ -1050,11 +1062,12 @@ class 角色窗口(窗口):
             # 设置图标和背景 临时做法
             store.const("/app/window/icon", self.icon)
             store.const("/app/window/background_image", self.主背景图片)
-            client = 换装窗口()
+            client = 登记窗口()
             client.初始化()
             return client
 
-        DefaultDialogRegister.showDialog("buff_panel({})".format(type(self)), createClient, self)
+        DefaultDialogRegister.showDialog(
+            "buff_panel({})".format(type(self)), createClient, self)
 
     def 时装选项更新(self, index):
         if index == 8:
@@ -1216,8 +1229,6 @@ class 角色窗口(窗口):
                 self.黑鸦词条选项[i][3].addItem(str(temp) + '%')
             temp -= 装备属性.间隔
         self.黑鸦词条选项[i][2].addItem(装备属性.随机属性描述)
-
-
 
     def BUFF次数输入填写(self, x, skill=None):
         if self.次数输入[x].currentIndex() == 2:
@@ -1848,7 +1859,7 @@ class 角色窗口(窗口):
         if 数据 is None:
             QMessageBox.information(self, "错误", "站街面板输入格式错误,已重置为空")
             self.一键站街设置输入[x].setText('')
-            数据= 0 
+            数据 = 0
 
         if 数据 == 0:
             QMessageBox.information(self, "错误", "请输入站街面板")
@@ -1912,18 +1923,67 @@ class 角色窗口(窗口):
         else:
             return count
 
-    def 站街面板修正(self,属性, 输入面板,x = 0,append = True):        
-        i = ['智力','体力','精神'].index(属性.类型)
+    def 站街面板修正(self, 属性, 输入面板, x=0, append=True):
+        i = ['智力', '体力', '精神'].index(属性.类型)
         修正前面板 = int(属性.站街系数)
         修正后面板 = 输入面板 - 修正前面板
         if append:
-            修正面板 = to_int(self.属性设置输入[i][15+x].text(),0)
+            修正面板 = to_int(self.属性设置输入[i][15+x].text(), 0)
             修正后面板 += 修正面板
         self.属性设置输入[i][15+x].setText(str(int(修正后面板)))
 
+    def exports_property(self, property):
+        num = 0
+        for skill in property.技能表.values():
+            skill.等级 = skill.基础等级 + int(self.等级调整[num].currentText())
+            skill.是否启用 = self.次数输入[num].currentIndex()
+            num += 1
 
-    def 换装计算(self,AWAKE:辅助角色属性 = None) -> 辅助角色属性:
-        if not self.登记启用: return None
+        property.排行系数 = self.排行参数.currentIndex()
+        property.C力智 = int(
+            ''.join(filter(str.isdigit, self.排行选项[0].currentText())))
+        property.C三攻 = int(
+            ''.join(filter(str.isdigit, self.排行选项[1].currentText())))
+        property.排行类型 = self.排行选项[2].currentText()
+
+        if self.排行选项[3].currentIndex() == 0:
+            pass
+        elif self.排行选项[3].currentIndex() == 1:
+            property.系统奶系数 = 1.35
+            property.系统奶基数 = 7664
+        elif self.排行选项[3].currentIndex() == 2:
+            property.系统奶系数 = 2.31
+            property.系统奶基数 = 4581
+
+        if self.初始属性.技能表['三次觉醒'].是否启用:
+            if self.觉醒选择状态 == 1:
+                property.技能表['三次觉醒'].关联技能 = [property.技能表['一次觉醒'].名称]
+            elif self.觉醒选择状态 == 2:
+                property.技能表['三次觉醒'].关联技能 = [property.技能表['二次觉醒'].名称]
+
+        count = 0
+        for i in equ.get_equ_list():
+            if i.品质 == '神话':
+                i.属性1选择_BUFF = self.神话属性选项[count * 4 + 0].currentIndex()
+                i.属性2选择_BUFF = self.神话属性选项[count * 4 + 1].currentIndex()
+                i.属性3选择_BUFF = self.神话属性选项[count * 4 + 2].currentIndex()
+                i.属性4选择_BUFF = self.神话属性选项[count * 4 + 3].currentIndex()
+                count += 1
+        
+        property.护石栏 = [i.currentIndex() for i in self.护石栏]
+
+        if self.护石第一栏.currentText() != '无':
+            property.护石第一栏 = self.护石第一栏.currentText()
+
+        if self.护石第二栏.currentText() != '无':
+            property.护石第二栏 = self.护石第二栏.currentText()
+
+        if self.护石第三栏.currentText() != '无':
+            property.护石第三栏 = self.护石第三栏.currentText()
+
+    def 换装计算(self, AWAKE: 辅助角色属性 = None) -> 辅助角色属性:
+        if not self.登记启用:
+            return None
         if AWAKE is None:
             AWAKE = self.角色属性A
 
@@ -1968,54 +2028,12 @@ class 角色窗口(窗口):
         BUFF.希洛克武器词条 = 2
         BUFF.残香词条 = 武器融合选项
 
-        num = 0
-        for skill in BUFF.技能表.values():
-            skill.等级 = skill.基础等级 + int(self.等级调整[num].currentText())
-            num += 1
-
-        BUFF.排行系数 = self.排行参数.currentIndex()
-        BUFF.C力智 = int(''.join(filter(str.isdigit, self.排行选项[0].currentText())))
-        BUFF.C三攻 = int(''.join(filter(str.isdigit, self.排行选项[1].currentText())))
-
-        # if ':' in self.排行选项[0].currentText():
-        #     属性.C力智 = int(self.排行选项[0].currentText().split(':')[1])
-        # else:
-        #     属性.C力智 = int(self.排行选项[0].currentText())
-        # if ':' in self.排行选项[1].currentText():
-        #     属性.C三攻 = int(self.排行选项[1].currentText().split(':')[1])
-        # else:
-        #     属性.C三攻 = int(self.排行选项[1].currentText())
-        BUFF.排行类型 = self.排行选项[2].currentText()
-
-        if self.排行选项[3].currentIndex() == 0:
-            pass
-        elif self.排行选项[3].currentIndex() == 1:
-            BUFF.系统奶系数 = 1.35
-            BUFF.系统奶基数 = 7664
-        elif self.排行选项[3].currentIndex() == 2:
-            BUFF.系统奶系数 = 2.31
-            BUFF.系统奶基数 = 4581
-
-        if self.初始属性.技能表['三次觉醒'].是否启用:
-            if self.觉醒选择状态 == 1:
-                BUFF.技能表['三次觉醒'].关联技能 = [BUFF.技能表['一次觉醒'].名称]
-            elif self.觉醒选择状态 == 2:
-                BUFF.技能表['三次觉醒'].关联技能 = [BUFF.技能表['二次觉醒'].名称]
-
-        count = 0
-        for i in equ.get_equ_list():
-            if i.品质 == '神话':
-                i.属性1选择_BUFF = self.神话属性选项[count * 4 + 0].currentIndex()
-                i.属性2选择_BUFF = self.神话属性选项[count * 4 + 1].currentIndex()
-                i.属性3选择_BUFF = self.神话属性选项[count * 4 + 2].currentIndex()
-                i.属性4选择_BUFF = self.神话属性选项[count * 4 + 3].currentIndex()
-                count += 1
+        self.exports_property(BUFF)
 
         self.辟邪玉属性计算(BUFF)
 
         if sum(希洛克选择状态) == 3:
             BUFF.武器词条触发 = 1
-
 
         for i in range(len(self.复选框列表)):
             if self.复选框列表[i].isChecked():
@@ -2027,15 +2045,6 @@ class 角色窗口(窗口):
 
         宠物列表[self.宠物.currentIndex()].城镇属性_BUFF(BUFF)
 
-        if self.护石第一栏.currentText() != '无':
-            BUFF.护石第一栏 = self.护石第一栏.currentText()
-
-        if self.护石第二栏.currentText() != '无':
-            BUFF.护石第二栏 = self.护石第二栏.currentText()
-
-        if self.护石第三栏.currentText() != '无':
-            BUFF.护石第三栏 = self.护石第三栏.currentText()
-
         for i in range(12):
             BUFF.是否增幅[i] = 1
             BUFF.强化等级[i] = 装备打造[i]
@@ -2045,25 +2054,20 @@ class 角色窗口(窗口):
 
         self.是否计算 = 1
 
-        num = 0
-        for skill in self.角色属性A.技能表.values():
-            skill.是否启用 = self.次数输入[num].currentIndex()
-            num += 1
-
         self.基础属性(BUFF)
 
         BUFF.穿戴装备(装备)
 
         if 站街面板 is not None:
-            站街属性 = deepcopy(BUFF)       
+            站街属性 = deepcopy(BUFF)
 
             站街属性.排行系数 = 1
             站街属性.装备属性计算()
-            
-            self.站街面板修正(站街属性,站街面板,2,False)
-        
+
+            self.站街面板修正(站街属性, 站街面板, 2, False)
+
         BUFF.预计算()
-        AWAKE.替换技能(BUFF.技能表['BUFF'],'BUFF')
+        AWAKE.替换技能(BUFF.技能表['BUFF'], 'BUFF')
         return BUFF
 
     def 自选计算(self, 输出=0):
@@ -2086,7 +2090,7 @@ class 角色窗口(窗口):
         B = deepcopy(self.角色属性A)
         B.穿戴装备(装备)
         B.预计算()
-        
+
         self.换装计算(B)
 
         if 输出 != 0:
@@ -2132,18 +2136,15 @@ class 角色窗口(窗口):
         合计魔攻 = 0
         合计独立 = 0
 
-        num = 0
-        总数据 = []
-        for skill in B.技能表.values():
-            详情 = skill.结算统计() if skill.是否启用 else [0] * 8
-            总数据.append(详情)
-            if round(sum(详情)) != 0:
-                合计力量 += 详情[3]
-                合计智力 += 详情[4]
-                合计物攻 += 详情[5]
-                合计魔攻 += 详情[6]
-                合计独立 += 详情[7]
-            num += 1
+        总数据 = B.compute()
+
+        for data in 总数据:
+            if sum(data) > 0:
+                合计力量 += data[3]
+                合计智力 += data[4]
+                合计物攻 += data[5]
+                合计魔攻 += data[6]
+                合计独立 += data[7]
         总奶量 = ''
         # tempstr = ''
         if 合计力量 == 合计智力:
@@ -2184,7 +2185,7 @@ class 角色窗口(窗口):
 
         skill_buff = B.技能表['BUFF']
         skill_awake = B.技能表['一次觉醒']
-        
+
         tempstr = []
         tempstr.append('BUFF力量% :' + to_percent(skill_buff.BUFF力量per))
         tempstr.append('BUFF智力% :' + to_percent(skill_buff.BUFF智力per))
@@ -2193,8 +2194,6 @@ class 角色窗口(窗口):
         tempstr.append('BUFF独立% :' + to_percent(skill_buff.BUFF独立per))
         tempstr.append('一觉力智  :' + str(int(round(skill_awake.一觉力智, 0))))
         tempstr.append('一觉力智% :' + to_percent(skill_awake.一觉力智per))
-        if B.角色 == '圣职者(男)':
-            tempstr.append('守护徽章% :' + to_percent(B.守护徽章per))
         tempstr.append(str(总奶量))
 
         # if self.角色属性B.希洛克武器词条 == 1:
@@ -2220,8 +2219,7 @@ class 角色窗口(窗口):
         if self.角色属性B.黑鸦词条[0][0] == 1 or self.角色属性B.黑鸦词条[1][
                 0] == 1 or self.角色属性B.黑鸦词条[2][0] == 1 or self.角色属性B.黑鸦词条[3][
                     0] == 1:
-            temp = ""
-            temp += "遴选"
+            temp = "遴选"
             if self.角色属性B.黑鸦词条[0][0] == 1:
                 if self.角色属性B.武器变换属性自适应 > 0:
                     黑鸦武器 = 武器变换属性列表[self.角色属性B.武器变换属性自适应]
@@ -2277,122 +2275,32 @@ class 角色窗口(窗口):
                     i] + '</font><br>' + equ.get_suit_by_name(
                         套装名称[i]).装备描述_BUFF(self.角色属性B)[:-4] + '</font><br>'
 
-        数量 = [0] * 3
+
+        self.角色属性B.装备描述 = 1
+
+        sirocos = []
+        
+        temp= ''
+
         for i in range(15):
-            数量[i % 3] += self.希洛克选择状态[i]
+            if self.希洛克选择状态[i] == 1:
+                siroco = SirocoList[i // 3]
+                if siroco not in sirocos:
+                    siroco.set_character(self.角色属性B)
+                    sirocos.append(siroco)
+                siroco.fuse(i % 3)
+        for siroco in sirocos:
+            temp += siroco.compute()
+        self.角色属性B.装备描述 = 0
+        套装属性.append(temp)
 
-        i = 0  # 奈克斯属性2
-        temp = ''
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
-            temp += 'Lv50主动技能力量、智力增加量+40<br>'
-        if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
-            temp += '[守护恩赐]体力、精神+80<br>'
-            temp += '[启示:圣歌][人偶操纵者]智力+80<br>'
-        if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
-            temp += 'Lv50主动技能物攻、魔攻、独立增加量+2%<br>'
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]) > 1:
-            套装.append("希洛克-奈克斯")
-            套装件数.append([
-                self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]
-            ])
-            套装属性.append(temp)
 
-        i = 1  # 暗杀者属性2
-        temp = ''
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
-            temp += 'Lv50主动技能力量、智力增加量+28<br>'
-        if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
-            temp += '[守护恩赐]体力、精神+55<br>'
-            temp += '[启示:圣歌][人偶操纵者]智力+55<br>'
-        if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
-            temp += 'Lv50主动技能物攻、魔攻、独立增加量+1%<br>'
-            temp += 'Lv50主动技能力量、智力增加量+1%<br>'
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]) > 1:
-            套装.append("希洛克-暗杀者")
-            套装件数.append([
-                self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]
-            ])
-            套装属性.append(temp)
 
-        i = 2  # 卢克西属性2
-        temp = ''
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
-            temp += '施放Lv50、Lv100主动技能时,赋予所有队友持续造成伤害的buff,伤害为30秒内所受伤害的1%,效果持续5秒<br>'
-            pass  # 下装
-        if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
-            temp += '施放Lv50、Lv100主动技能时,赋予所有队友持续造成伤害的buff,伤害为30秒内所受伤害的1%,效果持续5秒<br>'
-            pass  # 戒指
-        if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
-            temp += '施放Lv50、Lv100主动技能时,赋予所有队友持续造成伤害的buff,伤害为30秒内所受伤害的1%,效果持续5秒<br>'
-            pass  # 辅助装备
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]) > 1:
-            套装.append("希洛克-卢克西")
-            套装件数.append([
-                self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]
-            ])
-            套装属性.append(temp)
-
-        i = 3  # 守门人属性2
-        temp = ''
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
-            temp += 'Lv50主动技能力量、智力增加量+1%<br>'
-            temp += 'Lv50主动技能力量、智力增加量+20<br>'
-        if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
-            temp += '[守护恩赐]体力、精神+55<br>'
-            temp += '[启示:圣歌][人偶操纵者]智力+55<br>'
-        if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
-            temp += 'Lv30Buff技能力量、智力增加量+1%<br>'
-            temp += '[守护恩赐]体力、精神+30<br>'
-            temp += '[启示:圣歌][人偶操纵者]智力+30<br>'
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]) > 1:
-            套装.append("希洛克-守门人")
-            套装件数.append([
-                self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]
-            ])
-            套装属性.append(temp)
-
-        i = 4  # 洛多斯属性2
-        temp = ''
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
-            temp += 'Lv50主动技能力量、智力增加量+2%<br>'
-            # 属性.一觉力智per *= 1.02  # 下装
-        if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
-            temp += 'Lv30Buff技能力量、智力增加量+2%<br>'
-        if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
-            temp += 'Lv30Buff技能物理、魔法、独立攻击力增加量+1%<br>'
-            temp += '[守护恩赐]体力、精神+30<br>'
-            temp += '[启示:圣歌][人偶操纵者]智力+30<br>'
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]) > 1:
-            套装.append("希洛克-洛多斯")
-            套装件数.append([
-                self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]
-            ])
-            套装属性.append(temp)
+        for i in range(len(希洛克套装)):
+            count = self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]
+            if count > 1:
+                套装.append("希洛克-{}".format(希洛克套装[i]))
+                套装件数.append([count])
 
         for i in range(len(套装)):
             if len(套装件数[i]) > 0:
@@ -2421,7 +2329,7 @@ class 角色窗口(窗口):
     def 站街计算(self, 装备名称, 套装名称=None):
         C = deepcopy(self.角色属性A)
         C.穿戴装备(装备名称, 套装名称)
-        C.装备属性计算(x = 1)
+        C.装备属性计算(x=1)
         C.站街计算()
         return C
 
@@ -2475,7 +2383,7 @@ class 角色窗口(窗口):
             登记属性 = self.换装计算(self.角色属性B)
             登记装备 = 登记属性.装备栏
 
-                # self.输入属性(self.角色属性B)
+            # self.输入属性(self.角色属性B)
             self.角色属性B.切换详情 = '换装详情: <br>' + '<br>'.join(
                 [' , '.join(登记装备[i:i + 4]) for i in range(0, len(登记装备), 4)])
         # 登记 end
@@ -2544,7 +2452,7 @@ class 角色窗口(窗口):
             面板显示[i].setStyleSheet("QLabel{font-size:12px;color:white;}")
             面板显示[i].resize(100, 18)
             面板显示[i].setAlignment(Qt.AlignLeft)
-        
+
         skill_buff = self.角色属性B.技能表['BUFF']
         skill_awake = self.角色属性B.技能表['一次觉醒']
 
@@ -2556,8 +2464,6 @@ class 角色窗口(窗口):
         tempstr.append('BUFF独立% :' + to_percent(skill_buff.BUFF独立per))
         tempstr.append('一觉力智  :' + str(int(round(skill_awake.一觉力智, 0))))
         tempstr.append('一觉力智% :' + to_percent(skill_awake.一觉力智per))
-        if self.角色属性B.角色 == '圣职者(男)':
-            tempstr.append('守护徽章% :' + to_percent(self.角色属性B.守护徽章per))
 
         j = 318
         for i in tempstr:
@@ -2621,123 +2527,32 @@ class 角色窗口(窗口):
                     i] + '</font><br>' + equ.get_suit_by_name(
                         套装名称[i]).装备描述_BUFF(self.角色属性B)[:-4] + '</font><br>'
 
-        数量 = [0] * 3
+
+        E = deepcopy(self.初始属性)
+
+        sirocos = []
+
+        temp= ''
+
         for i in range(15):
-            数量[i % 3] += self.希洛克选择状态[i]
+            if self.希洛克选择状态[i] == 1:
+                siroco = SirocoList[i // 3]
+                if siroco not in sirocos:
+                    siroco.set_character(E)
+                    sirocos.append(siroco)
+                siroco.fuse(i % 3)
+        for siroco in sirocos:
+            temp += siroco.compute()
 
-        i = 0  # 奈克斯属性2
-        temp = ''
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
-            temp += 'Lv50主动技能力量、智力增加量+40<br>'
-        if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
-            temp += '[守护恩赐]体力、精神+80<br>'
-            temp += '[启示:圣歌][人偶操纵者]智力+80<br>'
-        if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
-            temp += 'Lv50主动技能物攻、魔攻、独立增加量+2%<br>'
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]) > 1:
-            套装.append("希洛克-奈克斯")
-            套装件数.append([
-                self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]
-            ])
-            套装属性.append(temp)
+        套装属性.append(temp)
 
-        i = 1  # 暗杀者属性2
-        temp = ''
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
-            temp += 'Lv50主动技能力量、智力增加量+28<br>'
-        if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
-            temp += '[守护恩赐]体力、精神+55<br>'
-            temp += '[启示:圣歌][人偶操纵者]智力+55<br>'
-        if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
-            temp += 'Lv50主动技能物攻、魔攻、独立增加量+1%<br>'
-            temp += 'Lv50主动技能力量、智力增加量+1%<br>'
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]) > 1:
-            套装.append("希洛克-暗杀者")
-            套装件数.append([
-                self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]
-            ])
-            套装属性.append(temp)
 
-        i = 2  # 卢克西属性2
-        temp = ''
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
-            temp += '施放Lv50、Lv100主动技能时,赋予所有队友持续造成伤害的buff,伤害为30秒内所受伤害的1%,效果持续5秒<br>'
-            pass  # 下装
-        if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
-            temp += '施放Lv50、Lv100主动技能时,赋予所有队友持续造成伤害的buff,伤害为30秒内所受伤害的1%,效果持续5秒<br>'
-            pass  # 戒指
-        if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
-            temp += '施放Lv50、Lv100主动技能时,赋予所有队友持续造成伤害的buff,伤害为30秒内所受伤害的1%,效果持续5秒<br>'
-            pass  # 辅助装备
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]) > 1:
-            套装.append("希洛克-卢克西")
-            套装件数.append([
-                self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]
-            ])
-            套装属性.append(temp)
-
-        i = 3  # 守门人属性2
-        temp = ''
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
-            temp += 'Lv50主动技能力量、智力增加量+1%<br>'
-            temp += 'Lv50主动技能力量、智力增加量+20<br>'
-        if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
-            temp += '[守护恩赐]体力、精神+55<br>'
-            temp += '[启示:圣歌][人偶操纵者]智力+55<br>'
-        if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
-            temp += 'Lv30Buff技能力量、智力增加量+1%<br>'
-            temp += '[守护恩赐]体力、精神+30<br>'
-            temp += '[启示:圣歌][人偶操纵者]智力+30<br>'
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]) > 1:
-            套装.append("希洛克-守门人")
-            套装件数.append([
-                self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]
-            ])
-            套装属性.append(temp)
-
-        i = 4  # 洛多斯属性2
-        temp = ''
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
-            temp += 'Lv50主动技能力量、智力增加量+2%<br>'
-            # 属性.一觉力智per *= 1.02  # 下装
-        if (self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
-            temp += 'Lv30Buff技能力量、智力增加量+2%<br>'
-        if (self.希洛克选择状态[i * 3 + 2] + self.希洛克选择状态[i * 3 + 0]) == 2:
-            temp += '<font size="3" face="宋体"><font color="#78FF1E">下装+辅助装备</font><br>'
-            temp += 'Lv30Buff技能物理、魔法、独立攻击力增加量+1%<br>'
-            temp += '[守护恩赐]体力、精神+30<br>'
-            temp += '[启示:圣歌][人偶操纵者]智力+30<br>'
-        if (self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]) > 1:
-            套装.append("希洛克-洛多斯")
-            套装件数.append([
-                self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] +
-                self.希洛克选择状态[i * 3 + 2]
-            ])
-            套装属性.append(temp)
-
+        for i in range(len(希洛克套装)):
+            count = self.希洛克选择状态[i * 3 + 0] + self.希洛克选择状态[i * 3 + 1] + self.希洛克选择状态[i * 3 + 2]
+            if count > 1:
+                套装.append("希洛克-{}".format(希洛克套装[i]))
+                套装件数.append([count])
+   
         for i in range(len(套装)):
             位置 += 间隔
             适用套装名称 = QLabel(输出窗口)
@@ -2770,11 +2585,11 @@ class 角色窗口(窗口):
 
         count = 0
 
-        统计详情 = []
 
-        for skill in 技能表:
-            详情 = skill.结算统计() if skill.是否启用 else [0] * 8
-            统计详情.append(详情)
+
+        统计详情 = self.角色属性B.compute()
+
+        for 详情 in 统计详情:
             if sum(详情) != 0:
                 count += 1
 
@@ -3003,22 +2818,22 @@ class 角色窗口(窗口):
             打造状态.move(初始x + x坐标[11] + 13, 初始y + y坐标[11] + 20 - pox_y2)
 
         if self.登记启用 and 自选计算模式:
-            #登记装备图表显示
+            # 登记装备图表显示
             偏移量 = 80
             x坐标 = [
                 32, 0, 0, 32, 0, 偏移量, 偏移量 + 32, 偏移量 + 32, 偏移量, 偏移量, 偏移量 + 32,
                 32
             ]
             y坐标 = [0, 0, 32, 32, 64, 0, 0, 32, 64, 32, 64, 64]
-            图片列表2 = self.获取装备图片(登记装备,self.登记希洛克,self.登记奥兹玛)
+            图片列表2 = self.获取装备图片(登记装备, self.登记希洛克, self.登记奥兹玛)
 
             def compare(i):
-                if 登记装备[i] !=self.排行数据[index][i]:
+                if 登记装备[i] != self.排行数据[index][i]:
                     return False
-                if i == 2 :
+                if i == 2:
                     if self.角色属性A.黑鸦词条[3][0] != self.角色属性B.黑鸦词条[3][0]:
                         return False
-                elif i == 7 :
+                elif i == 7:
                     if self.角色属性A.黑鸦词条[1][0] != self.角色属性B.黑鸦词条[1][0]:
                         return False
                 elif i == 9:
@@ -3029,7 +2844,6 @@ class 角色窗口(窗口):
                         return False
                 return True
 
-
             for i in range(len(登记装备)):
                 x = 初始x + x坐标[i] + 600
                 y = 初始y + y坐标[i] - pox_y2 + 200
@@ -3038,7 +2852,7 @@ class 角色窗口(窗口):
                 装备图标.resize(26, 26)
                 装备图标.move(x, y)
                 装备图标.setAlignment(Qt.AlignCenter)
-                               
+
                 if compare(i):
                     图标遮罩 = QLabel(输出窗口)
                     图标遮罩.setStyleSheet(
@@ -3049,6 +2863,26 @@ class 角色窗口(窗口):
         输出显示 = MainWindow(输出窗口)
         self.输出窗口列表.append(输出显示)
         输出显示.show()
+
+
+    def 辟邪玉显示(self, x=0):
+        temp = ''
+        num = 0
+        for i in range(4):
+            k = self.辟邪玉选择[i].currentIndex()
+            if k > 0:
+                temp += '{}{}<br>'.format(辟邪玉列表[k].简称, self.辟邪玉数值[i].currentText())
+                num += 1
+        辟邪玉颜色 = 颜色[{4: '史诗', 3: '传说', 2: '神器', 1: '稀有'}.get(num, '稀有')]
+        if x == 0:
+            return 辟邪玉颜色
+        else:
+            if num == 0:
+                return ''
+            else:
+                return '<font color="{}">辟邪玉:<br>{}</font>'.format(
+                    辟邪玉颜色, temp[:-4])
+
 
     def 装备描述_BUFF计算(self, property):
         tempstr = []
@@ -3185,20 +3019,23 @@ class 角色窗口(窗口):
                 else:
                     tempstr[i] += 装备.装备描述_BUFF(property)
 
-            if 希洛克选择状态[0] == 1 and i == 2:
-                # tempstr[i]+='<br>'
-                tempstr[i] += '<font color="#00A2E8">希洛克融合属性:</font><br>'
-                tempstr[i] += 'Lv30 Buff技能 力量、智力增加量 +3%'
-            elif 希洛克选择状态[1] == 1 and i == 7:
-                # tempstr[i]+='<br>'
-                tempstr[i] += '<font color="#00A2E8">希洛克融合属性:</font><br>'
-                tempstr[i] += 'Lv50主动技能力量、智力增加量 +3%'
-            elif 希洛克选择状态[2] == 1 and i == 9:
-                # tempstr[i]+='<br>'
-                tempstr[i] += '<font color="#00A2E8">希洛克融合属性:</font><br>'
-                tempstr[i] += '[守护恩赐]体力、精神 +80<br>'
-                tempstr[i] += '[启示:圣歌]、[人偶操纵者]智力 +80'
+            property.装备描述 = 1
 
+
+            部位 = 部位列表[i]
+
+            if 希洛克选择状态[0] == 1 and 部位 == '下装':
+                # tempstr[i]+='<br>'
+                tempstr[i] += '<font color="#00A2E8">希洛克融合属性:</font><br>'
+                tempstr[i] += BUFF增加(property,BUFF力智per= 1.03)
+            elif 希洛克选择状态[1] == 1 and 部位 == '戒指':
+                # tempstr[i]+='<br>'
+                tempstr[i] += '<font color="#00A2E8">希洛克融合属性:</font><br>'
+                tempstr[i] += 觉醒增加(property,一觉力智per= 1.03)
+            elif 希洛克选择状态[2] == 1 and 部位 == '辅助装备':
+                # tempstr[i]+='<br>'
+                tempstr[i] += '<font color="#00A2E8">希洛克融合属性:</font><br>'
+                tempstr[i] += 被动增加(property,被动进图加成=80)
             elif self.角色属性B.希洛克武器词条 == 1 and i == 11:
                 # tempstr[i]+='<br>'
                 tempstr[i] += '<font color="#00A2E8">希洛克融合属性:</font><br>'
@@ -3214,32 +3051,35 @@ class 角色窗口(窗口):
                         i] += "属性2:" + "<font style='color:gray'>" + 武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(
                             武器属性B.最大值) + ('%' if 武器属性B.间隔 / 10 < 1 else
                                           '') + '<br>'
-            elif self.角色属性B.希洛克武器词条 == 2 and i == 11:
+            elif self.角色属性B.希洛克武器词条 == 2 and 部位 == '武器':
                 # tempstr[i]+='<br>'
                 tempstr[i] += '<font color="#00A2E8">希洛克融合属性:</font><br>'
                 武器属性A = 武器属性A列表[self.武器融合属性A.currentIndex()]
                 武器属性B = 武器属性B列表[self.武器融合属性B.currentIndex()]
                 tempstr[
                     i] += "属性1:" + "<font style='color:gray'>" + 武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + self.武器融合属性A2.currentText(
-                    ) + '<br>'
+                ) + '<br>'
                 if self.角色属性B.武器词条触发 == 1:
                     tempstr[
                         i] += "属性2:" + "<font style='color:gray'>" + 武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + self.武器融合属性B2.currentText(
-                        ) + '<br>'
-            # elif self.希洛克武器词条[0].currentIndex() > 0 and i == 11:
-            #     tempstr[i]+='<br>'
-            #     tempstr[i]+='<font color="#00A2E8">希洛克融合属性:</font><br>'
-            #     if self.希洛克武器词条[0].currentIndex() == 1:
-            #         tempstr[i]+="属性1:{} +10%<br>".format(武器词条属性[属性.词条选择[0]])
-            #         if sum(数量)==3:
-            #             tempstr[i]+="属性2:{} +5%<br>".format(武器词条属性[属性.词条选择[1]])
-            #     else:
-            #         tempstr[i]+="属性1:{} +{}%<br>".format(武器词条属性[self.希洛克武器词条[1].currentIndex()],(self.希洛克武器词条[3].currentIndex() + 3) * 2)
-            #         if sum(数量)==3:
-            #             tempstr[i]+="属性2:{} +{}%<br>".format(武器词条属性[self.希洛克武器词条[2].currentIndex()],(self.希洛克武器词条[4].currentIndex() + 3) * 1)
-            if tempstr[i].endswith('<br>'):
-                tempstr[i] = tempstr[i][:-4]
+                    ) + '<br>'
+
+
+            if 部位 in 奥兹玛部位列表:
+                index = 奥兹玛部位列表.index(部位)
+                cur = -1
+                for j in range(0,5):
+                    if self.奥兹玛选择状态[j*5+index] == 1:
+                        cur = j
+                        break
+                if cur > 0:              
+                    tempstr[i] += '<font color="#00A2E8">奥兹玛融合属性:</font><br>'
+                    tempstr[i] += str(OzmaList[cur](property))
+            property.装备描述 = 0
+
+            tempstr[i] = tooltip_trim(tempstr[i])
             tempstr[i] += '</font>'
+
         return tempstr
 
     def 黑鸦属性描述(self, index, value, x=0):
@@ -3254,10 +3094,7 @@ class 角色窗口(窗口):
                 value) + ('%' if 装备属性.间隔 / 10 < 1 else '') + '<br>'
         return tempstr
 
-
-
-
-    def 黑鸦属性计算(self, 属性:辅助角色属性):
+    def 黑鸦属性计算(self, 属性: 辅助角色属性):
         for i in range(4):
             if self.黑鸦词条选项[i][0].currentIndex() == 2:
                 if i == 0:
@@ -3271,50 +3108,9 @@ class 角色窗口(窗口):
                     装备属性.当前值 = int(装备属性数值 if 装备属性数值 != '' else 0)
                     装备属性.变换属性(属性)
 
-    def 输入属性(self, 属性:辅助角色属性, x=0, 黑鸦词条=None, 希洛克选择状态=None, 奥兹玛选择状态=None):
-        num = 0
-        for skill in 属性.技能表.values():
-            skill.等级 = skill.基础等级 + int(self.等级调整[num].currentText())
-            num += 1
+    def 输入属性(self, 属性: 辅助角色属性, x=0):
 
-        属性.排行系数 = self.排行参数.currentIndex()
-        属性.C力智 = int(''.join(filter(str.isdigit, self.排行选项[0].currentText())))
-        属性.C三攻 = int(''.join(filter(str.isdigit, self.排行选项[1].currentText())))
-
-        # if ':' in self.排行选项[0].currentText():
-        #     属性.C力智 = int(self.排行选项[0].currentText().split(':')[1])
-        # else:
-        #     属性.C力智 = int(self.排行选项[0].currentText())
-        # if ':' in self.排行选项[1].currentText():
-        #     属性.C三攻 = int(self.排行选项[1].currentText().split(':')[1])
-        # else:
-        #     属性.C三攻 = int(self.排行选项[1].currentText())
-        属性.排行类型 = self.排行选项[2].currentText()
-
-        if self.排行选项[3].currentIndex() == 0:
-            pass
-        elif self.排行选项[3].currentIndex() == 1:
-            属性.系统奶系数 = 1.35
-            属性.系统奶基数 = 7664
-        elif self.排行选项[3].currentIndex() == 2:
-            属性.系统奶系数 = 2.31
-            属性.系统奶基数 = 4581
-
-        if self.初始属性.技能表['三次觉醒'].是否启用:
-            if self.觉醒选择状态 == 1:
-                属性.技能表['三次觉醒'].关联技能 = [属性.技能表['一次觉醒'].名称]
-            elif self.觉醒选择状态 == 2:
-                属性.技能表['三次觉醒'].关联技能 = [属性.技能表['二次觉醒'].名称]
-
-
-        count = 0
-        for i in equ.get_equ_list():
-            if i.品质 == '神话':
-                i.属性1选择_BUFF = self.神话属性选项[count * 4 + 0].currentIndex()
-                i.属性2选择_BUFF = self.神话属性选项[count * 4 + 1].currentIndex()
-                i.属性3选择_BUFF = self.神话属性选项[count * 4 + 2].currentIndex()
-                i.属性4选择_BUFF = self.神话属性选项[count * 4 + 3].currentIndex()
-                count += 1
+        self.exports_property(属性)
 
         if x == 0:
             self.辟邪玉属性计算(属性)
@@ -3323,10 +3119,10 @@ class 角色窗口(窗口):
             属性.武器词条触发 = 1
 
         属性.希洛克武器词条 = self.希洛克武器选择.currentIndex()
-        
-        if 属性.希洛克武器词条 == 2:
-            属性.残香词条 = [self.武器融合属性A.currentIndex(),self.武器融合属性A2.currentIndex(),self.武器融合属性B.currentIndex(),self.武器融合属性B2.currentIndex()]
 
+        if 属性.希洛克武器词条 == 2:
+            属性.残香词条 = [self.武器融合属性A.currentIndex(), self.武器融合属性A2.currentIndex(
+            ), self.武器融合属性B.currentIndex(), self.武器融合属性B2.currentIndex()]
 
         for i in range(len(self.复选框列表)):
             if self.复选框列表[i].isChecked():
@@ -3338,15 +3134,6 @@ class 角色窗口(窗口):
 
         宠物列表[self.宠物.currentIndex()].城镇属性_BUFF(属性)
 
-        if self.护石第一栏.currentText() != '无':
-            属性.护石第一栏 = self.护石第一栏.currentText()
-
-        if self.护石第二栏.currentText() != '无':
-            属性.护石第二栏 = self.护石第二栏.currentText()
-
-        if self.护石第三栏.currentText() != '无':
-            属性.护石第三栏 = self.护石第三栏.currentText()
-
         for i in range(12):
             属性.是否增幅[i] = self.装备打造选项[i].currentIndex()
             属性.强化等级[i] = self.装备打造选项[i + 12].currentIndex()
@@ -3355,32 +3142,23 @@ class 角色窗口(窗口):
         属性.类型 = self.装备打造选项[37].currentText()
         self.是否计算 = 1
 
-        num = 0
-        for skill in self.角色属性A.技能表.values():
-            skill.是否启用 = self.次数输入[num].currentIndex()
-            num += 1
-
         if self.切装模式选项.isChecked() and self.计算模式选择.currentIndex() != 2 and 属性.技能表['BUFF'].是否启用 and 属性.技能表['一次觉醒'].是否启用:
             属性.双装备模式 = 1
             pass
-        if 黑鸦词条 is None or len(黑鸦词条) == 0:
-            黑鸦词条 = []
-            for i in range(4):
-                temp = [
-                    self.黑鸦词条选项[i][0].currentIndex(),
-                    self.黑鸦词条选项[i][1].currentIndex(),
-                    self.黑鸦词条选项[i][3].currentText(),
-                ]
-                黑鸦词条.append(temp)
-        属性.黑鸦词条 = 黑鸦词条
-        
-        if 希洛克选择状态 is None or len(希洛克选择状态) == 0:
-            希洛克选择状态 = self.希洛克选择状态
-        属性.希洛克选择状态 = 希洛克选择状态
 
-        if 奥兹玛选择状态 is None or len(奥兹玛选择状态) == 0:
-            奥兹玛选择状态 = self.奥兹玛选择状态
-        属性.奥兹玛选择状态 = 奥兹玛选择状态
+        黑鸦词条 = []
+        for i in range(4):
+            temp = [
+                self.黑鸦词条选项[i][0].currentIndex(),
+                self.黑鸦词条选项[i][1].currentIndex(),
+                self.黑鸦词条选项[i][3].currentText(),
+            ]
+            黑鸦词条.append(temp)
+        属性.黑鸦词条 = 黑鸦词条
+
+        属性.希洛克选择状态 = self.希洛克选择状态
+
+        属性.奥兹玛选择状态 = self.奥兹玛选择状态
 
         属性.觉醒择优系数 = float(self.觉醒择优系数.currentText())
 
@@ -3555,7 +3333,4 @@ class 角色窗口(窗口):
                     属性.BUFF补正精神 += int(self.属性设置输入[i][j].text())
         for i in self.技能设置输入:
             self.技能加成判断(i.currentText(), 属性)
-
-        属性.护石计算(属性.护石第一栏)
-        属性.护石计算(属性.护石第二栏)
-        属性.护石计算(属性.护石第三栏)
+        属性.护石计算()
