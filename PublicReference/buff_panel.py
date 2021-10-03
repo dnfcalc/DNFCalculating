@@ -2,13 +2,13 @@ from PublicReference.utils.common import to_int
 from PublicReference.view.Page import Page
 from PyQt5.QtWidgets import QLabel, QGraphicsOpacityEffect
 
-from PublicReference.equipment.武器融合_buff import *
-from PublicReference.equipment.黑鸦_buff import 装备变换属性列表, 武器变换属性列表
+from PublicReference.equipment.buff.武器融合_buff import *
+from PublicReference.equipment.buff.黑鸦_buff import 装备变换属性列表, 武器变换属性列表
 from PublicReference.utils.constant import *
 from PublicReference.equipment.equ_list import *
 
 
-class 换装窗口(Page):
+class 登记窗口(Page):
     def __init__(self):
         super().__init__()
 

@@ -9,6 +9,8 @@ from PublicReference.common import *
 import ctypes
 import operator
 
+preferred = None
+
 try:
     preferred = ctypes.WinDLL(dllPath)
     logger.info("Preferred included.")

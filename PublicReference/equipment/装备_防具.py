@@ -917,7 +917,6 @@ class 装备97(装备):
         self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.09 - self.属性3选择_BUFF / 100,
                                BUFF魔攻per=1.09 - self.属性3选择_BUFF / 100,
                                BUFF独立per=1.09 - self.属性3选择_BUFF / 100)
-        self.属性描述 += 属性.被动增加(守护恩赐Lv=6 - self.属性4选择_BUFF)
         self.属性描述 += 属性.被动增加(转职被动Lv=6 - self.属性4选择_BUFF)
 
 
@@ -1376,7 +1375,6 @@ class 装备103(装备):
                                BUFF魔攻per=1.10 - self.属性1选择_BUFF / 100,
                                BUFF独立per=1.10 - self.属性1选择_BUFF / 100)
         self.属性描述 += 属性.被动增加(转职被动Lv=12 - self.属性2选择_BUFF)
-        self.属性描述 += 属性.被动增加(守护恩赐Lv=12 - self.属性2选择_BUFF)
         self.属性描述 += 属性.觉醒增加(一觉力智=150 - self.属性3选择_BUFF * 10)
 
 
@@ -1610,7 +1608,6 @@ class 装备106(装备):
         self.属性描述 += 属性.BUFF增加(BUFF力量per=1.11 - self.属性1选择_BUFF / 100,
                                BUFF智力per=1.11 - self.属性1选择_BUFF / 100)
         self.属性描述 += 属性.被动增加(转职被动Lv=10 - self.属性2选择_BUFF)
-        self.属性描述 += 属性.被动增加(守护恩赐Lv=10 - self.属性2选择_BUFF)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.12 - self.属性3选择_BUFF / 100)
 
 
@@ -1685,7 +1682,6 @@ class 装备107(装备):
                                BUFF魔攻per=1.1 - self.属性2选择_BUFF / 100,
                                BUFF独立per=1.1 - self.属性2选择_BUFF / 100)
         self.属性描述 += 属性.被动增加(转职被动Lv=10 - self.属性3选择_BUFF)
-        self.属性描述 += 属性.被动增加(守护恩赐Lv=10 - self.属性3选择_BUFF)
 
 
 class 装备108(装备):
@@ -1753,7 +1749,6 @@ class 装备108(装备):
         self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
         self.属性描述 += 属性.技能等级加成('所有', 5, 100 - self.属性1选择_BUFF * 5, 1)
         self.属性描述 += 属性.被动增加(转职被动Lv=17 - self.属性1选择_BUFF)
-        self.属性描述 += 属性.被动增加(守护恩赐Lv=17 - self.属性1选择_BUFF)
         self.属性描述 += 属性.被动增加(信念光环体精=160 - self.属性2选择_BUFF * 20)
         self.属性描述 += 属性.被动增加(一觉被动力智=140 - self.属性2选择_BUFF * 20)
         self.属性描述 += 属性.被动增加(守护恩赐体精=200 - self.属性3选择_BUFF * 20)
@@ -1911,7 +1906,6 @@ class 装备110(装备):
         self.属性描述 += 属性.技能等级加成('所有', 1, min(48, 50 - self.属性1选择_BUFF * 5), 1)
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.04 - self.属性1选择_BUFF / 100)
         self.属性描述 += 属性.被动增加(转职被动Lv=7 - self.属性2选择_BUFF)
-        self.属性描述 += 属性.被动增加(守护恩赐Lv=7 - self.属性2选择_BUFF)
         self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.05 - self.属性3选择_BUFF / 100,
                                BUFF魔攻per=1.05 - self.属性3选择_BUFF / 100,
                                BUFF独立per=1.05 - self.属性3选择_BUFF / 100)
