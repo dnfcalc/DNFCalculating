@@ -50,6 +50,15 @@ skillDataPath = resource_path("SkillData")
 
 部位列表 = ("上衣", "头肩", "下装", "腰带", "鞋", "手镯", "项链", "戒指", "耳环", "辅助装备", "魔法石",
         "武器")
+
+奥兹玛部位列表 = ("头肩", "腰带", "鞋", "项链", "魔法石")
+
+奥兹玛套装 = ('阿斯特罗斯', '贝利亚斯', '雷德梅恩', '罗什巴赫', '泰玛特')
+
+希洛克部位列表 = ("下装","戒指","辅助装备")
+
+希洛克套装 = ('奈克斯', '暗杀者', '卢克西', '守门人', '洛多斯')
+
 部位字典 = {
     "上衣": 0,
     "头肩": 1,
@@ -65,7 +74,8 @@ skillDataPath = resource_path("SkillData")
     "武器": 11
 }
 
-颜色 = {'神话': '#E0502F', '史诗': '#FFB400', '传说': '#FF7800', '神器':'#FF00FF', '稀有':'#B36BFF'}
+颜色 = {'神话': '#E0502F', '史诗': '#FFB400',
+      '传说': '#FF7800', '神器': '#FF00FF', '稀有': '#B36BFF'}
 
 总套装列表 = [防具套装, 首饰套装, 特殊套装, 上链左套装, 镯下右套装, 环鞋指套装]
 所有套装列表 = 防具套装 + 首饰套装 + 特殊套装 + 上链左套装 + 镯下右套装 + 环鞋指套装
@@ -318,8 +328,10 @@ class MyQComboBox(QComboBox):
         self.setView(QListView())
         self.setStyleSheet(下拉框样式)
 
+
 class MyQToolButton(QToolButton):
     DoubleClickSig = pyqtSignal(str)
+
     def mouseDoubleClickEvent(self, e):   # 双击
         sigContent = self.objectName()
         self.DoubleClickSig.emit(sigContent)

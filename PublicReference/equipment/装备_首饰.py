@@ -820,7 +820,6 @@ class 装备193(装备):
         self.属性描述 += '<font color="#00A2E8">神话属性：</font><br>'
         self.属性描述 += 属性.觉醒增加(一觉力智per=1.04 - self.属性1选择_BUFF / 100)
         self.属性描述 += 属性.被动增加(转职被动Lv=5 - self.属性2选择_BUFF)
-        self.属性描述 += 属性.被动增加(守护恩赐Lv=5 - self.属性2选择_BUFF)
         self.属性描述 += 属性.觉醒增加(一觉力智=110 - self.属性3选择_BUFF * 10)
         self.属性描述 += 属性.BUFF增加(BUFF物攻per=1.1 - self.属性4选择_BUFF / 100,
                                BUFF魔攻per=1.1 - self.属性4选择_BUFF / 100,

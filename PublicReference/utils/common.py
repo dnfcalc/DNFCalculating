@@ -25,7 +25,12 @@ def format_time(ftime):
 
     return remaining_time_str
 
+
 def to_int(content, default=None):
     if re.match("^-?\d+$", content):
         return int(content)
     return default
+
+
+def to_percent(num, digits=0):
+    return str(int(round(num*100, digits))) + "%"

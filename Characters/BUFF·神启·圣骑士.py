@@ -19,7 +19,7 @@ class BUFF·神启·圣骑士技能0(被动技能):
     def 精神加成(self):
         return self.精神[self.等级] + self.额外体精 + self.进图加成
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [0, self.体力加成(), self.精神加成(), 0, 0, 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -39,7 +39,7 @@ class BUFF·神启·圣骑士技能1(主动技能):
     def 精神加成(self):
         return int(self.数值[self.等级] * (1 + self.守护徽章per))
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [0, self.体力加成(), self.精神加成(), 0, 0, 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -52,7 +52,7 @@ class BUFF·神启·圣骑士技能2(主动技能):
     数值 = [0, 5, 6, 7, 8, 9, 10, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
           33, 34, 35, 36, 37, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [0, 0, 0, 0, 0, self.数值[self.等级], self.数值[self.等级], self.数值[self.等级]]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -77,7 +77,7 @@ class BUFF·神启·圣骑士技能3(主动技能):
     力智 = [0, 164, 175, 186, 198, 209, 219, 230, 241, 253, 264, 275, 286, 298, 309, 320, 330, 341, 353, 364,
           375, 386, 398, 409, 420, 431, 441, 453, 464, 475, 486, 498, 509, 520, 531, 543, 553, 564, 575, 586, 598]
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         倍率 = self.适用数值 / 620 + 1
         temp = [0, 0, 0]  # 智力,体力,精神
         temp.append(int(round((self.力智[self.等级] + self.BUFF力量) * self.BUFF力量per * 倍率,3)))  # 力量
@@ -115,38 +115,14 @@ class BUFF·神启·圣骑士技能4(被动技能):
     def 精神加成(self):
         return self.体精[self.等级] + self.额外体精
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [0, self.体力加成(), self.精神加成(), self.力智[self.等级], self.力智[self.等级], 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
 
-class BUFF·神启·圣骑士技能5(主动技能):
+class BUFF·神启·圣骑士技能5(觉醒技能):
     名称 = '天启之珠'
-    所在等级 = 50
-    等级上限 = 40
-    基础等级 = 12
-    一觉力智 = 0
-    一觉力智per = 0
-    # 28 原力智 941  测试修改为 939
-    力智 = [0, 43, 57, 74, 91, 111, 131, 153, 176, 201, 228, 255, 284, 315, 346, 379, 414, 449, 487, 526, 567, 608,
-          651, 696, 741, 789, 838, 888, 939, 993, 1047, 1103, 1160, 1219, 1278, 1340, 1403, 1467, 1533, 1600, 1668]
-
-    def 结算统计(self, 计算三觉=False):
-        if 计算三觉 is False and self.名称 in self.技能表['三次觉醒'].关联技能:
-            return [0]*8
-        倍率 = self.适用数值 / 750 + 1
-        x = (self.力智[self.等级] + self.一觉力智) * 倍率
-        return [0, 0, 0, int(x * self.一觉力智per), int(x * self.一觉力智per), 0, 0, 0]
-        # 智力 体力 精神  力量  智力  物攻  魔攻 独立
-
-    def 技能面板(self):
-        temp = []
-        temp.append(self.名称)
-        temp.append(
-            int(round((self.力智[self.等级] + self.一觉力智) * self.一觉力智per, 0)))
-        temp.append(
-            int(round((self.力智[self.等级] + self.一觉力智) * self.一觉力智per, 0)))
-        return temp
+    pass
 
 
 class BUFF·神启·圣骑士技能6(主动技能):
@@ -163,7 +139,7 @@ class BUFF·神启·圣骑士技能6(主动技能):
     def 精神加成(self):
         return self.体精[self.等级] * 24
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [0, self.体力加成(), self.精神加成(), 0, 0, 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
@@ -183,32 +159,15 @@ class BUFF·神启·圣骑士技能7(被动技能):
     def 精神加成(self):
         return self.体精[self.等级]
 
-    def 结算统计(self):
+    def 结算统计(self,context):
         return [0, self.体力加成(), self.精神加成(), 0, 0, 0, 0, 0]
         # 智力 体力 精神  力量  智力  物攻  魔攻 独立
 
 
-class BUFF·神启·圣骑士技能8(主动技能):
+class BUFF·神启·圣骑士技能8(三觉技能):
     名称 = '生命礼赞：神威'
-    所在等级 = 100
-    等级上限 = 40
-    基础等级 = 2
     关联技能 = ['神圣洗礼：信仰之翼']
-    绑定一觉力智per = 1.08
-    绑定二觉力智per = 0.23
-
-    def 结算统计(self):
-        if(self.技能表['一次觉醒'].是否启用 == 1):
-            values = self.技能表['一次觉醒'].结算统计(True)
-            倍率 = self.加成倍率()
-            return [i * 倍率 for i in values]
-        return [0]*8
-
-    def 加成倍率(self):
-        if '天启之珠' in self.关联技能:
-            return round(1.08 + self.等级 * 0.01, 2)
-        else:
-            return round(0.23 + self.等级 * 0.01, 2)
+    pass
 
 
 技能表 = {}
@@ -219,7 +178,6 @@ while i >= 0:
     try:
         skill: 技能 = eval("BUFF·神启·圣骑士技能"+str(i)+"()")
         skill.技能序号 = i
-        skill.技能表 = 技能表
         名称 = skill.名称
         if skill.所在等级 == 30:
             名称 = 'BUFF'
@@ -235,7 +193,7 @@ while i >= 0:
     except:
         i = -1
 
-class BUFF·神启·圣骑士角色属性(角色属性):
+class BUFF·神启·圣骑士角色属性(辅助角色属性):
     实际名称 = 'BUFF·神启·圣骑士'
     角色 = '圣职者(男)'
     职业 = '圣骑士'

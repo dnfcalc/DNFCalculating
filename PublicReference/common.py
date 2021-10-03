@@ -781,7 +781,7 @@ class 窗口(QWidget):
                     描述列表 = trans([i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述])
                     范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
                     for j in range(4):
-                        if 描述列表[j] != '无':
+                        if 描述列表[j] != trans('无'):
                             for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
                                 if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
                                     temp = 描述列表[j] + str(k)
@@ -789,7 +789,7 @@ class 窗口(QWidget):
                                         temp += '%'
                                     self.神话属性选项[count * 4 + j].addItem(temp)
                         else:
-                            self.神话属性选项[count * 4 + j].addItem('无')
+                            self.神话属性选项[count * 4 + j].addItem(trans('无'))
                     count += 1
 
             count = 0
@@ -798,7 +798,7 @@ class 窗口(QWidget):
                     描述列表 = trans([i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述])
                     范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
                     for j in range(4):
-                        if 描述列表[j] != '无':
+                        if 描述列表[j] != trans('无'):
                             for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
                                 if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
                                     temp = 描述列表[j] + str(k)
@@ -806,7 +806,7 @@ class 窗口(QWidget):
                                         temp += '%'
                                     self.改造产物选项[count * 4 + j].addItem(temp)
                         else:
-                            self.改造产物选项[count * 4 + j].addItem('无')
+                            self.改造产物选项[count * 4 + j].addItem(trans('无'))
                     count += 1
         else:
             count = 0
@@ -819,7 +819,7 @@ class 窗口(QWidget):
                         i.属性1范围_BUFF, i.属性2范围_BUFF, i.属性3范围_BUFF, i.属性4范围_BUFF
                     ]
                     for j in range(4):
-                        if 描述列表[j] != '无':
+                        if 描述列表[j] != trans('无'):
                             for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
                                 if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
                                     temp = 描述列表[j] + str(k)
@@ -827,7 +827,7 @@ class 窗口(QWidget):
                                         temp += '%'
                                     self.神话属性选项[count * 4 + j].addItem(temp)
                         else:
-                            self.神话属性选项[count * 4 + j].addItem('无')
+                            self.神话属性选项[count * 4 + j].addItem(trans('无'))
                     count += 1
         pass
 
@@ -1167,7 +1167,7 @@ class 窗口(QWidget):
         if self.初始属性.职业分类 == '输出':
             from PublicReference.equipment.辟邪玉 import 辟邪玉列表
         else:
-            from PublicReference.equipment.辟邪玉_buff import 辟邪玉列表
+            from PublicReference.equipment.buff.辟邪玉_buff import 辟邪玉列表
         self.辟邪玉数值[index].clear()
         x = self.辟邪玉选择[index].currentIndex()
         temp = 辟邪玉列表[x].最大值 * 10
@@ -1183,7 +1183,7 @@ class 窗口(QWidget):
         if self.初始属性.职业分类 == '输出':
             from PublicReference.equipment.辟邪玉 import 辟邪玉列表
         else:
-            from PublicReference.equipment.辟邪玉_buff import 辟邪玉列表
+            from PublicReference.equipment.buff.辟邪玉_buff import 辟邪玉列表
         for i in range(4):
             x = self.辟邪玉选择[i].currentIndex()
             if self.辟邪玉数值[i].currentIndex() >= 0:
@@ -1813,7 +1813,7 @@ class 窗口(QWidget):
         滚动排行.setMaximumSize(630, 1230)
         if len(筛选) == 0:
             # 滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）'+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)
-            滚动排行.setWindowTitle('当前模板配装排行(点击数字查看详情)')
+            滚动排行.setWindowTitle(trans('当前模板配装排行(点击数字查看详情)'))
         else:
             temp = ''
             for name in 筛选.values():
