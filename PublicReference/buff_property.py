@@ -11,13 +11,6 @@ from PublicReference.equipment.buff.黑鸦_buff import *
 from PublicReference.equipment.buff.护石_buff import *
 from PublicReference.equipment.buff.描述_buff import *
 
-preferred = None
-
-try:
-    preferred = ctypes.WinDLL(dllPath)
-    logger.info("Preferred included.")
-except Exception as e:
-    logger.error(e)
 
 
 class 技能:
@@ -572,7 +565,7 @@ class 辅助角色属性(属性):
                     siroco.set_character(self)
                     sirocos.append(siroco)
                 siroco.fuse(i % 3)
-            
+
         for siroco in sirocos:
             siroco.compute()
 
@@ -690,8 +683,7 @@ class 辅助角色属性(属性):
 
     def 自适应计算(self):
 
-        if preferred is not None:
-
+        try:
             temp = deepcopy(self)
             temp.适用数值计算()
 
@@ -719,7 +711,7 @@ class 辅助角色属性(属性):
             self.防具变换属性自适应 = in_pre_range[3:]
             self.黑鸦属性输入(in_pre_range[3:])
             pass
-        else:
+        except Exception as e:
             self.旧版自适应计算()
         pass
 

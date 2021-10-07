@@ -6,17 +6,7 @@ from PublicReference.equipment.武器融合 import *
 from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
-import ctypes
 import operator
-
-preferred = None
-
-try:
-    preferred = ctypes.WinDLL(dllPath)
-    logger.info("Preferred included.")
-except Exception as e:
-    logger.error(e)
-
 
 class 技能:
     名称 = ''
@@ -1299,7 +1289,8 @@ class 角色属性(属性):
             try:
                 self.全局自适应()
             except Exception as error:
-                # logger.error("error={} \n detail {}".format(error,traceback.print_exc()))
+                logger.info("----------------")
+                logger.error(error)
                 self.贪心自适应()
         for i in range(len(self.择优结果)):
             # 词条属性列表[self.择优结果[i][0]].加成属性(self,self.择优结果[i][1])
@@ -2646,7 +2637,7 @@ class 角色窗口(窗口):
         self.计算标识 = 1
 
         横坐标 = 355
-        标签 = QLabel('批量选择', self.main_frame5)
+        标签 = QLabel(trans('批量选择'), self.main_frame5)
         标签.setAlignment(Qt.AlignCenter)
         标签.setStyleSheet(标签样式)
         标签.resize(160, 25)
@@ -2672,7 +2663,7 @@ class 角色窗口(窗口):
             count += 1
 
         self.神话部位选项 = MyQComboBox(self.main_frame5)
-        self.神话部位选项.addItems(['神话部位：无', '神话部位：上衣', '神话部位：手镯', '神话部位：耳环'])
+        self.神话部位选项.addItems(trans(['神话部位：无', '神话部位：上衣', '神话部位：手镯', '神话部位：耳环']))
         self.神话部位选项.resize(160, 22)
         self.神话部位选项.move(横坐标, 50 + 30 * count)
         self.神话部位选项.activated.connect(lambda state: self.神话部位更改())
@@ -2689,7 +2680,7 @@ class 角色窗口(窗口):
         self.改造套装.activated.connect(lambda state: self.改造套装更改())
 
         count += 1
-        self.转甲选项 = QCheckBox('85SS转甲', self.main_frame5)
+        self.转甲选项 = QCheckBox(trans('85SS转甲'), self.main_frame5)
         self.转甲选项.resize(80, 22)
         self.转甲选项.move(横坐标 + 40, 50 + 30 * count)
         self.转甲选项.setChecked(True)
@@ -2950,7 +2941,7 @@ class 角色窗口(窗口):
             tem[1].resize(70, 20)
             tem[1].move(横坐标 + 161, 纵坐标 - 20 + 25 * (i + 15) - 20)
             # if i > 0:
-            for item in 词条属性列表:
+            for item in trans(词条属性列表):
                 tem[1].addItem(item.描述)
             # else:
             #     for item in 黑鸦武器属性列表:
@@ -2992,7 +2983,7 @@ class 角色窗口(窗口):
             trans('辅助装备：全属强+12<br>魔法石：全属强+30<br>勋章：全属强+7<br>宠物附魔：三攻+60</font>')
         )
 
-        self.智慧产物升级 = QCheckBox(' 智慧产物升级', self.main_frame6)
+        self.智慧产物升级 = QCheckBox(trans('智慧产物升级'), self.main_frame6)
         self.智慧产物升级.resize(140, 20)
         self.智慧产物升级.move(横坐标 + 161, 纵坐标 - 19 + 25 * (4 + 15) - 20)
         self.智慧产物升级.setStyleSheet(复选框样式)
@@ -3001,7 +2992,7 @@ class 角色窗口(窗口):
         横坐标 = 横坐标 + 320
         纵坐标 = 0
 
-        标签 = QLabel('希洛克相关', self.main_frame6)
+        标签 = QLabel(trans('希洛克相关'), self.main_frame6)
         标签.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
         标签.resize(300, 20)
         标签.move(横坐标 - 310, 纵坐标 + 135 - 10)

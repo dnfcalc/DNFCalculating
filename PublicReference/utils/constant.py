@@ -23,6 +23,8 @@ from copy import *
 # from .MainWindow import *
 import chardet
 import sys
+import platform
+import ctypes
 
 from PublicReference.utils.config import *
 
@@ -34,8 +36,21 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
-
-dllPath = resource_path(os.path.join("InternalFile", "DLL", "Preferred.dll"))
+preferred = None
+if platform.system() != "Windows":
+    dllPath = resource_path(os.path.join("InternalFile", "DLL", "Preferred.so"))
+    try:
+        preferred = ctypes.CDLL(dllPath)
+        logger.info("Preferred included.")
+    except Exception as e:
+        logger.error(e)
+else:
+    dllPath = resource_path(os.path.join("InternalFile", "DLL", "Preferred.dll"))
+    try:
+        preferred = ctypes.WinDLL(dllPath)
+        logger.info("Preferred included.")
+    except Exception as e:
+        logger.error(e)
 skillDataPath = resource_path("SkillData")
 
 # 100级史诗套数据

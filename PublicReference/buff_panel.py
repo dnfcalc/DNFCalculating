@@ -207,7 +207,7 @@ class 登记窗口(Page):
         x = 400
         y = 20
 
-        标签 = QLabel('批量选择', self)
+        标签 = QLabel(trans('批量选择'), self)
         标签.setAlignment(Qt.AlignCenter)
         标签.setStyleSheet(标签样式)
         标签.resize(160, 25)

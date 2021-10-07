@@ -56,14 +56,14 @@ class 角色窗口(窗口):
         标签.resize(191, 523)
         标签.move(922 + int((191 - 人物.width()) / 2), 10)
 
-        self.百变怪选项 = QCheckBox('百变怪   ', self.main_frame1)
+        self.百变怪选项 = QCheckBox(trans('百变怪'), self.main_frame1)
         self.百变怪选项.move(660, 613)
         self.百变怪选项.resize(80, 24)
         self.百变怪选项.setToolTip('<font size="3" face="宋体">仅在极速模式和套装模式下生效</font>')
         self.百变怪选项.setStyleSheet(复选框样式)
 
         self.计算模式选择 = MyQComboBox(self.main_frame1)
-        self.计算模式选择.addItems(['计算模式:极速模式', '计算模式:套装模式', '计算模式:单件模式'])
+        self.计算模式选择.addItems(trans(['计算模式:极速模式', '计算模式:套装模式', '计算模式:单件模式']))
         self.计算模式选择.move(750, 613)
         self.计算模式选择.resize(235, 24)
         self.计算模式选择.setStyleSheet(下拉框样式)
@@ -820,7 +820,7 @@ class 角色窗口(窗口):
             count += 1
 
         self.计算标识 = 1
-        标签 = QLabel('批量选择', self.main_frame5)
+        标签 = QLabel(trans('批量选择'), self.main_frame5)
         标签.setAlignment(Qt.AlignCenter)
         标签.setStyleSheet(标签样式)
         标签.resize(160, 25)
@@ -1969,7 +1969,7 @@ class 角色窗口(窗口):
                 i.属性3选择_BUFF = self.神话属性选项[count * 4 + 2].currentIndex()
                 i.属性4选择_BUFF = self.神话属性选项[count * 4 + 3].currentIndex()
                 count += 1
-        
+
         property.护石栏 = [i.currentIndex() for i in self.护石栏]
 
         if self.护石第一栏.currentText() != '无':
@@ -2279,7 +2279,7 @@ class 角色窗口(窗口):
         self.角色属性B.装备描述 = 1
 
         sirocos = []
-        
+
         temp= ''
 
         for i in range(15):
@@ -2552,7 +2552,7 @@ class 角色窗口(窗口):
             if count > 1:
                 套装.append("希洛克-{}".format(希洛克套装[i]))
                 套装件数.append([count])
-   
+
         for i in range(len(套装)):
             位置 += 间隔
             适用套装名称 = QLabel(输出窗口)
@@ -3072,7 +3072,7 @@ class 角色窗口(窗口):
                     if self.奥兹玛选择状态[j*5+index] == 1:
                         cur = j
                         break
-                if cur > 0:              
+                if cur > 0:
                     tempstr[i] += '<font color="#00A2E8">奥兹玛融合属性:</font><br>'
                     tempstr[i] += str(OzmaList[cur](property))
             property.装备描述 = 0
