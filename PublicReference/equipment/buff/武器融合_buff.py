@@ -14,7 +14,7 @@ class 武器属性():
         array = []
         while temp > self.最小值 - self.间隔:
             value = str(int(temp))
-            if self.间隔 / 10 < 1:
+            if self.间隔 // 10 < 1:
                 value += '%'
             array.append(value)
             temp -= self.间隔

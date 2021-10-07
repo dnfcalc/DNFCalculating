@@ -133,7 +133,6 @@ class 登记窗口(Page):
         for i in range(len(self.黑鸦词条)):
             黑鸦.append([
                 2, self.黑鸦词条[i][1].currentIndex(),
-                self.黑鸦词条[i][3].currentText(),
                 self.黑鸦词条[i][3].currentIndex(),
             ])
 
@@ -150,7 +149,8 @@ class 登记窗口(Page):
             self.武器融合属性B2.currentIndex(),
         ])
 
-        store.set('/buffer/data/register/display_power',to_int(self.站街面板输入.text()))
+        store.set('/buffer/data/register/display_power',
+                  to_int(self.站街面板输入.text()))
 
         store.emit("/buffer/event/register_changed")
         self.closeWindow()
@@ -560,8 +560,7 @@ class 登记窗口(Page):
         self.黑鸦词条[i][3].clear()
         if index == 0:
             return
-        变换属性 =  武器变换属性列表[index] if i == 0 else 装备变换属性列表[index]
-
+        变换属性 = 武器变换属性列表[index] if i == 0 else 装备变换属性列表[index]
 
         temp = 变换属性.最大值
         while temp >= 变换属性.最小值:

@@ -10,6 +10,7 @@ from PublicReference.equipment.buff.辟邪玉_buff import *
 from PublicReference.equipment.buff.黑鸦_buff import *
 from PublicReference.equipment.buff.护石_buff import *
 from PublicReference.equipment.buff.描述_buff import *
+from PublicReference.utils.common import to_int
 
 
 
@@ -244,10 +245,10 @@ class 辅助角色属性(属性):
         self.武器类型 = equ.get_equ_by_name(self.装备栏[11]).类型
 
     def 力智固定加成(self, x=0):
-        return 力智固定加成(self,x)
+        return 力智固定加成(self, x)
 
     def 体精固定加成(self, x=0):
-        return 体精固定加成(self,x)
+        return 体精固定加成(self, x)
 
     def BUFF增加(self,
                BUFFLv=0,
@@ -602,8 +603,12 @@ class 辅助角色属性(属性):
             if 黑鸦词条[i][0] == 2:
                 属性列表 = 装备变换属性列表 if i > 0 else 武器变换属性列表
                 装备属性 = 属性列表[黑鸦词条[i][1]]
-                装备属性数值 = str(黑鸦词条[i][2]).replace("%", '')
-                装备属性.当前值 = int(装备属性数值 if 装备属性数值 != '' else 0)
+                value = 黑鸦词条[i][2]
+                if isinstance(value, int):
+                    value = 装备属性.最大值 - 黑鸦词条[i][2] * 装备属性.间隔
+                else:
+                    value = 装备属性.当前值
+                装备属性.当前值 = value
                 装备属性.变换属性(self)
 
     def compute(self, match=None, handle=None):
@@ -745,7 +750,7 @@ class 辅助角色属性(属性):
             for i in range(len(防具变换属性组合)):
                 temp = deepcopy(self)
                 # 总数据 = []
-                temp.黑鸦属性输入(j, 防具变换属性组合[i])
+                temp.黑鸦属性输入(防具变换属性组合[i])
                 提升率 = temp.择优提升率计算()
                 词条提升率.append(提升率)
             a = max(词条提升率)

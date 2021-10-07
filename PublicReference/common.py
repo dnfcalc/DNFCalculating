@@ -966,7 +966,7 @@ class 窗口(QWidget):
                 self.奥兹玛选择状态[index] = 0
 
     def 技能存档更换(self):
-        if self.技能存档选择.currentText() == '新建存档':
+        if self.技能存档选择.currentText() == trans('新建存档'):
             num = 1
             while True:
                 path = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称,
@@ -980,7 +980,7 @@ class 窗口(QWidget):
             self.保存json(path=self.技能存档位置, page=[1])
             self.技能存档选择.setItemText(self.技能存档选择.count() - 1,
                                     'skill-{}'.format(num))
-            self.技能存档选择.addItem('新建存档')
+            self.技能存档选择.addItem(trans('新建存档'))
             return
 
         if self.技能存档位置 == self.技能存档选择.currentText():
@@ -1012,11 +1012,11 @@ class 窗口(QWidget):
                     setfile.append(dir)
         self.技能存档选择.clear()
         self.技能存档选择.addItems(setfile)
-        self.技能存档选择.addItem('新建存档')
+        self.技能存档选择.addItem(trans('新建存档'))
         self.技能存档位置 = self.技能存档选择.currentText()
 
     def 存档更换(self):
-        if self.存档选择.currentText() == '新建存档':
+        if self.存档选择.currentText() == trans('新建存档'):
             num = 1
             while True:
                 path = './ResourceFiles/{}/{}'.format(self.角色属性A.实际名称,
@@ -1029,7 +1029,7 @@ class 窗口(QWidget):
             self.存档位置 = 'set-{}'.format(num)
             self.保存配置(self.存档位置)
             self.存档选择.setItemText(self.存档选择.count() - 1, 'set-{}'.format(num))
-            self.存档选择.addItem('新建存档')
+            self.存档选择.addItem(trans('新建存档'))
             return
 
         if self.存档位置 == self.存档选择.currentText():
@@ -1058,7 +1058,7 @@ class 窗口(QWidget):
         self.存档选择.clear()
         for k in setfile:
             self.存档选择.addItem(k)
-        self.存档选择.addItem('新建存档')
+        self.存档选择.addItem(trans('新建存档'))
         self.存档位置 = self.存档选择.currentText()
 
     def 全局重置(self):
