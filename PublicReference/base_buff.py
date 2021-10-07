@@ -11,9 +11,9 @@ from PublicReference.view.DialogRegister import DefaultDialogRegister
 class 角色窗口(窗口):
     def __init__(self):
         self.初始属性: 辅助角色属性 = None
-        self.护石选项 = [
+        self.护石选项 = trans([
             '无', 'BUFF力量、智力+2%', 'BUFF力量、智力+4%', 'BUFF力量、智力+6%', 'BUFF力量、智力+8%'
-        ]
+        ])
         self.登记启用 = False
         super().__init__()
         store.bind(self, "登记启用", "/buffer/data/register_enable")
@@ -100,7 +100,7 @@ class 角色窗口(窗口):
         self.禁用存档.resize(100, 24)
         self.禁用存档.setStyleSheet(复选框样式)
 
-        重置按钮 = QPushButton('全局重置', self.main_frame1)
+        重置按钮 = QPushButton(trans('全局重置'), self.main_frame1)
         重置按钮.clicked.connect(lambda state: self.全局重置())
         重置按钮.move(880, 545)
         重置按钮.resize(100, 24)
@@ -224,7 +224,7 @@ class 角色窗口(窗口):
         横坐标 = 395
         纵坐标 = 20
         行高 = 18
-        x = QLabel("护石Ⅰ:", self.main_frame2)
+        x = QLabel(trans("护石") + "Ⅰ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         纵坐标 += 21
@@ -233,7 +233,7 @@ class 角色窗口(窗口):
 
         横坐标 = 565
         纵坐标 = 20
-        x = QLabel("护石Ⅱ:", self.main_frame2)
+        x = QLabel(trans("护石") + "Ⅱ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         纵坐标 += 21
@@ -243,7 +243,7 @@ class 角色窗口(窗口):
         横坐标 = 395
         纵坐标 = 70
         行高 = 18
-        x = QLabel("护石Ⅲ:", self.main_frame2)
+        x = QLabel(trans("护石") + "Ⅲ", self.main_frame2)
         x.move(横坐标, 纵坐标)
         x.setStyleSheet(标签样式)
         纵坐标 += 21
@@ -252,14 +252,14 @@ class 角色窗口(窗口):
 
         self.辟邪玉选择 = []
         self.辟邪玉数值 = []
-        x = QLabel("辟邪玉选择:", self.main_frame2)
+        x = QLabel(trans("辟邪玉选择"), self.main_frame2)
         x.move(395, 115 + 5)
         x.setStyleSheet(标签样式)
         for i in range(4):
             x = MyQComboBox(self.main_frame2)
             for j in 辟邪玉列表:
                 # '[' + str(j.编号) + ']' +
-                x.addItem(j.名称)
+                x.addItem(trans(j.名称))
             x.resize(200, 20)
             x.move(395, 140 + i * 25)
             x.currentIndexChanged.connect(
@@ -272,18 +272,18 @@ class 角色窗口(窗口):
 
         self.复选框列表 = []
         for i in 选项设置列表:
-            self.复选框列表.append(QCheckBox(i.名称, self.main_frame2))
+            self.复选框列表.append(QCheckBox(trans(i.名称), self.main_frame2))
 
         横坐标 = 395
         纵坐标 = 240
 
-        x = QLabel("武器融合:", self.main_frame2)
+        x = QLabel(trans("武器融合:"), self.main_frame2)
         x.move(横坐标, 纵坐标 + 5)
         x.resize(300, 20)
         x.setStyleSheet(标签样式)
 
         self.希洛克武器选择 = MyQComboBox(self.main_frame2)
-        self.希洛克武器选择.addItems(['武器词条:无', '自适应最高值', '自选词条数值'])
+        self.希洛克武器选择.addItems(trans(['武器词条:无', '自适应最高值', '自选词条数值']))
         self.希洛克武器选择.resize(120, 20)
         self.希洛克武器选择.move(横坐标 + 60, 纵坐标 + 5)
         self.希洛克武器选择.currentIndexChanged.connect(
@@ -291,7 +291,7 @@ class 角色窗口(窗口):
         纵坐标 += 10
         self.武器融合属性A = MyQComboBox(self.main_frame2)
         for j in 武器属性A列表:
-            self.武器融合属性A.addItem(j.固定属性描述)
+            self.武器融合属性A.addItem(trans(j.固定属性描述))
         self.武器融合属性A.resize(60, 20)
         self.武器融合属性A.move(横坐标, 纵坐标 + 25)
 
@@ -305,15 +305,15 @@ class 角色窗口(窗口):
         self.武器融合属性A.currentIndexChanged.connect(
             lambda: self.希洛克武器随机词条更新(self.武器融合属性A.currentIndex()))
 
-        x = QLabel("择优方向", self.main_frame2)
+        x = QLabel(trans("择优方向"), self.main_frame2)
         x.move(横坐标 + 335, 纵坐标 + 15)
         x.resize(300, 20)
         x.setStyleSheet(标签样式)
 
         self.觉醒择优方向 = MyQComboBox(self.main_frame2)
-        self.觉醒择优方向.addItem('自选觉醒择优系数')
-        self.觉醒择优方向.addItem('续航向:觉醒0.7系数')
-        self.觉醒择优方向.addItem('爆发向:觉醒1.0系数')
+        self.觉醒择优方向.addItem(trans('自选觉醒择优系数'))
+        self.觉醒择优方向.addItem(trans('续航向:觉醒0.7系数'))
+        self.觉醒择优方向.addItem(trans('爆发向:觉醒1.0系数'))
         self.觉醒择优方向.resize(138, 20)
         self.觉醒择优方向.move(横坐标 + 300, 纵坐标 + 40)
         self.觉醒择优方向.currentIndexChanged.connect(
@@ -329,7 +329,7 @@ class 角色窗口(窗口):
         纵坐标 = 纵坐标 + 30
         self.武器融合属性B = MyQComboBox(self.main_frame2)
         for j in 武器属性B列表:
-            self.武器融合属性B.addItem(j.固定属性描述)
+            self.武器融合属性B.addItem(trans(j.固定属性描述))
         self.武器融合属性B.resize(60, 20)
         self.武器融合属性B.move(横坐标, 纵坐标 + 25)
 
@@ -344,13 +344,13 @@ class 角色窗口(窗口):
             lambda: self.希洛克武器随机词条更新(self.武器融合属性B.currentIndex(), 1))
 
         纵坐标 = 纵坐标 + 60
-        标签 = QLabel('黑鸦遴选词条', self.main_frame2)
+        标签 = QLabel(trans('黑鸦遴选词条'), self.main_frame2)
         标签.setStyleSheet(标签样式 + 'QLabel{font-size:13px;}')
         标签.resize(410, 20)
         标签.move(横坐标, 纵坐标)
         标签.setAlignment(Qt.AlignCenter)
 
-        名称 = ['武　　器', '戒　　指', '辅助装备', '下　　装']
+        名称 = trans(['武　　器', '戒　　指', '辅助装备', '下　　装'])
         纵坐标 = 纵坐标 + 25
         self.黑鸦词条选项 = []
         for i in range(4):
@@ -364,13 +364,13 @@ class 角色窗口(窗口):
             tem = []
             tem.append(MyQComboBox(self.main_frame2))
             if i == 0:
-                tem[0].addItems(['无', '计算最高', '自选数值', '自选数值-觉醒'])
+                tem[0].addItems(trans(['无', '计算最高', '自选数值', '自选数值-觉醒']))
                 tem[0].resize(91, 20)
                 tem[0].move(横坐标 + 60, 纵坐标 + 25 * i)
                 tem[0].currentIndexChanged.connect(
                     lambda state, index=i: self.黑鸦词条更新(index))
             else:
-                tem[0].addItems(['无', '计算最高', '自选数值'])
+                tem[0].addItems(trans(['无', '计算最高', '自选数值']))
                 tem[0].resize(91, 20)
                 tem[0].move(横坐标 + 60, 纵坐标 + 25 * i)
                 tem[0].currentIndexChanged.connect(
@@ -388,12 +388,12 @@ class 角色窗口(窗口):
             tem[3].move(横坐标 + 361 + 20 + 10, 纵坐标 + 25 * i)
             if i > 0:
                 for item in 装备变换属性列表:
-                    tem[1].addItem(item.固定属性描述)
+                    tem[1].addItem(trans(item.固定属性描述))
                 tem[1].currentIndexChanged.connect(
                     lambda state, index=i: self.黑鸦随机词条更新(index, 1))
             else:
                 for item in 武器变换属性列表:
-                    tem[1].addItem(item.固定属性描述)
+                    tem[1].addItem(trans(item.固定属性描述))
                 tem[1].currentIndexChanged.connect(
                     lambda state, index=i: self.黑鸦随机词条更新(index))
             self.黑鸦词条选项.append(tem)
@@ -408,7 +408,7 @@ class 角色窗口(窗口):
 
         count = 0
         for i in 希洛克套装:
-            self.希洛克套装按钮.append(QPushButton(i, self.main_frame2))
+            self.希洛克套装按钮.append(QPushButton(trans(i), self.main_frame2))
             self.希洛克套装按钮[count].setStyleSheet(按钮样式)
             self.希洛克套装按钮[count].resize(50, 22)
             self.希洛克套装按钮[count].move(横坐标, 纵坐标 + 3 + count * 40)
@@ -448,7 +448,7 @@ class 角色窗口(窗口):
 
         count = 0
         for i in 奥兹玛套装:
-            self.奥兹玛套装按钮.append(QPushButton(i, self.main_frame2))
+            self.奥兹玛套装按钮.append(QPushButton(trans(i), self.main_frame2))
             self.奥兹玛套装按钮[count].setStyleSheet(按钮样式)
             self.奥兹玛套装按钮[count].resize(75, 22)
             self.奥兹玛套装按钮[count].move(横坐标, 纵坐标 + 3 + count * 32)
@@ -499,7 +499,7 @@ class 角色窗口(窗口):
                 3000, 3500, 4000, 4500, 5000, 5500, 6000, 7000, 8000, 10000,
                 12000, 15000, 20000
         ]:
-            self.排行选项[0].addItem('C力智:' + str(i))
+            self.排行选项[0].addItem(trans('C力智:') + str(i))
         self.排行选项[0].setCurrentIndex(4)
 
         self.排行选项[1].setEditable(True)
@@ -508,13 +508,13 @@ class 角色窗口(窗口):
                 3000, 3100, 3200, 3300, 3400, 3500, 3600, 3700, 3800, 3900,
                 4000, 4200, 4400, 4600, 4800, 5000
         ]:
-            self.排行选项[1].addItem('C三攻:' + str(i))
+            self.排行选项[1].addItem(trans('C三攻:') + str(i))
         self.排行选项[1].setCurrentIndex(10)
 
-        for i in ['物理百分比', '魔法百分比', '物理固伤', '魔法固伤']:
+        for i in trans(['物理百分比', '魔法百分比', '物理固伤', '魔法固伤']):
             self.排行选项[2].addItem(i)
 
-        for i in ['无系统奶', '希洛克系统奶', '黑鸦系统奶']:
+        for i in trans(['无系统奶', '希洛克系统奶', '黑鸦系统奶']):
             self.排行选项[3].addItem(i)
 
         counter = 0
@@ -523,7 +523,7 @@ class 角色窗口(窗口):
             i.move(990, 490 + counter * 28)
             counter += 1
 
-        self.计算按钮2 = QPushButton('开始计算', self.main_frame2)
+        self.计算按钮2 = QPushButton(trans('开始计算'), self.main_frame2)
         self.计算按钮2.clicked.connect(lambda state: self.计算())
         self.计算按钮2.move(990, 610)
         self.计算按钮2.resize(100, 30)
@@ -587,17 +587,17 @@ class 角色窗口(窗口):
 
         宽度 = 43
 
-        列名称1 = ["智力", "体力", "精神"]
-        行名称1 = [
+        列名称1 = trans(["智力", "体力", "精神"])
+        行名称1 = trans([
             "工会属性", "训练官BUFF", "戒指", "婚房", "冒险团", "晶体契约", "收集箱", "勋章", "名称装饰卡",
             "快捷栏纹章", "宠物装备-红", "  宠物装备-蓝  ", "  宠物装备-绿  ", "宠物附魔", "皮肤",
             "站街修正", "进图修正", "登记修正", ''
-        ]
+        ])
 
         column_count = len(列名称1)
         row_count = len(行名称1)
 
-        名称 = QLabel("基础细节", self.main_frame3)
+        名称 = QLabel(trans("基础细节"), self.main_frame3)
         名称.setAlignment(Qt.AlignCenter)
         名称.setStyleSheet(标签样式)
         名称.resize(80, 25)
@@ -640,7 +640,7 @@ class 角色窗口(窗口):
         self.列名称 = 列名称1 + 列名称2
         self.行名称 = 行名称1 + 行名称2
 
-        名称 = QLabel(" 附魔&徽章 ", self.main_frame3)
+        名称 = QLabel(trans("附魔&徽章"), self.main_frame3)
         名称.setAlignment(Qt.AlignCenter)
         名称.setStyleSheet(标签样式)
         名称.resize(80, 25)
@@ -674,15 +674,15 @@ class 角色窗口(窗口):
 
         for j in range(19):
             self.技能设置输入.append(MyQComboBox(self.main_frame3))
-            self.技能设置输入[j].addItem('无')
+            self.技能设置输入[j].addItem(trans('无'))
             self.技能设置输入[j].setStyleSheet(下拉框样式)
             self.技能设置输入[j].resize(150, 22)
             self.技能设置输入[j].move(90 + 7 * 宽度 + 6 * (宽度 + 5), 35 + j * 30)
 
         for j in [2, 3, 4]:
-            self.技能设置输入[j].addItems(['Lv1-30(主动)Lv+1', 'Lv1-50(主动)Lv+1'])
-        self.技能设置输入[2].addItems(['Lv1-35(主动)Lv+1', 'Lv30-50(主动)Lv+1'])
-        self.技能设置输入[3].addItem('Lv30-50(主动)Lv+1')
+            self.技能设置输入[j].addItems(trans(['Lv1-30(主动)Lv+1', 'Lv1-50(主动)Lv+1']))
+        self.技能设置输入[2].addItems(trans(['Lv1-35(主动)Lv+1', 'Lv30-50(主动)Lv+1']))
+        self.技能设置输入[3].addItem(trans('Lv30-50(主动)Lv+1'))
 
         for j in [8, 9]:
             self.技能设置输入[j].addItems(
@@ -690,28 +690,28 @@ class 角色窗口(窗口):
 
         self.技能设置输入[12].addItems(
             ['BUFFLv+1', 'BUFFLv+2', 'BUFFLv+3', 'BUFFLv+4'])
-        self.技能设置输入[13].addItems(['Lv1-50(主动)Lv+1', '一觉Lv+1', '一觉Lv+2'])
-        self.技能设置输入[14].addItems([
+        self.技能设置输入[13].addItems(trans(['Lv1-50(主动)Lv+1', '一觉Lv+1', '一觉Lv+2']))
+        self.技能设置输入[14].addItems(trans([
             'Lv1-30(所有)Lv+1', 'Lv1-50(所有)Lv+1', 'Lv1-20(所有)Lv+1',
             'Lv20-30(所有)Lv+1', 'Lv1-80(所有)Lv+1'
-        ])
+        ]))
 
         self.技能设置输入[16].addItems(
             i.名称+'Lv+1' for i in self.角色属性A.技能表.values() if i.所在等级 <= 85)
 
-        self.技能设置输入[17].addItems(['BUFF力智+3%', 'BUFF三攻+3%', 'BUFF力智、三攻+3%'])
-        self.技能设置输入[18].addItems(['BUFF力智+3%'])
+        self.技能设置输入[17].addItems(trans(['BUFF力智+3%', 'BUFF三攻+3%', 'BUFF力智、三攻+3%']))
+        self.技能设置输入[18].addItems(trans(['BUFF力智+3%']))
 
         if '智力' in self.角色属性A.类型:
-            self.修正列表名称 = [
+            self.修正列表名称 = trans([
                 '转职被动智力', 'BUFF力智%', 'BUFF三攻%', '转职被动等级', '一觉被动力智', '一觉力智%',
                 '一觉力智'
-            ]
+            ])
         else:
-            self.修正列表名称 = [
+            self.修正列表名称 = trans([
                 '守护恩赐体精', 'BUFF力智%', 'BUFF三攻%', '守护恩赐等级', '信念光环体精', '一觉力智%',
                 '一觉力智'
-            ]
+            ])
 
         Linelist = []
         for i in range(len(self.修正列表名称)):
@@ -729,14 +729,14 @@ class 角色窗口(窗口):
 
         count = 0
         self.时装选项 = []
-        for i in ['头部', '帽子', '脸部', '胸部', '上衣', '腰带', '下装', '鞋']:
+        for i in trans(['头部', '帽子', '脸部', '胸部', '上衣', '腰带', '下装', '鞋']):
             名称 = QLabel(i, self.main_frame3)
             名称.setAlignment(Qt.AlignCenter)
             名称.setStyleSheet(标签样式)
             名称.resize(90, 25)
             名称.move(170 + 7 * 宽度 + 9 * (宽度 + 5), 255 + count * 30)
             self.时装选项.append(MyQComboBox(self.main_frame3))
-            self.时装选项[count].addItems(['高级', '节日', '稀有', '神器'])
+            self.时装选项[count].addItems(trans(['高级', '节日', '稀有', '神器']))
             self.时装选项[count].resize(60, 22)
             self.时装选项[count].move(270 + 7 * 宽度 + 9 * (宽度 + 5),
                                   255 + count * 30)
@@ -745,13 +745,13 @@ class 角色窗口(窗口):
             count += 1
 
         self.时装选项.append(MyQComboBox(self.main_frame3))
-        self.时装选项[8].addItems(['高级套装[8]', '节日套装[8]', '稀有套装[8]', '神器套装[8]'])
+        self.时装选项[8].addItems([trans('高级套装')+'[8]', trans('节日套装')+'[8]', trans('稀有套装')+'[8]', trans('神器套装')+'[8]'])
         self.时装选项[8].resize(160, 22)
         self.时装选项[8].move(170 + 7 * 宽度 + 9 * (宽度 + 5), 260 + count * 30)
         self.时装选项[8].currentIndexChanged.connect(
             lambda state, index=8: self.时装选项更新(index))
 
-        self.计算按钮3 = QPushButton('开始计算', self.main_frame3)
+        self.计算按钮3 = QPushButton(trans('开始计算'), self.main_frame3)
         self.计算按钮3.clicked.connect(lambda state: self.计算())
         self.计算按钮3.move(990, 610)
         self.计算按钮3.resize(100, 30)
@@ -760,13 +760,13 @@ class 角色窗口(窗口):
     def 界面5(self):
         # 第五个布局
         self.main_frame5 = QWidget()
-        标签 = QLabel('单件选择', self.main_frame5)
+        标签 = QLabel(trans('单件选择'), self.main_frame5)
         标签.setAlignment(Qt.AlignCenter)
         标签.setStyleSheet(标签样式)
         标签.resize(240, 25)
         标签.move(70, 20)
 
-        标签 = QLabel('锁定', self.main_frame5)
+        标签 = QLabel(trans('锁定'), self.main_frame5)
         标签.setAlignment(Qt.AlignCenter)
         标签.setStyleSheet(标签样式)
         标签.resize(70, 25)
@@ -984,7 +984,7 @@ class 角色窗口(窗口):
             self.套装名称显示[i].resize(132, 18)
             self.套装名称显示[i].setAlignment(Qt.AlignCenter)
 
-        自选计算按钮 = QPushButton('查看详情', self.main_frame5)
+        自选计算按钮 = QPushButton(trans('查看详情'), self.main_frame5)
         自选计算按钮.clicked.connect(lambda state: self.自选计算())
         自选计算按钮.move(995, 610)
         自选计算按钮.resize(80, 28)
@@ -992,26 +992,26 @@ class 角色窗口(窗口):
 
         self.基准值 = []
 
-        设置基准值 = QPushButton('设为基准', self.main_frame5)
+        设置基准值 = QPushButton(trans('设为基准'), self.main_frame5)
         设置基准值.clicked.connect(lambda state: self.基准值设置())
         设置基准值.move(900, 610)
         设置基准值.resize(80, 28)
         设置基准值.setStyleSheet(按钮样式)
 
-        清空基准值 = QPushButton('清空基准', self.main_frame5)
+        清空基准值 = QPushButton(trans('清空基准'), self.main_frame5)
         清空基准值.clicked.connect(lambda state: self.基准值设置(1))
         清空基准值.move(805, 610)
         清空基准值.resize(80, 28)
         清空基准值.setStyleSheet(按钮样式)
 
-        换装选项 = QCheckBox('启用登记', self.main_frame5)
+        换装选项 = QCheckBox(trans('启用登记'), self.main_frame5)
 
         换装选项.toggled.connect(lambda checked: self.启用换装登记(checked))
         换装选项.move(320, 340)
         换装选项.resize(70, 28)
         换装选项.setStyleSheet(复选框样式)
 
-        换装设置 = QPushButton('登记设置', self.main_frame5)
+        换装设置 = QPushButton(trans('登记设置'), self.main_frame5)
         换装设置.clicked.connect(lambda _: self.换装设置())
         换装设置.move(390, 340)
         换装设置.resize(80, 28)
