@@ -493,8 +493,8 @@ class 辅助角色属性(属性):
                 i.套装栏[2 * num + 2] = i.套装栏[2 * num + 2].replace(
                     equ.get_equ_by_name(i.装备栏[index[num]]).所属套装,
                     equ.get_equ_by_name(i.装备栏[1]).所属套装)
-                i.切换详情 = equ.get_equ_by_name(i.装备栏[num * 2]).部位 + ':' + x1.装备栏[
-                    num * 2] + ' → ' + i.装备栏[num * 2]
+                i.切换详情 = trans(equ.get_equ_by_name(i.装备栏[num * 2]).部位) + ':' + trans(x1.装备栏[
+                    num * 2]) + ' → ' + trans(i.装备栏[num * 2])
                 num += 1
             return [x1, x2, x3, x4]
         elif sumcount == 6:
@@ -508,8 +508,8 @@ class 辅助角色属性(属性):
             x2.套装栏[index] = x2.套装栏[index].replace(
                 equ.get_equ_by_name(x2.装备栏[1]).所属套装,
                 equ.get_equ_by_name(x2.装备栏[部位[index]]).所属套装)
-            x2.切换详情 = equ.get_equ_by_name(x2.装备栏[index - 2]).部位 + ':' + x1.装备栏[
-                index - 2] + ' → ' + x2.装备栏[index - 2]
+            x2.切换详情 = trans(equ.get_equ_by_name(x2.装备栏[index - 2]).部位) + ':' + trans(x1.装备栏[
+                index - 2]) + ' → ' + trans(x2.装备栏[index - 2])
             return [x1, x2]
         elif count2 == 7 and 套装栏[1] != 套装栏[2]:
             x1 = deepcopy(属性)
@@ -541,13 +541,13 @@ class 辅助角色属性(属性):
             x5.装备栏[不可更换部位[1]] = equ.get_equ_by_index(三件套名称, '史诗',
                                                      部位列表[不可更换部位[1]]).名称
 
-            x2.切换详情 = 部位列表[可更换部位[0]] + ':' + 属性.装备栏[可更换部位[0]] + ' → ' + x2.装备栏[
-                可更换部位[0]]
-            x3.切换详情 = 部位列表[可更换部位[1]] + ':' + 属性.装备栏[可更换部位[1]] + ' → ' + x3.装备栏[
-                可更换部位[1]]
-            x4.切换详情 = 部位列表[可更换部位[2]] + ':' + 属性.装备栏[可更换部位[2]] + ' → ' + x4.装备栏[
-                可更换部位[2]]
-            x5.切换详情 = 属性.套装栏[2] + ' → ' + x5.套装栏[2]
+            x2.切换详情 = trans(部位列表[可更换部位[0]]) + ':' + trans(属性.装备栏[可更换部位[0]]) + ' → ' + trans(x2.装备栏[
+                可更换部位[0]])
+            x3.切换详情 = trans(部位列表[可更换部位[1]]) + ':' + trans(属性.装备栏[可更换部位[1]]) + ' → ' + trans(x3.装备栏[
+                可更换部位[1]])
+            x4.切换详情 = trans(部位列表[可更换部位[2]]) + ':' + trans(属性.装备栏[可更换部位[2]]) + ' → ' + trans(x4.装备栏[
+                可更换部位[2]])
+            x5.切换详情 = trans(属性.套装栏[2]) + ' → ' + trans(x5.套装栏[2])
             return [x1, x2, x3, x4, x5]
         else:
             return [deepcopy(属性)]
@@ -656,8 +656,8 @@ class 辅助角色属性(属性):
                 b = int(数据列表[0])
                 c = int(a) - int(b)
                 if 一觉.名称 not in 三觉.关联技能:
-                    temp += 一觉.名称 + '+'
-                temp += "{}:{}->{}(+{})".format(三觉.名称, b, a, c)
+                    temp += trans(一觉.名称) + '+'
+                temp += "{}:{}->{}(+{})".format(trans(三觉.名称), b, a, c)
             else:
                 temp = ''
                 # 计算现有装备BUFF
