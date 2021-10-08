@@ -768,7 +768,7 @@ class 技能31(职业主动技能):
             self.攻击次数3 = 6
             self.CD *= 0.9
         elif x == 1:
-            self.攻击次数0 = 0
+            self.攻击次数 = 0
             self.攻击次数2 = 0
             self.data2 = [int(i*0.29) for i in self.data2]
             self.攻击次数3 = 6
