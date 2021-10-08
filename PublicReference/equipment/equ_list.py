@@ -96,6 +96,9 @@ class equipment():
             item = self.get_equ_by_name(i)
             if item.所属套装2 != '无':
                 j = item.所属套装2
+                k = item.所属套装
+                if k != '智慧产物':
+                    dictionary[k] = dictionary.get(k, 0) + 1
             else:
                 j = item.所属套装
             if j != '无':
@@ -114,6 +117,13 @@ class equipment():
                         temp = '{}[{}]'.format(i, 5)
                         if temp in self.suit_name:
                             suits.append(temp)
+        for i in suits:
+            try:
+                temp = i.replace(i.split('[')[0], self.get_suit_by_name(i).子套装)
+                if temp in suits:
+                    suits.remove(temp)
+            except:
+                pass
         return suits
 
     def get_suit_by_id(self, id):
