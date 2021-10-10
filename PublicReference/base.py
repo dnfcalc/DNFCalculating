@@ -1,26 +1,12 @@
-from PublicReference.base_fame import *
 from PublicReference.equipment.equ_list import *
 from PublicReference.equipment.称号 import *
 from PublicReference.equipment.宠物 import *
 from PublicReference.equipment.辟邪玉 import *
 from PublicReference.equipment.武器融合 import *
-from PublicReference.equipment.冒险家名望 import *
 from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
-from PublicReference.view.DialogRegister import DefaultDialogRegister
-
-import ctypes
 import operator
-
-preferred = None
-
-try:
-    preferred = ctypes.WinDLL(dllPath)
-    logger.info("Preferred included.")
-except Exception as e:
-    logger.error(e)
-
 
 class 技能:
     名称 = ''
@@ -2837,16 +2823,9 @@ class 角色窗口(窗口):
 
         self.对比格式 = QCheckBox(trans('数值对比'), self.main_frame5)
         self.对比格式.stateChanged.connect(lambda state: self.自选计算(1))
-        self.对比格式.move(615, 612)
+        self.对比格式.move(720, 612)
         self.对比格式.resize(70, 24)
         self.对比格式.setStyleSheet(复选框样式)
-
-        名望设置 = QPushButton('名望细节', self.main_frame5)
-        名望设置.clicked.connect(lambda _: self.名望设置())
-        名望设置.move(710, 610)
-        名望设置.resize(80, 28)
-        名望设置.setStyleSheet(按钮样式)
-
 
     def 自选装备更改(self, index=0):
         try:
@@ -3410,19 +3389,6 @@ class 角色窗口(窗口):
             self.属性设置输入[6][16].setText(str(max(力量, 智力)))
             self.属性设置输入[8][16].setText(str(属强 if 属强 != 0 else ''))
 
-    def 名望设置(self):
-        def createClient():
-            store.set("/fame/temp/property", self)
-            # 设置图标和背景 临时做法
-            store.const("/app/window/icon", self.icon)
-            store.const("/app/window/background_image", self.主背景图片)
-            client = 名望窗口()
-            client.初始化()
-            return client
-
-        DefaultDialogRegister.showDialog(
-            "base_fame({})".format(type(self)), createClient, self)
-
     #通用
     def 下拉框禁用(self, a, b, c=下拉框样式):
         if a.isChecked():
@@ -3540,8 +3506,6 @@ class 角色窗口(窗口):
 
             self.套装显示设置(self.套装名称显示, B)
 
-        名望 = 获取人物名望(角色属性 = B, 人物设置 = self)
-        print(名望)
         if x == 0:
             self.排行数据.append(装备 + [0] + 套装 + ['无'])
             self.输出界面(0)
