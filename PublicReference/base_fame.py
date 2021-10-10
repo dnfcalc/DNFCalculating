@@ -11,7 +11,7 @@ class 名望窗口(Page):
     def 初始化(self):
         self.初始化 = True
         self.名望部位列表 = list(部位列表)
-        self.名望部位列表 += ["武器装扮", "宠物装备红", "宠物装备蓝", "宠物装备绿", "宠物附魔", "皮肤"]
+        self.名望部位列表 += ["武器装扮", "宠物装备红", "宠物装备蓝", "宠物装备绿", "宠物附魔", "皮肤", "光环", "称号附魔"]
         self.自选附魔名望选项 = []
         self.初始化UI()
         self.初始化 = False
@@ -24,7 +24,7 @@ class 名望窗口(Page):
            color: white;
            border: 0px
            }''')
-        self.setFixedSize(220, 560)
+        self.setFixedSize(440, 560)
         self.setWindowTitle("名望设置")
         self.setWindowIcon(icon)
         backgroundColorLabel = QLabel(self)
@@ -51,11 +51,12 @@ class 名望窗口(Page):
             defaultValueTable = 附魔名望默认选项
         else:
             defaultValueTable = 名望细节
-        for i in self.名望部位列表:
+        for idx in range(len(self.名望部位列表)):
+            i = self.名望部位列表[idx]
             label = QLabel(i, self)
             label.setStyleSheet(标签样式)
             label.resize(70, 22)
-            label.move(20, 10 + 30 * count)
+            label.move(20 + int(idx / 18)* 220, 10 + 30 * (count % 18))
 
             x = MyQComboBox(self)
             x.placeholderText = i
@@ -68,7 +69,7 @@ class 名望窗口(Page):
             x.setCurrentIndex(defaultIndex)
 
             x.resize(55, 20)
-            x.move(90, 10 + 30 * count)
+            x.move(90 + int(idx / 18)* 220, 10 + 30 * (count % 18))
             self.自选附魔名望选项.append(x)
 
             count += 1
