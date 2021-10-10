@@ -102,7 +102,7 @@ class 技能4(主动技能):
     演出时间 = 0.2
 
     def 等效百分比(self, 武器类型):
-        return ((self.data[self.等级]+self.data1[self.等级]+self.data2[self.等级]) * self.攻击次数 + self.data3[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级)
+        return ((self.data[self.等级]+self.data1[self.等级]+self.data2[self.等级]) * self.攻击次数 + self.data3[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.187
 
 
 class 技能5(主动技能):
@@ -120,7 +120,7 @@ class 技能5(主动技能):
     演出时间 = 0.2
 
     def 等效百分比(self, 武器类型):
-        return (self.data[self.等级] * self.攻击次数 + (self.data1[self.等级] + self.data2[self.等级] * 3) * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级)
+        return (self.data[self.等级] * self.攻击次数 + (self.data1[self.等级] + self.data2[self.等级] * 3) * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.187
 
 
 class 技能6(主动技能):
@@ -137,7 +137,7 @@ class 技能6(主动技能):
     演出时间 = 0.1
 
     def 等效百分比(self, 武器类型):
-        return (self.data[self.等级] * self.攻击次数 + self.data1[self.等级] * self.收招倍率2) * self.倍率 * (1 + self.TP成长 * self.TP等级)
+        return (self.data[self.等级] * self.攻击次数 + self.data1[self.等级] * self.收招倍率2) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.187
 
 
 class 技能7(主动技能):
@@ -156,7 +156,7 @@ class 技能7(主动技能):
     演出时间 = 0.2
 
     def 等效百分比(self, 武器类型):
-        return ((self.data[self.等级] * 3 + self.data1[self.等级] * 3 + self.data2[self.等级] * 3) * self.攻击次数 + self.data3[self.等级] * 3 * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级)
+        return ((self.data[self.等级] * 3 + self.data1[self.等级] * 3 + self.data2[self.等级] * 3) * self.攻击次数 + self.data3[self.等级] * 3 * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.164
 
 
 class 技能8(主动技能):
@@ -174,7 +174,7 @@ class 技能8(主动技能):
     演出时间 = 0.5
 
     def 等效百分比(self, 武器类型):
-        return (self.data[self.等级] * self.旋转次数 * self.攻击次数 + self.data1[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级)
+        return (self.data[self.等级] * self.旋转次数 * self.攻击次数 + self.data1[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.163
 
 
 class 技能9(主动技能):
@@ -202,7 +202,7 @@ class 技能9(主动技能):
             self.旋转倍率 = 2.91
 
     def 等效百分比(self, 武器类型):
-        return ((self.data[self.等级] * self.旋转次数 * self.旋转倍率 + self.data1[self.等级]) * self.攻击次数 + self.data2[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.141
+        return ((self.data[self.等级] * self.旋转次数 * self.旋转倍率 + self.data1[self.等级]) * self.攻击次数 + self.data2[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.167
 
 
 class 技能10(主动技能):
@@ -223,7 +223,7 @@ class 技能10(主动技能):
     演出时间 = 0.3
 
     def 等效百分比(self, 武器类型):
-        return ((self.data[self.等级] + self.data1[self.等级]) * self.攻击次数 + self.data2[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级)
+        return ((self.data[self.等级] + self.data1[self.等级]) * self.攻击次数 + self.data2[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.058
 
 
 class 技能11(主动技能):
@@ -256,7 +256,7 @@ class 技能11(主动技能):
             self.CD *= 0.9
 
     def 等效百分比(self, 武器类型):
-        return ((self.data[self.等级]*self.乱舞数 + self.data1[self.等级] * self.分身乱舞数 + self.data2[self.等级]) * self.攻击次数 + self.data3[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级)
+        return ((self.data[self.等级]*self.乱舞数 + self.data1[self.等级] * self.分身乱舞数 + self.data2[self.等级]) * self.攻击次数 + self.data3[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.11
 
 
 class 技能12(主动技能):
@@ -284,7 +284,7 @@ class 技能12(主动技能):
             self.收招倍率 *= 1.6356
 
     def 等效百分比(self, 武器类型):
-        return ((self.data[self.等级] + self.data1[self.等级] + self.data2[self.等级] + self.data3[self.等级]) * self.攻击次数 + self.data4[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级)
+        return ((self.data[self.等级] + self.data1[self.等级] + self.data2[self.等级] + self.data3[self.等级]) * self.攻击次数 + self.data4[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.166
 
 
 class 技能13(主动技能):
@@ -300,7 +300,7 @@ class 技能13(主动技能):
     CD = 145
 
     def 等效百分比(self, 武器类型):
-        return self.data[self.等级] * self.攻击次数 * self.倍率
+        return self.data[self.等级] * self.攻击次数 * self.倍率 * 1.205
 
     def 等效CD(self, 武器类型, 输出类型):
         if 武器类型 == '双剑':
@@ -338,7 +338,7 @@ class 技能14(主动技能):
             self.CD *= 0.89
 
     def 等效百分比(self, 武器类型):
-        return (self.data[self.等级] * self.攻击次数 + self.data1[self.等级] * self.收招倍率 + self.data[self.等级] * self.收招倍率3) * self.倍率 * (1 + self.TP成长 * self.TP等级)
+        return (self.data[self.等级] * self.攻击次数 + self.data1[self.等级] * self.收招倍率 + self.data[self.等级] * self.收招倍率3) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.257
 
 
 class 技能15(主动技能):
@@ -368,7 +368,7 @@ class 技能15(主动技能):
             self.倍率2 = 2.27
 
     def 等效百分比(self, 武器类型):
-        return ((self.data[self.等级] * 3 * self.倍率1 + self.data1[self.等级] * self.倍率2) * self.攻击次数 + self.data2[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级)
+        return ((self.data[self.等级] * 3 * self.倍率1 + self.data1[self.等级] * self.倍率2) * self.攻击次数 + self.data2[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.166
 
 
 class 技能16(主动技能):
@@ -392,7 +392,7 @@ class 技能16(主动技能):
             self.CD *= 0.89
 
     def 等效百分比(self, 武器类型):
-        return ((self.data[self.等级] * 6 + self.data1[self.等级]) * self.攻击次数 + self.data2[self.等级] * self.收招倍率) * self.倍率
+        return ((self.data[self.等级] * 6 + self.data1[self.等级]) * self.攻击次数 + self.data2[self.等级] * self.收招倍率) * self.倍率 * 1.187
 
 
 class 技能17(主动技能):
@@ -414,7 +414,7 @@ class 技能17(主动技能):
             self.收招倍率 *= 1.35
 
     def 等效百分比(self, 武器类型):
-        return (self.data[self.等级] * 10 * self.攻击次数 + self.data1[self.等级] * self.收招倍率) * self.倍率
+        return (self.data[self.等级] * 10 * self.攻击次数 + self.data1[self.等级] * self.收招倍率) * self.倍率 * 1.256
 
 
 class 技能18(主动技能):
@@ -430,7 +430,7 @@ class 技能18(主动技能):
     演出时间 = 3
 
     def 等效百分比(self, 武器类型):
-        return ((self.data[self.等级] * 8 + self.data1[self.等级]) * self.攻击次数 + self.data2[self.等级] * self.收招倍率) * self.倍率
+        return ((self.data[self.等级] * 8 + self.data1[self.等级]) * self.攻击次数 + self.data2[self.等级] * self.收招倍率) * self.倍率 * 1.187
 
 
 class 技能19(被动技能):
@@ -444,7 +444,7 @@ class 技能19(被动技能):
     倍率 = 1
 
     def 额外百分比(self):
-        return self.data[self.等级] * self.匕首数量 * self.倍率
+        return self.data[self.等级] * self.匕首数量 * self.倍率 * 1.247
 
 
 class 技能20(被动技能):
@@ -473,7 +473,7 @@ class 技能21(主动技能):
     演出时间 = 0.5
 
     def 等效百分比(self, 武器类型):
-        return (self.data0[self.等级] * self.攻击次数 + self.data1[self.等级]  * self.收招倍率) * self.倍率
+        return (self.data0[self.等级] * self.攻击次数 + self.data1[self.等级]  * self.收招倍率) * self.倍率 * 1.167
 
 
 class 技能22(主动技能):
@@ -489,7 +489,7 @@ class 技能22(主动技能):
     演出时间 = 6
 
     def 等效百分比(self, 武器类型):
-        return (self.data0[self.等级]* self.攻击次数 + self.data1[self.等级] * self.收招倍率) * self.倍率
+        return (self.data0[self.等级]* self.攻击次数 + self.data1[self.等级] * self.收招倍率) * self.倍率 * 1.189
 
     关联技能 = ['无']
 
