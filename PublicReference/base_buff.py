@@ -631,11 +631,11 @@ class 角色窗口(窗口):
 
         self.属性设置输入.extend(Linelist)
 
-        列名称2 = ["智力", "体力", "精神", "徽章智", "徽章体", "徽章精", "技能等级及选项"]
-        行名称2 = [
+        列名称2 = trans(["智力", "体力", "精神", "徽章智", "徽章体", "徽章精", "技能等级及选项"])
+        行名称2 = trans([
             "上衣", "下装", "头肩", "腰带", "鞋", "手镯", "项链", "戒指", "左槽", "右槽", "耳环",
             "武器", "BUFF等级补正", "穿戴称号", "穿戴光环", "武器装扮", "时装", "宠物登记补正", "光环登记补正"
-        ]
+        ])
 
         self.列名称 = 列名称1 + 列名称2
         self.行名称 = 行名称1 + 行名称2
@@ -2709,22 +2709,22 @@ class 角色窗口(窗口):
         if self.角色属性B.黑鸦词条[0][0] == 1 or self.角色属性B.黑鸦词条[1][
                 0] == 1 or self.角色属性B.黑鸦词条[2][0] == 1 or self.角色属性B.黑鸦词条[3][
                     0] == 1:
-            tempstr += "<br><br>" + "遴选"
+            tempstr += "<br><br>" + trans("黑鸦")
             if self.角色属性B.黑鸦词条[0][0] == 1:
                 if self.角色属性B.武器变换属性自适应 > 0:
                     黑鸦武器 = 武器变换属性列表[self.角色属性B.武器变换属性自适应]
-                    tempstr += " 武器:" + "<font style='color:gray'>" + 黑鸦武器.固定属性描述 + '</font>'
+                    tempstr += " {}:".format(trans('武器')) + "<font style='color:gray'>" + trans(黑鸦武器.固定属性描述) + '</font>'
                 else:
-                    tempstr += " 武器:" + "<font style='color:gray'>" + '觉醒' + '</font>'
+                    tempstr += " {}:".format(trans('武器')) + "<font style='color:gray'>" + trans('觉醒') + '</font>'
             if self.角色属性B.黑鸦词条[1][0] == 1:
                 黑鸦 = 装备变换属性列表[self.角色属性B.防具变换属性自适应[0]]
-                tempstr += " 戒指:" + "<font style='color:gray'>" + 黑鸦.固定属性描述 + '</font>'
+                tempstr += " {}:".format(trans('戒指')) + "<font style='color:gray'>" + trans(黑鸦.固定属性描述) + '</font>'
             if self.角色属性B.黑鸦词条[2][0] == 1:
                 黑鸦 = 装备变换属性列表[self.角色属性B.防具变换属性自适应[1]]
-                tempstr += " 辅助:" + "<font style='color:gray'>" + 黑鸦.固定属性描述 + '</font>'
+                tempstr += " {}:".format(trans('辅助')) + "<font style='color:gray'>" + trans(黑鸦.固定属性描述) + '</font>'
             if self.角色属性B.黑鸦词条[3][0] == 1:
                 黑鸦 = 装备变换属性列表[self.角色属性B.防具变换属性自适应[2]]
-                tempstr += " 下装:" + "<font style='color:gray'>" + 黑鸦.固定属性描述 + '</font>'
+                tempstr += " {}:".format(trans('下装')) + "<font style='color:gray'>" + trans(黑鸦.固定属性描述) + '</font>'
 
         合计 = QLabel(输出窗口)
         合计.setStyleSheet("QLabel{color:rgb(104,213,237);font-size:15px}")

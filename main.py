@@ -450,11 +450,11 @@ class 选择窗口(QWidget):
                                            | QMessageBox.YesToAll
                                            | QMessageBox.Cancel)
                 A = box.button(QMessageBox.Yes)
-                B = box.button(QMessageBox.YesToAll)
+                B = box.button(QMessageBox.No)
                 A.setText('BUFF')
                 B.setText('战斗')
                 if index["类名3"] != '无':
-                    C = box.button(QMessageBox.No)
+                    C = box.button(QMessageBox.YesToAll)
                     C.setText('前瞻版本-战斗')
             else:
                 A = box.button(QMessageBox.Yes)
