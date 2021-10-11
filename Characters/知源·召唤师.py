@@ -379,7 +379,7 @@ class 知源·召唤师技能20(知源·召唤师主动技能):
         self.是否带护石 = 1
 
     def 等效CD(self, 武器类型, 输出类型):
-        return round(self.CD, 1)
+        return round(self.CD / self.恢复, 1)
 
 
 class 知源·召唤师技能21(知源·召唤师主动技能):
