@@ -196,10 +196,14 @@ class 技能9(主动技能):
     护石选项 = ['魔界', '圣痕']
 
     def 装备护石(self, x):
+        # if x == 0:
+        #     self.旋转倍率 = 2.25
+        # elif x == 1:
+        #     self.旋转倍率 = 2.91
         if x == 0:
-            self.旋转倍率 = 2.25
+            self.旋转倍率 = (1-0.5)*1.25*3
         elif x == 1:
-            self.旋转倍率 = 2.91
+            self.旋转倍率 = (1-0.5)*1.47*3
 
     def 等效百分比(self, 武器类型):
         return ((self.data[self.等级] * self.旋转次数 * self.旋转倍率 + self.data[self.等级]+ self.data1[self.等级]) * self.攻击次数 + self.data2[self.等级] * self.收招倍率) * self.倍率 * (1 + self.TP成长 * self.TP等级) * 1.167
