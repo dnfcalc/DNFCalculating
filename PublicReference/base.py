@@ -1315,10 +1315,10 @@ class 角色属性(属性):
                     self.词条选择.append(self.择优结果[i][0])
             if i == 6:
                 self.自适应描述[0] = '{}%{}'.format(int(self.择优结果[i][1] * 100),
-                                               词条属性列表[self.择优结果[i][0]].描述)
+                                               trans(词条属性列表[self.择优结果[i][0]].描述))
             if i == 7:
                 self.自适应描述[1] = '{}%{}'.format(int(self.择优结果[i][1] * 100),
-                                               词条属性列表[self.择优结果[i][0]].描述)
+                                               trans(词条属性列表[self.择优结果[i][0]].描述))
 
     def 计算择优范围(self, d):
         index = []
@@ -1717,7 +1717,7 @@ class 角色窗口(窗口):
                 count += 1
         self.窗口高度 = max(55 + 30 * count, 680)
         self.setFixedSize(1120, 680)
-        self.输出背景图片 = QPixmap('./ResourceFiles/img/输出背景.png')
+        self.输出背景图片 = QPixmap(trans('./ResourceFiles/img/输出背景.png'))
         self.职业存档 = []
         super().界面()
 

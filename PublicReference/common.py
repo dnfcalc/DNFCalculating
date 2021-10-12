@@ -269,7 +269,9 @@ class 窗口(QWidget):
 
     def 界面(self):
         # self.setWindowTitle(self.角色属性A.实际名称 + "搭配计算器&17173DNF专区 （点击标签栏按钮切换界面）"+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)
-        self.setWindowTitle(self.角色属性A.实际名称 + ' & 17173DNF专区')
+        self.setWindowTitle(
+            trans(self.角色属性A.实际名称.replace('·男', '').replace('·女', '')) +
+            ' & ' + trans('17173DNF专区'))
         self.icon = QIcon('./ResourceFiles/' + self.角色属性A.实际名称 +
                           '/技能/BUFF.png')
         self.setWindowIcon(self.icon)

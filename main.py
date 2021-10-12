@@ -189,8 +189,8 @@ class 选择窗口(QWidget):
         bgcolor = QLabel(self)
         bgcolor.resize(805, 1520)
         # bgcolor.setStyleSheet("QLabel{background-color:rgba(0,0,0,1)}")
-        bgcolor.setStyleSheet(
-            "QLabel{background:url('ResourceFiles/img/分类/bg.png')}")
+        bgcolor.setStyleSheet("QLabel{background:url('" +
+                              trans('ResourceFiles/img/分类') + "/bg.png')}")
         self.char_img = []
         self.family_img = []
         is_gif = os.path.exists('动态头像')
@@ -202,7 +202,8 @@ class 选择窗口(QWidget):
                     QPixmap("ResourceFiles/img/头像/" + str(i) + ".png"))
         for i in range(17):
             self.family_img.append(
-                QPixmap("ResourceFiles/img/分类/" + str(i) + ".png"))
+                QPixmap("" + trans('ResourceFiles/img/分类') + "/" + str(i) +
+                        ".png"))
 
         #wrapper = QWidget()
         # self.setCentralWidget(wrapper)
@@ -356,7 +357,7 @@ class 选择窗口(QWidget):
         action_4 = QAction('联系我们-QQ-3群', parent=menu)
         action_4.triggered.connect(lambda state: self.打开链接(
             ['https://jq.qq.com/?_wv=1027&k=ekQXpyq0']))
-        action_5 = QAction('打赏', parent=menu)
+        action_5 = QAction(trans('打赏'), parent=menu)
         action_5.triggered.connect(lambda state, index=count: self.打赏())
         menu.addAction(action_0)
         menu.addSeparator()
@@ -626,8 +627,8 @@ class SetWindows(QWidget):
         self.topFiller.setMinimumSize(750, self.height)
         bgcolor = QLabel(self)
         bgcolor.resize(805, 625)
-        bgcolor.setStyleSheet(
-            "QLabel{background:url('ResourceFiles/img/分类/bg.png')}")
+        bgcolor.setStyleSheet("QLabel{background:url('" +
+                              trans('ResourceFiles/img/分类') + "/bg.png')}")
 
         with open("ResourceFiles/Config/Config.json", encoding='utf-8') as fp:
             set_info = json.load(fp)
