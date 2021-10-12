@@ -53,6 +53,11 @@ class 名望窗口(Page):
         count = 0
         名望细节 = store.get("/fame/selection")
         徽章名望细节 = store.get("/fame/selection2")
+        label = QLabel('第一列为附魔名望选择<br>第二列为徽章名望选择<br>闪耀26名望,华丽30名望,灿烂36名望<br>玲珑46名望,白金232名望', self)
+        label.setStyleSheet(标签样式_2)
+        label.resize(220, 100)
+        label.move(20 + 220, 10 + 30 * 5)
+
         if 名望细节 == None:
             defaultValueTable = 附魔名望默认选项
             defaultValueTable2 = 徽章名望默认选项
@@ -91,7 +96,7 @@ class 名望窗口(Page):
                 defaultIndex = 徽章值.index(徽章默认值)
                 徽章选项.setCurrentIndex(defaultIndex)
                 徽章选项.resize(55, 20)
-                徽章选项.move(90 + 75 + int(idx / 18)* 220, 10 + 30 * (idx % 18))
+                徽章选项.move(90 + 70 + int(idx / 18)* 220, 10 + 30 * (idx % 18))
                 self.自选徽章名望选项.append(徽章选项)
 
         self.更新名望细节()

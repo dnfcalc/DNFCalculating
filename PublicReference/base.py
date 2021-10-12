@@ -2485,7 +2485,7 @@ class 角色窗口(窗口):
                         max_level = 85 if cur ==999 else 48
                         skills = [i.名称 for i in self.角色属性A.技能栏 if i.所在等级 < max_level]
                         for skill_name in skills:
-                            templist[n].addItem(trans(skill_name)+" Lv+1",skill_name+" Lv+1")
+                            templist[n].addItem(trans(skill_name)+"Lv+1",skill_name+"Lv+1")
                     else:
                         templist[n].addItem('无')
                         for s_id in 行2技能[j]:
@@ -5294,11 +5294,11 @@ class 角色窗口(窗口):
                 templabel.move(0, 0)
                 templabel.resize(275, 42)
                 templabel.setAlignment(Qt.AlignCenter)
-                # templabel.setToolTip(str(json.dumps(名望详情,
-                #                  sort_keys=True,
-                #                  indent=4,
-                #                  separators=(',', ':'),
-                #                  ensure_ascii=False)).replace("{","").replace("},\n","").replace("}\n","").replace("}","").replace("\"",""))
+                print(json.dumps(名望详情,
+                                 sort_keys=True,
+                                 indent=4,
+                                 separators=(',', ':'),
+                                 ensure_ascii=False))
                 templabel.setToolTip('系数计算公式:dmi = ((总伤害数值 / 1e8) / pow((总名望 / (1e4) - 0.5), 3))<br>'
                     +str(名望详情) )
 
