@@ -346,8 +346,11 @@ class MyQComboBox(QComboBox):
             self.addItem(text)
         pass
 
-    def addItem(self,text):
-        super().addItem(trans(text),text)
+    def addItem(self,text,userData=None):
+        if userData is None:
+            userData = text
+        text = trans(text)
+        super().addItem(text,userData)
         pass
 
 class MyQToolButton(QToolButton):
