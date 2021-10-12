@@ -782,7 +782,7 @@ class 角色窗口(窗口):
         self.self_selects = []
 
         def equips_getter():
-            return [i.currentText() for i in self.自选装备]
+            return [i.currentData() for i in self.自选装备]
 
         def equips_setter(value):
             self.self_selects = value
@@ -801,6 +801,7 @@ class 角色窗口(窗口):
             combo.move(90, 50 + 30 * count)
 
             self.自选装备.append(combo)
+            
             combo.currentIndexChanged.connect(
                 lambda _: store.emit("/buffer/data/equips"))
             combo.currentIndexChanged.connect(
@@ -809,9 +810,9 @@ class 角色窗口(窗口):
                 if j.部位 == i:
                     if i == '武器':
                         if j.类型 in self.角色属性A.武器选项:
-                            combo.addItem(j.名称)
+                            combo.addItem(trans(j.名称),j.名称)
                     else:
-                        combo.addItem(j.名称)
+                        combo.addItem(trans(j.名称),j.名称)
             count += 1
 
         self.计算标识 = 1
@@ -825,20 +826,21 @@ class 角色窗口(窗口):
         count = 0
         self.自选套装 = []
         for i in 套装类型:
-            self.自选套装.append(MyQComboBox(self.main_frame5))
+            combo = MyQComboBox(self.main_frame5)
             套装名称 = []
             for j in equ.get_suit_list():
                 if j.名称 not in 套装名称 and j.类型 == i:
                     套装名称.append(j.名称)
-            self.自选套装[count].addItems(套装名称)
-            self.自选套装[count].resize(160, 22)
-            self.自选套装[count].move(330, 50 + 30 * count)
-            self.自选套装[count].activated.connect(
+                    combo.addItem(trans(j.名称),j.名称)
+            combo.resize(160, 22)
+            combo.move(330, 50 + 30 * count)
+            combo.activated.connect(
                 lambda state, index=count: self.自选套装更改(index))
+            self.自选套装.append(combo)
             count += 1
 
         self.神话部位选项 = MyQComboBox(self.main_frame5)
-        self.神话部位选项.addItems(['神话部位:无', '神话部位:上衣', '神话部位:手镯', '神话部位:耳环'])
+        self.神话部位选项.addItems(trans(['神话部位：无', '神话部位：上衣', '神话部位：手镯', '神话部位：耳环']))
         self.神话部位选项.resize(160, 22)
         self.神话部位选项.move(330, 50 + 30 * count)
         self.神话部位选项.activated.connect(lambda state: self.神话部位更改())
@@ -854,7 +856,7 @@ class 角色窗口(窗口):
         self.last_select_column = 0
 
         for i in range(column_count):
-            self.自选装备栏选项.addItem('自选装备栏:{}'.format(i))
+            self.自选装备栏选项.addItem('{}:{}'.format(trans('自选装备栏'),i))
         self.自选装备栏选项.setCurrentIndex(-1)
         self.自选装备栏选项.resize(160, 22)
         self.自选装备栏选项.move(330, 50 + 30 * count)
@@ -1814,10 +1816,6 @@ class 角色窗口(窗口):
         if self.禁用存档.isChecked():
             return
         self.保存json(path)
-
-    def closeEvent(self, event):
-        DefaultDialogRegister.dispose()
-        return super().closeEvent(event)
 
     # 一键修正计算
     def 一键修正(self, x=0):

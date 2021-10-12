@@ -2589,7 +2589,6 @@ class 角色窗口(窗口):
         count = 0
         self.自选装备 = []
         self.自选装备结果 = []
-        self.自选装备list = []
         if 切装模式 == 1:
             self.装备切装 = []
             self.切装修正属性 = []
@@ -2600,11 +2599,12 @@ class 角色窗口(窗口):
             锁定选择.resize(70, 22)
             锁定选择.move(10, 50 + 30 * count)
             self.装备锁定.append(锁定选择)
-            self.自选装备.append(MyQComboBox(self.main_frame5))
-            self.自选装备list.append([])
-            self.自选装备[count].resize(220, 22)
-            self.自选装备[count].move(90, 50 + 30 * count)
-            self.自选装备[count].currentIndexChanged.connect(
+
+            combo = MyQComboBox(self.main_frame5)
+
+            combo.resize(220, 22)
+            combo.move(90, 50 + 30 * count)
+            combo.currentIndexChanged.connect(
                 lambda state, index=count: self.自选装备更改(index))
             if 切装模式 == 1:
                 temp = QCheckBox(self.main_frame5)
@@ -2615,11 +2615,10 @@ class 角色窗口(窗口):
                 if j.部位 == i:
                     if i == '武器':
                         if j.类型 in self.角色属性A.武器选项:
-                            self.自选装备[count].addItem(trans(j.名称))
-                            self.自选装备list[count].append(j.名称)
+                            combo.addItem(trans(j.名称),j.名称)
                     else:
-                        self.自选装备[count].addItem(trans(j.名称))
-                        self.自选装备list[count].append(j.名称)
+                        combo.addItem(trans(j.名称),j.名称)
+            self.自选装备.append(combo)
             count += 1
 
         if 切装模式 == 1:
@@ -2649,20 +2648,18 @@ class 角色窗口(窗口):
         套装类型 = ['防具', '首饰', '特殊', '上链左', '镯下右', '环鞋指']
         count = 0
         self.自选套装 = []
-        self.自选套装_list = []
         for i in 套装类型:
-            self.自选套装.append(MyQComboBox(self.main_frame5))
             套装名称 = []
-            self.自选套装_list.append([])
+            combo = MyQComboBox(self.main_frame5)
             for j in equ.get_suit_list():
                 if j.名称 not in 套装名称 and j.类型 == i:
                     套装名称.append(j.名称)
-                    self.自选套装_list[count].append(j.名称)
-            self.自选套装[count].addItems(trans(套装名称))
-            self.自选套装[count].resize(160, 22)
-            self.自选套装[count].move(横坐标, 50 + 30 * count)
-            self.自选套装[count].activated.connect(
+                    combo.addItem(trans(j.名称),j.名称)
+            combo.resize(160, 22)
+            combo.move(横坐标, 50 + 30 * count)
+            combo.activated.connect(
                 lambda state, index=count: self.自选套装更改(index))
+            self.自选套装.append(combo)
             count += 1
 
         self.神话部位选项 = MyQComboBox(self.main_frame5)
@@ -2763,8 +2760,7 @@ class 角色窗口(窗口):
         for i in range(12):
             self.图片显示.append(QLabel(self.main_frame5))
             self.图片显示[i].setMovie(
-                equ.get_img_by_name(
-                    self.自选装备list[i][self.自选装备[i].currentIndex()]))
+                equ.get_img_by_name(self.自选装备[i].currentData()))
             self.图片显示[i].resize(26, 26)
             self.图片显示[i].move(初始x + 10 + x坐标[i], 初始y + 31 + y坐标[i])
             self.图片显示[i].setAlignment(Qt.AlignCenter)
@@ -2855,7 +2851,7 @@ class 角色窗口(窗口):
         try:
             self.图片显示[index].setMovie(
                 equ.get_img_by_name(
-                    self.自选装备list[index][self.自选装备[index].currentIndex()]))
+                    self.自选装备[index].currentData()))
         except:
             pass
 
@@ -2868,7 +2864,7 @@ class 角色窗口(窗口):
 
     def 自选套装更改(self, index):
         self.计算标识 = 0
-        name = self.自选套装_list[index][self.自选套装[index].currentIndex()]
+        name = self.自选套装[index].currentData()
         for i in range(11):
             if self.装备锁定[i].isChecked():
                 continue
@@ -3457,7 +3453,7 @@ class 角色窗口(窗口):
             return
         装备 = []
         for index in range(len(self.自选装备)):
-            装备.append(self.自选装备list[index][self.自选装备[index].currentIndex()])
+            装备.append(self.自选装备[index].currentData())
 
         temp = deepcopy(self.初始属性)
         temp.穿戴装备计算套装(装备)
@@ -5707,7 +5703,7 @@ class 角色窗口(窗口):
             for i in range(12):
                 if self.装备切装[i].isChecked():
                     属性.装备切装.append(
-                        self.自选装备list[i][self.自选装备[i].currentIndex()])
+                        self.自选装备[i].currentData())
                 else:
                     属性.装备切装.append('无')
 

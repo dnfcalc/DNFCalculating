@@ -1135,7 +1135,7 @@ class 窗口(QWidget):
     def 自选装备更改(self, index=0):
         try:
             self.图片显示[index].setMovie(
-                equ.get_img_by_name(self.自选装备[index].currentText()))
+                equ.get_img_by_name(self.自选装备[index].currentData()))
         except:
             pass
 
@@ -1148,7 +1148,7 @@ class 窗口(QWidget):
 
     def 自选套装更改(self, index):
         self.计算标识 = 0
-        name = self.自选套装[index].currentText()
+        name = self.自选套装[index].currentData()
         for i in range(11):
             if self.装备锁定[i].isChecked():
                 continue
