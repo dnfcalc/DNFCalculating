@@ -1,6 +1,7 @@
 from math import ceil
 from PublicReference.equipment.equ_list import *
 from PublicReference.utils.MainWindow import *
+from PublicReference.view.DialogRegister import DefaultDialogRegister
 
 装备版本 = "GF"
 装备增幅版本 = "GF"
@@ -244,6 +245,7 @@ class 窗口(QWidget):
         self.close()
 
     def closeEvent(self, event):
+        DefaultDialogRegister.dispose()
         self.保存配置(self.存档位置)
         self.关闭排行窗口()
         super().closeEvent(event)
