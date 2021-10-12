@@ -5295,14 +5295,21 @@ class 角色窗口(窗口):
             if 总名望 > 0:
                 dmi = ((总伤害数值 / 1e8) / pow((总名望 / (1e4) - 0.5), 3))
                 templabel = QLabel(输出窗口)
-                templabel.setText("名望 {}({})<br>名望细节自选页修改".format(
+                templabel.setText("名望 {}({})<br>名望设置自选页修改".format(
                     str(总名望), str(round(dmi, 2))))
                 templabel.setStyleSheet(
                     "QLabel{font-size:12px;color:rgb(255,255,255)}")
                 templabel.move(0, 0)
                 templabel.resize(275, 42)
                 templabel.setAlignment(Qt.AlignCenter)
-                templabel.setToolTip(str(名望详情))
+                # templabel.setToolTip(str(json.dumps(名望详情,
+                #                  sort_keys=True,
+                #                  indent=4,
+                #                  separators=(',', ':'),
+                #                  ensure_ascii=False)).replace("{","").replace("},\n","").replace("}\n","").replace("}","").replace("\"",""))
+                templabel.setToolTip('系数计算公式:dmi = ((总伤害数值 / 1e8) / pow((总名望 / (1e4) - 0.5), 3))<br>'
+                    +str(名望详情) )
+
         except:
             pass
 
