@@ -5,7 +5,7 @@ class Siroco:
 
     def __init__(self) -> None:
         self.pants_fused = False
-        self.rings_fused = False
+        self.ring_fused = False
         self.left_fused = False
         self.character = None
         self.text = ''
@@ -36,17 +36,17 @@ class Siroco:
     #
     def fuse_ring(self):
         觉醒增加(self.character, 一觉力智per=1.03)
-        self.rings_fused = True
+        self.ring_fused = True
 
     def fuse_left(self):
         被动增加(self.character, 守护恩赐体精=80, 转职被动智力=80)
         self.left_fused = True
 
     def compute(self):
-        if self.pants_fused and self.rings_fused:
+        if self.pants_fused and self.ring_fused:
             self.text += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
             self.force_pants()
-        if self.rings_fused and self.left_fused:            
+        if self.ring_fused and self.left_fused:            
             self.text += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
             self.force_ring()
         if self.left_fused and self.pants_fused:
@@ -54,7 +54,7 @@ class Siroco:
             self.force_left()
         text = self.text
         self.pants_fused = False
-        self.rings_fused = False
+        self.ring_fused = False
         self.left_fused = False
         self.character = None
         self.text = ''
@@ -79,10 +79,10 @@ class Nex(Siroco):
         self.text += 觉醒增加(self.character, 一觉力智=40)
 
     def force_ring(self):
-        self.text += BUFF增加(self.character, BUFF三攻per= 1.02)
+        self.text += 被动增加(self.character, 被动进图加成=80)
 
     def force_left(self):
-        self.text += 被动增加(self.character, 被动进图加成=80)
+        self.text += BUFF增加(self.character, BUFF三攻per= 1.02)
 
     pass
 
@@ -95,10 +95,10 @@ class Assassin(Siroco):
         self.text += 觉醒增加(self.character, 一觉力智=28)
 
     def force_ring(self):
-        self.text += BUFF增加(self.character, BUFF力智per=1.01, BUFF三攻per=1.01)
+        self.text += 被动增加(self.character, 被动进图加成=55)
 
     def force_left(self):
-        self.text += 被动增加(self.character, 被动进图加成=55)
+        self.text += BUFF增加(self.character, BUFF力智per=1.01, BUFF三攻per=1.01)
 
     pass
 
@@ -125,12 +125,11 @@ class Nameless(Siroco):
         self.text += 觉醒增加(self.character, 一觉力智=20, 一觉力智per=1.01)
 
     def force_ring(self):
-        self.text += BUFF增加(self.character, BUFF力智per=1.01)
-        self.text += 被动增加(self.character, 被动进图加成=30)
-
-    def force_left(self):
         self.text += 被动增加(self.character, 被动进图加成=55)
 
+    def force_left(self):
+        self.text += BUFF增加(self.character, BUFF力智per=1.01)
+        self.text += 被动增加(self.character, 被动进图加成=30)
 # 洛多斯
 
 
