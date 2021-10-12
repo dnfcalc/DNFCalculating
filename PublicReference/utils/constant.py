@@ -6,6 +6,7 @@ import os
 import math
 from ctypes import *
 import ctypes
+from typing import Iterable
 
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt, pyqtSignal
@@ -339,7 +340,15 @@ class MyQComboBox(QComboBox):
         super().__init__(win)
         self.setView(QListView())
         self.setStyleSheet(下拉框样式)
+    
+    def addItems(self, texts: Iterable[str]):
+        for text in texts:
+            self.addItem(text)
+        pass
 
+    def addItem(self,text):
+        super().addItem(trans(text),text)
+        pass
 
 class MyQToolButton(QToolButton):
     DoubleClickSig = pyqtSignal(str)

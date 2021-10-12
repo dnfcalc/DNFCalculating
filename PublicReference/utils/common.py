@@ -7,6 +7,7 @@
 # Email     : fzls.zju@gmail.com
 # -------------------------------
 import re
+from typing import Iterable
 
 
 # 格式化时间为比较美观的格式
@@ -34,3 +35,7 @@ def to_int(content, default=None):
 
 def to_percent(num, digits=0):
     return str(int(round(num*100, digits))) + "%"
+
+
+def format_range(content:str,items:Iterable):
+    return list(map(lambda i:content.format(i),items))

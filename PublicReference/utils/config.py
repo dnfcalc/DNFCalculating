@@ -122,29 +122,27 @@ if len(攻击目标) == 0:
     攻击目标 = [['120沙袋(绿)', 443243, 0, 0, 0, 0]]
 
 languageJson = []
-languagePath = "ResourceFiles/Config/language.json"
-if os.path.exists(languagePath):
-    with open(languagePath, encoding='utf-8') as fp:
-        languageJson = json.load(fp)
-        fp.close()
+if 多语言开关 == 1:
+    languagePath = "ResourceFiles/Config/language.json"
+    if os.path.exists(languagePath):
+        with open(languagePath, encoding='utf-8') as fp:
+            languageJson = json.load(fp)
+            fp.close()
 
 def trans(key):
-    if 多语言开关 == 0:
-        return key
     show = key
-    if type(key) == type([]):
+    if isinstance(key,list):
         show = []
         for item in key:
             show.append(tran(item))
-    elif type(key) == type(""):
+    elif isinstance(key,str):
         show = tran(key)
     return show
 
-def tran(key):
-    try:
-        show = languageJson[key]
-    except:
-        show = key
+def tran(key:str):
+    show = key
+    if languageJson.__contains__(key):
+        show = languageJson[key] 
     if show == '':
         show = key
     return show

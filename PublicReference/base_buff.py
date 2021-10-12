@@ -63,7 +63,7 @@ class 角色窗口(窗口):
         self.百变怪选项.setStyleSheet(复选框样式)
 
         self.计算模式选择 = MyQComboBox(self.main_frame1)
-        self.计算模式选择.addItems(trans(['计算模式:极速模式', '计算模式:套装模式', '计算模式:单件模式']))
+        self.计算模式选择.addItems(['计算模式:极速模式', '计算模式:套装模式', '计算模式:单件模式'])
         self.计算模式选择.move(750, 613)
         self.计算模式选择.resize(235, 24)
         self.计算模式选择.setStyleSheet(下拉框样式)
@@ -107,8 +107,7 @@ class 角色窗口(窗口):
         重置按钮.setStyleSheet(按钮样式)
 
         self.排行参数 = MyQComboBox(self.main_frame1)
-        self.排行参数.addItems(trans(
-            ['提升率排行', '面板排行', '力量排行', '智力排行', '物攻排行', '魔攻排行', '独立排行']))
+        self.排行参数.addItems(['提升率排行', '面板排行', '力量排行', '智力排行', '物攻排行', '魔攻排行', '独立排行'])
         self.排行参数.move(770, 545)
         self.排行参数.resize(100, 24)
 
@@ -259,7 +258,7 @@ class 角色窗口(窗口):
             x = MyQComboBox(self.main_frame2)
             for j in 辟邪玉列表:
                 # '[' + str(j.编号) + ']' +
-                x.addItem(trans(j.名称))
+                x.addItem(j.名称)
             x.resize(200, 20)
             x.move(395, 140 + i * 25)
             x.currentIndexChanged.connect(
@@ -283,7 +282,7 @@ class 角色窗口(窗口):
         x.setStyleSheet(标签样式)
 
         self.希洛克武器选择 = MyQComboBox(self.main_frame2)
-        self.希洛克武器选择.addItems(trans(['武器词条:无', '自适应最高值', '自选词条数值']))
+        self.希洛克武器选择.addItems(['武器词条:无', '自适应最高值', '自选词条数值'])
         self.希洛克武器选择.resize(120, 20)
         self.希洛克武器选择.move(横坐标 + 60, 纵坐标 + 5)
         self.希洛克武器选择.currentIndexChanged.connect(
@@ -291,7 +290,7 @@ class 角色窗口(窗口):
         纵坐标 += 10
         self.武器融合属性A = MyQComboBox(self.main_frame2)
         for j in 武器属性A列表:
-            self.武器融合属性A.addItem(trans(j.固定属性描述))
+            self.武器融合属性A.addItem(j.固定属性描述)
         self.武器融合属性A.resize(60, 20)
         self.武器融合属性A.move(横坐标, 纵坐标 + 25)
 
@@ -311,9 +310,9 @@ class 角色窗口(窗口):
         x.setStyleSheet(标签样式)
 
         self.觉醒择优方向 = MyQComboBox(self.main_frame2)
-        self.觉醒择优方向.addItem(trans('自选觉醒择优系数'))
-        self.觉醒择优方向.addItem(trans('续航向:觉醒0.7系数'))
-        self.觉醒择优方向.addItem(trans('爆发向:觉醒1.0系数'))
+        self.觉醒择优方向.addItem('自选觉醒择优系数')
+        self.觉醒择优方向.addItem('续航向:觉醒0.7系数')
+        self.觉醒择优方向.addItem('爆发向:觉醒1.0系数')
         self.觉醒择优方向.resize(138, 20)
         self.觉醒择优方向.move(横坐标 + 300, 纵坐标 + 40)
         self.觉醒择优方向.currentIndexChanged.connect(
@@ -329,7 +328,7 @@ class 角色窗口(窗口):
         纵坐标 = 纵坐标 + 30
         self.武器融合属性B = MyQComboBox(self.main_frame2)
         for j in 武器属性B列表:
-            self.武器融合属性B.addItem(trans(j.固定属性描述))
+            self.武器融合属性B.addItem(j.固定属性描述)
         self.武器融合属性B.resize(60, 20)
         self.武器融合属性B.move(横坐标, 纵坐标 + 25)
 
@@ -364,13 +363,13 @@ class 角色窗口(窗口):
             tem = []
             tem.append(MyQComboBox(self.main_frame2))
             if i == 0:
-                tem[0].addItems(trans(['无', '计算最高', '自选数值', '自选数值-觉醒']))
+                tem[0].addItems(['无', '计算最高', '自选数值', '自选数值-觉醒'])
                 tem[0].resize(91, 20)
                 tem[0].move(横坐标 + 60, 纵坐标 + 25 * i)
                 tem[0].currentIndexChanged.connect(
                     lambda state, index=i: self.黑鸦词条更新(index))
             else:
-                tem[0].addItems(trans(['无', '计算最高', '自选数值']))
+                tem[0].addItems(['无', '计算最高', '自选数值'])
                 tem[0].resize(91, 20)
                 tem[0].move(横坐标 + 60, 纵坐标 + 25 * i)
                 tem[0].currentIndexChanged.connect(
@@ -388,12 +387,12 @@ class 角色窗口(窗口):
             tem[3].move(横坐标 + 361 + 20 + 10, 纵坐标 + 25 * i)
             if i > 0:
                 for item in 装备变换属性列表:
-                    tem[1].addItem(trans(item.固定属性描述))
+                    tem[1].addItem(item.固定属性描述)
                 tem[1].currentIndexChanged.connect(
                     lambda state, index=i: self.黑鸦随机词条更新(index, 1))
             else:
                 for item in 武器变换属性列表:
-                    tem[1].addItem(trans(item.固定属性描述))
+                    tem[1].addItem(item.固定属性描述)
                 tem[1].currentIndexChanged.connect(
                     lambda state, index=i: self.黑鸦随机词条更新(index))
             self.黑鸦词条选项.append(tem)
@@ -508,13 +507,13 @@ class 角色窗口(窗口):
                 3000, 3100, 3200, 3300, 3400, 3500, 3600, 3700, 3800, 3900,
                 4000, 4200, 4400, 4600, 4800, 5000
         ]:
-            self.排行选项[1].addItem(trans('C三攻:') + str(i))
+            self.排行选项[1].addItem(trans('C三攻:')+str(i))
         self.排行选项[1].setCurrentIndex(10)
 
-        for i in trans(['物理百分比', '魔法百分比', '物理固伤', '魔法固伤']):
+        for i in ['物理百分比', '魔法百分比', '物理固伤', '魔法固伤']:
             self.排行选项[2].addItem(i)
 
-        for i in trans(['无系统奶', '希洛克系统奶', '黑鸦系统奶']):
+        for i in ['无系统奶', '希洛克系统奶', '黑鸦系统奶']:
             self.排行选项[3].addItem(i)
 
         counter = 0
@@ -674,44 +673,47 @@ class 角色窗口(窗口):
 
         for j in range(19):
             self.技能设置输入.append(MyQComboBox(self.main_frame3))
-            self.技能设置输入[j].addItem(trans('无'))
+            self.技能设置输入[j].addItem('无')
             self.技能设置输入[j].setStyleSheet(下拉框样式)
             self.技能设置输入[j].resize(150, 22)
             self.技能设置输入[j].move(90 + 7 * 宽度 + 6 * (宽度 + 5), 35 + j * 30)
 
         for j in [2, 3, 4]:
-            self.技能设置输入[j].addItems(trans(['Lv1-30(主动)Lv+1', 'Lv1-50(主动)Lv+1']))
-        self.技能设置输入[2].addItems(trans(['Lv1-35(主动)Lv+1', 'Lv30-50(主动)Lv+1']))
-        self.技能设置输入[3].addItem(trans('Lv30-50(主动)Lv+1'))
+            self.技能设置输入[j].addItems(['Lv1-30(主动)Lv+1','Lv1-50(主动)Lv+1'])
+
+        self.技能设置输入[2].addItems(['Lv1-35(主动)Lv+1','Lv30-50(主动)Lv+1'])
+        self.技能设置输入[3].addItem('Lv30-50(主动)Lv+1')
+
+        # 白金
+        skills = [i.名称 for i in self.角色属性A.技能表.values() if i.所在等级 < 48]
 
         for j in [8, 9]:
-            self.技能设置输入[j].addItems(
-                i.名称+'Lv+1' for i in self.角色属性A.技能表.values() if i.所在等级 < 48)
+            self.技能设置输入[j].addItems(format_range("{} Lv+1",skills))
 
         self.技能设置输入[12].addItems(
             ['BUFFLv+1', 'BUFFLv+2', 'BUFFLv+3', 'BUFFLv+4'])
-        self.技能设置输入[13].addItems(trans(['Lv1-50(主动)Lv+1', '一觉Lv+1', '一觉Lv+2']))
-        self.技能设置输入[14].addItems(trans([
+        self.技能设置输入[13].addItems(['Lv1-50(主动)Lv+1', '一觉Lv+1', '一觉Lv+2'])
+        self.技能设置输入[14].addItems([
             'Lv1-30(所有)Lv+1', 'Lv1-50(所有)Lv+1', 'Lv1-20(所有)Lv+1',
             'Lv20-30(所有)Lv+1', 'Lv1-80(所有)Lv+1'
-        ]))
+        ])
 
         self.技能设置输入[16].addItems(
             i.名称+'Lv+1' for i in self.角色属性A.技能表.values() if i.所在等级 <= 85)
 
-        self.技能设置输入[17].addItems(trans(['BUFF力智+3%', 'BUFF三攻+3%', 'BUFF力智、三攻+3%']))
-        self.技能设置输入[18].addItems(trans(['BUFF力智+3%']))
+        self.技能设置输入[17].addItems(['BUFF力智+3%', 'BUFF三攻+3%', 'BUFF力智、三攻+3%'])
+        self.技能设置输入[18].addItem('BUFF力智+3%')
 
         if '智力' in self.角色属性A.类型:
-            self.修正列表名称 = trans([
+            self.修正列表名称 = [
                 '转职被动智力', 'BUFF力智%', 'BUFF三攻%', '转职被动等级', '一觉被动力智', '一觉力智%',
                 '一觉力智'
-            ])
+            ]
         else:
-            self.修正列表名称 = trans([
+            self.修正列表名称 = [
                 '守护恩赐体精', 'BUFF力智%', 'BUFF三攻%', '守护恩赐等级', '信念光环体精', '一觉力智%',
                 '一觉力智'
-            ])
+            ]
 
         Linelist = []
         for i in range(len(self.修正列表名称)):
@@ -736,7 +738,7 @@ class 角色窗口(窗口):
             名称.resize(90, 25)
             名称.move(170 + 7 * 宽度 + 9 * (宽度 + 5), 255 + count * 30)
             self.时装选项.append(MyQComboBox(self.main_frame3))
-            self.时装选项[count].addItems(trans(['高级', '节日', '稀有', '神器']))
+            self.时装选项[count].addItems(['高级', '节日', '稀有', '神器'])
             self.时装选项[count].resize(60, 22)
             self.时装选项[count].move(270 + 7 * 宽度 + 9 * (宽度 + 5),
                                   255 + count * 30)
@@ -745,7 +747,7 @@ class 角色窗口(窗口):
             count += 1
 
         self.时装选项.append(MyQComboBox(self.main_frame3))
-        self.时装选项[8].addItems([trans('高级套装')+'[8]', trans('节日套装')+'[8]', trans('稀有套装')+'[8]', trans('神器套装')+'[8]'])
+        self.时装选项[8].addItems(format_range("{}[8]",trans(['高级套装','节日套装','稀有套装','神器套装'])))
         self.时装选项[8].resize(160, 22)
         self.时装选项[8].move(170 + 7 * 宽度 + 9 * (宽度 + 5), 260 + count * 30)
         self.时装选项[8].currentIndexChanged.connect(
@@ -810,9 +812,9 @@ class 角色窗口(窗口):
                 if j.部位 == i:
                     if i == '武器':
                         if j.类型 in self.角色属性A.武器选项:
-                            combo.addItem(trans(j.名称),j.名称)
+                            combo.addItem(j.名称)
                     else:
-                        combo.addItem(trans(j.名称),j.名称)
+                        combo.addItem(j.名称)
             count += 1
 
         self.计算标识 = 1
@@ -831,7 +833,7 @@ class 角色窗口(窗口):
             for j in equ.get_suit_list():
                 if j.名称 not in 套装名称 and j.类型 == i:
                     套装名称.append(j.名称)
-                    combo.addItem(trans(j.名称),j.名称)
+            combo.addItems(套装名称)
             combo.resize(160, 22)
             combo.move(330, 50 + 30 * count)
             combo.activated.connect(
@@ -840,7 +842,7 @@ class 角色窗口(窗口):
             count += 1
 
         self.神话部位选项 = MyQComboBox(self.main_frame5)
-        self.神话部位选项.addItems(trans(['神话部位：无', '神话部位：上衣', '神话部位：手镯', '神话部位：耳环']))
+        self.神话部位选项.addItems(['神话部位：无', '神话部位：上衣', '神话部位：手镯', '神话部位：耳环'])
         self.神话部位选项.resize(160, 22)
         self.神话部位选项.move(330, 50 + 30 * count)
         self.神话部位选项.activated.connect(lambda state: self.神话部位更改())
@@ -1078,8 +1080,8 @@ class 角色窗口(窗口):
             智力, 体力, 精神 = 0, 0, 0
             套装字典 = {'高级': 0, '节日': 0, '稀有': 0, '神器': 0}
             for i in range(8):
-                套装字典[self.时装选项[i].currentText()] = 套装字典.get(
-                    self.时装选项[i].currentText(), 0) + 1
+                套装字典[self.时装选项[i].currentData()] = 套装字典.get(
+                    self.时装选项[i].currentData(), 0) + 1
             # 套装属性
             神器 = 套装字典['神器']
             稀有 = 套装字典['稀有'] + 神器
@@ -1928,16 +1930,16 @@ class 角色窗口(窗口):
     def exports_property(self, property):
         num = 0
         for skill in property.技能表.values():
-            skill.等级 = skill.基础等级 + int(self.等级调整[num].currentText())
+            skill.等级 = skill.基础等级 + int(self.等级调整[num].currentData())
             skill.是否启用 = self.次数输入[num].currentIndex()
             num += 1
 
         property.排行系数 = self.排行参数.currentIndex()
         property.C力智 = int(
-            ''.join(filter(str.isdigit, self.排行选项[0].currentText())))
+            ''.join(filter(str.isdigit, self.排行选项[0].currentData())))
         property.C三攻 = int(
-            ''.join(filter(str.isdigit, self.排行选项[1].currentText())))
-        property.排行类型 = self.排行选项[2].currentText()
+            ''.join(filter(str.isdigit, self.排行选项[1].currentData())))
+        property.排行类型 = self.排行选项[2].currentData()
 
         if self.排行选项[3].currentIndex() == 0:
             pass
@@ -1965,14 +1967,14 @@ class 角色窗口(窗口):
 
         property.护石栏 = [i.currentIndex() for i in self.护石栏]
 
-        if self.护石第一栏.currentText() != '无':
-            property.护石第一栏 = self.护石第一栏.currentText()
+        if self.护石第一栏.currentData() != '无':
+            property.护石第一栏 = self.护石第一栏.currentData()
 
-        if self.护石第二栏.currentText() != '无':
-            property.护石第二栏 = self.护石第二栏.currentText()
+        if self.护石第二栏.currentData() != '无':
+            property.护石第二栏 = self.护石第二栏.currentData()
 
-        if self.护石第三栏.currentText() != '无':
-            property.护石第三栏 = self.护石第三栏.currentText()
+        if self.护石第三栏.currentData() != '无':
+            property.护石第三栏 = self.护石第三栏.currentData()
 
     def 换装计算(self, AWAKE: 辅助角色属性 = None) -> 辅助角色属性:
         if not self.登记启用:
@@ -2044,7 +2046,7 @@ class 角色窗口(窗口):
             BUFF.强化等级[i] = 装备打造[i]
             BUFF.改造等级[i] = 装备打造[i]
         BUFF.武器锻造等级 = self.装备打造选项[36].currentIndex()
-        BUFF.类型 = self.装备打造选项[37].currentText()
+        BUFF.类型 = self.装备打造选项[37].currentData()
 
         self.是否计算 = 1
 
@@ -3119,7 +3121,7 @@ class 角色窗口(窗口):
             属性.强化等级[i] = self.装备打造选项[i + 12].currentIndex()
             属性.改造等级[i] = self.装备打造选项[i + 24].currentIndex()
         属性.武器锻造等级 = self.装备打造选项[36].currentIndex()
-        属性.类型 = self.装备打造选项[37].currentText()
+        属性.类型 = self.装备打造选项[37].currentData()
         self.是否计算 = 1
 
         if self.切装模式选项.isChecked() and self.计算模式选择.currentIndex() != 2 and 属性.技能表['BUFF'].是否启用 and 属性.技能表['一次觉醒'].是否启用:
@@ -3312,5 +3314,5 @@ class 角色窗口(窗口):
                 if self.属性设置输入[i][j].text() != '':
                     属性.BUFF补正精神 += int(self.属性设置输入[i][j].text())
         for i in self.技能设置输入:
-            self.技能加成判断(i.currentText(), 属性)
+            self.技能加成判断(i.currentData(), 属性)
         属性.护石计算()
