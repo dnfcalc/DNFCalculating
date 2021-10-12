@@ -703,7 +703,7 @@ class 窗口(QWidget):
         self.宠物.currentIndexChanged.connect(
             lambda state, index='宠物': self.描述更新(index, self.宠物))
 
-        x = QLabel(trans(trans('称号&宠物选择：')), self.main_frame1)
+        x = QLabel(trans(trans('称号&宠物选择')), self.main_frame1)
         x.resize(130, 20)
         x.move(360, 400)
         x.setAlignment(Qt.AlignCenter)

@@ -2918,7 +2918,7 @@ class 角色窗口(窗口):
         for i in range(4):
             x = MyQComboBox(self.main_frame6)
             for j in 辟邪玉列表:
-                x.addItem(j.名称)
+                x.addItem(trans(j.名称))
             x.resize(200, 20)
             x.move(横坐标, 纵坐标 + (i + 1) * 25)
             x.currentIndexChanged.connect(

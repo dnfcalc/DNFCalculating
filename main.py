@@ -340,11 +340,11 @@ class 选择窗口(QWidget):
                 pass
         count += 1
 
-        butten = QtWidgets.QPushButton(' 设置|打赏|反馈', self.topFiller)
+        butten = QtWidgets.QPushButton(trans('设置|打赏|反馈'), self.topFiller)
         menu = QMenu()
-        action_0 = QAction('设置', parent=menu)
+        action_0 = QAction(trans('设置'), parent=menu)
         action_0.triggered.connect(lambda state: self.openSet())
-        action_1 = QAction('BUG反馈-Gitee', parent=menu)
+        action_1 = QAction(trans('BUG反馈-Gitee'), parent=menu)
         action_1.triggered.connect(lambda state: self.打开链接(
             ['https://gitee.com/i_melon/DNFCalculating/issues?state=all']))
         action_2 = QAction('联系我们-QQ-1群', parent=menu)
