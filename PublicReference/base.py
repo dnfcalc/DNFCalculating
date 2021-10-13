@@ -4734,19 +4734,25 @@ class 角色窗口(窗口):
 
         count = 0
 
+        # 站街力量 站街物攻 进图力量 进图物攻
         for i in [9, 10, 0, 1]:
             面板显示[i].move(20 + 初始x, const + count * 18)
             count += 1
         count = 0
+
+        # 站街智力 站街魔攻 进图智力 进图魔攻
         for i in [11, 12, 2, 3]:
             面板显示[i].move(150 + 初始x, const + count * 18)
             count += 1
+        # 独立
         面板显示[4].move(150 + 初始x, const + count * 18)
         count = 5
+        # 站街属强
         for i in [5, 6, 7, 8]:
             面板显示[i].move(125 + 初始x, const + count * 18)
             count += 1
         count = 5
+        # 进图属强
         for i in [13, 14, 15, 16]:
             面板显示[i].move(20 + 初始x, const + count * 18)
             count += 1
@@ -4769,6 +4775,29 @@ class 角色窗口(窗口):
         面板显示[17].setStyleSheet('QLabel{font-size:12px}')
 
     def 面板显示设置(self, 显示, 进图, 站街):
+
+        # 显示[0].setText(
+        #     '<font color="#FFFFFF">{}</font><font color="#96FF32">{}</font>'.
+        #     format(str(int(站街.站街力量())), str(int(进图.面板力量()))))
+        # 显示[1].setText(
+        #     '<font color="#FFFFFF">{}</font><font color="#96FF32">{}</font>'.
+        #     format(str(int(站街.站街物理攻击力())), str(int(进图.面板物理攻击力()))))
+        # 显示[2].setText(
+        #     '<font color="#FFFFFF">{}</font><font color="#96FF32">{}</font>'.
+        #     format(str(int(站街.站街智力())), str(int(进图.面板智力()))))
+        # 显示[3].setText(
+        #     '<font color="#FFFFFF">{}</font><font color="#96FF32">{}</font>'.
+        #     format(str(int(站街.站街魔法攻击力())), str(int(进图.面板魔法攻击力()))))
+        # 显示[4].setText(
+        #     '<font color="#FFFFFF">{}</font><font color="#96FF32">{}</font>'.
+        #     format(str(int(站街.站街独立攻击力())), str(int(进图.面板独立攻击力()))))
+        # 显示[5].setText(
+        #     '<font color="#FFFFFF">火({})冰({})光({})暗({})</font>'.format(
+        #         站街.火属性强化, 站街.冰属性强化, 站街.光属性强化, 站街.暗属性强化))
+        # 显示[6].setText(
+        #     '<font color="#96FF32">火({})冰({})光({})暗({})</font>'.format(
+        #         进图.火属性强化, 进图.冰属性强化, 进图.光属性强化, 进图.暗属性强化))
+
         显示[0].setText(str(int(进图.面板力量())))
         显示[1].setText(str(int(进图.面板物理攻击力())))
         显示[2].setText(str(int(进图.面板智力())))
@@ -5128,12 +5157,12 @@ class 角色窗口(窗口):
                             trans(武器词条属性[属性.词条选择[1]]))
                 else:
                     tempstr[i] += "属性1：{} +{}%<br>".format(
-                        trans(武器词条属性[self.希洛克武器词条[1].currentIndex()],
-                              (self.希洛克武器词条[3].currentIndex() + 3) * 2))
+                        trans(武器词条属性[self.希洛克武器词条[1].currentIndex()]),
+                              (self.希洛克武器词条[3].currentIndex() + 3) * 2)
                     if 数量 == 3:
                         tempstr[i] += "属性2：{} +{}%<br>".format(
-                            trans(武器词条属性[self.希洛克武器词条[2].currentIndex()],
-                                  (self.希洛克武器词条[4].currentIndex() + 3) * 1))
+                            trans(武器词条属性[self.希洛克武器词条[2].currentIndex()]),
+                                  (self.希洛克武器词条[4].currentIndex() + 3) * 1)
             if tempstr[i].endswith('<br>'):
                 tempstr[i] = tempstr[i][:-4]
             tempstr[i] += '</font>'
