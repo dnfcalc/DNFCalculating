@@ -95,18 +95,18 @@ class 被动技能(技能):
 
 符文效果选项 = [
     '无',
-    trans('攻击')+'+5%,CD+3%', 'CD-4%',
-    trans('攻击')+'+3%',
-    trans('攻击')+'-3%,CD-6%',
-    trans('攻击')+'+3%,CD+2%', 'CD-3%',
-    trans('攻击')+'+2%',
-    trans('攻击')+'-2%,CD-4%',
-    trans('攻击')+'+2%,CD+1%', 'CD-2%',
-    trans('攻击')+'+1%',
-    trans('攻击')+'-1%,CD-3%',
-    trans('攻击')+'+6%,CD+4%', 'CD-5%',
-    trans('攻击')+'+4%',
-    trans('攻击')+'-4%,CD-7%'
+    trans('攻击') + '+5%,CD+3%', 'CD-4%',
+    trans('攻击') + '+3%',
+    trans('攻击') + '-3%,CD-6%',
+    trans('攻击') + '+3%,CD+2%', 'CD-3%',
+    trans('攻击') + '+2%',
+    trans('攻击') + '-2%,CD-4%',
+    trans('攻击') + '+2%,CD+1%', 'CD-2%',
+    trans('攻击') + '+1%',
+    trans('攻击') + '-1%,CD-3%',
+    trans('攻击') + '+6%,CD+4%', 'CD-5%',
+    trans('攻击') + '+4%',
+    trans('攻击') + '-4%,CD-7%'
 ]
 
 刀魂之卡赞数据 = [
@@ -1314,11 +1314,13 @@ class 角色属性(属性):
                 if self.是否择优[i] != 0:
                     self.词条选择.append(self.择优结果[i][0])
             if i == 6:
-                self.自适应描述[0] = '{}%{}'.format(int(self.择优结果[i][1] * 100),
-                                               trans(词条属性列表[self.择优结果[i][0]].描述))
+                self.自适应描述[0] = '{}%{}'.format(
+                    int(self.择优结果[i][1] * 100),
+                    trans(词条属性列表[self.择优结果[i][0]].描述))
             if i == 7:
-                self.自适应描述[1] = '{}%{}'.format(int(self.择优结果[i][1] * 100),
-                                               trans(词条属性列表[self.择优结果[i][0]].描述))
+                self.自适应描述[1] = '{}%{}'.format(
+                    int(self.择优结果[i][1] * 100),
+                    trans(词条属性列表[self.择优结果[i][0]].描述))
 
     def 计算择优范围(self, d):
         index = []
@@ -1909,7 +1911,8 @@ class 角色窗口(窗口):
         self.攻击属性选项 = MyQComboBox(self.main_frame1)
         self.攻击属性选项.move(x, y + (高度 + 间隔) * 4)
         self.攻击属性选项.resize(宽度, 高度)
-        self.攻击属性选项.addItems('攻击属性:{}'.format(i) for i in ['全','火','冰','光','暗'])
+        self.攻击属性选项.addItems('攻击属性:{}'.format(i)
+                             for i in ['全', '火', '冰', '光', '暗'])
 
     def 界面2(self):
         # 第二个布局界面
@@ -2480,12 +2483,16 @@ class 角色窗口(窗口):
                     if cur == -1:
                         templist[n].setDisabled(True)
                         pass
-                    elif cur in [100,999] :
+                    elif cur in [100, 999]:
                         templist[n].addItem('无')
-                        max_level = 85 if cur ==999 else 48
-                        skills = [i.名称 for i in self.角色属性A.技能栏 if i.所在等级 < max_level]
+                        if cur == 999:
+                            skills = [i.名称 for i in self.角色属性A.技能栏 if i.所在等级 <= 85]
+                        else:
+                            skills = [i.名称 for i in self.角色属性A.技能栏 if i.所在等级 <= 70 and i.所在等级 not in [48,50]]
                         for skill_name in skills:
-                            templist[n].addItem(trans(skill_name)+"Lv+1",skill_name+"Lv+1")
+                            templist[n].addItem(
+                                trans(skill_name) + "Lv+1",
+                                skill_name + "Lv+1")
                     else:
                         templist[n].addItem('无')
                         for s_id in 行2技能[j]:
@@ -2661,8 +2668,7 @@ class 角色窗口(窗口):
             count += 1
 
         self.神话部位选项 = MyQComboBox(self.main_frame5)
-        self.神话部位选项.addItems(['神话部位：无', '神话部位：上衣', '神话部位：手镯',
-                                    '神话部位：耳环'])
+        self.神话部位选项.addItems(['神话部位：无', '神话部位：上衣', '神话部位：手镯', '神话部位：耳环'])
         self.神话部位选项.resize(160, 22)
         self.神话部位选项.move(横坐标, 50 + 30 * count)
         self.神话部位选项.activated.connect(lambda state: self.神话部位更改())
@@ -2848,8 +2854,7 @@ class 角色窗口(窗口):
     def 自选装备更改(self, index=0):
         try:
             self.图片显示[index].setMovie(
-                equ.get_img_by_name(
-                    self.自选装备[index].currentData()))
+                equ.get_img_by_name(self.自选装备[index].currentData()))
         except:
             pass
 
@@ -3279,7 +3284,7 @@ class 角色窗口(窗口):
 
     def 加载护石(self, 属性):
         for k in range(3):
-            if self.护石栏[k].currentData() !='无':
+            if self.护石栏[k].currentData() != '无':
                 try:
                     属性.技能栏[self.角色属性A.技能序号[self.护石选项[
                         self.护石栏[k].currentIndex()]]].装备护石()
@@ -3293,12 +3298,14 @@ class 角色窗口(窗口):
         属性.护石第三栏 = self.护石选项[self.护石栏[2].currentIndex()]
 
         for i in range(9):
-            if self.符文[i].currentData() != '无' and self.符文效果[i].currentData() != '无':
+            if self.符文[i].currentData() != '无' and self.符文效果[i].currentData(
+            ) != '无':
                 for j in self.符文效果[i].currentData().split(','):
                     if trans('攻击') in j:
                         属性.技能栏[self.角色属性A.技能序号[self.符文选项[
                             self.符文[i].currentIndex()]]].倍率 *= 1 + int(
-                                j.replace(trans('攻击'), '').replace('%','')) / 100
+                                j.replace(trans('攻击'), '').replace('%',
+                                                                   '')) / 100
                     if 'CD' in j:
                         属性.技能栏[self.角色属性A.技能序号[self.符文选项[
                             self.符文[i].currentIndex()]]].CD *= 1 + int(
@@ -5294,13 +5301,15 @@ class 角色窗口(窗口):
                 templabel.move(0, 0)
                 templabel.resize(275, 42)
                 templabel.setAlignment(Qt.AlignCenter)
-                print(json.dumps(名望详情,
-                                 sort_keys=True,
-                                 indent=4,
-                                 separators=(',', ':'),
-                                 ensure_ascii=False))
-                templabel.setToolTip('系数计算公式:dmi = ((总伤害数值 / 1e8) / pow((总名望 / (1e4) - 0.5), 3))<br>'
-                    +str(名望详情) )
+                print(
+                    json.dumps(名望详情,
+                               sort_keys=True,
+                               indent=4,
+                               separators=(',', ':'),
+                               ensure_ascii=False))
+                templabel.setToolTip(
+                    '系数计算公式:dmi = ((总伤害数值 / 1e8) / pow((总名望 / (1e4) - 0.5), 3))<br>'
+                    + str(名望详情))
 
         except:
             pass
@@ -5665,8 +5674,7 @@ class 角色窗口(窗口):
             序号 = self.角色属性A.技能序号[i.名称]
             if i.是否有伤害 == 1:
                 s = self.次数输入[序号].currentText()
-                s = s.replace('，', ',').replace(
-                    '（', '(').replace('）', ')')
+                s = s.replace('，', ',').replace('（', '(').replace('）', ')')
                 try:
                     if eval(s.replace('/CD', '1')) >= 0:
                         属性.次数输入.append(s)
@@ -5700,8 +5708,7 @@ class 角色窗口(窗口):
         if 切装模式 == 1:
             for i in range(12):
                 if self.装备切装[i].isChecked():
-                    属性.装备切装.append(
-                        self.自选装备[i].currentData())
+                    属性.装备切装.append(self.自选装备[i].currentData())
                 else:
                     属性.装备切装.append('无')
 
