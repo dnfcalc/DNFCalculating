@@ -269,9 +269,12 @@ class 窗口(QWidget):
 
     def 界面(self):
         # self.setWindowTitle(self.角色属性A.实际名称 + "搭配计算器&17173DNF专区 （点击标签栏按钮切换界面）"+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)
+        名称 = self.角色属性A.实际名称
         self.setWindowTitle(
-            trans(self.角色属性A.实际名称.replace('·男', '').replace('·女', '')) +
-            ' & ' + trans('17173DNF专区'))
+            trans(名称.replace('·男', '').replace('·女', '')) +
+            (('·' + trans('男')) if '男' in 名称 else (
+                ('·' + trans('女')) if '女' in 名称 else '')) + ' & ' +
+            trans('17173DNF专区'))
         self.icon = QIcon('./ResourceFiles/' + self.角色属性A.实际名称 +
                           '/技能/BUFF.png')
         self.setWindowIcon(self.icon)
@@ -806,7 +809,7 @@ class 窗口(QWidget):
                             for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
                                 if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
                                     temp = 描述列表[j] + str(k)
-                                    if 描述列表[j] != '所有属性强化:':
+                                    if 描述列表[j] != trans('所有属性强化 +'):
                                         temp += '%'
                                     self.改造产物选项[count * 4 + j].addItem(temp)
                         else:
@@ -1707,13 +1710,13 @@ class 窗口(QWidget):
         self.计算按钮3.setText("完成:" + temp)
 
     def calc_done(self):
-        self.计算按钮1.setText("开始计算")
+        self.计算按钮1.setText(trans("开始计算"))
         self.计算按钮1.setEnabled(True)
         self.计算按钮1.setStyleSheet(按钮样式)
-        self.计算按钮2.setText("开始计算")
+        self.计算按钮2.setText(trans("开始计算"))
         self.计算按钮2.setEnabled(True)
         self.计算按钮2.setStyleSheet(按钮样式)
-        self.计算按钮3.setText("开始计算")
+        self.计算按钮3.setText(trans("开始计算"))
         self.计算按钮3.setEnabled(True)
         self.计算按钮3.setStyleSheet(按钮样式)
         if len(self.排行数据) == 0:
@@ -2142,25 +2145,25 @@ class 技能详情(QFrame):
                 CD显示 = ''
                 CD恢复 = ''
                 try:
-                    tempstr = '<font face="宋体"><font color="#FF6666">' + data.角色属性B.技能栏[
-                        i].名称 + ("<br>" if data.角色属性B.技能栏[i].备注 != '' else
+                    tempstr = '<font face="宋体"><font color="#FF6666">' + trans(data.角色属性B.技能栏[
+                        i].名称) + ("<br>" if data.角色属性B.技能栏[i].备注 != '' else
                                  '') + data.角色属性B.技能栏[i].备注 + '</font><br>'
                     百分比 = int(data.角色属性B.技能栏[i].等效百分比(data.角色属性B.武器类型) /
                               data.角色属性B.技能栏[i].倍率)
                     被动倍率 = round(data.角色属性B.技能栏[i].被动倍率 * 100, 1)
                     其他倍率 = round(data.角色属性B.技能栏[i].倍率 * 100, 1)
-                    tempstr += '百分比：' + str(百分比) + '%<br>'
-                    tempstr += '被动倍率：' + str(被动倍率) + '%<br>'
+                    tempstr += trans('百分比：') + str(百分比) + '%<br>'
+                    tempstr += trans('被动倍率：') + str(被动倍率) + '%<br>'
                     if data.角色属性B.技能栏[i].倍率 != 0:
-                        tempstr += '其它倍率：' + str(其他倍率) + '%<br>'
+                        tempstr += trans('其它倍率：') + str(其他倍率) + '%<br>'
                     CD显示 = str(
                         round(
                             data.角色属性B.技能栏[i].等效CD(data.角色属性B.武器类型,
                                                    data.角色属性B.类型) *
                             data.角色属性B.技能栏[i].恢复, 2))
-                    tempstr += 'CD显示：' + CD显示 + 's<br>'
+                    tempstr += trans('CD显示：') + CD显示 + 's<br>'
                     CD恢复 = str(round(data.角色属性B.技能栏[i].恢复 * 100, 1)) + '%'
-                    tempstr += 'CD恢复：' + CD恢复 + '</font>'
+                    tempstr += trans('CD恢复：') + CD恢复 + '</font>'
                     每行详情[0].setToolTip(tempstr)
                 except:
                     pass

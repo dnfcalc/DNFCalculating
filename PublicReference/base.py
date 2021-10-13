@@ -265,7 +265,7 @@ class 角色属性(属性):
     # region 词条属性
     def 附加伤害加成(self, x, 可变=0, 辟邪玉加成=1):
         if self.装备描述 == 1:
-            return '附加伤害 +{}%<br>'.format(round(x * 100))
+            return trans('附加伤害') + ' +{}%<br>'.format(round(x * 100))
         else:
             self.附加伤害 += self.附加伤害增加增幅 * x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
@@ -279,7 +279,7 @@ class 角色属性(属性):
 
     def 三攻固定加成(self, x=0, y=0, z=0):
         if self.装备描述 == 1:
-            return '物攻/魔攻/独立 +{}<br>'.format(x)
+            return trans('物攻/魔攻/独立 +') + '{}<br>'.format(x)
         else:
             if y == 0 or z == 0:
                 y = x
@@ -291,7 +291,7 @@ class 角色属性(属性):
 
     def 力智固定加成(self, x=0, y=0):
         if self.装备描述 == 1:
-            return '力量、智力 +{}<br>'.format(x)
+            return trans('力量、智力') + ' +{}<br>'.format(x)
         else:
             if y == 0:
                 y = x
@@ -301,21 +301,21 @@ class 角色属性(属性):
 
     def 持续伤害加成(self, x):
         if self.装备描述 == 1:
-            return '持续伤害 +{}%<br>'.format(round(x * 100))
+            return trans('持续伤害') + ' +{}%<br>'.format(round(x * 100))
         else:
             self.持续伤害 += x
         return ''
 
     def 属性附加加成(self, x):
         if self.装备描述 == 1:
-            return '属性附加伤害 +{}%<br>'.format(round(x * 100))
+            return trans('属性附加伤害') + ' +{}%<br>'.format(round(x * 100))
         else:
             self.属性附加 += self.属性附加伤害增加增幅 * x
         return ''
 
     def 技能攻击力加成(self, x, 辟邪玉加成=1):
         if self.装备描述 == 1:
-            return '技能攻击力 +{}%<br>'.format(round(x * 100))
+            return trans('技能攻击力') + ' +{}%<br>'.format(round(x * 100))
         else:
             self.技能攻击力 *= 1 + self.技能伤害增加增幅 * x if 辟邪玉加成 == 1 else x
             # self.技能攻击力显示 *= int((1 + self.技能伤害增加增幅 * x if 辟邪玉加成 == 1 else x)*1000)/1000
@@ -323,7 +323,7 @@ class 角色属性(属性):
 
     def 暴击伤害加成(self, x, 可变=0, 辟邪玉加成=1):
         if self.装备描述 == 1:
-            return '暴击伤害 +{}%<br>'.format(round(x * 100))
+            return trans('暴击伤害') + ' +{}%<br>'.format(round(x * 100))
         else:
             self.暴击伤害 += self.暴击伤害增加增幅 * x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
@@ -337,7 +337,7 @@ class 角色属性(属性):
 
     def 伤害增加加成(self, x, 可变=0, 辟邪玉加成=1):
         if self.装备描述 == 1:
-            return '伤害增加 +{}%<br>'.format(round(x * 100))
+            return trans('伤害增加') + ' +{}%<br>'.format(round(x * 100))
         else:
             self.伤害增加 += self.伤害增加增幅 * x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
@@ -351,7 +351,7 @@ class 角色属性(属性):
 
     def 最终伤害加成(self, x, 可变=0, 辟邪玉加成=1):
         if self.装备描述 == 1:
-            return '最终伤害 +{}%<br>'.format(round(x * 100))
+            return trans('最终伤害') + ' +{}%<br>'.format(round(x * 100))
         else:
             self.最终伤害 += self.最终伤害增加增幅 * x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
@@ -365,7 +365,7 @@ class 角色属性(属性):
 
     def 百分比力智加成(self, x, 可变=0, 辟邪玉加成=1):
         if self.装备描述 == 1:
-            return '力量、智力 +{}%<br>'.format(round(x * 100))
+            return trans('力量、智力') + ' +{}%<br>'.format(round(x * 100))
         else:
             self.百分比力智 += self.力量智力增加增幅 * x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
@@ -379,8 +379,8 @@ class 角色属性(属性):
 
     def 百分比三攻加成(self, x, 可变=0, 辟邪玉加成=1):
         if self.装备描述 == 1:
-            return '百分比三攻 {}%<br>'.format(('+' if x > 0 else '') +
-                                          str(round(x * 100)))
+            return trans('百分比三攻') + ' {}%<br>'.format(('+' if x > 0 else '') +
+                                                      str(round(x * 100)))
         else:
             self.百分比三攻 += self.物理魔法攻击力增加增幅 * x if 辟邪玉加成 == 1 else x
             if 可变 > 0:
@@ -434,7 +434,7 @@ class 角色属性(属性):
 
     def 所有属性强化加成(self, x, 辟邪玉加成=1):
         if self.装备描述 == 1:
-            return '所有属性强化 +{}<br>'.format(x)
+            return trans('所有属性强化') + ' +{}<br>'.format(x)
         else:
             if self.状态 == 0:
                 temp = self.所有属性强化增加 * x if 辟邪玉加成 == 1 else x
@@ -445,24 +445,24 @@ class 角色属性(属性):
 
     def 攻击速度增加(self, x):
         if self.装备描述 == 1:
-            return '攻击速度 {}%<br>'.format(("+" if x > 0 else '') +
-                                         str(round(x * 100, 2)))
+            return trans('攻击速度') + ' {}%<br>'.format(("+" if x > 0 else '') +
+                                                     str(round(x * 100, 2)))
         else:
             self.攻击速度 += x
         return ''
 
     def 移动速度增加(self, x):
         if self.装备描述 == 1:
-            return '移动速度 {}%<br>'.format(("+" if x > 0 else '') +
-                                         str(round(x * 100, 2)))
+            return trans('移动速度') + ' {}%<br>'.format(("+" if x > 0 else '') +
+                                                     str(round(x * 100, 2)))
         else:
             self.移动速度 += x
         return ''
 
     def 施放速度增加(self, x):
         if self.装备描述 == 1:
-            return '施放速度 {}%<br>'.format(("+" if x > 0 else '') +
-                                         str(round(x * 100, 2)))
+            return trans('施放速度') + ' {}%<br>'.format(("+" if x > 0 else '') +
+                                                     str(round(x * 100, 2)))
         else:
             self.施放速度 += x
         return ''
@@ -494,14 +494,18 @@ class 角色属性(属性):
         if self.装备描述 == 1:
             if 加成类型 == "所有":
                 if minLv == maxLv:
-                    return "Lv{} 技能等级+{}<br>".format(minLv, lv)
+                    return ("Lv{} " + trans('技能等级') + "+{}<br>").format(
+                        minLv, lv)
                 else:
-                    return "Lv{}-{} 技能等级+{}<br>".format(minLv, maxLv, lv)
+                    return ("Lv{}-{} " + trans('技能等级') + "+{}<br>").format(
+                        minLv, maxLv, lv)
             else:
                 if minLv == maxLv:
-                    return "Lv{} 主动技能等级+{}<br>".format(minLv, lv)
+                    return ("Lv{} " + trans('主动技能等级') + "+{}<br>").format(
+                        minLv, lv)
                 else:
-                    return "Lv{}-{} 主动技能等级+{}<br>".format(minLv, maxLv, lv)
+                    return ("Lv{}-{} " + trans('主动技能等级') + "+{}<br>").format(
+                        minLv, maxLv, lv)
         else:
             if self.远古记忆 > 0:
                 if minLv <= 15 and maxLv >= 15:
@@ -527,9 +531,11 @@ class 角色属性(属性):
     def 技能冷却缩减(self, min, max, x):
         if self.装备描述 == 1:
             if min == max:
-                return "Lv{} 技能CD -{}%<br>".format(min, round(x * 100))
+                return ("Lv{} " + trans('技能') + "CD -{}%<br>").format(
+                    min, round(x * 100))
             else:
-                return "Lv{}-{} 技能CD -{}%<br>".format(min, max, round(x * 100))
+                return ("Lv{}-{} " + trans('技能') + "CD -{}%<br>").format(
+                    min, max, round(x * 100))
         else:
             for i in self.技能栏:
                 if i.所在等级 >= min and i.所在等级 <= max:
@@ -2486,9 +2492,14 @@ class 角色窗口(窗口):
                     elif cur in [100, 999]:
                         templist[n].addItem('无')
                         if cur == 999:
-                            skills = [i.名称 for i in self.角色属性A.技能栏 if i.所在等级 <= 85]
+                            skills = [
+                                i.名称 for i in self.角色属性A.技能栏 if i.所在等级 <= 85
+                            ]
                         else:
-                            skills = [i.名称 for i in self.角色属性A.技能栏 if i.所在等级 <= 70 and i.所在等级 not in [48,50]]
+                            skills = [
+                                i.名称 for i in self.角色属性A.技能栏
+                                if i.所在等级 <= 70 and i.所在等级 not in [48, 50]
+                            ]
                         for skill_name in skills:
                             templist[n].addItem(
                                 trans(skill_name) + "Lv+1",
@@ -2560,10 +2571,12 @@ class 角色窗口(窗口):
 
         self.时装选项.append(MyQComboBox(self.main_frame3))
         self.时装选项[8].setStyleSheet(下拉框样式_detail)
-        self.时装选项[8].addItems(
-            trans([
-                '高级套装' + '[8]', '节日套装' + '[8]', '稀有套装' + '[8]', '神器套装' + '[8]'
-            ]))
+        self.时装选项[8].addItems([
+            trans('高级套装') + '[8]',
+            trans('节日套装') + '[8]',
+            trans('稀有套装') + '[8]',
+            trans('神器套装') + '[8]'
+        ])
         self.时装选项[8].resize(100, 22)
         self.时装选项[8].move(990, 570)
         self.时装选项[8].currentIndexChanged.connect(
@@ -4992,10 +5005,11 @@ class 角色窗口(窗口):
             # 名称
             tempstr.append(
                 '<font size="3" face="宋体"><font color="{}">{}</font>'.format(
-                    颜色[装备.品质], 装备.名称))
+                    颜色[装备.品质], trans(装备.名称)))
             # 等级 品质 类型 部位
-            tempstr[i] += '<br>Lv{} {} {}({})'.format(装备.等级, 装备.品质, 装备.类型,
-                                                      装备.部位)
+            tempstr[i] += '<br>Lv{} {} {}({})'.format(装备.等级, trans(装备.品质),
+                                                      trans(装备.类型),
+                                                      trans(装备.部位))
             # 套装
             if 装备.所属套装 != '无':
                 if 装备.所属套装 != '智慧产物':
@@ -5005,8 +5019,8 @@ class 角色窗口(窗口):
             else:
                 y = ''
             if y != '':
-                tempstr[i] += '<br><font color="#78FF1E">{} 套装</font>'.format(
-                    y)
+                tempstr[i] += '<br><font color="#78FF1E">{} {}</font>'.format(
+                    trans(y), trans('套装'))
 
             # 精通描述
             if i < 5:
@@ -5022,30 +5036,30 @@ class 角色窗口(窗口):
                 if 属性.强化等级[i] != 0:
                     if i == 8:
                         tempstr[i] += '<br><font color="#68D5ED">+' + str(
-                            属性.强化等级[i]) + ' 强化: '
+                            属性.强化等级[i]) + ' ' + trans('强化') + ': '
                         tempstr[i] += '三攻 + ' + str(
                             耳环计算(装备.等级, 装备.品质, 属性.强化等级[i])) + '</font>'
                     if i in [9, 10]:
                         tempstr[i] += '<br><font color="#68D5ED">+' + str(
-                            属性.强化等级[i]) + ' 强化: '
+                            属性.强化等级[i]) + ' ' + trans('强化') + ': '
                         tempstr[i] += '四维 + ' + str(
                             左右计算(装备.等级, 装备.品质, 属性.强化等级[i])) + '</font>'
                     if i == 11:
                         tempstr[i] += '<br><font color="#68D5ED">+' + str(
-                            属性.强化等级[i]) + ' 强化: '
-                        tempstr[i] += '物理攻击力 + ' + str(
+                            属性.强化等级[i]) + ' ' + trans('强化') + ': '
+                        tempstr[i] += trans('物理攻击力') + ' + ' + str(
                             武器计算(装备.等级, 装备.品质, 属性.强化等级[i], 装备.类型,
                                  '物理')) + '</font><br>'
                         tempstr[i] += '<font color="#68D5ED">+' + str(
-                            属性.强化等级[i]) + ' 强化: '
-                        tempstr[i] += '魔法攻击力 + ' + str(
+                            属性.强化等级[i]) + ' ' + trans('强化') + ': '
+                        tempstr[i] += trans('魔法攻击力') + ' + ' + str(
                             武器计算(装备.等级, 装备.品质, 属性.强化等级[i], 装备.类型,
                                  '魔法')) + '</font>'
                 # 锻造描述
                 if i == 11 and 属性.武器锻造等级 != 0:
                     tempstr[i] += '<br><font color="#68D5ED">+' + str(
-                        属性.武器锻造等级) + '   锻造: '
-                    tempstr[i] += '独立攻击力 + ' + str(
+                        属性.武器锻造等级) + '   ' + trans('锻造') + ' '
+                    tempstr[i] += trans('独立攻击力') + ' + ' + str(
                         锻造计算(装备.等级, 装备.品质, 属性.武器锻造等级)) + '</font>'
 
                 # 增幅描述
@@ -5053,13 +5067,13 @@ class 角色窗口(窗口):
                     if tempstr[i] != '':
                         tempstr[i] += '<br>'
                     tempstr[i] += '<font color="#FF00FF">+' + str(
-                        属性.强化等级[i]) + ' 增幅: '
+                        属性.强化等级[i]) + ' ' + trans('增幅') + ': '
                     if '物理' in 属性.类型 or '力量' in 属性.类型:
-                        tempstr[i] += '力量 + ' + str(
+                        tempstr[i] += trans('力量') + ' + ' + str(
                             增幅计算(装备.等级, 装备.品质, 属性.强化等级[i],
                                  属性.增幅版本)) + '</font>'
                     else:
-                        tempstr[i] += '智力 + ' + str(
+                        tempstr[i] += trans('智力') + ' + ' + str(
                             增幅计算(装备.等级, 装备.品质, 属性.强化等级[i],
                                  属性.增幅版本)) + '</font>'
 
@@ -5089,33 +5103,37 @@ class 角色窗口(窗口):
             if i in [2, 7, 9]:
                 if 希洛克[i] != '':
                     tempstr[i] += '<br>'
-                    tempstr[i] += '<font color="#00A2E8">希洛克融合属性：</font><br>'
+                    tempstr[i] += '<font color="#00A2E8">' + trans(
+                        '希洛克融合属性：') + '</font><br>'
                     tempstr[i] += 希洛克[i]
 
             # 奥兹玛描述
             if i in [1, 3, 4, 6, 10]:
                 if 奥兹玛[i] != '':
                     tempstr[i] += '<br>'
-                    tempstr[i] += '<font color="#00A2E8">奥兹玛融合属性：</font><br>'
+                    tempstr[i] += '<font color="#00A2E8">' + trans(
+                        '奥兹玛融合属性：') + '</font><br>'
                     tempstr[i] += 奥兹玛[i]
 
             # 希洛克武器描述
             if self.希洛克武器词条[0].currentIndex() > 0 and i == 11:
                 tempstr[i] += '<br>'
-                tempstr[i] += '<font color="#00A2E8">希洛克融合属性：</font><br>'
+                tempstr[i] += '<font color="#00A2E8">' + trans(
+                    '希洛克融合属性：') + '</font><br>'
                 if self.希洛克武器词条[0].currentIndex() == 1:
-                    tempstr[i] += "属性1：{} +10%<br>".format(武器词条属性[属性.词条选择[0]])
+                    tempstr[i] += "属性1：{} +10%<br>".format(
+                        trans(武器词条属性[属性.词条选择[0]]))
                     if 数量 == 3:
                         tempstr[i] += "属性2：{} +5%<br>".format(
-                            武器词条属性[属性.词条选择[1]])
+                            trans(武器词条属性[属性.词条选择[1]]))
                 else:
                     tempstr[i] += "属性1：{} +{}%<br>".format(
-                        武器词条属性[self.希洛克武器词条[1].currentIndex()],
-                        (self.希洛克武器词条[3].currentIndex() + 3) * 2)
+                        trans(武器词条属性[self.希洛克武器词条[1].currentIndex()],
+                              (self.希洛克武器词条[3].currentIndex() + 3) * 2))
                     if 数量 == 3:
                         tempstr[i] += "属性2：{} +{}%<br>".format(
-                            武器词条属性[self.希洛克武器词条[2].currentIndex()],
-                            (self.希洛克武器词条[4].currentIndex() + 3) * 1)
+                            trans(武器词条属性[self.希洛克武器词条[2].currentIndex()],
+                                  (self.希洛克武器词条[4].currentIndex() + 3) * 1))
             if tempstr[i].endswith('<br>'):
                 tempstr[i] = tempstr[i][:-4]
             tempstr[i] += '</font>'
@@ -5331,62 +5349,65 @@ class 角色窗口(窗口):
             if self.角色属性B.技能栏[i].所在等级 != 100 or self.角色属性B.技能栏[i].是否主动 == 0:
                 if self.角色属性B.技能栏[i].等级 > 0:
                     if self.角色属性B.技能栏[i].自定义描述 == 1:
-                        tempstr += '<font face="宋体"><font color="#FF6666">' + self.角色属性B.技能栏[
-                            i].名称 + '</font><br>'
+                        tempstr += '<font face="宋体"><font color="#FF6666">' + trans(
+                            self.角色属性B.技能栏[i].名称) + '</font><br>'
                         tempstr += self.角色属性B.技能栏[i].技能描述(self.角色属性B.武器类型)
                     else:
                         if self.角色属性B.技能栏[i].关联技能 != [
                                 '无'
                         ] and self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) != 1:
-                            tempstr += '<font face="宋体"><font color="#FF6666">' + self.角色属性B.技能栏[
-                                i].名称 + '</font><br>'
-                            tempstr += '加成倍率：' + str(
+                            tempstr += '<font face="宋体"><font color="#FF6666">' + trans(
+                                self.角色属性B.技能栏[i].名称) + '</font><br>'
+                            tempstr += trans('加成倍率：') + str(
                                 round(
                                     self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) *
                                     100 - 100, 2)) + '%<br>'
-                            tempstr += '关联技能：'
+                            tempstr += trans('关联技能：')
                             for j in self.角色属性B.技能栏[i].关联技能:
                                 tempstr += j
                                 if j != self.角色属性B.技能栏[i].关联技能[-1]:
                                     tempstr += ','
                             if self.角色属性B.技能栏[i].非关联技能 != ['无']:
-                                tempstr += '<font color=gray>(不适用于:'
+                                tempstr += '<font color=gray>(' + trans(
+                                    '不适用于:') + ''
                                 for j in self.角色属性B.技能栏[i].非关联技能:
                                     tempstr += j
                                     if j != self.角色属性B.技能栏[i].非关联技能[-1]:
                                         tempstr += ','
                                 tempstr += ')</font>'
                             if self.角色属性B.技能栏[i].关联技能2 != ['无']:
-                                tempstr += '<br>加成倍率：' + str(
+                                tempstr += '<br>' + trans('加成倍率：') + str(
                                     round(
                                         self.角色属性B.技能栏[i].加成倍率2(
                                             self.角色属性B.武器类型) * 100 - 100,
                                         2)) + '%<br>'
-                                tempstr += '关联技能：'
+                                tempstr += trans('关联技能：')
                                 for k in self.角色属性B.技能栏[i].关联技能2:
                                     tempstr += k
                                     if k != self.角色属性B.技能栏[i].关联技能2[-1]:
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非关联技能2 != ['无']:
-                                tempstr += '<font color=gray>(不适用于:'
+                                tempstr += '<font color=gray>(' + trans(
+                                    '不适用于:') + ''
                                 for j in self.角色属性B.技能栏[i].非关联技能2:
                                     tempstr += j
                                     if j != self.角色属性B.技能栏[i].非关联技能2[-1]:
                                         tempstr += ','
                                 tempstr += ')</font>'
                             if self.角色属性B.技能栏[i].关联技能3 != ['无']:
-                                tempstr += '<br>加成倍率：' + str(
+                                tempstr += '<br>' + trans('加成倍率：') + '' + str(
                                     round(
                                         self.角色属性B.技能栏[i].加成倍率3(
                                             self.角色属性B.武器类型) * 100 - 100,
                                         2)) + '%<br>'
-                                tempstr += '关联技能：'
+                                tempstr += trans('关联技能：')
                                 for l in self.角色属性B.技能栏[i].关联技能3:
                                     tempstr += l
                                     if l != self.角色属性B.技能栏[i].关联技能3[-1]:
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非关联技能3 != ['无']:
-                                tempstr += '<font color=gray>(不适用于:'
+                                tempstr += '<font color=gray>(' + trans(
+                                    '不适用于:')
                                 for j in self.角色属性B.技能栏[i].非关联技能3:
                                     tempstr += j
                                     if j != self.角色属性B.技能栏[i].非关联技能3[-1]:
@@ -5396,57 +5417,60 @@ class 角色窗口(窗口):
                                 '无'
                         ] and self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型) != 1:
                             if tempstr == '':
-                                tempstr += '<font face="宋体"><font color="#FF6666">' + self.角色属性B.技能栏[
-                                    i].名称 + '</font><br>'
+                                tempstr += '<font face="宋体"><font color="#FF6666">' + trans(
+                                    self.角色属性B.技能栏[i].名称) + '</font><br>'
                             else:
                                 tempstr += '<br>'
-                            tempstr += '冷却缩减：' + str(
+                            tempstr += trans('冷却缩减：') + str(
                                 round(
                                     100 - self.角色属性B.技能栏[i].CD缩减倍率(
                                         self.角色属性B.武器类型) * 100, 2)) + '%<br>'
-                            tempstr += '冷却关联技能：'
+                            tempstr += trans('冷却关联技能：')
                             for j in self.角色属性B.技能栏[i].冷却关联技能:
                                 tempstr += j
                                 if j != self.角色属性B.技能栏[i].冷却关联技能[-1]:
                                     tempstr += ','
                             if self.角色属性B.技能栏[i].非冷却关联技能 != ['无']:
-                                tempstr += '<font color=gray>(不适用于:'
+                                tempstr += '<font color=gray>(' + trans(
+                                    '不适用于:')
                                 for j in self.角色属性B.技能栏[i].非冷却关联技能:
                                     tempstr += j
                                     if j != self.角色属性B.技能栏[i].非冷却关联技能[-1]:
                                         tempstr += ','
                                 tempstr += ')</font>'
                             if self.角色属性B.技能栏[i].冷却关联技能2 != ['无']:
-                                tempstr += '<br>冷却缩减：' + str(
+                                tempstr += '<br>' + trans('冷却缩减：') + str(
                                     round(
                                         100 - self.角色属性B.技能栏[i].CD缩减倍率2(
                                             self.角色属性B.武器类型) * 100,
                                         2)) + '%<br>'
-                                tempstr += '冷却关联技能：'
+                                tempstr += trans('冷却关联技能：')
                                 for j in self.角色属性B.技能栏[i].冷却关联技能2:
                                     tempstr += j
                                     if j != self.角色属性B.技能栏[i].冷却关联技能2[-1]:
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非冷却关联技能2 != ['无']:
-                                tempstr += '<font color=gray>(不适用于:'
+                                tempstr += '<font color=gray>(' + trans(
+                                    '不适用于:')
                                 for j in self.角色属性B.技能栏[i].非冷却关联技能2:
                                     tempstr += j
                                     if j != self.角色属性B.技能栏[i].非冷却关联技能2[-1]:
                                         tempstr += ','
                                 tempstr += ')</font>'
                             if self.角色属性B.技能栏[i].冷却关联技能3 != ['无']:
-                                tempstr += '<br>冷却缩减：' + str(
+                                tempstr += '<br>' + trans('冷却缩减：') + str(
                                     round(
                                         100 - self.角色属性B.技能栏[i].CD缩减倍率3(
                                             self.角色属性B.武器类型) * 100,
                                         2)) + '%<br>'
-                                tempstr += '冷却关联技能：'
+                                tempstr += trans('冷却关联技能：')
                                 for j in self.角色属性B.技能栏[i].冷却关联技能3:
                                     tempstr += j
                                     if j != self.角色属性B.技能栏[i].冷却关联技能3[-1]:
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非冷却关联技能3 != ['无']:
-                                tempstr += '<font color=gray>(不适用于:'
+                                tempstr += '<font color=gray>(' + trans(
+                                    '不适用于:')
                                 for j in self.角色属性B.技能栏[i].非冷却关联技能3:
                                     tempstr += j
                                     if j != self.角色属性B.技能栏[i].非冷却关联技能3[-1]:
@@ -5475,8 +5499,10 @@ class 角色窗口(窗口):
         if self.角色属性B.远古记忆 > 0:
             被动数据 = QLabel(输出窗口)
             被动数据.setPixmap((QPixmap('./ResourceFiles/img/远古记忆.png')))
-            tempstr = '<font face="宋体"><font color="#FF6666">' + '远古记忆' + '</font><br>'
-            tempstr += '智力+' + str(self.角色属性B.远古记忆 * 15) + '</font>'
+            tempstr = '<font face="宋体"><font color="#FF6666">' + trans(
+                '远古记忆') + '</font><br>'
+            tempstr += trans('智力') + '+' + str(
+                self.角色属性B.远古记忆 * 15) + '</font>'
             被动数据.setToolTip(tempstr)
             被动数据.move(293 + num * 40, 500 - pox_y)
             被动等级 = QLabel(输出窗口)
@@ -5491,7 +5517,8 @@ class 角色窗口(窗口):
             被动数据 = QLabel(输出窗口)
             被动数据.setPixmap((QPixmap('./ResourceFiles/img/刀魂之卡赞.png')))
             tempstr = '<font face="宋体"><font color="#FF6666">' + '刀魂之卡赞' + '</font><br>'
-            tempstr += '力量/智力+' + str(刀魂之卡赞数据[self.角色属性B.刀魂之卡赞]) + '</font>'
+            tempstr += trans('力量/智力 +') + str(
+                刀魂之卡赞数据[self.角色属性B.刀魂之卡赞]) + '</font>'
             被动数据.setToolTip(tempstr)
             被动数据.move(293 + num * 40, 500 - pox_y)
             被动等级 = QLabel(输出窗口)
