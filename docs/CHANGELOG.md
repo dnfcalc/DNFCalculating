@@ -1,5 +1,25 @@
 ## Newest
 
+### 2021-10-13
+
+#### NewFeatures
+* 同步国服10.14职业平衡 ([5d5ac5](https://gitee.com/i_melon/DNFCalculating/commit/5d5ac5cbae4bf04b2f2d3b7337ea7d8e64d32a09))
+* 归元·散打·男：同步无欲之花、正义的抉择不加成烈焰焚步的问题 ([58f1b3](https://gitee.com/i_melon/DNFCalculating/commit/58f1b3ac78da344e6ebd5898af4c5d5a65a663e5))
+* 新增名望参考计算By Umi，该功能处于试运行状态 ([ecc743](https://gitee.com/i_melon/DNFCalculating/commit/ecc7437aab247540278fbd1e83d6ae9ef8e6c6a1))
+
+#### BugFixes
+* 修复奶系希洛克属性2不正确的问题 ([5d13aa](https://gitee.com/i_melon/DNFCalculating/commit/5d13aac54d3ffc3274f0c2b44f3c9bc14e748fbb))
+* 修复奶系武器遴选描述不正确的bug ([1960de](https://gitee.com/i_melon/DNFCalculating/commit/1960de6f65ed84d05768a9a6f49849bf80b8d2c0))
+* 修复黑月之噬不吃CD恢复的BUG ([562687](https://gitee.com/i_melon/DNFCalculating/commit/562687371a390a3a1767661781595885b84c6d20))
+* 修正时装、白金技能选择范围 ([55876e](https://gitee.com/i_melon/DNFCalculating/commit/55876e542d8d22f211c479e2e73ec5aec3a285ed))
+* 千魂·决战者：修正流云幻灭数据错误 ([0eaf71](https://gitee.com/i_melon/DNFCalculating/commit/0eaf71a15404330a7d809dcaa326354060190c90))
+* 极诣·黑暗武士：修正斩龙破护石数据错误 ([5e874c](https://gitee.com/i_melon/DNFCalculating/commit/5e874cfc057177b83210f9813298bf6d7775fc4f))
+* 知源·元素师：修正前瞻版本圣灵符文数据错误 ([61f42a](https://gitee.com/i_melon/DNFCalculating/commit/61f42a4e6b68526e7ed34859aec641afef6ac97e))
+* 隐夜·刺客：修正螺旋穿刺护石数据错误 ([5782b4](https://gitee.com/i_melon/DNFCalculating/commit/5782b42f8b28b9fe0786775d1504a90113cb8864))
+
+
+## History
+
 ### 2021-09-30
 
 #### NewFeatures
@@ -112,8 +132,6 @@
 
 
 
-
-## History
 
 ### 2021-08-05
 
