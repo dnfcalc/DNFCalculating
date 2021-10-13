@@ -516,10 +516,10 @@ def 改造升级黑鸦名望计算(人物设置, 角色属性):
     for i in equ.get_equ_list():
         if i.所属套装 == '智慧产物':
             if i.名称 in 改造名称:
-                i.属性1选择 = 人物设置.改造产物选项[count2 * 4 + 0]
-                i.属性2选择 = 人物设置.改造产物选项[count2 * 4 + 1]
-                i.属性3选择 = 人物设置.改造产物选项[count2 * 4 + 2]
-                i.属性4选择 = 人物设置.改造产物选项[count2 * 4 + 3]
+                i.属性1选择 = 人物设置.改造产物选项[count2 * 4 + 0].currentIndex()
+                i.属性2选择 = 人物设置.改造产物选项[count2 * 4 + 1].currentIndex()
+                i.属性3选择 = 人物设置.改造产物选项[count2 * 4 + 2].currentIndex()
+                i.属性4选择 = 人物设置.改造产物选项[count2 * 4 + 3].currentIndex()
             count2 += 1
 
     for 装备 in 改造产物:
