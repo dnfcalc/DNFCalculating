@@ -849,7 +849,7 @@ class 窗口(QWidget):
         if x == 0:
             装备 = []
             for i in self.自选装备:
-                装备.append(i.currentText())
+                装备.append(i.currentData())
             A = deepcopy(self.初始属性)
             self.输入属性(A)
             A.穿戴装备计算套装(装备)
@@ -1083,18 +1083,18 @@ class 窗口(QWidget):
         部位序号 = []
         for n in equ.get_equ_list():
             try:
-                if n.关联套装 == self.改造套装.currentText():
+                if n.关联套装 == self.改造套装.currentData():
                     名称列表.append(n.名称)
                     部位序号.append(部位字典[n.部位])
             except:
                 pass
             try:
-                if n.所属套装 == self.改造套装.currentText().split('[')[0]:
+                if n.所属套装 == self.改造套装.currentData().split('[')[0]:
                     名称列表.append(n.名称)
                     部位序号.append(部位字典[n.部位])
             except:
                 pass
-        if self.改造套装.currentText() == '兵法之神[5]':
+        if self.改造套装.currentData() == '兵法之神[5]':
             for n in equ.get_equ_list():
                 try:
                     if n.所属套装 in ['无相轮回的希望', '流逝轮回的记忆'] and n.部位 != '辅助装备':
@@ -1117,7 +1117,7 @@ class 窗口(QWidget):
         部位 = [-1, 0, 5, 8]
         序号 = 部位[self.神话部位选项.currentIndex()]
         if 序号 != -1:
-            当前 = equ.get_equ_by_name(self.自选装备[序号].currentText())
+            当前 = equ.get_equ_by_name(self.自选装备[序号].currentData())
             x = -1
             for i in equ.get_equ_list():
                 if 当前.部位 == i.部位:
@@ -1126,7 +1126,7 @@ class 窗口(QWidget):
                         self.自选装备[序号].setCurrentIndex(x)
         for k in [0, 5, 8]:
             if k != 序号:
-                当前 = equ.get_equ_by_name(self.自选装备[k].currentText())
+                当前 = equ.get_equ_by_name(self.自选装备[k].currentData())
                 if 当前.品质 == '神话':
                     x = -1
                     for i in equ.get_equ_list():
@@ -1194,7 +1194,7 @@ class 窗口(QWidget):
         for i in range(4):
             x = self.辟邪玉选择[i].currentIndex()
             if self.辟邪玉数值[i].currentIndex() >= 0:
-                辟邪玉列表[x].当前值 = float(self.辟邪玉数值[i].currentText().replace(
+                辟邪玉列表[x].当前值 = float(self.辟邪玉数值[i].currentData().replace(
                     '%', ''))
             辟邪玉列表[x].穿戴属性(属性)
 
@@ -1392,7 +1392,7 @@ class 窗口(QWidget):
             page4_height = 0
             自选装备名称 = []
             for i in self.自选装备:
-                自选装备名称.append(i.currentText())
+                自选装备名称.append(i.currentData())
             for j in equ.get_equ_id_list():
                 temp = equ.get_equ_by_id(j)
                 if temp.品质 == '神话':
@@ -1481,7 +1481,7 @@ class 窗口(QWidget):
                 装备.append(i[0])
         elif x == 1:
             for i in self.自选装备:
-                装备.append(i.currentText())
+                装备.append(i.currentData())
 
         self.有效穿戴组合.append(装备)
 
@@ -1736,7 +1736,7 @@ class 窗口(QWidget):
 
     def 单条排行数据判断(self, s, l):
         for i in l:
-            if s[i] != self.自选装备[i].currentText():
+            if s[i] != self.自选装备[i].currentData():
                 return 0
         return 1
 
@@ -2145,9 +2145,10 @@ class 技能详情(QFrame):
                 CD显示 = ''
                 CD恢复 = ''
                 try:
-                    tempstr = '<font face="宋体"><font color="#FF6666">' + trans(data.角色属性B.技能栏[
-                        i].名称) + ("<br>" if data.角色属性B.技能栏[i].备注 != '' else
-                                 '') + data.角色属性B.技能栏[i].备注 + '</font><br>'
+                    tempstr = '<font face="宋体"><font color="#FF6666">' + trans(
+                        data.角色属性B.技能栏[i].名称) + (
+                            "<br>" if data.角色属性B.技能栏[i].备注 != '' else
+                            '') + data.角色属性B.技能栏[i].备注 + '</font><br>'
                     百分比 = int(data.角色属性B.技能栏[i].等效百分比(data.角色属性B.武器类型) /
                               data.角色属性B.技能栏[i].倍率)
                     被动倍率 = round(data.角色属性B.技能栏[i].被动倍率 * 100, 1)
