@@ -2843,12 +2843,12 @@ class 角色窗口(窗口):
         self.对比格式.move(615, 612)
         self.对比格式.resize(70, 24)
         self.对比格式.setStyleSheet(复选框样式)
-
-        名望设置 = QPushButton('名望细节', self.main_frame5)
-        名望设置.clicked.connect(lambda _: self.名望设置())
-        名望设置.move(710, 610)
-        名望设置.resize(80, 28)
-        名望设置.setStyleSheet(按钮样式)
+        if 多语言开关 == 0:
+            名望设置 = QPushButton('名望细节', self.main_frame5)
+            名望设置.clicked.connect(lambda _: self.名望设置())
+            名望设置.move(710, 610)
+            名望设置.resize(80, 28)
+            名望设置.setStyleSheet(按钮样式)
 
     def 名望设置(self):
         def createClient():
@@ -3013,7 +3013,7 @@ class 角色窗口(窗口):
         self.守门人全属强.setEnabled(False)
         self.守门人全属强.setStyleSheet(复选框样式)
         self.守门人全属强.setToolTip(
-            trans('<font size="3" face="宋体">计算时自动替换细节页的附魔勋章为全属强方案<br>') +
+            trans("<font size='3' face='宋体'>计算时自动替换细节页的附魔勋章为全属强方案<br>") +
             trans('自带单属强职业不可使用<br>') + trans('守门人属强：全属强+30*3<br>') + trans(
                 '武器：全属强+13（若原附魔为龙珠时不替换）<br>首饰：全属强+28*3(25*3站街修正属强自行-9)<br>') +
             trans('辅助装备：全属强+12<br>魔法石：全属强+30<br>勋章：全属强+7<br>宠物附魔：三攻+60</font>')
@@ -5158,11 +5158,11 @@ class 角色窗口(窗口):
                 else:
                     tempstr[i] += "属性1：{} +{}%<br>".format(
                         trans(武器词条属性[self.希洛克武器词条[1].currentIndex()]),
-                              (self.希洛克武器词条[3].currentIndex() + 3) * 2)
+                        (self.希洛克武器词条[3].currentIndex() + 3) * 2)
                     if 数量 == 3:
                         tempstr[i] += "属性2：{} +{}%<br>".format(
                             trans(武器词条属性[self.希洛克武器词条[2].currentIndex()]),
-                                  (self.希洛克武器词条[4].currentIndex() + 3) * 1)
+                            (self.希洛克武器词条[4].currentIndex() + 3) * 1)
             if tempstr[i].endswith('<br>'):
                 tempstr[i] = tempstr[i][:-4]
             tempstr[i] += '</font>'
@@ -5393,14 +5393,14 @@ class 角色窗口(窗口):
                                     100 - 100, 2)) + '%<br>'
                             tempstr += trans('关联技能：')
                             for j in self.角色属性B.技能栏[i].关联技能:
-                                tempstr += j
+                                tempstr += trans(j)
                                 if j != self.角色属性B.技能栏[i].关联技能[-1]:
                                     tempstr += ','
                             if self.角色属性B.技能栏[i].非关联技能 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
                                     '不适用于:') + ''
                                 for j in self.角色属性B.技能栏[i].非关联技能:
-                                    tempstr += j
+                                    tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非关联技能[-1]:
                                         tempstr += ','
                                 tempstr += ')</font>'
@@ -5412,14 +5412,14 @@ class 角色窗口(窗口):
                                         2)) + '%<br>'
                                 tempstr += trans('关联技能：')
                                 for k in self.角色属性B.技能栏[i].关联技能2:
-                                    tempstr += k
+                                    tempstr += trans(k)
                                     if k != self.角色属性B.技能栏[i].关联技能2[-1]:
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非关联技能2 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
                                     '不适用于:') + ''
                                 for j in self.角色属性B.技能栏[i].非关联技能2:
-                                    tempstr += j
+                                    tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非关联技能2[-1]:
                                         tempstr += ','
                                 tempstr += ')</font>'
@@ -5431,14 +5431,14 @@ class 角色窗口(窗口):
                                         2)) + '%<br>'
                                 tempstr += trans('关联技能：')
                                 for l in self.角色属性B.技能栏[i].关联技能3:
-                                    tempstr += l
+                                    tempstr += trans(l)
                                     if l != self.角色属性B.技能栏[i].关联技能3[-1]:
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非关联技能3 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
                                     '不适用于:')
                                 for j in self.角色属性B.技能栏[i].非关联技能3:
-                                    tempstr += j
+                                    tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非关联技能3[-1]:
                                         tempstr += ','
                                 tempstr += ')</font>'
@@ -5456,14 +5456,14 @@ class 角色窗口(窗口):
                                         self.角色属性B.武器类型) * 100, 2)) + '%<br>'
                             tempstr += trans('冷却关联技能：')
                             for j in self.角色属性B.技能栏[i].冷却关联技能:
-                                tempstr += j
+                                tempstr += trans(j)
                                 if j != self.角色属性B.技能栏[i].冷却关联技能[-1]:
                                     tempstr += ','
                             if self.角色属性B.技能栏[i].非冷却关联技能 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
                                     '不适用于:')
                                 for j in self.角色属性B.技能栏[i].非冷却关联技能:
-                                    tempstr += j
+                                    tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非冷却关联技能[-1]:
                                         tempstr += ','
                                 tempstr += ')</font>'
@@ -5475,14 +5475,14 @@ class 角色窗口(窗口):
                                         2)) + '%<br>'
                                 tempstr += trans('冷却关联技能：')
                                 for j in self.角色属性B.技能栏[i].冷却关联技能2:
-                                    tempstr += j
+                                    tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].冷却关联技能2[-1]:
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非冷却关联技能2 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
                                     '不适用于:')
                                 for j in self.角色属性B.技能栏[i].非冷却关联技能2:
-                                    tempstr += j
+                                    tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非冷却关联技能2[-1]:
                                         tempstr += ','
                                 tempstr += ')</font>'
@@ -5494,14 +5494,14 @@ class 角色窗口(窗口):
                                         2)) + '%<br>'
                                 tempstr += trans('冷却关联技能：')
                                 for j in self.角色属性B.技能栏[i].冷却关联技能3:
-                                    tempstr += j
+                                    tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].冷却关联技能3[-1]:
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非冷却关联技能3 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
                                     '不适用于:')
                                 for j in self.角色属性B.技能栏[i].非冷却关联技能3:
-                                    tempstr += j
+                                    tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非冷却关联技能3[-1]:
                                         tempstr += ','
                                 tempstr += ')</font>'
@@ -5607,18 +5607,19 @@ class 角色窗口(窗口):
         pdata['名称'] = self.角色属性A.实际名称
         pdata['装备'] = temp
 
-        butten = QtWidgets.QPushButton(trans('输出技能数据'), 输出窗口)
-        butten.clicked.connect(lambda state, d=deepcopy(pdata): self.输出数据(d))
-        butten.move(676, 540 - pox_y)
-        butten.setStyleSheet(按钮样式)
-        butten.resize(90, 21)
-
-        词条提升率计算.输出提升率 = 总伤害数值
-        butten = QtWidgets.QPushButton(trans('输出择优数据'), 输出窗口)
-        butten.clicked.connect(lambda state: 词条提升率计算.伤害计算(0))
-        butten.move(575, 540 - pox_y)
-        butten.setStyleSheet(按钮样式)
-        butten.resize(90, 21)
+        if 多语言开关 == 0:
+            butten = QtWidgets.QPushButton(trans('输出技能数据'), 输出窗口)
+            butten.clicked.connect(
+                lambda state, d=deepcopy(pdata): self.输出数据(d))
+            butten.move(676, 540 - pox_y)
+            butten.setStyleSheet(按钮样式)
+            butten.resize(90, 21)
+            词条提升率计算.输出提升率 = 总伤害数值
+            butten = QtWidgets.QPushButton(trans('输出择优数据'), 输出窗口)
+            butten.clicked.connect(lambda state: 词条提升率计算.伤害计算(0))
+            butten.move(575, 540 - pox_y)
+            butten.setStyleSheet(按钮样式)
+            butten.resize(90, 21)
 
         输出显示 = MainWindow(输出窗口)
         self.输出窗口列表.append(输出显示)
