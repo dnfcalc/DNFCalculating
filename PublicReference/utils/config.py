@@ -96,7 +96,7 @@ if 输出数据 == 1:
 
 languageJson = []
 if 多语言开关 == 1:
-    languagePath = "ResourceFiles/Config/language.json"
+    languagePath = "ResourceFiles/Config/language/language.json"
     if os.path.exists(languagePath):
         with open(languagePath, encoding='utf-8') as fp:
             languageJson = json.load(fp)
