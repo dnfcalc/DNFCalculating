@@ -2516,7 +2516,7 @@
   "ResourceFiles/img/分类": "ResourceFiles/img/language/分类",
   "./ResourceFiles/img/输出背景.png": "./ResourceFiles/img/language/输出背景.png",
   "./ResourceFiles/img/输出背景_BUFF.png": "./ResourceFiles/img/language/输出背景_BUFF.png",
-  "./ResourceFiles/Config/攻击目标.ini": "./ResourceFiles/Config/language/攻击目标.ini",
+  "ResourceFiles/Config/攻击目标.ini": "ResourceFiles/Config/language/攻击目标.ini",
   "ResourceFiles/Config/Config.json": "ResourceFiles/Config/language/config.json",
   "男": "남",
   "女": "여",

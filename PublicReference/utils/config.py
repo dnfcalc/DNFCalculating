@@ -125,7 +125,7 @@ def tran(key: str):
 
 #攻击目标##################################################################
 
-readConfig(trans('./ResourceFiles/Config/攻击目标.ini'))
+readConfig(trans('ResourceFiles/Config/攻击目标.ini'))
 
 # w, h = get_real_resolution()
 
@@ -146,7 +146,7 @@ for i in range(100):
         temp.append(conf.getint(item, '光抗'))
         temp.append(conf.getint(item, '暗抗'))
         攻击目标.append(temp)
-    except:
+    except Exception as error:
         break
 
 if len(攻击目标) == 0:

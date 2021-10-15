@@ -4754,8 +4754,8 @@ class 角色窗口(窗口):
         # 面板显示[4].move(150 + 初始x, const + count * 18)
         count = 6
 
-        面板显示[7].move(20 + 初始x, const + 6 * 18 - 3)
-        面板显示[8].move(150 + 初始x, const + 6 * 18 - 3)
+        面板显示[7].move(20 + 初始x, const + 6 * 18)
+        面板显示[8].move(150 + 初始x, const + 6 * 18)
         面板显示[9].move(20 + 初始x, const + 7 * 18 - 5)
         面板显示[10].move(150 + 初始x, const + 7 * 18 - 5)
 
