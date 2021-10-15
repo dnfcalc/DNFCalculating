@@ -4725,7 +4725,7 @@ class 角色窗口(窗口):
     def 面板布局设置(self, 面板显示, x=0):
 
         初始x = 0
-        const = 128
+        const = 128 + 19
 
         # self.main_frame5
         if x == 1:
@@ -4735,108 +4735,112 @@ class 角色窗口(窗口):
         count = 0
 
         # 站街力量 站街物攻 进图力量 进图物攻
-        for i in [9, 10, 0, 1]:
+        for i in [0, 1, 4, 5, 6]:
             面板显示[i].move(20 + 初始x, const + count * 18)
             count += 1
         count = 0
 
+        # 站街力量 站街物攻 进图力量 进图物攻
+        # for i in [9, 10, 0, 1]:
+        #     面板显示[i].move(20 + 初始x, const + count * 18)
+        #     count += 1
+        # count = 0
+
         # 站街智力 站街魔攻 进图智力 进图魔攻
-        for i in [11, 12, 2, 3]:
+        for i in [2, 3]:
             面板显示[i].move(150 + 初始x, const + count * 18)
             count += 1
         # 独立
-        面板显示[4].move(150 + 初始x, const + count * 18)
-        count = 5
-        # 站街属强
-        for i in [5, 6, 7, 8]:
-            面板显示[i].move(125 + 初始x, const + count * 18)
-            count += 1
-        count = 5
-        # 进图属强
-        for i in [13, 14, 15, 16]:
-            面板显示[i].move(20 + 初始x, const + count * 18)
-            count += 1
-        for i in range(len(面板显示) - 1):
-            if i >= 9:
-                面板显示[i].setStyleSheet(
-                    "QLabel{font-size:12px;color:rgb(255,255,255)}")
-            else:
-                面板显示[i].setStyleSheet(
-                    "QLabel{font-size:12px;color:rgb(150,255,30)}")
-            面板显示[i].resize(100, 18)
-            if i in [5, 6, 7, 8]:
-                面板显示[i].setAlignment(Qt.AlignLeft)
-            else:
-                面板显示[i].setAlignment(Qt.AlignRight)
+        # 面板显示[4].move(150 + 初始x, const + count * 18)
+        count = 6
 
-        面板显示[17].resize(100, 72)
-        面板显示[17].move(175 + 初始x, const + count * 18 - 75)
-        面板显示[17].setAlignment(Qt.AlignCenter)
-        面板显示[17].setStyleSheet('QLabel{font-size:12px}')
+        面板显示[7].move(20 + 初始x, const + 6 * 18 - 3)
+        面板显示[8].move(150 + 初始x, const + 6 * 18 - 3)
+        面板显示[9].move(20 + 初始x, const + 7 * 18 - 5)
+        面板显示[10].move(150 + 初始x, const + 7 * 18 - 5)
+
+        # 进图属强
+        for i in range(len(面板显示) - 1):
+            面板显示[i].resize(100, 18)
+            面板显示[i].setAlignment(Qt.AlignRight)
+            if i in [7, 8, 9, 10]:
+                面板显示[i].setAlignment(Qt.AlignCenter)
+        面板显示[5].resize(230, 18)
+        面板显示[6].resize(230, 18)
+        # 面板显示[7].resize(100, 72)
+        # 面板显示[7].move(175 + 初始x, const + count * 18 - 75)
+        # 面板显示[7].setAlignment(Qt.AlignCenter)
+        # 面板显示[7].setStyleSheet('QLabel{font-size:12px}')
 
     def 面板显示设置(self, 显示, 进图, 站街):
 
-        # 显示[0].setText(
-        #     '<font color="#FFFFFF">{}</font><font color="#96FF32">{}</font>'.
-        #     format(str(int(站街.站街力量())), str(int(进图.面板力量()))))
-        # 显示[1].setText(
-        #     '<font color="#FFFFFF">{}</font><font color="#96FF32">{}</font>'.
-        #     format(str(int(站街.站街物理攻击力())), str(int(进图.面板物理攻击力()))))
-        # 显示[2].setText(
-        #     '<font color="#FFFFFF">{}</font><font color="#96FF32">{}</font>'.
-        #     format(str(int(站街.站街智力())), str(int(进图.面板智力()))))
-        # 显示[3].setText(
-        #     '<font color="#FFFFFF">{}</font><font color="#96FF32">{}</font>'.
-        #     format(str(int(站街.站街魔法攻击力())), str(int(进图.面板魔法攻击力()))))
-        # 显示[4].setText(
-        #     '<font color="#FFFFFF">{}</font><font color="#96FF32">{}</font>'.
-        #     format(str(int(站街.站街独立攻击力())), str(int(进图.面板独立攻击力()))))
-        # 显示[5].setText(
-        #     '<font color="#FFFFFF">火({})冰({})光({})暗({})</font>'.format(
-        #         站街.火属性强化, 站街.冰属性强化, 站街.光属性强化, 站街.暗属性强化))
-        # 显示[6].setText(
-        #     '<font color="#96FF32">火({})冰({})光({})暗({})</font>'.format(
-        #         进图.火属性强化, 进图.冰属性强化, 进图.光属性强化, 进图.暗属性强化))
+        显示[0].setText(
+            '<font color="#FFFFFF">{} </font><font color="#96FF32">{}</font>'.
+            format(str(int(站街.站街力量())), str(int(进图.面板力量()))))
+        显示[1].setText(
+            '<font color="#FFFFFF">{} </font><font color="#96FF32">{}</font>'.
+            format(str(int(站街.站街物理攻击力())), str(int(进图.面板物理攻击力()))))
+        显示[2].setText(
+            '<font color="#FFFFFF">{} </font><font color="#96FF32">{}</font>'.
+            format(str(int(站街.站街智力())), str(int(进图.面板智力()))))
+        显示[3].setText(
+            '<font color="#FFFFFF">{} </font><font color="#96FF32">{}</font>'.
+            format(str(int(站街.站街魔法攻击力())), str(int(进图.面板魔法攻击力()))))
+        显示[4].setText(
+            '<font color="#FFFFFF">{} </font><font color="#96FF32">{}</font>'.
+            format(str(int(站街.站街独立攻击力())), str(int(进图.面板独立攻击力()))))
+        显示[5].setText(
+            ('<font color="#FFFFFF">' + trans('火') + '({})' + trans('冰') +
+             '({})' + trans('光') + '({})' + trans('暗') + '({})</font>').format(
+                 int(站街.火属性强化), int(站街.冰属性强化), int(站街.光属性强化), int(站街.暗属性强化)))
+        显示[6].setText(
+            ('<font color="#96FF32">' + trans('火') + '({})' + trans('冰') +
+             '({})' + trans('光') + '({})' + trans('暗') + '({})</font>').format(
+                 int(进图.火属性强化), int(进图.冰属性强化), int(进图.光属性强化), int(进图.暗属性强化)))
+        辟邪玉词条 = self.辟邪玉显示(1)
+        for i in range(len(辟邪玉词条)):
+            显示[7 + i].setText(辟邪玉词条[i])
+        # 显示[0].setText(str(int(进图.面板力量())))
+        # 显示[1].setText(str(int(进图.面板物理攻击力())))
+        # 显示[2].setText(str(int(进图.面板智力())))
+        # 显示[3].setText(str(int(进图.面板魔法攻击力())))
 
-        显示[0].setText(str(int(进图.面板力量())))
-        显示[1].setText(str(int(进图.面板物理攻击力())))
-        显示[2].setText(str(int(进图.面板智力())))
-        显示[3].setText(str(int(进图.面板魔法攻击力())))
+        # # 独立攻击力
+        # tempstr = '<font color="#FFFFFF">{}</font>   '.format(int(
+        #     站街.站街独立攻击力()))
+        # tempstr += '<font color="#96FF32">{}</font>'.format(int(进图.面板独立攻击力()))
+        # 显示[4].setText(tempstr)
 
-        # 独立攻击力
-        tempstr = '<font color="#FFFFFF">{}</font>   '.format(int(
-            站街.站街独立攻击力()))
-        tempstr += '<font color="#96FF32">{}</font>'.format(int(进图.面板独立攻击力()))
-        显示[4].setText(tempstr)
-
-        # 属性强化
-        tempstr = ''
-        # if 进图.所有属性强化增加 != 1.0:
-        #     x = 进图.所有属性强化增加 - 1
-        #     y = ' +{}%' if x > 0 else ' {}%'
-        #     tempstr += '<font color="{}">{}</font>'.format(self.辟邪玉显示(), y.format(round(x * 100, 1)))
-        显示[5].setText('{}{}'.format(int(进图.火属性强化), tempstr))
-        显示[6].setText('{}{}'.format(int(进图.冰属性强化), tempstr))
-        显示[7].setText('{}{}'.format(int(进图.光属性强化), tempstr))
-        显示[8].setText('{}{}'.format(int(进图.暗属性强化), tempstr))
-        显示[9].setText(str(int(站街.站街力量())))
-        显示[10].setText(str(int(站街.站街物理攻击力())))
-        显示[11].setText(str(int(站街.站街智力())))
-        显示[12].setText(str(int(站街.站街魔法攻击力())))
-        显示[13].setText(str(int(站街.火属性强化)))
-        显示[14].setText(str(int(站街.冰属性强化)))
-        显示[15].setText(str(int(站街.光属性强化)))
-        显示[16].setText(str(int(站街.暗属性强化)))
-        显示[17].setText(self.辟邪玉显示(1))
+        # # 属性强化
+        # tempstr = ''
+        # # if 进图.所有属性强化增加 != 1.0:
+        # #     x = 进图.所有属性强化增加 - 1
+        # #     y = ' +{}%' if x > 0 else ' {}%'
+        # #     tempstr += '<font color="{}">{}</font>'.format(self.辟邪玉显示(), y.format(round(x * 100, 1)))
+        # 显示[5].setText('{}{}'.format(int(进图.火属性强化), tempstr))
+        # 显示[6].setText('{}{}'.format(int(进图.冰属性强化), tempstr))
+        # 显示[7].setText('{}{}'.format(int(进图.光属性强化), tempstr))
+        # 显示[8].setText('{}{}'.format(int(进图.暗属性强化), tempstr))
+        # 显示[9].setText(str(int(站街.站街力量())))
+        # 显示[10].setText(str(int(站街.站街物理攻击力())))
+        # 显示[11].setText(str(int(站街.站街智力())))
+        # 显示[12].setText(str(int(站街.站街魔法攻击力())))
+        # 显示[13].setText(str(int(站街.火属性强化)))
+        # 显示[14].setText(str(int(站街.冰属性强化)))
+        # 显示[15].setText(str(int(站街.光属性强化)))
+        # 显示[16].setText(str(int(站街.暗属性强化)))
+        # 显示[17].setText(self.辟邪玉显示(1))
 
     def 辟邪玉显示(self, x=0):
         temp = ''
         num = 0
+        list = []
         for i in range(4):
             k = self.辟邪玉选择[i].currentIndex()
             if k > 0:
-                temp += '{}{}<br>'.format(辟邪玉列表[k].简称,
-                                          self.辟邪玉数值[i].currentText())
+                list.append('{} {}'.format(
+                    trans(辟邪玉列表[k].简称), '' if self.辟邪玉数值[i].currentText()
+                    == '+0' else self.辟邪玉数值[i].currentText()))
                 num += 1
         辟邪玉颜色 = 颜色[{4: '史诗', 3: '传说', 2: '神器', 1: '稀有'}.get(num, '稀有')]
         if x == 0:
@@ -4845,8 +4849,10 @@ class 角色窗口(窗口):
             if num == 0:
                 return ''
             else:
-                return '<font color="{}">辟邪玉:<br>{}</font>'.format(
-                    辟邪玉颜色, temp[:-4])
+                for i in range(num):
+                    list[i] = '<font color="{}">{}</font>'.format(
+                        辟邪玉颜色, list[i])
+                return list
 
     def 套装显示设置(self, 显示, 属性):
         count = 0
@@ -5291,7 +5297,7 @@ class 角色窗口(窗口):
             templab.setText(pdata['词条'][i])
             templab.setStyleSheet(
                 "QLabel{font-size:12px;color:rgb(104,213,237)}")
-            templab.move(2, j - pox_y2)
+            templab.move(5, j - pox_y2)
             templab.resize(180, 17)
             templab.setAlignment(Qt.AlignLeft)
             templab.setToolTip('<font color="#B99460">' + 词条解释[i] + '</font>')
@@ -5341,19 +5347,27 @@ class 角色窗口(窗口):
             if 总名望 > 0:
                 dmi = ((总伤害数值 / 1e8) / pow((总名望 / (1e4) - 0.5), 3))
                 templabel = QLabel(输出窗口)
-                templabel.setText("名望 {}({})<br>名望设置自选页修改".format(
-                    str(总名望), str(round(dmi, 2))))
+
+                templabel.setText("{} ({})".format(str(总名望), str(round(dmi,
+                                                                       2))))
                 templabel.setStyleSheet(
                     "QLabel{font-size:12px;color:rgb(255,255,255)}")
-                templabel.move(0, 0)
-                templabel.resize(275, 42)
-                templabel.setAlignment(Qt.AlignCenter)
-                print(
-                    json.dumps(名望详情,
-                               sort_keys=True,
-                               indent=4,
-                               separators=(',', ':'),
-                               ensure_ascii=False))
+                templabel.move(130, 110)
+                templabel.resize(100, 42)
+                # templabel.setAlignment(Qt.AlignCenter)
+                # templabel.setText("名望 {}({})<br>名望设置自选页修改".format(
+                #     str(总名望), str(round(dmi, 2))))
+                # templabel.setStyleSheet(
+                #     "QLabel{font-size:12px;color:rgb(255,255,255)}")
+                # templabel.move(0, 0)
+                # templabel.resize(275, 42)
+                # templabel.setAlignment(Qt.AlignCenter)
+                # print(
+                #     json.dumps(名望详情,
+                #                sort_keys=True,
+                #                indent=4,
+                #                separators=(',', ':'),
+                #                ensure_ascii=False))
                 templabel.setToolTip(
                     '系数计算公式:dmi = ((总伤害数值 / 1e8) / pow((总名望 / (1e4) - 0.5), 3))<br>'
                     + str(名望详情))

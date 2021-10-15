@@ -767,9 +767,10 @@ if __name__ == '__main__':
             fp.close()
             if ("main.py" not in sys.argv[0]) and 配置格式有误:
                 instance.配置错误.exec()
-            if ("main.py" not in sys.argv[0]) and instance.通知时间 != 通知时间:
+            if ("main.py" not in sys.argv[0]
+                ) and instance.通知时间 != 通知时间 and 多语言开关 == 0:
                 instance.消息通知.exec()
-            if ("main.py" not in sys.argv[0]) and 展示信息:
+            if ("main.py" not in sys.argv[0]) and 展示信息 and 多语言开关 == 0:
                 QDesktopServices.openUrl(
                     QUrl('http://dnf.17173.com/jsq/changlog.html#/'))
                 instance.版本提示.exec()
