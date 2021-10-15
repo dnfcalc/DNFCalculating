@@ -198,8 +198,13 @@ class 选择窗口(QWidget):
             if is_gif:
                 self.char_img.append(QMovie("动态头像/" + str(i) + ".gif"))
             else:
-                self.char_img.append(
-                    QPixmap("ResourceFiles/img/头像/" + str(i) + ".png"))
+                if i == 30 and not 多语言开关 == 0:
+                    self.char_img.append(
+                        QPixmap(
+                            trans("ResourceFiles/img/头像/") + str(i) + ".png"))
+                else:
+                    self.char_img.append(
+                        QPixmap("ResourceFiles/img/头像/" + str(i) + ".png"))
         for i in range(17):
             self.family_img.append(
                 QPixmap("" + trans('ResourceFiles/img/分类') + "/" + str(i) +

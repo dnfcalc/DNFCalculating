@@ -5297,7 +5297,7 @@ class 角色窗口(窗口):
             templab.setText(pdata['词条'][i])
             templab.setStyleSheet(
                 "QLabel{font-size:12px;color:rgb(104,213,237)}")
-            templab.move(5, j - pox_y2)
+            templab.move(7, j - pox_y2)
             templab.resize(180, 17)
             templab.setAlignment(Qt.AlignLeft)
             templab.setToolTip('<font color="#B99460">' + 词条解释[i] + '</font>')
