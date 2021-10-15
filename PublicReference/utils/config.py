@@ -92,9 +92,40 @@ if 输出数据 == 1:
     if not os.path.exists('./数据记录'):
         os.makedirs('./数据记录')
 
+#多语言##################################################################
+
+languageJson = []
+if 多语言开关 == 1:
+    languagePath = "ResourceFiles/Config/language.json"
+    if os.path.exists(languagePath):
+        with open(languagePath, encoding='utf-8') as fp:
+            languageJson = json.load(fp)
+            fp.close()
+
+
+def trans(key):
+    show = key
+    if isinstance(key, list):
+        show = []
+        for item in key:
+            show.append(tran(item))
+    elif isinstance(key, str):
+        show = tran(key)
+    return show
+
+
+def tran(key: str):
+    show = key
+    if languageJson.__contains__(key):
+        show = languageJson[key]
+    if show == '':
+        show = key
+    return show
+
+
 #攻击目标##################################################################
 
-readConfig('./ResourceFiles/Config/攻击目标.ini')
+readConfig(trans('./ResourceFiles/Config/攻击目标.ini'))
 
 # w, h = get_real_resolution()
 
@@ -120,29 +151,3 @@ for i in range(100):
 
 if len(攻击目标) == 0:
     攻击目标 = [['120沙袋(绿)', 443243, 0, 0, 0, 0]]
-
-languageJson = []
-if 多语言开关 == 1:
-    languagePath = "ResourceFiles/Config/language.json"
-    if os.path.exists(languagePath):
-        with open(languagePath, encoding='utf-8') as fp:
-            languageJson = json.load(fp)
-            fp.close()
-
-def trans(key):
-    show = key
-    if isinstance(key,list):
-        show = []
-        for item in key:
-            show.append(tran(item))
-    elif isinstance(key,str):
-        show = tran(key)
-    return show
-
-def tran(key:str):
-    show = key
-    if languageJson.__contains__(key):
-        show = languageJson[key] 
-    if show == '':
-        show = key
-    return show

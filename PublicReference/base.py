@@ -5398,7 +5398,7 @@ class 角色窗口(窗口):
                                     tempstr += ','
                             if self.角色属性B.技能栏[i].非关联技能 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
-                                    '不适用于:') + ''
+                                    '不适用于：') + ''
                                 for j in self.角色属性B.技能栏[i].非关联技能:
                                     tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非关联技能[-1]:
@@ -5417,7 +5417,7 @@ class 角色窗口(窗口):
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非关联技能2 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
-                                    '不适用于:') + ''
+                                    '不适用于：') + ''
                                 for j in self.角色属性B.技能栏[i].非关联技能2:
                                     tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非关联技能2[-1]:
@@ -5436,7 +5436,7 @@ class 角色窗口(窗口):
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非关联技能3 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
-                                    '不适用于:')
+                                    '不适用于：')
                                 for j in self.角色属性B.技能栏[i].非关联技能3:
                                     tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非关联技能3[-1]:
@@ -5461,7 +5461,7 @@ class 角色窗口(窗口):
                                     tempstr += ','
                             if self.角色属性B.技能栏[i].非冷却关联技能 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
-                                    '不适用于:')
+                                    '不适用于：')
                                 for j in self.角色属性B.技能栏[i].非冷却关联技能:
                                     tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非冷却关联技能[-1]:
@@ -5480,7 +5480,7 @@ class 角色窗口(窗口):
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非冷却关联技能2 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
-                                    '不适用于:')
+                                    '不适用于：')
                                 for j in self.角色属性B.技能栏[i].非冷却关联技能2:
                                     tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非冷却关联技能2[-1]:
@@ -5499,7 +5499,7 @@ class 角色窗口(窗口):
                                         tempstr += ','
                             if self.角色属性B.技能栏[i].非冷却关联技能3 != ['无']:
                                 tempstr += '<font color=gray>(' + trans(
-                                    '不适用于:')
+                                    '不适用于：')
                                 for j in self.角色属性B.技能栏[i].非冷却关联技能3:
                                     tempstr += trans(j)
                                     if j != self.角色属性B.技能栏[i].非冷却关联技能3[-1]:

@@ -2497,6 +2497,8 @@
   "ResourceFiles/img/分类": "ResourceFiles/img/分类_language",
   "./ResourceFiles/img/输出背景.png": "./ResourceFiles/img/输出背景_language.png",
   "./ResourceFiles/img/输出背景_BUFF.png": "./ResourceFiles/img/输出背景_BUFF_language.png",
+  "./ResourceFiles/Config/攻击目标.ini": "./ResourceFiles/Config/攻击目标_language.ini",
+  "ResourceFiles/Config/Config.json": "ResourceFiles/Config/config_language.json",
   "男": "남",
   "女": "여",
   "希洛克融合属性：": "시로코：",
@@ -2624,5 +2626,10 @@
   "CD恢复：": "쿨타임 초기화：",
   "加成倍率：": "데미지 증가량：",
   "关联技能：": "관련 스킬계：",
-  "所有": "토털"
+  "所有": "토털",
+  "冷却缩减：": "쿨타임 감소：",
+  "冷却关联技能：": "쿨타임 관련 스킬계：",
+  "不适用于：": "해당 없음：",
+  "其他属性：": "다른 속성：",
+  "进图触发：": "던전안 발동："
 }

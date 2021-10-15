@@ -614,7 +614,8 @@ class SetWindows(QWidget):
                    border: 0px
                    }''')
         self.height = 625
-        with open("ResourceFiles/Config/config.json", encoding='utf-8') as fp:
+        with open(trans("ResourceFiles/Config/config.json"),
+                  encoding='utf-8') as fp:
             self.height = len(json.load(fp)) * 50 + 20
         fp.close()
 
@@ -630,7 +631,8 @@ class SetWindows(QWidget):
         bgcolor.setStyleSheet("QLabel{background:url('" +
                               trans('ResourceFiles/img/分类') + "/bg.png')}")
 
-        with open("ResourceFiles/Config/Config.json", encoding='utf-8') as fp:
+        with open(trans("ResourceFiles/Config/Config.json"),
+                  encoding='utf-8') as fp:
             set_info = json.load(fp)
         fp.close()
 

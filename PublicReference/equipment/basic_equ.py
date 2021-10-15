@@ -89,16 +89,18 @@ class 装备:
         self.属性描述 += (trans('独立攻击力') +
                       ' +{}<br>'.format(self.独立攻击力)) if self.独立攻击力 > 0 else ''
         self.城镇属性(属性)
-        self.属性描述 += '<font color="#00A2E8">进图触发：</font><br>'
+        self.属性描述 += '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>'
         self.进图属性(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">进图触发：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('进图触发：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">进图触发：</font><br>', '')
-        self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
+                '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>', '')
+        self.属性描述 += '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>'
         self.其它属性(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('其他属性：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">其他属性：</font><br>', '')
+                '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>', '')
         self.属性描述 += '<font color="#00A2E8">' + trans('遴选属性：') + '</font><br>'
         self.变换属性(属性)
         if self.属性描述.endswith('<font color="#00A2E8">' + trans('遴选属性：') +
@@ -128,16 +130,18 @@ class 装备:
         self.属性描述 += (trans('独立攻击力') +
                       ' +{}<br>'.format(self.独立攻击力)) if self.独立攻击力 > 0 else ''
         self.城镇属性(属性)
-        self.属性描述 += '<font color="#00A2E8">进图触发：</font><br>'
+        self.属性描述 += '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>'
         self.进图属性(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">进图触发：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('进图触发：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">进图触发：</font><br>', '')
-        self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
+                '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>', '')
+        self.属性描述 += '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>'
         self.其它属性(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('其他属性：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">其他属性：</font><br>', '')
+                '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>', '')
         self.属性描述 += '<font color="#00A2E8">' + trans('遴选属性：') + '</font><br>'
         # self.变换属性(属性)
         # if self.属性描述.endswith('<font color="#00A2E8">'+trans('遴选属性：')+'</font><br>'):
@@ -170,16 +174,18 @@ class 装备:
         self.城镇属性_BUFF(属性)
         self.属性描述 += '<font color="#00A2E8">辅助职业专属属性：</font><br>'
         self.BUFF属性(属性)
-        self.属性描述 += '<font color="#00A2E8">进图触发：</font><br>'
+        self.属性描述 += '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>'
         self.进图属性_BUFF(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">进图触发：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('进图触发：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">进图触发：</font><br>', '')
-        self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
+                '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>', '')
+        self.属性描述 += '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>'
         self.其它属性_BUFF(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('其他属性：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">其他属性：</font><br>', '')
+                '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>', '')
         属性.装备描述 = 0
         return self.属性描述
 
@@ -207,16 +213,18 @@ class 装备:
         self.城镇属性_BUFF(属性)
         self.属性描述 += '<font color="#00A2E8">辅助职业专属属性：</font><br>'
         self.BUFF属性(属性)
-        self.属性描述 += '<font color="#00A2E8">进图触发：</font><br>'
+        self.属性描述 += '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>'
         self.进图属性_BUFF(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">进图触发：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('进图触发：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">进图触发：</font><br>', '')
-        self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
+                '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>', '')
+        self.属性描述 += '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>'
         self.其它属性_BUFF(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('其他属性：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">其他属性：</font><br>', '')
+                '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>', '')
         self.属性描述 += '<font color="#00A2E8">' + trans('遴选属性：') + '</font><br>'
         属性.装备描述 = 0
         return self.属性描述
@@ -287,16 +295,18 @@ class 套装:
         属性.装备描述 = 1
         self.属性描述 = ''
         self.城镇属性(属性)
-        self.属性描述 += '<font color="#00A2E8">进图触发：</font><br>'
+        self.属性描述 += '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>'
         self.进图属性(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">进图触发：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('进图触发：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">进图触发：</font><br>', '')
-        self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
+                '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>', '')
+        self.属性描述 += '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>'
         self.其它属性(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('其他属性：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">其他属性：</font><br>', '')
+                '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>', '')
         属性.装备描述 = 0
         return self.属性描述
 
@@ -306,16 +316,18 @@ class 套装:
         self.城镇属性_BUFF(属性)
         self.属性描述 += '<font color="#00A2E8">辅助职业专属属性：</font><br>'
         self.BUFF属性(属性)
-        self.属性描述 += '<font color="#00A2E8">进图触发：</font><br>'
+        self.属性描述 += '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>'
         self.进图属性_BUFF(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">进图触发：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('进图触发：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">进图触发：</font><br>', '')
-        self.属性描述 += '<font color="#00A2E8">其他属性：</font><br>'
+                '<font color="#00A2E8">' + trans('进图触发：') + '</font><br>', '')
+        self.属性描述 += '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>'
         self.其它属性_BUFF(属性)
-        if self.属性描述.endswith('<font color="#00A2E8">其他属性：</font><br>'):
+        if self.属性描述.endswith('<font color="#00A2E8">' + trans('其他属性：') +
+                              '</font><br>'):
             self.属性描述 = self.属性描述.replace(
-                '<font color="#00A2E8">其他属性：</font><br>', '')
+                '<font color="#00A2E8">' + trans('其他属性：') + '</font><br>', '')
         属性.装备描述 = 0
         return self.属性描述
 
