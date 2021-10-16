@@ -1,10 +1,12 @@
 # 宠物属性部分
+from PublicReference.equipment.base_item import Item
 
 宠物列表 = [None] * 8
 
 
-class 宠物7():
-    名称 = '(21)至尊·火神的化身'
+class 宠物7(Item):
+    显示名称 = '(21)至尊·火神的化身'
+    名称 = "火神的化身"
 
     def 城镇属性_BUFF(self, 属性):
         属性.智力 += 160
@@ -21,8 +23,9 @@ class 宠物7():
         return temp
 
 
-class 宠物6():
-    名称 = '(21)普通·骑士/精灵使'
+class 宠物6(Item):
+    显示名称 = '(21)普通·骑士/精灵使'
+    名称 = "骑士/精灵使"
 
     def 城镇属性_BUFF(self, 属性):
         属性.智力 += 150
@@ -39,8 +42,9 @@ class 宠物6():
         return temp
 
 
-class 宠物5():
-    名称 = '(20)至尊·暴风圣女'
+class 宠物5(Item):
+    显示名称 = '(20)至尊·暴风圣女'
+    名称 = "暴风圣女"
 
     def 城镇属性_BUFF(self, 属性):
         属性.智力 += 150
@@ -57,8 +61,9 @@ class 宠物5():
         return temp
 
 
-class 宠物4():
-    名称 = '(19)至尊·神迹·莱恩'
+class 宠物4(Item):
+    显示名称 = '(19)至尊·神迹·莱恩'
+    名称 = '神迹·莱恩'
 
     def 城镇属性_BUFF(self, 属性):
         属性.智力 += 120
@@ -75,8 +80,9 @@ class 宠物4():
         return temp
 
 
-class 宠物3():
-    名称 = '(20)普通·神官'
+class 宠物3(Item):
+    显示名称 = '(20)普通·神官'
+    名称 = '神官格洛丽亚'
 
     def 城镇属性_BUFF(self, 属性):
         属性.智力 += 140
@@ -93,8 +99,9 @@ class 宠物3():
         return temp
 
 
-class 宠物2():
-    名称 = '(19)普通·莱恩'
+class 宠物2(Item):
+    显示名称 = '(19)普通·莱恩'
+    名称 = '骑士莱恩'
 
     def 城镇属性_BUFF(self, 属性):
         属性.智力 += 120
@@ -111,8 +118,9 @@ class 宠物2():
         return temp
 
 
-class 宠物1():
-    名称 = '(15)迷你战争领主-SSS型'
+class 宠物1(Item):
+    显示名称 = '(15)迷你战争领主-SSS型'
+    名称 = '迷你战争领主-SSS型'
 
     def 城镇属性_BUFF(self, 属性):
         属性.智力 += 10
@@ -129,7 +137,8 @@ class 宠物1():
         return temp
 
 
-class 宠物0():
+class 宠物0(Item):
+    显示名称 = '无'
     名称 = '无'
 
     def 城镇属性_BUFF(self, 属性):

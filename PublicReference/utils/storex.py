@@ -11,6 +11,7 @@ import re
 class Store:
     def __init__(self):
         self.__states = {}
+        self.last_state = None
         pass
 
     # 设置值
@@ -26,6 +27,9 @@ class Store:
         if _value is None:
             _value = defaultValue
         return _value
+
+    def __getitem__(self, __key: str):
+        return self.get(__key)
 
     # 获取一个克隆值
     def clone(self,key:str,defaultValue:any = None):
@@ -123,11 +127,14 @@ class Store:
 
     def __get_field__(self, key: str):
         field = None
+        if re.search("\{\w+\}",key):
+            key = key.format_map(self)
         if self.__states.__contains__(key):
             field = self.__states[key]
         else:
             field = Store.Field()
             self.__states[key] = field
+        self.last_state = (key,field)
         return field
 
     class Field:

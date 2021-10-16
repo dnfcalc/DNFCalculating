@@ -219,9 +219,15 @@ class 窗口(QWidget):
 
         self.calc_done_signal.connect(self.calc_done)
         self.update_remaining_signal.connect(self.update_remaining)
-        store.delete("^/(buffer|carry)/data/.*$")
 
         self.窗口属性输入()
+        store.delete("^/(buffer|carry|fame)/.*$")
+
+        is_carry = self.初始属性.职业分类 == "输出"
+
+        store.set("type",'carry' if is_carry else 'buffer')
+        store.set("/{type}/memory/original_property",self.初始属性)
+
         self.界面()
         self.布局界面()
 
@@ -236,7 +242,7 @@ class 窗口(QWidget):
             os.makedirs(path)
 
         self.存档列表读取()
-        if self.初始属性.职业分类 == '输出':
+        if is_carry:
             self.技能存档列表读取()
 
         self.click_window(0)

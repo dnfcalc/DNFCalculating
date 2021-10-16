@@ -79,7 +79,7 @@ class 登记窗口(Page):
 
     def 初始化装备(self):
         equips = store.first("/buffer/data/register/equips",
-                             "/buffer/data/equips")
+                             "/buffer/memory/equips")
         amplifies = store.first("/buffer/data/register/amplifies",
                                 "/buffer/data/amplifies")
         for 部位 in range(len(equips)):

@@ -9,9 +9,6 @@ class 名望窗口(Page):
         super().__init__()
         self.已初始化 = False
 
-    def setDelegate(self, func):
-        self.delegate = func
-
     def 初始化(self):
         self.初始化 = True
         self.名望部位列表 = list(附魔名望默认选项.keys())
@@ -114,4 +111,4 @@ class 名望窗口(Page):
 
         store.set("/fame/selection", 名望细节)
         store.set("/fame/selection2", 徽章细节)
-        self.delegate(x=1)
+        store.emit("/fame/event/changed")

@@ -1,18 +1,16 @@
 from  PublicReference.equipment.描述 import *
+from  PublicReference.equipment.base_item import Item
 # 称号属性部分
 
 称号列表 = [None] * 7
 
-
-class 称号6():
-    名称 = '(21)五一·LV15-35(所有)'
+class 称号6(Item):
+    显示名称 = '(21)骑士之誓(Lv15-35 所有技能Lv+1)'
+    名称 = '骑士之誓'
 
     def 城镇属性_BUFF(self, 属性):
         四维固定加成(属性,80)
         属性.技能等级加成('所有', 15, 35, 1)
-
-    def 触发属性(self, 属性):
-        pass
 
     def 装备描述_BUFF(self, 属性):
         temp = 四维固定加成(属性,80)
@@ -20,15 +18,13 @@ class 称号6():
         return temp
 
 
-class 称号5():
-    名称 = '(20)五一·LV15-35(主动)'
+class 称号5(Item):
+    显示名称 = '(20)权御九界(Lv15-35 主动技能Lv+1)'
+    名称 = '权御九界'
 
     def 城镇属性_BUFF(self, 属性):
         四维固定加成(属性,80)
         属性.技能等级加成('主动', 15, 35, 1)
-
-    def 触发属性(self, 属性):
-        pass
 
     def 装备描述_BUFF(self, 属性):
         temp = 四维固定加成(属性,80)
@@ -36,15 +32,13 @@ class 称号5():
         return temp
 
 
-class 称号4():
-    名称 = '(20)五一·LV15-20'
+class 称号4(Item):
+    显示名称 = '(20)无畏战斗者(LV15-20 所有技能Lv+1)'
+    名称 = '无畏战斗者'
 
     def 城镇属性_BUFF(self, 属性):
         四维固定加成(属性,80)
         属性.技能等级加成('所有', 15, 20, 1)
-
-    def 触发属性(self, 属性):
-        pass
 
     def 装备描述_BUFF(self, 属性):
         temp = 四维固定加成(属性,80)
@@ -52,15 +46,13 @@ class 称号4():
         return temp
 
 
-class 称号3():
-    名称 = '(20)五一·LV20-25'
+class 称号3(Item):
+    显示名称 = '(20)无畏战争者(Lv20-25 所有技能Lv+1)'
+    名称 = '无畏战争者'
 
     def 城镇属性_BUFF(self, 属性):
         四维固定加成(属性,80)
         属性.技能等级加成('所有', 20, 25, 1)
-
-    def 触发属性(self, 属性):
-        pass
 
     def 装备描述_BUFF(self, 属性):
         temp = 四维固定加成(属性,80)
@@ -68,15 +60,13 @@ class 称号3():
         return temp
 
 
-class 称号2():
-    名称 = '(20)五一·LV25-30'
+class 称号2(Item):
+    显示名称 = '(20)无畏死亡者(LV25-30 所有技能Lv+1)'
+    名称 = '无畏死亡者'
 
     def 城镇属性_BUFF(self, 属性):
         四维固定加成(属性,80)
         属性.技能等级加成('所有', 25, 30, 1)
-
-    def 触发属性(self, 属性):
-        pass
 
     def 装备描述_BUFF(self, 属性):
         temp = 四维固定加成(属性,80)
@@ -84,15 +74,13 @@ class 称号2():
         return temp
 
 
-class 称号1():
-    名称 = '(20)五一·LV30-35'
+class 称号1(Item):
+    显示名称 = '(20)无畏牺牲者(Lv30-35 所有技能Lv+1)'
+    名称 = '无畏牺牲者'
 
     def 城镇属性_BUFF(self, 属性):
         四维固定加成(属性,80)
         属性.技能等级加成('所有', 30, 35, 1)
-
-    def 触发属性(self, 属性):
-        pass
 
     def 装备描述_BUFF(self, 属性):
         temp = 四维固定加成(属性,80)
@@ -100,19 +88,8 @@ class 称号1():
         return temp
 
 
-class 称号0():
-    名称 = '无'
-    名望 = 491
-
-    def 城镇属性_BUFF(self, 属性):
-        pass
-
-    def 触发属性(self, 属性):
-        pass
-
-    def 装备描述_BUFF(self, 属性):
-        temp = ''
-        return temp
+class 称号0(Item):
+    pass
 
 
 for i in range(len(称号列表)):
