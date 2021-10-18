@@ -79,7 +79,7 @@
   },
   {
     "名称": "多语言",
-    "选项": ["中文", "韩文"],
+    "选项": ["中文", "韩文(한국어)"],
     "说明": "多语言开关，开启后会启用ResourceFiles/Config/language/language.json的对照文本",
     "default": 0
   }

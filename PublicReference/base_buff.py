@@ -12,9 +12,9 @@ from PublicReference.equipment.冒险家名望 import *
 class 角色窗口(窗口):
     def __init__(self):
         self.初始属性: 辅助角色属性 = None
-        self.护石选项 = trans([
+        self.护石选项 = [
             '无', 'BUFF力量、智力+2%', 'BUFF力量、智力+4%', 'BUFF力量、智力+6%', 'BUFF力量、智力+8%'
-        ])
+        ]
         self.登记启用 = False
         super().__init__()
 
@@ -468,8 +468,7 @@ class 角色窗口(窗口):
                 self.奥兹玛遮罩透明度.append(QGraphicsOpacityEffect())
                 self.奥兹玛遮罩透明度[序号].setOpacity(0.5)
 
-                tooltip = '<font color="#00A2E8">' + trans(
-                    '奥兹玛融合属性：') + '</font><br>'
+                tooltip = trans('<font color="#00A2E8">{奥兹玛融合属性}：</font><br>')
                 tooltip += ozma(T)
                 tooltip = tooltip_trim(tooltip)
 
@@ -688,10 +687,10 @@ class 角色窗口(窗口):
         self.技能设置输入[3].addItem('Lv30-50(主动)Lv+1')
 
         # 白金
-        skills = [i.名称 for i in self.角色属性A.技能表.values() if i.所在等级 < 48]
+        skills = [trans('{$name}Lv+1',name = i.名称) for i in self.角色属性A.技能表.values() if i.所在等级 < 48]
 
         for j in [8, 9]:
-            self.技能设置输入[j].addItems(format_range("{} Lv+1",skills))
+            self.技能设置输入[j].addItems(skills)
 
         self.技能设置输入[12].addItems(
             ['BUFFLv+1', 'BUFFLv+2', 'BUFFLv+3', 'BUFFLv+4'])
@@ -701,9 +700,9 @@ class 角色窗口(窗口):
             'Lv20-30(所有)Lv+1', 'Lv1-80(所有)Lv+1'
         ])
 
-        self.技能设置输入[16].addItems(i.名称 + ' Lv+1'
-                                 for i in self.角色属性A.技能表.values()
-                                 if i.所在等级 <= 85)
+        skills = [trans('{$name}Lv+1',name = i.名称) for i in self.角色属性A.技能表.values() if i.所在等级 < 85]
+
+        self.技能设置输入[16].addItems(skills)
 
         self.技能设置输入[17].addItems(['BUFF力智+3%', 'BUFF三攻+3%', 'BUFF力智、三攻+3%'])
         self.技能设置输入[18].addItem('BUFF力智+3%')
@@ -1310,25 +1309,28 @@ class 角色窗口(窗口):
 
         try:
             self.等级调整[num].setCurrentIndex(info['level'])
-        except:
+        except Exception as e:
+            logger.error(e)
             pass
 
         try:
             self.次数输入[num].setCurrentIndex(info['count'])
-        except:
-            pass
+        except Exception as e:
+            logger.error(e)
 
     def 获取技能选项(self, num):
         info = {}
         try:
             info['level'] = self.等级调整[num].currentIndex()
-        except:
+        except Exception as e:
             info['level'] = 0
+            logger.error(e)
 
         try:
             info['count'] = self.次数输入[num].currentIndex()
-        except:
+        except Exception as e:
             info['count'] = 0
+            logger.error(e)
         return info
 
     def 载入旧版json(self, path='set', page=[0, 1, 2, 3, 4]):
@@ -1856,7 +1858,8 @@ class 角色窗口(窗口):
         try:
             if self.一键站街设置输入[0].text() != '' or self.一键站街设置输入[1].text() != '':
                 sign = 1
-        except:
+        except Exception as e:
+            logger.error(e)
             pass
         if sign == -1:
             QMessageBox.information(self, "错误", "请在按钮左侧输入站街数值")
@@ -2950,8 +2953,7 @@ class 角色窗口(窗口):
         for i in range(4):
             k = self.辟邪玉选择[i].currentIndex()
             if k > 0:
-                temp += '{}{}<br>'.format(辟邪玉列表[k].简称,
-                                          self.辟邪玉数值[i].currentText())
+                temp += trans('{$name}$value<br>',name = 辟邪玉列表[k].简称, value = self.辟邪玉数值[i].currentData())
                 num += 1
         辟邪玉颜色 = 颜色[{4: '史诗', 3: '传说', 2: '神器', 1: '稀有'}.get(num, '稀有')]
         if x == 0:
@@ -2960,8 +2962,7 @@ class 角色窗口(窗口):
             if num == 0:
                 return ''
             else:
-                return '<font color="{}">辟邪玉:<br>{}</font>'.format(
-                    辟邪玉颜色, temp[:-4])
+                return trans('<font color="$color">{辟邪玉}:<br>$effect</font>',color = 辟邪玉颜色, effect = temp[:-4])
 
     def 装备描述_BUFF计算(self, property):
         tempstr = []
@@ -2973,25 +2974,24 @@ class 角色窗口(窗口):
             奥兹玛选择状态[i % 5] += self.奥兹玛选择状态[i]
         for i in range(12):
             装备 = equ.get_equ_by_name(property.装备栏[i])
-            tempstr.append('<font size="3" face="宋体"><font color="' +
-                           颜色[装备.品质] + '">' + 装备.名称 + '</font><br>')
+            tempstr.append(trans('<font size="3" face="宋体"><font color="$color"> {$name}</font><br>',color = 颜色[装备.品质],name=装备.名称))
             if 装备.所属套装 != '无':
                 if 装备.所属套装 != '智慧产物':
                     y = ' ' + 装备.所属套装
                 else:
                     try:
                         y = ' ' + 装备.所属套装2
-                    except:
+                    except Exception as e:
                         y = ' '
             else:
                 y = ' '
             if i == 11:
                 y += ' ' + 装备.类型
-            tempstr[i] += 'Lv' + str(装备.等级) + ' ' + 装备.品质 + y
 
+            tempstr[i] +=trans('{Lv}$level {$rarity} {$name}',level = 装备.等级, rarity = 装备.品质, name = y )   
             if i < 5:
                 x = property.防具精通计算(i)
-                tempstr[i] += '<br>防具精通: '
+                tempstr[i] += trans('<br>{防具精通}: ')
                 for n in property.防具精通属性:
                     if n != '体力':
                         tempstr[i] += n + ' +' + str(2 * x) + ' '
@@ -3001,35 +3001,27 @@ class 角色窗口(窗口):
             if 装备.所属套装 != '智慧产物':
                 if property.强化等级[i] != 0:
                     if i in [9, 10]:
-                        tempstr[i] += '<br><font color="#68D5ED">+' + str(
-                            property.强化等级[i]) + ' 强化: '
-                        tempstr[i] += '四维 + ' + str(
-                            左右计算(100, 装备.品质, property.强化等级[i])) + '</font>'
+                        tempstr[i] +=trans('<br><font color="#68D5ED">+$value {强化}：',value = property.强化等级[i])
+                        tempstr[i] += trans('{四维} +$value </font>',value = 左右计算(100, 装备.品质, property.强化等级[i])) 
 
                 if property.武器锻造等级 != 0:
                     if i == 11:
-                        tempstr[i] += '<br><font color="#68D5ED">+' + str(
-                            property.武器锻造等级) + '   锻造: '
-                        tempstr[i] += '四维 + ' + str(
-                            锻造四维(装备.等级, 装备.品质, property.武器锻造等级)) + '</font>'
+                        tempstr[i] += trans('<br><font color="#B36BFF">+$value  {锻造}  ',value = property.武器锻造等级) 
+                        tempstr[i] += trans("{四维} +$value </font>",value =锻造四维(装备.等级, 装备.品质, property.武器锻造等级))
 
                 if property.是否增幅[i] == 1:
+                    value = 增幅计算(装备.等级, 装备.品质, property.强化等级[i],
+                                 property.增幅版本)
                     if tempstr[i] != '':
                         tempstr[i] += '<br>'
-                    tempstr[i] += '<font color="#FF00FF">+' + str(
-                        property.强化等级[i]) + ' 增幅: '
+                    tempstr[i] += trans('<font color="#FF00FF">+$value {增幅}：',value = property.强化等级[i])
                     if '体力' in property.类型:
-                        tempstr[i] += '异次元体力 + ' + str(
-                            增幅计算(装备.等级, 装备.品质, property.强化等级[i],
-                                 property.增幅版本)) + '</font>'
+                        tempstr[i] += trans('{异次元体力} +$value</font>',value = value)
                     elif '精神' in property.类型:
-                        tempstr[i] += '异次元精神 + ' + str(
-                            增幅计算(装备.等级, 装备.品质, property.强化等级[i],
-                                 property.增幅版本)) + '</font>'
+                        tempstr[i] += trans('{异次元精神} +$value</font>',value = value)
                     elif '智力' in property.类型:
-                        tempstr[i] += '异次元智力 + ' + str(
-                            增幅计算(装备.等级, 装备.品质, property.强化等级[i],
-                                 property.增幅版本)) + '</font>'
+                        tempstr[i] += trans('{异次元智力} +$value</font>',value = value)
+
 
             if tempstr[i] != '':
                 tempstr[i] += '<br>'
@@ -3097,50 +3089,46 @@ class 角色窗口(窗口):
 
             部位 = 部位列表[i]
 
+            希洛克title = trans('<font color="#00A2E8">{希洛克融合属性}：</font><br>')
+
             if 希洛克选择状态[0] == 1 and 部位 == '下装':
                 # tempstr[i]+='<br>'
-                tempstr[i] += '<font color="#00A2E8">' + trans(
-                    '希洛克融合属性：') + '</font><br>'
+                tempstr[i] += 希洛克title
                 tempstr[i] += BUFF增加(property, BUFF力智per=1.03)
             elif 希洛克选择状态[1] == 1 and 部位 == '戒指':
                 # tempstr[i]+='<br>'
-                tempstr[i] += '<font color="#00A2E8">' + trans(
-                    '希洛克融合属性：') + '</font><br>'
+                tempstr[i] += 希洛克title
                 tempstr[i] += 觉醒增加(property, 一觉力智per=1.03)
             elif 希洛克选择状态[2] == 1 and 部位 == '辅助装备':
                 # tempstr[i]+='<br>'
-                tempstr[i] += '<font color="#00A2E8">' + trans(
-                    '希洛克融合属性：') + '</font><br>'
+                tempstr[i] += 希洛克title
                 tempstr[i] += 被动增加(property, 被动进图加成=80)
-            elif self.角色属性B.希洛克武器词条 == 1 and i == 11:
+            if self.角色属性B.希洛克武器词条 > 0 and i == 11:
+
+
                 # tempstr[i]+='<br>'
-                tempstr[i] += '<font color="#00A2E8">' + trans(
-                    '希洛克融合属性：') + '</font><br>'
-                武器词条最高值 = self.角色属性B.自适应最高值
-                武器属性A = 武器属性A列表[武器词条最高值[0]]
-                武器属性B = 武器属性B列表[武器词条最高值[1]]
-                tempstr[
-                    i] += "属性1:" + "<font style='color:gray'>" + 武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + str(
-                        武器属性A.最大值) + ('%'
-                                      if 武器属性A.间隔 / 10 < 1 else '') + '<br>'
+                tempstr[i] += 希洛克title
+
+                if self.角色属性B.希洛克武器词条 == 1:
+                    武器词条最高值 = self.角色属性B.自适应最高值
+                    武器属性A = 武器属性A列表[武器词条最高值[0]]
+                    武器属性B = 武器属性B列表[武器词条最高值[1]]
+                elif self.角色属性B.希洛克武器词条 == 2:
+                    武器属性A = 武器属性A列表[self.武器融合属性A.currentIndex()]
+                    武器属性B = 武器属性B列表[self.武器融合属性B.currentIndex()]
+
+                tempstr[i] += trans("{属性1}：<font style='color:gray'>$a</font>,$b$c$d<br>",\
+                a = 武器属性A.固定属性描述,\
+                b = 武器属性A.随机属性描述,\
+                c = 武器属性A.最大值,\
+                d = '%' if 武器属性A.间隔 / 10 < 1 else '')
                 if self.角色属性B.武器词条触发 == 1:
-                    tempstr[
-                        i] += "属性2:" + "<font style='color:gray'>" + 武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + str(
-                            武器属性B.最大值) + ('%' if 武器属性B.间隔 / 10 < 1 else
-                                          '') + '<br>'
-            elif self.角色属性B.希洛克武器词条 == 2 and 部位 == '武器':
-                # tempstr[i]+='<br>'
-                tempstr[i] += '<font color="#00A2E8">' + trans(
-                    '希洛克融合属性：') + '</font><br>'
-                武器属性A = 武器属性A列表[self.武器融合属性A.currentIndex()]
-                武器属性B = 武器属性B列表[self.武器融合属性B.currentIndex()]
-                tempstr[
-                    i] += "属性1:" + "<font style='color:gray'>" + 武器属性A.固定属性描述 + '</font>,' + 武器属性A.随机属性描述 + self.武器融合属性A2.currentText(
-                    ) + '<br>'
-                if self.角色属性B.武器词条触发 == 1:
-                    tempstr[
-                        i] += "属性2:" + "<font style='color:gray'>" + 武器属性B.固定属性描述 + '</font>,' + 武器属性B.随机属性描述 + self.武器融合属性B2.currentText(
-                        ) + '<br>'
+                    tempstr[i] += trans("{属性2}：<font style='color:gray'>$a</font>,$b$c$d<br>",\
+                    a = 武器属性B.固定属性描述,\
+                    b = 武器属性B.随机属性描述,\
+                    c = 武器属性B.最大值,\
+                    d = '%' if 武器属性B.间隔 / 10 < 1 else '')
+
 
             if 部位 in 奥兹玛部位列表:
                 index = 奥兹玛部位列表.index(部位)
@@ -3150,7 +3138,7 @@ class 角色窗口(窗口):
                         cur = j
                         break
                 if cur > 0:
-                    tempstr[i] += '<font color="#00A2E8">奥兹玛融合属性:</font><br>'
+                    tempstr[i] += trans('<font color="#00A2E8">{奥兹玛融合属性}：</font><br>')
                     tempstr[i] += str(OzmaList[cur](property))
             property.装备描述 = 0
 
@@ -3290,7 +3278,7 @@ class 角色窗口(窗口):
             属性.BUFFLv += 4
             return
         for skill in 属性.技能表.values():
-            if name == skill.名称 + ' Lv+1':
+            if name == skill.名称 + 'Lv+1':
                 skill.等级加成(1)
                 return
         if name == 'BUFF力智+3%':
@@ -3310,7 +3298,8 @@ class 角色窗口(窗口):
                 if self.属性设置输入[i][j].text() != '':
                     try:
                         float(self.属性设置输入[i][j].text())
-                    except:
+                    except Exception as e:
+                        logger.error(e)
                         QMessageBox.information(
                             self, "错误", self.行名称[j + 17 if i > 2 else j] +
                             ":" + self.列名称[i] + "  输入格式错误,已重置为空")
@@ -3320,7 +3309,8 @@ class 角色窗口(窗口):
                 if self.属性设置输入[i][j].text() != '':
                     try:
                         float(self.属性设置输入[i][j].text())
-                    except:
+                    except Exception as e:
+                        logger.error(e)
                         QMessageBox.information(
                             self, "错误", self.行名称[j + 17 if i > 2 else j] +
                             ":" + self.列名称[i] + "  输入格式错误,已重置为空")
@@ -3339,7 +3329,7 @@ class 角色窗口(窗口):
                             self.修正列表名称[j] + " 输入数值超出[-20,100],已重置为空")
                         temp[-1] = 0.0
                         self.属性设置输入[9][j].setText('')
-                except:
+                except Exception as e:
                     temp.append(0.0)
                     QMessageBox.information(self, "错误",
                                             self.修正列表名称[j] + " 输入格式错误,已重置为空")
@@ -3347,7 +3337,7 @@ class 角色窗口(窗口):
             elif self.属性设置输入[9][j].text() != '' and j in [0, 3, 4, 6]:
                 try:
                     temp.append(int(self.属性设置输入[9][j].text()))
-                except:
+                except Exception as e:
                     temp.append(0.0)
                     QMessageBox.information(self, "错误",
                                             self.修正列表名称[j] + " 输入格式错误,已重置为空")

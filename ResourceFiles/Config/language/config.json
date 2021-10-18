@@ -79,8 +79,8 @@
   },
   {
     "名称": "한국어",
-    "选项": ["중국어", "한국어"],
-    "说明": "다언어 스위치，오픈 후，사용 하 다ResourceFiles/Config/language.json",
+    "选项": ["중국어(中文)", "한국어"],
+    "说明": "다언어 스위치，오픈 후，사용 하 다ResourceFiles/Config/language_*.json",
     "default": 0
   }
 ]

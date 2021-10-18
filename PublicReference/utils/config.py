@@ -2,7 +2,8 @@ import configparser
 import os
 import json
 
-from PyQt5.QtCore import showbase
+
+from PublicReference.utils.lan import Language
 
 global 配置格式有误
 global 窗口显示模式
@@ -94,33 +95,17 @@ if 输出数据 == 1:
 
 #多语言##################################################################
 
+lan = Language()
+
+defaultLanPaths = ['language_chn','language_kor']
 languageJson = []
-if 多语言开关 == 1:
-    languagePath = "ResourceFiles/Config/language/language.json"
-    if os.path.exists(languagePath):
-        with open(languagePath, encoding='utf-8') as fp:
-            languageJson = json.load(fp)
-            fp.close()
 
+languagePath = "ResourceFiles/Config/language/{}.json".format(defaultLanPaths[多语言开关])
+lan.load_json(languagePath)
 
-def trans(key):
-    show = key
-    if isinstance(key, list):
-        show = []
-        for item in key:
-            show.append(tran(item))
-    elif isinstance(key, str):
-        show = tran(key)
-    return show
+def trans(text,**kwargs):
+    return lan.trans(text,**kwargs)
 
-
-def tran(key: str):
-    show = key
-    if languageJson.__contains__(key):
-        show = languageJson[key]
-    if show == '':
-        show = key
-    return show
 
 
 #攻击目标##################################################################

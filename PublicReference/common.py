@@ -1,6 +1,7 @@
 from math import ceil
 from PublicReference.equipment.equ_list import *
 from PublicReference.utils.MainWindow import *
+from PublicReference.utils.common import to_percent
 from PublicReference.view.DialogRegister import DefaultDialogRegister
 
 装备版本 = "GF"
@@ -225,8 +226,8 @@ class 窗口(QWidget):
 
         is_carry = self.初始属性.职业分类 == "输出"
 
-        store.set("type",'carry' if is_carry else 'buffer')
-        store.set("/{type}/memory/original_property",self.初始属性)
+        store.set("type", 'carry' if is_carry else 'buffer')
+        store.set("/{type}/memory/original_property", self.初始属性)
 
         self.界面()
         self.布局界面()
@@ -447,17 +448,19 @@ class 窗口(QWidget):
                     else:
                         描述 = equ.get_suit_by_name(name).装备描述(self.角色属性A)[:-4]
                     if 描述 != '':
-                        temp += '<font color="#78FF1E">' + i.名称 + '[{}]</font><br>'.format(
+                        temp += '<font color="#78FF1E">' + trans(i.名称) + '[{}]</font><br>'.format(
                             n)
                         temp += 描述
                         temp += '<br>'
-                except:
+                except Exception as e:
+                    logger.error(e)
                     pass
         return temp[:-4] + '</font>'
 
     def 单件描述(self, i):
         temp = '<font size="3" face="宋体"><font color="{}">'.format(颜色[i.品质])
-        temp += i.名称 + '</font><br>' + i.类型 + '-' + i.部位 + '<br>'
+        temp += trans(i.名称) + '</font><br>' + trans(i.类型) + \
+            '-' + trans(i.部位) + '<br>'
         if self.角色属性A.职业分类 == 'BUFF':
             temp += i.装备描述_BUFF(self.角色属性A)
         else:
@@ -749,6 +752,7 @@ class 窗口(QWidget):
         for j in equ.get_equ_id_list():
             temp = equ.get_equ_by_id(j)
             if temp.品质 == '神话':
+
                 self.神话属性图片.append(QLabel(self.main_frame4))
                 self.神话属性图片[-1].setMovie(equ.get_img_by_id(j))
                 self.神话属性图片[-1].setToolTip('<font size="3" face="宋体">' +
@@ -791,55 +795,55 @@ class 窗口(QWidget):
             count = 0
             for i in equ.get_equ_list():
                 if i.品质 == '神话':
-                    描述列表 = trans([i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述])
+                    描述列表 = [i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述]
                     范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
                     for j in range(4):
-                        if 描述列表[j] != trans('无'):
+                        if 描述列表[j] != '无':
+                            self.神话属性选项[count * 4 + j].setEnabled(True)
                             for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
                                 if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
-                                    temp = 描述列表[j] + str(k)
-                                    if 范围列表[j][2] == 1:
-                                        temp += '%'
+                                    temp = trans(描述列表[j], value=k)
                                     self.神话属性选项[count * 4 + j].addItem(temp)
                         else:
+                            self.神话属性选项[count * 4 + j].setEnabled(False)
                             self.神话属性选项[count * 4 + j].addItem(trans('无'))
                     count += 1
 
             count = 0
             for i in equ.get_equ_list():
                 if i.所属套装 == '智慧产物':
-                    描述列表 = trans([i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述])
+                    描述列表 = [i.属性1描述, i.属性2描述, i.属性3描述, i.属性4描述]
                     范围列表 = [i.属性1范围, i.属性2范围, i.属性3范围, i.属性4范围]
                     for j in range(4):
-                        if 描述列表[j] != trans('无'):
+                        if 描述列表[j] != '无':
+                            self.改造产物选项[count * 4 + j].setEnabled(True)
                             for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
                                 if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
-                                    temp = 描述列表[j] + str(k)
-                                    if 描述列表[j] != trans('所有属性强化 +'):
-                                        temp += '%'
+                                    temp = trans(描述列表[j], value=k)
                                     self.改造产物选项[count * 4 + j].addItem(temp)
                         else:
+                            self.改造产物选项[count * 4 + j].setEnabled(False)
                             self.改造产物选项[count * 4 + j].addItem(trans('无'))
                     count += 1
         else:
             count = 0
             for i in equ.get_equ_list():
                 if i.品质 == '神话':
-                    描述列表 = trans([
+                    描述列表 = [
                         i.属性1描述_BUFF, i.属性2描述_BUFF, i.属性3描述_BUFF, i.属性4描述_BUFF
-                    ])
+                    ]
                     范围列表 = [
                         i.属性1范围_BUFF, i.属性2范围_BUFF, i.属性3范围_BUFF, i.属性4范围_BUFF
                     ]
                     for j in range(4):
-                        if 描述列表[j] != trans('无'):
+                        if 描述列表[j] != '无':
+                            self.神话属性选项[count * 4 + j].setEnabled(True)
                             for k in range(范围列表[j][0], 范围列表[j][1] - 1, -1):
                                 if (k % 范围列表[j][2]) == 0 or k == 范围列表[j][0]:
-                                    temp = 描述列表[j] + str(k)
-                                    if 范围列表[j][2] == 1 and 'Lv' not in 描述列表[j]:
-                                        temp += '%'
+                                    temp = trans(描述列表[j], value=k)
                                     self.神话属性选项[count * 4 + j].addItem(temp)
                         else:
+                            self.神话属性选项[count * 4 + j].setEnabled(False)
                             self.神话属性选项[count * 4 + j].addItem(trans('无'))
                     count += 1
         pass
@@ -1228,16 +1232,13 @@ class 窗口(QWidget):
                 if x == 1:
                     self.计算模式选择.setItemText(
                         0,
-                        trans('计算模式：极速模式') + '  ' + trans('组合：') +
-                        self.组合数量计算(0))
+                        trans("{计算模式：极速模式}  {组合}：$value", value=self.组合数量计算(0)))
                     self.计算模式选择.setItemText(
                         1,
-                        trans('计算模式：套装模式') + '  ' + trans('组合：') +
-                        self.组合数量计算(1))
+                        trans("{计算模式：套装模式}  {组合}：$value", value=self.组合数量计算(1)))
                     self.计算模式选择.setItemText(
                         2,
-                        trans('计算模式：单件模式') + '  ' + trans('组合：') +
-                        self.组合数量计算(2))
+                        trans("{计算模式：单件模式}  {组合}：$value", value=self.组合数量计算(2)))
             except Exception as error:
                 pass
 
@@ -1871,8 +1872,8 @@ class 窗口(QWidget):
         if 输出数据 == 1 and len(筛选) == 0:
             setfile = open('./数据记录/{}-{}.csv'.format(
                 self.角色属性A.实际名称, time.strftime('%m-%d-%H-%M-%S')),
-                           'w',
-                           encoding='gbk')
+                'w',
+                encoding='gbk')
             for i in range(len(显示序号)):
                 temp = ''
                 for j in range(13):
@@ -1994,64 +1995,64 @@ class 窗口(QWidget):
             if 奥兹玛选择[i] > 0:
                 奥兹玛[i % 5] = i
 
-        #0 上衣
+        # 0 上衣
         图片列表.append(equ.get_img_by_name(装备列表[0]))
 
-        #1 护肩
+        # 1 护肩
         if 奥兹玛.get(0, -1) >= 0:
             图片列表.append(equ.get_img_by_id(1000 + 奥兹玛[0]))
         else:
             图片列表.append(equ.get_img_by_name(装备列表[1]))
 
-        #2 护腿
+        # 2 护腿
         if 希洛克.get(0, -1) >= 0:
             图片列表.append(equ.get_img_by_id(1100 + 希洛克[0]))
         else:
             图片列表.append(equ.get_img_by_name(装备列表[2]))
 
-        #3 腰带
+        # 3 腰带
         if 奥兹玛.get(1, -1) >= 0:
             图片列表.append(equ.get_img_by_id(1000 + 奥兹玛[1]))
         else:
             图片列表.append(equ.get_img_by_name(装备列表[3]))
 
-        #4 鞋子
+        # 4 鞋子
         if 奥兹玛.get(2, -1) >= 0:
             图片列表.append(equ.get_img_by_id(1000 + 奥兹玛[2]))
         else:
             图片列表.append(equ.get_img_by_name(装备列表[4]))
 
-        #5 手镯
+        # 5 手镯
         图片列表.append(equ.get_img_by_name(装备列表[5]))
 
-        #6 项链
+        # 6 项链
         if 奥兹玛.get(3, -1) >= 0:
             图片列表.append(equ.get_img_by_id(1000 + 奥兹玛[3]))
         else:
             图片列表.append(equ.get_img_by_name(装备列表[6]))
 
-        #7 戒指
+        # 7 戒指
         if 希洛克.get(1, -1) >= 0:
             图片列表.append(equ.get_img_by_id(1100 + 希洛克[1]))
         else:
             图片列表.append(equ.get_img_by_name(装备列表[7]))
 
-        #8 耳环
+        # 8 耳环
         图片列表.append(equ.get_img_by_name(装备列表[8]))
 
-        #9 辅助
+        # 9 辅助
         if 希洛克.get(2, -1) >= 0:
             图片列表.append(equ.get_img_by_id(1100 + 希洛克[2]))
         else:
             图片列表.append(equ.get_img_by_name(装备列表[9]))
 
-        #10 魔法石
+        # 10 魔法石
         if 奥兹玛.get(4, -1) >= 0:
             图片列表.append(equ.get_img_by_id(1000 + 奥兹玛[4]))
         else:
             图片列表.append(equ.get_img_by_name(装备列表[10]))
 
-        #11 武器
+        # 11 武器
         图片列表.append(equ.get_img_by_name(装备列表[11], 希洛克武器标记))
 
         return 图片列表
@@ -2113,7 +2114,7 @@ class 窗口(QWidget):
                                     index).品质 != '神话' and equ.get_equ_by_id(
                                         index).所属套装 not in [
                                             '精灵使的权能', '大自然的呼吸', '能量主宰'
-                                        ]:
+                            ]:
                                 sign += 1
                     if sign == 11:
                         count += len(self.有效武器列表)
@@ -2159,18 +2160,17 @@ class 技能详情(QFrame):
                               data.角色属性B.技能栏[i].倍率)
                     被动倍率 = round(data.角色属性B.技能栏[i].被动倍率 * 100, 1)
                     其他倍率 = round(data.角色属性B.技能栏[i].倍率 * 100, 1)
-                    tempstr += trans('百分比：') + str(百分比) + '%<br>'
-                    tempstr += trans('被动倍率：') + str(被动倍率) + '%<br>'
+                    tempstr += trans('{百分比}：$value%<br>',value = 百分比)
+                    tempstr += trans('{被动倍率}：$value%<br>',value = 被动倍率)
                     if data.角色属性B.技能栏[i].倍率 != 0:
-                        tempstr += trans('其它倍率：') + str(其他倍率) + '%<br>'
+                        tempstr += trans('{其它倍率}：$value%<br>',value = 其他倍率)
                     CD显示 = str(
                         round(
                             data.角色属性B.技能栏[i].等效CD(data.角色属性B.武器类型,
                                                    data.角色属性B.类型) *
                             data.角色属性B.技能栏[i].恢复, 2))
-                    tempstr += trans('CD显示：') + CD显示 + 's<br>'
-                    CD恢复 = str(round(data.角色属性B.技能栏[i].恢复 * 100, 1)) + '%'
-                    tempstr += trans('CD恢复：') + CD恢复 + '</font>'
+                    tempstr += trans('{CD显示}：$values<br>',value = CD显示)
+                    tempstr += trans('{CD恢复}：$value</font>',value = to_percent(data.角色属性B.技能栏[i].恢复))
                     每行详情[0].setToolTip(tempstr)
                 except:
                     pass
