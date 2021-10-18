@@ -547,7 +547,7 @@ class 角色属性(属性):
 
     def 进图属强加成(self, x, 辟邪玉加成=1):
         if self.装备描述 == 1:
-            return trans('{进图属性强化} +$value<br>', x)
+            return trans('{进图属性强化} +$value<br>', value=x)
         else:
             self.进图属强 += int(self.所有属性强化增加 * x if 辟邪玉加成 == 1 else x)
         return ''
@@ -1598,7 +1598,7 @@ class 角色属性(属性):
     def 自适应输出(self):
         temp = ''
         if self.自适应选项[0] != 0:  # 宠物
-            temp += trans('{宠物}:$value',value = self.自适应描述[0] ) 
+            temp += trans('{宠物}:$value',value = self.自适应描述[0] )
         if self.自适应选项[1] != 0:  # 光环
             if temp != '':
                 temp += '|'
@@ -2013,7 +2013,7 @@ class 角色窗口(窗口):
                 x = QLabel(self.main_frame2)
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
                 x.resize(28, 28)
-                tempstr = trans('<font face="宋体"><font color="#FF6666">{$name}<br>',name = i.名称) 
+                tempstr = trans('<font face="宋体"><font color="#FF6666">{$name}<br>',name = i.名称)
                 if i.备注 is not None and  i.备注 != '':
                     tempstr += trans('{$value}</font><br>',value = i.备注)
                 tempstr += trans('{所在等级}：$level<br>',level = i.所在等级)
@@ -2069,7 +2069,7 @@ class 角色窗口(窗口):
                 x = QLabel(self.main_frame2)
                 x.setPixmap(self.技能图片[self.角色属性A.技能序号[i.名称]])
                 x.resize(28, 28)
-                tempstr = trans('<font face="宋体"><font color="#FF6666">{$name}<br>',name = i.名称) 
+                tempstr = trans('<font face="宋体"><font color="#FF6666">{$name}<br>',name = i.名称)
                 if i.备注 is not None and i.备注 != '':
                     tempstr += trans('{$value}</font><br>',value = i.备注)
                 tempstr += trans('{所在等级}：$level<br>',level = i.所在等级) + str(i.所在等级) + '<br>'
@@ -2160,7 +2160,7 @@ class 角色窗口(窗口):
             lambda state, index=0: self.护石类型选项更新(index))
         纵坐标 += 25
         for i in range(3):
-            tempstr = trans("{符文}$value{选择}：",value = i+1) 
+            tempstr = trans("{符文}$value{选择}：",value = i+1)
             x = QLabel(tempstr, self.main_frame2)
             x.move(横坐标, 纵坐标)
             x.setStyleSheet(标签样式)
@@ -2192,7 +2192,7 @@ class 角色窗口(窗口):
             lambda state, index=1: self.护石类型选项更新(index))
         纵坐标 += 25
         for i in range(3, 6):
-            tempstr = trans("{符文}$value{选择}：",value = i+1) 
+            tempstr = trans("{符文}$value{选择}：",value = i+1)
             x = QLabel(tempstr, self.main_frame2)
             x.move(横坐标, 纵坐标)
             x.setStyleSheet(标签样式)
@@ -2220,7 +2220,7 @@ class 角色窗口(窗口):
             lambda state, index=2: self.护石类型选项更新(index))
         纵坐标 += 25
         for i in range(6, 9):
-            tempstr = trans("{符文}$value{选择}：",value = i+1) 
+            tempstr = trans("{符文}$value{选择}：",value = i+1)
             x = QLabel(tempstr, self.main_frame2)
             x.move(横坐标, 纵坐标)
             x.setStyleSheet(标签样式)
@@ -2485,7 +2485,7 @@ class 角色窗口(窗口):
                                 i.名称 for i in self.角色属性A.技能栏
                                 if i.所在等级 <= 70 and i.所在等级 not in [48, 50]
                             ]
-                           
+
                         for skill_name in skills:
                             templist[n].addItem(
                                 trans('{$name}Lv+1',name = skill_name),
@@ -5101,7 +5101,7 @@ class 角色窗口(窗口):
                         tempstr[i] +=trans('{魔法攻击力} + $value</font>', value = 武器计算(装备.等级, 装备.品质, 属性.强化等级[i], 装备.类型,'魔法'))
                 # 锻造描述
                 if i == 11 and 属性.武器锻造等级 != 0:
-                    tempstr[i] += trans('<br><font color="#B36BFF">+$value  {锻造}  ',value = 属性.武器锻造等级) 
+                    tempstr[i] += trans('<br><font color="#B36BFF">+$value  {锻造}  ',value = 属性.武器锻造等级)
                     tempstr[i] += trans('{独立攻击力} + $value</font>', value = 锻造计算(装备.等级, 装备.品质, 属性.武器锻造等级))
 
                 # 增幅描述
@@ -5114,7 +5114,7 @@ class 角色窗口(窗口):
                     if '物理' in 属性.类型 or '力量' in 属性.类型:
                         tempstr[i] += trans('异次元力量')
                     else:
-                        tempstr[i] += trans('异次元智力')        
+                        tempstr[i] += trans('异次元智力')
                     tempstr[i] +=' +{}</font>'.format(value)
 
             # 遴选描述
@@ -5497,7 +5497,7 @@ class 角色窗口(窗口):
         if self.角色属性B.远古记忆 > 0:
             被动数据 = QLabel(输出窗口)
             被动数据.setPixmap((QPixmap('./ResourceFiles/img/远古记忆.png')))
-            tempstr = trans('<font face="宋体"><font color="#FF6666">{远古记忆}</font><br>{智力}+$value</font>',value = self.角色属性B.远古记忆 * 15) 
+            tempstr = trans('<font face="宋体"><font color="#FF6666">{远古记忆}</font><br>{智力}+$value</font>',value = self.角色属性B.远古记忆 * 15)
             被动数据.setToolTip(tempstr)
             被动数据.move(293 + num * 40, 500 - pox_y)
             被动等级 = QLabel(输出窗口)
@@ -5511,7 +5511,7 @@ class 角色窗口(窗口):
         if self.角色属性B.刀魂之卡赞 > 0:
             被动数据 = QLabel(输出窗口)
             被动数据.setPixmap((QPixmap('./ResourceFiles/img/刀魂之卡赞.png')))
-            tempstr = trans('<font face="宋体"><font color="#FF6666">{刀魂之卡赞}</font><br>{力量、智力}+$value</font>',value = 刀魂之卡赞数据[self.角色属性B.刀魂之卡赞]) 
+            tempstr = trans('<font face="宋体"><font color="#FF6666">{刀魂之卡赞}</font><br>{力量、智力}+$value</font>',value = 刀魂之卡赞数据[self.角色属性B.刀魂之卡赞])
             被动数据.setToolTip(tempstr)
             被动数据.move(293 + num * 40, 500 - pox_y)
             被动等级 = QLabel(输出窗口)
