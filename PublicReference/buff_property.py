@@ -420,7 +420,7 @@ class 辅助角色属性(属性):
         x2 = ((self.C力智 +
                (self.C力智 - 950) * self.系统奶系数 + self.系统奶基数 + a) / 250 +
               1) * (self.C三攻 + b)
-        return [x2 / x1 * 100, int(self.站街系数), 力量合计, 智力合计, 物攻合计, 魔攻合计, 独立合计][x]
+        return [x2 / x1 * 100, int(self.站街系数), a, b][x]
 
     def 适用数值计算(self):
         self.专属词条计算()
