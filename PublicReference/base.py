@@ -227,6 +227,8 @@ class 角色属性(属性):
     太极天帝剑 = 0
     # 0绿色生命的面容：无  1绿色生命的面容：阴暗面
     绿色生命的面容 = 1
+    # 0噙毒手套：中毒  1噙毒手套：未中毒
+    噙毒手套 = 0
 
     攻击属性 = 0
     产物升级 = 0
@@ -1773,6 +1775,8 @@ class 角色窗口(窗口):
             ]))
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['太极天帝剑：阳', '太极天帝剑：阴'])
+        self.装备条件选择.append(MyQComboBox(self.main_frame1))
+        self.装备条件选择[-1].addItems(['噙毒手套：中毒', '噙毒手套：未中毒'])
         # self.装备条件选择.append(MyQComboBox(self.main_frame1))
         # self.装备条件选择[-1].addItems(['绿色生命的面容：无', '绿色生命的面容：阴暗面'])
         for i in range(len(self.装备条件选择)):
@@ -5800,6 +5804,7 @@ class 角色窗口(窗口):
         属性.持续伤害计算比例 = 1 - 0.01 * self.装备条件选择[9].currentIndex()
         属性.军神的隐秘遗产 = self.装备条件选择[10].currentIndex()
         属性.太极天帝剑 = self.装备条件选择[11].currentIndex()
+        属性.噙毒手套 = self.装备条件选择[12].currentIndex()
         # 属性.绿色生命的面容 = self.装备条件选择[12].currentIndex()
         属性.产物升级 = 1 if self.智慧产物升级.isChecked() else 0
         属性.黑鸦武器择优模式 = self.武器择优模式.currentIndex()
