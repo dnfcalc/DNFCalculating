@@ -1732,7 +1732,7 @@ class 角色窗口(窗口):
         for i in 宠物列表:
             self.宠物.addItem(trans(i.显示名称), i.名称)
 
-        标签 = QLabel('装备条件设置', self.main_frame1)
+        标签 = QLabel(trans('装备条件设置'), self.main_frame1)
         标签.move(940, 5)
         标签.resize(170, 20)
         标签.setAlignment(Qt.AlignCenter)
@@ -1784,7 +1784,7 @@ class 角色窗口(窗口):
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
         self.装备条件选择[-1].addItems(['太极天帝剑：阳', '太极天帝剑：阴'])
         self.装备条件选择.append(MyQComboBox(self.main_frame1))
-        self.装备条件选择[-1].addItems(['噙毒手套：中毒', '噙毒手套：未中毒'])
+        self.装备条件选择[-1].addItems(['{噙毒手套}：中毒', '{噙毒手套}：未中毒'])
         # self.装备条件选择.append(MyQComboBox(self.main_frame1))
         # self.装备条件选择[-1].addItems(['绿色生命的面容：无', '绿色生命的面容：阴暗面'])
         for i in range(len(self.装备条件选择)):
