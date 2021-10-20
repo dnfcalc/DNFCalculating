@@ -2088,8 +2088,9 @@ class 角色窗口(窗口):
                     name=i.名称)
                 if i.备注 is not None and i.备注 != '':
                     tempstr += trans('{$value}</font><br>', value=i.备注)
-                tempstr += trans('{所在等级}：$level<br>', level=i.所在等级) + str(
-                    i.所在等级) + '<br>'
+                else:
+                    tempstr += '</font>'
+                tempstr += trans('{所在等级}：$level<br>', level=i.所在等级)
                 tempstr += trans('{等级上限}：$limit', limit=i.等级上限)
                 tempstr += '</font>'
                 x.setToolTip(tempstr)
