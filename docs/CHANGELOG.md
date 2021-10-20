@@ -1,5 +1,20 @@
 ## Newest
 
+### 2021-10-20
+
+#### NewFeatures
+*  : 噙毒手套支持设置是否触发 ([78a5ef](https://gitee.com/i_melon/DNFCalculating/commit/78a5ef090fa3609b03173da272d622be6d4d6a27))
+* 优化详情界面显示 ([47d5e3](https://gitee.com/i_melon/DNFCalculating/commit/47d5e3ad3fa898ccc26d8739f5a5c572eb3397fd))
+* 同步韩服体验服职业平衡 ([8e1ba1](https://gitee.com/i_melon/DNFCalculating/commit/8e1ba1c12bf120546f36914328ebb3d6537db0fc))
+* 极诣·流浪武士：前瞻版本新增光剑掌握技能<br>
+用时，请自行调整对应技能等级，过去版本存档该技能默认为0级 ([9c634d](https://gitee.com/i_melon/DNFCalculating/commit/9c634df17ed870cb7af0cf5c694922a080b38150))
+* 添加奶系名望 ([8b4630](https://gitee.com/i_melon/DNFCalculating/commit/8b463048ccaca4d1294aaaac647b08fc6a211aea))
+
+#### BugFixes
+* 修复部分武器缺失图标的问题 ([0d7776](https://gitee.com/i_melon/DNFCalculating/commit/0d77765af86bef7269df600f0f86f812b63a8137))
+* 修正部分智慧产物升级属性问题 ([8daba2](https://gitee.com/i_melon/DNFCalculating/commit/8daba2fb9dc72af218c5d6d2fbf1d04c42e48839))
+* 极诣·剑影：修正特定选择下无法计算的情况 ([5a9507](https://gitee.com/i_melon/DNFCalculating/commit/5a95078da469dfaab4498433387f5aa5dce5057f))
+
 ### 2021-10-15
 
 #### BugFixes
@@ -27,6 +42,7 @@
 * 极诣·黑暗武士：修正斩龙破护石数据错误 ([5e874c](https://gitee.com/i_melon/DNFCalculating/commit/5e874cfc057177b83210f9813298bf6d7775fc4f))
 * 知源·元素师：修正前瞻版本圣灵符文数据错误 ([61f42a](https://gitee.com/i_melon/DNFCalculating/commit/61f42a4e6b68526e7ed34859aec641afef6ac97e))
 * 隐夜·刺客：修正螺旋穿刺护石数据错误 ([5782b4](https://gitee.com/i_melon/DNFCalculating/commit/5782b42f8b28b9fe0786775d1504a90113cb8864))
+
 
 
 
