@@ -38,7 +38,7 @@ class 技能0(职业主动技能):
 
     攻击次数 = 1
     能量 = 140
-    最小值 = 2
+    最小值 = 4
     CD = 5.0
     持续秒数 = 6.0
     TP成长 = 0.08
@@ -49,6 +49,8 @@ class 技能0(职业主动技能):
         if x == 1:
             觉醒后能量消耗 = 70
             self.data0 = [int(x * 觉醒后能量消耗 / self.最小值) for x in self.data0]
+#            self.data0 = [0.5*x for x in data0]
+
             self.最小值 = 觉醒后能量消耗
             # self.基础 = self.基础 * 70 / 2
             # self.成长 = self.成长 * 70 / 2
