@@ -19,11 +19,11 @@ class Language():
     def __getitem__(self, key):
         return self.dicts.get(key, key)
 
-    ## key: 原始文本 使用{word}的格式 可以格式化为对应的值 
+    ## key: 原始文本 使用{word}的格式 可以格式化为对应的值
     ## **kwargs: 键值对可变参数 在{word} 之前 将#key转换为对应的value
     def trans(self, text, **kwargs):
         if isinstance(text, list):
-            return list(map(lambda i: self.trans(i,**kwargs), text))
+            return list(map(lambda i: self.trans(i, **kwargs), text))
         text = str(text)
         value = text
         if self.dicts.__contains__(text):
@@ -34,7 +34,11 @@ class Language():
             for kw in kwargs.keys():
                 _old = "${}".format(kw)
                 _new = str(kwargs.get(kw))
-                text = text.replace(_old,_new)
-            value = text.format_map(self)
-        value = value.replace("$","{}")
+                text = text.replace(_old, _new)
+            try:
+                value = text.format_map(self)
+            except Exception:
+                # 后续待完善
+                return value
+        value = value.replace("$", "{}")
         return value
