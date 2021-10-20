@@ -3243,6 +3243,8 @@ class 角色窗口(窗口):
                 self.护石类型选项[x].addItems(
                     trans(self.初始属性.技能栏[self.初始属性.技能序号[self.护石选项[
                         self.护石栏[x].currentIndex()]]].护石选项))
+                self.护石类型选项[x].setCurrentIndex(len(self.初始属性.技能栏[self.初始属性.技能序号[self.护石选项[
+                        self.护石栏[x].currentIndex()]]].护石选项)-1)
             except:
                 self.护石类型选项[x].addItem('魔界')
                 self.护石类型选项[x].addItem('圣痕')
