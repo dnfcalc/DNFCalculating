@@ -3,11 +3,11 @@
 ### 2021-10-20
 
 #### NewFeatures
-*  : 噙毒手套支持设置是否触发 ([78a5ef](https://gitee.com/i_melon/DNFCalculating/commit/78a5ef090fa3609b03173da272d622be6d4d6a27))
+* 噙毒手套支持设置是否触发 ([78a5ef](https://gitee.com/i_melon/DNFCalculating/commit/78a5ef090fa3609b03173da272d622be6d4d6a27))
 * 优化详情界面显示 ([47d5e3](https://gitee.com/i_melon/DNFCalculating/commit/47d5e3ad3fa898ccc26d8739f5a5c572eb3397fd))
 * 同步韩服体验服职业平衡 ([8e1ba1](https://gitee.com/i_melon/DNFCalculating/commit/8e1ba1c12bf120546f36914328ebb3d6537db0fc))
 * 极诣·流浪武士：前瞻版本新增光剑掌握技能<br>
-用时，请自行调整对应技能等级，过去版本存档该技能默认为0级 ([9c634d](https://gitee.com/i_melon/DNFCalculating/commit/9c634df17ed870cb7af0cf5c694922a080b38150))
+使用时，请自行调整对应技能等级，过去版本存档该技能默认为0级 ([9c634d](https://gitee.com/i_melon/DNFCalculating/commit/9c634df17ed870cb7af0cf5c694922a080b38150))
 * 添加奶系名望 ([8b4630](https://gitee.com/i_melon/DNFCalculating/commit/8b463048ccaca4d1294aaaac647b08fc6a211aea))
 
 #### BugFixes
@@ -19,7 +19,6 @@
 
 #### BugFixes
 * 修复智慧产物升级无法打开详情页bug ([6bf99b](https://gitee.com/i_melon/DNFCalculating/commit/6bf99b5ae789737806f6335bfa1c4ae327b3f998))
-* 修复智慧产物升级无法打开详情页bug ([fe16aa](https://gitee.com/i_melon/DNFCalculating/commit/fe16aa796ee07a6f0f38bd01b0ed9872c78c01da))
 
 ### 2021-10-14
 
