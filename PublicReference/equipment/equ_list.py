@@ -47,7 +47,7 @@ class equipment():
             self.equ_tuple += (temp, )
             self.equ_id_tuple += (i, )
             key = '{}\t{}\t{}'.format(temp.所属套装, temp.品质, temp.部位)
-            self.index[key] = i            
+            self.index[key] = i
 
     def load_suit(self):
         self.suit_list = {}
@@ -88,7 +88,7 @@ class equipment():
             img = QMovie(os.path.join(path, i))
             img.start()
             self.equ_img[2000 + int(i.split('.')[0])] = img
-    
+
     def get_suits_by_equips(self, equips):
         suits = []
         dictionary = {}
@@ -142,11 +142,14 @@ class equipment():
         return self.get_equ_by_id(self.equ_id.get(name, 0))
 
     def get_img_by_name(self, name, num=0):
-        return self.get_img_by_id(self.equ_id.get(name, 0) + num)
+        id = self.equ_id.get(name, 0)
+        if id+num in self.equ_id_tuple:
+            id += num
+        return self.get_img_by_id(id)
 
     def get_id_by_name(self, name):
         return self.equ_id.get(name, 0)
-        
+
     def get_equ_list(self):
         return self.equ_tuple
 
