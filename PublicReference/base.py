@@ -3788,10 +3788,6 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    store.set("/{type}/data/siroco_weapon", set_data['希洛克武器'])
-                except Exception as error:
-                    logger.error(error)
-                try:
                     store.set("/{type}/data/jude_effects", set_data['辟邪玉效果'])
                 except Exception as error:
                     logger.error(error)
@@ -3965,8 +3961,8 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.时间输入.setCurrentIndex(
-                        store.get("/{type}/data/time_input"))
+                    self.时间输入.setCurrentText(str(
+                        store.get("/{type}/data/time_input",'25')))
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -4105,18 +4101,8 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = store.get("/{type}/data/siroco_weapon", 0)
-                    if isinstance(data, list):
-                        data = data[0]
-                    self.希洛克武器词条[0].setCurrentIndex(data)
-                except Exception as error:
-                    logger.error(error)
-                try:
-                    data = store.get("/{type}/data/weapon_fusion")
-                    if data is None:
-                        data = store.get("/{type}/data/siroco_weapon", [0] * 5)
-                        data = data[1:]
-                    num = 1
+                    data = store.get("/{type}/data/weapon_fusion",[0]*5)
+                    num = 0
                     for i in data:
                         self.希洛克武器词条[num].setCurrentIndex(i)
                         num += 1
@@ -4341,7 +4327,7 @@ class 角色窗口(窗口):
             # 第二页(技能/符文/药剂)
             try:
                 store.set("/{type}/data/buff_input", self.BUFF输入.text())
-                store.set("/{type}/data/time_input", self.时间输入.currentIndex())
+                store.set("/{type}/data/time_input", self.时间输入.currentText())
 
                 store.set("/{type}/data/awakening_binding", self.觉醒选择状态)
 
@@ -4405,10 +4391,8 @@ class 角色窗口(窗口):
                           self.武器择优模式.currentIndex())
                 store.set("/{type}/data/nameless_elemental_value",
                           self.守门人属强.currentIndex())
-                store.set("/{type}/data/siroco_weapon",
-                          self.希洛克武器词条[0].currentIndex())
                 store.set("/{type}/data/weapon_fusion",
-                          [i.currentIndex() for i in self.希洛克武器词条[:-1]])
+                          [i.currentIndex() for i in self.希洛克武器词条])
                 store.set("/{type}/data/jude_effects",
                           [i.currentIndex() for i in self.辟邪玉选择])
                 store.set("/{type}/data/jude_values",
