@@ -3961,8 +3961,11 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    self.时间输入.setCurrentText(str(
-                        store.get("/{type}/data/time_input",'25')))
+                    时间 = store.get("/{type}/data/time_input", '25')
+                    if int(时间) < 10:
+                        self.时间输入.setCurrentIndex(int(时间))
+                    else:
+                        self.时间输入.setCurrentText(str(时间))
                 except Exception as error:
                     logger.error(error)
                 try:
@@ -4101,7 +4104,7 @@ class 角色窗口(窗口):
                 except Exception as error:
                     logger.error(error)
                 try:
-                    data = store.get("/{type}/data/weapon_fusion",[0]*5)
+                    data = store.get("/{type}/data/weapon_fusion", [0] * 5)
                     num = 0
                     for i in data:
                         self.希洛克武器词条[num].setCurrentIndex(i)
@@ -5769,7 +5772,7 @@ class 角色窗口(窗口):
                 词条属性列表[self.希洛克武器词条[2].currentIndex()].加成属性(
                     属性, (self.希洛克武器词条[4].currentIndex() + 3) * 0.01)
         try:
-            属性.时间输入 = int(float(self.时间输入.currentData()))
+            属性.时间输入 = int(float(self.时间输入.currentText()))
         except:
             属性.时间输入 = 25
         属性.次数输入.clear()
