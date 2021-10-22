@@ -556,7 +556,7 @@ class 角色属性(属性):
 
     def 技能倍率加成(self, lv, x):
         if self.装备描述 == 1:
-            return trans("Lv$level {技能攻击力} +$value",
+            return trans("Lv$level {技能攻击力} +$value<br>",
                          level=lv,
                          value=to_percent(x))
         else:
@@ -570,11 +570,11 @@ class 角色属性(属性):
         if self.装备描述 == 1:
             tem = ""
             if 倍率 != 1:
-                tem += trans("[{$name}]{攻击力} +$value",
+                tem += trans("[{$name}]{攻击力} +$value<br>",
                              name=名称,
                              value=to_percent(倍率 - 1))
             if CD != 1:
-                tem += trans("[{$name}]{CD} +$value",
+                tem += trans("[{$name}]{CD} +$value<br>",
                              name=名称,
                              value=to_percent(CD - 1))
             return tem
@@ -3243,8 +3243,9 @@ class 角色窗口(窗口):
                 self.护石类型选项[x].addItems(
                     trans(self.初始属性.技能栏[self.初始属性.技能序号[self.护石选项[
                         self.护石栏[x].currentIndex()]]].护石选项))
-                self.护石类型选项[x].setCurrentIndex(len(self.初始属性.技能栏[self.初始属性.技能序号[self.护石选项[
-                        self.护石栏[x].currentIndex()]]].护石选项)-1)
+                self.护石类型选项[x].setCurrentIndex(
+                    len(self.初始属性.技能栏[self.初始属性.技能序号[self.护石选项[
+                        self.护石栏[x].currentIndex()]]].护石选项) - 1)
             except:
                 self.护石类型选项[x].addItem('魔界')
                 self.护石类型选项[x].addItem('圣痕')
