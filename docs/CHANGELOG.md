@@ -1,5 +1,11 @@
 ## Newest
 
+### 2021-10-22
+
+#### BugFixes
+* 修正输出宠物缺失的情况 ([3de08b](https://gitee.com/i_melon/DNFCalculating/commit/3de08be9f6242bf53b907e514341c4b2368f4df1))
+* 苍暮·暗刃：修正无法打开的情况 ([a583d6](https://gitee.com/i_melon/DNFCalculating/commit/a583d6fa0a6188d559ebca018f110790734bef72))
+
 ### 2021-10-21
 
 #### NewFeatures
@@ -46,6 +52,7 @@
 * 极诣·黑暗武士：修正斩龙破护石数据错误 ([5e874c](https://gitee.com/i_melon/DNFCalculating/commit/5e874cfc057177b83210f9813298bf6d7775fc4f))
 * 知源·元素师：修正前瞻版本圣灵符文数据错误 ([61f42a](https://gitee.com/i_melon/DNFCalculating/commit/61f42a4e6b68526e7ed34859aec641afef6ac97e))
 * 隐夜·刺客：修正螺旋穿刺护石数据错误 ([5782b4](https://gitee.com/i_melon/DNFCalculating/commit/5782b42f8b28b9fe0786775d1504a90113cb8864))
+
 
 
 
