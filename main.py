@@ -313,17 +313,18 @@ class 选择窗口(QWidget):
         self.版本提示 = QMessageBox(QMessageBox.Question, "提示",
                                 trans("此工具为开源免费软件\n如遇二次售卖获利,请协助反馈举报~"))
         try:
-            repJson = requests.get(
-                "https://i_melon.gitee.io/dnfcalculating/notice.json",
-                timeout=2).json()
-            self.通知时间 = repJson[0]['time']
-            self.消息通知 = QMessageBox(QMessageBox.Question, "通知",
-                                    repJson[0]['info'])
-            self.消息通知.setWindowIcon(self.icon)
-            confirm = NotificationButton.ConfirmButton(self.消息通知)
-            self.消息通知.setWindowFlags(Qt.Window | Qt.WindowTitleHint
-                                     | Qt.CustomizeWindowHint)
-            self.消息通知.addButton(confirm, QMessageBox.YesRole)
+            if 自动检查更新 == 0:
+                repJson = requests.get(
+                    "https://i_melon.gitee.io/dnfcalculating/notice.json",
+                    timeout=2).json()
+                self.通知时间 = repJson[0]['time']
+                self.消息通知 = QMessageBox(QMessageBox.Question, "通知",
+                                        repJson[0]['info'])
+                self.消息通知.setWindowIcon(self.icon)
+                confirm = NotificationButton.ConfirmButton(self.消息通知)
+                self.消息通知.setWindowFlags(Qt.Window | Qt.WindowTitleHint
+                                         | Qt.CustomizeWindowHint)
+                self.消息通知.addButton(confirm, QMessageBox.YesRole)
         except Exception as error:
             pass
         self.版本提示.setWindowIcon(self.icon)
@@ -773,7 +774,7 @@ if __name__ == '__main__':
             if ("main.py" not in sys.argv[0]) and 配置格式有误:
                 instance.配置错误.exec()
             if ("main.py" not in sys.argv[0]
-                ) and instance.通知时间 != 通知时间 and 多语言开关 == 0:
+                ) and instance.通知时间 != 通知时间 and 多语言开关 == 0 and 自动检查更新 == 0:
                 instance.消息通知.exec()
             if ("main.py" not in sys.argv[0]) and 展示信息 and 多语言开关 == 0:
                 QDesktopServices.openUrl(
