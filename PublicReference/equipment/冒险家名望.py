@@ -51,8 +51,16 @@ from PublicReference.utils.constant import *
     103: 185
 }
 宠物附魔名望 = {100: 139, 101: 148, 102: 159, 103: 170, 104: 185, 200: 116}
-称号附魔名望 = {1: 93, 2: 107, 3: 130, 100: 139,
-          101: 153, 102: 168, 103: 185, 200: 370}
+称号附魔名望 = {
+    1: 93,
+    2: 107,
+    3: 130,
+    100: 139,
+    101: 153,
+    102: 168,
+    103: 185,
+    200: 370
+}
 武器装扮名望 = {1: 72, 100: 94}
 光环名望 = {1: 140, 2: 170, 3: 209, 4: 260, 5: 325, 100: 464}
 宠物装备名望 = {1: 21, 100: 30, 101: 41, 102: 54, 103: 69}
@@ -144,7 +152,7 @@ def 排列组合(target):
     "守护珠": [0] + list(守护珠名望),
     "收集箱": [0, 80, 175],
 }
-徽章排列组合名望选项 = 排列组合([23, 26, 36, 46])
+徽章排列组合名望选项 = 排列组合([26, 30, 36, 46])
 徽章名望选项 = {
     "上衣": [0] + list(徽章排列组合名望选项),
     "下装": [0] + list(徽章排列组合名望选项),
@@ -204,7 +212,7 @@ def 排列组合(target):
 }
 
 称号名望表 = {
-    '无':1,
+    '无': 1,
     '明日-春华': 3,
     '圣殿之巅': 5,
     '桃园结义[义]': 100,
@@ -340,10 +348,10 @@ def 细节收集(部位名称, 属性设置输入):
 
 
 def 勋章名望计算():
-    细节选项 = store.get("/{type}/data/detail_options",[])
+    细节选项 = store.get("/{type}/data/detail_options", [])
     勋章强化等级 = 8
-    if len(细节选项)> 0 :
-        if isinstance(细节选项[0],list):
+    if len(细节选项) > 0:
+        if isinstance(细节选项[0], list):
             勋章强化等级 = 细节选项[0][7]
     基础名望 = 232 + 46 * 4
     if 勋章强化等级 == 0:
@@ -363,20 +371,20 @@ def 徽章名望计算():
 
 
 def 称号名望计算():
-    称号名称 = store.get("/{type}/memory/title","无")
+    称号名称 = store.get("/{type}/memory/title", "无")
     称号基础名望 = 称号名望[称号名望表[称号名称]]
     return 称号基础名望
 
 
 def 时装名望计算():
-    所有时装 = store.get("/{type}/memory/avatar",['神器']*8)
+    所有时装 = store.get("/{type}/memory/avatar", ['神器'] * 8)
     所有时装 = 所有时装[:8]  # [8]是 所有选项
     最终时装名望 = sum(装扮名望[时装] for 时装 in 所有时装)
     return 最终时装名望
 
 
 def 辟邪玉名望计算():
-    辟邪玉选项 =store.get("/{type}/data/jude_effects",[0]*4)
+    辟邪玉选项 = store.get("/{type}/data/jude_effects", [0] * 4)
     辟邪玉等级 = sum(1 for 辟邪玉词条 in 辟邪玉选项 if 辟邪玉词条 != 0)
     return 辟邪玉名望[辟邪玉等级]
 
@@ -384,7 +392,7 @@ def 辟邪玉名望计算():
 def 护石名望计算():
     护石名望 = {"圣痕": 185, "魔界": 120, '无': 0}
 
-    护石等级 = store.get("/{type}/memory/talismans_types",['圣痕']*3)
+    护石等级 = store.get("/{type}/memory/talismans_types", ['圣痕'] * 3)
 
     护石最终名望 = sum(护石名望[护石等级_] for 护石等级_ in 护石等级)
     return 护石最终名望
@@ -392,22 +400,21 @@ def 护石名望计算():
 
 def 符文名望计算():
     符文名望 = {0: 0, 4: 46, 1: 21, 2: 18, 3: 15}
-    符文效果 = store.get("/{type}/data/runes_effects",[1]*9)
+    符文效果 = store.get("/{type}/data/runes_effects", [1] * 9)
 
     最终符文名望 = sum(符文名望[int(符文 // 4) + 1] for 符文 in 符文效果 if 符文 != 0)
     return 最终符文名望
 
 
 def 宠物名望计算():
-    宠物名称 = store.get("/{type}/memory/pet",'无')
+    宠物名称 = store.get("/{type}/memory/pet", '无')
     最终宠物名望 = 宠物名望表.get(内置宠物名望表[宠物名称], 0)
     return 最终宠物名望
 
 
-
 def 装备基础名望计算():
-    
-    装备栏 = store.get("/{type}/memory/equips",['无']*12)
+
+    装备栏 = store.get("/{type}/memory/equips", ['无'] * 12)
     装备栏 = 装备栏[:-1]
     装备基础名望 = {}
     for 装备 in 装备栏:
@@ -425,9 +432,9 @@ def 装备基础名望计算():
 
 
 def 装备打造名望计算():
-    装备栏 = store.get("/{type}/memory/equips",['无']*12)
-    打造选项 = store.get("/{type}/data/equip_forges",[0]*36)
-    装备栏 = 装备栏[:-1] # 去掉武器
+    装备栏 = store.get("/{type}/memory/equips", ['无'] * 12)
+    打造选项 = store.get("/{type}/data/equip_forges", [0] * 36)
+    装备栏 = 装备栏[:-1]  # 去掉武器
     打造名望 = {}
     for i in range(len(装备栏)):
         装备 = equ.get_equ_by_name(装备栏[i])
@@ -436,10 +443,10 @@ def 装备打造名望计算():
             单件装备打造名望 = -99999
         else:
             if 装备.所属套装 == "智慧产物":
-                改造等级 = 打造选项[i+24]
+                改造等级 = 打造选项[i + 24]
                 单件装备打造名望 = 装备改造名望[改造等级]
             else:
-                打造等级 = 打造选项[i+12]
+                打造等级 = 打造选项[i + 12]
                 if 打造选项[i]:
                     if 装备.品质 == "史诗":
                         单件装备打造名望 = 装备增幅名望[打造等级]
@@ -455,8 +462,8 @@ def 装备打造名望计算():
 
 
 def 武器名望计算():
-    装备栏 = store.get("/{type}/memory/equips",['无']*12)
-    打造选项 = store.get("/{type}/data/equip_forges",[0]*40)
+    装备栏 = store.get("/{type}/memory/equips", ['无'] * 12)
+    打造选项 = store.get("/{type}/data/equip_forges", [0] * 40)
     属性 = store.get("/{type}/memory/original_property")
 
     武器 = equ.get_equ_by_name(装备栏[-1])
@@ -468,7 +475,7 @@ def 武器名望计算():
 
     武器基础打造 = 打造选项[-1 if 武器.所属套装 == "智慧产物" else 23]
 
-    if 打造选项[11]: # 是否增幅
+    if 打造选项[11]:  # 是否增幅
         武器打造名望 = 武器增幅名望[武器基础打造]
     else:
         武器打造名望 = 武器强化名望[武器基础打造]
@@ -496,7 +503,7 @@ def 附魔名望计算():
 # https://dnf.qq.com/cp/a20210325version/page3.html
 
 
-def 黑鸦名望计算(改造部位 = []):
+def 黑鸦名望计算(改造部位=[]):
 
     黑鸦词条 = store.get("/{type}/data/black_purgatory")
     黑鸦名望表 = {0: 69, 1: 83, 2: 98, 3: 116}
@@ -525,22 +532,22 @@ def 改造升级黑鸦名望计算():
     属性2名望 = {0: 15, 1: 12, 2: 9}
     属性3名望 = {0: 10, 1: 8, 2: 6}
 
-    if not store.get("/{type}/data/remodel_upgrade",False):
+    if not store.get("/{type}/data/remodel_upgrade", False):
         return {}
 
     所有装备 = store.get("/{type}/memory/equips")  #
-    打造选项 = store.get("/{type}/data/equip_forges",[0]*40)
-    改造产物选项 = store.get("/{type}/data/remodel_properties",[])
+    打造选项 = store.get("/{type}/data/equip_forges", [0] * 40)
+    改造产物选项 = store.get("/{type}/data/remodel_properties", [])
     改造产物 = []
     改造名称 = []
     for i in range(len(所有装备)):
         装备 = equ.get_equ_by_name(所有装备[i])
         if 装备.所属套装 == "智慧产物":
-            装备.改造等级 = 打造选项[i+24]
+            装备.改造等级 = 打造选项[i + 24]
             改造产物.append(装备)
             改造名称.append(装备.名称)
 
-    if len(改造产物选项) > 0 :
+    if len(改造产物选项) > 0:
         count2 = 0
         for i in equ.get_equ_list():
             if i.所属套装 == '智慧产物':
@@ -553,9 +560,9 @@ def 改造升级黑鸦名望计算():
 
     for 装备 in 改造产物:
         名望 = 属性1名望[装备.属性1选择]
-        if 装备.改造等级 >= 6: 
+        if 装备.改造等级 >= 6:
             名望 += 属性2名望[装备.属性2选择]
-        if 装备.改造等级 >= 7: 
+        if 装备.改造等级 >= 7:
             名望 += 属性3名望[装备.属性3选择]
         改造升级名望[装备.部位] = 名望
 
@@ -563,9 +570,16 @@ def 改造升级黑鸦名望计算():
 
 
 def 希洛克融合名望计算():
-    希洛克选择状态 = store.get("/{type}/data/siroco",[0]*15)
-    希洛克武器选择 = store.get("/{type}/data/siroco_weapon",0)
-    希洛克武器词条 = store.get("/{type}/data/weapon_fusion",[0]*4)
+    希洛克选择状态 = store.get("/{type}/data/siroco", [0] * 15)
+    希洛克武器选择 = store.get("/{type}/data/siroco_weapon", 0)
+    希洛克武器词条 = store.get("/{type}/data/weapon_fusion", [0] * 4)
+
+    # 奶C不一致
+    if len(希洛克武器词条) > 4:
+        希洛克武器选择 = 希洛克武器词条[0]
+        希洛克武器词条[1] = 希洛克武器词条[3]
+        希洛克武器词条[3] = 希洛克武器词条[4]
+
     希洛克选择状态 = [希洛克选择状态[i:i + 3] for i in range(0, len(希洛克选择状态), 3)]
     希洛克成套 = sum(list(map(lambda x: sum(x), 希洛克选择状态)))
 
@@ -603,7 +617,7 @@ def 希洛克融合名望计算():
 
 
 def 奥兹玛融合名望计算():
-    奥兹玛选择状态 = store.get("/{type}/data/ozma",[0]*25)
+    奥兹玛选择状态 = store.get("/{type}/data/ozma", [0] * 25)
 
     奥兹玛部位 = [奥兹玛选择状态[i:i + 5] for i in range(0, len(奥兹玛选择状态), 5)]
     头肩 = sum(list(map(lambda x: x[0], 奥兹玛部位)))

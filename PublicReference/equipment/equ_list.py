@@ -143,8 +143,8 @@ class equipment():
 
     def get_img_by_name(self, name, num=0):
         id = self.equ_id.get(name, 0)
-        if id+num in self.equ_id_tuple:
-            id += num
+        # if id+num in self.equ_id_tuple:
+        id += num
         return self.get_img_by_id(id)
 
     def get_id_by_name(self, name):
