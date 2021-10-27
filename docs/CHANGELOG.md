@@ -1,5 +1,14 @@
 ## Newest
 
+### 2021-10-27
+
+#### NewFeatures
+* 知源·缔造者：添加符文选项 ([6757fe](https://gitee.com/i_melon/DNFCalculating/commit/6757fe36b6d42b7ee170603920e1045f8f049760))
+
+#### BugFixes
+* 修复输出职业存档问题 ([e9aeb3](https://gitee.com/i_melon/DNFCalculating/commit/e9aeb39352145573c60c29eee08a46baabf07eee))
+* 残香图标与名望计算错误修复 ([56e773](https://gitee.com/i_melon/DNFCalculating/commit/56e77328cac5155f03650dc582d2c32e901c5fb3))
+
 ### 2021-10-22
 
 #### BugFixes
@@ -52,6 +61,7 @@
 * 极诣·黑暗武士：修正斩龙破护石数据错误 ([5e874c](https://gitee.com/i_melon/DNFCalculating/commit/5e874cfc057177b83210f9813298bf6d7775fc4f))
 * 知源·元素师：修正前瞻版本圣灵符文数据错误 ([61f42a](https://gitee.com/i_melon/DNFCalculating/commit/61f42a4e6b68526e7ed34859aec641afef6ac97e))
 * 隐夜·刺客：修正螺旋穿刺护石数据错误 ([5782b4](https://gitee.com/i_melon/DNFCalculating/commit/5782b42f8b28b9fe0786775d1504a90113cb8864))
+
 
 
 
