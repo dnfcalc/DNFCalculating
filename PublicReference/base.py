@@ -4813,45 +4813,37 @@ class 角色窗口(窗口):
         显示[0].setText(
             '<font color="#FFFFFF">{} </font><font color="#96FF32">{}</font>'.
             format(str(int(站街.站街力量())), str(int(进图.面板力量()))))
-        显示[0].setStyleSheet(
-            "QLabel{font-size:12px;}")
+        显示[0].setStyleSheet("QLabel{font-size:12px;}")
         显示[1].setText(
             '<font color="#FFFFFF">{} </font><font color="#96FF32">{}</font>'.
             format(str(int(站街.站街物理攻击力())), str(int(进图.面板物理攻击力()))))
-        显示[1].setStyleSheet(
-            "QLabel{font-size:12px;}")
+        显示[1].setStyleSheet("QLabel{font-size:12px;}")
         显示[2].setText(
             '<font color="#FFFFFF">{} </font><font color="#96FF32">{}</font>'.
             format(str(int(站街.站街智力())), str(int(进图.面板智力()))))
-        显示[2].setStyleSheet(
-            "QLabel{font-size:12px;}")
+        显示[2].setStyleSheet("QLabel{font-size:12px;}")
         显示[3].setText(
             '<font color="#FFFFFF">{} </font><font color="#96FF32">{}</font>'.
             format(str(int(站街.站街魔法攻击力())), str(int(进图.面板魔法攻击力()))))
-        显示[3].setStyleSheet(
-            "QLabel{font-size:12px;}")
+        显示[3].setStyleSheet("QLabel{font-size:12px;}")
         显示[4].setText(
             '<font color="#FFFFFF">{} </font><font color="#96FF32">{}</font>'.
             format(str(int(站街.站街独立攻击力())), str(int(进图.面板独立攻击力()))))
-        显示[4].setStyleSheet(
-            "QLabel{font-size:12px;}")
+        显示[4].setStyleSheet("QLabel{font-size:12px;}")
         显示[5].setText(
             ('<font color="#FFFFFF">' + trans('火') + '({})' + trans('冰') +
              '({})' + trans('光') + '({})' + trans('暗') + '({})</font>').format(
                  int(站街.火属性强化), int(站街.冰属性强化), int(站街.光属性强化), int(站街.暗属性强化)))
-        显示[5].setStyleSheet(
-            "QLabel{font-size:12px;}")
+        显示[5].setStyleSheet("QLabel{font-size:12px;}")
         显示[6].setText(
             ('<font color="#96FF32">' + trans('火') + '({})' + trans('冰') +
              '({})' + trans('光') + '({})' + trans('暗') + '({})</font>').format(
                  int(进图.火属性强化), int(进图.冰属性强化), int(进图.光属性强化), int(进图.暗属性强化)))
-        显示[6].setStyleSheet(
-            "QLabel{font-size:12px;}")
+        显示[6].setStyleSheet("QLabel{font-size:12px;}")
         辟邪玉词条 = self.辟邪玉显示(1)
         for i in range(len(辟邪玉词条)):
             显示[7 + i].setText(辟邪玉词条[i])
-            显示[7 + i].setStyleSheet(
-            "QLabel{font-size:12px;}")
+            显示[7 + i].setStyleSheet("QLabel{font-size:12px;}")
         # 显示[0].setText(str(int(进图.面板力量())))
         # 显示[1].setText(str(int(进图.面板物理攻击力())))
         # 显示[2].setText(str(int(进图.面板智力())))
@@ -5045,6 +5037,7 @@ class 角色窗口(窗口):
             打造状态.move(初始x + x坐标[11] + 13, 初始y + y坐标[11] + 20 - pox_y2)
             temp[11] += '(锻造+{})'.format(属性.武器锻造等级)
             打造状态.resize(21, 10)
+        return temp
 
     def 格式化输出(self, 数字文本, x=0):
         if x == 1:
@@ -5674,7 +5667,7 @@ class 角色窗口(窗口):
             打造显示.append(QLabel(输出窗口))
             打造显示[i].move(-100, -100)
 
-        self.打造显示设置(打造显示, self.角色属性B)
+        temp = self.打造显示设置(打造显示, self.角色属性B)
 
         pdata['名称'] = self.角色属性A.实际名称
         pdata['装备'] = temp
@@ -5706,7 +5699,7 @@ class 角色窗口(窗口):
             count = max(len(d['装备']), len(d['词条']), len(d['技能']))
             rows = []
             for i in range(count):
-                t = d['词条'][i].split(':') if i < len(d['词条']) else []
+                t = d['词条'][i].split('：') if i < len(d['词条']) else []
                 rows.append([
                     (str(d['装备'][i]) if i < len(d['装备']) else ''),
                     (str(t[0][-2] + t[0][-1]) if i < len(d['词条']) else ''),
@@ -5731,7 +5724,7 @@ class 角色窗口(窗口):
                 result.write(','.join(row) + '\n')
             result.close()
             os.startfile(result_path)
-        except:
+        except Exception as error:
             pass
 
     # endregion
