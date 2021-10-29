@@ -1826,9 +1826,9 @@ class 窗口(QWidget):
            border: 0px
            }''')
 
-        滚动排行.resize(630, 530)
-        滚动排行.setMinimumSize(630, 530)
-        滚动排行.setMaximumSize(630, 1230)
+        滚动排行.resize(650, 530)
+        滚动排行.setMinimumSize(650, 530)
+        滚动排行.setMaximumSize(650, 1230)
         if len(筛选) == 0:
             # 滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）'+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)
             滚动排行.setWindowTitle(trans('当前模板配装排行(点击数字查看详情)'))
@@ -1840,12 +1840,12 @@ class 窗口(QWidget):
         滚动排行.setWindowIcon(self.icon)
         if not SkinVersion == 'None':
             背景颜色 = QLabel(滚动排行)
-            背景颜色.resize(630, 1230)
+            背景颜色.resize(650, 1230)
             背景颜色.setStyleSheet("QLabel{background-color:rgba(50,50,50,1.0)}")
             排行背景透明度 = QGraphicsOpacityEffect()
             排行背景透明度.setOpacity(0.15)
             排行背景 = QLabel(滚动排行)
-            排行背景.resize(630, 1230)
+            排行背景.resize(650, 1230)
             排行背景.setPixmap(self.主背景图片)
             排行背景.setGraphicsEffect(排行背景透明度)
             排行背景.setAlignment(Qt.AlignCenter)
@@ -1853,7 +1853,7 @@ class 窗口(QWidget):
         #wrapper = QWidget()
         # 滚动排行.setCentralWidget(wrapper)
         滚动排行.topFiller = QWidget()
-        滚动排行.topFiller.setMinimumSize(570, 50 * len(显示序号) + 30)
+        滚动排行.topFiller.setMinimumSize(590, 50 * len(显示序号) + 30)
 
         if len(显示序号) > 10:
             初始x = -10
@@ -1939,7 +1939,16 @@ class 窗口(QWidget):
             详情按钮.clicked.connect(lambda state, index=显示序号[i]: self.输出界面(index))
 
             详情按钮.move(int(初始x + x间隔 * 15), int(初始y + i * y间隔))
-            详情按钮.resize(120, 30)
+            详情按钮.resize(140, 30)
+
+            code = QtWidgets.QLabel(
+                '<font face="黑体">' + get_mac_address() + '</font>',
+                滚动排行.topFiller)
+            # code.setText('abdhfosnd39dkws2dfsddd')
+            code.setStyleSheet('color:rgba(255,255,255,0.7);font-size:9px')
+            code.move(int(初始x + x间隔 * 15), int(初始y + i * y间隔) + 11)
+            code.resize(140, 30)
+
             temp = deepcopy(self.角色属性A)
             技能等级溢出 = temp.等级溢出判断(
                 self.排行数据[显示序号[i]][0:12],
@@ -1975,14 +1984,14 @@ class 窗口(QWidget):
         滚动排行.setLayout(滚动排行.vbox)
 
         排行显示 = MainWindow(滚动排行)
-        for i in range(0, 6):
-            label = QLabel(排行显示)
-            label.setText(get_mac_address())
-            label.move(10 + 70 * i, 40 + 90 * i)
-            label.resize(200, 21)
-            label.setStyleSheet(
-                'QLabel{font-size:15px;color:rgba(255,255,255,0.6);font-weight:bolder}'
-            )
+        # for i in range(0, 6):
+        #     label = QLabel(排行显示)
+        #     label.setText(get_mac_address())
+        #     label.move(10 + 70 * i, 40 + 90 * i)
+        #     label.resize(200, 21)
+        #     label.setStyleSheet(
+        #         'QLabel{font-size:15px;color:rgba(255,255,255,0.6);font-weight:bolder}'
+        #     )
         self.排行窗口列表.append(排行显示)
         排行显示.show()
 
