@@ -9,7 +9,7 @@ from PublicReference.utils.MainWindow import *
 from PublicReference.utils.calc_core import calc_core
 from PublicReference.utils.producer_consumer import producer_data, consumer, thread_num
 import traceback
-from PublicReference.utils import zipfile
+from PublicReference.utils import zipfile, uniqueCode, img
 from PublicReference.utils import img
 from PublicReference.utils.LZextends import *
 from PublicReference.view import NotificationButton
@@ -18,6 +18,7 @@ import time
 import subprocess
 import base64
 import requests
+import random
 
 # 配置PyQt5环境变量
 import PyQt5
@@ -216,6 +217,17 @@ class 选择窗口(QWidget):
         self.topFiller.setMinimumSize(750, 1520)
 
         count = 0
+        reason = ''
+        canUse = -1
+        try:
+            code = get_mac_address()
+            repJson = requests.get(
+                "https://i_melon.gitee.io/dnfcalculating/ban.json",
+                timeout=2).json()
+            reason = repJson[code]['reason']
+            if reason != '': canUse = random.randint(0, 75)
+        except:
+            pass
         for i in range(75):
             img_box = QLabel(self.topFiller)
             if is_gif:
@@ -226,7 +238,6 @@ class 选择窗口(QWidget):
             img_box.resize(121, 90)
             img_box.move(100 + 偏移量 + (count % 5) * 125,
                          10 + int(count / 5) * 100)
-
             if i < 75:
                 if 角色列表[i]["类名"] != '空':
                     img_box_2 = QLabel(self.topFiller)
@@ -247,8 +258,12 @@ class 选择窗口(QWidget):
                     butten.resize(121, 90)
                     butten.move(100 + 偏移量 + (count % 5) * 125,
                                 10 + int(count / 5) * 100)
-                    butten.clicked.connect(
-                        lambda state, index=角色列表[i]: self.职业版本判断(index))
+                    if canUse > 0 and i != canUse:
+                        butten.clicked.connect(
+                            lambda state, reason=reason: self.弹窗警告(reason))
+                    else:
+                        butten.clicked.connect(
+                            lambda state, index=角色列表[i]: self.职业版本判断(index))
                     # temp = '<b>作者：<font color="#C66211">' + 角色列表[i][
                     #     "作者"] + '</font>'
                     # butten.setToolTip(temp)
@@ -440,6 +455,14 @@ class 选择窗口(QWidget):
         赞赏码.loadFromData(base64.b64decode(img.二维码))
         主背景.setPixmap(赞赏码)
         self.w.show()
+
+    def 弹窗警告(self, reason):
+        box = QMessageBox(
+            QMessageBox.Question, "提示",
+            "由于{},您已被限制使用计算器，每次开启仅能随机使用一个职业<br>如需解除，请联系开发人员".format(reason))
+        box.setWindowIcon(self.icon)
+        box.setStandardButtons(QMessageBox.Yes)
+        box.exec_()
 
     def 职业版本判断(self, index):
         try:

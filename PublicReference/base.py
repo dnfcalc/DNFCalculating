@@ -8,6 +8,7 @@ from PublicReference.equipment.冒险家名望 import *
 from PublicReference.choise.选项设置 import *
 from PublicReference.choise.细节选项 import *
 from PublicReference.common import *
+from PublicReference.utils.uniqueCode import get_mac_address
 import operator
 
 from PublicReference.utils.common import format_range, to_percent
@@ -5317,7 +5318,7 @@ class 角色窗口(窗口):
         pox_y2 = 11
         temp = ''
         if name == '':
-            temp += trans('详细数据')
+            temp += trans('详细数据') + ' 仅供参考 带节奏死个🐎'
             # if self.角色属性A.计算自适应方式 == 1:
             #     temp+= ' - 全局择优'
             # else:
@@ -5673,6 +5674,11 @@ class 角色窗口(窗口):
         pdata['装备'] = temp
 
         if 多语言开关 == 0:
+            label = QLabel(输出窗口)
+            label.setText(get_mac_address())
+            label.setStyleSheet(
+                'QLabel{font-size:12px;color:rgba(0,0,0,0.5);font-weight:bolder}')
+            label.move(290, 545 - pox_y)
             butten = QtWidgets.QPushButton(trans('输出技能数据'), 输出窗口)
             butten.clicked.connect(
                 lambda state, d=deepcopy(pdata): self.输出数据(d))

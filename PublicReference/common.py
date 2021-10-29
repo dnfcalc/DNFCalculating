@@ -2,6 +2,7 @@ from math import ceil
 from PublicReference.equipment.equ_list import *
 from PublicReference.utils.MainWindow import *
 from PublicReference.utils.common import to_percent
+from PublicReference.utils.uniqueCode import get_mac_address
 from PublicReference.view.DialogRegister import DefaultDialogRegister
 
 装备版本 = "GF"
@@ -448,8 +449,8 @@ class 窗口(QWidget):
                     else:
                         描述 = equ.get_suit_by_name(name).装备描述(self.角色属性A)[:-4]
                     if 描述 != '':
-                        temp += '<font color="#78FF1E">' + trans(i.名称) + '[{}]</font><br>'.format(
-                            n)
+                        temp += '<font color="#78FF1E">' + trans(
+                            i.名称) + '[{}]</font><br>'.format(n)
                         temp += 描述
                         temp += '<br>'
                 except Exception as e:
@@ -1232,13 +1233,16 @@ class 窗口(QWidget):
                 if x == 1:
                     self.计算模式选择.setItemText(
                         0,
-                        trans("{计算模式：极速模式}  {组合}：$value", value=self.组合数量计算(0)))
+                        trans("{计算模式：极速模式}  {组合}：$value",
+                              value=self.组合数量计算(0)))
                     self.计算模式选择.setItemText(
                         1,
-                        trans("{计算模式：套装模式}  {组合}：$value", value=self.组合数量计算(1)))
+                        trans("{计算模式：套装模式}  {组合}：$value",
+                              value=self.组合数量计算(1)))
                     self.计算模式选择.setItemText(
                         2,
-                        trans("{计算模式：单件模式}  {组合}：$value", value=self.组合数量计算(2)))
+                        trans("{计算模式：单件模式}  {组合}：$value",
+                              value=self.组合数量计算(2)))
             except Exception as error:
                 pass
 
@@ -1872,8 +1876,8 @@ class 窗口(QWidget):
         if 输出数据 == 1 and len(筛选) == 0:
             setfile = open('./数据记录/{}-{}.csv'.format(
                 self.角色属性A.实际名称, time.strftime('%m-%d-%H-%M-%S')),
-                'w',
-                encoding='gbk')
+                           'w',
+                           encoding='gbk')
             for i in range(len(显示序号)):
                 temp = ''
                 for j in range(13):
@@ -1971,6 +1975,14 @@ class 窗口(QWidget):
         滚动排行.setLayout(滚动排行.vbox)
 
         排行显示 = MainWindow(滚动排行)
+        for i in range(0, 6):
+            label = QLabel(排行显示)
+            label.setText(get_mac_address())
+            label.move(10 + 70 * i, 40 + 90 * i)
+            label.resize(200, 21)
+            label.setStyleSheet(
+                'QLabel{font-size:15px;color:rgba(255,255,255,0.6);font-weight:bolder}'
+            )
         self.排行窗口列表.append(排行显示)
         排行显示.show()
 
@@ -2114,7 +2126,7 @@ class 窗口(QWidget):
                                     index).品质 != '神话' and equ.get_equ_by_id(
                                         index).所属套装 not in [
                                             '精灵使的权能', '大自然的呼吸', '能量主宰'
-                            ]:
+                                        ]:
                                 sign += 1
                     if sign == 11:
                         count += len(self.有效武器列表)
@@ -2160,17 +2172,18 @@ class 技能详情(QFrame):
                               data.角色属性B.技能栏[i].倍率)
                     被动倍率 = round(data.角色属性B.技能栏[i].被动倍率 * 100, 1)
                     其他倍率 = round(data.角色属性B.技能栏[i].倍率 * 100, 1)
-                    tempstr += trans('{百分比}：$value%<br>',value = 百分比)
-                    tempstr += trans('{被动倍率}：$value%<br>',value = 被动倍率)
+                    tempstr += trans('{百分比}：$value%<br>', value=百分比)
+                    tempstr += trans('{被动倍率}：$value%<br>', value=被动倍率)
                     if data.角色属性B.技能栏[i].倍率 != 0:
-                        tempstr += trans('{其它倍率}：$value%<br>',value = 其他倍率)
+                        tempstr += trans('{其它倍率}：$value%<br>', value=其他倍率)
                     CD显示 = str(
                         round(
                             data.角色属性B.技能栏[i].等效CD(data.角色属性B.武器类型,
                                                    data.角色属性B.类型) *
                             data.角色属性B.技能栏[i].恢复, 2))
-                    tempstr += trans('{CD显示}：$values<br>',value = CD显示)
-                    tempstr += trans('{CD恢复}：$value</font>',value = to_percent(data.角色属性B.技能栏[i].恢复))
+                    tempstr += trans('{CD显示}：$values<br>', value=CD显示)
+                    tempstr += trans('{CD恢复}：$value</font>',
+                                     value=to_percent(data.角色属性B.技能栏[i].恢复))
                     每行详情[0].setToolTip(tempstr)
                 except:
                     pass
