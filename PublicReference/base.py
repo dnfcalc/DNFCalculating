@@ -5677,7 +5677,7 @@ class 角色窗口(窗口):
             label = QLabel(输出窗口)
             label.setText(get_mac_address())
             label.setStyleSheet(
-                'QLabel{font-size:12px;color:rgba(0,0,0,0.5);font-weight:bolder}')
+                f'QLabel{{font-size:12px;{make_watermark_qt_color_string(watermark_surrounding_backgroud_color_detail)};font-weight:bolder}}')
             label.move(290, 545 - pox_y)
             butten = QtWidgets.QPushButton(trans('输出技能数据'), 输出窗口)
             butten.clicked.connect(

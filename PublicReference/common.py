@@ -3,6 +3,7 @@ from PublicReference.equipment.equ_list import *
 from PublicReference.utils.MainWindow import *
 from PublicReference.utils.common import to_percent
 from PublicReference.utils.uniqueCode import get_mac_address
+from PublicReference.utils.watermark_def import *
 from PublicReference.view.DialogRegister import DefaultDialogRegister
 
 装备版本 = "GF"
@@ -1826,9 +1827,9 @@ class 窗口(QWidget):
            border: 0px
            }''')
 
-        滚动排行.resize(650, 530)
-        滚动排行.setMinimumSize(650, 530)
-        滚动排行.setMaximumSize(650, 1230)
+        滚动排行.resize(652, 530)
+        滚动排行.setMinimumSize(652, 530)
+        滚动排行.setMaximumSize(652, 1230)
         if len(筛选) == 0:
             # 滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）'+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)
             滚动排行.setWindowTitle(trans('当前模板配装排行(点击数字查看详情)'))
@@ -1840,12 +1841,12 @@ class 窗口(QWidget):
         滚动排行.setWindowIcon(self.icon)
         if not SkinVersion == 'None':
             背景颜色 = QLabel(滚动排行)
-            背景颜色.resize(650, 1230)
+            背景颜色.resize(652, 1230)
             背景颜色.setStyleSheet("QLabel{background-color:rgba(50,50,50,1.0)}")
             排行背景透明度 = QGraphicsOpacityEffect()
             排行背景透明度.setOpacity(0.15)
             排行背景 = QLabel(滚动排行)
-            排行背景.resize(650, 1230)
+            排行背景.resize(652, 1230)
             排行背景.setPixmap(self.主背景图片)
             排行背景.setGraphicsEffect(排行背景透明度)
             排行背景.setAlignment(Qt.AlignCenter)
@@ -1853,7 +1854,7 @@ class 窗口(QWidget):
         #wrapper = QWidget()
         # 滚动排行.setCentralWidget(wrapper)
         滚动排行.topFiller = QWidget()
-        滚动排行.topFiller.setMinimumSize(590, 50 * len(显示序号) + 30)
+        滚动排行.topFiller.setMinimumSize(592, 50 * len(显示序号) + 30)
 
         if len(显示序号) > 10:
             初始x = -10
@@ -1939,14 +1940,14 @@ class 窗口(QWidget):
             详情按钮.clicked.connect(lambda state, index=显示序号[i]: self.输出界面(index))
 
             详情按钮.move(int(初始x + x间隔 * 15), int(初始y + i * y间隔))
-            详情按钮.resize(140, 30)
+            详情按钮.resize(142, 30)
 
             code = QtWidgets.QLabel(
                 '<font face="黑体">' + get_mac_address() + '</font>',
                 滚动排行.topFiller)
             # code.setText('abdhfosnd39dkws2dfsddd')
-            code.setStyleSheet('color:rgba(255,255,255,0.7);font-size:9px')
-            code.move(int(初始x + x间隔 * 15), int(初始y + i * y间隔) + 11)
+            code.setStyleSheet(f'{make_watermark_qt_color_string(watermark_surrounding_backgroud_color_ranking)};font-size:9px')
+            code.move(int(初始x + x间隔 * 15+1), int(初始y + i * y间隔) + 11)
             code.resize(140, 30)
 
             temp = deepcopy(self.角色属性A)
