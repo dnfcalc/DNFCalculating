@@ -2274,10 +2274,10 @@ class 角色窗口(窗口):
 
         偏移 = (35 if self.初始属性.远古记忆 != -1 else 0) + (35 if self.初始属性.刀魂之卡赞 != -1
                                                     else 0) + 35
-        奶量buff力智label.move(970, 18 + counter * 80 + 10 + 偏移)
+        奶量buff力智label.move(970, 24 + counter * 80 + 10 + 偏移)
         奶量buff力智输入框 = QLineEdit(self.main_frame2)
         奶量buff力智输入框.setStyleSheet(文本框样式黄)
-        奶量buff力智输入框.move(1050, 15 + counter * 80 + 10 + 偏移)
+        奶量buff力智输入框.move(1050, 21 + counter * 80 + 10 + 偏移)
         奶量buff力智输入框.resize(50, 20)
         self.奶量buff输入.append(奶量buff力智输入框)
 
