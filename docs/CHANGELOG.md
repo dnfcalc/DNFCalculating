@@ -1,5 +1,18 @@
 ## Newest
 
+### 2021-11-01
+
+#### NewFeatures
+* 计算器新增用户识别码,为本机Mac地址MD5加密(无法反解)<br>
+主要用于预防部分用户打碟,可供后续ban选用户 ([2c7bbd](https://gitee.com/i_melon/DNFCalculating/commit/2c7bbdae9d5b72f73995fe8f891927d4ddebd31e))
+
+#### BugFixes
+* 修复在目录存在空格的情况下可能误删文件的情况 ([1eafb8](https://gitee.com/i_melon/DNFCalculating/commit/1eafb8fba8dcd939c936d23b9dfad7124c83c323))
+* 修正输出技能数据无法使用的情况 ([a2183a](https://gitee.com/i_melon/DNFCalculating/commit/a2183ae1fd610ff251a66571a6bf058b92b64fb3))
+
+
+## History
+
 ### 2021-10-27
 
 #### NewFeatures
@@ -68,8 +81,6 @@
 
 
 
-
-## History
 
 ### 2021-09-30
 
