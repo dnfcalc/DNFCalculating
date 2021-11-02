@@ -1942,13 +1942,16 @@ class 窗口(QWidget):
             详情按钮.move(int(初始x + x间隔 * 15), int(初始y + i * y间隔))
             详情按钮.resize(142, 30)
 
-            code = QtWidgets.QLabel(
-                '<font face="黑体">' + get_mac_address() + '</font>',
-                滚动排行.topFiller)
+            code = MyQLabel(滚动排行.topFiller)
+            code.setText('<font face="黑体">' + get_mac_address() + '</font>')
             # code.setText('abdhfosnd39dkws2dfsddd')
-            code.setStyleSheet(f'{make_watermark_qt_color_string(watermark_surrounding_backgroud_color_ranking)};font-size:9px')
-            code.move(int(初始x + x间隔 * 15+1), int(初始y + i * y间隔) + 11)
+            code.setStyleSheet(
+                f'{make_watermark_qt_color_string(watermark_surrounding_backgroud_color_ranking)};font-size:9px'
+            )
+            code.move(int(初始x + x间隔 * 15 + 1), int(初始y + i * y间隔) + 11)
             code.resize(140, 30)
+            code.connect_customized_slot(
+                lambda index=显示序号[i]: self.输出界面(index))
 
             temp = deepcopy(self.角色属性A)
             技能等级溢出 = temp.等级溢出判断(

@@ -37,18 +37,21 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
+
 preferred = None
 try:
     if platform.system() != "Windows":
-        dllPath = resource_path(os.path.join("InternalFile", "DLL", "Preferred.so"))
+        dllPath = resource_path(
+            os.path.join("InternalFile", "DLL", "Preferred.so"))
         preferred = ctypes.CDLL(dllPath)
         # logger.info("Preferred included.")
     else:
-        dllPath = resource_path(os.path.join("InternalFile", "DLL", "Preferred.dll"))
+        dllPath = resource_path(
+            os.path.join("InternalFile", "DLL", "Preferred.dll"))
         preferred = ctypes.WinDLL(dllPath)
 except Exception as e:
     logger.error(e)
-    
+
 skillDataPath = resource_path("SkillData")
 
 # 100级史诗套数据
@@ -68,7 +71,7 @@ skillDataPath = resource_path("SkillData")
 
 奥兹玛套装 = ('阿斯特罗斯', '贝利亚斯', '雷德梅恩', '罗什巴赫', '泰玛特')
 
-希洛克部位列表 = ("下装","戒指","辅助装备")
+希洛克部位列表 = ("下装", "戒指", "辅助装备")
 
 希洛克套装 = ('奈克斯', '暗杀者', '卢克西', '守门人', '洛多斯')
 
@@ -87,8 +90,13 @@ skillDataPath = resource_path("SkillData")
     "武器": 11
 }
 
-颜色 = {'神话': '#E0502F', '史诗': '#FFB400',
-      '传说': '#FF7800', '神器': '#FF00FF', '稀有': '#B36BFF'}
+颜色 = {
+    '神话': '#E0502F',
+    '史诗': '#FFB400',
+    '传说': '#FF7800',
+    '神器': '#FF00FF',
+    '稀有': '#B36BFF'
+}
 
 总套装列表 = [防具套装, 首饰套装, 特殊套装, 上链左套装, 镯下右套装, 环鞋指套装]
 所有套装列表 = 防具套装 + 首饰套装 + 特殊套装 + 上链左套装 + 镯下右套装 + 环鞋指套装
@@ -340,22 +348,38 @@ class MyQComboBox(QComboBox):
         super().__init__(win)
         self.setView(QListView())
         self.setStyleSheet(下拉框样式)
-    
+
     def addItems(self, texts: Iterable[str]):
         for text in texts:
             self.addItem(text)
         pass
 
-    def addItem(self,text,userData=None):
+    def addItem(self, text, userData=None):
         if userData is None:
             userData = text
         text = trans(text)
-        super().addItem(text,userData)
+        super().addItem(text, userData)
         pass
+
 
 class MyQToolButton(QToolButton):
     DoubleClickSig = pyqtSignal(str)
 
-    def mouseDoubleClickEvent(self, e):   # 双击
+    def mouseDoubleClickEvent(self, e):  # 双击
         sigContent = self.objectName()
         self.DoubleClickSig.emit(sigContent)
+
+
+class MyQLabel(QtWidgets.QLabel):
+    # 自定义信号, 注意信号必须为类属性
+    button_clicked_signal = pyqtSignal()
+
+    def __init__(self, parent=None):
+        super(MyQLabel, self).__init__(parent)
+
+    def mouseReleaseEvent(self, QMouseEvent):
+        self.button_clicked_signal.emit()
+
+    # 可在外部与槽函数连接
+    def connect_customized_slot(self, func):
+        self.button_clicked_signal.connect(func)
