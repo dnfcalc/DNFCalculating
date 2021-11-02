@@ -1832,7 +1832,8 @@ class 窗口(QWidget):
         滚动排行.setMaximumSize(652, 1230)
         if len(筛选) == 0:
             # 滚动排行.setWindowTitle('当前模板配装排行（点击数字查看详情）'+"装备版本："+self.角色属性A.版本 + " 增幅版本：" + self.角色属性A.增幅版本)
-            滚动排行.setWindowTitle(trans('当前模板配装排行(点击数字查看详情)'))
+            滚动排行.setWindowTitle(
+                trans('当前模板配装排行(点击数字查看详情)') + ' {}'.format(get_mac_address()))
         else:
             temp = ''
             for name in 筛选.values():
@@ -1948,8 +1949,8 @@ class 窗口(QWidget):
             code.setStyleSheet(
                 f'{make_watermark_qt_color_string(watermark_surrounding_backgroud_color_ranking)};font-size:9px'
             )
-            code.move(int(初始x + x间隔 * 15 + 1), int(初始y + i * y间隔) + 11)
-            code.resize(140, 30)
+            code.move(int(初始x + x间隔 * 15 + 1), int(初始y + i * y间隔) + 17)
+            code.resize(140, 15)
             code.connect_customized_slot(
                 lambda index=显示序号[i]: self.输出界面(index))
 

@@ -2461,7 +2461,7 @@ class 角色窗口(窗口):
         pox_y2 = 11
         temp = ''
         if name == '':
-            temp += trans('详细数据')
+            temp += trans('详细数据') + ' 仅供参考 带节奏死个' + ' ' + get_mac_address()
         else:
             temp += name
         # temp += '（最多显示前18个技能）'+"装备版本:"+self.角色属性A.版本 + " 增幅版本:" + self.角色属性A.增幅版本
