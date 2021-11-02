@@ -9,6 +9,7 @@ from PublicReference.utils.common import *
 from PublicReference.view.DialogRegister import DefaultDialogRegister
 from PublicReference.equipment.冒险家名望 import *
 
+
 class 角色窗口(窗口):
     def __init__(self):
         self.初始属性: 辅助角色属性 = None
@@ -22,14 +23,16 @@ class 角色窗口(窗口):
 
     def 称号描述(self):
         temp = '<font size="3" face="宋体">'
-        temp += '<font color="#78FF1E">' + trans(self.称号.currentData()) + '</font><br>'
+        temp += '<font color="#78FF1E">' + trans(
+            self.称号.currentData()) + '</font><br>'
         temp += 称号列表[self.称号.currentIndex()].装备描述_BUFF(self.角色属性B)[:-4]
         temp += '</font>'
         return temp
 
     def 宠物描述(self):
         temp = '<font size="3" face="宋体">'
-        temp += '<font color="#78FF1E">' + self.宠物.currentData() + '</font><br>'
+        temp += '<font color="#78FF1E">' + self.宠物.currentData(
+        ) + '</font><br>'
         temp += 宠物列表[self.宠物.currentIndex()].装备描述_BUFF(self.角色属性B)[:-4]
         temp += '</font>'
         return temp
@@ -45,10 +48,10 @@ class 角色窗口(窗口):
         super().界面1()
 
         for i in 称号列表:
-            self.称号.addItem(trans(i.显示名称),i.名称)
+            self.称号.addItem(trans(i.显示名称), i.名称)
 
         for i in 宠物列表:
-            self.宠物.addItem(trans(i.显示名称),i.名称)
+            self.宠物.addItem(trans(i.显示名称), i.名称)
 
         标签 = QLabel(self.main_frame1)
         人物 = QPixmap('./ResourceFiles/' + self.角色属性A.实际名称 + "/职业.png")
@@ -108,8 +111,7 @@ class 角色窗口(窗口):
         重置按钮.setStyleSheet(按钮样式)
 
         self.排行参数 = MyQComboBox(self.main_frame1)
-        self.排行参数.addItems(
-            ['提升率排行', '面板排行', '力智排行', '三攻排行'])
+        self.排行参数.addItems(['提升率排行', '面板排行', '力智排行', '三攻排行'])
         self.排行参数.move(770, 545)
         self.排行参数.resize(100, 24)
 
@@ -687,7 +689,10 @@ class 角色窗口(窗口):
         self.技能设置输入[3].addItem('Lv30-50(主动)Lv+1')
 
         # 白金
-        skills = [trans('{$name}Lv+1',name = i.名称) for i in self.角色属性A.技能表.values() if i.所在等级 < 48]
+        skills = [
+            trans('{$name}Lv+1', name=i.名称) for i in self.角色属性A.技能表.values()
+            if i.所在等级 < 48
+        ]
 
         for j in [8, 9]:
             self.技能设置输入[j].addItems(skills)
@@ -700,7 +705,10 @@ class 角色窗口(窗口):
             'Lv20-30(所有)Lv+1', 'Lv1-80(所有)Lv+1'
         ])
 
-        skills = [trans('{$name}Lv+1',name = i.名称) for i in self.角色属性A.技能表.values() if i.所在等级 < 85]
+        skills = [
+            trans('{$name}Lv+1', name=i.名称) for i in self.角色属性A.技能表.values()
+            if i.所在等级 < 85
+        ]
 
         self.技能设置输入[16].addItems(skills)
 
@@ -1025,7 +1033,6 @@ class 角色窗口(窗口):
         换装设置.resize(80, 28)
         换装设置.setStyleSheet(按钮样式)
 
-    
         名望设置 = QPushButton('名望细节', self.main_frame5)
         名望设置.clicked.connect(lambda _: self.名望设置())
         名望设置.move(710, 610)
@@ -1038,7 +1045,7 @@ class 角色窗口(窗口):
             # 设置图标和背景 临时做法
             store.const("/app/window/icon", self.icon)
             store.const("/app/window/background_image", self.主背景图片)
-            store.watch("/fame/event/changed",lambda _, : self.自选计算(1))
+            store.watch("/fame/event/changed", lambda _, : self.自选计算(1))
             client = 名望窗口()
             client.初始化()
             return client
@@ -1715,8 +1722,7 @@ class 角色窗口(窗口):
         super().希洛克选择(index, x)
         store.emit("/{type}/data/siroco")
 
-    
-    def exports_store(self,page = [0,1,2,3,4]):
+    def exports_store(self, page=[0, 1, 2, 3, 4]):
         if 0 in page:
             # 第一页(装备/选择/打造)
             try:
@@ -1735,7 +1741,8 @@ class 角色窗口(窗口):
                 store.set('/{type}/data/thread_count',
                           self.线程数选择.currentIndex())
                 store.set('/{type}/data/equip_checked', self.装备选择状态)
-                store.set('/{type}/data/equip_forges', [i.currentIndex() for i in self.装备打造选项])
+                store.set('/{type}/data/equip_forges',
+                          [i.currentIndex() for i in self.装备打造选项])
             except Exception as error:
                 logger.error(error)
 
@@ -1969,10 +1976,12 @@ class 角色窗口(窗口):
             num += 1
 
         property.排行系数 = self.排行参数.currentIndex()
+        # print(self.排行选项[0].currentText())
+        # print(self.排行选项[0].currentData())
         property.C力智 = int(''.join(
-            filter(str.isdigit, self.排行选项[0].currentData())))
+            filter(str.isdigit, self.排行选项[0].currentText())))
         property.C三攻 = int(''.join(
-            filter(str.isdigit, self.排行选项[1].currentData())))
+            filter(str.isdigit, self.排行选项[1].currentText())))
         property.排行类型 = self.排行选项[2].currentData()
 
         if self.排行选项[3].currentIndex() == 0:
@@ -2184,7 +2193,7 @@ class 角色窗口(窗口):
             总奶量 += ',智力+' + str(round(合计智力))
 
         if 合计物攻 == 合计魔攻 and 合计魔攻 == 合计独立:
-            总奶量 += ','+trans('三攻') + '+' + str(round(合计物攻))
+            总奶量 += ',' + trans('三攻') + '+' + str(round(合计物攻))
         else:
             总奶量 += ',物攻+' + str(round(合计物攻))
             总奶量 += ',魔攻+' + str(round(合计魔攻))
@@ -2732,20 +2741,20 @@ class 角色窗口(窗口):
                 tempstr += ',智力' + 对比智力
 
             if 对比物攻 == 对比魔攻 and 对比魔攻 == 对比独立:
-                tempstr += ','+trans('三攻') + 对比物攻
+                tempstr += ',' + trans('三攻') + 对比物攻
             else:
                 tempstr += ',物攻' + 对比物攻
                 tempstr += ',魔攻' + 对比魔攻
                 tempstr += ',独立' + 对比独立
         else:
             if 合计力量 == 合计智力:
-                tempstr += trans('力智')+'+' + str(round(合计力量))
+                tempstr += trans('力智') + '+' + str(round(合计力量))
             else:
                 tempstr += '力量+' + str(round(合计力量))
                 tempstr += ',智力+' + str(round(合计智力))
 
             if 合计物攻 == 合计魔攻 and 合计魔攻 == 合计独立:
-                tempstr += ','+trans('三攻')+'+' + str(round(合计物攻))
+                tempstr += ',' + trans('三攻') + '+' + str(round(合计物攻))
             else:
                 tempstr += ',物攻+' + str(round(合计物攻))
                 tempstr += ',魔攻+' + str(round(合计魔攻))
@@ -2925,20 +2934,21 @@ class 角色窗口(窗口):
         try:
             self.exports_store()
             更新人物名望()
-                # TODO: 重新布局
+            # TODO: 重新布局
             总名望 = store.get("/fame/temp_result")
             名望详情 = store.get("/fame/temp_result/detail")
             if 总名望 > 0:
-                bmi = pow(提升率,2) / 1e5   / pow((总名望 / 1e4 - 0.5), 3)
+                bmi = pow(提升率, 2) / 1e5 / pow((总名望 / 1e4 - 0.5), 3)
                 templabel = QLabel(输出窗口)
-                templabel.setText("名望 {}({})".format(
-                    str(总名望), str(round(bmi, 2))))
+                templabel.setText("名望 {}({})".format(str(总名望),
+                                                     str(round(bmi, 2))))
                 templabel.setStyleSheet(
-                        "QLabel{font-size:12px;color:rgb(255,255,255)}")
+                    "QLabel{font-size:12px;color:rgb(255,255,255)}")
                 templabel.move(130, 110)
                 templabel.resize(100, 42)
-                templabel.setToolTip('系数计算公式:bmi = pow(提升率,2) / 1e5   / pow((总名望 / 1e4 - 0.5), 3)<br>'
-                    +str(名望详情) )
+                templabel.setToolTip(
+                    '系数计算公式:bmi = pow(提升率,2) / 1e5   / pow((总名望 / 1e4 - 0.5), 3)<br>'
+                    + str(名望详情))
 
         except Exception as e:
             logger.error(e)
@@ -2953,7 +2963,9 @@ class 角色窗口(窗口):
         for i in range(4):
             k = self.辟邪玉选择[i].currentIndex()
             if k > 0:
-                temp += trans('{$name}$value<br>',name = 辟邪玉列表[k].简称, value = self.辟邪玉数值[i].currentData())
+                temp += trans('{$name}$value<br>',
+                              name=辟邪玉列表[k].简称,
+                              value=self.辟邪玉数值[i].currentData())
                 num += 1
         辟邪玉颜色 = 颜色[{4: '史诗', 3: '传说', 2: '神器', 1: '稀有'}.get(num, '稀有')]
         if x == 0:
@@ -2962,7 +2974,9 @@ class 角色窗口(窗口):
             if num == 0:
                 return ''
             else:
-                return trans('<font color="$color">{辟邪玉}:<br>$effect</font>',color = 辟邪玉颜色, effect = temp[:-4])
+                return trans('<font color="$color">{辟邪玉}:<br>$effect</font>',
+                             color=辟邪玉颜色,
+                             effect=temp[:-4])
 
     def 装备描述_BUFF计算(self, property):
         tempstr = []
@@ -2974,7 +2988,11 @@ class 角色窗口(窗口):
             奥兹玛选择状态[i % 5] += self.奥兹玛选择状态[i]
         for i in range(12):
             装备 = equ.get_equ_by_name(property.装备栏[i])
-            tempstr.append(trans('<font size="3" face="宋体"><font color="$color"> {$name}</font><br>',color = 颜色[装备.品质],name=装备.名称))
+            tempstr.append(
+                trans(
+                    '<font size="3" face="宋体"><font color="$color"> {$name}</font><br>',
+                    color=颜色[装备.品质],
+                    name=装备.名称))
             if 装备.所属套装 != '无':
                 if 装备.所属套装 != '智慧产物':
                     y = ' ' + 装备.所属套装
@@ -2988,7 +3006,10 @@ class 角色窗口(窗口):
             if i == 11:
                 y += ' ' + 装备.类型
 
-            tempstr[i] +=trans('{Lv}$level {$rarity} {$name}',level = 装备.等级, rarity = 装备.品质, name = y )   
+            tempstr[i] += trans('{Lv}$level {$rarity} {$name}',
+                                level=装备.等级,
+                                rarity=装备.品质,
+                                name=y)
             if i < 5:
                 x = property.防具精通计算(i)
                 tempstr[i] += trans('<br>{防具精通}: ')
@@ -3001,27 +3022,37 @@ class 角色窗口(窗口):
             if 装备.所属套装 != '智慧产物':
                 if property.强化等级[i] != 0:
                     if i in [9, 10]:
-                        tempstr[i] +=trans('<br><font color="#68D5ED">+$value {强化}：',value = property.强化等级[i])
-                        tempstr[i] += trans('{四维} +$value </font>',value = 左右计算(100, 装备.品质, property.强化等级[i])) 
+                        tempstr[i] += trans(
+                            '<br><font color="#68D5ED">+$value {强化}：',
+                            value=property.强化等级[i])
+                        tempstr[i] += trans('{四维} +$value </font>',
+                                            value=左右计算(100, 装备.品质,
+                                                       property.强化等级[i]))
 
                 if property.武器锻造等级 != 0:
                     if i == 11:
-                        tempstr[i] += trans('<br><font color="#B36BFF">+$value  {锻造}  ',value = property.武器锻造等级) 
-                        tempstr[i] += trans("{四维} +$value </font>",value =锻造四维(装备.等级, 装备.品质, property.武器锻造等级))
+                        tempstr[i] += trans(
+                            '<br><font color="#B36BFF">+$value  {锻造}  ',
+                            value=property.武器锻造等级)
+                        tempstr[i] += trans("{四维} +$value </font>",
+                                            value=锻造四维(装备.等级, 装备.品质,
+                                                       property.武器锻造等级))
 
                 if property.是否增幅[i] == 1:
-                    value = 增幅计算(装备.等级, 装备.品质, property.强化等级[i],
-                                 property.增幅版本)
+                    value = 增幅计算(装备.等级, 装备.品质, property.强化等级[i], property.增幅版本)
                     if tempstr[i] != '':
                         tempstr[i] += '<br>'
-                    tempstr[i] += trans('<font color="#FF00FF">+$value {增幅}：',value = property.强化等级[i])
+                    tempstr[i] += trans('<font color="#FF00FF">+$value {增幅}：',
+                                        value=property.强化等级[i])
                     if '体力' in property.类型:
-                        tempstr[i] += trans('{异次元体力} +$value</font>',value = value)
+                        tempstr[i] += trans('{异次元体力} +$value</font>',
+                                            value=value)
                     elif '精神' in property.类型:
-                        tempstr[i] += trans('{异次元精神} +$value</font>',value = value)
+                        tempstr[i] += trans('{异次元精神} +$value</font>',
+                                            value=value)
                     elif '智力' in property.类型:
-                        tempstr[i] += trans('{异次元智力} +$value</font>',value = value)
-
+                        tempstr[i] += trans('{异次元智力} +$value</font>',
+                                            value=value)
 
             if tempstr[i] != '':
                 tempstr[i] += '<br>'
@@ -3105,7 +3136,6 @@ class 角色窗口(窗口):
                 tempstr[i] += 被动增加(property, 被动进图加成=80)
             if self.角色属性B.希洛克武器词条 > 0 and i == 11:
 
-
                 # tempstr[i]+='<br>'
                 tempstr[i] += 希洛克title
 
@@ -3129,7 +3159,6 @@ class 角色窗口(窗口):
                     c = 武器属性B.最大值,\
                     d = '%' if 武器属性B.间隔 / 10 < 1 else '')
 
-
             if 部位 in 奥兹玛部位列表:
                 index = 奥兹玛部位列表.index(部位)
                 cur = -1
@@ -3138,7 +3167,8 @@ class 角色窗口(窗口):
                         cur = j
                         break
                 if cur > 0:
-                    tempstr[i] += trans('<font color="#00A2E8">{奥兹玛融合属性}：</font><br>')
+                    tempstr[i] += trans(
+                        '<font color="#00A2E8">{奥兹玛融合属性}：</font><br>')
                     tempstr[i] += str(OzmaList[cur](property))
             property.装备描述 = 0
 
