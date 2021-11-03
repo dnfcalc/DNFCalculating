@@ -1,10 +1,10 @@
 # 宠物属性部分
 from PublicReference.equipment.base_item import Item
 
-宠物列表 = [None] * 16
+宠物列表 = [None] * 17
 
 
-class 宠物15(Item):
+class 宠物16(Item):
     显示名称 = '(21)至尊·火神的化身'
     名称 = '火神的化身'
 
@@ -29,7 +29,7 @@ class 宠物15(Item):
         return temp
 
 
-class 宠物14(Item):
+class 宠物15(Item):
     显示名称 = '(21)普通·骑士/精灵使'
     名称 = '骑士/精灵使'
 
@@ -54,7 +54,7 @@ class 宠物14(Item):
         return temp
 
 
-class 宠物13(Item):
+class 宠物14(Item):
     显示名称 = '(21)夏日之恋莱森德'
     名称 = '夏日之恋莱森德'
 
@@ -79,7 +79,7 @@ class 宠物13(Item):
         return temp
 
 
-class 宠物12(Item):
+class 宠物13(Item):
     显示名称 = '(21)夏日之恋赫米雅'
     名称 = '夏日之恋赫米雅'
 
@@ -104,7 +104,7 @@ class 宠物12(Item):
         return temp
 
 
-class 宠物11(Item):
+class 宠物12(Item):
     显示名称 = '(21)比拉谢尔号'
     名称 = '比拉谢尔号'
 
@@ -129,7 +129,7 @@ class 宠物11(Item):
         return temp
 
 
-class 宠物10(Item):
+class 宠物11(Item):
     显示名称 = '(20)至尊·暴风圣女'
     名称 = '暴风圣女'
 
@@ -156,7 +156,7 @@ class 宠物10(Item):
         return temp
 
 
-class 宠物9(Item):
+class 宠物10(Item):
     显示名称 = '(19)至尊·神迹·莱恩'
     名称 = '神迹·莱恩'
 
@@ -183,7 +183,7 @@ class 宠物9(Item):
         return temp
 
 
-class 宠物8(Item):
+class 宠物9(Item):
     显示名称 = '(20)普通·神官'
     名称 = '神官格洛丽亚'
 
@@ -208,7 +208,7 @@ class 宠物8(Item):
         return temp
 
 
-class 宠物7(Item):
+class 宠物8(Item):
     显示名称 = '(19)至尊·莱恩'
     名称 = '古国英豪莱恩'
 
@@ -233,7 +233,7 @@ class 宠物7(Item):
         return temp
 
 
-class 宠物6(Item):
+class 宠物7(Item):
     显示名称 = '(19)普通·莱恩'
     名称 = '骑士莱恩'
 
@@ -256,7 +256,7 @@ class 宠物6(Item):
         return temp
 
 
-class 宠物5(Item):
+class 宠物6(Item):
     显示名称 = '(18)至尊·蒂娅'
     名称 = '冰雪魔法师蒂娅'
 
@@ -279,7 +279,7 @@ class 宠物5(Item):
         return temp
 
 
-class 宠物4(Item):
+class 宠物5(Item):
     显示名称 = '(18)普通·蒂娅'
     名称 = '雪兔蒂娅'
 
@@ -302,7 +302,7 @@ class 宠物4(Item):
         return temp
 
 
-class 宠物3(Item):
+class 宠物4(Item):
     显示名称 = '(17)克里斯'
     名称 = '克里斯'
 
@@ -327,7 +327,7 @@ class 宠物3(Item):
         return temp
 
 
-class 宠物2(Item):
+class 宠物3(Item):
     显示名称 = '(16)关羽'
     名称 = '关羽'
 
@@ -350,7 +350,7 @@ class 宠物2(Item):
         return temp
 
 
-class 宠物1(Item):
+class 宠物2(Item):
     显示名称 = '(15)墨仙雪莲'
     名称 = '墨仙雪莲'
 
@@ -374,6 +374,25 @@ class 宠物1(Item):
         temp += 'Lv1-50 技能等级+1<br>'
         return temp
 
+class 宠物1(Item):
+    显示名称 = '心悦宠物'
+    名称 = '心悦宠物'
+
+    def 城镇属性(self, 属性):
+        属性.力量 += 100
+        属性.智力 += 100
+        属性.所有属性强化加成(20)
+        属性.附加伤害加成(0.5)
+        属性.技能等级加成('所有', 1, 50, 1)
+
+    def 装备描述(self, 属性):
+        temp = ''
+        temp += '力量 +100<br>'
+        temp += '智力 +100<br>'
+        temp += '所有属性强化 +20<br>'
+        temp += '附加伤害 +5%<br>'
+        temp += 'Lv1-50 技能等级+1<br>'
+        return temp
 
 class 宠物0(Item):
     显示名称 = '无'
