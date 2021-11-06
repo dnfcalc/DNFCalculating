@@ -261,7 +261,7 @@ class 技能13(职业主动技能):
         if x == 0:
             self.攻击次数 = 8
             self.data1 = [int(x*2) for x in self.data1]
-            self.倍率2 = 2
+            # self.倍率2 = 2
         elif x == 1:
             self.攻击次数 = 8
             self.data1 = [int(x*2.16) for x in self.data1]
@@ -311,10 +311,11 @@ class 技能16(职业主动技能):
     def 装备护石(self, x):
         if x == 0:
             self.data1 = [int(x*1.36) for x in self.data1]
-            self.倍率2 *= 1.36
+            # self.倍率2 *= 1.36
             self.CD *= 0.9
         elif x == 1:
-            self.倍率2 *= 1.49
+            self.data1 = [int(x*1.49) for x in self.data1]
+            # self.倍率2 *= 1.49
             self.CD *= 0.9
 
 
