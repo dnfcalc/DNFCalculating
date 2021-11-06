@@ -2506,6 +2506,10 @@ class 角色窗口(窗口):
                                 i.名称 for i in self.角色属性A.技能栏
                                 if i.所在等级 <= 70 and i.所在等级 not in [48, 50]
                             ]
+                            if self.角色属性A.实际名称 == '极诣·黑暗武士':
+                                skills.append('幽魂剑')
+                            if self.角色属性A.实际名称 == '知源·缔造者':
+                                skills.append('末日虫洞')
 
                         for skill_name in skills:
                             templist[n].addItem(
