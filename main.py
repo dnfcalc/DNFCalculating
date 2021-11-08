@@ -444,7 +444,8 @@ class 选择窗口(QWidget):
         职业 = importlib.import_module(module_name)
         char = eval("职业." + className + '()')
         increase_counter(ga_category="职业使用", name=className)
-        increase_counter(ga_category="用户职业使用", name=get_mac_address())
+        if get_mac_address() != '':
+            increase_counter(ga_category="用户职业使用", name=get_mac_address())
         self.char_window = MainWindow(char)
         self.char_window.show()
 

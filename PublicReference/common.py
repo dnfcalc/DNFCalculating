@@ -372,7 +372,8 @@ class 窗口(QWidget):
             self.window_btn[-1].resize(int(self.width() / self.页面数量 - 8), 21)
             self.window_btn[-1].move((self.window_btn[-1].width()) * i + 10, 6)
             self.window_btn[-1].clicked.connect(
-                lambda state, index=i: self.click_window(index))
+                lambda state, index=i, name=self.页面名称[i]: self.click_window(
+                    index, info=name))
             self.window_btn[-1].DoubleClickSig.connect(
                 lambda state, index=i: self.重置页面(index))
 
@@ -1388,7 +1389,9 @@ class 窗口(QWidget):
         else:
             i.setStyleSheet(下拉框样式)
 
-    def click_window(self, index):
+    def click_window(self, index, info=''):
+        if info != '':
+            increase_counter(ga_category="界面使用情况", name=info)
         self.当前页面 = index
         if self.stacked_layout.currentIndex() != index:
             self.stacked_layout.setCurrentIndex(index)

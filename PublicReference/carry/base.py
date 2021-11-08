@@ -1724,7 +1724,7 @@ class 角色窗口(窗口):
 
     def 界面1(self):
         super().界面1()
-        increase_counter(ga_category="carry界面", name="界面/选择/打造")
+        # increase_counter(ga_category="carry界面", name="界面/选择/打造")
 
         for i in 称号列表:
             self.称号.addItem(trans(i.显示名称), i.名称)
@@ -1825,7 +1825,7 @@ class 角色窗口(窗口):
             self.一键站街设置输入[i].move(940 + i * 57, 424)
 
         一键修正按钮 = QPushButton(trans('一键修正面板细节'), self.main_frame1)
-        一键修正按钮.clicked.connect(lambda state: self.一键修正())
+        一键修正按钮.clicked.connect(lambda state: self.一键修正(0))
         一键修正按钮.move(940, 450)
         一键修正按钮.resize(166, 25)
         一键修正按钮.setStyleSheet(按钮样式)
@@ -1918,7 +1918,7 @@ class 角色窗口(窗口):
 
     def 界面2(self):
         # 第二个布局界面
-        increase_counter(ga_category="carry界面", name="技能/符文/药剂")
+        # increase_counter(ga_category="carry界面", name="技能/符文/药剂")
         # 技能等级、TP、次数输入、宠物次数
         self.BUFF输入 = QLineEdit(self.main_frame2)
         self.时间输入 = MyQComboBox(self.main_frame2)
@@ -2359,7 +2359,7 @@ class 角色窗口(窗口):
         self.计算按钮2.setStyleSheet(按钮样式)
 
     def 界面3(self):
-        increase_counter(ga_category="carry界面", name="基础/细节/修正")
+        # increase_counter(ga_category="carry界面", name="基础/细节/修正")
         # 第三个布局界面
         self.属性设置输入 = []
         self.细节选项输入 = []
@@ -2600,7 +2600,7 @@ class 角色窗口(窗口):
         self.计算按钮3.setStyleSheet(按钮样式)
 
     def 界面5(self):
-        increase_counter(ga_category="carry界面", name="自选装备计算")
+        # increase_counter(ga_category="carry界面", name="自选装备计算")
         # 第五个布局
         标签 = QLabel(trans('单件选择'), self.main_frame5)
         标签.setAlignment(Qt.AlignCenter)
@@ -2912,7 +2912,7 @@ class 角色窗口(窗口):
         self.自选计算(1)
 
     def 界面6(self):
-        increase_counter(ga_category="carry界面", name="辟邪玉/希洛克/黑鸦/奥兹玛")
+        # increase_counter(ga_category="carry界面", name="辟邪玉/希洛克/黑鸦/奥兹玛")
         横坐标 = 10
         纵坐标 = 0
 
