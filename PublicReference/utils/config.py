@@ -19,6 +19,7 @@ global 天劫光环
 global 战术白字
 global 天御套装
 global 千蛛减防
+global currentVersion
 
 配置格式有误 = False
 
@@ -138,3 +139,8 @@ for i in range(100):
 
 if len(攻击目标) == 0:
     攻击目标 = [['120沙袋(绿)', 443243, 0, 0, 0, 0]]
+
+with open("ResourceFiles/Config/release_version.json") as fp:
+    versionInfo = json.load(fp)
+    currentVersion = versionInfo['version'].replace('-', '.')
+    # self.自动检查版本 = versionInfo['AutoCheckUpdate']

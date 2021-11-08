@@ -1,4 +1,3 @@
-from PublicReference.base_fame import *
 from PublicReference.equipment.equ_list import *
 from PublicReference.equipment.称号 import *
 from PublicReference.equipment.宠物 import *
@@ -1292,7 +1291,6 @@ class 角色属性(属性):
             try:
                 self.全局自适应()
             except Exception as error:
-                logger.info("----------------")
                 logger.error(error)
                 self.贪心自适应()
         for i in range(len(self.择优结果)):

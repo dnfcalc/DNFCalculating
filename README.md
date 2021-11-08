@@ -48,8 +48,8 @@ python(3.8)编写，使用 pyqt5 图形 GUI 库
 　　　　|--　 Characters：职业实现目录  
 　　　　|--　 PublicReference：公有引用方法  
 　　　　|　　　|--　 base.py：输出职业公有实现方法  
-　　　　|　　　|--　 base_buff.py：奶系职业公有实现方法  
-　　　　|　　　|--　 buff_panel.py：奶系切装功能实现  
+　　　　|　　　|--　 base.py：奶系职业公有实现方法  
+　　　　|　　　|--　 panel.py：奶系切装功能实现  
 　　　　|　　　|--　 common.py：界面公有实现方法  
 　　　　|　　　|--　 \_\_init\_\_.py：初始化文件，启用多线程及日志记录  
 　　　　|　　　|--　 choise：选项设置  

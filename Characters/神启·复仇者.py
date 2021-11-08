@@ -1,5 +1,5 @@
 from math import *
-from PublicReference.base import *
+from PublicReference.carry.base import *
 
 # 技能后的倍率是魔化后的倍率
 

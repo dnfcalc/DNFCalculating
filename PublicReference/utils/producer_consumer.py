@@ -9,7 +9,7 @@
 import multiprocessing
 import traceback
 
-from PublicReference import logger
+from .log import logger
 
 thread_num = multiprocessing.cpu_count()
 thread_task = 4

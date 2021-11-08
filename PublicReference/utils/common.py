@@ -7,7 +7,8 @@
 # Email     : fzls.zju@gmail.com
 # -------------------------------
 import re
-from typing import Iterable, Protocol, Mapping
+from typing import Iterable
+from .log import *
 
 
 # 格式化时间为比较美观的格式

@@ -1,4 +1,4 @@
-from PublicReference.base import *
+from PublicReference.carry.base import *
 
 
 class 极诣·驭剑士主动技能(主动技能):

@@ -1,4 +1,4 @@
-from PublicReference.base_buff import *
+from PublicReference.buffer.base import *
 
 
 class BUFF·神启·圣骑士技能0(被动技能):

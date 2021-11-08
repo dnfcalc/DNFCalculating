@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from .constant import 标题背景, 标题字体
+from PublicReference.utils.constant import 标题背景, 标题字体
 
 RES_PATH = './ResourceFiles/img/UI/'
 

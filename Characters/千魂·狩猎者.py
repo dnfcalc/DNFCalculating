@@ -1,4 +1,4 @@
-from PublicReference.base import *
+from PublicReference.carry.base import *
 
 
 class 职业主动技能(主动技能):

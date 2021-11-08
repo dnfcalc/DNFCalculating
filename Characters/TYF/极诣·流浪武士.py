@@ -1,4 +1,4 @@
-from PublicReference.base import *
+from PublicReference.carry.base import *
 
 
 class 技能0(被动技能):

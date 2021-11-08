@@ -1,8 +1,7 @@
 from ctypes import *
 
-from PublicReference.buff_panel import *
-from PublicReference.buff_property import *
-from PublicReference.base_fame import *
+from .panel import *
+from .property import *
 from PublicReference.choise.选项设置_buff import *
 from PublicReference.common import *
 from PublicReference.utils.common import *
@@ -1097,7 +1096,7 @@ class 角色窗口(窗口):
             client.初始化()
             return client
 
-        DefaultDialogRegister.showDialog("buff_panel({})".format(type(self)),
+        DefaultDialogRegister.showDialog("panel({})".format(type(self)),
                                          createClient, self)
 
     def 时装选项更新(self, index):

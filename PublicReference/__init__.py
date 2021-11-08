@@ -6,30 +6,10 @@
 # Author    : Chen Ji
 # Email     : fzls.zju@gmail.com
 # -------------------------------
-import logging
-import multiprocessing
-import pathlib
-import sys
-from datetime import datetime
 
 from .utils.common import *
-
-###########################################################
-#                         logging                         #
-###########################################################
-logFormatter = logging.Formatter(
-    "%(asctime)s %(levelname)-5.5s [%(name)s] %(funcName)s:%(lineno)d: %(message)s"
-)
-logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
-logger.name = "DNFCalculating"
-
-log_directory = "logs"
-try:
-    pathlib.Path(log_directory).mkdir(parents=True, exist_ok=True)
-except PermissionError as err:
-    print("创建日志目录logs失败，请确认是否限制了基础的运行权限")
-    sys.exit(-1)
+import multiprocessing
+from datetime import datetime
 
 process_name = multiprocessing.current_process().name
 time_str = datetime.now().strftime('%Y_%m_%d_%H_%M_%S')

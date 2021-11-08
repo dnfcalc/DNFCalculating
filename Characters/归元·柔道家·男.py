@@ -1,4 +1,4 @@
-from PublicReference.base import *
+from PublicReference.carry.base import *
 
 # 武器选择
 # class 主动技能(主动技能):

@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtCore
 import importlib
 from PublicReference.common import *
-from PublicReference.utils.MainWindow import *
+from PublicReference.view.MainWindow import *
 from PublicReference.utils.calc_core import calc_core
 from PublicReference.utils.producer_consumer import producer_data, consumer, thread_num
 import traceback
@@ -178,10 +178,8 @@ class 选择窗口(QWidget):
                   encoding='utf-8') as fp:
             角色列表 = json.load(fp)
         fp.close()
-        with open("ResourceFiles/Config/release_version.json") as fp:
-            versionInfo = json.load(fp)
-            self.计算器版本 += versionInfo['version'].replace('-', '.')
-            # self.自动检查版本 = versionInfo['AutoCheckUpdate']
+        self.计算器版本 = currentVersion
+        # self.自动检查版本 = versionInfo['AutoCheckUpdate']
         fp.close()
         self.setWindowTitle(trans('DNF搭配计算器&17173DNF专区'))
         self.icon = QIcon('ResourceFiles/img/logo.ico')

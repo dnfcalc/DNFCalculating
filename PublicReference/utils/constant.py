@@ -14,7 +14,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QUrl
 
-from PublicReference import logger
+from .log import logger
 from .calc_core import CalcData
 from .common import format_time
 from .minheap import MinHeap, MinHeapWithQueue, batch_size

@@ -1,4 +1,4 @@
-from PublicReference.base_buff import *
+from PublicReference.buffer.base import *
 
 
 class 知源·小魔女技能0(被动技能):
