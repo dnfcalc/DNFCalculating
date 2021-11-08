@@ -18,7 +18,7 @@ class CalcData():
         self.智慧产物限制 = 3
 
         self.minheap_queue = None  # type: Queue
-        self.角色属性A = None  # type: 角色属性
+        self.角色属性A = None
 
         # 被分配的计算范围
         self.mode_index = 0  # 0-极速模式，1-套装模式，2-散件模式

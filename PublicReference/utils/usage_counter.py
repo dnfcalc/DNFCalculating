@@ -7,6 +7,7 @@ from functools import wraps
 from typing import Any, Callable, Tuple
 from urllib.parse import quote_plus
 from .config import currentVersion
+import sys
 
 import requests
 
@@ -69,6 +70,8 @@ def increase_counter(name: Any = "",
                      ga_type=GA_REPORT_TYPE_EVENT,
                      ga_category="",
                      ga_misc_params: dict = None):
+    if "main.py" in sys.argv[0]:
+        return
     name = str(name)
 
     if name == "":
