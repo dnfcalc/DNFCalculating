@@ -324,8 +324,13 @@ class 选择窗口(QWidget):
             QMessageBox.Question, "提示",
             "配置文件有误，程序将以默认设置开启！\n请检查以下文件\nResourceFiles\\Config\\基础设置.ini\nResourceFiles\\Config\\攻击目标.ini\nResourceFiles\\Skins\\Skin.ini\n是否以UTF-8编码存储且文件内格式正确"
         )
-        self.版本提示 = QMessageBox(QMessageBox.Question, "提示",
-                                trans("此工具为开源免费软件\n如遇二次售卖获利,请协助反馈举报~"))
+        self.版本提示 = QMessageBox(QMessageBox.Question, "用户须知",
+                                trans("此工具为开源免费软件\n如遇二次售卖获利,请协助反馈举报~")+'\n同时,计算器预设了埋点,收集使用情况供功能分析优化,如:职业打开情况、页签打开情况、按钮使用情况等')
+        self.版本提示.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        self.版本提示A = self.版本提示.button(QMessageBox.Yes)
+        self.版本提示B = self.版本提示.button(QMessageBox.No)
+        self.版本提示A.setText('已知悉')
+        self.版本提示B.setText('退出')
         try:
             if 自动检查更新 == 0:
                 repJson = requests.get(
@@ -773,6 +778,7 @@ if __name__ == '__main__':
     instance._signal.connect(instance.closeSet)
     win = MainWindow(instance)
     win.show()
+    用户须知 = False
 
     try:
         instance.报错提示.exec()
@@ -783,6 +789,7 @@ if __name__ == '__main__':
             with open("ResourceFiles/Config/release_version.json", "r+") as fp:
                 versionInfo = json.load(fp)
                 展示信息 = versionInfo['ShowChangeLog']
+                用户须知 = versionInfo['agreement']
                 versionInfo['ShowChangeLog'] = False
                 fp.seek(0)
                 json.dump(versionInfo, fp, ensure_ascii=False)
@@ -804,16 +811,31 @@ if __name__ == '__main__':
             fp.close()
             if ("main.py" not in sys.argv[0]) and 配置格式有误:
                 instance.配置错误.exec()
+            if not 用户须知:
+                instance.版本提示.exec()
+                if instance.版本提示.clickedButton() == instance.版本提示A:
+                    with open("ResourceFiles/Config/release_version.json", "r+") as fp:
+                        versionInfo = json.load(fp)
+                        versionInfo['agreement'] = True
+                        用户须知 = True
+                        fp.seek(0)
+                        json.dump(versionInfo, fp, ensure_ascii=False)
+                        fp.truncate()
+                    fp.close()
+                else:
+                    os.system("taskkill /pid {} -f".format(主进程PID))
             if ("main.py" not in sys.argv[0]
                 ) and instance.通知时间 != 通知时间 and 多语言开关 == 0 and 自动检查更新 == 0:
                 instance.消息通知.exec()
             if ("main.py" not in sys.argv[0]) and 展示信息 and 多语言开关 == 0:
                 QDesktopServices.openUrl(
                     QUrl('http://dnf.17173.com/jsq/changlog.html#/'))
-                instance.版本提示.exec()
+
         except Exception as error:
             logger.error("error={} \n detail {}".format(
                 error, traceback.print_exc()))
             pass
-
-    app.exec_()
+    else:
+        用户须知 = True
+    if 用户须知:
+        app.exec_()
