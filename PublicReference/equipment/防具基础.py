@@ -388,6 +388,7 @@ from decimal import Decimal
     "轮回·鲜红血纹皮甲胸铠": (91, 91, 0, 0),
 }
 
+
 def 设置防具基础(装备):
     装备.力量 = {}
     装备.智力 = {}
@@ -395,8 +396,9 @@ def 设置防具基础(装备):
     装备.精神 = {}
     a = 防具额外.get(装备.名称, (0, 0, 0, 0))
     for i in ['布甲', '皮甲', '轻甲', '重甲', '板甲']:
-        b = 防具基础.get('{}-{}-{}-{}'.format(装备.等级, 装备.品质, i, 装备.部位), (0, 0, 0, 0))
-        装备.力量.update({i:round((a[0] + b[0]) * Decimal(1.1))})
-        装备.智力.update({i:round((a[1] + b[1]) * Decimal(1.1))})
-        装备.体力.update({i:round((a[2] + b[2]) * Decimal(1.1))})
-        装备.精神.update({i:round((a[3] + b[3]) * Decimal(1.1))})
+        b = 防具基础.get('{}-{}-{}-{}'.format(装备.等级, 装备.品质, i, 装备.部位),
+                     (0, 0, 0, 0))
+        装备.力量.update({i: round((a[0] + b[0]) * Decimal(1.1))})
+        装备.智力.update({i: round((a[1] + b[1]) * Decimal(1.1))})
+        装备.体力.update({i: round((a[2] + b[2]) * Decimal(1.1))})
+        装备.精神.update({i: round((a[3] + b[3]) * Decimal(1.1))})

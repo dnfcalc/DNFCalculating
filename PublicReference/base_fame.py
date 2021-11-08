@@ -50,7 +50,9 @@ class 名望窗口(Page):
         count = 0
         名望细节 = store.get("/fame/selection")
         徽章名望细节 = store.get("/fame/selection2")
-        label = QLabel('第一列为附魔名望选择<br>第二列为徽章名望选择<br>闪耀26名望,华丽30名望,灿烂36名望<br>玲珑46名望,白金232名望', self)
+        label = QLabel(
+            '第一列为附魔名望选择<br>第二列为徽章名望选择<br>闪耀26名望,华丽30名望,灿烂36名望<br>玲珑46名望,白金232名望',
+            self)
         label.setStyleSheet(标签样式_2)
         label.resize(220, 100)
         label.move(20 + 220, 10 + 30 * 5)
@@ -66,7 +68,7 @@ class 名望窗口(Page):
             label = QLabel(部位, self)
             label.setStyleSheet(标签样式)
             label.resize(70, 22)
-            label.move(20 + int(idx / 18)* 220, 10 + 30 * (idx % 18))
+            label.move(20 + int(idx / 18) * 220, 10 + 30 * (idx % 18))
 
             x = MyQComboBox(self)
             x.placeholderText = 部位
@@ -74,13 +76,12 @@ class 名望窗口(Page):
             defaultValue = defaultValueTable[部位]
             for value in values:
                 x.addItem(str(value))
-            x.currentIndexChanged.connect(lambda:self.更新名望细节())
+            x.currentIndexChanged.connect(lambda: self.更新名望细节())
             defaultIndex = values.index(defaultValue)
             x.setCurrentIndex(defaultIndex)
             x.resize(55, 20)
             x.move(90 + int(idx / 18) * 220, 10 + 30 * (idx % 18))
             self.自选附魔名望选项.append(x)
-
 
             徽章值 = 徽章名望选项.get(部位, None)
             if 徽章值 != None:
@@ -93,11 +94,10 @@ class 名望窗口(Page):
                 defaultIndex = 徽章值.index(徽章默认值)
                 徽章选项.setCurrentIndex(defaultIndex)
                 徽章选项.resize(55, 20)
-                徽章选项.move(90 + 70 + int(idx / 18)* 220, 10 + 30 * (idx % 18))
+                徽章选项.move(90 + 70 + int(idx / 18) * 220, 10 + 30 * (idx % 18))
                 self.自选徽章名望选项.append(徽章选项)
 
         self.更新名望细节()
-
 
     def 更新名望细节(self):
         if not self.已初始化: return

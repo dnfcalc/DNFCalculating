@@ -374,6 +374,7 @@ class 宠物2(Item):
         temp += 'Lv1-50 技能等级+1<br>'
         return temp
 
+
 class 宠物1(Item):
     显示名称 = '心悦宠物'
     名称 = '心悦宠物'
@@ -393,6 +394,7 @@ class 宠物1(Item):
         temp += '附加伤害 +5%<br>'
         temp += 'Lv1-50 技能等级+1<br>'
         return temp
+
 
 class 宠物0(Item):
     显示名称 = '无'

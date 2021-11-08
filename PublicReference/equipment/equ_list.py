@@ -170,4 +170,5 @@ class equipment():
         id = self.get_id_by_index(suit, quality, part)
         return self.get_equ_by_id(id)
 
+
 equ = equipment()

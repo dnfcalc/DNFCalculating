@@ -84,7 +84,8 @@ class Worker(QThread):
         zip_file.close()
         # print(path+'\download')
         try:
-            os.system('RMDIR /Q /S "{}"'.format(os.path.join(os.getcwd(), '__ZFJtemp')))
+            os.system('RMDIR /Q /S "{}"'.format(
+                os.path.join(os.getcwd(), '__ZFJtemp')))
         except Exception as error:
             logger.error("error={} \n detail {}".format(
                 error, traceback.print_exc()))

@@ -94,16 +94,15 @@ class 登记窗口(Page):
                               "/buffer/data/siroco")
         for i in range(len(sirocos)):
             self.希洛克选择(i, sirocos[i])
-        weapon_fusion = store.first(
-            "/buffer/data/register/weapon_fusion", "/buffer/data/weapon_fusion", [0]*4)
+        weapon_fusion = store.first("/buffer/data/register/weapon_fusion",
+                                    "/buffer/data/weapon_fusion", [0] * 4)
         self.武器融合属性A.setCurrentIndex(weapon_fusion[0])
         self.武器融合属性A2.setCurrentIndex(weapon_fusion[1])
         self.武器融合属性B.setCurrentIndex(weapon_fusion[2])
         self.武器融合属性B2.setCurrentIndex(weapon_fusion[3])
 
     def 初始化奥兹玛(self):
-        ozmas = store.first("/buffer/data/register/ozma",
-                            "/buffer/data/ozma")
+        ozmas = store.first("/buffer/data/register/ozma", "/buffer/data/ozma")
         for i in range(len(ozmas)):
             self.奥兹玛选择(i, ozmas[i])
 
@@ -132,7 +131,8 @@ class 登记窗口(Page):
             增幅.append(self.自选增幅选项[i].currentIndex() if equip != '无' else -1)
         for i in range(len(self.黑鸦词条)):
             黑鸦.append([
-                2, self.黑鸦词条[i][1].currentIndex(),
+                2,
+                self.黑鸦词条[i][1].currentIndex(),
                 self.黑鸦词条[i][3].currentIndex(),
             ])
 
@@ -247,7 +247,7 @@ class 登记窗口(Page):
         label.move(x, y)
 
         self.站街面板输入 = QLineEdit(self)
-        self.站街面板输入.move(x+60, y)
+        self.站街面板输入.move(x + 60, y)
         self.站街面板输入.resize(70, 24)
         self.站街面板输入.setStyleSheet(输入框样式)
 
@@ -261,13 +261,13 @@ class 登记窗口(Page):
 
         minus = QPushButton('打造↓', self)
         minus.clicked.connect(lambda state: self.批量打造(-1))
-        minus.move(x+60, y)
+        minus.move(x + 60, y)
         minus.resize(40, 24)
         minus.setStyleSheet(按钮样式)
 
         reset = QPushButton('重置', self)
         reset.clicked.connect(lambda state: self.初始化装备())
-        reset.move(x+120, y)
+        reset.move(x + 120, y)
         reset.resize(40, 24)
         reset.setStyleSheet(按钮样式)
 

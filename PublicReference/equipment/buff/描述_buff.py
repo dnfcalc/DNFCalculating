@@ -10,23 +10,25 @@ label = '{}{} +{}<br>'
 魔攻增加量 = trans('{魔法攻击力}{增加量}')
 独立增加量 = trans('{独立攻击力}{增加量}')
 
-def BUFF增加(self,
-           BUFFLv=0,
-           BUFF力量=0,
-           BUFF智力=0,
-           BUFF力量per=1,
-           BUFF智力per=1,
-           BUFF物攻=0,
-           BUFF魔攻=0,
-           BUFF独立=0,
-           BUFF物攻per=1,
-           BUFF魔攻per=1,
-           BUFF独立per=1,
-           BUFF力智=0,
-           BUFF三攻=0,
-           BUFF力智per=1,
-           BUFF三攻per=1,
-           ):
+
+def BUFF增加(
+    self,
+    BUFFLv=0,
+    BUFF力量=0,
+    BUFF智力=0,
+    BUFF力量per=1,
+    BUFF智力per=1,
+    BUFF物攻=0,
+    BUFF魔攻=0,
+    BUFF独立=0,
+    BUFF物攻per=1,
+    BUFF魔攻per=1,
+    BUFF独立per=1,
+    BUFF力智=0,
+    BUFF三攻=0,
+    BUFF力智per=1,
+    BUFF三攻per=1,
+):
 
     if BUFF力智 > 0:
         BUFF力量 += BUFF力智
@@ -126,7 +128,7 @@ def 力智固定加成(self, x=0):
             self.智力 += x
         if self.类型 not in ['力量', '智力']:
             return ''
-    return '{} +{}<br>'.format(trans("力量、智力"),x)
+    return '{} +{}<br>'.format(trans("力量、智力"), x)
 
 
 def 体精固定加成(self, x=0):
@@ -136,7 +138,7 @@ def 体精固定加成(self, x=0):
             self.精神 += x
         if self.类型 not in ['体力', '精神']:
             return ''
-    return '{} +{}<br>'.format(trans("体力、精神"),x)
+    return '{} +{}<br>'.format(trans("体力、精神"), x)
 
 
 def 被动增加(self,
@@ -146,8 +148,7 @@ def 被动增加(self,
          信念光环体精=0,
          一觉被动Lv=0,
          一觉被动力智=0,
-         被动进图加成=0
-         ):
+         被动进图加成=0):
     角色 = None
     if self is not None:
         if self.装备描述 == 0:
@@ -161,11 +162,15 @@ def 被动增加(self,
         角色 = self.角色
     tem = ''
 
-    转职被动 = {'圣职者(男)': '[{守护恩赐}]', '圣职者(女)': '[{启示圣歌}]',
-            '魔法师(女)': '[{人偶操纵者}]', 'None': '[{守护恩赐}]、[{启示圣歌}]、[{人偶操纵者}]'}[str(角色)]
+    转职被动 = {
+        '圣职者(男)': '[{守护恩赐}]',
+        '圣职者(女)': '[{启示圣歌}]',
+        '魔法师(女)': '[{人偶操纵者}]',
+        'None': '[{守护恩赐}]、[{启示圣歌}]、[{人偶操纵者}]'
+    }[str(角色)]
 
     if 转职被动Lv > 0:
-        tem += label.format(trans(转职被动),trans("技能Lv"), int(转职被动Lv))
+        tem += label.format(trans(转职被动), trans("技能Lv"), int(转职被动Lv))
 
     if 被动进图加成 > 0:
         转职被动智力 += 被动进图加成
@@ -173,20 +178,24 @@ def 被动增加(self,
 
     if 角色 == '圣职者(男)' or 角色 is None:
         if 守护恩赐体精 > 0:
-            tem += label.format(trans("[{守护恩赐}]"),trans('体力、精神'),int(守护恩赐体精))
+            tem += label.format(trans("[{守护恩赐}]"), trans('体力、精神'), int(守护恩赐体精))
         if 一觉被动Lv > 0:
-            tem += label.format(trans("[{信念光环}]"),trans('技能Lv'),int(一觉被动Lv))
+            tem += label.format(trans("[{信念光环}]"), trans('技能Lv'), int(一觉被动Lv))
         if 一觉被动力智 > 0:
-            tem += label.format(trans("[{信念光环}]"),trans('{体力、精神}{增加量}'),int(一觉被动力智))
+            tem += label.format(trans("[{信念光环}]"), trans('{体力、精神}{增加量}'),
+                                int(一觉被动力智))
     if 角色 in ['圣职者(女)', '魔法师(女)'] or 角色 is None:
-        觉醒被动 = {'圣职者(女)': '[{虔诚信念}]', '魔法师(女)': '[{少女的爱}]',
-                'None': '[{虔诚信念}]、[{少女的爱}]'}[str(角色)]
+        觉醒被动 = {
+            '圣职者(女)': '[{虔诚信念}]',
+            '魔法师(女)': '[{少女的爱}]',
+            'None': '[{虔诚信念}]、[{少女的爱}]'
+        }[str(角色)]
         if 转职被动智力 > 0:
-            tem += label.format(trans(转职被动),trans("智力"), int(转职被动智力))
+            tem += label.format(trans(转职被动), trans("智力"), int(转职被动智力))
         if 一觉被动Lv > 0:
-            tem += label.format(trans(觉醒被动),trans("技能Lv"), int(一觉被动Lv))
+            tem += label.format(trans(觉醒被动), trans("技能Lv"), int(一觉被动Lv))
         if 一觉被动力智 > 0:
-            tem += label.format(trans(觉醒被动),力智增加量, int(一觉被动力智))
+            tem += label.format(trans(觉醒被动), 力智增加量, int(一觉被动力智))
     return tem
 
 

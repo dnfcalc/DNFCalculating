@@ -2,7 +2,6 @@ from .描述_buff import *
 
 
 class Siroco:
-
     def __init__(self) -> None:
         self.pants_fused = False
         self.ring_fused = False
@@ -46,7 +45,7 @@ class Siroco:
         if self.pants_fused and self.ring_fused:
             self.text += '<font size="3" face="宋体"><font color="#78FF1E">下装+戒指</font><br>'
             self.force_pants()
-        if self.ring_fused and self.left_fused:            
+        if self.ring_fused and self.left_fused:
             self.text += '<font size="3" face="宋体"><font color="#78FF1E">戒指+辅助装备</font><br>'
             self.force_ring()
         if self.left_fused and self.pants_fused:
@@ -74,7 +73,6 @@ class Siroco:
 
 # 奈克斯
 class Nex(Siroco):
-
     def force_pants(self):
         self.text += 觉醒增加(self.character, 一觉力智=40)
 
@@ -82,15 +80,15 @@ class Nex(Siroco):
         self.text += 被动增加(self.character, 被动进图加成=80)
 
     def force_left(self):
-        self.text += BUFF增加(self.character, BUFF三攻per= 1.02)
+        self.text += BUFF增加(self.character, BUFF三攻per=1.02)
 
     pass
+
 
 # 暗杀者
 
 
 class Assassin(Siroco):
-
     def force_pants(self):
         self.text += 觉醒增加(self.character, 一觉力智=28)
 
@@ -102,19 +100,19 @@ class Assassin(Siroco):
 
     pass
 
+
 # 卢克西
 
 
 class Roxy(Siroco):
-
     def force_ring(self):
-        self.text+= "释放Lv50、Lv100主动技能时,所有队员持续伤害+1%,效果持续5秒<br>"
+        self.text += "释放Lv50、Lv100主动技能时,所有队员持续伤害+1%,效果持续5秒<br>"
 
     def force_left(self):
-        self.text+= "释放Lv50、Lv100主动技能时,所有队员持续伤害+1%,效果持续5秒<br>"
+        self.text += "释放Lv50、Lv100主动技能时,所有队员持续伤害+1%,效果持续5秒<br>"
 
     def force_pants(self):
-        self.text+= "释放Lv50、Lv100主动技能时,所有队员持续伤害+1%,效果持续5秒<br>"
+        self.text += "释放Lv50、Lv100主动技能时,所有队员持续伤害+1%,效果持续5秒<br>"
 
     pass
 
@@ -130,6 +128,8 @@ class Nameless(Siroco):
     def force_left(self):
         self.text += BUFF增加(self.character, BUFF力智per=1.01)
         self.text += 被动增加(self.character, 被动进图加成=30)
+
+
 # 洛多斯
 
 

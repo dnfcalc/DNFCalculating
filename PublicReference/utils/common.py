@@ -7,7 +7,7 @@
 # Email     : fzls.zju@gmail.com
 # -------------------------------
 import re
-from typing import Iterable,Protocol,Mapping
+from typing import Iterable, Protocol, Mapping
 
 
 # 格式化时间为比较美观的格式
@@ -32,10 +32,12 @@ def to_int(content, default=None):
         return int(content)
     return default
 
+
 # 将小数转换为百分比字符串的表示方式
 def to_percent(num, digits=0):
-    return str(int(round(num*100, digits))) + "%"
+    return str(int(round(num * 100, digits))) + "%"
+
 
 # 将字符串数组批量格式化
-def format_range(content:str,items:Iterable,*args,**kwargs):
-    return list(map(lambda i:content.format(i,*args,**kwargs),items))
+def format_range(content: str, items: Iterable, *args, **kwargs):
+    return list(map(lambda i: content.format(i, *args, **kwargs), items))

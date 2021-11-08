@@ -5322,7 +5322,7 @@ class 角色窗口(窗口):
         pox_y2 = 11
         temp = ''
         if name == '':
-            temp += trans('详细数据') + ' 仅供参考 带节奏死个🐎' + ' '+get_mac_address()
+            temp += trans('详细数据') + ' 仅供参考 带节奏死个🐎' + ' ' + get_mac_address()
             # if self.角色属性A.计算自适应方式 == 1:
             #     temp+= ' - 全局择优'
             # else:
@@ -5681,7 +5681,8 @@ class 角色窗口(窗口):
             label = QLabel(输出窗口)
             label.setText(get_mac_address())
             label.setStyleSheet(
-                f'QLabel{{font-size:12px;{make_watermark_qt_color_string(watermark_surrounding_backgroud_color_detail)};font-weight:bolder}}')
+                f'QLabel{{font-size:12px;{make_watermark_qt_color_string(watermark_surrounding_backgroud_color_detail)};font-weight:bolder}}'
+            )
             label.move(290, 545 - pox_y)
             butten = QtWidgets.QPushButton(trans('输出技能数据'), 输出窗口)
             butten.clicked.connect(
