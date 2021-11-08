@@ -2,7 +2,6 @@ import configparser
 import os
 import json
 
-
 from PublicReference.utils.lan import Language
 
 global 配置格式有误
@@ -18,6 +17,8 @@ global 攻击目标
 
 global 天劫光环
 global 战术白字
+global 天御套装
+global 千蛛减防
 
 配置格式有误 = False
 
@@ -97,15 +98,16 @@ if 输出数据 == 1:
 
 lan = Language()
 
-defaultLanPaths = ['language_chn','language_kor']
+defaultLanPaths = ['language_chn', 'language_kor']
 languageJson = []
 
-languagePath = "ResourceFiles/Config/language/{}.json".format(defaultLanPaths[多语言开关])
+languagePath = "ResourceFiles/Config/language/{}.json".format(
+    defaultLanPaths[多语言开关])
 lan.load_json(languagePath)
 
-def trans(text,**kwargs):
-    return lan.trans(text,**kwargs)
 
+def trans(text, **kwargs):
+    return lan.trans(text, **kwargs)
 
 
 #攻击目标##################################################################
