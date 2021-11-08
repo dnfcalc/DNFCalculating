@@ -45,6 +45,7 @@ class 角色窗口(窗口):
 
     def 界面1(self):
         super().界面1()
+        increase_counter(ga_category="buffer界面", name="装备/选择/打造")
 
         for i in 称号列表:
             self.称号.addItem(trans(i.显示名称), i.名称)
@@ -142,6 +143,7 @@ class 角色窗口(窗口):
                       lambda: [i.currentIndex() for i in 增幅选项], None)
 
     def 界面2(self):
+        increase_counter(ga_category="buffer界面", name="技能/符文/其它")
         # 第二个布局界面
         self.main_frame2 = QWidget()
 
@@ -581,6 +583,7 @@ class 角色窗口(窗口):
         self.武器融合属性B2.setStyleSheet(下拉框样式)
 
     def 界面3(self):
+        increase_counter(ga_category="buffer界面", name="基础/细节/修正")
         # 第三个布局界面
         self.main_frame3 = QWidget()
 
@@ -771,6 +774,7 @@ class 角色窗口(窗口):
         self.计算按钮3.setStyleSheet(按钮样式)
 
     def 界面5(self):
+        increase_counter(ga_category="buffer界面", name="自选装备计算")
         # 第五个布局
         self.main_frame5 = QWidget()
         标签 = QLabel(trans('单件选择'), self.main_frame5)
@@ -1039,6 +1043,8 @@ class 角色窗口(窗口):
         名望设置.setStyleSheet(按钮样式)
 
     def 名望设置(self):
+        increase_counter(ga_category="buffer详细功能使用", name="名望")
+
         def createClient():
             store.set("/fame/temp/property", self)
             # 设置图标和背景 临时做法
@@ -1084,6 +1090,8 @@ class 角色窗口(窗口):
         self.自选计算(1)
 
     def 换装设置(self):
+        increase_counter(ga_category="buffer详细功能使用", name="切装")
+
         def createClient():
             store.compute("/{type}/temp/property_a", lambda: self.角色属性A)
             # 换装更新事件
@@ -1860,6 +1868,7 @@ class 角色窗口(窗口):
 
     # 一键修正计算
     def 一键修正(self, x=0):
+        increase_counter(ga_category="buffer详细功能使用", name="一键修正")
         sign = -1
         try:
             if self.一键站街设置输入[0].text() != '' or self.一键站街设置输入[1].text() != '':

@@ -6,7 +6,7 @@ import uuid
 from functools import wraps
 from typing import Any, Callable, Tuple
 from urllib.parse import quote_plus
-from config import currentVersion
+from .config import currentVersion
 
 import requests
 

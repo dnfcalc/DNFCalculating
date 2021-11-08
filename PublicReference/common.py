@@ -5,6 +5,7 @@ from PublicReference.utils.common import to_percent
 from PublicReference.utils.uniqueCode import get_mac_address
 from PublicReference.utils.watermark_def import *
 from PublicReference.view.DialogRegister import DefaultDialogRegister
+from PublicReference.utils.usage_counter import increase_counter
 
 装备版本 = "GF"
 装备增幅版本 = "GF"

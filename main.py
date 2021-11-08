@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtCore
 import importlib
 from PublicReference.common import *
+from PublicReference.utils.usage_counter import increase_counter
 from PublicReference.view.MainWindow import *
 from PublicReference.utils.calc_core import calc_core
 from PublicReference.utils.producer_consumer import producer_data, consumer, thread_num
@@ -307,7 +308,7 @@ class 选择窗口(QWidget):
         # menu.addAction(action_2)
         # butten.setMenu(menu)
         butten.clicked.connect(lambda state, index=count: self.打开链接(
-            ['http://dnf.17173.com/jsq/?khd']))
+            ['http://dnf.17173.com/jsq/?khd'], "首页"))
         butten.move(100 + 偏移量 + 4 * 125, 10 + (count + 1) * 100)
         butten.setStyleSheet(按钮样式3)
         butten.resize(121, 90)
@@ -365,17 +366,18 @@ class 选择窗口(QWidget):
         action_0 = QAction(trans('设置'), parent=menu)
         action_0.triggered.connect(lambda state: self.openSet())
         action_1 = QAction(trans('BUG反馈-Gitee'), parent=menu)
-        action_1.triggered.connect(lambda state: self.打开链接(
-            ['https://gitee.com/i_melon/DNFCalculating/issues?state=all']))
+        action_1.triggered.connect(lambda state: self.打开链接([
+            'https://gitee.com/i_melon/DNFCalculating/issues?state=all'
+        ], "Gitee"))
         action_2 = QAction('联系我们-QQ-1群', parent=menu)
         action_2.triggered.connect(lambda state: self.打开链接(
-            ['https://jq.qq.com/?_wv=1027&k=VSNtZ1xv']))
+            ['https://jq.qq.com/?_wv=1027&k=VSNtZ1xv'], "QQ群"))
         action_3 = QAction('联系我们-QQ-2群', parent=menu)
         action_3.triggered.connect(lambda state: self.打开链接(
-            ['https://jq.qq.com/?_wv=1027&k=QMgadVkA']))
+            ['https://jq.qq.com/?_wv=1027&k=QMgadVkA'], "QQ群"))
         action_4 = QAction('联系我们-QQ-3群', parent=menu)
         action_4.triggered.connect(lambda state: self.打开链接(
-            ['https://jq.qq.com/?_wv=1027&k=ekQXpyq0']))
+            ['https://jq.qq.com/?_wv=1027&k=ekQXpyq0'], "QQ群"))
         action_5 = QAction(trans('打赏'), parent=menu)
         action_5.triggered.connect(lambda state, index=count: self.打赏())
         menu.addAction(action_0)
@@ -403,7 +405,7 @@ class 选择窗口(QWidget):
 
         butten = QtWidgets.QPushButton('', self.topFiller)
         butten.clicked.connect(lambda state, index=count: self.打开链接(
-            ['http://dnf.17173.com/?jsq']))
+            ['http://dnf.17173.com/?jsq'], "首页"))
         butten.move(100 + 偏移量 + 4 * 125, 10 + (count + 1) * 100)
         butten.setStyleSheet(按钮样式3)
         butten.resize(121, 90)
@@ -420,6 +422,7 @@ class 选择窗口(QWidget):
         self.setLayout(self.vbox)
 
     def openSet(self):
+        increase_counter(ga_category="其余功能使用", name="设置")
         self.processpid = []
         self.setWindow = SetWindows(self.worker, self)
         # self.setWindow._signal.connect(self.closeSet)
@@ -440,6 +443,8 @@ class 选择窗口(QWidget):
         module_name = "Characters." + name
         职业 = importlib.import_module(module_name)
         char = eval("职业." + className + '()')
+        increase_counter(ga_category="职业使用", name=className)
+        increase_counter(ga_category="用户职业使用", name=get_mac_address())
         self.char_window = MainWindow(char)
         self.char_window.show()
 
@@ -452,6 +457,7 @@ class 选择窗口(QWidget):
         赞赏码 = QPixmap()
         赞赏码.loadFromData(base64.b64decode(img.二维码))
         主背景.setPixmap(赞赏码)
+        increase_counter(ga_category="其余功能使用", name="打赏")
         self.w.show()
 
     def 弹窗警告(self, reason):
@@ -511,11 +517,14 @@ class 选择窗口(QWidget):
                 error, traceback.print_exc()))
             return
 
-    def 打开链接(self, url):
+    def 打开链接(self, url, name=''):
+        if name != '':
+            increase_counter(ga_category="其余功能使用", name=name)
         for i in url:
             QDesktopServices.openUrl(QUrl(i))
 
     def 检查更新(self):
+        increase_counter(ga_category="其余功能使用", name="检查更新")
         self.网盘检查()
         if self.网盘报错 == 1:
             box = QMessageBox(QMessageBox.Question, "提示", "无法自动检查更新，请手动前往官网下载")
