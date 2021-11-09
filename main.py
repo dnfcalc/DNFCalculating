@@ -324,8 +324,10 @@ class 选择窗口(QWidget):
             QMessageBox.Question, "提示",
             "配置文件有误，程序将以默认设置开启！\n请检查以下文件\nResourceFiles\\Config\\基础设置.ini\nResourceFiles\\Config\\攻击目标.ini\nResourceFiles\\Skins\\Skin.ini\n是否以UTF-8编码存储且文件内格式正确"
         )
-        self.版本提示 = QMessageBox(QMessageBox.Question, "用户须知",
-                                trans("此工具为开源免费软件\n如遇二次售卖获利,请协助反馈举报~")+'\n同时,计算器预设了埋点,收集使用情况供功能分析优化,如:职业打开情况、页签打开情况、按钮使用情况等')
+        self.版本提示 = QMessageBox(
+            QMessageBox.Question, "用户须知",
+            trans("此工具为开源免费软件\n如遇二次售卖获利,请协助反馈举报~") +
+            '\n同时,计算器预设了埋点,收集使用情况供功能分析优化并限制滥用工具的情况,如:职业打开情况、页签打开情况、按钮使用情况等')
         self.版本提示.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
         self.版本提示A = self.版本提示.button(QMessageBox.Yes)
         self.版本提示B = self.版本提示.button(QMessageBox.No)
@@ -814,7 +816,8 @@ if __name__ == '__main__':
             if not 用户须知:
                 instance.版本提示.exec()
                 if instance.版本提示.clickedButton() == instance.版本提示A:
-                    with open("ResourceFiles/Config/release_version.json", "r+") as fp:
+                    with open("ResourceFiles/Config/release_version.json",
+                              "r+") as fp:
                         versionInfo = json.load(fp)
                         versionInfo['agreement'] = True
                         用户须知 = True
