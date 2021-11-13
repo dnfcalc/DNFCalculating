@@ -1913,7 +1913,9 @@ class 角色窗口(窗口):
         QMessageBox.information(
             self, "自动修正计算完毕", "仅对站街修正进行了修改,使面板与输入一致<br>请自行核对其它页面 非智力/体力/精神条目")
 
-    def click_window(self, index):
+    def click_window(self, index,info=''):
+        if info != '':
+            increase_counter(ga_category="界面使用情况", name=info)
         self.保存json(self.存档位置, page=[self.当前页面])
         self.当前页面 = index
 
