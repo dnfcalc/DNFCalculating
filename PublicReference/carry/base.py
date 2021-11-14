@@ -5303,10 +5303,10 @@ class 角色窗口(窗口):
                                     tempstr += ','
                             tempstr += ')</font>'
                         if self.角色属性B.技能栏[i].关联技能2 != ['无']:
-                            tempstr += trans(加成倍率key,
+                            tempstr += "<br>"+trans(加成倍率key,
                                              value=to_percent(
                                                  self.角色属性B.技能栏[i].加成倍率2(
-                                                     self.角色属性B.武器类型) * -1,
+                                                     self.角色属性B.武器类型) -1,
                                                  2))
                             tempstr += 关联技能title
                             for k in self.角色属性B.技能栏[i].关联技能2:
@@ -5321,10 +5321,10 @@ class 角色窗口(窗口):
                                     tempstr += ','
                             tempstr += ')</font>'
                         if self.角色属性B.技能栏[i].关联技能3 != ['无']:
-                            tempstr += trans(加成倍率key,
+                            tempstr += "<br>"+trans(加成倍率key,
                                              value=to_percent(
                                                  self.角色属性B.技能栏[i].加成倍率3(
-                                                     self.角色属性B.武器类型) * -1,
+                                                     self.角色属性B.武器类型)  -1,
                                                  2))
                             tempstr += 关联技能title
                             for l in self.角色属性B.技能栏[i].关联技能3:
@@ -5342,7 +5342,7 @@ class 角色窗口(窗口):
                             '无'
                     ] and self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型) != 1:
                         冷却关联title = trans('{冷却关联技能}：')
-                        冷却缩减key = "<br>{冷却缩减}：$value<br>"
+                        冷却缩减key = "{冷却缩减}：$value<br>"
                         if tempstr == '':
                             tempstr += trans(
                                 '<font face="宋体"><font color="#FF6666">{$value}</font><br>',
@@ -5431,7 +5431,7 @@ class 角色窗口(窗口):
 
         self.角色属性B = deepcopy(self.角色属性A)
         self.角色属性B.穿戴装备(装备名称, 套装名称)
-        
+
         #C为站街属性
         C = self.站街计算(装备名称, 套装名称)
         if flag == 1:
