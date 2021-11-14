@@ -1365,6 +1365,7 @@ class 角色属性(属性):
                                      time.strftime('%m-%d-%H-%M-%S')))
         wf = open(result_path, 'w', encoding='gbk')
         wf.write('黑鸦武器,黑鸦戒指,黑鸦左槽,黑鸦下装,残香10%,残香5%,宠物装备,光环,系数,伤害\n')
+        increase_counter(ga_category="carry详细功能使用", name="输出择优数据")
         for a1 in rangelist[0]:
             for a2 in rangelist[1]:
                 for a3 in rangelist[2]:
@@ -5702,6 +5703,7 @@ class 角色窗口(窗口):
 
     def 输出数据(self, d):
         try:
+            increase_counter(ga_category="carry详细功能使用", name="输出技能数据")
             path = './详细数据'
             if not os.path.exists(path):
                 os.makedirs(path)
