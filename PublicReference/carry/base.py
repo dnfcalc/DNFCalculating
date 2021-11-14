@@ -5267,6 +5267,144 @@ class 角色窗口(窗口):
                 return '<font face="宋体" color= "#E52E2E">' + str(
                     '%.2f' % temp2) + '%</font>'
 
+    def 被动技能描述(self, i):
+        tempstr = ''
+        if self.角色属性B.技能栏[i].所在等级 != 100 or self.角色属性B.技能栏[i].是否主动 == 0:
+            if self.角色属性B.技能栏[i].等级 > 0:
+                if self.角色属性B.技能栏[i].自定义描述 == 1:
+                    tempstr += '<font face="宋体"><font color="#FF6666">' + trans(
+                        self.角色属性B.技能栏[i].名称) + '</font><br>'
+                    tempstr += self.角色属性B.技能栏[i].技能描述(self.角色属性B.武器类型)
+                else:
+                    不适用于title = trans('<font color=gray>({不适用于}：')
+                    if self.角色属性B.技能栏[i].关联技能 != [
+                            '无'
+                    ] and self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) != 1:
+                        加成倍率key = '{加成倍率}：$value<br>'
+                        关联技能title = trans('{关联技能}：')
+                        tempstr += trans(
+                            '<font face="宋体"><font color="#FF6666">{$value}</font><br>',
+                            value=self.角色属性B.技能栏[i].名称)
+                        tempstr += trans(
+                            加成倍率key,
+                            value=to_percent(
+                                self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) -
+                                1, 2))
+                        tempstr += 关联技能title
+                        for j in self.角色属性B.技能栏[i].关联技能:
+                            tempstr += trans(j)
+                            if j != self.角色属性B.技能栏[i].关联技能[-1]:
+                                tempstr += ','
+                        if self.角色属性B.技能栏[i].非关联技能 != ['无']:
+                            tempstr += 不适用于title
+                            for j in self.角色属性B.技能栏[i].非关联技能:
+                                tempstr += trans(j)
+                                if j != self.角色属性B.技能栏[i].非关联技能[-1]:
+                                    tempstr += ','
+                            tempstr += ')</font>'
+                        if self.角色属性B.技能栏[i].关联技能2 != ['无']:
+                            tempstr += trans(加成倍率key,
+                                             value=to_percent(
+                                                 self.角色属性B.技能栏[i].加成倍率2(
+                                                     self.角色属性B.武器类型) * -1,
+                                                 2))
+                            tempstr += 关联技能title
+                            for k in self.角色属性B.技能栏[i].关联技能2:
+                                tempstr += trans(k)
+                                if k != self.角色属性B.技能栏[i].关联技能2[-1]:
+                                    tempstr += ','
+                        if self.角色属性B.技能栏[i].非关联技能2 != ['无']:
+                            tempstr += 不适用于title
+                            for j in self.角色属性B.技能栏[i].非关联技能2:
+                                tempstr += trans(j)
+                                if j != self.角色属性B.技能栏[i].非关联技能2[-1]:
+                                    tempstr += ','
+                            tempstr += ')</font>'
+                        if self.角色属性B.技能栏[i].关联技能3 != ['无']:
+                            tempstr += trans(加成倍率key,
+                                             value=to_percent(
+                                                 self.角色属性B.技能栏[i].加成倍率3(
+                                                     self.角色属性B.武器类型) * -1,
+                                                 2))
+                            tempstr += 关联技能title
+                            for l in self.角色属性B.技能栏[i].关联技能3:
+                                tempstr += trans(l)
+                                if l != self.角色属性B.技能栏[i].关联技能3[-1]:
+                                    tempstr += ','
+                        if self.角色属性B.技能栏[i].非关联技能3 != ['无']:
+                            tempstr += 不适用于title
+                            for j in self.角色属性B.技能栏[i].非关联技能3:
+                                tempstr += trans(j)
+                                if j != self.角色属性B.技能栏[i].非关联技能3[-1]:
+                                    tempstr += ','
+                            tempstr += ')</font>'
+                    if self.角色属性B.技能栏[i].冷却关联技能 != [
+                            '无'
+                    ] and self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型) != 1:
+                        冷却关联title = trans('{冷却关联技能}：')
+                        冷却缩减key = "<br>{冷却缩减}：$value<br>"
+                        if tempstr == '':
+                            tempstr += trans(
+                                '<font face="宋体"><font color="#FF6666">{$value}</font><br>',
+                                value=self.角色属性B.技能栏[i].名称)
+                        else:
+                            tempstr += '<br>'
+                        tempstr += trans(
+                            冷却缩减key,
+                            value=to_percent(
+                                1 -
+                                self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型),
+                                2))
+                        tempstr += 冷却关联title
+                        for j in self.角色属性B.技能栏[i].冷却关联技能:
+                            tempstr += trans(j)
+                            if j != self.角色属性B.技能栏[i].冷却关联技能[-1]:
+                                tempstr += ','
+                        if self.角色属性B.技能栏[i].非冷却关联技能 != ['无']:
+                            tempstr += 不适用于title
+                            for j in self.角色属性B.技能栏[i].非冷却关联技能:
+                                tempstr += trans(j)
+                                if j != self.角色属性B.技能栏[i].非冷却关联技能[-1]:
+                                    tempstr += ','
+                            tempstr += ')</font>'
+                        if self.角色属性B.技能栏[i].冷却关联技能2 != ['无']:
+                            tempstr += trans(冷却缩减key,
+                                             value=to_percent(
+                                                 1 -
+                                                 self.角色属性B.技能栏[i].CD缩减倍率2(
+                                                     self.角色属性B.武器类型), 2))
+                            tempstr += 冷却关联title
+                            for j in self.角色属性B.技能栏[i].冷却关联技能2:
+                                tempstr += trans(j)
+                                if j != self.角色属性B.技能栏[i].冷却关联技能2[-1]:
+                                    tempstr += ','
+                        if self.角色属性B.技能栏[i].非冷却关联技能2 != ['无']:
+                            tempstr += 不适用于title
+                            for j in self.角色属性B.技能栏[i].非冷却关联技能2:
+                                tempstr += trans(j)
+                                if j != self.角色属性B.技能栏[i].非冷却关联技能2[-1]:
+                                    tempstr += ','
+                            tempstr += ')</font>'
+                        if self.角色属性B.技能栏[i].冷却关联技能3 != ['无']:
+                            tempstr += trans(冷却缩减key,
+                                             value=to_percent(
+                                                 1 -
+                                                 self.角色属性B.技能栏[i].CD缩减倍率3(
+                                                     self.角色属性B.武器类型), 2))
+                            tempstr += 冷却关联title
+                            for j in self.角色属性B.技能栏[i].冷却关联技能3:
+                                tempstr += trans(j)
+                                if j != self.角色属性B.技能栏[i].冷却关联技能3[-1]:
+                                    tempstr += ','
+                        if self.角色属性B.技能栏[i].非冷却关联技能3 != ['无']:
+                            tempstr += 不适用于title
+                            for j in self.角色属性B.技能栏[i].非冷却关联技能3:
+                                tempstr += trans(j)
+                                if j != self.角色属性B.技能栏[i].非冷却关联技能3[-1]:
+                                    tempstr += ','
+                            tempstr += ')</font>'
+        return tempstr
+
     def 输出界面(self, index, name=''):
         # 调试模式下 index为-1
         flag = 1
@@ -5278,6 +5416,7 @@ class 角色窗口(窗口):
                 if i.类型 == self.角色属性A.武器选项[0]:
                     武器名称 = i.名称
                     break
+            #调试模式默认图标显示
             self.排行数据.append([
                 '撒旦：沸腾之怒', '贝利亚尔：毁灭之种', '亚蒙：谎言之力', '亚巴顿：绝望地狱', '巴尔：堕落之魂',
                 '白象之庇护', '四叶草之初心', '红兔之祝福', '军神的心之所念', '军神的遗书', '军神的庇护宝石',
@@ -5286,23 +5425,17 @@ class 角色窗口(窗口):
             ])
 
         pdata = {}
-        装备名称 = []
-        套装名称 = []
+        装备名称 = self.排行数据[index][0:12]
+        套装名称 = self.排行数据[index][13:-1]
         百变怪 = self.排行数据[index][-1]
-        for i in range(12):
-            装备名称.append(self.排行数据[index][i])
-        for i in range(13, len(self.排行数据[index]) - 1):
-            套装名称.append(self.排行数据[index][i])
+
         self.角色属性B = deepcopy(self.角色属性A)
         self.角色属性B.穿戴装备(装备名称, 套装名称)
-
+        
+        #C为站街属性
+        C = self.站街计算(装备名称, 套装名称)
         if flag == 1:
-            C = self.站街计算(装备名称, 套装名称)
             self.角色属性B.其它属性计算()
-        else:
-            C = deepcopy(self.角色属性A)
-            C.穿戴装备(装备名称, 套装名称)
-            C.被动倍率计算()
 
         词条提升率计算 = deepcopy(self.角色属性B)
         统计详情 = self.角色属性B.伤害计算(1)
@@ -5442,164 +5575,25 @@ class 角色窗口(窗口):
         num = 0
         for i in range(len(self.角色属性B.技能栏)):
             # Will修改
-            tempstr = ''
-            if self.角色属性B.技能栏[i].所在等级 != 100 or self.角色属性B.技能栏[i].是否主动 == 0:
-                if self.角色属性B.技能栏[i].等级 > 0:
-                    if self.角色属性B.技能栏[i].自定义描述 == 1:
-                        tempstr += '<font face="宋体"><font color="#FF6666">' + trans(
-                            self.角色属性B.技能栏[i].名称) + '</font><br>'
-                        tempstr += self.角色属性B.技能栏[i].技能描述(self.角色属性B.武器类型)
-                    else:
-                        不适用于title = trans('<font color=gray>({不适用于}：')
-
-                        if self.角色属性B.技能栏[i].关联技能 != [
-                                '无'
-                        ] and self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) != 1:
-                            加成倍率key = '{加成倍率}：$value<br>'
-                            关联技能title = trans('{关联技能}：')
-
-                            tempstr += trans(
-                                '<font face="宋体"><font color="#FF6666">{$value}</font><br>',
-                                value=self.角色属性B.技能栏[i].名称)
-                            tempstr += trans(
-                                加成倍率key,
-                                value=to_percent(
-                                    self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) -
-                                    1, 2))
-                            tempstr += 关联技能title
-                            for j in self.角色属性B.技能栏[i].关联技能:
-                                tempstr += trans(j)
-                                if j != self.角色属性B.技能栏[i].关联技能[-1]:
-                                    tempstr += ','
-                            if self.角色属性B.技能栏[i].非关联技能 != ['无']:
-                                tempstr += 不适用于title
-                                for j in self.角色属性B.技能栏[i].非关联技能:
-                                    tempstr += trans(j)
-                                    if j != self.角色属性B.技能栏[i].非关联技能[-1]:
-                                        tempstr += ','
-                                tempstr += ')</font>'
-                            if self.角色属性B.技能栏[i].关联技能2 != ['无']:
-                                tempstr += trans(加成倍率key,
-                                                 value=to_percent(
-                                                     self.角色属性B.技能栏[i].加成倍率2(
-                                                         self.角色属性B.武器类型) * -1,
-                                                     2))
-                                tempstr += 关联技能title
-                                for k in self.角色属性B.技能栏[i].关联技能2:
-                                    tempstr += trans(k)
-                                    if k != self.角色属性B.技能栏[i].关联技能2[-1]:
-                                        tempstr += ','
-                            if self.角色属性B.技能栏[i].非关联技能2 != ['无']:
-                                tempstr += 不适用于title
-                                for j in self.角色属性B.技能栏[i].非关联技能2:
-                                    tempstr += trans(j)
-                                    if j != self.角色属性B.技能栏[i].非关联技能2[-1]:
-                                        tempstr += ','
-                                tempstr += ')</font>'
-                            if self.角色属性B.技能栏[i].关联技能3 != ['无']:
-                                tempstr += trans(加成倍率key,
-                                                 value=to_percent(
-                                                     self.角色属性B.技能栏[i].加成倍率3(
-                                                         self.角色属性B.武器类型) * -1,
-                                                     2))
-                                tempstr += 关联技能title
-                                for l in self.角色属性B.技能栏[i].关联技能3:
-                                    tempstr += trans(l)
-                                    if l != self.角色属性B.技能栏[i].关联技能3[-1]:
-                                        tempstr += ','
-                            if self.角色属性B.技能栏[i].非关联技能3 != ['无']:
-                                tempstr += 不适用于title
-                                for j in self.角色属性B.技能栏[i].非关联技能3:
-                                    tempstr += trans(j)
-                                    if j != self.角色属性B.技能栏[i].非关联技能3[-1]:
-                                        tempstr += ','
-                                tempstr += ')</font>'
-                        if self.角色属性B.技能栏[i].冷却关联技能 != [
-                                '无'
-                        ] and self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型) != 1:
-                            冷却关联title = trans('{冷却关联技能}：')
-                            冷却缩减key = "<br>{冷却缩减}：$value<br>"
-
-                            if tempstr == '':
-                                tempstr += trans(
-                                    '<font face="宋体"><font color="#FF6666">{$value}</font><br>',
-                                    value=self.角色属性B.技能栏[i].名称)
-                            else:
-                                tempstr += '<br>'
-
-                            tempstr += trans(
-                                冷却缩减key,
-                                value=to_percent(
-                                    1 -
-                                    self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型),
-                                    2))
-                            tempstr += 冷却关联title
-                            for j in self.角色属性B.技能栏[i].冷却关联技能:
-                                tempstr += trans(j)
-                                if j != self.角色属性B.技能栏[i].冷却关联技能[-1]:
-                                    tempstr += ','
-                            if self.角色属性B.技能栏[i].非冷却关联技能 != ['无']:
-                                tempstr += 不适用于title
-                                for j in self.角色属性B.技能栏[i].非冷却关联技能:
-                                    tempstr += trans(j)
-                                    if j != self.角色属性B.技能栏[i].非冷却关联技能[-1]:
-                                        tempstr += ','
-                                tempstr += ')</font>'
-                            if self.角色属性B.技能栏[i].冷却关联技能2 != ['无']:
-                                tempstr += trans(冷却缩减key,
-                                                 value=to_percent(
-                                                     1 -
-                                                     self.角色属性B.技能栏[i].CD缩减倍率2(
-                                                         self.角色属性B.武器类型), 2))
-                                tempstr += 冷却关联title
-                                for j in self.角色属性B.技能栏[i].冷却关联技能2:
-                                    tempstr += trans(j)
-                                    if j != self.角色属性B.技能栏[i].冷却关联技能2[-1]:
-                                        tempstr += ','
-                            if self.角色属性B.技能栏[i].非冷却关联技能2 != ['无']:
-                                tempstr += 不适用于title
-                                for j in self.角色属性B.技能栏[i].非冷却关联技能2:
-                                    tempstr += trans(j)
-                                    if j != self.角色属性B.技能栏[i].非冷却关联技能2[-1]:
-                                        tempstr += ','
-                                tempstr += ')</font>'
-                            if self.角色属性B.技能栏[i].冷却关联技能3 != ['无']:
-                                tempstr += trans(冷却缩减key,
-                                                 value=to_percent(
-                                                     1 -
-                                                     self.角色属性B.技能栏[i].CD缩减倍率3(
-                                                         self.角色属性B.武器类型), 2))
-                                tempstr += 冷却关联title
-                                for j in self.角色属性B.技能栏[i].冷却关联技能3:
-                                    tempstr += trans(j)
-                                    if j != self.角色属性B.技能栏[i].冷却关联技能3[-1]:
-                                        tempstr += ','
-                            if self.角色属性B.技能栏[i].非冷却关联技能3 != ['无']:
-                                tempstr += 不适用于title
-                                for j in self.角色属性B.技能栏[i].非冷却关联技能3:
-                                    tempstr += trans(j)
-                                    if j != self.角色属性B.技能栏[i].非冷却关联技能3[-1]:
-                                        tempstr += ','
-                                tempstr += ')</font>'
-
-                if tempstr != '':
-                    tempstr += '</font>'
-                    被动数据 = QLabel(输出窗口)
-                    被动数据.setPixmap(self.技能图片[i])
-                    被动数据.setToolTip(tempstr)
-                    被动数据.move(293 + num * 40, 500 - pox_y)
-                    被动等级 = QLabel(输出窗口)
-                    被动等级.setText('Lv.' + str(实际技能等级[i]))
-                    被动等级.move(293 - 6 + num * 40, 480 - pox_y)
-                    被动等级.resize(40, 28)
-                    if 实际技能等级[i] != 0:
-                        被动等级.setStyleSheet(
-                            "QLabel{font-size:12px;color:rgb(255,255,255)}")
-                    else:
-                        被动等级.setStyleSheet(
-                            "QLabel{font-size:12px;color:rgb(255,0,0)}")
-                    被动等级.setAlignment(Qt.AlignCenter)
-                    num += 1
+            tempstr = self.被动技能描述(i)
+            if tempstr != '':
+                tempstr += '</font>'
+                被动数据 = QLabel(输出窗口)
+                被动数据.setPixmap(self.技能图片[i])
+                被动数据.setToolTip(tempstr)
+                被动数据.move(293 + num * 40, 500 - pox_y)
+                被动等级 = QLabel(输出窗口)
+                被动等级.setText('Lv.' + str(实际技能等级[i]))
+                被动等级.move(293 - 6 + num * 40, 480 - pox_y)
+                被动等级.resize(40, 28)
+                if 实际技能等级[i] != 0:
+                    被动等级.setStyleSheet(
+                        "QLabel{font-size:12px;color:rgb(255,255,255)}")
+                else:
+                    被动等级.setStyleSheet(
+                        "QLabel{font-size:12px;color:rgb(255,0,0)}")
+                被动等级.setAlignment(Qt.AlignCenter)
+                num += 1
 
         if self.角色属性B.远古记忆 > 0:
             被动数据 = QLabel(输出窗口)
