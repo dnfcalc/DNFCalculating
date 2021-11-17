@@ -368,7 +368,7 @@ class 选择窗口(QWidget):
                 pass
         count += 1
 
-        butten = QtWidgets.QPushButton(trans('设置|打赏|反馈'), self.topFiller)
+        butten = QtWidgets.QPushButton(" "+trans('设置|打赏|反馈'), self.topFiller)
         menu = QMenu()
         action_0 = QAction(trans('设置'), parent=menu)
         action_0.triggered.connect(lambda state: self.openSet())
@@ -387,6 +387,9 @@ class 选择窗口(QWidget):
             ['https://jq.qq.com/?_wv=1027&k=ekQXpyq0'], "QQ群"))
         action_5 = QAction(trans('打赏'), parent=menu)
         action_5.triggered.connect(lambda state, index=count: self.打赏())
+        action_6 = QAction('联系我们-解除限制', parent=menu)
+        action_6.triggered.connect(lambda state: self.打开链接(
+            ['https://gitee.com/i_melon/DNFCalculating/issues/I4IOO7'], "解除限制"))
         menu.addAction(action_0)
         menu.addSeparator()
         menu.addAction(action_5)
@@ -396,6 +399,7 @@ class 选择窗口(QWidget):
         menu.addAction(action_2)
         menu.addAction(action_3)
         menu.addAction(action_4)
+        menu.addAction(action_6)
         butten.setMenu(menu)
         # butten.clicked.connect(lambda state, index = count: self.问题反馈())
         butten.move(100 + 偏移量 + 4 * 125, 10 + (count + 1) * 100)
@@ -471,7 +475,7 @@ class 选择窗口(QWidget):
     def 弹窗警告(self, reason):
         box = QMessageBox(
             QMessageBox.Question, "提示",
-            "由于{},您已被限制使用计算器，每次开启仅能随机使用一个职业<br>如需解除，请联系开发人员".format(reason))
+            "由于{},您已被限制使用计算器，每次开启仅能随机使用一个职业<br>如需解除，请于设置=>解除限制内申请".format(reason))
         box.setWindowIcon(self.icon)
         box.setStandardButtons(QMessageBox.Yes)
         box.exec_()

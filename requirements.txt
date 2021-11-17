@@ -2,6 +2,6 @@
 # pip install -i https://pypi.mirrors.ustc.edu.cn/simple/ -r requirements.txt
 lanzou-api
 # pyinstaller
-# pypiwin32
+pypiwin32
 PyQt5==5.15.2
 chardet
