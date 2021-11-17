@@ -1,5 +1,18 @@
 ## Newest
 
+### 2021-11-17
+
+#### NewFeatures
+* 同步韩服体验服修罗、龙骑、特工、死灵数据 ([2700a6](https://gitee.com/i_melon/DNFCalculating/commit/2700a67a59a9a25a95df193e67b9506de3d9fce6))
+* 添加心悦宠物 ([b96b7d](https://gitee.com/i_melon/DNFCalculating/commit/b96b7d31dafc833e0692dc2b062a8bcd7182b708))
+
+#### BugFixes
+* 修正外传职业白金技能区间错误 ([fd0deb](https://gitee.com/i_melon/DNFCalculating/commit/fd0debfa2f3d6e394a2db12f28c8dd4fdf5d270b))
+* 修正属强辟邪玉对完美掌控加成错误 ([4e574a](https://gitee.com/i_melon/DNFCalculating/commit/4e574a3cda414ba06eae8ba1bc3620e45cfaf955))
+* 奶系计算时C属性输入未能生效修复 ([c9a1b2](https://gitee.com/i_melon/DNFCalculating/commit/c9a1b274f2266db6827ff0f162c0edae7a7d6c60))
+* 战斗·神启·圣骑士：修正圣光突袭护石闪退的情况 ([6378c3](https://gitee.com/i_melon/DNFCalculating/commit/6378c3b8fdee8cf2666819bfd2a0ec1f3ea63e21))
+* 皓曦·帕拉丁：修正圣盾裁决护石数据错误 fix #I4IADL ([31fa9a](https://gitee.com/i_melon/DNFCalculating/commit/31fa9a4885147c0195597c859c7fbea32a364035))
+
 ### 2021-11-01
 
 #### NewFeatures
@@ -9,6 +22,7 @@
 #### BugFixes
 * 修复在目录存在空格的情况下可能误删文件的情况 ([1eafb8](https://gitee.com/i_melon/DNFCalculating/commit/1eafb8fba8dcd939c936d23b9dfad7124c83c323))
 * 修正输出技能数据无法使用的情况 ([a2183a](https://gitee.com/i_melon/DNFCalculating/commit/a2183ae1fd610ff251a66571a6bf058b92b64fb3))
+
 
 
 ## History
