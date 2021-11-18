@@ -1,5 +1,10 @@
 ## Newest
 
+### 2021-11-18
+
+#### BugFixes
+* 极诣·阿修罗：修正韩服体验服雷神之息数据错误 ([d1a538](https://gitee.com/i_melon/DNFCalculating/commit/d1a53893c0d5b4d6e7b3a752b3b84ab90dd61f87))
+
 ### 2021-11-17
 
 #### NewFeatures
@@ -22,6 +27,7 @@
 #### BugFixes
 * 修复在目录存在空格的情况下可能误删文件的情况 ([1eafb8](https://gitee.com/i_melon/DNFCalculating/commit/1eafb8fba8dcd939c936d23b9dfad7124c83c323))
 * 修正输出技能数据无法使用的情况 ([a2183a](https://gitee.com/i_melon/DNFCalculating/commit/a2183ae1fd610ff251a66571a6bf058b92b64fb3))
+
 
 
 
