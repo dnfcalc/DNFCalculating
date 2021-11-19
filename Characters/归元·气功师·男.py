@@ -555,7 +555,7 @@ class 技能21(主动技能):
     def 装备护石(self, x):
         if x == 0:
             self.倍率 *= 1.3
-            self.cd = 0.9
+            self.CD = 0.9
 
     def 等效百分比(self, 武器类型):
         return self.data0[self.等级] * self.攻击次数 * (1 + self.TP成长 * self.TP等级) * self.倍率
