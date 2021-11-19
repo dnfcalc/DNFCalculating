@@ -1,1 +1,1 @@
-QLabel{color:white}
+QLabel{font-size:12px;color:white}
