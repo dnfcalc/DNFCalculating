@@ -4141,8 +4141,8 @@ class 装备244(装备):
         pass
 
     def 进图属性(self, 属性):
-        for i in range(20):
-            self.属性描述 += 属性.所有属性强化加成(属性.获取改造(self.部位))
+        for i in range(10):
+            self.属性描述 += 属性.所有属性强化加成(2 * 属性.获取改造(self.部位))
         pass
 
     def 其它属性(self, 属性):
@@ -4162,7 +4162,7 @@ class 装备244(装备):
         if 改造等级 > 0:
             temp += '<font color="#FF8200">改造属性(+' + str(
                 改造等级) + ')：</font><br>'
-            temp += '所有属性强化 +%d x 20<br>' % (改造等级)
+            temp += '所有属性强化 +%d x 10<br>' % (2 * 改造等级)
         if 改造等级 >= 5:
             temp += '技能攻击力 +1% x 20 <br>'
             temp += '攻击速度 +15%<br>'
