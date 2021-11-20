@@ -226,6 +226,8 @@ class 选择窗口(QWidget):
             reason = repJson[code]['reason']
             if reason != '': canUse = random.randint(0, 75)
         except:
+            reason = '获取异常列表错误'
+            canUse = random.randint(0, 75)
             pass
         for i in range(75):
             img_box = QLabel(self.topFiller)
