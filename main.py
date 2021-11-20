@@ -699,7 +699,7 @@ class SetWindows(QWidget):
             txt2_box.move(60, 30 + 50 * num + 5)
             txt2_box.setStyleSheet(
                 'QLabel{font-size:13px;color:rgb(175,148,89)}')
-            self.ComboBoxList[num] = MyQComboBox(self.topFiller)
+            self.ComboBoxList[num] = MyQComboBox(self.topFiller,useWheel=False)
             self.ComboBoxList[num].addItems(i['选项'])
             self.ComboBoxList[num].resize(100, 20)
             self.ComboBoxList[num].move(50 + 80, 30 + 50 * num + 5)

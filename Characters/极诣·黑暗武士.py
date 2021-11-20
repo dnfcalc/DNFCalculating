@@ -1364,7 +1364,7 @@ class 极诣·黑暗武士(角色窗口):
             temp = []
             temp2 = []
             for j in range(6):
-                temp.append(MyQComboBox(self.main_frame2))
+                temp.append(MyQComboBox(self.main_frame2,useWheel=False))
                 temp[j].resize(100, 22)
                 temp[j].addItems(技能名称)
                 temp[j].currentIndexChanged.connect(

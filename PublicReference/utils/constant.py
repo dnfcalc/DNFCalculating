@@ -9,6 +9,7 @@ import ctypes
 from typing import Iterable
 
 from PyQt5 import QtWidgets
+from PyQt5 import QtGui
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -344,8 +345,9 @@ QScrollBar::down-arrow:vertical {
 
 
 class MyQComboBox(QComboBox):
-    def __init__(self, win):
+    def __init__(self, win ,useWheel=True):
         super().__init__(win)
+        self.useWheel = useWheel
         self.setView(QListView())
         self.setStyleSheet(下拉框样式)
 
@@ -360,6 +362,12 @@ class MyQComboBox(QComboBox):
         text = trans(text)
         super().addItem(text, userData)
         pass
+    
+    def wheelEvent(self, e: QtGui.QWheelEvent) -> None:
+        if self.useWheel:
+            return super().wheelEvent(e)
+        else:
+            pass
 
 
 class MyQToolButton(QToolButton):
