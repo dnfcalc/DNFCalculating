@@ -105,12 +105,18 @@ skillDataPath = resource_path("SkillData")
 
 def getQCSS(FileName):
     try:
-        with open(
-                "./ResourceFiles/Skins/" + SkinVersion + "/" + FileName +
-                ".qcss", "rb") as fp:
-            content = fp.read()
-            encoding = chardet.detect(content) or {}
-            content = content.decode(encoding.get("encoding") or "utf-8")
+        content = store.get("./ResourceFiles/Skins/" + SkinVersion + "/" +
+                            FileName)
+        if content == None:
+            with open(
+                    "./ResourceFiles/Skins/" + SkinVersion + "/" + FileName +
+                    ".qcss", "rb") as fp:
+                content = fp.read()
+                encoding = chardet.detect(content) or {}
+                content = content.decode(encoding.get("encoding") or "utf-8")
+                store.set(
+                    "./ResourceFiles/Skins/" + SkinVersion + "/" + FileName,
+                    content)
         return content
     except Exception as error:
         return ''
@@ -345,7 +351,7 @@ QScrollBar::down-arrow:vertical {
 
 
 class MyQComboBox(QComboBox):
-    def __init__(self, win ,useWheel=True):
+    def __init__(self, win, useWheel=True):
         super().__init__(win)
         self.useWheel = useWheel
         self.setView(QListView())
@@ -362,7 +368,7 @@ class MyQComboBox(QComboBox):
         text = trans(text)
         super().addItem(text, userData)
         pass
-    
+
     def wheelEvent(self, e: QtGui.QWheelEvent) -> None:
         if self.useWheel:
             return super().wheelEvent(e)

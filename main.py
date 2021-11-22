@@ -223,8 +223,9 @@ class 选择窗口(QWidget):
             repJson = requests.get(
                 "https://i_melon.gitee.io/dnfcalculating/ban.json",
                 timeout=2).json()
-            reason = repJson[code]['reason']
-            if reason != '': canUse = random.randint(0, 75)
+            if not code == '':
+                reason = repJson[code]['reason']
+                if reason != '': canUse = random.randint(0, 75)
         except:
             reason = '获取异常列表错误'
             canUse = random.randint(0, 75)
@@ -370,7 +371,7 @@ class 选择窗口(QWidget):
                 pass
         count += 1
 
-        butten = QtWidgets.QPushButton(" "+trans('设置|打赏|反馈'), self.topFiller)
+        butten = QtWidgets.QPushButton(" " + trans('设置|打赏|反馈'), self.topFiller)
         menu = QMenu()
         action_0 = QAction(trans('设置'), parent=menu)
         action_0.triggered.connect(lambda state: self.openSet())
@@ -390,8 +391,9 @@ class 选择窗口(QWidget):
         action_5 = QAction(trans('打赏'), parent=menu)
         action_5.triggered.connect(lambda state, index=count: self.打赏())
         action_6 = QAction('联系我们-解除限制', parent=menu)
-        action_6.triggered.connect(lambda state: self.打开链接(
-            ['https://gitee.com/i_melon/DNFCalculating/issues/I4IOO7'], "解除限制"))
+        action_6.triggered.connect(lambda state: self.打开链接([
+            'https://gitee.com/i_melon/DNFCalculating/issues/I4IOO7'
+        ], "解除限制"))
         menu.addAction(action_0)
         menu.addSeparator()
         menu.addAction(action_5)
@@ -477,7 +479,8 @@ class 选择窗口(QWidget):
     def 弹窗警告(self, reason):
         box = QMessageBox(
             QMessageBox.Question, "提示",
-            "由于{},您已被限制使用计算器，每次开启仅能随机使用一个职业<br>如需解除，请于设置=>解除限制内申请".format(reason))
+            "{}由于{},您已被限制使用计算器，每次开启仅能随机使用一个职业<br>如需解除，请于设置=>解除限制内申请".format(
+                get_mac_address(),reason))
         box.setWindowIcon(self.icon)
         box.setStandardButtons(QMessageBox.Yes)
         box.exec_()
@@ -701,7 +704,8 @@ class SetWindows(QWidget):
             txt2_box.move(60, 30 + 50 * num + 5)
             txt2_box.setStyleSheet(
                 'QLabel{font-size:13px;color:rgb(175,148,89)}')
-            self.ComboBoxList[num] = MyQComboBox(self.topFiller,useWheel=False)
+            self.ComboBoxList[num] = MyQComboBox(self.topFiller,
+                                                 useWheel=False)
             self.ComboBoxList[num].addItems(i['选项'])
             self.ComboBoxList[num].resize(100, 20)
             self.ComboBoxList[num].move(50 + 80, 30 + 50 * num + 5)
