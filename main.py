@@ -106,7 +106,7 @@ class 选择窗口(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.thread_init()
+        # self.thread_init()
         self.ui()
         self.char_window = None
 
@@ -480,7 +480,7 @@ class 选择窗口(QWidget):
         box = QMessageBox(
             QMessageBox.Question, "提示",
             "{}由于{},您已被限制使用计算器，每次开启仅能随机使用一个职业<br>如需解除，请于设置=>解除限制内申请".format(
-                get_mac_address(),reason))
+                get_mac_address(), reason))
         box.setWindowIcon(self.icon)
         box.setStandardButtons(QMessageBox.Yes)
         box.exec_()
@@ -786,10 +786,15 @@ if __name__ == '__main__':
                                                 True)
     app = QApplication([])
 
-    instance = 选择窗口()
-    instance._signal.connect(instance.closeSet)
-    win = MainWindow(instance)
-    win.show()
+    try:
+        instance = 选择窗口()
+        instance._signal.connect(instance.closeSet)
+        win = MainWindow(instance)
+        win.show()
+    except Exception as error:
+        logger.error("error={} \n detail {}".format(error,
+                                                    traceback.print_exc()))
+
     用户须知 = False
 
     try:
@@ -851,4 +856,5 @@ if __name__ == '__main__':
     else:
         用户须知 = True
     if 用户须知:
+        instance.thread_init()
         app.exec_()

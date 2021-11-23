@@ -4,8 +4,6 @@ import threading
 import time
 import os
 import math
-from ctypes import *
-import ctypes
 from typing import Iterable
 
 from PyQt5 import QtWidgets
