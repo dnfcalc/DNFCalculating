@@ -25,6 +25,7 @@ import chardet
 import sys
 import platform
 import ctypes
+from ctypes import *
 
 from PublicReference.utils.config import *
 
