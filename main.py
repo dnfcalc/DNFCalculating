@@ -223,14 +223,14 @@ class 选择窗口(QWidget):
             repJson = requests.get(
                 "https://i_melon.gitee.io/dnfcalculating/ban.json",
                 timeout=2).json()
-        except:
-            reason = '获取异常列表错误'
-            canUse = random.randint(0, 75)
-            pass
-        try:
             if not code == '':
                 reason = repJson[code]['reason']
                 if reason != '': canUse = random.randint(0, 75)
+        # except:
+        #     reason = '获取异常列表错误'
+        #     canUse = random.randint(0, 75)
+        #     pass
+        # try:    
         except:
             pass
         for i in range(75):
