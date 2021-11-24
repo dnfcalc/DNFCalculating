@@ -1,5 +1,17 @@
 ## Newest
 
+### 2021-11-24
+
+#### NewFeatures
+* 同步韩服正式服特工、阿修罗调整 ([e46d6c](https://gitee.com/i_melon/DNFCalculating/commit/e46d6c3e20140a8a6c5f91d54d9e6b690e6e48d9))
+* 禁用设置页面、黑暗武士排列页面下拉菜单鼠标滚轮选择功能，防止误操作 ([5f1057](https://gitee.com/i_melon/DNFCalculating/commit/5f10572a35161bab5d6a416020b07764d55dd2f4))
+
+#### BugFixes
+* 修复心悦宠物属性错误 ([bd927a](https://gitee.com/i_melon/DNFCalculating/commit/bd927aeffd9a2b068408d88b68119f337072c2ae))
+* 修正属强辟邪玉对完美掌控加成错误 ([4c6059](https://gitee.com/i_melon/DNFCalculating/commit/4c6059f147bd715af6124b04ed43814b5f372b24))
+* 修正标题栏字号在部分情况下异常的情况 ([fbc6ab](https://gitee.com/i_melon/DNFCalculating/commit/fbc6ab53b6ec41f8087783096477a3811eac83fb))
+* 归元·气功师·男：修正月辉念气破护石CD错误 ([a6948a](https://gitee.com/i_melon/DNFCalculating/commit/a6948a1fc8019c66820db629d221e2668782d859))
+
 ### 2021-11-18
 
 #### BugFixes
@@ -27,6 +39,7 @@
 #### BugFixes
 * 修复在目录存在空格的情况下可能误删文件的情况 ([1eafb8](https://gitee.com/i_melon/DNFCalculating/commit/1eafb8fba8dcd939c936d23b9dfad7124c83c323))
 * 修正输出技能数据无法使用的情况 ([a2183a](https://gitee.com/i_melon/DNFCalculating/commit/a2183ae1fd610ff251a66571a6bf058b92b64fb3))
+
 
 
 
