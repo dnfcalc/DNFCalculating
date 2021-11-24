@@ -534,8 +534,8 @@ class 技能24(主动技能):
 
     def 装备护石(self, x):
         if x == 0:
-            self.data1 = [int(i*1.6) for i in self.data1]
-            self.data3 = [int(i*1.6) for i in self.data3]
+            self.data1 = [int(i*1.48) for i in self.data1]
+            self.data3 = [int(i*1.48) for i in self.data3]
             # self.护石加成 *= 1.35628
 
 
