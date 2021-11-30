@@ -1,7 +1,7 @@
 # 水印附近背景色-排行榜界面
 watermark_surrounding_backgroud_color_ranking = (21, 39, 65)
 # 水印附近背景色-详情界面
-watermark_surrounding_backgroud_color_detail = (27, 14, 6)
+watermark_surrounding_backgroud_color_detail = (27, 48, 81)
 # 水印与背景色的偏差值
 watermark_delta = -5
 # 考虑到图片压缩，水印色彩允许的上下偏移值
