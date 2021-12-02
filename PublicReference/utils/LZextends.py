@@ -6,58 +6,16 @@ from typing import List
 class LZextends():
     def __init__(self):
         self.lzy = LanZouCloud()
+        self.lzy._host_url = 'https://pan.lanzouo.com'
 
-    def get_folder_info_by_url(self, share_url, dir_pwd='') -> FolderDetail:
-        for possiable_url in self.all_possiable_urls(share_url):
-            folder_info = self.lzy.get_folder_info_by_url(
-                possiable_url, dir_pwd)
-            if folder_info.code != LanZouCloud.SUCCESS:
-                # logger.debug(f"请求{possiable_url}失败，将尝试下一个")
-                continue
-
-            return folder_info
-
-        return FolderDetail(LanZouCloud.FAILED)
-
-    def down_file_by_url(self,
-                         share_url,
-                         pwd='',
-                         save_path='./Download',
-                         *,
-                         callback=None,
-                         overwrite=False,
-                         downloaded_handler=None) -> int:
-        for possiable_url in self.all_possiable_urls(share_url):
-            retCode = self.lzy.down_file_by_url(
-                possiable_url,
-                pwd,
-                save_path,
-                callback=callback,
-                overwrite=overwrite,
-                downloaded_handler=downloaded_handler)
-            if retCode != LanZouCloud.SUCCESS:
-                # logger.debug(f"请求{possiable_url}失败，将尝试下一个")
-                continue
-
-            return retCode
-
-        return LanZouCloud.FAILED
-
-    def all_possiable_urls(self, lanzouyun_url: str) -> List[str]:
-        old_domain = 'wwx.lanzoui'
-        return [
-            lanzouyun_url,
-
-            # lanzouyun_url.replace(old_domain, 'wwx.lanzoui'),
-            lanzouyun_url.replace(old_domain, 'wws.lanzoui'),
-            lanzouyun_url.replace(old_domain, 'pan.lanzoui'),
-            lanzouyun_url.replace(old_domain, 'www.lanzoui'),
-            lanzouyun_url.replace(old_domain, 'wwx.lanzoux'),
-            lanzouyun_url.replace(old_domain, 'wws.lanzoux'),
-            lanzouyun_url.replace(old_domain, 'pan.lanzoux'),
-            lanzouyun_url.replace(old_domain, 'www.lanzoux'),
-            lanzouyun_url.replace(old_domain, 'wwx.lanzous'),
-            lanzouyun_url.replace(old_domain, 'wws.lanzous'),
-            lanzouyun_url.replace(old_domain, 'pan.lanzous'),
-            lanzouyun_url.replace(old_domain, 'www.lanzous'),
+    @staticmethod
+    def _all_possible_urls(url: str) -> List[str]:
+        """蓝奏云的主域名有时会挂掉, 此时尝试切换到备用域名"""
+        available_domains = [
+            'lanzouo.com',  # 鲁ICP备15001327号-8, 2021-09-15
+            'lanzouw.com',  # 鲁ICP备15001327号-7, 2021-09-02
+            'lanzoui.com',  # 鲁ICP备15001327号-6, 2020-06-09, SEO 排名最低
+            'lanzoux.com',  # 鲁ICP备15001327号-5, 2020-06-09
+            'lanzous.com'  # 主域名, 备案异常, 部分地区已经无法访问
         ]
+        return [url.replace('lanzous.com', d) for d in available_domains]

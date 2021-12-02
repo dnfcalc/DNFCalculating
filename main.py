@@ -141,7 +141,7 @@ class 选择窗口(QWidget):
             lzy = LZextends()
             fileURL = ''
             folder_info = lzy.get_folder_info_by_url(
-                'https://wwx.lanzoui.com/b01bfj76f')
+                'https://wwx.lanzoux.com/b01bfj76f')
             if folder_info.code != LanZouCloud.SUCCESS:
                 self.网盘链接 = ''
                 self.网盘报错 = 1
@@ -230,7 +230,7 @@ class 选择窗口(QWidget):
         #     reason = '获取异常列表错误'
         #     canUse = random.randint(0, 75)
         #     pass
-        # try:    
+        # try:
         except:
             pass
         for i in range(75):
