@@ -42,7 +42,7 @@ preferred = None
 try:
     if platform.system() != "Windows":
         dllPath = resource_path(
-            os.path.join("InternalFile", "DLL", "Preferred.so"))
+            os.path.join("InternalFile", "DLL", "Preferred.dylib"))
         preferred = ctypes.CDLL(dllPath)
         # logger.info("Preferred included.")
     else:
