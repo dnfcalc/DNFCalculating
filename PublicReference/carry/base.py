@@ -4237,6 +4237,17 @@ class 角色窗口(窗口):
             # 如果不存在任何存档则载入重置存档
             self.载入json(path='reset')
 
+    def isIntSeriously(self,number):
+        result = False
+        try:
+            n = float(number)
+            # 判断是否是整数并且是否小于10
+            if n.is_integer() and str(number).count('.') == 0 and n<=10:
+                result =True
+        except:
+            pass
+        return result
+
     def 设置技能选项(self, 序号, info):
         try:
             self.等级调整[序号].setCurrentIndex(info['level'])
@@ -4248,26 +4259,28 @@ class 角色窗口(窗口):
             pass
 
         try:
-            if type(info['count']) == type('str'):
+            if info['count'] == '/CD':
+                self.次数输入[序号].setCurrentIndex(0)
+            elif self.isIntSeriously(info['count']):
+                self.次数输入[序号].setCurrentIndex(int(info['count'])+1)
+            else:
                 self.次数输入[序号].setCurrentIndex(12)
                 self.次数输入[序号].setEditable(True)
                 self.次数输入[序号].clearEditText()
                 self.次数输入[序号].setCurrentText(info['count'])
                 self.次数输入[序号].setStyleSheet(下拉框样式)
-            else:
-                self.次数输入[序号].setCurrentIndex(info['count'])
         except:
             pass
 
         try:
-            if type(info['pet']) == type('str'):
+            if self.isIntSeriously(info['pet']):
+                self.宠物次数[序号].setCurrentIndex(int(info['pet']))
+            else:
                 self.宠物次数[序号].setCurrentIndex(11)
                 self.宠物次数[序号].setEditable(True)
                 self.宠物次数[序号].clearEditText()
                 self.宠物次数[序号].setCurrentText(info['pet'])
                 self.宠物次数[序号].setStyleSheet(下拉框样式)
-            else:
-                self.宠物次数[序号].setCurrentIndex(info['pet'])
         except:
             pass
 
