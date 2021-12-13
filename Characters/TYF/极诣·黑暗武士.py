@@ -1212,7 +1212,9 @@ class 技能45(被动技能):
 i = 0
 while i >= 0:
     try:
-        exec('技能列表.append(技能'+str(i)+'())')
+        tem = eval('技能'+str(i)+'()')
+        tem.基础等级计算()
+        技能列表.append(tem)
         i += 1
     except:
         i = -1

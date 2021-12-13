@@ -14,6 +14,7 @@ from PublicReference.utils.common import format_range, to_percent
 
 等级 = 100 + 5
 
+
 class 技能:
     名称 = ''
     备注 = ''
@@ -23,6 +24,9 @@ class 技能:
     基础等级 = 0
     等级溢出 = 0
     自定义描述 = 0
+    学习间隔 = 1
+    等级精通 = 60
+    基础等级 = 0
 
     关联技能 = ['无']
     关联技能2 = ['无']
@@ -47,6 +51,9 @@ class 技能:
                     self.等级溢出 = 1
             else:
                 self.等级 += x
+
+    def 基础等级计算(self):
+        pass
 
 
 class 主动技能(技能):
@@ -89,11 +96,19 @@ class 主动技能(技能):
     def 等效CD(self, 武器类型, 输出类型):
         return round(self.CD / self.恢复 * 武器冷却惩罚(武器类型, 输出类型, self.版本), 1)
 
+    def 基础等级计算(self):
+        if self.基础等级 == 0:
+            self.基础等级 = min(int((等级 - self.所在等级) / self.学习间隔 + 1), self.等级精通)
+
 
 class 被动技能(技能):
     是否主动 = 0
     是否有伤害 = 0
     关联技能 = ['所有']
+
+    def 基础等级计算(self):
+        if self.基础等级 == 0:
+            self.基础等级 = min(int((等级 - self.所在等级) / self.学习间隔 + 1), self.等级精通)
 
 
 符文效果选项 = [
@@ -4238,13 +4253,13 @@ class 角色窗口(窗口):
             # 如果不存在任何存档则载入重置存档
             self.载入json(path='reset')
 
-    def isIntSeriously(self,number):
+    def isIntSeriously(self, number):
         result = False
         try:
             n = float(number)
             # 判断是否是整数并且是否小于10
-            if n.is_integer() and str(number).count('.') == 0 and n<=10:
-                result =True
+            if n.is_integer() and str(number).count('.') == 0 and n <= 10:
+                result = True
         except:
             pass
         return result
@@ -4263,7 +4278,7 @@ class 角色窗口(窗口):
             if info['count'] == '/CD':
                 self.次数输入[序号].setCurrentIndex(0)
             elif self.isIntSeriously(info['count']):
-                self.次数输入[序号].setCurrentIndex(int(info['count'])+1)
+                self.次数输入[序号].setCurrentIndex(int(info['count']) + 1)
             else:
                 self.次数输入[序号].setCurrentIndex(12)
                 self.次数输入[序号].setEditable(True)
@@ -5303,8 +5318,8 @@ class 角色窗口(窗口):
                         tempstr += trans(
                             加成倍率key,
                             value=to_percent(
-                                self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) -
-                                1, 2))
+                                self.角色属性B.技能栏[i].加成倍率(self.角色属性B.武器类型) - 1,
+                                2))
                         tempstr += 关联技能title
                         for j in self.角色属性B.技能栏[i].关联技能:
                             tempstr += trans(j)
@@ -5318,11 +5333,11 @@ class 角色窗口(窗口):
                                     tempstr += ','
                             tempstr += ')</font>'
                         if self.角色属性B.技能栏[i].关联技能2 != ['无']:
-                            tempstr += "<br>"+trans(加成倍率key,
-                                             value=to_percent(
-                                                 self.角色属性B.技能栏[i].加成倍率2(
-                                                     self.角色属性B.武器类型) -1,
-                                                 2))
+                            tempstr += "<br>" + trans(
+                                加成倍率key,
+                                value=to_percent(
+                                    self.角色属性B.技能栏[i].加成倍率2(self.角色属性B.武器类型) -
+                                    1, 2))
                             tempstr += 关联技能title
                             for k in self.角色属性B.技能栏[i].关联技能2:
                                 tempstr += trans(k)
@@ -5336,11 +5351,11 @@ class 角色窗口(窗口):
                                     tempstr += ','
                             tempstr += ')</font>'
                         if self.角色属性B.技能栏[i].关联技能3 != ['无']:
-                            tempstr += "<br>"+trans(加成倍率key,
-                                             value=to_percent(
-                                                 self.角色属性B.技能栏[i].加成倍率3(
-                                                     self.角色属性B.武器类型)  -1,
-                                                 2))
+                            tempstr += "<br>" + trans(
+                                加成倍率key,
+                                value=to_percent(
+                                    self.角色属性B.技能栏[i].加成倍率3(self.角色属性B.武器类型) -
+                                    1, 2))
                             tempstr += 关联技能title
                             for l in self.角色属性B.技能栏[i].关联技能3:
                                 tempstr += trans(l)
@@ -5367,8 +5382,7 @@ class 角色窗口(窗口):
                         tempstr += trans(
                             冷却缩减key,
                             value=to_percent(
-                                1 -
-                                self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型),
+                                1 - self.角色属性B.技能栏[i].CD缩减倍率(self.角色属性B.武器类型),
                                 2))
                         tempstr += 冷却关联title
                         for j in self.角色属性B.技能栏[i].冷却关联技能:
@@ -5383,11 +5397,12 @@ class 角色窗口(窗口):
                                     tempstr += ','
                             tempstr += ')</font>'
                         if self.角色属性B.技能栏[i].冷却关联技能2 != ['无']:
-                            tempstr += trans(冷却缩减key,
-                                             value=to_percent(
-                                                 1 -
-                                                 self.角色属性B.技能栏[i].CD缩减倍率2(
-                                                     self.角色属性B.武器类型), 2))
+                            tempstr += trans(
+                                冷却缩减key,
+                                value=to_percent(
+                                    1 -
+                                    self.角色属性B.技能栏[i].CD缩减倍率2(self.角色属性B.武器类型),
+                                    2))
                             tempstr += 冷却关联title
                             for j in self.角色属性B.技能栏[i].冷却关联技能2:
                                 tempstr += trans(j)
@@ -5401,11 +5416,12 @@ class 角色窗口(窗口):
                                     tempstr += ','
                             tempstr += ')</font>'
                         if self.角色属性B.技能栏[i].冷却关联技能3 != ['无']:
-                            tempstr += trans(冷却缩减key,
-                                             value=to_percent(
-                                                 1 -
-                                                 self.角色属性B.技能栏[i].CD缩减倍率3(
-                                                     self.角色属性B.武器类型), 2))
+                            tempstr += trans(
+                                冷却缩减key,
+                                value=to_percent(
+                                    1 -
+                                    self.角色属性B.技能栏[i].CD缩减倍率3(self.角色属性B.武器类型),
+                                    2))
                             tempstr += 冷却关联title
                             for j in self.角色属性B.技能栏[i].冷却关联技能3:
                                 tempstr += trans(j)

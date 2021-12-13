@@ -8,7 +8,7 @@ from PublicReference.carry.base import *
 #             return round(self.CD / self.恢复 * 0.95, 1)
 
 
-class 极诣·剑影技能0(主动技能):
+class 技能0(主动技能):
     名称 = '鬼步'
     所在等级 = 15
     等级上限 = 60
@@ -25,7 +25,7 @@ class 极诣·剑影技能0(主动技能):
         return (self.data1[self.等级] * self.攻击次数2) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能1(主动技能):
+class 技能1(主动技能):
     名称 = '鬼连斩'
     所在等级 = 15
     等级上限 = 60
@@ -51,7 +51,7 @@ class 极诣·剑影技能1(主动技能):
         return (self.data1[self.等级] + self.data2[self.等级] + self.data3[self.等级] + self.data4[self.等级] * self.攻击次数5 * self.被动开关) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能2(被动技能):
+class 技能2(被动技能):
     名称 = '剑影太刀精通'
     所在等级 = 20
     等级上限 = 20
@@ -70,7 +70,7 @@ class 极诣·剑影技能2(被动技能):
             return round(1.00 + 0.02 * self.等级, 5)
 
 
-class 极诣·剑影技能3(主动技能):
+class 技能3(主动技能):
     名称 = '幻鬼：一闪'
     所在等级 = 20
     等级上限 = 60
@@ -85,7 +85,7 @@ class 极诣·剑影技能3(主动技能):
         return self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能4(被动技能):
+class 技能4(被动技能):
     名称 = '幻鬼之力'
     所在等级 = 25
     等级上限 = 20
@@ -98,7 +98,7 @@ class 极诣·剑影技能4(被动技能):
             return round(1.10 + 0.02 * self.等级, 5)
 
 
-class 极诣·剑影技能5(主动技能):
+class 技能5(主动技能):
     名称 = '鬼连牙'
     所在等级 = 25
     等级上限 = 60
@@ -113,7 +113,7 @@ class 极诣·剑影技能5(主动技能):
         return self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能6(主动技能):
+class 技能6(主动技能):
     名称 = '幻鬼：连斩'
     所在等级 = 25
     等级上限 = 60
@@ -134,7 +134,7 @@ class 极诣·剑影技能6(主动技能):
         return (self.data1[self.等级] + self.data2[self.等级] + self.data3[self.等级] + self.data4[self.等级]) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能7(主动技能):
+class 技能7(主动技能):
     名称 = '共鸣：离魂一闪'
     所在等级 = 30
     等级上限 = 60
@@ -151,7 +151,7 @@ class 极诣·剑影技能7(主动技能):
         return (self.data1[self.等级] + self.data2[self.等级]) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能8(主动技能):
+class 技能8(主动技能):
     名称 = '魂破斩'
     所在等级 = 35
     等级上限 = 60
@@ -176,7 +176,7 @@ class 极诣·剑影技能8(主动技能):
         return self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能9(主动技能):
+class 技能9(主动技能):
     名称 = '共鸣：鬼灵斩'
     所在等级 = 35
     等级上限 = 60
@@ -191,7 +191,7 @@ class 极诣·剑影技能9(主动技能):
         return self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能10(主动技能):
+class 技能10(主动技能):
     名称 = '幻鬼：回天'
     所在等级 = 40
     等级上限 = 60
@@ -217,7 +217,7 @@ class 极诣·剑影技能10(主动技能):
         return (self.data1[self.等级] + self.data2[self.等级] * self.攻击次数3) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能11(主动技能):
+class 技能11(主动技能):
     名称 = '冥灵断魂斩'
     所在等级 = 45
     等级上限 = 60
@@ -240,7 +240,7 @@ class 极诣·剑影技能11(主动技能):
         return self.data1[self.等级] * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能12(主动技能):
+class 技能12(主动技能):
     名称 = '冥夜鬼天杀'
     所在等级 = 50
     等级上限 = 40
@@ -254,7 +254,7 @@ class 极诣·剑影技能12(主动技能):
         return (self.data1[self.等级] * self.攻击次数2) * self.倍率
 
 
-class 极诣·剑影技能13(被动技能):
+class 技能13(被动技能):
     名称 = '鬼夜'
     所在等级 = 48
     等级上限 = 40
@@ -267,7 +267,7 @@ class 极诣·剑影技能13(被动技能):
             return round(1.035 + 0.02 * self.等级, 5)
 
 
-class 极诣·剑影技能14(主动技能):
+class 技能14(主动技能):
     名称 = '幻鬼：奈落'
     所在等级 = 60
     等级上限 = 40
@@ -292,7 +292,7 @@ class 极诣·剑影技能14(主动技能):
         return (self.data1[self.等级]) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能15(主动技能):
+class 技能15(主动技能):
     名称 = '共鸣：聚渊'
     所在等级 = 70
     等级上限 = 40
@@ -320,7 +320,7 @@ class 极诣·剑影技能15(主动技能):
         return (self.data1[self.等级] + self.data2[self.等级] + self.data3[self.等级] * self.攻击次数4) * (1 + self.TP成长 * self.TP等级) * self.倍率
 
 
-class 极诣·剑影技能16(主动技能):
+class 技能16(主动技能):
     名称 = '幻鬼：大回天'
     所在等级 = 75
     等级上限 = 40
@@ -341,7 +341,7 @@ class 极诣·剑影技能16(主动技能):
         return (self.data1[self.等级] * self.攻击次数2) * self.倍率
 
 
-class 极诣·剑影技能17(被动技能):
+class 技能17(被动技能):
     名称 = '鬼咲'
     所在等级 = 75
     等级上限 = 40
@@ -354,7 +354,7 @@ class 极诣·剑影技能17(被动技能):
             return round(1.22 + 0.02 * self.等级, 5)
 
 
-class 极诣·剑影技能18(主动技能):
+class 技能18(主动技能):
     名称 = '裂魂乱舞'
     所在等级 = 80
     等级上限 = 40
@@ -392,7 +392,7 @@ class 极诣·剑影技能18(主动技能):
         return (self.data1[self.等级] * self.攻击次数2 + self.data2[self.等级] * self.攻击次数3 + self.data3[self.等级] * self.攻击次数4 + self.data4[self.等级] * self.攻击次数5 * self.护石倍率1 + self.data5[self.等级] * self.攻击次数6 * self.护石倍率2) * self.倍率
 
 
-class 极诣·剑影技能19(主动技能):
+class 技能19(主动技能):
     名称 = '鬼隐·夜奈落'
     所在等级 = 85
     等级上限 = 40
@@ -411,7 +411,7 @@ class 极诣·剑影技能19(主动技能):
         return (self.data1[self.等级] + self.data2[self.等级] + self.data3[self.等级] + self.data4[self.等级]) * self.倍率
 
 
-class 极诣·剑影技能20(被动技能):
+class 技能20(被动技能):
     名称 = '睥睨万物'
     所在等级 = 95
     等级上限 = 40
@@ -424,7 +424,7 @@ class 极诣·剑影技能20(被动技能):
             return round(1.18 + 0.02 * self.等级, 5)
 
 
-class 极诣·剑影技能21(主动技能):
+class 技能21(主动技能):
     名称 = '无式·极影剑'
     所在等级 = 95
     等级上限 = 40
@@ -453,7 +453,7 @@ class 极诣·剑影技能21(主动技能):
         return (self.data1[self.等级] * self.攻击次数2 + self.data2[self.等级] * self.攻击次数3 + self.data3[self.等级] * self.攻击次数4 + self.data4[self.等级] * self.攻击次数5 + self.data5[self.等级] * self.攻击次数6 + self.data6[self.等级] * self.攻击次数7) * self.倍率
 
 
-class 极诣·剑影技能22(主动技能):
+class 技能22(主动技能):
     名称 = '灭魂极影剑·止煞'
     所在等级 = 100
     等级上限 = 40
@@ -485,7 +485,7 @@ class 极诣·剑影技能22(主动技能):
         return (self.data1[self.等级] + self.data2[self.等级] * self.攻击次数3 + self.data3[self.等级] + self.data4[self.等级] * self.攻击次数5 + self.data5[self.等级] + self.data6[self.等级] + self.data7[self.等级]) * self.倍率
 
 
-class 极诣·剑影技能23(被动技能):
+class 技能23(被动技能):
     名称 = '鬼连斩：极'
     所在等级 = 30
     等级上限 = 60
@@ -500,25 +500,27 @@ class 极诣·剑影技能23(被动技能):
 i = 0
 while i >= 0:
     try:
-        exec('技能列表.append(极诣·剑影技能'+str(i)+'())')
+        tem = eval('技能'+str(i)+'()')
+        tem.基础等级计算()
+        技能列表.append(tem)
         i += 1
     except:
         i = -1
 
-极诣·剑影技能序号 = dict()
+技能序号 = dict()
 for i in range(len(技能列表)):
-    极诣·剑影技能序号[技能列表[i].名称] = i
+    技能序号[技能列表[i].名称] = i
 
 极诣·剑影一觉序号 = 0
 极诣·剑影二觉序号 = 0
 极诣·剑影三觉序号 = 0
 for i in 技能列表:
     if i.所在等级 == 50:
-        极诣·剑影一觉序号 = 极诣·剑影技能序号[i.名称]
+        极诣·剑影一觉序号 = 技能序号[i.名称]
     if i.所在等级 == 85:
-        极诣·剑影二觉序号 = 极诣·剑影技能序号[i.名称]
+        极诣·剑影二觉序号 = 技能序号[i.名称]
     if i.所在等级 == 100:
-        极诣·剑影三觉序号 = 极诣·剑影技能序号[i.名称]
+        极诣·剑影三觉序号 = 技能序号[i.名称]
 
 极诣·剑影护石选项 = ['无']
 for i in 技能列表:
@@ -554,7 +556,7 @@ class 极诣·剑影角色属性(角色属性):
     def __init__(self):
         基础属性输入(self)
         self.技能栏 = deepcopy(技能列表)
-        self.技能序号 = deepcopy(极诣·剑影技能序号)
+        self.技能序号 = deepcopy(技能序号)
 
     def 武器基础(self):
         temp = equ.get_equ_by_name(self.装备栏[11])
