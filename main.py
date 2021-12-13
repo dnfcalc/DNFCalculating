@@ -304,7 +304,51 @@ class 选择窗口(QWidget):
         # 为了女鬼调整位置
         count = 1
 
-        butten = QtWidgets.QPushButton(trans('首页\n手册|日志|源码'), self.topFiller)
+        butten = QtWidgets.QPushButton(
+            '  ' + trans('首页') + '\n  ' + trans('设置|打赏|反馈'), self.topFiller)
+
+        # butten = QtWidgets.QPushButton(" " + trans(''), self.topFiller)
+        menu = QMenu()
+        action_0 = QAction(trans('设置'), parent=menu)
+        action_0.triggered.connect(lambda state: self.openSet())
+        action_1 = QAction(trans('BUG反馈-Gitee'), parent=menu)
+        action_1.triggered.connect(lambda state: self.打开链接([
+            'https://gitee.com/i_melon/DNFCalculating/issues?state=all'
+        ], "Gitee"))
+        action_2 = QAction('联系我们-QQ-1群', parent=menu)
+        action_2.triggered.connect(lambda state: self.打开链接(
+            ['https://jq.qq.com/?_wv=1027&k=VSNtZ1xv'], "QQ群"))
+        action_3 = QAction('联系我们-QQ-2群', parent=menu)
+        action_3.triggered.connect(lambda state: self.打开链接(
+            ['https://jq.qq.com/?_wv=1027&k=QMgadVkA'], "QQ群"))
+        action_4 = QAction('联系我们-QQ-3群', parent=menu)
+        action_4.triggered.connect(lambda state: self.打开链接(
+            ['https://jq.qq.com/?_wv=1027&k=ekQXpyq0'], "QQ群"))
+        action_5 = QAction(trans('打赏'), parent=menu)
+        action_5.triggered.connect(lambda state, index=count: self.打赏())
+        action_6 = QAction('联系我们-解除限制', parent=menu)
+        action_6.triggered.connect(lambda state: self.打开链接([
+            'https://gitee.com/i_melon/DNFCalculating/issues/I4IOO7'
+        ], "解除限制"))
+        action_7 = QAction(QIcon('ResourceFiles/img/logo.ico'),
+                           trans('手册 源码 日志'),
+                           parent=menu)
+        action_7.triggered.connect(
+            lambda state: self.打开链接(['http://dnf.17173.com/jsq/?khd'], "首页"))
+        menu.addAction(action_7)
+        menu.addSeparator()
+        menu.addAction(action_0)
+        menu.addSeparator()
+        menu.addAction(action_5)
+        menu.addSeparator()
+        menu.addAction(action_1)
+        menu.addSeparator()
+        menu.addAction(action_2)
+        menu.addAction(action_3)
+        menu.addAction(action_4)
+        menu.addAction(action_6)
+        butten.setMenu(menu)
+        # butten.clicked.connect(lambda state, index = count: self.问题反馈())
         # menu=QMenu()
         # action_0 = QAction('手册',parent=menu)
         # action_1 = QAction('日志',parent=menu)
@@ -313,8 +357,6 @@ class 选择窗口(QWidget):
         # menu.addAction(action_1)
         # menu.addAction(action_2)
         # butten.setMenu(menu)
-        butten.clicked.connect(lambda state, index=count: self.打开链接(
-            ['http://dnf.17173.com/jsq/?khd'], "首页"))
         butten.move(100 + 偏移量 + 4 * 125, 10 + (count + 1) * 100)
         butten.setStyleSheet(按钮样式3)
         butten.resize(121, 90)
@@ -373,45 +415,6 @@ class 选择窗口(QWidget):
             except Exception as error:
                 pass
         count += 1
-
-        butten = QtWidgets.QPushButton(" " + trans('设置|打赏|反馈'), self.topFiller)
-        menu = QMenu()
-        action_0 = QAction(trans('设置'), parent=menu)
-        action_0.triggered.connect(lambda state: self.openSet())
-        action_1 = QAction(trans('BUG反馈-Gitee'), parent=menu)
-        action_1.triggered.connect(lambda state: self.打开链接([
-            'https://gitee.com/i_melon/DNFCalculating/issues?state=all'
-        ], "Gitee"))
-        action_2 = QAction('联系我们-QQ-1群', parent=menu)
-        action_2.triggered.connect(lambda state: self.打开链接(
-            ['https://jq.qq.com/?_wv=1027&k=VSNtZ1xv'], "QQ群"))
-        action_3 = QAction('联系我们-QQ-2群', parent=menu)
-        action_3.triggered.connect(lambda state: self.打开链接(
-            ['https://jq.qq.com/?_wv=1027&k=QMgadVkA'], "QQ群"))
-        action_4 = QAction('联系我们-QQ-3群', parent=menu)
-        action_4.triggered.connect(lambda state: self.打开链接(
-            ['https://jq.qq.com/?_wv=1027&k=ekQXpyq0'], "QQ群"))
-        action_5 = QAction(trans('打赏'), parent=menu)
-        action_5.triggered.connect(lambda state, index=count: self.打赏())
-        action_6 = QAction('联系我们-解除限制', parent=menu)
-        action_6.triggered.connect(lambda state: self.打开链接([
-            'https://gitee.com/i_melon/DNFCalculating/issues/I4IOO7'
-        ], "解除限制"))
-        menu.addAction(action_0)
-        menu.addSeparator()
-        menu.addAction(action_5)
-        menu.addSeparator()
-        menu.addAction(action_1)
-        menu.addSeparator()
-        menu.addAction(action_2)
-        menu.addAction(action_3)
-        menu.addAction(action_4)
-        menu.addAction(action_6)
-        butten.setMenu(menu)
-        # butten.clicked.connect(lambda state, index = count: self.问题反馈())
-        butten.move(100 + 偏移量 + 4 * 125, 10 + (count + 1) * 100)
-        butten.setStyleSheet(按钮样式3)
-        butten.resize(121, 90)
         count += 1
 
         # butten = QtWidgets.QPushButton('打   赏', self.topFiller)
