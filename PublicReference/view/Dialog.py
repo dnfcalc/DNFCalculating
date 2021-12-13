@@ -129,7 +129,7 @@ class Dialog(QMainWindow):
             rect = parent.geometry()
             x = rect.x() + rect.width() / 2 - self.width() / 2
             y = rect.y() + rect.height() / 2 - self.height() / 2
-            self.move(x, y)
+            self.move(int(x), int(y))
         return super().showEvent(event)
 
     def closeEvent(self, event):
