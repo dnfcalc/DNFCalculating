@@ -12,6 +12,7 @@ import operator
 
 from PublicReference.utils.common import format_range, to_percent
 
+等级 = 100 + 5
 
 class 技能:
     名称 = ''
