@@ -6,31 +6,26 @@ import logging
 import os
 import pickle
 import re
-from datetime import timedelta, datetime
-from random import uniform, choices, sample, shuffle, choice
+from datetime import datetime, timedelta
+from random import choice, choices, sample, shuffle, uniform
 
 import requests
 
-__all__ = [
-    'logger', 'remove_notes', 'name_format', 'time_format', 'is_name_valid',
-    'is_file_url', 'is_folder_url', 'big_file_split', 'un_serialize',
-    'let_me_upload', 'auto_rename', 'calc_acw_sc__v2'
-]
+__all__ = ['logger', 'remove_notes', 'name_format', 'time_format', 'is_name_valid', 'is_file_url',
+           'is_folder_url', 'big_file_split', 'un_serialize', 'let_me_upload', 'auto_rename', 'calc_acw_sc__v2']
 
 # 调试日志设置
 logger = logging.getLogger('lanzou')
 logger.setLevel(logging.ERROR)
 formatter = logging.Formatter(
-    fmt=
-    "%(asctime)s [line:%(lineno)d] %(funcName)s %(levelname)s - %(message)s",
+    fmt="%(asctime)s [line:%(lineno)d] %(funcName)s %(levelname)s - %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S")
 console = logging.StreamHandler()
 console.setFormatter(formatter)
 logger.addHandler(console)
 
 headers = {
-    'User-Agent':
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36',
     # 'Referer': 'https://pan.lanzous.com',  # 可以没有
     'Accept-Language': 'zh-CN,zh;q=0.9',
 }
@@ -47,10 +42,7 @@ def remove_notes(html: str) -> str:
 
 def name_format(name: str) -> str:
     """去除非法字符"""
-    name = name.replace(u'\xa0',
-                        ' ').replace(u'\u3000',
-                                     ' ').replace('  ',
-                                                  ' ')  # 去除其它字符集的空白符,去除重复空白字符
+    name = name.replace(u'\xa0', ' ').replace(u'\u3000', ' ').replace('  ', ' ')  # 去除其它字符集的空白符,去除重复空白字符
     return re.sub(r'[$%^!*<>)(+=`\'\"/:;,?]', '', name)
 
 
@@ -82,24 +74,22 @@ def time_format(time_str: str) -> str:
 def is_name_valid(filename: str) -> bool:
     """检查文件名是否允许上传"""
 
-    valid_suffix_list = ('ppt', 'xapk', 'ke', 'azw', 'cpk', 'gho', 'dwg', 'db',
-                         'docx', 'deb', 'e', 'ttf', 'xls', 'bat', 'crx', 'rpm',
-                         'txf', 'pdf', 'apk', 'ipa', 'txt', 'mobi', 'osk',
-                         'dmg', 'rp', 'osz', 'jar', 'ttc', 'z', 'w3x', 'xlsx',
-                         'cetrainer', 'ct', 'rar', 'mp3', 'pptx',
-                         'mobileconfig', 'epub', 'imazingapp', 'doc', 'iso',
-                         'img', 'appimage', '7z', 'rplib', 'lolgezi', 'exe',
-                         'azw3', 'zip', 'conf', 'tar', 'dll', 'flac', 'xpa',
-                         'lua', 'cad', 'hwt', 'accdb', 'ce', 'xmind', 'enc',
-                         'bds', 'bdi', 'ssf', 'it', 'gz')
+    valid_suffix_list = (
+        'ppt', 'xapk', 'ke', 'azw', 'cpk', 'gho', 'dwg', 'db', 'docx', 'deb', 'e', 'ttf', 'xls', 'bat',
+        'crx', 'rpm', 'txf', 'pdf', 'apk', 'ipa', 'txt', 'mobi', 'osk', 'dmg', 'rp', 'osz', 'jar',
+        'ttc', 'z', 'w3x', 'xlsx', 'cetrainer', 'ct', 'rar', 'mp3', 'pptx', 'mobileconfig', 'epub',
+        'imazingapp', 'doc', 'iso', 'img', 'appimage', '7z', 'rplib', 'lolgezi', 'exe', 'azw3', 'zip',
+        'conf', 'tar', 'dll', 'flac', 'xpa', 'lua', 'cad', 'hwt', 'accdb', 'ce',
+        'xmind', 'enc', 'bds', 'bdi', 'ssf', 'it', 'gz'
+    )
 
     return filename.split('.')[-1].lower() in valid_suffix_list
 
 
 def is_file_url(share_url: str) -> bool:
     """判断是否为文件的分享链接"""
-    base_pat = r'https?://[a-zA-Z0-9-]*?\.?lanzou[six].com/.+'  # 子域名可个性化设置或者不存在
-    user_pat = r'https?://[a-zA-Z0-9-]*?\.?lanzou[six].com/i[a-zA-Z0-9]{5,}/?'  # 普通用户 URL 规则
+    base_pat = r'https?://[a-zA-Z0-9-]*?\.?lanzou\w.com/.+'  # 子域名可个性化设置或者不存在
+    user_pat = r'https?://[a-zA-Z0-9-]*?\.?lanzou\w.com/i[a-zA-Z0-9]{5,}/?'  # 普通用户 URL 规则
     if not re.fullmatch(base_pat, share_url):
         return False
     elif re.fullmatch(user_pat, share_url):
@@ -108,16 +98,15 @@ def is_file_url(share_url: str) -> bool:
         try:
             html = requests.get(share_url, headers=headers, timeout=15).text
             html = remove_notes(html)
-            return True if re.search(r'class="fileinfo"|id="file"|文件描述',
-                                     html) else False
+            return True if re.search(r'class="fileinfo"|id="file"|文件描述', html) else False
         except (requests.RequestException, Exception):
             return False
 
 
 def is_folder_url(share_url: str) -> bool:
     """判断是否为文件夹的分享链接"""
-    base_pat = r'https?://[a-zA-Z0-9-]*?\.?lanzou[six].com/.+'
-    user_pat = r'https?://[a-zA-Z0-9-]*?\.?lanzou[six].com/(/s/)?b[a-zA-Z0-9]{7,}/?'
+    base_pat = r'https?://[a-zA-Z0-9-]*?\.?lanzou\w.com/.+'
+    user_pat = r'https?://[a-zA-Z0-9-]*?\.?lanzou\w.com/(/s/)?b[a-zA-Z0-9]{7,}/?'
     if not re.fullmatch(base_pat, share_url):
         return False
     elif re.fullmatch(user_pat, share_url):
@@ -152,31 +141,22 @@ def big_file_split(file_path: str, max_size: int = 100, start_byte: int = 0):
     """
     file_name = os.path.basename(file_path)
     file_size = os.path.getsize(file_path)
-    tmp_dir = os.path.dirname(file_path) + os.sep + '__' + '.'.join(
-        file_name.split('.')[:-1])
+    tmp_dir = os.path.dirname(file_path) + os.sep + '__' + '.'.join(file_name.split('.')[:-1])
 
     if not os.path.exists(tmp_dir):
         os.makedirs(tmp_dir)
 
     def get_random_size() -> int:
         """按权重生成一个不超过 max_size 的文件大小"""
-        reduce_size = choices([
-            uniform(0, 20),
-            uniform(20, 30),
-            uniform(30, 60),
-            uniform(60, 80)
-        ],
-                              weights=[2, 5, 2, 1])
+        reduce_size = choices([uniform(0, 20), uniform(20, 30), uniform(30, 60), uniform(60, 80)], weights=[2, 5, 2, 1])
         return round((max_size - reduce_size[0]) * 1048576)
 
     def get_random_name() -> str:
         """生成一个随机文件名"""
         # 这些格式的文件一般都比较大且不容易触发下载检测
-        suffix_list = ('zip', 'rar', 'apk', 'ipa', 'exe', 'pdf', '7z', 'tar',
-                       'deb', 'dmg', 'rpm', 'flac')
+        suffix_list = ('zip', 'rar', 'apk', 'ipa', 'exe', 'pdf', '7z', 'tar', 'deb', 'dmg', 'rpm', 'flac')
         name = list(file_name.replace('.', '').replace(' ', ''))
-        name = name + sample('abcdefghijklmnopqrstuvwxyz', 3) + sample(
-            '1234567890', 2)
+        name = name + sample('abcdefghijklmnopqrstuvwxyz', 3) + sample('1234567890', 2)
         shuffle(name)  # 打乱顺序
         name = ''.join(name) + '.' + choice(suffix_list)
         return name_format(name)  # 确保随机名合法
@@ -207,13 +187,8 @@ def let_me_upload(file_path):
     file_size = os.path.getsize(file_path) / 1024 / 1024  # MB
     file_name = os.path.basename(file_path)
 
-    big_file_suffix = [
-        'zip', 'rar', 'apk', 'ipa', 'exe', 'pdf', '7z', 'tar', 'deb', 'dmg',
-        'rpm', 'flac'
-    ]
-    small_file_suffix = big_file_suffix + [
-        'doc', 'epub', 'mobi', 'mp3', 'ppt', 'pptx'
-    ]
+    big_file_suffix = ['zip', 'rar', 'apk', 'ipa', 'exe', 'pdf', '7z', 'tar', 'deb', 'dmg', 'rpm', 'flac']
+    small_file_suffix = big_file_suffix + ['doc', 'epub', 'mobi', 'mp3', 'ppt', 'pptx']
     big_file_suffix = choice(big_file_suffix)
     small_file_suffix = choice(small_file_suffix)
     suffix = small_file_suffix if file_size < 30 else big_file_suffix
@@ -241,10 +216,7 @@ def auto_rename(file_path) -> str:
         return file_path
     fpath, fname = os.path.split(file_path)
     fname_no_ext, ext = os.path.splitext(fname)
-    flist = [
-        f for f in os.listdir(fpath)
-        if re.fullmatch(rf"{fname_no_ext}\(?\d*\)?{ext}", f)
-    ]
+    flist = [f for f in os.listdir(fpath) if re.fullmatch(rf"{fname_no_ext}\(?\d*\)?{ext}", f)]
     count = 1
     while f"{fname_no_ext}({count}){ext}" in flist:
         count += 1
@@ -254,18 +226,14 @@ def auto_rename(file_path) -> str:
 def calc_acw_sc__v2(html_text: str) -> str:
     arg1 = re.search(r"arg1='([0-9A-Z]+)'", html_text)
     arg1 = arg1.group(1) if arg1 else ""
-    acw_sc__v2 = hex_xor(unsbox(arg1),
-                         "3000176000856006061501533003690027800375")
+    acw_sc__v2 = hex_xor(unsbox(arg1), "3000176000856006061501533003690027800375")
     return acw_sc__v2
 
 
 # 参考自 https://zhuanlan.zhihu.com/p/228507547
 def unsbox(str_arg):
-    v1 = [
-        15, 35, 29, 24, 33, 16, 1, 38, 10, 9, 19, 31, 40, 27, 22, 23, 25, 13,
-        6, 11, 39, 18, 20, 8, 14, 21, 32, 26, 2, 30, 7, 4, 17, 5, 3, 28, 34,
-        37, 12, 36
-    ]
+    v1 = [15, 35, 29, 24, 33, 16, 1, 38, 10, 9, 19, 31, 40, 27, 22, 23, 25, 13, 6, 11, 39, 18, 20, 8, 14, 21, 32, 26, 2,
+          30, 7, 4, 17, 5, 3, 28, 34, 37, 12, 36]
     v2 = ["" for _ in v1]
     for idx in range(0, len(str_arg)):
         v3 = str_arg[idx]
