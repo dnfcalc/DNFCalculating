@@ -1685,9 +1685,13 @@ class 角色属性(属性):
         Q = deepcopy(self)
         P = deepcopy(self)
 
+        temp = list(P.装备栏)
+
         for i in range(12):
             if P.装备切装[i] != '无':
-                P.装备栏[i] = P.装备切装[i]
+                temp[i] = P.装备切装[i]
+
+        P.装备栏 = tuple(temp)
 
         P.适用套装计算()
 
