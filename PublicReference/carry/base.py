@@ -12,8 +12,7 @@ import operator
 
 from PublicReference.utils.common import format_range, to_percent
 
-等级 = 100 + 5
-
+等级 = 100
 
 class 技能:
     名称 = ''
@@ -98,7 +97,8 @@ class 主动技能(技能):
 
     def 基础等级计算(self):
         if self.基础等级 == 0:
-            self.基础等级 = min(int((等级 - self.所在等级) / self.学习间隔 + 1), self.等级精通)
+            # 契约等级+5
+            self.基础等级 = min(int((等级+5 - self.所在等级) / self.学习间隔 + 1), self.等级精通)
 
 
 class 被动技能(技能):
@@ -108,7 +108,8 @@ class 被动技能(技能):
 
     def 基础等级计算(self):
         if self.基础等级 == 0:
-            self.基础等级 = min(int((等级 - self.所在等级) / self.学习间隔 + 1), self.等级精通)
+            # 契约等级+5
+            self.基础等级 = min(int((等级+5 - self.所在等级) / self.学习间隔 + 1), self.等级精通)
 
 
 符文效果选项 = [
@@ -876,7 +877,7 @@ class 角色属性(属性):
     def 伤害指数计算(self):
 
         防御 = max(self.防御输入 - self.固定减防, 0) * (1 - self.百分比减防)
-        基准倍率 = 1.5 * self.主BUFF * (1 - 防御 / (防御 + 20000))
+        基准倍率 = 1.5 * self.主BUFF * (1 - 防御 / (防御 + 200*等级))
 
         # 避免出现浮点数取整BUG
         self.伤害增加 += 0.00000001
