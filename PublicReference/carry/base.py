@@ -537,6 +537,14 @@ class 角色属性(属性):
                 ]
         return ''
 
+    def 武器装扮等级加成(self, Lv, lv):
+        lv = int(lv)
+        for i in self.技能栏:
+            if i.所在等级 == Lv and i.是否主动 == 1 and i.名称 not in [
+                    "念兽龙虎啸", "风雷啸", "圣灵符文"
+            ]:
+                i.等级加成(lv)
+
     def 技能冷却缩减(self, min, max, x):
         if self.装备描述 == 1:
             label = trans('技能')
@@ -2520,15 +2528,11 @@ class 角色窗口(窗口):
                     if cur == -1:
                         templist[n].setDisabled(True)
                         pass
-                    elif cur in [100, 999, 888]:
+                    elif cur in [100, 999]:
                         templist[n].addItem('无')
                         if cur == 999:
                             skills = [
                                 i.名称 for i in self.角色属性A.技能栏 if i.所在等级 <= 85
-                            ]
-                        elif cur == 888:
-                            skills = [
-                                i.名称 for i in self.角色属性A.技能栏 if (i.所在等级 in [40,45,60,70,75,80] and i.是否主动 == 1)
                             ]
                         else:
                             skills = [
