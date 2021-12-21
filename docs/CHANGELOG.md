@@ -1,5 +1,24 @@
 ## Newest
 
+### 2021-12-21
+
+#### NewFeatures
+* 修改lanzou下载域名 ([73c55a](https://gitee.com/i_melon/DNFCalculating/commit/73c55a4e1dc5bf849e8ce007aa49528cdcafead2))
+* 同步国服体验服职业平衡 ([c7dc82](https://gitee.com/i_melon/DNFCalculating/commit/c7dc821f2c4a7dc0e041584ca4f8ac2fcff0c98f))
+* 添加重霄·合金战士 ([568aa6](https://gitee.com/i_melon/DNFCalculating/commit/568aa6ebfa29e13aeeac7082e86924fe53e6ca9c))
+* 通过国服体验服34删除后的加强 ([cff1a5](https://gitee.com/i_melon/DNFCalculating/commit/cff1a595ce61f9dd3eacbfed8b0d941446d84b9d))
+
+#### BugFixes
+* 修复使徒降临名望 fix #I4K1TF ([c3ae2d](https://gitee.com/i_melon/DNFCalculating/commit/c3ae2db794d77761c41039a730e2c840486badd8))
+* 修复部分情况名望界面无法打开bug ([8d8b38](https://gitee.com/i_melon/DNFCalculating/commit/8d8b3860168e9c57540ae8c461cf5ae32376c420))
+* 修正存档后技能次数及宠物次数默认到了填写的情况 fix #I4KYDT ([59aa55](https://gitee.com/i_melon/DNFCalculating/commit/59aa5507fb378d2c6983a9a81a1b3e460e2acb7c))
+* 修正输出切装计算闪退的情况 fix #I4N3TI ([32bfee](https://gitee.com/i_melon/DNFCalculating/commit/32bfeedda95f6bcbe096f2ca09720b028cb49696))
+* 知源·冰结师：修正永罪冰狱数据误差 ([a72948](https://gitee.com/i_melon/DNFCalculating/commit/a72948fc305dedf5c84d5ea536e3994a1c4c9b91))
+* 知源·缔造者：添加符文时空禁制 ([b4ef23](https://gitee.com/i_melon/DNFCalculating/commit/b4ef23143f8468dac9ef6b151a47e9e784afe9ea))
+
+
+## History
+
 ### 2021-11-24
 
 #### NewFeatures
@@ -43,8 +62,6 @@
 
 
 
-
-## History
 
 ### 2021-10-27
 
