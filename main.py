@@ -138,7 +138,7 @@ class 选择窗口(QWidget):
         if 目录.endswith('py'):
             return
         try:
-            lzy = LZextends()
+            lzy = LZextends().lzy
             fileURL = ''
             folder_info = lzy.get_folder_info_by_url(
                 'https://wwx.lanzoux.com/b01bfj76f')
