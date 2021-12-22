@@ -342,6 +342,8 @@ class 技能20(主动技能):
 
     def 装备护石(self, 类型):
         if 类型 == 0:
+            # 变成充能类技能
+            self.基础释放次数 = 2
             self.倍率 *= 1-0.43+0.06
             self.CD *= 0.5
 
@@ -355,12 +357,14 @@ class 技能21(主动技能):
     成长 = 104
     攻击次数 = 28*4
     CD = 40
+    CD_min = 20
 
     是否有护石 = 1
     护石选项 = ['圣痕']
 
     def 装备护石(self, 类型):
         if 类型 == 0:
+            self.CD_min = 30
             # 增加持续时间
             self.攻击次数 *=30/20
             # 自爆
@@ -535,6 +539,28 @@ class 职业属性(角色属性):
             self.魔法攻击力 += 武器计算(temp.等级, temp.品质,
                                self.强化等级[11], self.武器类型, '魔法')
             self.独立攻击力 += 锻造计算(temp.等级, temp.品质, self.武器锻造等级)
+
+    def 技能释放次数计算(self):
+        技能释放次数 = []
+        for i in self.技能栏:
+            if i.是否有伤害 == 1:
+                s = self.次数输入[self.技能序号[i.名称]]
+                if '/CD' in s:
+                    if i.名称 == 'AT-SO步行者':
+                        if self.时间输入 >= i.CD_min:
+                            技能释放次数.append( self.时间输入 / max(i.等效CD(self.武器类型, self.类型),i.CD_min))
+                        else:
+                            技能释放次数.append( self.时间输入 / i.CD_min )
+                    else:
+                        技能释放次数.append(
+                        int((self.时间输入 - i.演出时间) /
+                            i.等效CD(self.武器类型, self.类型)) + 1 + i.基础释放次数)
+                else:
+                    技能释放次数.append(round(float(s), 2))
+            else:
+                技能释放次数.append(0)
+
+        return self.技能释放次数解析(技能释放次数)
 
 class 重霄·合金战士(角色窗口):
     def 窗口属性输入(self):
