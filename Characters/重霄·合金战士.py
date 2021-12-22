@@ -537,8 +537,7 @@ class 职业属性(角色属性):
 
     def 武器基础(self):
         temp = equ.get_equ_by_name(self.装备栏[11])
-
-        self.力量 += temp.力量
+        self.力量 += temp.智力
         self.智力 += temp.智力
         self.物理攻击力 += temp.魔法攻击力
         self.魔法攻击力 += temp.魔法攻击力
