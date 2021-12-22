@@ -1,5 +1,10 @@
 ## Newest
 
+### 2021-12-22
+
+#### BugFixes
+* 重霄·合金战士：修正战略轰炸护石问题 ([bb68cb](https://gitee.com/i_melon/DNFCalculating/commit/bb68cb5c95579b4f916130020e6ba5a0f280b08b))
+
 ### 2021-12-21
 
 #### NewFeatures
@@ -15,6 +20,7 @@
 * 修正输出切装计算闪退的情况 fix #I4N3TI ([32bfee](https://gitee.com/i_melon/DNFCalculating/commit/32bfeedda95f6bcbe096f2ca09720b028cb49696))
 * 知源·冰结师：修正永罪冰狱数据误差 ([a72948](https://gitee.com/i_melon/DNFCalculating/commit/a72948fc305dedf5c84d5ea536e3994a1c4c9b91))
 * 知源·缔造者：添加符文时空禁制 ([b4ef23](https://gitee.com/i_melon/DNFCalculating/commit/b4ef23143f8468dac9ef6b151a47e9e784afe9ea))
+
 
 
 ## History
