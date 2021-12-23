@@ -559,7 +559,7 @@ class 神启·诱魔者角色属性(角色属性):
     防具类型 = '重甲'
     防具精通属性 = ['智力']
 
-    主BUFF = 2.01
+    主BUFF = 1.875
     BUFF属强 = 0
 
     远古记忆 = 0
@@ -608,7 +608,12 @@ class 神启·诱魔者(角色窗口):
         self.BUFF.move(self.BUFF.x() - 18, self.BUFF.y())
         self.BUFF输入.move(self.BUFF输入.x() - 20, self.BUFF输入.y())
         self.BUFF输入.resize(40, 25)
-        self.BUFF输入.setToolTip('纯C最高值为101')
+        self.BUFF.setToolTip(
+            trans('<font size="3" face="宋体">{最高值参考}：$value</font>',
+                  value='87.5%'))
+        self.BUFF输入.setToolTip(
+            trans('<font size="3" face="宋体">{最高值参考}：$value</font>',
+                  value='87.5%'))
 
         self.BUFF输入2 = QLineEdit(self.main_frame2)
         self.BUFF输入2.setText(str(self.初始属性.BUFF属强))
