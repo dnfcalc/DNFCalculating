@@ -383,15 +383,6 @@ class 选择窗口(QWidget):
         self.版本提示A.setText('已知悉')
         self.版本提示B.setText('退出')
 
-        self.问卷 = QMessageBox(
-            QMessageBox.Question, "问卷协助",
-            trans("有一份调研问卷需要协助填写，有空的可以协助填写下（只会在首次打开推送，推送至1.4日）\n成功填写有几率获得礼品"))
-        self.问卷.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
-        self.问卷A = self.问卷.button(QMessageBox.Yes)
-        self.问卷B = self.问卷.button(QMessageBox.No)
-        self.问卷A.setText('好的')
-        self.问卷B.setText('无视')
-
         try:
             if 自动检查更新 == 0:
                 repJson = requests.get(
@@ -409,7 +400,6 @@ class 选择窗口(QWidget):
             pass
         self.版本提示.setWindowIcon(self.icon)
         self.配置错误.setWindowIcon(self.icon)
-        self.问卷.setWindowIcon(self.icon)
 
         if 自动检查更新 == 0:
             try:
@@ -865,18 +855,8 @@ if __name__ == '__main__':
                 ) and instance.通知时间 != 通知时间 and 多语言开关 == 0 and 自动检查更新 == 0:
                 instance.消息通知.exec()
             if ("main.py" not in sys.argv[0]) and 展示信息 and 多语言开关 == 0:
-                showQue = 0
-                if datetime.datetime.now() <= datetime.datetime(
-                        2022, 1, 3, 23, 59, 59, 0):
-                    instance.问卷.exec()
-                    if instance.问卷.clickedButton() == instance.问卷A:
-                        showQue = 1
                 QDesktopServices.openUrl(
                     QUrl('http://dnf.17173.com/jsq/changlog.html#/'))
-                if showQue == 1:
-                    QDesktopServices.openUrl(
-                        QUrl(
-                            'https://www.wjx.cn/vj/hymYJGK.aspx?udsid=293417'))
 
         except Exception as error:
             logger.error("error={} \n detail {}".format(
