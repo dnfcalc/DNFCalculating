@@ -1,5 +1,16 @@
 ## Newest
 
+### 2021-12-30
+
+#### NewFeatures
+* 重霄·合金战士：优化电弧能量释放充能算法 ([d239b9](https://gitee.com/i_melon/DNFCalculating/commit/d239b9df542f203e6989b6bb36a8927c9acf9077))
+* 重霄·合金战士：修改部分护石效果 ([271f88](https://gitee.com/i_melon/DNFCalculating/commit/271f8815016d2dda0f54cf0a0333228e6b984234))
+* 重霄·合金战士：调整默认存档 ([528771](https://gitee.com/i_melon/DNFCalculating/commit/52877154e2b252651ea3c71aaf3876e95a042134))
+
+#### BugFixes
+* 修正武器基础同步问题 ([190794](https://gitee.com/i_melon/DNFCalculating/commit/1907943ef3cb34114e8fc8d5c6afb1dc0ef1850d))
+* 重霄·合金战士：修正武器的力量同步 ([fbdbe0](https://gitee.com/i_melon/DNFCalculating/commit/fbdbe0d362312f0ff8798aa5b444262615704eed))
+
 ### 2021-12-22
 
 #### BugFixes
@@ -20,6 +31,7 @@
 * 修正输出切装计算闪退的情况 fix #I4N3TI ([32bfee](https://gitee.com/i_melon/DNFCalculating/commit/32bfeedda95f6bcbe096f2ca09720b028cb49696))
 * 知源·冰结师：修正永罪冰狱数据误差 ([a72948](https://gitee.com/i_melon/DNFCalculating/commit/a72948fc305dedf5c84d5ea536e3994a1c4c9b91))
 * 知源·缔造者：添加符文时空禁制 ([b4ef23](https://gitee.com/i_melon/DNFCalculating/commit/b4ef23143f8468dac9ef6b151a47e9e784afe9ea))
+
 
 
 
