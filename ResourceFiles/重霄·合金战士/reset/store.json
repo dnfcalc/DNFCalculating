@@ -3,24 +3,24 @@
   "/carry/data/pet": 0,
   "/carry/data/compute_mode": 0,
   "/carry/data/ditto_checked": false,
-  "/carry/data/pet_equip_adaptive": false,
-  "/carry/data/aura_adaptive": false,
-  "/carry/data/myth_top_checked": false,
+  "/carry/data/pet_equip_adaptive": true,
+  "/carry/data/aura_adaptive": true,
+  "/carry/data/myth_top_checked": true,
   "/carry/data/damage_unit": false,
   "/carry/data/thread_count": 1,
   "/carry/data/attack_elemental": 0,
   "/carry/data/remodel_limit": 2,
   "/carry/data/equip_checked": [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
-    0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
-    0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0,
+    0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1,
+    0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1,
+    0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0,
+    1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1,
+    0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -35,18 +35,19 @@
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   ],
   "/carry/data/equip_forges": [
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+    1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 10, 10, 10, 10, 10, 10, 10, 10, 12, 10,
     10, 12, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 8, 0
   ],
-  "/carry/data/equip_conditions": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "/carry/data/equip_conditions": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   "/carry/data/buff_input": "100",
   "/carry/data/time_input": "25",
-  "/carry/data/awakening_binding": 2,
-  "/carry/data/talismans": [0, 0, 0],
+  "/carry/data/awakening_binding": 1,
+  "/carry/data/talismans": [3, 2, 1],
   "/carry/data/talisman_types": [0, 0, 0],
-  "/carry/data/runes_skills": [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  "/carry/data/runes_effects": [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "/carry/data/runes_skills": [13, 13, 13, 13, 13, 13, 13, 13, 13],
+  "/carry/data/runes_effects": [13, 14, 15, 13, 14, 15, 13, 14, 15],
   "/carry/data/consumables": [
+    true,
     true,
     true,
     true,
@@ -75,15 +76,15 @@
     },
     "超频：压制": {
       "level": 50,
-      "tp": 5,
-      "count": "/CD",
-      "pet": "1"
+      "tp": 0,
+      "count": "0",
+      "pet": "0"
     },
     "烟尘弹": {
       "level": 48,
-      "tp": 5,
-      "count": "/CD",
-      "pet": "1"
+      "tp": 0,
+      "count": "0",
+      "pet": "0"
     },
     "合金战士自动手枪精通": {
       "level": 10,
@@ -93,9 +94,9 @@
     },
     "瞄准射击": {
       "level": 1,
-      "tp": 3,
-      "count": "/CD",
-      "pet": "1"
+      "tp": 0,
+      "count": "0",
+      "pet": "0"
     },
     "弱点扫描": {
       "level": 10,
@@ -105,15 +106,15 @@
     },
     "枪托强击": {
       "level": 43,
-      "tp": 5,
-      "count": "/CD",
-      "pet": "1"
+      "tp": 0,
+      "count": "0",
+      "pet": "0"
     },
     "改装榴弹": {
       "level": 43,
-      "tp": 5,
-      "count": "/CD",
-      "pet": "1"
+      "tp": 0,
+      "count": "0",
+      "pet": "0"
     },
     "改造烟尘弹": {
       "level": 1,
@@ -123,44 +124,44 @@
     },
     "超频：重盾保卫": {
       "level": 43,
-      "tp": 5,
-      "count": "/CD",
+      "tp": 0,
+      "count": "4",
       "pet": "1"
     },
     "磁力手雷": {
       "level": 38,
-      "tp": 5,
-      "count": "/CD",
-      "pet": "1"
+      "tp": 0,
+      "count": "0",
+      "pet": "0"
     },
     "三连霰弹": {
       "level": 38,
-      "tp": 5,
-      "count": "/CD",
-      "pet": "1"
+      "tp": 0,
+      "count": "0",
+      "pet": "0"
     },
     "爆裂飞踢": {
       "level": 36,
-      "tp": 5,
-      "count": "/CD",
-      "pet": "1"
+      "tp": 0,
+      "count": "0",
+      "pet": "0"
     },
     "超频：机械冲撞": {
       "level": 36,
       "tp": 5,
-      "count": "/CD",
+      "count": "3",
       "pet": "1"
     },
     "战略轰炸": {
       "level": 33,
       "tp": 5,
-      "count": "/CD",
-      "pet": "1"
+      "count": "2",
+      "pet": "0"
     },
     "雷达扫射": {
       "level": 31,
       "tp": 5,
-      "count": "/CD",
+      "count": "1",
       "pet": "1"
     },
     "机体复原": {
@@ -172,32 +173,32 @@
     "电弧能量释放": {
       "level": 1,
       "tp": 0,
-      "count": "/CD",
-      "pet": "1"
+      "count": "6",
+      "pet": "3"
     },
     "超频：全领域攻击": {
       "level": 0,
       "tp": 0,
-      "count": "/CD",
+      "count": "1",
       "pet": "1"
     },
     "超频：电流闪踢": {
       "level": 23,
       "tp": 5,
-      "count": "/CD",
-      "pet": "1"
+      "count": "2",
+      "pet": "0"
     },
     "堡垒轰击": {
       "level": 18,
       "tp": 5,
-      "count": "/CD",
+      "count": "1",
       "pet": "1"
     },
     "AT-SO步行者": {
       "level": 16,
       "tp": 0,
-      "count": "/CD",
-      "pet": "1"
+      "count": "1",
+      "pet": "0"
     },
     "躯体重塑": {
       "level": 11,
@@ -208,13 +209,13 @@
     "炎神攻城炮": {
       "level": 13,
       "tp": 0,
-      "count": "/CD",
+      "count": "1",
       "pet": "1"
     },
     "超频：伊奎利斯-MR": {
       "level": 0,
       "tp": 0,
-      "count": "/CD",
+      "count": "1",
       "pet": "1"
     },
     "诺维尔计划：涅磐": {
@@ -226,13 +227,13 @@
     "超频：音速瞬杀": {
       "level": 6,
       "tp": 0,
-      "count": "/CD",
+      "count": "1",
       "pet": "1"
     },
     "超频：末世终结之战": {
       "level": 2,
       "tp": 0,
-      "count": "/CD",
+      "count": "1",
       "pet": "1"
     }
   },
@@ -463,23 +464,23 @@
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   ],
   "/carry/data/remodel_upgrade": false,
-  "/carry/data/weapon_adaptive_mode": 0,
+  "/carry/data/weapon_adaptive_mode": 1,
   "/carry/data/nameless_elemental_value": 3,
-  "/carry/data/weapon_fusion": [0, 0, 0, 0, 0],
+  "/carry/data/weapon_fusion": [1, 0, 0, 0, 0],
   "/carry/data/jude_effects": [0, 0, 0, 0],
   "/carry/data/jude_values": [-1, -1, -1, -1],
   "/carry/data/astaroth_options": [0, 0, 0, 0, 0],
   "/carry/data/black_purgatory": [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0]
+    [1, 0, 0],
+    [1, 0, 0],
+    [1, 0, 0],
+    [1, 0, 0]
   ],
-  "/carry/data/siroco": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "/carry/data/siroco": [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
   "/carry/data/ozma": [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1
   ],
-  "/carry/data/self_select/equips": [[3, 3, 3, 3, 3, 2, 2, 2, 8, 0, 0, 0]],
+  "/carry/data/self_select/equips": [[3, 3, 3, 3, 3, 2, 2, 2, 0, 0, 0, 0]],
   "/carry/data/self_select/column_index": 0,
   "/carry/data/self_select/locked": [
     false,
