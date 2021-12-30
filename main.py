@@ -54,7 +54,7 @@ class Worker(QThread):
         path = os.getcwd() + "/__ZFJtemp"
         try:
             # os.rename(sys.argv[0],sys.argv[0]+'.del')
-            lzy = LZextends()
+            lzy = LZextends().lzy
             lzy.down_file_by_url(self.fileURL,
                                  '',
                                  path,
