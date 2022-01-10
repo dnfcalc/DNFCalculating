@@ -14,6 +14,7 @@ from PublicReference.utils.common import format_range, to_percent
 
 等级 = 100
 
+
 class 技能:
     名称 = ''
     备注 = ''
@@ -98,7 +99,8 @@ class 主动技能(技能):
     def 基础等级计算(self):
         if self.基础等级 == 0:
             # 契约等级+5
-            self.基础等级 = min(int((等级+5 - self.所在等级) / self.学习间隔 + 1), self.等级精通)
+            self.基础等级 = min(int((等级 + 5 - self.所在等级) / self.学习间隔 + 1),
+                            self.等级精通)
 
 
 class 被动技能(技能):
@@ -109,7 +111,8 @@ class 被动技能(技能):
     def 基础等级计算(self):
         if self.基础等级 == 0:
             # 契约等级+5
-            self.基础等级 = min(int((等级+5 - self.所在等级) / self.学习间隔 + 1), self.等级精通)
+            self.基础等级 = min(int((等级 + 5 - self.所在等级) / self.学习间隔 + 1),
+                            self.等级精通)
 
 
 符文效果选项 = [
@@ -877,7 +880,7 @@ class 角色属性(属性):
     def 伤害指数计算(self):
 
         防御 = max(self.防御输入 - self.固定减防, 0) * (1 - self.百分比减防)
-        基准倍率 = 1.5 * self.主BUFF * (1 - 防御 / (防御 + 200*等级))
+        基准倍率 = 1.5 * self.主BUFF * (1 - 防御 / (防御 + 200 * 等级))
 
         # 避免出现浮点数取整BUG
         self.伤害增加 += 0.00000001
@@ -2517,11 +2520,15 @@ class 角色窗口(窗口):
                     if cur == -1:
                         templist[n].setDisabled(True)
                         pass
-                    elif cur in [100, 999]:
+                    elif cur in [100, 999, 888]:
                         templist[n].addItem('无')
                         if cur == 999:
                             skills = [
                                 i.名称 for i in self.角色属性A.技能栏 if i.所在等级 <= 85
+                            ]
+                        elif cur == 888:
+                            skills = [
+                                i.名称 for i in self.角色属性A.技能栏 if (i.所在等级 in [40,45,60,70,75,80] and i.是否主动 == 1)
                             ]
                         else:
                             skills = [
