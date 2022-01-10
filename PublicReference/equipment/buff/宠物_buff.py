@@ -4,6 +4,44 @@ from PublicReference.equipment.base_item import Item
 宠物列表 = [None] * 8
 
 
+class 宠物9(Item):
+    显示名称 = '(22)至尊·超越时空·厄俄斯/赫斯'
+    名称 = "超越时空·厄俄斯/赫斯"
+
+    def 城镇属性_BUFF(self, 属性):
+        属性.智力 += 160
+        属性.体力 += 160
+        属性.精神 += 160
+        属性.技能等级加成('所有', 1, 95, 1)
+
+    def 装备描述_BUFF(self, 属性):
+        temp = ''
+        temp += '智力 +160<br>'
+        temp += '体力 +160<br>'
+        temp += '精神 +160<br>'
+        temp += 'Lv1-95 技能等级+1<br>'
+        return temp
+
+
+class 宠物8(Item):
+    显示名称 = '(22)普通·次元探险家·厄俄斯/赫斯'
+    名称 = "次元探险家·厄俄斯/赫斯"
+
+    def 城镇属性_BUFF(self, 属性):
+        属性.智力 += 150
+        属性.体力 += 150
+        属性.精神 += 150
+        属性.技能等级加成('所有', 1, 95, 1)
+
+    def 装备描述_BUFF(self, 属性):
+        temp = ''
+        temp += '智力 +150<br>'
+        temp += '体力 +150<br>'
+        temp += '精神 +150<br>'
+        temp += 'Lv1-95 技能等级+1<br>'
+        return temp
+
+
 class 宠物7(Item):
     显示名称 = '(21)至尊·火神的化身'
     名称 = "火神的化身"

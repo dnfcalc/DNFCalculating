@@ -712,6 +712,12 @@ class 角色窗口(窗口):
             if i.所在等级 < 85
         ]
 
+        skills_weapons = [
+            trans('{$name}Lv+1', name=i.名称) for i in self.角色属性A.技能表.values()
+            if (i.所在等级 in [40, 45, 60, 70, 75, 80] and i.是否主动 == 1)
+        ]
+
+        self.技能设置输入[15].addItems(skills_weapons)
         self.技能设置输入[16].addItems(skills)
 
         self.技能设置输入[17].addItems(['BUFF力智+3%', 'BUFF三攻+3%', 'BUFF力智、三攻+3%'])
@@ -1913,7 +1919,7 @@ class 角色窗口(窗口):
         QMessageBox.information(
             self, "自动修正计算完毕", "仅对站街修正进行了修改,使面板与输入一致<br>请自行核对其它页面 非智力/体力/精神条目")
 
-    def click_window(self, index,info=''):
+    def click_window(self, index, info=''):
         if info != '':
             increase_counter(ga_category="界面使用情况", name=info)
         self.保存json(self.存档位置, page=[self.当前页面])
