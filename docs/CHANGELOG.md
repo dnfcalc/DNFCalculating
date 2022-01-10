@@ -7,7 +7,7 @@
 
 #### BugFixes
 * 修正自动更新未能下载的情况 ([a39f2a](https://gitee.com/i_melon/DNFCalculating/commit/a39f2a18b3267043cd61cb0fcbd2d698650ad501))
-* 隐夜·死灵术士：移除无关符文 fix:#I4P6AY ([e1eafa](https://gitee.com/i_melon/DNFCalculating/commit/e1eafa8e676a85ef21f0a01d1f410b9b13f6b7a8))
+* 隐夜·死灵术士：移除无关符文 ([e1eafa](https://gitee.com/i_melon/DNFCalculating/commit/e1eafa8e676a85ef21f0a01d1f410b9b13f6b7a8))
 
 
 ## History
