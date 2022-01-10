@@ -1,5 +1,17 @@
 ## Newest
 
+### 2022-01-10
+
+#### NewFeatures
+* 添加2022春节礼包相关 ([c3515a](https://gitee.com/i_melon/DNFCalculating/commit/c3515ab6450adfe643dfa0f1db9b1d1e8d6679cc))
+
+#### BugFixes
+* 修正自动更新未能下载的情况 ([a39f2a](https://gitee.com/i_melon/DNFCalculating/commit/a39f2a18b3267043cd61cb0fcbd2d698650ad501))
+* 隐夜·死灵术士：移除无关符文 fix:#I4P6AY ([e1eafa](https://gitee.com/i_melon/DNFCalculating/commit/e1eafa8e676a85ef21f0a01d1f410b9b13f6b7a8))
+
+
+## History
+
 ### 2021-12-30
 
 #### NewFeatures
@@ -34,8 +46,6 @@
 
 
 
-
-## History
 
 ### 2021-11-24
 
