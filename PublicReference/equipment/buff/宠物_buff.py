@@ -1,7 +1,7 @@
 # 宠物属性部分
 from PublicReference.equipment.base_item import Item
 
-宠物列表 = [None] * 8
+宠物列表 = [None] * 10
 
 
 class 宠物9(Item):
