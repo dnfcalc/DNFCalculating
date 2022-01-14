@@ -469,8 +469,11 @@ class 选择窗口(QWidget):
         increase_counter(ga_category="职业使用", name=className)
         if get_mac_address() != '':
             increase_counter(ga_category="用户职业使用", name=get_mac_address())
-        self.char_window = MainWindow(char)
-        self.char_window.show()
+        try:
+            self.char_window = MainWindow(char)
+            self.char_window.show()
+        except Exception as e:
+            print(e)
 
     def 打赏(self):
         self.w = QWidget()
@@ -503,7 +506,7 @@ class 选择窗口(QWidget):
             box.setWindowIcon(self.icon)
             box.setStandardButtons(QMessageBox.Yes | QMessageBox.No
                                    | QMessageBox.Cancel)
-            if index["序号"] == "41":
+            if index["序号"] in ["40","41"] :
                 if index["类名3"] != '无':
                     box.setStandardButtons(QMessageBox.Yes | QMessageBox.No
                                            | QMessageBox.YesToAll
