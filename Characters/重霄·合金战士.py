@@ -78,7 +78,7 @@ class 技能3(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(1.1 + 0.02 * self.等级, 3)
+            return round(1.13 + 0.02 * self.等级, 3)
 
 class 技能4(主动技能):
     名称 = '瞄准射击'
@@ -285,7 +285,7 @@ class 技能16(被动技能):
         if self.等级 == 0:
             return 1.0
         else:
-            return round(1 + 0.02 * self.等级, 3)
+            return round(1.04 + 0.02 * self.等级, 3)
 
 class 技能17(主动技能):
     名称 = '电弧能量释放'
