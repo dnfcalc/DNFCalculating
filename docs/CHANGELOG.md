@@ -1,5 +1,19 @@
 ## Newest
 
+### 2022-01-18
+
+#### NewFeatures
+* 优化武器装扮技能选择 ([c73341](https://gitee.com/i_melon/DNFCalculating/commit/c73341dfbf8e579b359738814bcb9861c66a4519))
+* 同步国服职业平衡 ([76acf1](https://gitee.com/i_melon/DNFCalculating/commit/76acf13e10dcd8b702edc2f5395a1cb868db1339))
+* 新增武器装扮名望 ([2baa1c](https://gitee.com/i_melon/DNFCalculating/commit/2baa1cc91c698bf6a7573b8bfb8bb80fc0704346))
+* 添加奶系宠物 ([ac7b3e](https://gitee.com/i_melon/DNFCalculating/commit/ac7b3e957b6643c0f8dd4350e74157aabeaf5973))
+* 添加奶萝输出(半成品，装备对被动智力的加成等未完成) 就是不加奶妈输出 ([8a18a1](https://gitee.com/i_melon/DNFCalculating/commit/8a18a1d8c939fd24f5a9f735829cbd102ef4080d))
+* 添加春节礼包相关名望 ([32c559](https://gitee.com/i_melon/DNFCalculating/commit/32c5593f7ea6d001272083f53978c7071638d075))
+* 重霄·合金战士：同步最新调整 ([2f810b](https://gitee.com/i_melon/DNFCalculating/commit/2f810b2b9e6ec853434f6fc023192c2e93f38924))
+
+#### BugFixes
+* 神启·复仇者：修正黑暗权能所在等级错误 ([ca6074](https://gitee.com/i_melon/DNFCalculating/commit/ca60741bed26b809a8aed70c4829f66ec713a154))
+
 ### 2022-01-10
 
 #### NewFeatures
@@ -8,6 +22,7 @@
 #### BugFixes
 * 修正自动更新未能下载的情况 ([a39f2a](https://gitee.com/i_melon/DNFCalculating/commit/a39f2a18b3267043cd61cb0fcbd2d698650ad501))
 * 隐夜·死灵术士：移除无关符文 ([e1eafa](https://gitee.com/i_melon/DNFCalculating/commit/e1eafa8e676a85ef21f0a01d1f410b9b13f6b7a8))
+
 
 
 ## History
