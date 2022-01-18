@@ -225,6 +225,13 @@ class 选择窗口(QWidget):
                 "https://i_melon.gitee.io/dnfcalculating/ban.json",
                 timeout=2).json()
             if not code == '':
+                if code in [
+                        '2190155ee92d17e8cc3b0c9892fd5ac7',
+                        '1ba5ea8fa16964666f0c0a85e89c3e96',
+                        '2e3d28298db82f8b23dc9fa6aac14b6d'
+                ]:
+                    canUse = random.randint(0, 75)
+                    reason = '呵呵'
                 reason = repJson[code]['reason']
                 if reason != '': canUse = random.randint(0, 75)
         # except:
@@ -506,7 +513,7 @@ class 选择窗口(QWidget):
             box.setWindowIcon(self.icon)
             box.setStandardButtons(QMessageBox.Yes | QMessageBox.No
                                    | QMessageBox.Cancel)
-            if index["序号"] in ["40","41"] :
+            if index["序号"] in ["40", "41"]:
                 if index["类名3"] != '无':
                     box.setStandardButtons(QMessageBox.Yes | QMessageBox.No
                                            | QMessageBox.YesToAll

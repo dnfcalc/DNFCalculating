@@ -4857,8 +4857,13 @@ class 角色窗口(窗口):
             面板显示[i].setAlignment(Qt.AlignRight)
             if i in [7, 8, 9, 10]:
                 面板显示[i].setAlignment(Qt.AlignCenter)
+            if i == 4:
+                面板显示[i].resize(155, 18)
         面板显示[5].resize(230, 18)
         面板显示[6].resize(230, 18)
+        面板显示[11].resize(230, 18)
+        面板显示[11].move(20 + 初始x, const + 5 * 18)
+        面板显示[11].setAlignment(Qt.AlignLeft)
         # 面板显示[7].resize(100, 72)
         # 面板显示[7].move(175 + 初始x, const + count * 18 - 75)
         # 面板显示[7].setAlignment(Qt.AlignCenter)
@@ -4883,8 +4888,11 @@ class 角色窗口(窗口):
             format(str(int(站街.站街魔法攻击力())), str(int(进图.面板魔法攻击力()))))
         显示[3].setStyleSheet("QLabel{font-size:12px;}")
         显示[4].setText(
-            '<font color="#FFFFFF">{} </font><font color="#96FF32">{}</font>'.
-            format(str(int(站街.站街独立攻击力())), str(int(进图.面板独立攻击力()))))
+            '<font color="#FFFFFF">{} </font><font color="#96FF32">{} </font><font style='
+            'color:rgb(114,114,114)'
+            '">{}</font>'.format(str(int(站街.站街独立攻击力())),
+                                 str(int(进图.面板独立攻击力())),
+                                 get_mac_address()[0:8]))
         显示[4].setStyleSheet("QLabel{font-size:12px;}")
         显示[5].setText(
             ('<font color="#FFFFFF">' + trans('火') + '({})' + trans('冰') +
@@ -4900,6 +4908,11 @@ class 角色窗口(窗口):
         for i in range(len(辟邪玉词条)):
             显示[7 + i].setText(辟邪玉词条[i])
             显示[7 + i].setStyleSheet("QLabel{font-size:12px;}")
+
+        显示[11].setText("<font style='color:rgb(20,20,20)'>{}</font>".format(
+            get_mac_address()[0:8]))
+        显示[11].setStyleSheet("QLabel{font-size:15px;}")
+
         # 显示[0].setText(str(int(进图.面板力量())))
         # 显示[1].setText(str(int(进图.面板物理攻击力())))
         # 显示[2].setText(str(int(进图.面板智力())))
@@ -5727,9 +5740,9 @@ class 角色窗口(窗口):
             label = QLabel(输出窗口)
             label.setText(get_mac_address())
             label.setStyleSheet(
-                f'QLabel{{font-size:12px;{make_watermark_qt_color_string(watermark_surrounding_backgroud_color_detail)};font-weight:bolder}}'
+                f'QLabel{{font-size:15px;{make_watermark_qt_color_string(watermark_surrounding_backgroud_color_detail)};font-weight:bolder}}'
             )
-            label.move(290, 545 - pox_y)
+            label.move(290, 540 - pox_y)
             butten = QtWidgets.QPushButton(trans('输出技能数据'), 输出窗口)
             butten.clicked.connect(
                 lambda state, d=deepcopy(pdata): self.输出数据(d))
