@@ -228,7 +228,8 @@ class 选择窗口(QWidget):
                 if code in [
                         '2190155ee92d17e8cc3b0c9892fd5ac7',
                         '1ba5ea8fa16964666f0c0a85e89c3e96',
-                        '2e3d28298db82f8b23dc9fa6aac14b6d'
+                        '2e3d28298db82f8b23dc9fa6aac14b6d',
+                        'f8b3cf5c269c97a8d6d2d97ecf769a06'
                 ]:
                     canUse = random.randint(0, 75)
                     reason = '呵呵'
