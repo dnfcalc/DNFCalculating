@@ -1,5 +1,10 @@
 ## Newest
 
+### 2022-01-27
+
+#### BugFixes
+* 重霄·弹药专家·男：修正男弹药子弹数据 ([426ff2](https://gitee.com/i_melon/DNFCalculating/commit/426ff2068a2875f7f26f1962d68a0d589e3c9d9c))
+
 ### 2022-01-26
 
 #### NewFeatures
@@ -31,6 +36,7 @@
 #### BugFixes
 * 修正自动更新未能下载的情况 ([a39f2a](https://gitee.com/i_melon/DNFCalculating/commit/a39f2a18b3267043cd61cb0fcbd2d698650ad501))
 * 隐夜·死灵术士：移除无关符文 ([e1eafa](https://gitee.com/i_melon/DNFCalculating/commit/e1eafa8e676a85ef21f0a01d1f410b9b13f6b7a8))
+
 
 
 
