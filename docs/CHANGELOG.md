@@ -1,5 +1,19 @@
 ## Newest
 
+### 2022-01-27
+
+#### BugFixes
+* 重霄·弹药专家·男：修正男弹药子弹数据 ([426ff2](https://gitee.com/i_melon/DNFCalculating/commit/426ff2068a2875f7f26f1962d68a0d589e3c9d9c))
+
+### 2022-01-26
+
+#### NewFeatures
+* 同步韩服职业平衡及重做 ([f1f2b4](https://gitee.com/i_melon/DNFCalculating/commit/f1f2b4a6208fac413abd71efb710131060f52244))
+
+#### BugFixes
+* 神启·巫女：修正神龙如意珠伤害 ([d19d41](https://gitee.com/i_melon/DNFCalculating/commit/d19d41ae606d82753b6958b7cbbb4bb3f5dea666))
+* 重霄·合金战士：同步国服正式服护石实际效果 ([91d7b8](https://gitee.com/i_melon/DNFCalculating/commit/91d7b8c98e97483674b9bc5b62a6de99df6427d2))
+
 ### 2022-01-18
 
 #### NewFeatures
@@ -22,6 +36,8 @@
 #### BugFixes
 * 修正自动更新未能下载的情况 ([a39f2a](https://gitee.com/i_melon/DNFCalculating/commit/a39f2a18b3267043cd61cb0fcbd2d698650ad501))
 * 隐夜·死灵术士：移除无关符文 ([e1eafa](https://gitee.com/i_melon/DNFCalculating/commit/e1eafa8e676a85ef21f0a01d1f410b9b13f6b7a8))
+
+
 
 
 
