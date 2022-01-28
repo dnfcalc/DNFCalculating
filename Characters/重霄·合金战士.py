@@ -80,6 +80,12 @@ class 技能3(被动技能):
         else:
             return round(1.13 + 0.02 * self.等级, 3)
 
+    def 物理攻击力倍率(self, 武器类型):
+        if self.等级 == 0:
+            return 1.0
+        else:
+            return round(1.13 + 0.02 * self.等级, 3)
+
 class 技能4(主动技能):
     名称 = '瞄准射击'
     所在等级 = 15
