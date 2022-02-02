@@ -1,5 +1,17 @@
 ## Newest
 
+### 2022-02-02
+
+#### NewFeatures
+* 同步游戏内辟邪玉技攻上限的设定，由于不确定游戏内结算顺序，会有部分出入<br>
+技攻累加超过200的部分不享受玉的加成，计算器详情会红色标注 ([e1aab7](https://gitee.com/i_melon/DNFCalculating/commit/e1aab77f6dd28403c7b482284020d79439396193))
+
+#### BugFixes
+* 重霄·合金战士：修正面板显示 ([4c4ec5](https://gitee.com/i_melon/DNFCalculating/commit/4c4ec5003d51a5c1d1337ecdea1a9304e39a27fc))
+
+
+## History
+
 ### 2022-01-27
 
 #### BugFixes
@@ -40,8 +52,6 @@
 
 
 
-
-## History
 
 ### 2021-12-30
 
