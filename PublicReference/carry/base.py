@@ -338,9 +338,11 @@ class 角色属性(属性):
             self.属性附加 += self.属性附加伤害增加增幅 * x
         return ''
 
-    def 技能攻击力加成(self, x, 辟邪玉加成=1):
+    def 技能攻击力加成(self, x, 辟邪玉加成=1,适用累加=1):
         if self.装备描述 == 1:
             return trans('{技能攻击力} +$value<br>', value=to_percent(x))
+        if 适用累加 == 0:
+            self.技能攻击力 *= 1 + self.技能伤害增加增幅 * x if 辟邪玉加成 == 1 else x
         else:
             self.技能攻击力累加 += x
             if self.技能攻击力累加 <= 2:
