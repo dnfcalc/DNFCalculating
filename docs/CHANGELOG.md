@@ -1,5 +1,10 @@
 ## Newest
 
+### 2022-02-03
+
+#### NewFeatures
+* 同步部分改造的不纳入上限统计 ([0202b2](https://gitee.com/i_melon/DNFCalculating/commit/0202b253429c9c19bb8da627c253fc479f0820a1))
+
 ### 2022-02-02
 
 #### NewFeatures
@@ -8,6 +13,7 @@
 
 #### BugFixes
 * 重霄·合金战士：修正面板显示 ([4c4ec5](https://gitee.com/i_melon/DNFCalculating/commit/4c4ec5003d51a5c1d1337ecdea1a9304e39a27fc))
+
 
 
 ## History
