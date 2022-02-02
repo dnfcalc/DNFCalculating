@@ -180,6 +180,7 @@ class 角色属性(属性):
     暴伤 = 0.0  # 冲突属性
     最终伤害 = 0.0
     技能攻击力 = 1.0
+    技能攻击力累加 = 0.0
     # 技能攻击力显示 = 1.0
     持续伤害 = 0.0
     加算冷却缩减 = 0.0
@@ -341,8 +342,11 @@ class 角色属性(属性):
         if self.装备描述 == 1:
             return trans('{技能攻击力} +$value<br>', value=to_percent(x))
         else:
-            self.技能攻击力 *= 1 + self.技能伤害增加增幅 * x if 辟邪玉加成 == 1 else x
-            # self.技能攻击力显示 *= int((1 + self.技能伤害增加增幅 * x if 辟邪玉加成 == 1 else x)*1000)/1000
+            self.技能攻击力累加 += x
+            if self.技能攻击力累加 <= 2:
+                self.技能攻击力 *= 1 + self.技能伤害增加增幅 * x if 辟邪玉加成 == 1 else x
+            else:
+                self.技能攻击力 *= 1 + (self.技能伤害增加增幅*(2+x-self.技能攻击力累加)+self.技能攻击力累加-2) if self.技能攻击力累加 - x < 2  or 辟邪玉加成 == 1 else x
         return ''
 
     def 暴击伤害加成(self, x, 可变=0, 辟邪玉加成=1):
@@ -3584,6 +3588,9 @@ class 角色窗口(窗口):
             词条数值 = self.词条显示计算(B)
             词条解释 = self.词条显示计算(B, 1)
             for i in range(0, len(词条数值)):
+                if i == 5 and B.技能攻击力累加 > 2:
+                    self.词条显示[i].setStyleSheet(
+                        "QLabel{font-size:12px;color:red}")
                 self.词条显示[i].setText(词条数值[i])
                 self.词条显示[i].setToolTip('<font color="#B99460">' + 词条解释[i] +
                                         '</font>')
@@ -5558,8 +5565,12 @@ class 角色窗口(窗口):
         for i in range(0, len(pdata['词条'])):
             templab = QLabel(输出窗口)
             templab.setText(pdata['词条'][i])
-            templab.setStyleSheet(
-                "QLabel{font-size:12px;color:rgb(104,213,237)}")
+            if i == 5 and self.角色属性B.技能攻击力累加 > 2:
+                templab.setStyleSheet(
+                    "QLabel{font-size:12px;color:red}")
+            else:
+                templab.setStyleSheet(
+                    "QLabel{font-size:12px;color:rgb(104,213,237)}")
             templab.move(7, j - pox_y2)
             templab.resize(180, 17)
             templab.setAlignment(Qt.AlignLeft)
