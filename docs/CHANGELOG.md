@@ -1,5 +1,17 @@
 ## Newest
 
+### 2022-02-14
+
+#### NewFeatures
+* 归元·气功师·男：同步韩服正式服修改 ([25ccb7](https://gitee.com/i_melon/DNFCalculating/commit/25ccb729a289abb2fa5f93bac0c3e5ed5783b9bf))
+* 重霄·弹药专家·男：调整尼尔狙击护石算法 ([4e3744](https://gitee.com/i_melon/DNFCalculating/commit/4e37447d6bbff27f86d8d2e838f88374e13d397c))
+
+#### BugFixes
+* 修正勋章名望 fix #I4SKOV ([4f1391](https://gitee.com/i_melon/DNFCalculating/commit/4f1391d8f8eab7b2054ce68bc788053a76a64582))
+* 归元·气功师·男：修正月辉念气破护石CD异常 fix #I4SLC0 ([f00c33](https://gitee.com/i_melon/DNFCalculating/commit/f00c338f8876cd2b0793545ae4912c8aa8086926))
+* 极诣·剑魂：修正屏蔽三觉下二觉伤害计算问题 fix #I4SAMU ([56b5b7](https://gitee.com/i_melon/DNFCalculating/commit/56b5b7f02e73388d3aa0f6dc04da8a9af538552f))
+* 极诣·流浪武士：修正飞花逐月数据问题 ([445274](https://gitee.com/i_melon/DNFCalculating/commit/445274499096faaf46897554e773b614100a55a6))
+
 ### 2022-02-03
 
 #### NewFeatures
@@ -13,6 +25,7 @@
 
 #### BugFixes
 * 重霄·合金战士：修正面板显示 ([4c4ec5](https://gitee.com/i_melon/DNFCalculating/commit/4c4ec5003d51a5c1d1337ecdea1a9304e39a27fc))
+
 
 
 
