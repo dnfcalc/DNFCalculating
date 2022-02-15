@@ -136,6 +136,7 @@ class 选择窗口(QWidget):
             return error
 
     def 网盘检查(self):
+        return
         if 目录.endswith('py'):
             return
         try:
@@ -409,21 +410,21 @@ class 选择窗口(QWidget):
         self.版本提示.setWindowIcon(self.icon)
         self.配置错误.setWindowIcon(self.icon)
 
-        # if 自动检查更新 == 0:
-        #     try:
-        #         self.网盘检查()
-        #         if self.网盘报错 == 1:
-        #             self.报错提示 = QMessageBox(QMessageBox.Question, "提示",
-        #                                     trans("无法自动检查更新，请在每周三/四自行前往检查版本"))
-        #             self.报错提示.setWindowIcon(self.icon)
-        #             # box.exec_()
-        #         if self.网盘链接 != '':
-        #             m_red_SheetStyle = "padding-left:3px;min-width: 25px; min-height: 16px;border-radius: 5px; background:red;color:white"
-        #             label = QLabel("New", self.topFiller)
-        #             label.move(115 + 4 * 125 + 90, 30 + (count + 1) * 100)
-        #             label.setStyleSheet(m_red_SheetStyle)
-        #     except Exception as error:
-        #         pass
+        if 自动检查更新 == 0:
+            try:
+                self.网盘检查()
+                if self.网盘报错 == 1:
+                    self.报错提示 = QMessageBox(QMessageBox.Question, "提示",
+                                            trans("无法自动检查更新，请在每周三/四自行前往检查版本"))
+                    self.报错提示.setWindowIcon(self.icon)
+                    # box.exec_()
+                if self.网盘链接 != '':
+                    m_red_SheetStyle = "padding-left:3px;min-width: 25px; min-height: 16px;border-radius: 5px; background:red;color:white"
+                    label = QLabel("New", self.topFiller)
+                    label.move(115 + 4 * 125 + 90, 30 + (count + 1) * 100)
+                    label.setStyleSheet(m_red_SheetStyle)
+            except Exception as error:
+                pass
         count += 1
         count += 1
 
