@@ -136,6 +136,7 @@ class 选择窗口(QWidget):
             return error
 
     def 网盘检查(self):
+        return
         if 目录.endswith('py'):
             return
         try:
