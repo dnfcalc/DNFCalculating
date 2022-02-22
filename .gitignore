@@ -1,0 +1,13 @@
+__pycache__
+logs
+set*
+skill*
+AutoRelease
+*.exe
+.vscode/launch.json
+debug.log
+build.bat
+详细数据
+DLL
+.DS_Store
+SkillData
