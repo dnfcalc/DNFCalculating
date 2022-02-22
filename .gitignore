@@ -11,3 +11,12 @@ build.bat
 DLL
 .DS_Store
 SkillData
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+
+tmp
+**/.tmp
+release
