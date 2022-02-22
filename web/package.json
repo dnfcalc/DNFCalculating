@@ -31,5 +31,6 @@
     "electron",
     "vue3",
     "rollup"
-  ]
+  ],
+  "dependencies": {}
 }
