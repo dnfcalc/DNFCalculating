@@ -20,3 +20,4 @@ dist-ssr
 tmp
 **/.tmp
 release
+build
