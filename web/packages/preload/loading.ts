@@ -1,5 +1,3 @@
-
-
 /**
  * https://tobiasahlin.com/spinkit
  * https://connoratherton.com/loaders
@@ -51,6 +49,6 @@ export function useLoading() {
     removeLoading() {
       document.head.removeChild(oStyle)
       document.body.removeChild(oDiv)
-    },
+    }
   }
 }

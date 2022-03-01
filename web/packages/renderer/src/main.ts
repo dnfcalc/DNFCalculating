@@ -1,10 +1,13 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-
+import { createApp } from 'vue'
+import App from './App.vue'
+import { GetAdventureInfo } from './api/info'
 // 在vue3渲染前开启api服务
-window.server.statrServer();
+window.server.statrServer()
 
-createApp(App).mount("#app").$nextTick(window.removeLoading);
+createApp(App).mount('#app').$nextTick(window.removeLoading)
+
+const adventureinfo = await GetAdventureInfo()
+console.log(adventureinfo.data)
 
 // console.log('fs', window.fs)
 // console.log('ipcRenderer', window.ipcRenderer)

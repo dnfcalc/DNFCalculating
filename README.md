@@ -16,7 +16,7 @@ api:python+FastAPI
   pip install uvicorn[standard]
 
   cd ../web
-  npm install -g yarn
+  pnpm install -g yarn
   yarn
 ```
 

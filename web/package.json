@@ -32,5 +32,7 @@
     "vue3",
     "rollup"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.26.0"
+  }
 }
