@@ -16,7 +16,7 @@ register_exception(app)
 register_cors(app)
 
 # 路由添加注册
-app.include_router(infoRouter, prefix="/info", tags=['info'])
+app.include_router(infoRouter, prefix="/info", tags=['杂项信息接口'])
 
 if __name__ == '__main__':
     port = 17173
