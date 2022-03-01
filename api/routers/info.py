@@ -28,7 +28,7 @@ class adventureinfo(BaseModel):
 @infoRouter.get(path='/adventureinfo', response_model=Return[adventureinfo])
 async def get_adventure_info():
     adventure_info = {}
-    with open("api/dataFiles/adventure_info.json", encoding='utf-8') as fp:
+    with open("api/ResourceFiles/adventure_info.json", encoding='utf-8') as fp:
         adventure_info = json.load(fp)
     return reponse(data=adventure_info)
 
