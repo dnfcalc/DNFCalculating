@@ -2,7 +2,7 @@ import fs from "fs";
 import { contextBridge, ipcRenderer } from "electron";
 import { domReady } from "./utils";
 import { useLoading } from "./loading";
-import { statrServer, stopServer } from "../main/server";
+import { statrServer, stopServer } from "./server";
 
 const { appendLoading, removeLoading } = useLoading();
 
