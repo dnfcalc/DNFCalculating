@@ -1,6 +1,7 @@
 import { app, BrowserWindow, shell } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
+import { stopServer } from '../preload/server'
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
@@ -19,7 +20,8 @@ async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
     webPreferences: {
-      preload: join(__dirname, '../preload/index.cjs')
+      preload: join(__dirname, '../preload/index.cjs'),
+      webSecurity: false
     }
   })
 
@@ -48,6 +50,7 @@ async function createWindow() {
 app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
+  stopServer()
   win = null
   if (process.platform !== 'darwin') app.quit()
 })

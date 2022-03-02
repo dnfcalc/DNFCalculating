@@ -9,8 +9,8 @@ export function statrServer() {
   // TODO 启动python api 待改进 后续添加端口占用判断等
   console.log('statrServer')
   if (process.platform == 'win32')
-    child_process.exec(`python ../api/main.py ${port}`)
-  else child_process.exec(`python3 ${__dirname}/../../../api/main.py ${port}`)
+    child_process.exec(`python api/main.py ${port}`)
+  else child_process.exec(`python3 ${__dirname}/../../api/main.py ${port}`)
 }
 
 /**
@@ -19,5 +19,5 @@ export function statrServer() {
  */
 export function stopServer() {
   // TODO 关闭python api
-  console.log('stopServer')
+  child_process.exec('taskkill /f /im python.exe')
 }

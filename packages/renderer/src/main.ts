@@ -7,7 +7,7 @@ window.server.statrServer()
 createApp(App).mount('#app').$nextTick(window.removeLoading)
 
 const adventureinfo = await GetAdventureInfo()
-console.log(adventureinfo.data)
+console.log(adventureinfo)
 
 // console.log('fs', window.fs)
 // console.log('ipcRenderer', window.ipcRenderer)
