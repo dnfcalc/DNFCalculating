@@ -7,7 +7,7 @@ enum InfoAPI {
 }
 
 export function GetAdventureInfo() {
-  return hyRequest.get<IDataType<IAdventureInfo[]>>({
+  return hyRequest.get<IDataType<IAdventureInfo[][]>>({
     url: InfoAPI.AdventureInfo
   })
 }

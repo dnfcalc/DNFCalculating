@@ -3,11 +3,13 @@ import App from './App.vue'
 import { GetAdventureInfo } from './api/info'
 // 在vue3渲染前开启api服务
 window.server.statrServer()
-
 createApp(App).mount('#app').$nextTick(window.removeLoading)
-
-const adventureinfo = await GetAdventureInfo()
-console.log(adventureinfo)
+setTimeout(async () => {
+  let adventureinfo = await GetAdventureInfo()
+  adventureinfo.data.forEach((item) => {
+    console.log(item)
+  })
+}, 500)
 
 // console.log('fs', window.fs)
 // console.log('ipcRenderer', window.ipcRenderer)

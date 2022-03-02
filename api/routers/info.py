@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter
 from pydantic import BaseModel
 from utils.apiTools import reponse, Return
@@ -21,7 +22,7 @@ class adventureinfo(BaseModel):
     备注: str
 
 
-@infoRouter.get(path='/adventureinfo', response_model=Return[adventureinfo])
+@infoRouter.get(path='/adventureinfo', response_model=Return[List[adventureinfo]])
 async def get_adventure_info():
     return reponse(data=sundryInfo.get_adventure_info())
 

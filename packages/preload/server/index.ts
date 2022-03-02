@@ -19,5 +19,7 @@ export function statrServer() {
  */
 export function stopServer() {
   // TODO 关闭python api
-  child_process.exec('taskkill /f /im python.exe')
+  if (process.platform == 'win32')
+    child_process.exec('taskkill /f /im python.exe')
+  else child_process.exec('killall Python')
 }
