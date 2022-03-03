@@ -9,28 +9,28 @@
             class="w-15 h-15 bg-center bg-no-repeat"
             :style="sub_icon(index)"
           ></div>
-          <template v-for="job in sub">
-            <div
-              class="job-box w-30 h-22.5 m-1 box-border relative duration-300 cursor-pointer"
-            >
-              <div
-                class="job-border w-full h-full absolute z-2 bg-no-repeat"
-              ></div>
-              <div
-                class="job-mask bg-hex-#ffd7002e w-full h-full invisible z-999 absolute"
-              ></div>
-              <div
-                class="absolute bottom-1 w-full text-sm text-center text-hex-#bea347"
-              >
-                {{ job.显示名称 }}
-              </div>
-              <div
-                class="w-full h-full bg-no-repeat bg-auto bg-clip-content overflow-hidden z-1"
-                :style="job_icon(job.序号)"
-              ></div>
-            </div>
-          </template>
         </div>
+        <template v-for="job in sub">
+          <div
+            class="job-box w-30 h-22.5 m-1 box-border relative duration-300 cursor-pointer"
+          >
+            <div
+              class="job-border w-full h-full absolute z-2 bg-no-repeat"
+            ></div>
+            <div
+              class="job-mask bg-hex-#ffd7002e w-full h-full invisible z-999 absolute"
+            ></div>
+            <div
+              class="absolute bottom-1 w-full text-sm text-center text-hex-#bea347"
+            >
+              {{ job.显示名称 }}
+            </div>
+            <div
+              class="w-full h-full bg-no-repeat bg-auto bg-clip-content overflow-hidden z-1"
+              :style="job_icon(job.序号)"
+            ></div>
+          </div>
+        </template>
       </div>
     </template>
   </div>
@@ -68,7 +68,7 @@ function choose_job(job: string) {
 
   .job-box {
     .job-border {
-      background-image: url(@/assets/img/job_border.png);
+      background-image: url(./images/adventure/border.png);
     }
 
     &:hover {
