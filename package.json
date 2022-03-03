@@ -33,6 +33,7 @@
     "rollup"
   ],
   "dependencies": {
-    "axios": "^0.26.0"
+    "axios": "^0.26.0",
+    "vue-router": "^4.0.13"
   }
 }
