@@ -551,9 +551,15 @@ class classChange(Character):
       self.armor_mastery = ['智力', '力量']
       # buff倍率
       self.buff_ratio = 1.84
-      # 技能列表
-      self.get_skill_info(技能列表)
+      # 技能列表、护石及符文信息
+      self.set_skill_info(技能列表,['爆裂弹'])
       # 个性化设置，技能选项等
-      self.individuation=[]
-      # 护石及符文信息
+      self.set_individuation()
       # 药剂等相关信息设置
+
+  def set_individuation(self):
+    self.individuation = [
+      {"type":"checkbox","value":"测试checkbox","items":[],"row":0,"column":0,"key":0},
+      {"type":"select","value":"","items":[1,2,3,4,5,6,7],"row":1,"colume":0,"key":1},
+      {"type":"label","value":"测试label","items":[],"row":2,"colume":0,"key":2}
+    ]

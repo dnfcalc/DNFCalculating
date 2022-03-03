@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter
 from pydantic import BaseModel
 from utils.apiTools import reponse, Return
-from core.response import sundryInfo,skillInfo
+from core.response import sundryInfo,characterInfo
 
 infoRouter = APIRouter()
 
@@ -49,6 +49,6 @@ class characterSkillInfo(BaseModel):
     # 护石及符文信息
     # 药剂等相关信息设置
 
-@infoRouter.get(path='skillInfo/{character_name}')
-async def get_skill_info(character_name : str):
-  return reponse(data=skillInfo.get_skill_info(character_name))
+@infoRouter.get(path='/characterInfo/{character_name}')
+async def get_character_info(character_name : str):
+  return reponse(data=characterInfo.get_character_info(character_name))
