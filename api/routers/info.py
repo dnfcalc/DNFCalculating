@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter
 from pydantic import BaseModel
 from utils.apiTools import reponse, Return
-from core.response import sundryInfo
+from core.response import sundryInfo,skillInfo
 
 infoRouter = APIRouter()
 
@@ -22,7 +22,7 @@ class adventureinfo(BaseModel):
     备注: str
 
 
-@infoRouter.get(path='/adventureinfo', response_model=Return[List[adventureinfo]])
+@infoRouter.get(path='/adventureinfo', response_model=Return[List[List[adventureinfo]]])
 async def get_adventure_info():
     return reponse(data=sundryInfo.get_adventure_info())
 
@@ -37,6 +37,18 @@ async def get_notice():
     return reponse(data=sundryInfo.get_notice())
 
 
-@infoRouter.get(path='/blacklistlist', response_model=Return)
+@infoRouter.get(path='/blacklistlist', response_model=Return[dict])
 async def get_blacklistlist():
     return reponse(data=sundryInfo.get_blacklistlist())
+
+class characterSkillInfo(BaseModel):
+    # 技能信息
+    skillInfo:dict
+    # 个性化设置，技能选项等
+    individuation:dict
+    # 护石及符文信息
+    # 药剂等相关信息设置
+
+@infoRouter.get(path='skillInfo/{character_name}')
+async def get_skill_info(character_name : str):
+  return reponse(data=skillInfo.get_skill_info(character_name))

@@ -13,7 +13,7 @@ T = TypeVar('T')
 class Return(GenericModel, Generic[T]):
     code: int = 200
     message: str = ""
-    data: Union[List[T], dict, str, T] = None
+    data: Union[T,dict, str] = None
 
 
 def reponse(*, code=200, data: Union[list, dict, str], message="Success"):
