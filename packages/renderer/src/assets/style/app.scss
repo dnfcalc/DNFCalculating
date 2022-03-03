@@ -1,0 +1,69 @@
+html,
+body,
+#app {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: apple-system, BlinkMacSystemFont, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+}
+
+* {
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  background: rgb(0, 0, 0, 0.9);
+  width: 12px;
+  margin: 0px 0px 0px 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(36, 36, 36);
+  width: 12px;
+  border: 1px solid rgb(76, 61, 39);
+  border-radius: 1px;
+
+  &:hover {
+    background: rgb(52, 52, 52);
+  }
+}
+
+.divider {
+  width: calc(100% - 4px);
+  height: 1px;
+  background-color: rgba(58, 57, 58, 0.8);
+  margin: 8px 0;
+}
+
+.mask-full {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  position: relative;
+}
+
+.icon-lay:not(.active) {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+}

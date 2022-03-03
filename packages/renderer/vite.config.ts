@@ -3,34 +3,35 @@ import { defineConfig, Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import resolve from 'vite-plugin-resolve'
 import pkg from '../../package.json'
+import Unocss from 'unocss/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   mode: process.env.NODE_ENV,
   root: __dirname,
   plugins: [
+    Unocss(),
     vue(),
-    resolveElectron(
-      /**
-       * Here you can specify other modules
-       * 🚧 You have to make sure that your module is in `dependencies` and not in the` devDependencies`,
-       *    which will ensure that the electron-builder can package it correctly
-       * @example
-       * {
-       *   'electron-store': 'const Store = require("electron-store"); export default Store;',
-       * }
-       */
-    ),
+    resolveElectron()
+    /**
+     * Here you can specify other modules
+     * 🚧 You have to make sure that your module is in `dependencies` and not in the` devDependencies`,
+     *    which will ensure that the electron-builder can package it correctly
+     * @example
+     * {
+     *   'electron-store': 'const Store = require("electron-store"); export default Store;',
+     * }
+     */
   ],
   base: './',
   build: {
     emptyOutDir: true,
     sourcemap: true,
-    outDir: '../../dist/renderer',
+    outDir: '../../dist/renderer'
   },
   server: {
-    port: pkg.env.PORT,
-  },
+    port: pkg.env.PORT
+  }
 })
 
 /**
@@ -48,7 +49,7 @@ export function resolveElectron(
   return resolve({
     electron: electronExport(),
     ...builtinModulesExport(builtins),
-    ...resolves,
+    ...resolves
   })
 
   function electronExport() {
