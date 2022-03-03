@@ -3,7 +3,8 @@ import { IAdventureInfo } from './type'
 import { IDataType } from '../types'
 
 enum InfoAPI {
-  AdventureInfo = '/info/adventureinfo'
+  AdventureInfo = '/info/adventureinfo',
+  BlackList = '/info/blacklist'
 }
 
 export function GetAdventureInfo() {

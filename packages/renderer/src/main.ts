@@ -1,15 +1,16 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import { GetAdventureInfo } from './api/info'
+import { pinia } from './store'
 import router from './router'
 // 在vue3渲染前开启api服务
 window.server.statrServer()
-createApp(App).use(router).mount('#app').$nextTick(window.removeLoading)
-setTimeout(async () => {
-  let adventureinfo = await GetAdventureInfo()
-  adventureinfo.data.forEach((item) => {
-    console.log(item)
-  })
+// 延迟1秒加载，为了防止Python程序还没启动
+setTimeout(() => {
+  createApp(App)
+    .use(pinia)
+    .use(router)
+    .mount('#app')
+    .$nextTick(window.removeLoading)
 }, 1000)
 
 // console.log('fs', window.fs)

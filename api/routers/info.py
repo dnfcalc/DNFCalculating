@@ -37,6 +37,6 @@ async def get_notice():
     return reponse(data=sundryInfo.get_notice())
 
 
-@infoRouter.get(path='/balcklist', response_model=Return)
-async def get_balcklist():
-    return reponse(data=sundryInfo.get_balcklist())
+@infoRouter.get(path='/blacklistlist', response_model=Return)
+async def get_blacklistlist():
+    return reponse(data=sundryInfo.get_blacklistlist())

@@ -21,8 +21,8 @@ def get_notice():
     return notice
 
 
-def get_balcklist():
-    balcklist = {
+def get_blacklistlist():
+    blacklistlist = {
         "2190155ee92d17e8cc3b0c9892fd5ac7": {
             "reason": "https://tieba.baidu.com/p/7624625617 不好意思 是计算器配不上你"
         },
@@ -45,4 +45,4 @@ def get_balcklist():
         }
     }
     # 同步获取服务上的黑名单
-    return balcklist
+    return blacklistlist
