@@ -1,4 +1,3 @@
-import { registerRuntimeHelpers } from '@vue/compiler-core'
 import { defineStore } from 'pinia'
 import { GetAdventureInfo } from '../api/info'
 import { IAdventureInfo } from '../api/info/type'

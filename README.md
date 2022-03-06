@@ -12,20 +12,25 @@ api:python+FastAPI
 ```
   git clone https://gitee.com/i_melon/dnfcalculating_110
   cd api
-  pip install fastapi
-  pip install uvicorn[standard]
+  pip install fastapi requests uvicorn[standard]
 
-  cd ../web
-  pnpm install -g yarn
-  yarn
+  cd ..
+  npm install -g pnpm
+
+  如果依赖安装过慢，可设置镜像
+  npm config set registry https://registry.npmmirror.com/
+  或 
+  pnpm add -g nrm 
+  nrm use taobao
+
+  pnpm install
+
 ```
 
 ## 项目运行
 
 ```
-  python api/main.py
-  cd web
-  yarn dev
+  pnpm dev
 ```
 
 ## 项目进展

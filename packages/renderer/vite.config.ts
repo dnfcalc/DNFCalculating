@@ -1,21 +1,28 @@
 import { builtinModules } from 'module'
 import { defineConfig, Plugin } from 'vite'
+import path from 'path'
 import vue from '@vitejs/plugin-vue'
+import jsx from '@vitejs/plugin-vue-jsx'
 import resolve from 'vite-plugin-resolve'
 import pkg from '../../package.json'
 import Unocss from 'unocss/vite'
 
-import presetDefault from '@unocss/preset-uno'
-import presetIcons from '@unocss/preset-icons'
+import { presetUno, presetIcons } from 'unocss'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   mode: process.env.NODE_ENV,
   root: __dirname,
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  },
   plugins: [
     Unocss({
-      presets: [presetDefault(), presetIcons()]
+      presets: [presetUno(), presetIcons()]
     }),
+    jsx(),
     vue(),
     resolveElectron()
     /**

@@ -2,7 +2,18 @@
   "useTabs": false,
   "tabWidth": 2,
   "printWidth": 80,
-  "singleQuote": true,
+  "singleQuote": false,
+  "semi": false,
+  "vueIndentScriptAndStyle": true,
+  "quoteProps": "as-needed",
+  "bracketSpacing": true,
   "trailingComma": "none",
-  "semi": false
+  "jsxBracketSameLine": false,
+  "jsxSingleQuote": false,
+  "arrowParens": "avoid",
+  "insertPragma": false,
+  "requirePragma": false,
+  "proseWrap": "never",
+  "htmlWhitespaceSensitivity": "strict",
+  "endOfLine": "auto"
 }
