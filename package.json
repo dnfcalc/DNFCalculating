@@ -3,20 +3,31 @@
   "version": "1.0.0",
   "main": "dist/main/index.cjs",
   "license": "MIT",
+  "lint-staged": {
+    "**.{js,tsx?,vue,css,scss,html}": [
+      "prettier --write "
+    ]
+  },
   "scripts": {
     "dev": "node scripts/watch.mjs",
     "prebuild": "vue-tsc --project packages/renderer/tsconfig.json --noEmit && node scripts/build.mjs",
     "build": "electron-builder",
-    "debug": "npm run prebuild && vite ./packages/renderer"
+    "debug": "npm run prebuild && vite ./packages/renderer",
+    "postinstall": "husky install"
   },
   "engines": {
     "node": ">=14.17.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.1.0",
+    "@vitejs/plugin-vue-jsx": "^1.3.8",
     "electron": "16.0.8",
     "electron-builder": "^22.14.5",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.5",
+    "prettier": "^2.5.1",
     "typescript": "^4.5.5",
+    "unocss": "^0.27.1",
     "vite": "^2.7.13",
     "vite-plugin-resolve": "^1.4.4",
     "vue": "^3.2.29",
@@ -36,7 +47,6 @@
     "axios": "^0.26.0",
     "pinia": "^2.0.11",
     "sass": "^1.49.9",
-    "unocss": "^0.27.1",
     "vue-router": "^4.0.13"
   }
 }

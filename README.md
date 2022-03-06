@@ -16,8 +16,8 @@ api:python+FastAPI
   pip install uvicorn[standard]
 
   cd ../web
-  pnpm install -g yarn
-  yarn
+  npm install -g pnpm
+  pnpm install
 ```
 
 ## 项目运行
@@ -25,7 +25,7 @@ api:python+FastAPI
 ```
   python api/main.py
   cd web
-  yarn dev
+  pnpm dev
 ```
 
 ## 项目进展
