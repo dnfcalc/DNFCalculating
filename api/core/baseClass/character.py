@@ -38,6 +38,7 @@ class Character:
         "type":skill.是否有伤害,
         "need_level":skill.所在等级,
         "level_master":skill.等级精通,
+        "level_max":skill.等级上限,
         "CD":0 if not skill.是否有伤害 else skill.CD,
         "current_LV":skill.基础等级,
         "data": 0 if not skill.是否有伤害 else skill.等效百分比('')
