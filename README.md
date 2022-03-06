@@ -12,16 +12,15 @@ api:python+FastAPI
 ```
   git clone https://gitee.com/i_melon/dnfcalculating_110
   cd api
-  pip install fastapi requests
-  pip install uvicorn[standard]
+  pip install fastapi requests uvicorn[standard]
 
   cd ..
   npm install -g pnpm
 
   如果依赖安装过慢，可设置镜像
-  pnpm config set registry https://registry.npmmirror.com/
+  npm config set registry https://registry.npmmirror.com/
   或 
-  pnpm install -g nrm 
+  pnpm add -g nrm 
   nrm use taobao
 
   pnpm install
