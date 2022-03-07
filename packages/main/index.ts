@@ -1,13 +1,13 @@
-import { app, BrowserWindow, shell } from 'electron'
-import { release } from 'os'
-import { join } from 'path'
-import { stopServer } from '../preload/server'
+import { app, BrowserWindow, shell } from "electron"
+import { release } from "os"
+import { join } from "path"
+import { stopServer } from "../preload/server"
 
 // Disable GPU Acceleration for Windows 7
-if (release().startsWith('6.1')) app.disableHardwareAcceleration()
+if (release().startsWith("6.1")) app.disableHardwareAcceleration()
 
 // Set application name for Windows 10+ notifications
-if (process.platform === 'win32') app.setAppUserModelId(app.getName())
+if (process.platform === "win32") app.setAppUserModelId(app.getName())
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
@@ -18,47 +18,47 @@ let win: BrowserWindow | null = null
 
 async function createWindow() {
   win = new BrowserWindow({
-    title: 'Main window',
-    width:840,
-    height:685,
-    resizable:false,
+    title: "Main window",
+    width: 880,
+    height: 680,
+    resizable: false,
     webPreferences: {
-      preload: join(__dirname, '../preload/index.cjs'),
+      preload: join(__dirname, "../preload/index.cjs"),
       webSecurity: false
     }
   })
 
-  if (app.isPackaged || process.env['DEBUG']) {
-    win.loadFile(join(__dirname, '../renderer/index.html'))
+  if (app.isPackaged || process.env["DEBUG"]) {
+    win.loadFile(join(__dirname, "../renderer/index.html"))
   } else {
     // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
-    const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`
+    const url = `http://${process.env["VITE_DEV_SERVER_HOST"]}:${process.env["VITE_DEV_SERVER_PORT"]}`
 
     win.loadURL(url)
     win.webContents.openDevTools()
   }
 
   // Test active push message to Renderer-process
-  win.webContents.on('did-finish-load', () => {
-    win?.webContents.send('main-process-message', new Date().toLocaleString())
+  win.webContents.on("did-finish-load", () => {
+    win?.webContents.send("main-process-message", new Date().toLocaleString())
   })
 
   // Make all links open with the browser, not with the application
   win.webContents.setWindowOpenHandler(({ url }) => {
-    if (url.startsWith('https:')) shell.openExternal(url)
-    return { action: 'deny' }
+    if (url.startsWith("https:")) shell.openExternal(url)
+    return { action: "deny" }
   })
 }
 
 app.whenReady().then(createWindow)
 
-app.on('window-all-closed', () => {
+app.on("window-all-closed", () => {
   stopServer()
   win = null
-  if (process.platform !== 'darwin') app.quit()
+  if (process.platform !== "darwin") app.quit()
 })
 
-app.on('second-instance', () => {
+app.on("second-instance", () => {
   if (win) {
     // Focus on the main window if the user tried to open another
     if (win.isMinimized()) win.restore()
@@ -66,7 +66,7 @@ app.on('second-instance', () => {
   }
 })
 
-app.on('activate', () => {
+app.on("activate", () => {
   const allWindows = BrowserWindow.getAllWindows()
   if (allWindows.length) {
     allWindows[0].focus()

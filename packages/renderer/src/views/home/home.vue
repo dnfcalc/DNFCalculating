@@ -59,6 +59,8 @@
 <style lang="scss">
   .home {
     background-image: url(./images/adventure/bg.png);
+    background-repeat: no-repeat;
+    background-size: 865px 100%;
 
     .job-icon-box {
       background-image: url(./images/adventure/flash.png);
