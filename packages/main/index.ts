@@ -1,7 +1,7 @@
-import { app, BrowserWindow, shell } from "electron"
+import { app, BrowserWindow, shell, ipcMain } from "electron"
 import { release } from "os"
 import { join } from "path"
-import { stopServer } from "../preload/server"
+import { statrServer, stopServer } from "../preload/server"
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith("6.1")) app.disableHardwareAcceleration()
@@ -50,7 +50,7 @@ async function createWindow() {
   })
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(statrServer).then(createWindow)
 
 app.on("window-all-closed", () => {
   stopServer()
@@ -72,5 +72,29 @@ app.on("activate", () => {
     allWindows[0].focus()
   } else {
     createWindow()
+  }
+})
+
+ipcMain.handle("open-win", (event, arg) => {
+  const ChildWin = new BrowserWindow({
+    title: "Main window",
+    width: arg.width,
+    height: arg.height,
+    resizable: false,
+    webPreferences: {
+      preload: join(__dirname, "../preload/index.cjs"),
+      webSecurity: false
+    }
+  })
+
+  if (app.isPackaged || process.env["DEBUG"]) {
+    ChildWin.loadFile(join(__dirname, `../renderer/index.html#${arg.url}`))
+  } else {
+    // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
+    const url = `http://${process.env["VITE_DEV_SERVER_HOST"]}:${process.env["VITE_DEV_SERVER_PORT"]}#${arg.url}`
+
+    ChildWin.loadURL(url)
+    console.log(url)
+    // newW.webContents.openDevTools()
   }
 })

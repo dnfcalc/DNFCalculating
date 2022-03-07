@@ -564,6 +564,6 @@ class classChange(Character):
   def set_individuation(self):
     self.individuation = [
       {"type":"checkbox","value":"测试checkbox","items":[],"row":0,"column":0,"key":0},
-      {"type":"select","value":"","items":[1,2,3,4,5,6,7],"row":1,"colume":0,"key":1},
-      {"type":"label","value":"测试label","items":[],"row":2,"colume":0,"key":2}
+      {"type":"select","value":"","items":[1,2,3,4,5,6,7],"row":1,"column":0,"key":1},
+      {"type":"label","value":"测试label","items":[],"row":2,"column":0,"key":2}
     ]

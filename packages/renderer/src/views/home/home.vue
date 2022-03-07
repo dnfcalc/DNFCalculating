@@ -2,6 +2,7 @@
   import { IAdventureInfo } from "@/api/info/type"
   import { useBasicInfoStore } from "@/store"
   import { defineComponent, onMounted, ref, renderList } from "vue"
+  import { useRouter } from "vue-router"
 
   function sub_icon(sub: number) {
     return {
@@ -15,16 +16,28 @@
     }
   }
 
-  function choose_job(job: string) {
-    alert(job)
-  }
   export default defineComponent(() => {
     const adventureinfo = ref<IAdventureInfo[][]>([])
+    const router = useRouter()
     onMounted(async () => {
       const basicInfoState = useBasicInfoStore()
       await basicInfoState.get_basic_info()
       adventureinfo.value = basicInfoState.adventureinfo as IAdventureInfo[][]
     })
+
+    // 获取角色相关信息，判定是否开放
+    function choose_job(alter: string) {
+      if (alter !== "重霄·弹药专家·女") {
+        alert(`请自行开发或联系开发`)
+        return
+      }
+      // router.push("/character/" + alter)
+      window.ipcRenderer.invoke("open-win", {
+        url: "/character/" + alter,
+        height: 500,
+        width: 500
+      })
+    }
 
     return () => (
       <div class="bg-cover h-full w-full p-5 home overflow-auto">
@@ -37,7 +50,10 @@
               ></div>
             </div>
             {renderList(sub, job => (
-              <div class="cursor-pointer h-22.5 m-1 w-30 duration-300 job-box box-border relative">
+              <div
+                onClick={() => choose_job(job.类名)}
+                class="cursor-pointer h-22.5 m-1 w-30 duration-300 job-box box-border relative"
+              >
                 <div class="bg-no-repeat h-full w-full z-2 job-border absolute"></div>
                 <div class="h-full bg-hex-ffd7002e w-full z-999 job-mask invisible absolute"></div>
                 <div class="text-sm text-center w-full bottom-1 text-hex-bea347 absolute">
@@ -60,7 +76,7 @@
   .home {
     background-image: url(./images/adventure/bg.png);
     background-repeat: no-repeat;
-    background-size: 865px 100%;
+    background-size: calc(100% - 40px) 100%;
 
     .job-icon-box {
       background-image: url(./images/adventure/flash.png);
