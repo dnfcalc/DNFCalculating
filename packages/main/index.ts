@@ -88,10 +88,10 @@ ipcMain.handle("open-win", (event, arg) => {
   })
 
   if (app.isPackaged || process.env["DEBUG"]) {
-    ChildWin.loadFile(join(__dirname, `../renderer/index.html#${arg.url}`))
+    ChildWin.loadFile(join(__dirname, `../renderer/index.html/#${arg.url}`))
   } else {
     // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
-    const url = `http://${process.env["VITE_DEV_SERVER_HOST"]}:${process.env["VITE_DEV_SERVER_PORT"]}#${arg.url}`
+    const url = `http://${process.env["VITE_DEV_SERVER_HOST"]}:${process.env["VITE_DEV_SERVER_PORT"]}/#${arg.url}`
 
     ChildWin.loadURL(url)
     console.log(url)

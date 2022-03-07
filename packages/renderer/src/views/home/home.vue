@@ -3,6 +3,7 @@
   import { useBasicInfoStore } from "@/store"
   import { defineComponent, onMounted, ref, renderList } from "vue"
   import { useRouter } from "vue-router"
+  import openURL from "@/utils/openURL"
 
   function sub_icon(sub: number) {
     return {
@@ -31,12 +32,8 @@
         alert(`请自行开发或联系开发`)
         return
       }
+      openURL(router, "/character/" + alter, { width: 800, height: 800 })
       // router.push("/character/" + alter)
-      window.ipcRenderer.invoke("open-win", {
-        url: "/character/" + alter,
-        height: 500,
-        width: 500
-      })
     }
 
     return () => (
