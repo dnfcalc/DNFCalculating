@@ -1,0 +1,90 @@
+@import "@/assets/style/theme.scss";
+
+.equip-tooltip-header {
+  height: 28px;
+  display: flex;
+
+  .equip-tooltip-icon {
+    width: 28px;
+    height: 28px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    margin-right: 6px;
+  }
+}
+
+.equip-tooltip-action {
+  height: 24px;
+  position: relative;
+  line-height: 16px;
+  color: #4aa256;
+  font-size: 12px;
+}
+
+.equip-tooltip-title {
+  line-height: 14px;
+  font-size: 14px;
+  height: 28px;
+}
+.info-row {
+  display: flex;
+  justify-content: flex-end;
+  color: #c1a237;
+  font-weight: bold;
+  font-size: 12px;
+  .part-text {
+    color: #937639;
+  }
+}
+
+.comment {
+  color: $text-color;
+  font-size: 13px;
+  margin-top: 12px;
+  margin-right: 12px;
+
+  &.status {
+    color: #86784f;
+    .num {
+      margin-left: 4px;
+    }
+  }
+
+  &.effect {
+    color: #b3a987;
+  }
+
+  &.modifier {
+    color: #937639;
+  }
+
+  .green-socket {
+    color: #79c59d;
+  }
+
+  .red-socket {
+    color: #ff6666;
+  }
+
+  .yellow-socket {
+    color: #c1a237;
+  }
+
+  .blue-socket {
+    color: #549aec;
+  }
+
+  .platinum-socket {
+    color: #add9df;
+  }
+  .socket-value {
+    padding-left: 4px;
+    color: #937639;
+  }
+
+  .property-title {
+    color: #4aa256;
+  }
+}

@@ -1,0 +1,12 @@
+.i-popper {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  min-width: 100px;
+  min-height: 80px;
+  border: 1px solid #5b472a;
+  background-color: rgba(0, 0, 0, 0.8);
+}
