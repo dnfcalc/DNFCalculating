@@ -56,6 +56,7 @@
     .i-checkbox-label {
       height: 24px;
       line-height: 24px;
+      color: #af8f4c;
     }
   }
 </style>

@@ -20,6 +20,8 @@
           <calc-tab value="1">套装</calc-tab>
           <calc-tab value="2">自选</calc-tab>
         </calc-tabs>
+        <calc-button>DYSB</calc-button>
+        <calc-checkbox label="DYSB"></calc-checkbox>
         {renderList(basicInfo.value.skillInfo, (skill, index) => (
           <div>{skill.name}</div>
         ))}

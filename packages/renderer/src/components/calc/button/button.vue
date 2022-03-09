@@ -56,7 +56,7 @@
     outline: none;
     min-width: 80px;
     height: 24px;
-    line-height: 24px;
+    line-height: 20px;
 
     font-size: 12px;
     color: #e9c556;
