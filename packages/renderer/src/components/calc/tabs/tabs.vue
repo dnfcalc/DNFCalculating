@@ -16,9 +16,6 @@
     },
     props: {
       ...listProps,
-      modelValue: {
-        type: [Object, Number, String, Array]
-      },
       vertical: {
         type: Boolean
       }

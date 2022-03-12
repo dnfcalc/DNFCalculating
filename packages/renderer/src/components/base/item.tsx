@@ -4,8 +4,11 @@ import { itemProps, useSelectionItem } from "@/components/hooks/selection/item"
 export default defineComponent({
   name: "i-item",
   props: itemProps,
-  setup(props, { slots }) {
-    const { itemClass, active, current } = useSelectionItem(props)
+  setup(props, context) {
+    const { itemClass, active, current, render } = useSelectionItem(
+      props,
+      context
+    )
 
     function onClick() {
       if (!!active) {
@@ -14,7 +17,7 @@ export default defineComponent({
     }
     return () => (
       <div onClick={onClick} class={itemClass.value}>
-        {current.value.key ?? renderSlot(slots, "default")}
+        {render()}
       </div>
     )
   }

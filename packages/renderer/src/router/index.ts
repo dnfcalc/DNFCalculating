@@ -18,6 +18,15 @@ const routes: RouteRecordRaw[] = [
   }
 ]
 
+if (import.meta.env.DEV) {
+  //用于组件展示的页面
+  routes.push({
+    path: "/show",
+    name: "show",
+    component: () => import("@/pages/show.vue")
+  })
+}
+
 const router = createRouter({
   routes,
   history: createWebHashHistory()

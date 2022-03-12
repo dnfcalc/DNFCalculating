@@ -66,6 +66,8 @@
     display: block;
     text-align: center;
     text-decoration: none;
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
 
     &.icon {
       min-width: 28px;
@@ -75,6 +77,12 @@
     &:hover {
       color: #fee97d;
       background: linear-gradient(#2d4e9f, #153051);
+      border: 1px solid #e3c18a;
+    }
+
+    &:active {
+      color: #e9c556;
+      background: linear-gradient(#2d4e9f, #122438);
       border: 1px solid #e3c18a;
     }
 

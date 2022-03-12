@@ -1,17 +1,36 @@
+import {
+  ComponentPropsOptions,
+  computed,
+  ComputedRef,
+  inject,
+  onDeactivated,
+  PropType,
+  Ref,
+  renderSlot,
+  watch
+} from "vue"
+import { defineHooks } from "../define"
+import {
+  AciveClassSymbol,
+  AciveSymbol,
+  InitSymbol,
+  ItemClassSymbol,
+  ModelValueSymbol,
+  Option,
+  UnactiveSymbol
+} from "./constants"
 import { ClassType } from "./types"
-import { ComponentPropsOptions, computed, ComputedRef, inject, onDeactivated, ref, Ref, SetupContext, toRaw, watch } from "vue"
-import { AciveClassSymbol, AciveSymbol, InitSymbol, ItemClassSymbol, ModelValueSymbol, Option, UnactiveSymbol } from "./constants"
 
 export const itemProps: ComponentPropsOptions = {
   value: {
     type: [Object, String, Number, Boolean]
   },
   label: {
-    type: [Function, String]
+    type: [Function, String] as PropType<string | ((val: string) => string)>
   }
 }
 
-export function useSelectionItem(props: any) {
+export const useSelectionItem = defineHooks(itemProps, (props, { slots }) => {
   const active = inject(AciveSymbol) as Ref<Option>
   const init = inject<(obj: any) => () => void>(InitSymbol)
   const modelValue = inject(ModelValueSymbol) as Ref
@@ -21,19 +40,19 @@ export function useSelectionItem(props: any) {
   })
 
   const current = computed(() => {
-    let key: string | Function = props.label
-    if (typeof key == "function") {
-      key = (key(props.value) as string) ?? props.value
+    let label = props.label as string | Function
+    if (typeof label == "function") {
+      label = (label(props.value) as string) ?? props.value
     }
     return {
-      key,
+      label,
+      render,
       value: props.value
     }
   })
 
   if (!!init) {
     const remove = init(current)
-
     onDeactivated(remove)
   }
 
@@ -44,7 +63,10 @@ export function useSelectionItem(props: any) {
   })
 
   const itemClass = computed(() => {
-    return [inject<ComputedRef<ClassType>>(ItemClassSymbol)?.value ?? "", isActive.value ? activeClass.value : unactiveClass.value]
+    return [
+      inject<ComputedRef<ClassType>>(ItemClassSymbol)?.value ?? "",
+      isActive.value ? activeClass.value : unactiveClass.value
+    ]
   })
 
   const activeClass = computed(() => {
@@ -55,14 +77,19 @@ export function useSelectionItem(props: any) {
     return inject<ComputedRef<ClassType>>(UnactiveSymbol)?.value ?? "unactive"
   })
 
+  function render() {
+    return (props.label as string) ?? renderSlot(slots, "default")
+  }
+
   return {
     active,
     isActive,
     current,
     activeClass,
     unactiveClass,
-    itemClass
+    itemClass,
+    render
   }
-}
+})
 
 export interface ItemProps {}

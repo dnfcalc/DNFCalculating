@@ -1,30 +1,31 @@
 <script lang="tsx">
-  import { defineComponent, ref, renderSlot } from "vue"
+  import { defineComponent, renderSlot } from "vue"
+  import { switchProps, useSwitch } from "@/components/hooks/swtich/swtich"
 
   export default defineComponent({
     name: "i-checkbox",
+    components: {},
     props: {
-      checked: {
-        type: Boolean
-      },
+      ...switchProps,
       label: {
         type: String
       }
     },
-    setup(props, { emit, slots }) {
-      const checked = ref(!!props.checked)
 
-      function check() {
-        checked.value = !checked.value
-        emit("update:checked", checked.value)
-      }
+    setup(props, context) {
+      const { toggle, switchClass } = useSwitch(
+        { ...props, class: "i-checkbox", checkedClass: "checked" },
+        context
+      )
+
+      const { slots } = context
 
       return () => (
-        <div class="i-checkbox" onClick={check}>
-          <span
-            class={{ "i-checkbox-icon": true, checked: checked.value }}
-          ></span>
-          <span class="i-checkbox-label" v-text={props.label}></span>
+        <div onClick={() => toggle()} class={switchClass.value}>
+          <span class="i-checkbox-icon"></span>
+          <span class="i-checkbox-label">
+            {props.label ?? renderSlot(slots, "default")}
+          </span>
         </div>
       )
     }
@@ -36,19 +37,23 @@
     align-items: center;
     font-size: 12px;
     height: 24px;
+    cursor: pointer;
+
+    &.checked {
+      .i-checkbox-icon {
+        background-image: url("./img/checkbox_checked.png");
+      }
+    }
+
     .i-checkbox-icon {
       width: 12px;
       height: 12px;
       margin-right: 4px;
       background-image: url("./img/checkbox_uncheck.png");
-
-      &.checked {
-        background-image: url("./img/checkbox_checked.png");
-      }
     }
 
-    &:hover {
-      .i-checkbox-icon:not(.checked) {
+    &:hover:not(.checked) {
+      .i-checkbox-icon {
         background-image: url("./img/checkbox_hover.png");
       }
     }

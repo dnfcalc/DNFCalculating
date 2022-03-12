@@ -13,12 +13,15 @@
     Teleport,
     onDeactivated,
     renderSlot,
-    CSSProperties
+    CSSProperties,
+    Transition
   } from "vue"
   import {
     listProps,
     useSelectionList
   } from "@/components/hooks/selection/list"
+
+  import NSelection from "@/components/base/selection"
   import { onClickOutside } from "@vueuse/core"
 
   export default defineComponent({
@@ -37,8 +40,14 @@
         type: String
       }
     },
+    components: {
+      NSelection
+    },
     setup(props, context) {
-      const { active } = useSelectionList(props, context)
+      const { active } = useSelectionList(
+        { ...props, itemClass: "i-select-dropdown-item" },
+        context
+      )
 
       const isOpen = ref(false)
       const triggerRef = ref<HTMLElement>()
@@ -67,7 +76,7 @@
           dropdownPosition.value = {
             w: width,
             x: left,
-            y: top + height + 4
+            y: top + height + 2
           }
         }
       }
@@ -84,9 +93,11 @@
         window.removeEventListener("scroll", onResize)
       })
 
+      const { slots } = context
+
       return () => {
-        function renderTrigger() {
-          return (
+        return (
+          <div class="min-w-20 w-40 i-select" onClick={collapse}>
             <div
               class={{
                 "i-select-trigger": true,
@@ -94,34 +105,22 @@
               }}
               ref={triggerRef}
             >
-              <span
-                class="i-select-label"
-                v-text={active.value?.key ?? props.emptyLabel}
-              ></span>
+              <span class="i-select-label">
+                {active.value?.render() ?? props.emptyLabel}
+              </span>
               <span class="i-select-down-icon"></span>
             </div>
-          )
-        }
-
-        const renderDropDown = () => {
-          const { slots } = context
-          return (
             <Teleport to="body">
-              <div
-                class="i-select-dropdown"
-                style={dropdownStyle.value}
-                v-show={isOpen.value}
-              >
-                {renderSlot(slots, "default")}
-              </div>
+              <Transition name="dropdown" mode="out-in">
+                <div
+                  class="i-select-dropdown"
+                  style={dropdownStyle.value}
+                  v-show={isOpen.value}
+                >
+                  {renderSlot(slots, "default")}
+                </div>
+              </Transition>
             </Teleport>
-          )
-        }
-
-        return (
-          <div class="i-select min-w-20 w-40" onClick={collapse}>
-            {renderTrigger()}
-            {renderDropDown()}
           </div>
         )
       }
@@ -130,11 +129,11 @@
 </script>
 <style lang="scss">
   /**
- * @Author: Kritsu
- * @Date:   2021/11/09 15:43:10
- * @Last Modified by:   Kritsu
- * @Last Modified time: 2021/11/17 18:03:08
- */
+  * @Author: Kritsu
+  * @Date:   2021/11/09 15:43:10
+  * @Last Modified by:   Kritsu
+  * @Last Modified time: 2021/11/17 18:03:08
+  */
   $text-color: #e9c556;
   .i-select {
     min-width: 80px;
@@ -196,7 +195,7 @@
     $activeColor: lighten($hoverColor, 5%);
     color: $text-color;
 
-    .i-option {
+    .i-select-dropdown-item {
       font-size: 12px;
       height: 20px;
       line-height: 20px;
@@ -212,12 +211,40 @@
       &.active {
         background-color: $activeColor;
       }
-    }
 
-    .i-option:hover:not(.active) {
-      font-size: 12px;
-      background-color: $hoverColor;
-      border: 0px;
+      &:hover:not(.active) {
+        font-size: 12px;
+        background-color: $hoverColor;
+      }
     }
+  }
+
+  @keyframes dropdown-enter {
+    from {
+      max-height: 0;
+      opacity: 0;
+    }
+    to {
+      max-height: 160px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes dropdown-leave {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .dropdown-enter-active {
+    animation: dropdown-enter 0.2s ease-in;
+  }
+
+  .dropdown-leave-active {
+    animation: dropdown-leave 0.2s ease-in;
   }
 </style>

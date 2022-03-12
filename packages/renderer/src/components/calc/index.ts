@@ -6,6 +6,7 @@ import Option from "./option/index.vue"
 import Menu from "./menu/menu.vue"
 import Checkbox from "./checkbox/checkbox.vue"
 import Collapse from "./collapse/collapse"
+import Dialog from "./dialog/dialog.vue"
 
 import { App } from "vue"
 
@@ -17,7 +18,8 @@ const components = {
   Select,
   Menu,
   Checkbox,
-  Collapse
+  Collapse,
+  Dialog
 }
 
 export default {

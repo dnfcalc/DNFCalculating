@@ -1,3 +1,7 @@
+:root {
+  font-size: 16px;
+}
+
 html,
 body,
 #app {
@@ -80,3 +84,5 @@ body {
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+@import url(./animation.scss);

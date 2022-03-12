@@ -7,7 +7,7 @@
    */
   import { defineComponent, h, renderSlot } from "vue"
   import { RouterLink } from "vue-router"
-  import item from "@/components/base/item"
+  import NItem from "@/components/base/item"
   import { itemProps } from "@/components/hooks/selection/item"
 
   export default defineComponent({
@@ -17,7 +17,7 @@
       width: { type: [Number, String], default: () => 120 },
       to: { type: String }
     },
-    components: { item },
+    components: { NItem },
     setup(props, { slots }) {
       return () => {
         const style = {
@@ -25,9 +25,9 @@
         }
 
         const defaults = (
-          <item {...props} style={style}>
+          <n-item {...props} style={style}>
             {renderSlot(slots, "default")}
-          </item>
+          </n-item>
         )
 
         if (!!props.to) {
