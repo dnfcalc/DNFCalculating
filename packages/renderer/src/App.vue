@@ -38,6 +38,13 @@
   })
 </script>
 
+<style>
+  html {
+    cursor: url("@/assets/img/cursor.png"), auto;
+    cursor: url("@/assets/img/cursor.png"), default;
+  }
+</style>
+
 <style scoped>
   .app {
     height: 100%;
