@@ -253,4 +253,12 @@
   .dropdown-leave-active {
     animation: dropdown-leave 0.2s ease-in;
   }
+
+  .dropdown-enter-active {
+    animation: dropdown-enter 0.2s ease-in;
+  }
+
+  .dropdown-leave-active {
+    animation: dropdown-leave 0.2s ease-in;
+  }
 </style>
