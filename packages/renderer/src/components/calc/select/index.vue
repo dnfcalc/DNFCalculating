@@ -140,12 +140,12 @@
     width: 160px;
     user-select: none;
     outline: none;
-    height: 24px;
-    min-height: 24px;
+    height: 20px;
+    min-height: 20px;
     line-height: 100%;
     font-size: 12px;
     color: $text-color;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 1);
     border: 1px solid #5b472a;
     border-radius: 2px;
     padding: 0;
@@ -156,6 +156,7 @@
       padding: 0;
       display: flex;
       height: 100%;
+      opacity: 0.8;
 
       justify-content: space-between;
       align-items: center;
@@ -169,6 +170,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
+        border-radius: 3px;
         width: 18px;
         height: 17px;
       }
@@ -180,6 +182,10 @@
           background-image: url("./img/select_down_disabled.png");
         }
       }
+    }
+
+    .i-select-trigger:hover {
+      opacity: 1;
     }
   }
 
