@@ -7,13 +7,18 @@
    * 人物面板
    */
   import { defineComponent, h, renderSlot } from "vue"
-
+  import EquipmentSlot from "@/components/calc/status/equipment_slot.vue"
   export default defineComponent({
     name: "character-status",
     props: {},
-    components: {},
+    components: { EquipmentSlot },
     setup(props, { slots }) {
       return () => {}
     }
   })
 </script>
+
+<template>
+  <div>chara</div>
+  <equipment-slot type="shoulder" id="0"></equipment-slot>
+</template>
