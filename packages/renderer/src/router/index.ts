@@ -17,7 +17,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import("@/pages/character/character.vue")
   },
   {
-    path: "/panel/custom_selection", 
+    path: "/custom_selection/:characterName", 
     name: "custom_selection",
     component: () => import("@/pages/panel/custom_selection.vue")
   },

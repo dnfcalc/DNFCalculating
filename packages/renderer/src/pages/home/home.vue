@@ -32,7 +32,10 @@
         if (alter === "重霄·弹药专家·女") {
           openURL(router, "/character/" + alter, { width: 800, height: 800 })
         } else {
-          openURL(router, "/show", { width: 800, height: 800 })
+          openURL(router, "/custom_selection/" + alter, {
+            width: 800,
+            height: 800
+          })
         }
       }
       // router.push("/character/" + alter)
