@@ -39,7 +39,7 @@
     }
 
     return () => (
-      <div class="bg-cover h-full w-full p-5 home overflow-auto">
+      <div class="bg-cover bg-no-repeat pt-8 pb-12 pl-4 home">
         {renderList(adventureinfo.value, (sub, index) => (
           <div class="flex flex-row">
             <div class="bg-no-repeat bg-center flex flex-wrap h-25 w-30 job-icon-box justify-center items-center relative">
@@ -53,11 +53,14 @@
                 onClick={choose_job(job.类名)}
                 class="cursor-pointer h-22.5 m-1 w-30 duration-300 job-box box-border relative"
               >
-                <div class="bg-no-repeat h-full w-full z-2 job-border absolute"></div>
-                <div class="h-full bg-hex-ffd7002e w-full z-999 job-mask invisible absolute"></div>
-                <div class="text-sm text-center w-full bottom-1 text-hex-bea347 absolute">
-                  {job.显示名称}
-                </div>
+                {!!job.显示名称 && (
+                  <>
+                    <div class="bg-no-repeat h-full w-full z-2 duration-200 job-border absolute hover:bg-hex-ffd7002e"></div>
+                    <div class="text-sm text-center w-full bottom-1 text-hex-bea347 absolute">
+                      {job.显示名称}
+                    </div>
+                  </>
+                )}
                 <div
                   class="bg-no-repeat bg-auto bg-clip-content h-full w-full z-1 overflow-hidden"
                   style={job_icon(job.序号)}
@@ -74,8 +77,6 @@
 <style lang="scss">
   .home {
     background-image: url(./images/adventure/bg.png);
-    background-repeat: no-repeat;
-    background-size: calc(100% - 40px) 100%;
 
     .job-icon-box {
       background-image: url(./images/adventure/flash.png);
@@ -84,12 +85,6 @@
     .job-box {
       .job-border {
         background-image: url(./images/adventure/border.png);
-      }
-
-      &:hover {
-        .job-mask {
-          visibility: visible;
-        }
       }
     }
   }

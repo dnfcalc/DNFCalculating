@@ -18,10 +18,11 @@ let win: BrowserWindow | null = null
 
 async function createWindow() {
   win = new BrowserWindow({
-    title: "Main window",
+    frame: false,
     width: 880,
     height: 680,
     resizable: false,
+
     webPreferences: {
       preload: join(__dirname, "../preload/index.cjs"),
       webSecurity: false
@@ -49,6 +50,8 @@ async function createWindow() {
     if (url.startsWith("https:")) shell.openExternal(url)
     return { action: "deny" }
   })
+
+  win.setMenuBarVisibility(false)
 }
 
 app.whenReady().then(statrServer).then(createWindow)
@@ -56,7 +59,8 @@ app.whenReady().then(statrServer).then(createWindow)
 app.on("window-all-closed", () => {
   stopServer()
   win = null
-  if (process.platform !== "darwin") app.quit()
+  console.log("window closed.")
+  app.quit()
 })
 
 app.on("second-instance", () => {
@@ -78,10 +82,10 @@ app.on("activate", () => {
 
 ipcMain.handle("open-win", (event, arg) => {
   const ChildWin = new BrowserWindow({
-    title: "Main window",
     width: arg.width,
     height: arg.height,
     resizable: false,
+    frame: false,
     webPreferences: {
       preload: join(__dirname, "../preload/index.cjs"),
       webSecurity: false
@@ -97,5 +101,18 @@ ipcMain.handle("open-win", (event, arg) => {
     ChildWin.loadURL(url)
     console.log(url)
     // newW.webContents.openDevTools()
+  }
+})
+
+ipcMain.handle("minimize-win", event => {
+  const window = BrowserWindow.fromWebContents(event.sender)
+  if (window) {
+    window.minimize()
+  }
+})
+ipcMain.handle("close-win", event => {
+  const window = BrowserWindow.fromWebContents(event.sender)
+  if (window) {
+    window.close()
   }
 })

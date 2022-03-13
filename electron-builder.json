@@ -1,25 +1,19 @@
 {
-  "appId": "YouAppID",
+  "appId": "dnfcalc",
   "asar": true,
   "directories": {
     "output": "release/${version}"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "mac": {
     "artifactName": "${productName}_${version}.${ext}",
-    "target": [
-      "dmg"
-    ]
+    "target": ["dmg"]
   },
   "win": {
     "target": [
       {
         "target": "nsis",
-        "arch": [
-          "x64"
-        ]
+        "arch": ["x64"]
       }
     ],
     "artifactName": "${productName}_${version}.${ext}"

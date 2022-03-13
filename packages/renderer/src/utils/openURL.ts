@@ -1,4 +1,6 @@
-export default function openURL(router: any, url: string, args: {}) {
+import type { Router } from "vue-router"
+
+export default function openURL(router: Router, url: string, args: {}) {
   try {
     window.ipcRenderer.invoke("open-win", {
       url: url,
