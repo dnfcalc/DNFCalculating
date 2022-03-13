@@ -20,3 +20,4 @@ tmp
 **/.tmp
 release
 build
+*.log
