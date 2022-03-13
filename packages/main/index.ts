@@ -27,6 +27,7 @@ async function createWindow() {
       webSecurity: false
     }
   })
+  win.setMenuBarVisibility(false)
 
   if (app.isPackaged || process.env["DEBUG"]) {
     win.loadFile(join(__dirname, "../renderer/index.html"))
