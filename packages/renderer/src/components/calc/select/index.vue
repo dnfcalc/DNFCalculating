@@ -140,8 +140,8 @@
     width: 160px;
     user-select: none;
     outline: none;
-    height: 20px;
-    min-height: 20px;
+    height: 16px;
+    min-height: 16px;
     line-height: 100%;
     font-size: 12px;
     color: $text-color;
@@ -149,6 +149,7 @@
     border: 1px solid #5b472a;
     border-radius: 2px;
     padding: 0;
+    padding-right: 1px;
     margin: 0;
     display: block;
 
@@ -170,9 +171,19 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        border-radius: 3px;
-        width: 18px;
-        height: 17px;
+        border-radius: 2px;
+        width: 15px;
+        height: 14px;
+      }
+
+      .i-select-down-icon:active {
+        background-image: url("./img/select_down_clicked.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 2px;
+        width: 15px;
+        height: 14px;
       }
 
       &.disabled {
