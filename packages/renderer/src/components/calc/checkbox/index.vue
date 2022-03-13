@@ -14,7 +14,11 @@
 
     setup(props, context) {
       const { toggle, switchClass } = useSwitch(
-        { ...props, class: "i-checkbox", checkedClass: "checked" },
+        {
+          ...props,
+          class: "i-checkbox flex items-center text-xs h-6 cursor-pointer",
+          checkedClass: "checked"
+        },
         context
       )
 
@@ -33,12 +37,6 @@
 </script>
 <style lang="scss">
   .i-checkbox {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    height: 24px;
-    cursor: pointer;
-
     &.checked {
       .i-checkbox-icon {
         background-image: url("./img/checkbox_checked.png");

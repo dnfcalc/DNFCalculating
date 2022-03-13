@@ -26,7 +26,7 @@
           <n-selection
             {...props}
             class={{ "i-tabs": true, vertical: !!props.vertical }}
-            item-class="i-tab"
+            item-class="i-tab cursor-pointer"
           >
             {renderSlot(slots, "default")}
           </n-selection>
@@ -63,7 +63,6 @@
     .i-tab {
       font-size: 12px;
 
-      cursor: pointer;
       width: 120px;
       height: 24px;
       line-height: 24px;

@@ -26,12 +26,13 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.3.5",
     "prettier": "^2.5.1",
+    "sass": "^1.49.9",
     "typescript": "^4.5.5",
     "unocss": "^0.27.1",
+    "unplugin-vue-components": "^0.18.0",
     "vite": "^2.8.6",
     "vite-plugin-electron-renderer": "^0.1.4",
-    "vue-tsc": "^0.31.1",
-    "sass": "^1.49.9"
+    "vue-tsc": "^0.31.1"
   },
   "env": {
     "//": "Used in build scripts",
@@ -44,10 +45,10 @@
     "rollup"
   ],
   "dependencies": {
-    "vue": "^3.2.29",
+    "@vueuse/core": "^7.7.1",
     "axios": "^0.26.0",
     "pinia": "^2.0.11",
-    "@vueuse/core": "^7.7.1",
+    "vue": "^3.2.29",
     "vue-router": "^4.0.13"
   }
 }

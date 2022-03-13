@@ -6,7 +6,6 @@
    * @Last Modified time: 2021/11/17 18:49:21
    */
   import { defineComponent, h, renderSlot } from "vue"
-  import { RouterLink } from "vue-router"
   import NItem from "@/components/base/item"
   import { itemProps } from "@/components/hooks/selection/item"
 

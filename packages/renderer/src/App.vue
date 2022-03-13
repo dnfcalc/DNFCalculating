@@ -1,12 +1,18 @@
 <script lang="tsx">
   // This starter template is using Vue 3 <script setup> SFCs
   // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-  import { defineComponent, Suspense } from "vue"
+  import { computed, defineComponent, Suspense } from "vue"
+  import { useRoute } from "vue-router"
   import { useAppStore } from "./store/app"
 
   export default defineComponent({
     setup() {
       const appStore = useAppStore()
+
+      const title = computed(() => {
+        const route = useRoute()
+        return route.meta.title ?? appStore.title
+      })
 
       return () => (
         <>
@@ -15,7 +21,7 @@
             style="-webkit-app-region: drag"
           >
             <img src="/favicon.ico" class="h-4 leading-4 w-4" />
-            <div class="text-white text-xs">{appStore.title}</div>
+            <div class="text-white text-xs">{title.value}</div>
             <div class="flex items-center">
               <div
                 onClick={appStore.minimize}
@@ -37,13 +43,6 @@
     }
   })
 </script>
-
-<style>
-  html {
-    cursor: url("@/assets/img/cursor.png"), auto;
-    cursor: url("@/assets/img/cursor.png"), default;
-  }
-</style>
 
 <style scoped>
   .app {

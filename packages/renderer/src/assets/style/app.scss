@@ -22,6 +22,20 @@ body {
 
 * {
   user-select: none;
+  cursor: url("@/assets/cursor/basic.cur"), auto;
+  cursor: url("@/assets/cursor/basic.cur"), default;
+}
+
+@mixin pointer() {
+  cursor: url("@/assets/cursor/basic.cur"), pointer;
+
+  &:active {
+    cursor: url("@/assets/cursor/basic_press.cur"), pointer;
+  }
+}
+
+.cursor-pointer {
+  @include pointer();
 }
 
 ::-webkit-scrollbar {
@@ -47,12 +61,12 @@ body {
 ::-webkit-scrollbar-button:vertical:single-button:start {
   width: 11px;
   background: url("images/ui/up.png") 0px 1px no-repeat;
-  cursor: pointer;
+  @include pointer();
 }
 ::-webkit-scrollbar-button:vertical:single-button:end {
   width: 11px;
   background: url("images/ui/down.png") 0px 2px no-repeat;
-  cursor: pointer;
+  @include pointer();
 }
 
 .divider {

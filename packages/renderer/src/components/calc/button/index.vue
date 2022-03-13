@@ -11,10 +11,6 @@
   export default defineComponent({
     name: "calc-button",
     props: {
-      disabled: {
-        type: Boolean,
-        default: false
-      },
       small: {
         type: Boolean,
         default: false
@@ -24,7 +20,7 @@
         default: null
       }
     },
-    setup(props, { slots }) {
+    setup(props, { emit, slots }) {
       return () => {
         return h(
           //@ts-ignore
@@ -32,8 +28,7 @@
           {
             to: props.to,
             class: {
-              "i-button": true,
-              disabled: props.disabled,
+              "i-button cursor-pointer outline-none": true,
               small: props.small
             }
           },
@@ -53,7 +48,6 @@
  */
 
   .i-button {
-    outline: none;
     min-width: 80px;
     height: 24px;
     line-height: 20px;
@@ -67,7 +61,6 @@
     text-align: center;
     text-decoration: none;
     transition: all 200ms ease-in-out;
-    cursor: pointer;
 
     &.icon {
       min-width: 28px;
@@ -86,7 +79,7 @@
       border: 1px solid #e3c18a;
     }
 
-    &.disabled {
+    &:disabled {
       color: #696969;
       background: linear-gradient(#353535, #1c1c1c);
       border: 1px solid #414141;

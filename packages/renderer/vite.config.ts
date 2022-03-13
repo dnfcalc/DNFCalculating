@@ -4,6 +4,7 @@ import path from "path"
 import vue from "@vitejs/plugin-vue"
 import jsx from "@vitejs/plugin-vue-jsx"
 import electron from "vite-plugin-electron-renderer"
+import uncomponents from "unplugin-vue-components/vite"
 import pkg from "../../package.json"
 import unocss from "unocss/vite"
 
@@ -20,7 +21,27 @@ export default defineConfig({
   },
   plugins: [
     unocss({
+      rules: [
+        [
+          /^col-(\d?\d)$/,
+          ([, o]) => {
+            let span = Number(o)
+            const val = `${(span * 100) / 24}%`
+            return {
+              flex: `0 0 ${val}`
+            }
+          }
+        ]
+      ],
+
       presets: [presetUno(), presetIcons()]
+    }),
+    uncomponents({
+      dts: true,
+      dirs: ["src/components/"],
+      allowOverrides: true,
+
+      directoryAsNamespace: true
     }),
     jsx(),
     vue(),

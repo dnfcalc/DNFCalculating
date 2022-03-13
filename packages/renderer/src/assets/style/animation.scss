@@ -29,3 +29,24 @@
     opacity: 0;
   }
 }
+
+@keyframes dropdown-enter {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 160px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdown-leave {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

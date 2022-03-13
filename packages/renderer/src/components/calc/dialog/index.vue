@@ -9,7 +9,7 @@
     Transition
   } from "vue"
 
-  import IButton from "@/components/calc/button/button.vue"
+  import IButton from "@/components/calc/button/index.vue"
 
   function renderTeleport(to = "body", children: JSX.Element[]) {
     return h(Teleport, { to }, children)

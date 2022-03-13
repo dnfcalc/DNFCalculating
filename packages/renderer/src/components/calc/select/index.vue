@@ -108,7 +108,7 @@
               <span class="i-select-label">
                 {active.value?.render() ?? props.emptyLabel}
               </span>
-              <span class="i-select-down-icon"></span>
+              <span class="cursor-pointer i-select-down-icon"></span>
             </div>
             <Teleport to="body">
               <Transition name="dropdown" mode="out-in">
@@ -221,7 +221,6 @@
       border: none;
       outline: none;
       appearance: none;
-      cursor: default;
       display: block;
       overflow: hidden;
 
@@ -236,32 +235,11 @@
     }
   }
 
-  @keyframes dropdown-enter {
-    from {
-      max-height: 0;
-      opacity: 0;
-    }
-    to {
-      max-height: 160px;
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes dropdown-leave {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  .dropdown-enter-active {
+  .dropdown-active {
     animation: dropdown-enter 0.2s ease-in;
   }
 
-  .dropdown-leave-active {
+  .dropdown-active {
     animation: dropdown-leave 0.2s ease-in;
   }
 
