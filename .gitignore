@@ -15,8 +15,9 @@ node_modules
 dist
 dist-ssr
 *.local
-
+.pnpm-debug.log
 tmp
 **/.tmp
 release
 build
+*.log

@@ -29,11 +29,11 @@
     // 获取角色相关信息，判定是否开放
     function choose_job(alter: string) {
       return () => {
-        if (alter !== "重霄·弹药专家·女") {
-          alert(`请自行开发或联系开发`)
-          return
+        if (alter === "重霄·弹药专家·女") {
+          openURL(router, "/character/" + alter, { width: 800, height: 800 })
+        } else {
+          openURL(router, "/show", { width: 800, height: 800 })
         }
-        openURL(router, "/character/" + alter, { width: 800, height: 800 })
       }
       // router.push("/character/" + alter)
     }

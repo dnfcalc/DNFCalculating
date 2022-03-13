@@ -15,7 +15,12 @@ const routes: RouteRecordRaw[] = [
     path: "/character/:name",
     name: "character",
     component: () => import("@/pages/character/character.vue")
-  }
+  },
+  {
+    path: "/panel/custom_selection", 
+    name: "custom_selection",
+    component: () => import("@/pages/panel/custom_selection.vue")
+  },
 ]
 
 if (import.meta.env.DEV) {
