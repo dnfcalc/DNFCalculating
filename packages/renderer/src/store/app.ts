@@ -8,7 +8,7 @@ interface AppState {
 export const useAppStore = defineStore("app", {
   state(): AppState {
     return {
-      title: "DNF计算器搭配计算器&17173专区",
+      title: "DNF计算器搭配计算器 & Colg",
       id: undefined
     }
   },

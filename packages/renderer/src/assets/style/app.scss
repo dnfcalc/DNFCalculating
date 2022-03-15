@@ -18,10 +18,7 @@ body,
 }
 
 body {
-  font-family: apple-system, BlinkMacSystemFont, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Segoe UI", "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  font-family: SimSun;
 }
 
 @mixin pointer() {
@@ -102,6 +99,14 @@ body {
   height: 28px;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.header {
+  color: #9f8d5c;
+  // text-shadow: -1px -1px 0 rgba(0, 0, 0, 1), 1px -1px 0 rgba(0, 0, 0, 1),
+  //   -1px 1px 0 rgba(0, 0, 0, 1), 1px 1px 0 rgba(0, 0, 0, 1),
+  //   0px 1px 1px rgba(0, 0, 0, 1);
+  text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
 }
 
 @import url(./animation.scss);

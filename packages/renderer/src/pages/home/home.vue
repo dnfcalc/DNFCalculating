@@ -29,6 +29,7 @@
     // 获取角色相关信息，判定是否开放
     function choose_job(alter: string) {
       return () => {
+        if (alter == "空") return
         if (alter === "重霄·弹药专家·女") {
           openURL(router, "/character/" + alter, { width: 800, height: 300 })
         } else {
@@ -76,9 +77,9 @@
 
 <style lang="scss">
   .home {
-    background-image: url(./images/adventure/bg.png);
+    background-image: url(./images/adventure/bg.jpg);
     background-repeat: no-repeat;
-    background-size: 850px 1556px;
+    background-size: 100% 1556px;
 
     .job-icon-box {
       background-image: url(./images/adventure/flash.png);

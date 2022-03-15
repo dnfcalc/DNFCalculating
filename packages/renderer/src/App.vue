@@ -21,7 +21,7 @@
             style="-webkit-app-region: drag"
           >
             <img src="/favicon.ico" class="h-4 leading-4 w-4" />
-            <div class="text-white text-xs">{title.value}</div>
+            <div class="header text-xs">{title.value}</div>
             <div class="flex items-center">
               <div
                 onClick={appStore.minimize}
