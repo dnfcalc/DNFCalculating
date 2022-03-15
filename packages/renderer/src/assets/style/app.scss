@@ -56,13 +56,13 @@ body {
 }
 
 ::-webkit-scrollbar-button {
-  height: 42px;
+  height: 20px;
 }
 
 ::-webkit-scrollbar-button:vertical:single-button:start {
   width: 11px;
   // 添加标题栏后调整相关位置
-  background: url("@/assets/img/up.png") 0px 25px no-repeat;
+  background: url("@/assets/img/up.png") 0px 2px no-repeat;
 }
 
 ::-webkit-scrollbar-button:vertical:single-button:end {

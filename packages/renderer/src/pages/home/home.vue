@@ -31,7 +31,7 @@
       return () => {
         if (alter == "空") return
         if (alter === "重霄·弹药专家·女") {
-          openURL(router, "/character/" + alter, { width: 1000, height: 300 })
+          openURL(router, "/character/" + alter, { width: 1000, height: 500 })
         } else {
           openURL(router, "/show", { width: 800, height: 800 })
         }
@@ -79,7 +79,7 @@
   .home {
     background-image: url(./images/adventure/bg.jpg);
     background-repeat: no-repeat;
-    background-size: 100% 1556px;
+    background-size: 100% 100%;
 
     .job-icon-box {
       background-image: url(./images/adventure/flash.png);

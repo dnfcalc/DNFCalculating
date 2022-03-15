@@ -33,7 +33,10 @@
               ></div>
             </div>
           </div>
-          <div class="h-full w-full pt-6 overflow-y-auto">
+          <div
+            class="w-full mt-6 overflow-y-auto"
+            style="height:calc(100% - 24px);"
+          >
             <Suspense>
               <router-view></router-view>
             </Suspense>

@@ -4,14 +4,20 @@
   import { ICharacterInfo } from "@/api/character/type"
   import { useRoute } from "vue-router"
 
+  function skill_icon(character: string, skillName: string) {
+    return `./images/characters/${character}/skill/${skillName}.png`
+  }
+
   export default defineComponent(() => {
     let basicInfo = ref<ICharacterInfo>({ skillInfo: [], individuation: [] })
+    let characterName = ref<string>("")
     const route = useRoute()
     onMounted(async () => {
       const characterInfoState = useCharacterStore()
       if (typeof route.params.name === "string") {
-        await characterInfoState.get_character_info(route.params.name)
-        basicInfo.value = characterInfoState[route.params.name]
+        characterName.value = route.params.name
+        await characterInfoState.get_character_info(characterName.value)
+        basicInfo.value = characterInfoState[characterName.value]
           ?.basicInfo as ICharacterInfo
       }
     })
@@ -20,9 +26,12 @@
     const showDialog = () => (visible.value = true)
 
     return () => (
-      <div>
+      <div bg-cover bg-no-repeat pt-8 pb-12 pl-4>
         {renderList(basicInfo.value.skillInfo, (skill, index) => (
-          <div>{skill.name}</div>
+          <div>
+            <img src={skill_icon(characterName.value, skill.name)} />
+            {skill.name}
+          </div>
         ))}
       </div>
     )
