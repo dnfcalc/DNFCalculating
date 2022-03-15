@@ -31,7 +31,7 @@
       return () => {
         if (alter == "空") return
         if (alter === "重霄·弹药专家·女") {
-          openURL(router, "/character/" + alter, { width: 800, height: 300 })
+          openURL(router, "/character/" + alter, { width: 1000, height: 300 })
         } else {
           openURL(router, "/show", { width: 800, height: 800 })
         }
@@ -57,7 +57,7 @@
                 {!!job.显示名称 && (
                   <>
                     <div class="bg-no-repeat h-full w-full z-2 duration-200 job-border absolute hover:bg-hex-ffd7002e"></div>
-                    <div class="text-sm text-center w-full bottom-1 text-hex-bea347 absolute">
+                    <div class="text-xs text-center w-full bottom-1 text-hex-bea347 absolute">
                       {job.显示名称}
                     </div>
                   </>

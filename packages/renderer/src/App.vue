@@ -51,6 +51,8 @@
 
   .app-title {
     -webkit-app-region: drag;
+    background-image: url("@/assets/img/title.png");
+    background-size: 100% 100%;
   }
 
   .min-icon {
