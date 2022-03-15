@@ -61,6 +61,7 @@ app.on("window-all-closed", () => {
   win = null
   console.log("window closed.")
   app.quit()
+  app.exit(0)
 })
 
 app.on("second-instance", () => {

@@ -1,5 +1,8 @@
 const port: number = 17173
-const child_process = require('child_process')
+
+import child_process from "child_process"
+
+let instance: child_process.ChildProcessWithoutNullStreams
 
 /**
  * 开启python的api服务
@@ -7,10 +10,17 @@ const child_process = require('child_process')
  */
 export function statrServer() {
   // TODO 启动python api 待改进 后续添加端口占用判断等
-  console.log('statrServer')
-  if (process.platform == 'win32')
-    child_process.exec(`python api/main.py ${port}`)
-  else child_process.exec(`python3 ${__dirname}/../../api/main.py ${port}`)
+  if (process.platform == "win32") {
+    instance = child_process.spawn(`python`, [`api/main.py`, `${port}`])
+  } else {
+    instance = child_process.spawn("python3", [
+      `${__dirname}/../../api/main.py`,
+      `${port}`
+    ])
+  }
+  if (instance) {
+    console.log("server started.")
+  }
 }
 
 /**
@@ -19,7 +29,7 @@ export function statrServer() {
  */
 export function stopServer() {
   // TODO 关闭python api
-  if (process.platform == 'win32')
-    child_process.exec('taskkill /f /im python.exe')
-  else child_process.exec('killall Python')
+  if (instance) {
+    instance.kill(0) && console.log("server stoped.")
+  }
 }
