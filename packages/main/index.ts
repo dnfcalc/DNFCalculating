@@ -19,7 +19,7 @@ let win: BrowserWindow | null = null
 async function createWindow() {
   win = new BrowserWindow({
     frame: false,
-    width: 880,
+    width: 861,
     height: 680,
     resizable: false,
 

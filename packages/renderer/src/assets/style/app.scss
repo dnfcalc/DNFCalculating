@@ -55,18 +55,19 @@ body {
 }
 
 ::-webkit-scrollbar-button {
-  height: 18px;
+  height: 42px;
 }
 
 ::-webkit-scrollbar-button:vertical:single-button:start {
   width: 11px;
-  background: url("images/ui/up.png") 0px 1px no-repeat;
-  @include pointer();
+  // 添加标题栏后调整相关位置
+  background: url("@/assets/img/up.png") 0px 25px no-repeat;
+  cursor: pointer;
 }
 ::-webkit-scrollbar-button:vertical:single-button:end {
   width: 11px;
-  background: url("images/ui/down.png") 0px 2px no-repeat;
-  @include pointer();
+  background: url("@/assets/img/down.png") 0px 2px no-repeat;
+  cursor: pointer;
 }
 
 .divider {
