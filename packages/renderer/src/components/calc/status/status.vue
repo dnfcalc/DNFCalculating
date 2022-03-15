@@ -19,6 +19,6 @@
 </script>
 
 <template>
-  <div>chara</div>
+  <div>cha12313a</div>
   <equipment-slot type="shoulder" id="0"></equipment-slot>
 </template>

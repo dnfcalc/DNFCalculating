@@ -18,7 +18,7 @@
 </script>
 
 <template>
-  equipment_slot
+  equipment12312_slot
   <div class="equipment-slot" :class="type"></div>
 </template>
 
