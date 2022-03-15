@@ -29,6 +29,10 @@ body {
   }
 }
 
+@mixin outline() {
+  text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+}
+
 * {
   user-select: none;
   @include pointer();
@@ -106,7 +110,53 @@ body {
   // text-shadow: -1px -1px 0 rgba(0, 0, 0, 1), 1px -1px 0 rgba(0, 0, 0, 1),
   //   -1px 1px 0 rgba(0, 0, 0, 1), 1px 1px 0 rgba(0, 0, 0, 1),
   //   0px 1px 1px rgba(0, 0, 0, 1);
-  text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+  @include outline();
 }
 
 @import url(./animation.scss);
+
+.tooltip {
+  width: 210px;
+  float: left;
+  border: 1px solid rgb(128, 128, 128);
+  padding: 10px 5px 10px 5px;
+  font-size: 0.75rem;
+  @include outline();
+
+  .name {
+    @include outline();
+    padding: 0px 5px 0px 5px;
+    &::after {
+      content: "";
+      width: 210px;
+      height: 8px;
+      background: url("@/assets/img/underline.png");
+      display: block;
+      background-size: contain;
+      left: 5px;
+      margin-top: 4px;
+    }
+  }
+}
+
+.tooltip-equipment {
+  @extend .tooltip;
+}
+
+.tooltip-skill {
+  @extend .tooltip;
+  background-color: rgba(0, 0, 0, 0.3);
+  .name {
+    color: rgb(197, 172, 72);
+  }
+
+  .name-p {
+    @extend .name;
+    color: rgb(139, 254, 133);
+  }
+
+  .info {
+    color: rgb(132, 119, 78);
+    margin: 5px;
+  }
+}
