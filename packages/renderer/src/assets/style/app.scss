@@ -1,5 +1,9 @@
 :root {
   font-size: 16px;
+  --cursor-pointer: url("@/assets/cursor/basic.cur"),
+    url("@/assets/cursor/cursor.png"), pointer;
+  --cursor-active: url("@/assets/cursor/basic_press.cur"),
+    url("@/assets/cursor/cursor.png"), pointer;
 }
 
 html,
@@ -20,18 +24,17 @@ body {
     sans-serif;
 }
 
-* {
-  user-select: none;
-  cursor: url("@/assets/cursor/basic.cur"), auto;
-  cursor: url("@/assets/cursor/basic.cur"), default;
-}
-
 @mixin pointer() {
-  cursor: url("@/assets/cursor/basic.cur"), pointer;
+  cursor: var(--cursor-pointer);
 
   &:active {
-    cursor: url("@/assets/cursor/basic_press.cur"), pointer;
+    cursor: var(--cursor-active);
   }
+}
+
+* {
+  user-select: none;
+  @include pointer();
 }
 
 .cursor-pointer {
@@ -42,6 +45,7 @@ body {
   background: rgb(0, 0, 0, 0.9);
   width: 11px;
   margin: 0px 0px 0px 0px;
+  @include pointer();
 }
 
 ::-webkit-scrollbar-thumb {
@@ -62,12 +66,11 @@ body {
   width: 11px;
   // 添加标题栏后调整相关位置
   background: url("@/assets/img/up.png") 0px 25px no-repeat;
-  cursor: pointer;
 }
+
 ::-webkit-scrollbar-button:vertical:single-button:end {
   width: 11px;
   background: url("@/assets/img/down.png") 0px 2px no-repeat;
-  cursor: pointer;
 }
 
 .divider {
