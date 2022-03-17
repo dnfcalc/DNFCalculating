@@ -30,12 +30,9 @@ const routes: RouteRecordRaw[] = [
       },
       //用于组件展示的页面
       {
-        path: "/show",
-        name: "show",
-        meta: {
-          title: "组件展示"
-        },
-        component: () => import("@/pages/main/show.vue")
+        path: "/equipment/:name",
+        name: "equipment",
+        component: () => import("@/pages/main/equipment/equipment.vue")
       }
     ]
   },
@@ -46,19 +43,18 @@ const routes: RouteRecordRaw[] = [
   }
 ]
 
-// if (import.meta.env.DEV) {
-//   //用于组件展示的页面
-//   routes[2].children?.push({
-//     path: "/show",
-//     name: "show",
-//     meta: {
-//       title: "组件展示"
-//     },
-//     component: () => import("@/pages/show.vue")
-//   })
-// }
+if (import.meta.env.DEV) {
+  //用于组件展示的页面
+  routes.push({
+    path: "/show",
+    name: "show",
+    meta: {
+      title: "组件展示"
+    },
+    component: () => import("@/pages/show.vue")
+  })
+}
 
-console.log(routes[2].children)
 
 const router = createRouter({
   routes,

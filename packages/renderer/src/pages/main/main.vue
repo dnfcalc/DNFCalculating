@@ -6,15 +6,12 @@
 
   export default defineComponent(() => {
     const char = useRoute().params.name as string
-    onMounted(() => {
-      useRouter().push("/show")
-    })
 
     return () => (
       <div class="main">
         <div class="header">
           <calc-tabs>
-            <calc-tab value="1" to="/show">
+            <calc-tab value="1" to={"/equipment/" + char}>
               装备
             </calc-tab>
             <calc-tab value="2" to={"/character/" + char}>
