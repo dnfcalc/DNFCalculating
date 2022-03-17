@@ -11,13 +11,33 @@ const routes: RouteRecordRaw[] = [
     name: "home",
     component: () => import("@/pages/home/home.vue")
   },
+
   {
-    path: "/character/:name",
-    name: "character",
+    path: "/main/:name",
+    name: "main",
     meta: {
       title: "角色"
     },
-    component: () => import("@/pages/character/character.vue")
+    component: () => import("@/pages/main/main.vue"),
+    children: [
+      {
+        path: "/character/:name",
+        name: "character",
+        meta: {
+          title: "角色"
+        },
+        component: () => import("@/pages/main/character/character.vue")
+      },
+      //用于组件展示的页面
+      {
+        path: "/show",
+        name: "show",
+        meta: {
+          title: "组件展示"
+        },
+        component: () => import("@/pages/main/show.vue")
+      }
+    ]
   },
   {
     path: "/panel/custom_selection",
@@ -26,17 +46,19 @@ const routes: RouteRecordRaw[] = [
   }
 ]
 
-if (import.meta.env.DEV) {
-  //用于组件展示的页面
-  routes.push({
-    path: "/show",
-    name: "show",
-    meta: {
-      title: "组件展示"
-    },
-    component: () => import("@/pages/show.vue")
-  })
-}
+// if (import.meta.env.DEV) {
+//   //用于组件展示的页面
+//   routes[2].children?.push({
+//     path: "/show",
+//     name: "show",
+//     meta: {
+//       title: "组件展示"
+//     },
+//     component: () => import("@/pages/show.vue")
+//   })
+// }
+
+console.log(routes[2].children)
 
 const router = createRouter({
   routes,

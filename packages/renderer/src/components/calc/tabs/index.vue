@@ -52,6 +52,14 @@
     margin: 0;
     padding: 0;
 
+    a {
+      text-decoration: none;
+      color: #c6b083;
+      &:visited {
+        color: currentColor;
+      }
+    }
+
     &.vertical {
       flex-direction: column;
 

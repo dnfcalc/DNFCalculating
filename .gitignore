@@ -21,3 +21,4 @@ tmp
 release
 build
 *.log
+components.d.ts

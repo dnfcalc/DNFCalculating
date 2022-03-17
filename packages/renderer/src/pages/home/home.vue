@@ -31,7 +31,7 @@
       return () => {
         if (alter == "空") return
         if (alter === "重霄·弹药专家·女") {
-          openURL(router, "/character/" + alter, { width: 1000, height: 500 })
+          openURL(router, "/main/" + alter, { width: 1000, height: 500 })
         } else {
           openURL(router, "/show", { width: 800, height: 800 })
         }
